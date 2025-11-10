@@ -1,11 +1,12 @@
+import type {AllowedComponentProps, ComponentCustomProps, ExtractPropTypes, IntrinsicElementAttributes, VNodeProps} from 'vue';
 import {
-  type AllowedComponentProps,
-  type ComponentCustomProps,
-  type ExtractPropTypes,
-  type IntrinsicElementAttributes,
-  type VNodeProps,
+  
+  
+  
+  
+  
   defineComponent,
-  h,
+  h
 } from 'vue'
 import { Dynamic } from './utils/dynamic'
 
@@ -19,20 +20,20 @@ export interface PolymorphicProps {
   asChild?: boolean
 }
 
-export type AsChildComponent<
+export interface AsChildComponent<
   Component extends ElementType,
   P extends Record<string, unknown> = Record<never, never>,
-> = {
+> {
   new (): {
-    $props: AllowedComponentProps &
-      ComponentCustomProps &
-      VNodeProps &
-      ExtractPropTypes<Component> &
-      (Component extends keyof IntrinsicElementAttributes
+    $props: AllowedComponentProps
+      & ComponentCustomProps
+      & VNodeProps
+      & ExtractPropTypes<Component>
+      & (Component extends keyof IntrinsicElementAttributes
         ? IntrinsicElementAttributes[Component]
-        : Record<never, never>) &
-      P &
-      PolymorphicProps
+        : Record<never, never>)
+      & P
+      & PolymorphicProps
   }
 }
 
@@ -49,9 +50,9 @@ export type HTMLPolymorphicProps<T extends ElementType> = Omit<
   asChild?: boolean
 }
 
-export type HTMLArkProps<T extends DOMElements> = HTMLPolymorphicProps<T>
+export type HTMLUIProps<T extends DOMElements> = HTMLPolymorphicProps<T>
 
-const withAsChild = (component: ElementType) => {
+function withAsChild(component: ElementType) {
   return defineComponent({
     name: 'Polymorphic',
     inheritAttrs: false,
@@ -62,7 +63,8 @@ const withAsChild = (component: ElementType) => {
       },
     },
     setup(props, { attrs, slots }) {
-      if (!props.asChild) return () => h(component, { ...attrs }, slots.default?.())
+      if (!props.asChild) 
+return () => h(component, { ...attrs }, slots.default?.())
       return () => h(Dynamic, attrs, { default: slots.default })
     },
   })
@@ -87,4 +89,4 @@ export function jsxFactory() {
   return factory
 }
 
-export const factory = jsxFactory()
+export const ui = jsxFactory()

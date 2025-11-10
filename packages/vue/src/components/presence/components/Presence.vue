@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { factory } from '../../../factory'
+import { ui } from '../../../factory'
 import { usePresence } from '../composables/use-presence'
 import { PresenceProvider } from '../composables/use-presence-context'
 import { useForwardExpose } from '../../../composables'
@@ -23,7 +23,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <factory.div
+  <ui.div
     v-if="!presence.unmounted"
     v-bind="presence.presenceProps"
     :as-child="asChild"
@@ -31,5 +31,5 @@ useForwardExpose()
     data-part="root"
   >
     <slot />
-  </factory.div>
+  </ui.div>
 </template>
