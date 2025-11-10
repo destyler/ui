@@ -5,11 +5,8 @@ import type { PolymorphicProps } from '~/factory'
 
 export interface CollapseItemTriggerBaseProps extends PolymorphicProps {}
 export interface CollapseItemTriggerProps
-  extends CollapseItemTriggerBaseProps,
-    /**
-     * @vue-ignore
-     */
-    ButtonHTMLAttributes {}
+  extends /* @vue-ignore */ CollapseItemTriggerBaseProps,
+    /* @vue-ignore */ ButtonHTMLAttributes {}
 </script>
 
 <script setup lang="ts">

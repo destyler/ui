@@ -18,7 +18,9 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "debug": "tsdown --debug",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "peerDependencies": {
     "vue": "^3.0.0"

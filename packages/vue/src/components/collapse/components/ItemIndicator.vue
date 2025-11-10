@@ -5,11 +5,8 @@ import type { PolymorphicProps } from '~/factory'
 
 export interface CollapseItemIndicatorBaseProps extends PolymorphicProps {}
 export interface CollapseItemIndicatorProps
-  extends CollapseItemIndicatorBaseProps,
-    /**
-     * @vue-ignore
-     */
-    HTMLAttributes {}
+  extends /* @vue-ignore */ CollapseItemIndicatorBaseProps,
+    /* @vue-ignore */ HTMLAttributes {}
 </script>
 
 <script setup lang="ts">

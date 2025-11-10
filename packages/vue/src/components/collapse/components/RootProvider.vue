@@ -10,11 +10,8 @@ interface RootProviderProps {
 
 export interface CollapseRootProviderBaseProps extends RootProviderProps, RenderStrategyProps, PolymorphicProps {}
 export interface CollapseRootProviderProps
-  extends CollapseRootProviderBaseProps,
-    /**
-     * @vue-ignore
-     */
-    HTMLAttributes {}
+  extends /* @vue-ignore */ CollapseRootProviderBaseProps,
+    /* @vue-ignore */ HTMLAttributes {}
 </script>
 
 <script setup lang="ts">

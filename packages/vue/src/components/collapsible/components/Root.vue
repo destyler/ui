@@ -6,11 +6,8 @@ import type { RootEmits, RootProps } from '../types'
 
 export interface CollapsibleRootBaseProps extends RootProps, PolymorphicProps {}
 export interface CollapsibleRootProps
-  extends CollapsibleRootBaseProps,
-    /**
-     * @vue-ignore
-     */
-    HTMLAttributes {}
+  extends /* @vue-ignore */ CollapsibleRootBaseProps,
+    /* @vue-ignore */ HTMLAttributes {}
 export interface CollapsibleRootEmits extends RootEmits {}
 </script>
 

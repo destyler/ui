@@ -4,11 +4,8 @@ import type { PolymorphicProps } from '~/factory'
 
 export interface CollapseItemContentBaseProps extends PolymorphicProps {}
 export interface CollapseItemContentProps
-  extends CollapseItemContentBaseProps,
-    /**
-     * @vue-ignore
-     */
-    HTMLAttributes {}
+  extends /* @vue-ignore */ CollapseItemContentBaseProps,
+    /* @vue-ignore */ HTMLAttributes {}
 
 interface VisibilityProps {
   hidden?: boolean

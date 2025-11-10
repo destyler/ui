@@ -3,3 +3,6 @@ dist
 *.log
 .DS_Store
 .rolldown
+
+*storybook.log
+storybook-static
