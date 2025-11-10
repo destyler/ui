@@ -1,0 +1,36 @@
+{
+  "name": "@destyler-ui/vue",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "A starter for creating a Vue component library.",
+  "author": "Elone Hoo <hi@elonehoo.me>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "debug": "tsdown --debug",
+    "prepublishOnly": "pnpm run build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@destyler/dom": "^0.1.0",
+    "@destyler/i18n": "^0.1.0",
+    "@destyler/vue": "^0.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.1",
+    "vue": "^3.5.22",
+    "vue-tsc": "^3.1.3"
+  }
+}

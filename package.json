@@ -1,0 +1,23 @@
+{
+  "name": "@destyler-ui/monorepo",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.17.0",
+  "description": "",
+  "author": "Elone Hoo <hi@elonehoo.me>",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm run --filter \"./packages/**\" -r build",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
+    "@types/node": "^24.10.0",
+    "@vitejs/devtools": "0.0.0-alpha.16",
+    "bumpp": "^10.3.1",
+    "eslint": "^9.39.1",
+    "rolldown-vite": "^7.2.2",
+    "tsdown": "^0.16.1",
+    "typescript": "^5.9.3"
+  }
+}
