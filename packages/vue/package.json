@@ -24,9 +24,13 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
+    "@destyler/anatomy": "^0.1.0",
+    "@destyler/collection": "^0.1.0",
     "@destyler/dom": "^0.1.0",
     "@destyler/i18n": "^0.1.0",
-    "@destyler/vue": "^0.1.0"
+    "@destyler/presence": "^0.1.0",
+    "@destyler/vue": "^0.1.0",
+    "@destyler/xstate": "^0.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",

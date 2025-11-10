@@ -35,15 +35,27 @@ importers:
 
   packages/vue:
     dependencies:
+      '@destyler/anatomy':
+        specifier: ^0.1.0
+        version: 0.1.0
+      '@destyler/collection':
+        specifier: ^0.1.0
+        version: 0.1.0
       '@destyler/dom':
         specifier: ^0.1.0
         version: 0.1.0
       '@destyler/i18n':
         specifier: ^0.1.0
         version: 0.1.0
+      '@destyler/presence':
+        specifier: ^0.1.0
+        version: 0.1.0
       '@destyler/vue':
         specifier: ^0.1.0
         version: 0.1.0(vue@3.5.24(typescript@5.9.3))
+      '@destyler/xstate':
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
@@ -146,11 +158,20 @@ packages:
   '@clack/prompts@0.11.0':
     resolution: {integrity: sha512-pMN5FcrEw9hUkZA4f+zLlzivQSeQf5dRGJjSUbvVYDLvpKCdQx5OaknvKzgbtXOizhP+SJJJjqEbOe55uKKfAw==}
 
+  '@destyler/anatomy@0.1.0':
+    resolution: {integrity: sha512-Eor4rjhGS7ZW8fonhd0AKjsNcr9s5ArdIUae1XhwThVf1eRY+5FbGUIiVjuX6CggbXw9fENFTF/l6KHV46wF3w==}
+
+  '@destyler/collection@0.1.0':
+    resolution: {integrity: sha512-EJSJRvPveBG6b1tViw/wRpUBjDbHQC1QnREWwqXZRJFHhtdGxj6i5MoN3xn8F2OKL91IC2OHMkwWASmW4bEX/w==}
+
   '@destyler/dom@0.1.0':
     resolution: {integrity: sha512-eLtc/YzINh1cgYKgY6/wBmJWu6+IaJ2zwYZHJ5ggVn7en5rOtti1j3mFVINU+jq+Y8yihh8vx4rKmZfZ2NbgOw==}
 
   '@destyler/i18n@0.1.0':
     resolution: {integrity: sha512-FCvEBYRVu0IdaLpZKGBgQfyC/UnE2MHqNUNwdmiIfqsLvY9ZUMtV+CT4Z9j3IC06fOduSK7mp3/WIqD8w7RI3A==}
+
+  '@destyler/presence@0.1.0':
+    resolution: {integrity: sha512-3dYaeHMwaxKZRlfSnCVmw7ErB54cDEt5zV86KZuwXzkha/QxYERED6vG+/3WF9I9BFYojlFUQclMcarL1iYI0A==}
 
   '@destyler/store@0.1.0':
     resolution: {integrity: sha512-3DNhwcuFTUYHzNIVj1ksuvz7JIy4L5r5VD6qMceqHKh7TXR4TxSBFj1SpWiJsR4x0y+dyQEE2c+fpt73A/9wpw==}
@@ -2681,6 +2702,12 @@ snapshots:
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
+  '@destyler/anatomy@0.1.0': {}
+
+  '@destyler/collection@0.1.0':
+    dependencies:
+      '@destyler/utils': 0.1.0
+
   '@destyler/dom@0.1.0':
     dependencies:
       '@destyler/types': 0.1.0
@@ -2688,6 +2715,11 @@ snapshots:
   '@destyler/i18n@0.1.0':
     dependencies:
       '@destyler/dom': 0.1.0
+
+  '@destyler/presence@0.1.0':
+    dependencies:
+      '@destyler/types': 0.1.0
+      '@destyler/xstate': 0.1.0
 
   '@destyler/store@0.1.0':
     dependencies:
