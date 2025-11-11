@@ -16,7 +16,7 @@ import { computed } from 'vue'
 import { useCollapseContext } from '../composables/use-collapse-context'
 import { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'
 
-defineProps<CollapseItemTriggerProps>()
+const props = defineProps<CollapseItemTriggerProps>()
 const collapse = useCollapseContext()
 const itemProps = useCollapseItemPropsContext()
 const collapsible = useCollapsibleContext()
@@ -31,7 +31,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="triggerProps" :as-child="asChild">
+  <ui.button v-bind="triggerProps" :as-child="props.asChild">
     <slot />
   </ui.button>
 </template>

@@ -23,7 +23,7 @@ import { useCollapseItemPropsContext } from '../composables/use-collapse-item-pr
 
 const splitVisibilityProps = createSplitProps<VisibilityProps>()
 
-defineProps<CollapseItemContentProps>()
+const props = defineProps<CollapseItemContentProps>()
 const collapse = useCollapseContext()
 const itemProps = useCollapseItemPropsContext()
 
@@ -36,7 +36,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <Collapsible.Content v-bind="itemContentProps" :as-child="asChild">
+  <Collapsible.Content v-bind="itemContentProps" :as-child="props.asChild">
     <slot />
   </Collapsible.Content>
 </template>

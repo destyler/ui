@@ -26,7 +26,7 @@ useForwardExpose()
   <ui.div
     v-if="!presence.unmounted"
     v-bind="presence.presenceProps"
-    :as-child="asChild"
+    :as-child="props.asChild"
     data-scope="presence"
     data-part="root"
   >

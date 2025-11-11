@@ -29,7 +29,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-bind="collapse.getRootProps()" :as-child="asChild">
+  <ui.div v-bind="collapse.getRootProps()" :as-child="props.asChild">
     <slot></slot>
   </ui.div>
 </template>

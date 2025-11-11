@@ -34,7 +34,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-bind="collapsible.getRootProps()" :as-child="asChild">
+  <ui.div v-bind="collapsible.getRootProps()" :as-child="props.asChild">
     <slot />
   </ui.div>
 </template>

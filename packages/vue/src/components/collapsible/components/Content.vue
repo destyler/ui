@@ -11,14 +11,14 @@ import { ui } from '~/factory'
 import { useCollapsibleContext } from '../composables/use-collapsible-context'
 import { useForwardExpose } from '~/composables'
 
-defineProps<CollapsibleContentProps>()
+const props = defineProps<CollapsibleContentProps>()
 const collapsible = useCollapsibleContext()
 
 useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-if="!collapsible.unmounted" v-bind="collapsible.getContentProps()" :as-child="asChild">
+  <ui.div v-if="!collapsible.unmounted" v-bind="collapsible.getContentProps()" :as-child="props.asChild">
     <slot />
   </ui.div>
 </template>
