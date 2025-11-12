@@ -3,6 +3,7 @@ import LazyMount from '../examples/LazyMount.vue'
 import LazyMountAndUnmountOnExit from '../examples/LazyMountAndUnmountOnExit.vue'
 import OnExitComplete from '../examples/OnExitComplete.vue'
 import RootProvider from '../examples/RootProvider.vue'
+import UnmountOnExit from '../examples/UnmountOnExit.vue'
 
 export default {
   title: 'Components / Collapsible',
@@ -44,5 +45,12 @@ export function rootProvider() {
   return {
     components: { RootProvider },
     template: '<RootProvider />',
+  }
+}
+
+export function unmountOnExit() {
+  return {
+    components: { UnmountOnExit },
+    template: '<UnmountOnExit />',
   }
 }
