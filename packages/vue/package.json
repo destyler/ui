@@ -5,6 +5,17 @@
   "description": "A starter for creating a Vue component library.",
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",
+  "homepage": "https://github.com/destyler/ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/destyler/ui.git",
+    "directory": "packages/vue"
+  },
+  "bugs": "https://github.com/destyler/ui/issues",
+  "keywords": [
+    "base",
+    "destyler"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
