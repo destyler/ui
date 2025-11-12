@@ -1,5 +1,7 @@
 import type { Preview } from '@storybook/vue3-vite'
 
+import '../../../utils/bootstrap.css'
+
 const preview: Preview = {
   parameters: {
     controls: {

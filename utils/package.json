@@ -1,0 +1,17 @@
+{
+  "name": "@destyler-ui/private",
+  "private": "true",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "*": "./src/*"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}
