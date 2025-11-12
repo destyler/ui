@@ -8,10 +8,9 @@ export default {
   },
 }
 
-export const basic = () => ({
+export function basic () {
+  return {
   components: { Basic },
   template: '<Basic />',
-})
-
-
-
+}
+}
