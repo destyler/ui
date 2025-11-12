@@ -8,7 +8,9 @@
   "scripts": {
     "build": "pnpm run --filter \"./packages/**\" -r build",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "release": "bumpp",
+    "publish:ci": "pnpm -r publish --access public --no-git-checks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
