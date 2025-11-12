@@ -1,9 +1,10 @@
 import type { ComponentPublicInstance } from 'vue'
-import {computed, getCurrentInstance, ref} from 'vue'
+import { computed, getCurrentInstance, ref } from 'vue'
 import { unrefElement } from '../utils/unref-element'
 
-const isElement = (el: any): el is Element =>
-  Object.prototype.hasOwnProperty.call(el, 'nodeName') && typeof el.nodeName === 'string'
+function isElement(el: any): el is Element {
+  return Object.prototype.hasOwnProperty.call(el, 'nodeName') && typeof el.nodeName === 'string'
+}
 
 export function useForwardExpose() {
   const instance = getCurrentInstance()!
@@ -14,10 +15,10 @@ export function useForwardExpose() {
     // $el could be text/comment for non-single root normal or text root, thus we retrieve the nextElementSibling
     // @ts-expect-error ignore ts error
     return ['#text', '#comment'].includes(currentRef.value?.$el.nodeName)
-      ? // @ts-expect-error ignore ts error
-        currentRef.value?.$el.nextElementSibling
-      : // @ts-expect-error ignore ts error
-        unrefElement(currentRef)
+      // @ts-expect-error ignore ts error
+      ? currentRef.value?.$el.nextElementSibling
+      // @ts-expect-error ignore ts error
+      : unrefElement(currentRef)
   })
 
   // localExpose should only be assigned once else will create infinite loop
@@ -56,7 +57,8 @@ export function useForwardExpose() {
   function forwardRef(ref: Element | ComponentPublicInstance | null) {
     currentRef.value = ref
 
-    if (isElement(ref) || !ref) return
+    if (isElement(ref) || !ref)
+      return
 
     // retrieve the forwarded element
     Object.defineProperty(ret, '$el', {

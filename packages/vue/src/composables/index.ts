@@ -1,6 +1,6 @@
 export { useEmitAsProps } from './use-emits-as-props'
+export { useForwardExpose } from './use-forward-expose'
 export { useForwardProps } from './use-forward-props'
 export { useForwardPropsEmits } from './use-forward-props-emits'
-export { RenderStrategyPropsProvider, useRenderStrategyProps, type RenderStrategyProps } from './use-render-strategy'
-export { useForwardExpose } from './use-forward-expose'
+export { type RenderStrategyProps, RenderStrategyPropsProvider, useRenderStrategyProps } from './use-render-strategy'
 export { useVModel } from './use-v-model'

@@ -1,4 +1,5 @@
-import { type MaybeRefOrGetter, type UnwrapRef, camelize, computed, getCurrentInstance, toRef } from 'vue'
+import type { MaybeRefOrGetter, UnwrapRef } from 'vue'
+import { camelize, computed, getCurrentInstance, toRef } from 'vue'
 
 interface PropOptions {
   type?: any
@@ -14,7 +15,8 @@ export function useForwardProps<
   // Default value for declared props
   const defaultProps = Object.keys(vm?.type.props ?? {}).reduce((prev, curr) => {
     const defaultValue = (vm?.type.props[curr] as PropOptions).default
-    if (defaultValue !== undefined) prev[curr as keyof U] = defaultValue
+    if (defaultValue !== undefined)
+      prev[curr as keyof U] = defaultValue
     return prev
   }, {} as U)
 
@@ -27,9 +29,10 @@ export function useForwardProps<
       preservedProps[camelize(key) as keyof U] = assignedProps[key]
     })
 
-    // @ts-expect-error
+    // @ts-expect-error ignore ts error
     return Object.keys({ ...defaultProps, ...preservedProps }).reduce((prev, curr) => {
-      if (refProps.value[curr] !== undefined) prev[curr as keyof U] = refProps.value[curr]
+      if (refProps.value[curr] !== undefined)
+        prev[curr as keyof U] = refProps.value[curr]
       return prev
     }, {} as U)
   })

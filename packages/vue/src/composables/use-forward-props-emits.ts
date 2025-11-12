@@ -10,7 +10,7 @@ export function useForwardPropsEmits<
   const emitsAsProps = emit ? useEmitAsProps(emit) : {}
 
   return computed(() => ({
-    // @ts-expect-error
+    // @ts-expect-error ignore ts error
     ...parsedProps.value,
     ...emitsAsProps,
   }))

@@ -1,8 +1,9 @@
-import * as presence from '@destyler/presence'
-import { normalizeProps, useMachine } from '@destyler/vue'
-import { type MaybeRef, type VNodeRef, computed, ref, watch } from 'vue'
+import type { MaybeRef, VNodeRef } from 'vue'
 import type { EmitFn, Optional } from '../../../types'
 import type { RootEmits } from '../types'
+import * as presence from '@destyler/presence'
+import { normalizeProps, useMachine } from '@destyler/vue'
+import { computed, ref, watch } from 'vue'
 
 export interface UsePresenceProps extends Optional<presence.Context, 'present'> {
   /**
@@ -19,7 +20,7 @@ export interface UsePresenceProps extends Optional<presence.Context, 'present'> 
 
 export type UsePresenceReturn = ReturnType<typeof usePresence>
 
-export const usePresence = (props: MaybeRef<UsePresenceProps>, emit?: EmitFn<RootEmits>) => {
+export function usePresence(props: MaybeRef<UsePresenceProps>, emit?: EmitFn<RootEmits>) {
   const context = ref(props)
   const wasEverPresent = ref(false)
   const nodeRef = ref<VNodeRef | null>(null)
@@ -37,7 +38,8 @@ export const usePresence = (props: MaybeRef<UsePresenceProps>, emit?: EmitFn<Roo
     () => api.value.present,
     () => {
       const isPresent = api.value.present
-      if (isPresent) wasEverPresent.value = true
+      if (isPresent)
+        wasEverPresent.value = true
     },
   )
 
@@ -53,11 +55,11 @@ export const usePresence = (props: MaybeRef<UsePresenceProps>, emit?: EmitFn<Roo
   return computed(() => ({
     present: api.value.present,
     unmounted:
-      (!api.value.present && !wasEverPresent.value && context.value.lazyMount) ||
-      (context.value?.unmountOnExit && !api.value?.present && wasEverPresent.value),
+      (!api.value.present && !wasEverPresent.value && context.value.lazyMount)
+      || (context.value?.unmountOnExit && !api.value?.present && wasEverPresent.value),
     presenceProps: {
-      ref: nodeRef,
-      hidden: !api.value.present,
+      'ref': nodeRef,
+      'hidden': !api.value.present,
       'data-state': context.value?.present ? 'open' : 'closed',
     },
   }))

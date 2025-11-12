@@ -1,12 +1,14 @@
+import type { VNode } from 'vue'
 import { mergeProps } from '@destyler/vue'
-import { Fragment, type VNode, cloneVNode, defineComponent } from 'vue'
+import { cloneVNode, defineComponent, Fragment } from 'vue'
 
 export const Dynamic = defineComponent({
   name: 'Dynamic',
   inheritAttrs: false,
   setup(_, { attrs, slots }) {
     return () => {
-      if (!slots.default) return null
+      if (!slots.default)
+        return null
       const children = renderSlotFragments(slots.default())
       const [firstChildren, ...otherChildren] = children
 
@@ -30,9 +32,11 @@ export const Dynamic = defineComponent({
 })
 
 function renderSlotFragments(children?: VNode[]): VNode[] {
-  if (!children) return []
+  if (!children)
+    return []
   return children.flatMap((child) => {
-    if (child.type === Fragment) return renderSlotFragments(child.children as VNode[])
+    if (child.type === Fragment)
+      return renderSlotFragments(child.children as VNode[])
 
     return [child]
   })

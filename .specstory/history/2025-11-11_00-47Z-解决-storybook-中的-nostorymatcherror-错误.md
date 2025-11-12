@@ -26,12 +26,11 @@ PreviewWithSelection @ storybook_internal_preview_runtime.js?v=9aef49a6:44719
 PreviewWeb @ storybook_internal_preview_runtime.js?v=9aef49a6:45384
 (anonymous) @ vite-app.js:27
 
-
 ---
 
 _**Agent (model copilot/claude-sonnet-4.5)**_
 
-我来帮你解决这个 Storybook 错误。错误提示找不到 story `'components-collapse--basic'`。让我先检查一下当前的 story 文件结构。 问题在于你的 story 文件只定义了 default export,但没有导出任何具名的 story。Storybook 需要具名导出来创建实际的 story。我来修复这个文件: 
+我来帮你解决这个 Storybook 错误。错误提示找不到 story `'components-collapse--basic'`。让我先检查一下当前的 story 文件结构。 问题在于你的 story 文件只定义了 default export,但没有导出任何具名的 story。Storybook 需要具名导出来创建实际的 story。我来修复这个文件:
 ```
 
 ```
@@ -49,11 +48,11 @@ _**User (2025-11-11 01:19Z)**_
 这是为什么
 
 ```
-[Vue warn]: Property "asChild" was accessed during render but is not defined on instance. 
-  at <Root defaultValue= ['Vue'] > 
-  at <Basic> 
-  at <Anonymous> 
-  at <Anonymous> 
+[Vue warn]: Property "asChild" was accessed during render but is not defined on instance.
+  at <Root defaultValue= ['Vue'] >
+  at <Basic>
+  at <Anonymous>
+  at <Anonymous>
   at <App>
 ```
 
@@ -61,15 +60,11 @@ _**User (2025-11-11 01:19Z)**_
 
 _**Agent (model copilot/claude-sonnet-4.5)**_
 
-这个警告是因为 `Root` 组件使用了 `asChild` 属性但没有正确定义。让我检查一下相关的组件代码： 我看到问题了。在 `Root.vue` 的模板中使用了 `asChild`，但这个属性来自 `PolymorphicProps`，需要在 props 中访问。让我检查一下 `PolymorphicProps` 的定义： 现在我明白了。问题是在模板中直接使用 `asChild` 变量，但应该使用 `props.asChild`。让我修复这个问题： 
+这个警告是因为 `Root` 组件使用了 `asChild` 属性但没有正确定义。让我检查一下相关的组件代码： 我看到问题了。在 `Root.vue` 的模板中使用了 `asChild`，但这个属性来自 `PolymorphicProps`，需要在 props 中访问。让我检查一下 `PolymorphicProps` 的定义： 现在我明白了。问题是在模板中直接使用 `asChild` 变量，但应该使用 `props.asChild`。让我修复这个问题：
 ```
 
 ```
-让我检查其他组件是否也有同样的问题： 还有其他组件也有同样的问题。让我逐个修复它们： 现在我需要修复所有这些组件，将 `asChild` 改为 `props.asChild`： 
-```
-
-```
-
+让我检查其他组件是否也有同样的问题： 还有其他组件也有同样的问题。让我逐个修复它们： 现在我需要修复所有这些组件，将 `asChild` 改为 `props.asChild`：
 ```
 
 ```
@@ -90,6 +85,8 @@ _**Agent (model copilot/claude-sonnet-4.5)**_
 
 ```
 
+```
+
+```
 
 ---
-

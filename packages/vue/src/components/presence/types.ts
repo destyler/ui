@@ -23,7 +23,7 @@ export interface RootProps {
   unmountOnExit?: boolean
 }
 
-export type RootEmits = {
+export interface RootEmits {
   /**
    * Function called when the animation ends in the closed state
    */
@@ -33,8 +33,8 @@ export type RootEmits = {
 export interface PresenceBaseProps extends RootProps, PolymorphicProps {}
 export interface PresenceProps
   extends PresenceBaseProps,
-    /**
-     * @vue-ignore
-     */
-    HTMLAttributes {}
+  /**
+   * @vue-ignore
+   */
+  HTMLAttributes {}
 export interface PresenceEmits extends RootEmits {}

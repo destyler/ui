@@ -1,7 +1,6 @@
 import type { ComputedRef } from 'vue'
-import { createContext } from '../../utils'
 import type { UseEnvironmentContext } from './type'
+import { createContext } from '../../utils'
 
-
-export const [EnvironmentContextProvider, useEnvironmentContext] =
-  createContext<ComputedRef<UseEnvironmentContext> | null>('EnvironmentContext')
+export const [EnvironmentContextProvider, useEnvironmentContext]
+  = createContext<ComputedRef<UseEnvironmentContext> | null>('EnvironmentContext')

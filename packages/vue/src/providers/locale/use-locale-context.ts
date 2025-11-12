@@ -1,7 +1,7 @@
-import { type ComputedRef, computed } from 'vue'
-import { createContext } from '../../utils'
+import type { ComputedRef } from 'vue'
 import type { LocaleContext } from './types'
-
+import { computed } from 'vue'
+import { createContext } from '../../utils'
 
 export const DEFAULT_LOCALE: ComputedRef<LocaleContext> = computed(() => ({
   dir: 'ltr',

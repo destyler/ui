@@ -1,12 +1,13 @@
+import type { Ref, UnwrapRef, WritableComputedRef } from 'vue'
 import {
-  type Ref,
-  type UnwrapRef,
-  type WritableComputedRef,
   computed,
   getCurrentInstance,
   nextTick,
+
   ref,
+
   watch,
+
 } from 'vue'
 
 export interface UseVModelOptions<T, Passive extends boolean = false> {
@@ -65,7 +66,8 @@ export function useVModel<P extends object, K extends keyof P, Name extends stri
     if (!eventName) {
       _emit(eventName || `update:${prop.toString()}`, value)
       //
-    } else {
+    }
+    else {
       //
       for (const event of eventName) {
         _emit(event, value)

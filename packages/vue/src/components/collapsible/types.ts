@@ -38,11 +38,11 @@ export interface RootEmits {
   /**
    * Function called when the animation ends in the closed state.
    */
-  "exitComplete": []
+  'exitComplete': []
   /**
    * Function called when the popup is opened
    */
-  "openChange": [details: collapsible.OpenChangeDetails]
+  'openChange': [details: collapsible.OpenChangeDetails]
   /**
    * Event handler called when the open state of the collapsible changes.
    */

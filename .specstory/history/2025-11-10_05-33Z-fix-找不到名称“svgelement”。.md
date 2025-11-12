@@ -14,8 +14,6 @@ _**Agent (model copilot/claude-sonnet-4.5)**_
 
 The problem is that `SVGElement` is a browser DOM type that needs to be available in the TypeScript environment, which requires the DOM library to be included in your TypeScript configuration.
 
-
-
 ```bash
 
 # Add DOM library to tsconfig.json if not already present
@@ -25,4 +23,3 @@ The problem is that `SVGElement` is a browser DOM type that needs to be availabl
 ```
 
 ---
-

@@ -49,11 +49,11 @@ export interface RootEmits {
   /**
    * The callback fired when the focused collapse item changes.
    */
-  "focusChange": [details: collapse.FocusChangeDetails]
+  'focusChange': [details: collapse.FocusChangeDetails]
   /**
    * The callback fired when the state of expanded/collapsed collapse items changes.
    */
-  "valueChange": [details: collapse.ValueChangeDetails]
+  'valueChange': [details: collapse.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */

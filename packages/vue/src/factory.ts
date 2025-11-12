@@ -1,12 +1,8 @@
-import type {AllowedComponentProps, ComponentCustomProps, ExtractPropTypes, IntrinsicElementAttributes, VNodeProps} from 'vue';
+import type { AllowedComponentProps, ComponentCustomProps, ExtractPropTypes, IntrinsicElementAttributes, VNodeProps } from 'vue'
 import {
-  
-  
-  
-  
-  
+
   defineComponent,
-  h
+  h,
 } from 'vue'
 import { Dynamic } from './utils/dynamic'
 
@@ -63,8 +59,8 @@ function withAsChild(component: ElementType) {
       },
     },
     setup(props, { attrs, slots }) {
-      if (!props.asChild) 
-return () => h(component, { ...attrs }, slots.default?.())
+      if (!props.asChild)
+        return () => h(component, { ...attrs }, slots.default?.())
       return () => h(Dynamic, attrs, { default: slots.default })
     },
   })

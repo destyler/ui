@@ -1,24 +1,25 @@
+import type { CollectionItem, CollectionOptions, FilePathTreeNode, TreeCollectionOptions, TreeNode } from '@destyler/collection'
 import {
-  type CollectionItem,
-  type CollectionOptions,
-  type FilePathTreeNode,
-  ListCollection,
-  TreeCollection,
-  type TreeCollectionOptions,
-  type TreeNode,
+
   filePathToTree,
+  ListCollection,
+
+  TreeCollection,
 } from '@destyler/collection'
 import { ref } from '@destyler/xstate'
 
 export type { CollectionItem, ListCollection } from '@destyler/collection'
 
-export const createListCollection = <T extends CollectionItem>(options: CollectionOptions<T>): ListCollection<T> =>
-  ref(new ListCollection(options))
+export function createListCollection<T extends CollectionItem>(options: CollectionOptions<T>): ListCollection<T> {
+  return ref(new ListCollection(options))
+}
 
 export type { TreeCollection, TreeNode } from '@destyler/collection'
 
-export const createTreeCollection = <T extends TreeNode>(options: TreeCollectionOptions<T>): TreeCollection<T> =>
-  ref(new TreeCollection(options))
+export function createTreeCollection<T extends TreeNode>(options: TreeCollectionOptions<T>): TreeCollection<T> {
+  return ref(new TreeCollection(options))
+}
 
-export const createFileTreeCollection = (paths: string[]): TreeCollection<FilePathTreeNode> =>
-  ref(filePathToTree(paths))
+export function createFileTreeCollection(paths: string[]): TreeCollection<FilePathTreeNode> {
+  return ref(filePathToTree(paths))
+}

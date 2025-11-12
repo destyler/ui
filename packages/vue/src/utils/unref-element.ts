@@ -1,4 +1,5 @@
-import { type ComponentPublicInstance, type MaybeRef, type MaybeRefOrGetter, toValue } from 'vue'
+import type { ComponentPublicInstance, MaybeRef, MaybeRefOrGetter } from 'vue'
+import { toValue } from 'vue'
 
 export type VueInstance = ComponentPublicInstance
 export type MaybeElementRef<T extends MaybeElement = MaybeElement> = MaybeRef<T>

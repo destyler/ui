@@ -14,5 +14,5 @@ export interface RenderStrategyProps {
   unmountOnExit?: boolean
 }
 
-export const [RenderStrategyPropsProvider, useRenderStrategyProps] =
-  createContext<ComputedRef<RenderStrategyProps>>('RenderStrategyProps')
+export const [RenderStrategyPropsProvider, useRenderStrategyProps]
+  = createContext<ComputedRef<RenderStrategyProps>>('RenderStrategyProps')

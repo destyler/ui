@@ -8,9 +8,9 @@ export default {
   },
 }
 
-export function basic () {
+export function basic() {
   return {
-  components: { Basic },
-  template: '<Basic />',
-}
+    components: { Basic },
+    template: '<Basic />',
+  }
 }
