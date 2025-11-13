@@ -435,9 +435,59 @@ useForwardExpose()
 
 ---
 
-_**User (2025-11-13 02:22Z)**_
+_**User (2025-11-13 02:23Z)**_
 
 所以现在不渲染组件了,这合理吗
+
+---
+
+_**Agent (model copilot/gpt-5-codex)**_
+
+**Clarifying CollapsibleProvider rendering issues**
+
+I'm working through why the component might not render initially due to how the `value` prop and computed refs are handled in the `CollapsibleProvider`. The core issue seems to be mixing unwrapped and computed types, causing early `undefined` values and `v-if` skipping rendering. I want to explain in Chinese that the current pattern skips initial rendering not ideally, and propose a fix to accept either computed or plain objects, use `isRef` checks, and always pass a stable computed to the provider—this way the component renders immediately but updates once the value is ready. I'll include example Vue code snippets to illustrate this approach.组件一直不渲染当然不合理，我们还是应该让它正常挂载，只是在 API 还没准备好时做保护。可以这样改 `RootProvider`：
+
+```vue
+<script setup lang="ts">
+import { computed, isRef } from 'vue'
+import { ui } from '~/factory'
+import { CollapsibleProvider } from '../composables/use-collapsible-context'
+import { useForwardExpose } from '~/composables'
+import type { UseCollapsibleReturn } from '../composables/use-collapsible'
+
+const props = defineProps<{
+  value: UseCollapsibleReturn | UseCollapsibleReturn['value']
+}>()
+
+// 始终拿到一个 computed，用来给上下文
+const contextRef = isRef(props.value) ? props.value : computed(() => props.value)
+
+// 方便模板和内部调用（可能暂时拿不到）
+const collapsible = computed(() => contextRef.value)
+
+CollapsibleProvider(contextRef as UseCollapsibleReturn)
+useForwardExpose()
+</script>
+
+<template>
+  <ui.div v-bind="collapsible.value?.getRootProps?.() ?? {}" :as-child="props.asChild">
+    <slot />
+  </ui.div>
+</template>
+```
+
+这样处理后：
+- StoryBook 里 `<Collapsible.RootProvider :value="collapsible">` 传进来的若是 `UseCollapsibleReturn`（ref），我们直接复用；若 Vue 已自动解包成普通对象，则再包一层 `computed`。
+- 模板仍然会渲染，只是 `getRootProps` 在真正可用前返回空对象，避免报错。
+- 上下文里 `useCollapsibleContext()` 拿到的还是 `UseCollapsibleReturn`，`Trigger`、`Content` 等组件无需改动。
+
+改完记得跑一下 StoryBook 对应的 story，确认示例能正常渲染。
+
+---
+
+_**User (2025-11-13 04:42Z)**_
+
+但是我肯定不希望是这样的编写方案,有没有其他的可能性
 
 ---
 
