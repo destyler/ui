@@ -1,4 +1,4 @@
-import Basic from '../examples/basic.vue'
+import Basic from '../examples/Basic.vue'
 
 export default {
   title: 'Components / Collapse',
