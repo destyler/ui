@@ -1,8 +1,7 @@
 <script lang="ts">
 import type { PolymorphicProps } from '~/factory'
 
-export interface CollapseItemContentBaseProps extends PolymorphicProps {}
-export interface CollapseItemContentProps extends CollapseItemContentBaseProps {}
+export interface CollapseItemContentProps extends PolymorphicProps {}
 
 interface VisibilityProps {
   hidden?: boolean

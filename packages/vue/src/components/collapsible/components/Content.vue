@@ -1,8 +1,7 @@
 <script lang="ts">
 import type { PolymorphicProps } from '~/factory'
 
-export interface CollapsibleContentBaseProps extends PolymorphicProps {}
-export interface CollapsibleContentProps extends CollapsibleContentBaseProps {}
+export interface CollapsibleContentProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">

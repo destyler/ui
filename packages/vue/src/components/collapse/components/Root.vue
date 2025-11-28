@@ -4,8 +4,7 @@ import type { RenderStrategyProps } from '~/composables'
 import type { PolymorphicProps } from '~/factory'
 import type { RootEmits, RootProps } from '../types'
 
-export interface CollapseRootBaseProps extends RootProps, RenderStrategyProps, PolymorphicProps {}
-export interface CollapseRootProps extends CollapseRootBaseProps {}
+export interface CollapseRootProps extends RootProps, RenderStrategyProps, PolymorphicProps {}
 export interface CollapseRootEmits extends RootEmits {}
 </script>
 

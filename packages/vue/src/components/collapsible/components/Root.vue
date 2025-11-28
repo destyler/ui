@@ -3,8 +3,7 @@ import type { BooleanDefaults } from '~/types'
 import type { PolymorphicProps } from '~/factory'
 import type { RootEmits, RootProps } from '../types'
 
-export interface CollapsibleRootBaseProps extends RootProps, PolymorphicProps {}
-export interface CollapsibleRootProps extends CollapsibleRootBaseProps {}
+export interface CollapsibleRootProps extends RootProps, PolymorphicProps {}
 export interface CollapsibleRootEmits extends RootEmits {}
 </script>
 

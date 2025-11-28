@@ -8,8 +8,7 @@ interface RootProviderProps {
   value: UnwrapRef<UseCollapseReturn>
 }
 
-export interface CollapseRootProviderBaseProps extends RootProviderProps, RenderStrategyProps, PolymorphicProps {}
-export interface CollapseRootProviderProps extends CollapseRootProviderBaseProps {}
+export interface CollapseRootProviderProps extends RootProviderProps, RenderStrategyProps, PolymorphicProps {}
 </script>
 
 <script setup lang="ts">

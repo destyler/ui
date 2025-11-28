@@ -2,8 +2,7 @@
 <script lang="ts">
 import type { PolymorphicProps } from '~/factory'
 
-export interface CollapseItemIndicatorBaseProps extends PolymorphicProps {}
-export interface CollapseItemIndicatorProps extends CollapseItemIndicatorBaseProps {}
+export interface CollapseItemIndicatorProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">

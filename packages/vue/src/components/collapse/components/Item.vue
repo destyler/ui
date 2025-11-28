@@ -2,8 +2,7 @@
 import type { ItemProps } from '@destyler/collapse'
 import type { PolymorphicProps } from '~/factory'
 
-export interface CollapseItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface CollapseItemProps extends CollapseItemBaseProps {}
+export interface CollapseItemProps extends ItemProps, PolymorphicProps {}
 </script>
 
 <script setup lang="ts">

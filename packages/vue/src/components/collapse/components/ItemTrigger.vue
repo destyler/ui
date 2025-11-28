@@ -2,8 +2,7 @@
 import { useCollapsibleContext } from '~/components/collapsible'
 import type { PolymorphicProps } from '~/factory'
 
-export interface CollapseItemTriggerBaseProps extends PolymorphicProps {}
-export interface CollapseItemTriggerProps extends CollapseItemTriggerBaseProps {}
+export interface CollapseItemTriggerProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">

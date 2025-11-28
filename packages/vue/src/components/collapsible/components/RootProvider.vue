@@ -7,8 +7,7 @@ interface RootProviderProps {
   value: UnwrapRef<UseCollapsibleReturn>
 }
 
-export interface CollapsibleRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface CollapsibleRootProviderProps extends CollapsibleRootProviderBaseProps {}
+export interface CollapsibleRootProviderProps extends RootProviderProps, PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
