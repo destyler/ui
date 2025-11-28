@@ -1,14 +1,11 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { BooleanDefaults } from '~/types'
 import type { RenderStrategyProps } from '~/composables'
 import type { PolymorphicProps } from '~/factory'
 import type { RootEmits, RootProps } from '../types'
 
 export interface CollapseRootBaseProps extends RootProps, RenderStrategyProps, PolymorphicProps {}
-export interface CollapseRootProps
-  extends /* @vue-ignore */ CollapseRootBaseProps,
-    /* @vue-ignore */ HTMLAttributes {}
+export interface CollapseRootProps extends CollapseRootBaseProps {}
 export interface CollapseRootEmits extends RootEmits {}
 </script>
 

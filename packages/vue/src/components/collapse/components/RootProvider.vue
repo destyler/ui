@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { HTMLAttributes, UnwrapRef } from 'vue'
+import type { UnwrapRef } from 'vue'
 import type { RenderStrategyProps } from '~/composables'
 import type { PolymorphicProps } from '~/factory'
 import type { UseCollapseReturn } from '../composables/use-collapse'
@@ -9,9 +9,7 @@ interface RootProviderProps {
 }
 
 export interface CollapseRootProviderBaseProps extends RootProviderProps, RenderStrategyProps, PolymorphicProps {}
-export interface CollapseRootProviderProps
-  extends /* @vue-ignore */ CollapseRootProviderBaseProps,
-    /* @vue-ignore */ HTMLAttributes {}
+export interface CollapseRootProviderProps extends CollapseRootProviderBaseProps {}
 </script>
 
 <script setup lang="ts">

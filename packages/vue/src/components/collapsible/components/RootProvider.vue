@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { HTMLAttributes, UnwrapRef } from 'vue'
+import type { UnwrapRef } from 'vue'
 import type { PolymorphicProps } from '~/factory'
 import type { UseCollapsibleReturn } from '../composables/use-collapsible'
 
@@ -8,9 +8,7 @@ interface RootProviderProps {
 }
 
 export interface CollapsibleRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface CollapsibleRootProviderProps
-  extends /* @vue-ignore */ CollapsibleRootProviderBaseProps,
-    /* @vue-ignore */ HTMLAttributes {}
+export interface CollapsibleRootProviderProps extends CollapsibleRootProviderBaseProps {}
 </script>
 
 <script setup lang="ts">

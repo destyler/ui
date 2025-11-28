@@ -1,11 +1,8 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { PolymorphicProps } from '~/factory'
 
 export interface CollapseItemContentBaseProps extends PolymorphicProps {}
-export interface CollapseItemContentProps
-  extends /* @vue-ignore */ CollapseItemContentBaseProps,
-    /* @vue-ignore */ HTMLAttributes {}
+export interface CollapseItemContentProps extends CollapseItemContentBaseProps {}
 
 interface VisibilityProps {
   hidden?: boolean

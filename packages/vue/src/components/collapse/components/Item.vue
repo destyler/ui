@@ -1,12 +1,9 @@
 <script lang="ts">
 import type { ItemProps } from '@destyler/collapse'
-import type { HTMLAttributes } from 'vue'
 import type { PolymorphicProps } from '~/factory'
 
 export interface CollapseItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface CollapseItemProps
-  extends /* @vue-ignore */ CollapseItemBaseProps,
-    /* @vue-ignore */ HTMLAttributes {}
+export interface CollapseItemProps extends CollapseItemBaseProps {}
 </script>
 
 <script setup lang="ts">

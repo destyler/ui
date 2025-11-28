@@ -1,11 +1,8 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
 import type { PolymorphicProps } from '~/factory'
 
 export interface CollapsibleTriggerBaseProps extends PolymorphicProps {}
-export interface CollapsibleTriggerProps
-  extends /* @vue-ignore */ CollapsibleTriggerBaseProps,
-    /* @vue-ignore */ ButtonHTMLAttributes {}
+export interface CollapsibleTriggerProps extends CollapsibleTriggerBaseProps {}
 </script>
 
 <script setup lang="ts">

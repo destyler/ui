@@ -1,9 +1,8 @@
 <script lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { PolymorphicProps } from '~/factory'
 
 export interface CollapsibleContentBaseProps extends PolymorphicProps {}
-export interface CollapsibleContentProps extends /* @vue-ignore */ CollapsibleContentBaseProps, /* @vue-ignore */ HTMLAttributes {}
+export interface CollapsibleContentProps extends CollapsibleContentBaseProps {}
 </script>
 
 <script setup lang="ts">
