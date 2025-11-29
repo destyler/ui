@@ -14,4 +14,13 @@ export default defineConfig({
   plugins: [
     Vue(),
   ],
+  optimizeDeps: {
+    include: [
+      '@destyler/collapsible',
+      '@destyler/collection',
+      '@destyler/xstate',
+      '@destyler/i18n',
+      '@destyler/dom',
+    ],
+  },
 })

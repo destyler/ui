@@ -3,7 +3,7 @@ import { Collapse } from '../index'
 import { ref } from 'vue'
 
 const items = ref(['React', 'Solid', 'Vue'])
-const value = ref(['React'])
+const value = ref(['Vue'])
 </script>
 
 <template>

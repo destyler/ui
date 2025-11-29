@@ -9,12 +9,12 @@ const items = ref(['React', 'Solid', 'Vue'])
   <Collapse.Root :defaultValue="['Vue']">
     <Collapse.Item v-for="item in items" :key="item" :value="item">
       <Collapse.ItemTrigger>
-        What is {{ item }}?
+        {{ item }} trigger
         <Collapse.ItemIndicator>
           x
         </Collapse.ItemIndicator>
       </Collapse.ItemTrigger>
-      <Collapse.ItemContent>{{ item }} is a JavaScript library for building user interfaces.</Collapse.ItemContent>
+      <Collapse.ItemContent>{{ item }} Content</Collapse.ItemContent>
     </Collapse.Item>
   </Collapse.Root>
 </template>

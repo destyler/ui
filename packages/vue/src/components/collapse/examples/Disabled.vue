@@ -7,9 +7,9 @@ const items = ref(['React', 'Solid', 'Vue'])
 
 <template>
   <Collapse.Root>
-    <Collapse.Item v-for="item in items" :key="item" :value="item" :disabled="item === 'Solid'">
-      <Collapse.ItemTrigger>{{ item }} trigger</Collapse.ItemTrigger>
-      <Collapse.ItemContent>{{ item }} content</Collapse.ItemContent>
+    <Collapse.Item v-for="item in items" :key="item" :value="item" :disabled="item === 'React'">
+      <Collapse.ItemTrigger>{{ item }} Trigger</Collapse.ItemTrigger>
+      <Collapse.ItemContent>{{ item }} Content</Collapse.ItemContent>
     </Collapse.Item>
   </Collapse.Root>
 </template>

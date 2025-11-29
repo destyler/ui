@@ -31,7 +31,10 @@
     "debug": "tsdown --debug",
     "prepublishOnly": "pnpm run build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest run --browser.headless",
+    "test:dev": "vitest dev --browser.headless",
+    "test:ui": "vitest --ui --open"
   },
   "peerDependencies": {
     "vue": ">=3.5.0"
