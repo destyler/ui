@@ -1,0 +1,16 @@
+import { describe, expect, it } from 'vitest'
+import { render } from 'vitest-browser-vue'
+import { getExports, getParts } from '../../../../../../utils/test'
+import Basic from '../examples/Basic.vue'
+import { {{capitalize (camelize vue)}}, {{camelize vue}}Anatomy } from '../index'
+
+describe('[{{dashCase vue}}] component', () => {
+  it.each(getParts({{camelize vue}}Anatomy))('should render part %s', async (part) => {
+    render(Basic)
+    expect(document.querySelector(part)).toBeInTheDocument()
+  })
+
+  it.each(getExports({{camelize vue}}Anatomy))('should export %s', async (part) => {
+    expect({{capitalize (camelize vue)}}[part]).toBeDefined()
+  })
+})

@@ -13,7 +13,8 @@
     "release": "bumpp package.json packages/**/package.json --commit --push --tag",
     "publish:ci": "pnpm -r publish --access public --no-git-checks",
     "test:ci": "pnpm run --filter \"./packages/**\" -r test",
-    "vue": "pnpm --filter @destyler-ui/vue"
+    "vue": "pnpm --filter @destyler-ui/vue",
+    "generate:vue": "plop vue"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
@@ -33,6 +34,7 @@
     "eslint-plugin-storybook": "^10.1.0",
     "happy-dom": "^20.0.11",
     "playwright": "^1.57.0",
+    "plop": "^4.0.4",
     "rolldown-vite": "^7.2.8",
     "storybook": "^10.1.0",
     "tsdown": "^0.16.8",
