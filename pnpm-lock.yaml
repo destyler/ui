@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      plop:
-        specifier: ^4.0.4
-        version: 4.0.4(@types/node@24.10.1)
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^6.2.0
@@ -63,6 +59,9 @@ importers:
       playwright:
         specifier: ^1.57.0
         version: 1.57.0
+      plop:
+        specifier: ^4.0.4
+        version: 4.0.4(@types/node@24.10.1)
       rolldown-vite:
         specifier: ^7.2.8
         version: 7.2.8(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(yaml@2.8.1)
@@ -88,6 +87,9 @@ importers:
   packages/vue:
     dependencies:
       '@destyler/anatomy':
+        specifier: ^0.2.0
+        version: 0.2.0
+      '@destyler/carousel':
         specifier: ^0.2.0
         version: 0.2.0
       '@destyler/collapse':
@@ -241,6 +243,9 @@ packages:
   '@destyler/anatomy@0.2.0':
     resolution: {integrity: sha512-xHVncHx69sZULY7V/f/S3N1IeKMJtcMAHz2E9jBcAIswLtRVvMRfnMkXgUoH6ijxj0mvkC4wau+gKmTZ58MQfg==}
 
+  '@destyler/carousel@0.2.0':
+    resolution: {integrity: sha512-OuPA6BQikNN76nJBFz/6+SRielU1QBNCyRRoTpCFAiXy6xcscAw8hXUguucyXPq6joU5+PDc+XjSp0pVf3vdxg==}
+
   '@destyler/collapse@0.2.0':
     resolution: {integrity: sha512-LiviBhfvAjh9XJSOPh73nT90llBhKVWg1aT4zlqy31ciJhq8chQy88rIlYqBHQcJnDCLJU/qeIBLMPsOpApFLA==}
 
@@ -261,6 +266,9 @@ packages:
 
   '@destyler/presence@0.2.0':
     resolution: {integrity: sha512-j17MHsJvLC2UZaIWgXQp1bHBbq//TzofMiVdAswouNkDpjVp8AAHDEJQdVGQOFTTa2pwCg/86uQMd6X4x/d3+w==}
+
+  '@destyler/scroll-snap@0.2.0':
+    resolution: {integrity: sha512-vtqdWdxQBG0ZjxRItk1kFAKqQdY8bohPPg5+wbUjJI7A4XQf6Nz3eMByDCt3dD7cddjYcMN6XnWew9t/OKJbtQ==}
 
   '@destyler/store@0.2.0':
     resolution: {integrity: sha512-77Cn6go9KyzpRPQReN0rDmRWWNuQTiuDTYG/gWIS06jUH6kddwM2sZz7F4bT/hkbQ1Ebdu75vjtLDMZegouw+A==}
@@ -4148,6 +4156,15 @@ snapshots:
 
   '@destyler/anatomy@0.2.0': {}
 
+  '@destyler/carousel@0.2.0':
+    dependencies:
+      '@destyler/anatomy': 0.2.0
+      '@destyler/dom': 0.2.0
+      '@destyler/scroll-snap': 0.2.0
+      '@destyler/types': 0.2.0
+      '@destyler/utils': 0.2.0
+      '@destyler/xstate': 0.2.0
+
   '@destyler/collapse@0.2.0':
     dependencies:
       '@destyler/anatomy': 0.2.0
@@ -4188,6 +4205,10 @@ snapshots:
     dependencies:
       '@destyler/types': 0.2.0
       '@destyler/xstate': 0.2.0
+
+  '@destyler/scroll-snap@0.2.0':
+    dependencies:
+      '@destyler/dom': 0.2.0
 
   '@destyler/store@0.2.0':
     dependencies:

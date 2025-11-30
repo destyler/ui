@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@destyler/anatomy": "^0.2.0",
+    "@destyler/carousel": "^0.2.0",
     "@destyler/collapse": "^0.2.0",
     "@destyler/collapsible": "^0.2.0",
     "@destyler/collection": "^0.2.0",
