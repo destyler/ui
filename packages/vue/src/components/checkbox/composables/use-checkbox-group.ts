@@ -1,0 +1,76 @@
+import type { GroupEmits, GroupProps } from '../types'
+import type { EmitFn } from '~/types'
+import { computed, toRefs } from 'vue'
+import { useVModel } from '~/composables'
+
+export interface UseCheckboxGroupProps extends GroupProps {}
+export type UseCheckboxGroupReturn = ReturnType<typeof useCheckboxGroup>
+
+interface CheckboxGroupItemProps {
+  value: string | undefined
+}
+
+export function useCheckboxGroup(props: GroupProps, emit?: EmitFn<GroupEmits>) {
+  const interactive = computed(() => !(props.disabled || props.readOnly))
+
+  const { defaultValue } = toRefs(props)
+
+  const valueRef = useVModel(props, 'modelValue', emit, {
+    defaultValue: defaultValue?.value ?? [],
+    passive: (props.modelValue === undefined) as false,
+    eventName: ['valueChange', 'update:modelValue'],
+  })
+
+  const isChecked = (val: string | undefined) => {
+    return valueRef.value.some(v => String(v) === String(val))
+  }
+
+  const addValue = (val: string) => {
+    if (!interactive.value)
+      return
+    if (isChecked(val))
+      return
+    valueRef.value = valueRef.value.concat(val)
+  }
+
+  const removeValue = (val: string) => {
+    if (!interactive.value)
+      return
+    valueRef.value = valueRef.value.filter(v => String(v) !== String(val))
+  }
+
+  const toggleValue = (val: string) => {
+    isChecked(val) ? removeValue(val) : addValue(val)
+  }
+
+  const getItemProps = (itemProps: CheckboxGroupItemProps) => {
+    return {
+      checked: itemProps.value != null ? isChecked(itemProps.value) : undefined,
+      onCheckedChange() {
+        if (itemProps.value != null) {
+          toggleValue(itemProps.value)
+        }
+      },
+      name: props.name,
+      disabled: props.disabled,
+      readOnly: props.readOnly,
+      invalid: props.invalid,
+    }
+  }
+  const setValue = (value: string[]) => {
+    valueRef.value = value
+  }
+
+  return computed(() => ({
+    isChecked,
+    value: valueRef.value,
+    name: props.name,
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    invalid: props.invalid,
+    addValue,
+    setValue,
+    toggleValue,
+    getItemProps,
+  }))
+}
