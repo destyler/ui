@@ -44,4 +44,4 @@ jobs:
         run: pnpm playwright install --with-deps
 
       - name: Test
-        run: pnpm run vue test
+        run: pnpm run test:ci
