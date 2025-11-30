@@ -44,6 +44,7 @@
     "@destyler/auto-resize": "^0.2.0",
     "@destyler/carousel": "^0.2.0",
     "@destyler/checkbox": "^0.2.0",
+    "@destyler/clipboard": "^0.2.0",
     "@destyler/collapse": "^0.2.0",
     "@destyler/collapsible": "^0.2.0",
     "@destyler/collection": "^0.2.0",
