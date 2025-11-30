@@ -46,6 +46,7 @@
     "@destyler/collection": "^0.2.0",
     "@destyler/dom": "^0.2.0",
     "@destyler/i18n": "^0.2.0",
+    "@destyler/image": "^0.2.0",
     "@destyler/presence": "^0.2.0",
     "@destyler/vue": "^0.2.0",
     "@destyler/xstate": "^0.2.0"
