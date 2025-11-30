@@ -15,6 +15,10 @@ import { ui } from '~/factory'
 import { useCollapse } from '../composables/use-collapse'
 import { CollapseProvider } from '../composables/use-collapse-context'
 
+defineOptions({
+  name: 'CollapseRoot'
+})
+
 const props = withDefaults(defineProps<CollapseRootProps>(), {
   collapsible: undefined,
   disabled: undefined,

@@ -12,6 +12,10 @@ import { useClipboard } from '../composables/use-clipboard'
 import { ClipboardProvider } from '../composables/use-clipboard-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'ClipboardRoot'
+})
+
 const props = defineProps<ClipboardRootProps>()
 const emits = defineEmits<ClipboardRootEmits>()
 

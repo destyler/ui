@@ -6,6 +6,10 @@ import { useForwardExpose } from '../../../composables'
 import type { BooleanDefaults } from '../../../types'
 import type {PresenceProps, PresenceEmits,RootProps} from '../types'
 
+defineOptions({
+  name: 'Presence'
+})
+
 const props = withDefaults(defineProps<PresenceProps>(), {
   immediate: undefined,
   lazyMount: undefined,

@@ -16,6 +16,10 @@ import { ui } from '~/factory'
 import { ClipboardProvider } from '../composables/use-clipboard-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'ClipboardRootProvider'
+})
+
 const props = defineProps<ClipboardRootProviderProps>()
 const clipboard = computed(() => props.value)
 

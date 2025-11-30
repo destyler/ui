@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useClipboardContext } from '../composables/use-clipboard-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'ClipboardLabel'
+})
+
 defineProps<ClipboardLabelProps>()
 const clipboard = useClipboardContext()
 

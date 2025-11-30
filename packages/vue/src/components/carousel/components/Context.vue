@@ -11,6 +11,10 @@ export interface CarouselContextProps
 <script setup lang="ts">
 import { useCarouselContext } from '../composables/use-carousel-context'
 
+defineOptions({
+  name: 'CarouselContext'
+})
+
 const carousel = useCarouselContext()
 
 defineSlots<{

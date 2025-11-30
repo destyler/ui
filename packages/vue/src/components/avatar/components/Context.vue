@@ -11,6 +11,10 @@ export interface AvatarContextProps
 <script setup lang="ts">
 import { useAvatarContext } from '../composables/use-avatar-context'
 
+defineOptions({
+  name: 'AvatarContext'
+})
+
 const avatar = useAvatarContext()
 
 defineSlots<{

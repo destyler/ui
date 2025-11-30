@@ -13,6 +13,10 @@ import { useCarousel } from '../composables/use-carousel'
 import { CarouselProvider } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CarouselRoot'
+})
+
 const props = withDefaults(defineProps<CarouselRootProps>(), {
   allowMouseDrag: undefined,
   loop: undefined,

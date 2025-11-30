@@ -13,6 +13,10 @@ import { useCheckbox } from '../composables/use-checkbox'
 import { CheckboxProvider } from '../composables/use-checkbox-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CheckboxRoot'
+})
+
 const props = withDefaults(defineProps<CheckboxRootProps>(), {
   checked: undefined,
   defaultChecked: undefined,

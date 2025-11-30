@@ -14,6 +14,10 @@ import { useCheckboxGroup } from '../composables/use-checkbox-group'
 import { CheckboxGroupProvider } from '../composables/use-checkbox-group-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CheckboxGroup'
+})
+
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   disabled: undefined,
   readOnly: undefined,

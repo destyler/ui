@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useCollapsibleContext } from '../composables/use-collapsible-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CollapsibleContent'
+})
+
 const props = defineProps<CollapsibleContentProps>()
 const collapsible = useCollapsibleContext()
 

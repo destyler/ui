@@ -12,6 +12,10 @@ import { ui } from '~/factory'
 import { useCheckboxContext } from '../composables/use-checkbox-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CheckboxIndicator'
+})
+
 const props = defineProps<CheckboxIndicatorProps>()
 const checkbox = useCheckboxContext()
 const isHidden = computed(() => (props.indeterminate ? checkbox.value.indeterminate : checkbox.value.checked))

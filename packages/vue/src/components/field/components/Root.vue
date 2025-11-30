@@ -12,6 +12,10 @@ import { useField } from '../composables/use-field'
 import { FieldProvider } from '../composables/use-field-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'FieldRoot'
+})
+
 const props = withDefaults(defineProps<FieldRootProps>(), {
   disabled: undefined,
   invalid: undefined,

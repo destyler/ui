@@ -9,6 +9,10 @@ export interface CarouselControlProps extends PolymorphicProps{}
 import { ui } from '~/factory'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CarouselControl'
+})
+
 defineProps<CarouselControlProps>()
 const carousel = useCarouselContext()
 

@@ -12,6 +12,10 @@ import { useAvatar } from '../composables/use-avatar'
 import { AvatarProvider } from '../composables/use-avatar-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'AvatarRoot'
+})
+
 const props = defineProps<AvatarRootProps>()
 const emits = defineEmits<AvatarRootEmits>()
 

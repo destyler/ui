@@ -16,6 +16,10 @@ import { ui } from '~/factory'
 import { CarouselProvider } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CarouselRootProvider'
+})
+
 const props = defineProps<CarouselRootProviderProps>()
 const carousel = computed(() => props.value)
 

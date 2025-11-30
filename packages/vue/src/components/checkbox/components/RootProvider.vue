@@ -16,6 +16,10 @@ import { ui } from '~/factory'
 import { CheckboxProvider } from '../composables/use-checkbox-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CheckboxRootProvider'
+})
+
 const props = defineProps<CheckboxRootProviderProps>()
 const checkbox = computed(() => props.value)
 

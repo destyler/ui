@@ -16,6 +16,10 @@ import { ui } from '~/factory'
 import { CollapsibleProvider } from '../composables/use-collapsible-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CollapsibleRootProvider'
+})
+
 const props = defineProps<CollapsibleRootProviderProps>()
 const collapsible = computed(() => props.value)
 

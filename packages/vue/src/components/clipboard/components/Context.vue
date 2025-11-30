@@ -11,6 +11,10 @@ export interface ClipboardContextProps
 <script setup lang="ts">
 import { useClipboardContext } from '../composables/use-clipboard-context'
 
+defineOptions({
+  name: 'ClipboardContext'
+})
+
 const clipboard = useClipboardContext()
 
 defineSlots<{

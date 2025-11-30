@@ -11,6 +11,10 @@ import { ui } from '~/factory'
 import { useCollapseContext } from '../composables/use-collapse-context'
 import { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'
 
+defineOptions({
+  name: 'CollapseItemIndicator'
+})
+
 const props = defineProps<CollapseItemIndicatorProps>()
 const collapse = useCollapseContext()
 const itemProps = useCollapseItemPropsContext()

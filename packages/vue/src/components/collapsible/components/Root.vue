@@ -13,6 +13,10 @@ import { useCollapsible } from '../composables/use-collapsible'
 import { CollapsibleProvider } from '../composables/use-collapsible-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CollapsibleRoot'
+})
+
 const props = withDefaults(defineProps<CollapsibleRootProps>(), {
   defaultOpen: undefined,
   disabled: undefined,

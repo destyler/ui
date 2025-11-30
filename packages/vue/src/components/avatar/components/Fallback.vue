@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useForwardExpose } from '~/composables'
 import { useAvatarContext } from '../composables/use-avatar-context'
 
+defineOptions({
+  name: 'AvatarFallback'
+})
+
 defineProps<AvatarFallbackProps>()
 const avatar = useAvatarContext()
 useForwardExpose()

@@ -10,6 +10,10 @@ import { useCheckboxContext } from '../composables/use-checkbox-context'
 import { useFieldContext } from '~/components/field'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CheckboxHiddenInput'
+})
+
 defineProps<CheckboxHiddenInputProps>()
 const checkbox = useCheckboxContext()
 const field = useFieldContext()

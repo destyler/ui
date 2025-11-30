@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useCarouselContext } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CarouselAutoplayTrigger'
+})
+
 defineProps<CarouselAutoplayTriggerProps>()
 const carousel = useCarouselContext()
 

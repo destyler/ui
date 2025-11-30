@@ -25,6 +25,10 @@ import { useForwardExpose } from '~/composables'
 import { useFieldContext } from '../composables/use-field-context'
 import { ui } from '~/factory'
 
+defineOptions({
+  name: 'FieldTextarea'
+})
+
 const props = defineProps<FieldTextareaProps>()
 const field = useFieldContext()
 const emit = defineEmits(['update:modelValue'])

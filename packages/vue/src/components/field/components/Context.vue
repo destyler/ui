@@ -11,6 +11,10 @@ export interface FieldContextProps
 <script setup lang="ts">
 import { useFieldContext } from '../composables/use-field-context'
 
+defineOptions({
+  name: 'FieldContext'
+})
+
 const field = useFieldContext()
 
 defineSlots<{

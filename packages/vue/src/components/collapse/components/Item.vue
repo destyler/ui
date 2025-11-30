@@ -13,6 +13,10 @@ import { useCollapseContext } from '../composables/use-collapse-context'
 import { CollapseItemProvider } from '../composables/use-collapse-item-context'
 import { CollapseItemPropsProvider } from '../composables/use-collapse-item-props-context'
 
+defineOptions({
+  name: 'CollapseItem'
+})
+
 const collapse = useCollapseContext()
 const props = defineProps<CollapseItemProps>()
 const item = computed(() => collapse.value.getItemState(props))

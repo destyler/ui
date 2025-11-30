@@ -11,6 +11,10 @@ export interface CollapsibleContextProps
 <script setup lang="ts">
 import { useCollapsibleContext } from '../composables/use-collapsible-context'
 
+defineOptions({
+  name: 'CollapsibleContext'
+})
+
 const collapsible = useCollapsibleContext()
 
 defineSlots<{

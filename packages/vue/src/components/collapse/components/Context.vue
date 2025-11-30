@@ -11,6 +11,10 @@ export interface CollapseContextProps
 <script setup lang="ts">
 import { useCollapseContext } from '../composables/use-collapse-context'
 
+defineOptions({
+  name: 'CollapseContext'
+})
+
 const collapse = useCollapseContext()
 
 defineSlots<{

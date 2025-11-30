@@ -11,6 +11,10 @@ export interface CheckboxContextProps
 <script setup lang="ts">
 import { useCheckboxContext } from '../composables/use-checkbox-context'
 
+defineOptions({
+  name: 'CheckboxContext'
+})
+
 const checkbox = useCheckboxContext()
 
 defineSlots<{

@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useCheckboxContext } from '../composables/use-checkbox-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CheckboxControl'
+})
+
 defineProps<CheckboxControlProps>()
 const checkbox = useCheckboxContext()
 

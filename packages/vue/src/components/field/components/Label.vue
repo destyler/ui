@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useFieldContext } from '../composables/use-field-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'FieldLabel'
+})
+
 defineProps<FieldLabelProps>()
 const field = useFieldContext()
 

@@ -9,6 +9,10 @@ import { ui } from '~/factory'
 import { useCollapsibleContext } from '../composables/use-collapsible-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'CollapsibleTrigger'
+})
+
 defineProps<CollapsibleTriggerProps>()
 const collapsible = useCollapsibleContext()
 

@@ -16,6 +16,10 @@ import { ui } from '~/factory'
 import { FieldProvider } from '../composables/use-field-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'FieldRootProvider'
+})
+
 const props = defineProps<FieldRootProviderProps>()
 const field = computed(() => props.value)
 

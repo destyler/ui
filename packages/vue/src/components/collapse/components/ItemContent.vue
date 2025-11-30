@@ -17,6 +17,10 @@ import { createSplitProps } from '~/utils/create-split-props'
 import { useCollapseContext } from '../composables/use-collapse-context'
 import { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'
 
+defineOptions({
+  name: 'CollapseItemContent'
+})
+
 const splitVisibilityProps = createSplitProps<VisibilityProps>()
 
 const props = defineProps<CollapseItemContentProps>()

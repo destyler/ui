@@ -17,6 +17,10 @@ import { RenderStrategyPropsProvider, useForwardExpose } from '~/composables'
 import { ui } from '~/factory'
 import { CollapseProvider } from '../composables/use-collapse-context'
 
+defineOptions({
+  name: 'CollapseRootProvider'
+})
+
 const props = defineProps<CollapseRootProviderProps>()
 const collapse = computed(() => props.value)
 

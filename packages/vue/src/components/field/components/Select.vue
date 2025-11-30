@@ -18,6 +18,10 @@ import { ui } from '~/factory'
 import { useFieldContext } from '../composables/use-field-context'
 import { useForwardExpose } from '~/composables'
 
+defineOptions({
+  name: 'FieldSelect'
+})
+
 defineProps<FieldSelectProps & { modelValue?: string }>()
 const field = useFieldContext()
 

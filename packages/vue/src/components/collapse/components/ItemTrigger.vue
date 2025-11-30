@@ -12,6 +12,10 @@ import { computed } from 'vue'
 import { useCollapseContext } from '../composables/use-collapse-context'
 import { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'
 
+defineOptions({
+  name: 'CollapseItemTrigger'
+})
+
 const props = defineProps<CollapseItemTriggerProps>()
 const collapse = useCollapseContext()
 const itemProps = useCollapseItemPropsContext()
