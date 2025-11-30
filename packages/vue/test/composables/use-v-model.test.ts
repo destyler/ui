@@ -16,7 +16,7 @@ describe('composable: useVModel', () => {
 
     render(UseVModelBasic, {
       props: {
-        "modelValue": modelValue.value,
+        'modelValue': modelValue.value,
         'onUpdate:modelValue': onUpdate,
       },
     })
@@ -38,7 +38,7 @@ describe('composable: useVModel', () => {
 
     render(UseVModelPassive, {
       props: {
-        "modelValue": modelValue.value,
+        'modelValue': modelValue.value,
         'onUpdate:modelValue': onUpdate,
       },
     })
@@ -92,7 +92,7 @@ describe('composable: useVModel', () => {
 
     render(UseVModelBasic, {
       props: {
-        "modelValue": 'test',
+        'modelValue': 'test',
         'onUpdate:modelValue': onUpdate,
       },
     })

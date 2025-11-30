@@ -91,6 +91,6 @@ export interface GroupEmits {
   /**
    * Functional called when the value changes.
    */
-  valueChange: [value: string[]]
+  'valueChange': [value: string[]]
   'update:modelValue': [value: string[]]
 }

@@ -6,6 +6,6 @@ export function getParts(anatomy: AnatomyInstance<string>) {
   )
 }
 
-export function getExports <T extends string>(anatomy: AnatomyInstance<T>) {
-  return anatomy.keys().map((x) => (x.charAt(0).toUpperCase() + x.slice(1)) as Capitalize<T>)
+export function getExports<T extends string>(anatomy: AnatomyInstance<T>) {
+  return anatomy.keys().map(x => (x.charAt(0).toUpperCase() + x.slice(1)) as Capitalize<T>)
 }

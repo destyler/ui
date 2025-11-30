@@ -95,14 +95,14 @@ export interface RootEmits {
   /**
    * Function called when the autoplay status changes.
    */
-  "autoplayStatusChange": [details: carousel.AutoplayStatusDetails]
+  'autoplayStatusChange': [details: carousel.AutoplayStatusDetails]
   /**
    * Function called when the drag status changes.
    */
-  "dragStatusChange": [details: carousel.DragStatusDetails]
+  'dragStatusChange': [details: carousel.DragStatusDetails]
   /**
    * Function called when the page changes.
    */
-  "pageChange": [details: carousel.PageChangeDetails]
+  'pageChange': [details: carousel.PageChangeDetails]
   'update:page': [page: number]
 }

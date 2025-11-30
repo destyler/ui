@@ -47,7 +47,7 @@ describe('composable: useForwardProps', () => {
     render(UseForwardPropsBasic, {
       props: {
         'data-custom': 'value',
-        "title": 'Title',
+        'title': 'Title',
       },
     })
 
