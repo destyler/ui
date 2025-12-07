@@ -116,6 +116,9 @@ importers:
       '@destyler/focus-trap':
         specifier: ^0.2.1
         version: 0.2.1
+      '@destyler/highlight-text':
+        specifier: ^0.2.1
+        version: 0.2.1
       '@destyler/i18n':
         specifier: ^0.2.0
         version: 0.2.0
@@ -287,6 +290,9 @@ packages:
 
   '@destyler/focus-visible@0.2.0':
     resolution: {integrity: sha512-S1nZQLcabCt9UwSg0n2CHnmso0qvQmaXSsm9sVvX2FSIDi1cjSlrMbPsZ0SsV5y4MTYzH0gGuvaoIBQrGApg+w==}
+
+  '@destyler/highlight-text@0.2.1':
+    resolution: {integrity: sha512-Zec5LjKRu0ApXpBV/0FbTj3CT1bWCn1RZSbQQa63spR5qFvOmx41sSxL2IgHEagK822IDUCYsB4pEjAkpYt5MA==}
 
   '@destyler/i18n@0.2.0':
     resolution: {integrity: sha512-EPw+Xg8LRTI7dO4wI0rM0YvCgGjwNVskiIriCqHQi/rjfaKCAGp688L2WvRFFUIh71KJEx4VGiaSM7FBhpCNrQ==}
@@ -4260,6 +4266,8 @@ snapshots:
   '@destyler/focus-visible@0.2.0':
     dependencies:
       '@destyler/dom': 0.2.0
+
+  '@destyler/highlight-text@0.2.1': {}
 
   '@destyler/i18n@0.2.0':
     dependencies:
