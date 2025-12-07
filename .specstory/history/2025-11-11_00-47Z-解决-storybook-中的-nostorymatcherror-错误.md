@@ -31,11 +31,64 @@ PreviewWeb @ storybook_internal_preview_runtime.js?v=9aef49a6:45384
 
 _**Agent (model copilot/claude-sonnet-4.5)**_
 
-我来帮你解决这个 Storybook 错误。错误提示找不到 story `'components-collapse--basic'`。让我先检查一下当前的 story 文件结构。 问题在于你的 story 文件只定义了 default export,但没有导出任何具名的 story。Storybook 需要具名导出来创建实际的 story。我来修复这个文件: 
-```
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/stories/collapse.stories.ts#1-1)，行 1 到 12</summary>
 
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/stories/collapse.stories.ts#1-1)，行 1 到 12
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/examples/basic.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/examples/basic.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
 ```
-完成了!我已经修复了 story 文件。主要更改:
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport Basic from '../examples/basic.vue'\n\nexport default {\n  title: 'Components / Collapse',\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}\n\nexport const basic = () =&gt; ({\n  components: { Basic },\n  template: '&lt;Basic /&gt;',\n})\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import Basic from '../examples/basic.vue'\n\nexport default {\n  title: 'Components / Collapse',\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}\n\nexport const basic = () =&gt; ({\n  components: { Basic },\n  template: '&lt;Basic /&gt;',\n})",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+我来帮你解决这个 Storybook 错误。错误提示找不到 story `'components-collapse--basic'`。让我先检查一下当前的 story 文件结构。 问题在于你的 story 文件只定义了 default export,但没有导出任何具名的 story。Storybook 需要具名导出来创建实际的 story。我来修复这个文件: 完成了!我已经修复了 story 文件。主要更改:
 
 1. 移除了 `component: Basic`(这不是标准的 Storybook 配置)
 2. 添加了具名导出 `export const basic`,这样 Storybook 才能找到并渲染这个 story
@@ -61,55 +114,394 @@ _**User (2025-11-11 01:22Z)**_
 
 _**Agent (model copilot/claude-sonnet-4.5)**_
 
-这个警告是因为 `Root` 组件使用了 `asChild` 属性但没有正确定义。让我检查一下相关的组件代码： 我看到问题了。在 `Root.vue` 的模板中使用了 `asChild`，但这个属性来自 `PolymorphicProps`，需要在 props 中访问。让我检查一下 `PolymorphicProps` 的定义： 现在我明白了。问题是在模板中直接使用 `asChild` 变量，但应该使用 `props.asChild`。让我修复这个问题： 
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/Root.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/Root.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/types.ts#1-1)，行 1 到 50</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/types.ts#1-1)，行 1 到 50
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts#1-1)，行 1 到 50</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts#1-1)，行 1 到 50
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\n&lt;template&gt;\n  &lt;ui.div v-bind=\"collapse.getRootProps()\" :as-child=\"props.asChild\"&gt;\n    &lt;slot&gt;&lt;/slot&gt;\n  &lt;/ui.div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;template&gt;\n  &lt;ui.div v-bind=\"collapse.getRootProps()\" :as-child=\"props.asChild\"&gt;\n    &lt;slot&gt;&lt;/slot&gt;\n  &lt;/ui.div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="copilot_findTextInFiles">
+<details>
+<summary>Tool use: **copilot_findTextInFiles** • 正在搜索 `:as-child="asChild"` (`**/packages/vue/src/components/collapse/**/*.vue`) 的文本</summary>
+
+
+No results found
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemIndicator.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemIndicator.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemContent.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemContent.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemTrigger.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemTrigger.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/RootProvider.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/RootProvider.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\ndefineProps&lt;CollapseItemIndicatorProps&gt;()\nconst collapse = useCollapseContext()\nconst itemProps = useCollapseItemPropsContext()\nuseForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;ui.div v-bind=\"collapse.getItemIndicatorProps(itemProps)\" :as-child=\"props.asChild\"&gt;\n    &lt;slot /&gt;\n  &lt;/ui.div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;vue\nconst splitVisibilityProps = createSplitProps&lt;VisibilityProps&gt;()\n\nconst props = defineProps&lt;CollapseItemContentProps&gt;()\nconst collapse = useCollapseContext()\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;vue\nuseForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;Collapsible.Content v-bind=\"itemContentProps\" :as-child=\"props.asChild\"&gt;\n    &lt;slot /&gt;\n  &lt;/Collapsible.Content&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;vue\nimport { useCollapseContext } from '../composables/use-collapse-context'\nimport { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'\n\nconst props = defineProps&lt;CollapseItemTriggerProps&gt;()\nconst collapse = useCollapseContext()\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;vue\nuseForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;ui.button v-bind=\"triggerProps\" :as-child=\"props.asChild\"&gt;\n    &lt;slot /&gt;\n  &lt;/ui.button&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;vue\nuseForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;ui.div v-bind=\"collapse.getRootProps()\" :as-child=\"props.asChild\"&gt;\n    &lt;slot&gt;&lt;/slot&gt;\n  &lt;/ui.div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "defineProps&lt;CollapseItemIndicatorProps&gt;()\nconst collapse = useCollapseContext()\nconst itemProps = useCollapseItemPropsContext()\nuseForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;ui.div v-bind=\"collapse.getItemIndicatorProps(itemProps)\" :as-child=\"props.asChild\"&gt;\n    &lt;slot /&gt;\n  &lt;/ui.div&gt;\n&lt;/template&gt;const splitVisibilityProps = createSplitProps&lt;VisibilityProps&gt;()\n\nconst props = defineProps&lt;CollapseItemContentProps&gt;()\nconst collapse = useCollapseContext()useForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;Collapsible.Content v-bind=\"itemContentProps\" :as-child=\"props.asChild\"&gt;\n    &lt;slot /&gt;\n  &lt;/Collapsible.Content&gt;\n&lt;/template&gt;import { useCollapseContext } from '../composables/use-collapse-context'\nimport { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'\n\nconst props = defineProps&lt;CollapseItemTriggerProps&gt;()\nconst collapse = useCollapseContext()useForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;ui.button v-bind=\"triggerProps\" :as-child=\"props.asChild\"&gt;\n    &lt;slot /&gt;\n  &lt;/ui.button&gt;\n&lt;/template&gt;useForwardExpose()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;ui.div v-bind=\"collapse.getRootProps()\" :as-child=\"props.asChild\"&gt;\n    &lt;slot&gt;&lt;/slot&gt;\n  &lt;/ui.div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemIndicator.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/ItemIndicator.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\nimport { useCollapseContext } from '../composables/use-collapse-context'\nimport { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'\n\nconst props = defineProps&lt;CollapseItemIndicatorProps&gt;()\nconst collapse = useCollapseContext()\nconst itemProps = useCollapseItemPropsContext()\nuseForwardExpose()\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { useCollapseContext } from '../composables/use-collapse-context'\nimport { useCollapseItemPropsContext } from '../composables/use-collapse-item-props-context'\n\nconst props = defineProps&lt;CollapseItemIndicatorProps&gt;()\nconst collapse = useCollapseContext()\nconst itemProps = useCollapseItemPropsContext()\nuseForwardExpose()",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="copilot_findTextInFiles">
+<details>
+<summary>Tool use: **copilot_findTextInFiles** • 正在搜索 `:as-child="asChild"` (`**/packages/vue/src/components/collapsible/**/*.vue`) 的文本</summary>
+
+
+No results found
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Root.vue#1-1)，行 1 到 40</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Root.vue#1-1)，行 1 到 40
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/RootProvider.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/RootProvider.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Content.vue)</summary>
+
+```vue
+useForwardExpose()
+</script>
+
+<template>
+  <ui.div v-bind="collapsible.getRootProps()" :as-child="props.asChild">
+    <slot />
+  </ui.div>
+</template>
 ```
 
-```
-让我检查其他组件是否也有同样的问题： 还有其他组件也有同样的问题。让我逐个修复它们： 现在我需要修复所有这些组件，将 `asChild` 改为 `props.asChild`： 
+```vue
+useForwardExpose()
+</script>
+
+<template>
+  <ui.div v-bind="collapsible.getRootProps()" :as-child="props.asChild">
+    <slot />
+  </ui.div>
+</template>
 ```
 
+```vue
+import { useCollapsibleContext } from '../composables/use-collapsible-context'
+import { useForwardExpose } from '~/composables'
+
+const props = defineProps<CollapsibleContentProps>()
+const collapsible = useCollapsibleContext()
+
+useForwardExpose()
+</script>
+
+<template>
+  <ui.div v-if="!collapsible.unmounted" v-bind="collapsible.getContentProps()" :as-child="props.asChild">
+    <slot />
+  </ui.div>
+</template>
 ```
 
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/collapsible/**/Trigger.vue&#96; 匹配的文件",
+  "pastTenseMessage": "搜索与 &#96;**/collapsible/**/Trigger.vue&#96; 匹配的文件，2 匹配项",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue",
+      "scheme": "file"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Trigger.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="copilot_findTextInFiles">
+<details>
+<summary>Tool use: **copilot_findTextInFiles** • 正在搜索 `:as-child="asChild"` (`**/packages/vue/src/**/*.vue`) 的文本</summary>
+
+
+No results found
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/presence/components/Presence.vue)</summary>
+
+```vue
+<template>
+  <ui.div
+    v-if="!presence.unmounted"
+    v-bind="presence.presenceProps"
+    :as-child="props.asChild"
+    data-scope="presence"
+    data-part="root"
+  >
+    <slot />
+  </ui.div>
+</template>
 ```
 
-```
 
-```
+</details>
+</tool-use>
 
-```
+---
 
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-让我重新检查并修复 ItemIndicator.vue： 我需要将 `defineProps` 改为带 `const props =` 的形式： 
-```
-
-```
-现在让我检查是否还有其他 collapsible 组件也有同样的问题： collapsible 组件也有同样的问题。让我一并修复： 
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-还需要检查是否还有 Trigger 组件： Trigger 组件没有使用 `asChild`，所以不需要修改。让我检查一下错误是否还有其他地方： 还有 Presence 组件。让我修复它： 
-```
-
-```
-完成！我已经修复了所有组件中的 `asChild` 属性访问问题。
+这个警告是因为 `Root` 组件使用了 `asChild` 属性但没有正确定义。让我检查一下相关的组件代码： 我看到问题了。在 `Root.vue` 的模板中使用了 `asChild`，但这个属性来自 `PolymorphicProps`，需要在 props 中访问。让我检查一下 `PolymorphicProps` 的定义： 现在我明白了。问题是在模板中直接使用 `asChild` 变量，但应该使用 `props.asChild`。让我修复这个问题： 让我检查其他组件是否也有同样的问题： 还有其他组件也有同样的问题。让我逐个修复它们： 现在我需要修复所有这些组件，将 `asChild` 改为 `props.asChild`： 让我重新检查并修复 ItemIndicator.vue： 我需要将 `defineProps` 改为带 `const props =` 的形式： 现在让我检查是否还有其他 collapsible 组件也有同样的问题： collapsible 组件也有同样的问题。让我一并修复： 还需要检查是否还有 Trigger 组件： Trigger 组件没有使用 `asChild`，所以不需要修改。让我检查一下错误是否还有其他地方： 还有 Presence 组件。让我修复它： 完成！我已经修复了所有组件中的 `asChild` 属性访问问题。
 
 **问题根源：**
 在 Vue 3 的 `<script setup>` 中，模板无法直接访问 `defineProps` 返回的属性名（如 `asChild`），必须通过 `props` 对象来访问（如 `props.asChild`）。
@@ -142,11 +534,196 @@ Neither '~/composables.vue' nor '~/composables.js(x)' or '~/composables/index.js
 
 _**Agent (model copilot/claude-sonnet-4.5)**_
 
-这个问题是路径别名 `~` 解析失败。让我检查一下项目的配置和当前文件： 配置看起来是正确的。让我检查 Storybook 的配置： 问题在于 Storybook 没有配置路径别名。我需要在 Storybook 的配置中添加 Vite 的别名配置： 
-```
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/tsconfig.json)</summary>
 
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/tsconfig.json)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/vite.config.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/vite.config.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
 ```
-完成！我已经在 Storybook 的配置文件中添加了路径别名配置。
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/.storybook/main.*&#96; 匹配的文件",
+  "pastTenseMessage": "搜索与 &#96;**/.storybook/main.*&#96; 匹配的文件，2 匹配项",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts",
+      "scheme": "file"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/storybook/main.*&#96; 匹配的文件",
+  "pastTenseMessage": "搜索匹配 &#96;**/storybook/main.*&#96; 的文件，无匹配项",
+  "resultDetails": [],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/*storybook*.config.*&#96; 匹配的文件",
+  "pastTenseMessage": "搜索匹配 &#96;**/*storybook*.config.*&#96; 的文件，无匹配项",
+  "resultDetails": [],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport type { StorybookConfig } from '@storybook/vue3-vite'\nimport path from 'node:path'\nimport { fileURLToPath } from 'node:url'\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url))\n\nconst config: StorybookConfig = {\n  stories: [\n    '../**/stories/**/*.mdx',\n    '../**/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'\n  ],\n  addons: [\n    '@chromatic-com/storybook',\n    '@storybook/addon-docs',\n    '@storybook/addon-a11y',\n    '@storybook/addon-vitest'\n  ],\n  framework: {\n    name: '@storybook/vue3-vite',\n    options: {},\n  },\n  async viteFinal(config) {\n    config.resolve = config.resolve || {}\n    config.resolve.alias = {\n      ...config.resolve.alias,\n      '~/': &#96;${path.resolve(__dirname, '../src')}/&#96;,\n    }\n    return config\n  },\n}\nexport default config\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import type { StorybookConfig } from '@storybook/vue3-vite'\nimport path from 'node:path'\nimport { fileURLToPath } from 'node:url'\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url))\n\nconst config: StorybookConfig = {\n  stories: [\n    '../**/stories/**/*.mdx',\n    '../**/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'\n  ],\n  addons: [\n    '@chromatic-com/storybook',\n    '@storybook/addon-docs',\n    '@storybook/addon-a11y',\n    '@storybook/addon-vitest'\n  ],\n  framework: {\n    name: '@storybook/vue3-vite',\n    options: {},\n  },\n  async viteFinal(config) {\n    config.resolve = config.resolve || {}\n    config.resolve.alias = {\n      ...config.resolve.alias,\n      '~/': &#96;${path.resolve(__dirname, '../src')}/&#96;,\n    }\n    return config\n  },\n}\nexport default config",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+这个问题是路径别名 `~` 解析失败。让我检查一下项目的配置和当前文件： 配置看起来是正确的。让我检查 Storybook 的配置： 问题在于 Storybook 没有配置路径别名。我需要在 Storybook 的配置中添加 Vite 的别名配置： 完成！我已经在 Storybook 的配置文件中添加了路径别名配置。
 
 **修复说明：**
 - 在 `main.ts` 中添加了 `viteFinal` 钩子
@@ -170,15 +747,295 @@ Neither '~/factory.vue' nor '~/factory.js(x)' or '~/factory/index.js(x)' or '~/f
 
 _**Agent (model copilot/claude-sonnet-4.5)**_
 
-让我检查一下实际的文件结构，确认 `~/composables` 和 `~/factory` 是否存在： 文件都存在。问题可能是 Storybook 没有重启。但让我先检查一下在组件中是如何导入的，以及 `.storybook` 目录中是否还有其他配置文件： 路径使用正确。让我查看当前的 `main.ts` 文件内容，确保修改已正确保存： 配置看起来正确。让我检查一下是否还需要导入类型。另外，让我看看 Storybook 的 preview 配置： 问题可能是别名配置的方式。让我尝试另一种配置方法，使用完整的 Vite 配置导入： 
-```
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
 
-```
-让我修复导入顺序： 
-```
+Additional data:
 
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
 ```
-现在配置已更新。关键更改：
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/composables/index.{ts,js}&#96; 匹配的文件",
+  "pastTenseMessage": "搜索与 &#96;**/composables/index.{ts,js}&#96; 匹配的文件，2 匹配项",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts",
+      "scheme": "file"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/factory.{ts,js}&#96; 匹配的文件",
+  "pastTenseMessage": "搜索与 &#96;**/factory.{ts,js}&#96; 匹配的文件，2 匹配项",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/factory.ts",
+      "scheme": "file"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src",
+  "relativeWorkspacePath": "src"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook",
+  "relativeWorkspacePath": ".storybook"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/Root.vue#1-1)，行 1 到 20</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/components/Root.vue#1-1)，行 1 到 20
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/main.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/preview.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/.storybook/preview.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport type { StorybookConfig } from '@storybook/vue3-vite'\nimport { mergeConfig } from 'vite'\nimport path from 'node:path'\nimport { fileURLToPath } from 'node:url'\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url))\n\nconst config: StorybookConfig = {\n  stories: [\n    '../**/stories/**/*.mdx',\n    '../**/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'\n  ],\n  addons: [\n    '@chromatic-com/storybook',\n    '@storybook/addon-docs',\n    '@storybook/addon-a11y',\n    '@storybook/addon-vitest'\n  ],\n  framework: {\n    name: '@storybook/vue3-vite',\n    options: {},\n  },\n  async viteFinal(config) {\n    return mergeConfig(config, {\n      resolve: {\n        alias: {\n          '~': path.resolve(__dirname, '../src'),\n        },\n      },\n    })\n  },\n}\nexport default config\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import type { StorybookConfig } from '@storybook/vue3-vite'\nimport { mergeConfig } from 'vite'\nimport path from 'node:path'\nimport { fileURLToPath } from 'node:url'\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url))\n\nconst config: StorybookConfig = {\n  stories: [\n    '../**/stories/**/*.mdx',\n    '../**/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'\n  ],\n  addons: [\n    '@chromatic-com/storybook',\n    '@storybook/addon-docs',\n    '@storybook/addon-a11y',\n    '@storybook/addon-vitest'\n  ],\n  framework: {\n    name: '@storybook/vue3-vite',\n    options: {},\n  },\n  async viteFinal(config) {\n    return mergeConfig(config, {\n      resolve: {\n        alias: {\n          '~': path.resolve(__dirname, '../src'),\n        },\n      },\n    })\n  },\n}\nexport default config",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport type { StorybookConfig } from '@storybook/vue3-vite'\nimport path from 'node:path'\nimport { fileURLToPath } from 'node:url'\nimport { mergeConfig } from 'vite'\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url))\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import type { StorybookConfig } from '@storybook/vue3-vite'\nimport path from 'node:path'\nimport { fileURLToPath } from 'node:url'\nimport { mergeConfig } from 'vite'\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url))",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+让我检查一下实际的文件结构，确认 `~/composables` 和 `~/factory` 是否存在： 文件都存在。问题可能是 Storybook 没有重启。但让我先检查一下在组件中是如何导入的，以及 `.storybook` 目录中是否还有其他配置文件： 路径使用正确。让我查看当前的 `main.ts` 文件内容，确保修改已正确保存： 配置看起来正确。让我检查一下是否还需要导入类型。另外，让我看看 Storybook 的 preview 配置： 问题可能是别名配置的方式。让我尝试另一种配置方法，使用完整的 Vite 配置导入： 让我修复导入顺序： 现在配置已更新。关键更改：
 1. 使用 `mergeConfig` 来合并配置，这是更标准的做法
 2. 别名改为 `'~': path.resolve(...)` 而不是 `'~/': ...`（去掉了尾部斜杠）
 

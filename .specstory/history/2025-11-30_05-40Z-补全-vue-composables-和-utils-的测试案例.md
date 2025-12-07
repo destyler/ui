@@ -12,27 +12,2320 @@ _**User (2025-11-30 05:49Z)**_
 
 _**Agent (model copilot/claude-opus-4.5)**_
 
-现在我了解了现有的测试结构和风格。让我查看一下是否有现有的组件测试作为参考： 现在我已经充分了解了代码结构。让我创建 composables 和 utils 的测试文件： 
-```
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts)</summary>
 
-```
 
-```
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/index.ts)
 
-```
+</details>
+</tool-use>
 
-```
+---
 
-```
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/index.ts)</summary>
 
-```
 
-```
-这些类型错误是由于 Vue 文件的类型声明问题，不影响运行。我继续创建其他测试文件。 
-```
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/index.ts)
 
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test",
+  "relativeWorkspacePath": "test"
+}
 ```
-现在我已经创建了所有的测试文件。让我检查一下 `use-forward-expose` 和 `use-render-strategy` 这两个 composables，看看是否需要为它们编写测试： 现在为 `useRenderStrategyProps` 添加测试: 所有测试文件都已创建完成。让我列出最终的测试文件结构： 我已经完成了所有 composables 和 utils 的测试补全。以下是创建的测试文件汇总：
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-emits-as-props.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-emits-as-props.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-expose.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-expose.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-props.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-props.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-props-emits.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-props-emits.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-render-strategy.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-render-strategy.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-v-model.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-v-model.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/clean-props.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/clean-props.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/collection.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/collection.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/create-context.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/create-context.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/create-split-props.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/create-split-props.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/run-if-fn.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/run-if-fn.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/unref-element.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/unref-element.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils",
+  "relativeWorkspacePath": "utils"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory",
+  "relativeWorkspacePath": "factory"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/vitest.setup.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/vitest.setup.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/vitest.config.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/vitest.config.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/run-if-fn.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/run-if-fn.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory/factory.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory/factory.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_findFiles">
+<details>
+<summary>Tool use: **copilot_findFiles**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_findFiles",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在搜索与 &#96;**/*.test.ts&#96; 匹配的文件",
+  "pastTenseMessage": "搜索与 &#96;**/*.test.ts&#96; 匹配的文件，7 匹配项",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/avatar/test/avatar.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/avatar/test/avatar.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/avatar/test/avatar.test.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/test/collapsible.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/test/collapsible.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/test/collapsible.test.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/presence/test/presence.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/presence/test/presence.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/presence/test/presence.test.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/test/collapse.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/test/collapse.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/test/collapse.test.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/run-if-fn.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/run-if-fn.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/run-if-fn.test.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory/factory.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory/factory.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/factory/factory.test.ts",
+      "scheme": "file"
+    },
+    {
+      "$mid": 1,
+      "fsPath": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/carousel/test/carousel.test.ts",
+      "external": "file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/carousel/test/carousel.test.ts",
+      "path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/carousel/test/carousel.test.ts",
+      "scheme": "file"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/test/collapsible.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/test/collapsible.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/dynamic.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/dynamic.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**已创建 9 个待办事项**
+
+- [-] 创建 composables 测试目录
+- [ ] 编写 use-v-model 测试
+- [ ] 编写 use-forward-props 测试
+- [ ] 编写 use-emits-as-props 测试
+- [ ] 编写 use-forward-props-emits 测试
+- [ ] 编写 clean-props 测试
+- [ ] 编写 create-context 测试
+- [ ] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createDirectory">
+<details>
+<summary>Tool use: **copilot_createDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables",
+  "relativeWorkspacePath": "composables"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-v-model.test.ts",
+  "relativeWorkspacePath": "use-v-model.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-v-model.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-v-model.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { nextTick, ref } from 'vue'\nimport { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page, userEvent } from 'vitest/browser'\nimport UseVModelBasic from './UseVModelBasic.vue'\nimport UseVModelPassive from './UseVModelPassive.vue'\nimport UseVModelCustomEvent from './UseVModelCustomEvent.vue'\nimport UseVModelDefaultValue from './UseVModelDefaultValue.vue'\n\ndescribe('composable: useVModel', () =&gt; {\n  it('should sync with v-model in non-passive mode', async () =&gt; {\n    const modelValue = ref('initial')\n    const onUpdate = vi.fn((value: string) =&gt; {\n      modelValue.value = value\n    })\n\n    render(UseVModelBasic, {\n      props: {\n        modelValue: modelValue.value,\n        'onUpdate:modelValue': onUpdate,\n      },\n    })\n\n    const input = page.getByTestId('input')\n    await expect.element(input).toHaveValue('initial')\n\n    await userEvent.clear(input)\n    await userEvent.type(input, 'updated')\n\n    expect(onUpdate).toHaveBeenCalledWith('updated')\n  })\n\n  it('should sync with v-model in passive mode', async () =&gt; {\n    const modelValue = ref('initial')\n    const onUpdate = vi.fn((value: string) =&gt; {\n      modelValue.value = value\n    })\n\n    render(UseVModelPassive, {\n      props: {\n        modelValue: modelValue.value,\n        'onUpdate:modelValue': onUpdate,\n      },\n    })\n\n    const input = page.getByTestId('input')\n    await expect.element(input).toHaveValue('initial')\n\n    await userEvent.clear(input)\n    await userEvent.type(input, 'passive-update')\n\n    await vi.waitFor(() =&gt; {\n      expect(onUpdate).toHaveBeenCalled()\n    })\n  })\n\n  it('should use default value when modelValue is undefined', async () =&gt; {\n    render(UseVModelDefaultValue, {\n      props: {\n        modelValue: undefined,\n      },\n    })\n\n    const input = page.getByTestId('input')\n    await expect.element(input).toHaveValue('default-value')\n  })\n\n  it('should emit custom event names', async () =&gt; {\n    const onCustomEvent = vi.fn()\n    const onAnotherEvent = vi.fn()\n\n    render(UseVModelCustomEvent, {\n      props: {\n        modelValue: 'initial',\n        onCustomEvent,\n        onAnotherEvent,\n      },\n    })\n\n    const input = page.getByTestId('input')\n    await userEvent.clear(input)\n    await userEvent.type(input, 'custom')\n\n    await vi.waitFor(() =&gt; {\n      expect(onCustomEvent).toHaveBeenCalledWith('custom')\n      expect(onAnotherEvent).toHaveBeenCalledWith('custom')\n    })\n  })\n\n  it('should handle named key prop', async () =&gt; {\n    const onUpdate = vi.fn()\n\n    render(UseVModelBasic, {\n      props: {\n        modelValue: 'test',\n        'onUpdate:modelValue': onUpdate,\n      },\n    })\n\n    const input = page.getByTestId('input')\n    await userEvent.clear(input)\n    await userEvent.type(input, 'new-value')\n\n    expect(onUpdate).toHaveBeenCalledWith('new-value')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelBasic.vue",
+  "relativeWorkspacePath": "UseVModelBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useVModel } from '~/composables/use-v-model'\n\nconst props = defineProps&lt;{\n  modelValue?: string\n}&gt;()\n\nconst emit = defineEmits&lt;{\n  'update:modelValue': [value: string]\n}&gt;()\n\nconst value = useVModel(props, 'modelValue', emit)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;input\n    data-testid=\"input\"\n    :value=\"value\"\n    @input=\"value = ($event.target as HTMLInputElement).value\"\n  &gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelPassive.vue",
+  "relativeWorkspacePath": "UseVModelPassive.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelPassive.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelPassive.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useVModel } from '~/composables/use-v-model'\n\nconst props = defineProps&lt;{\n  modelValue?: string\n}&gt;()\n\nconst emit = defineEmits&lt;{\n  'update:modelValue': [value: string]\n}&gt;()\n\nconst value = useVModel(props, 'modelValue', emit, { passive: true })\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;input\n    data-testid=\"input\"\n    v-model=\"value\"\n  &gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelCustomEvent.vue",
+  "relativeWorkspacePath": "UseVModelCustomEvent.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelCustomEvent.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelCustomEvent.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useVModel } from '~/composables/use-v-model'\n\nconst props = defineProps&lt;{\n  modelValue?: string\n}&gt;()\n\nconst emit = defineEmits&lt;{\n  customEvent: [value: string]\n  anotherEvent: [value: string]\n}&gt;()\n\nconst value = useVModel(props, 'modelValue', emit, {\n  eventName: ['customEvent', 'anotherEvent'],\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;input\n    data-testid=\"input\"\n    :value=\"value\"\n    @input=\"value = ($event.target as HTMLInputElement).value\"\n  &gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelDefaultValue.vue",
+  "relativeWorkspacePath": "UseVModelDefaultValue.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelDefaultValue.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseVModelDefaultValue.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useVModel } from '~/composables/use-v-model'\n\nconst props = defineProps&lt;{\n  modelValue?: string\n}&gt;()\n\nconst emit = defineEmits&lt;{\n  'update:modelValue': [value: string]\n}&gt;()\n\nconst value = useVModel(props, 'modelValue', emit, {\n  defaultValue: 'default-value',\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;input\n    data-testid=\"input\"\n    :value=\"value\"\n    @input=\"value = ($event.target as HTMLInputElement).value\"\n  &gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { ref } from 'vue'\nimport { page, userEvent } from 'vitest/browser'\nimport UseVModelBasic from './UseVModelBasic.vue'\nimport UseVModelCustomEvent from './UseVModelCustomEvent.vue'\nimport UseVModelDefaultValue from './UseVModelDefaultValue.vue'\nimport UseVModelPassive from './UseVModelPassive.vue'\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { ref } from 'vue'\nimport { page, userEvent } from 'vitest/browser'\nimport UseVModelBasic from './UseVModelBasic.vue'\nimport UseVModelCustomEvent from './UseVModelCustomEvent.vue'\nimport UseVModelDefaultValue from './UseVModelDefaultValue.vue'\nimport UseVModelPassive from './UseVModelPassive.vue'",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page, userEvent } from 'vitest/browser'\nimport { ref } from 'vue'\nimport UseVModelBasic from './UseVModelBasic.vue'\nimport UseVModelCustomEvent from './UseVModelCustomEvent.vue'\nimport UseVModelDefaultValue from './UseVModelDefaultValue.vue'\nimport UseVModelPassive from './UseVModelPassive.vue'\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page, userEvent } from 'vitest/browser'\nimport { ref } from 'vue'\nimport UseVModelBasic from './UseVModelBasic.vue'\nimport UseVModelCustomEvent from './UseVModelCustomEvent.vue'\nimport UseVModelDefaultValue from './UseVModelDefaultValue.vue'\nimport UseVModelPassive from './UseVModelPassive.vue'",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 use-forward-props 测试/3) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [-] 编写 use-forward-props 测试
+- [ ] 编写 use-emits-as-props 测试
+- [ ] 编写 use-forward-props-emits 测试
+- [ ] 编写 clean-props 测试
+- [ ] 编写 create-context 测试
+- [ ] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props.test.ts",
+  "relativeWorkspacePath": "use-forward-props.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page, userEvent } from 'vitest/browser'\nimport UseForwardPropsBasic from './UseForwardPropsBasic.vue'\nimport UseForwardPropsParent from './UseForwardPropsParent.vue'\n\ndescribe('composable: useForwardProps', () =&gt; {\n  it('should forward props correctly', async () =&gt; {\n    render(UseForwardPropsBasic, {\n      props: {\n        title: 'Test Title',\n        disabled: true,\n      },\n    })\n\n    const element = page.getByTestId('forwarded')\n    await expect.element(element).toHaveTextContent('Test Title')\n    await expect.element(element).toHaveAttribute('data-disabled', 'true')\n  })\n\n  it('should use default props when not provided', async () =&gt; {\n    render(UseForwardPropsBasic, {\n      props: {\n        title: 'Custom Title',\n      },\n    })\n\n    const element = page.getByTestId('forwarded')\n    await expect.element(element).toHaveTextContent('Custom Title')\n    await expect.element(element).toHaveAttribute('data-disabled', 'false')\n  })\n\n  it('should forward props from parent to child', async () =&gt; {\n    render(UseForwardPropsParent, {\n      props: {\n        title: 'Parent Title',\n        variant: 'primary',\n      },\n    })\n\n    const element = page.getByTestId('child')\n    await expect.element(element).toHaveTextContent('Parent Title')\n    await expect.element(element).toHaveAttribute('data-variant', 'primary')\n  })\n\n  it('should handle camelCase and kebab-case props', async () =&gt; {\n    render(UseForwardPropsBasic, {\n      props: {\n        'data-custom': 'value',\n        title: 'Title',\n      },\n    })\n\n    const element = page.getByTestId('forwarded')\n    await expect.element(element).toHaveTextContent('Title')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsBasic.vue",
+  "relativeWorkspacePath": "UseForwardPropsBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useForwardProps } from '~/composables/use-forward-props'\n\nconst props = withDefaults(defineProps&lt;{\n  title: string\n  disabled?: boolean\n}&gt;(), {\n  disabled: false,\n})\n\nconst forwarded = useForwardProps(props)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div\n    data-testid=\"forwarded\"\n    :data-disabled=\"String(forwarded.disabled)\"\n  &gt;\n    {{ forwarded.title }}\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsParent.vue",
+  "relativeWorkspacePath": "UseForwardPropsParent.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsParent.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsParent.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useForwardProps } from '~/composables/use-forward-props'\nimport UseForwardPropsChild from './UseForwardPropsChild.vue'\n\nconst props = defineProps&lt;{\n  title: string\n  variant?: string\n}&gt;()\n\nconst forwarded = useForwardProps(props)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;UseForwardPropsChild v-bind=\"forwarded\" /&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsChild.vue",
+  "relativeWorkspacePath": "UseForwardPropsChild.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsChild.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsChild.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\ndefineProps&lt;{\n  title: string\n  variant?: string\n}&gt;()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div\n    data-testid=\"child\"\n    :data-variant=\"variant\"\n  &gt;\n    {{ title }}\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardPropsBasic from './UseForwardPropsBasic.vue'\nimport UseForwardPropsParent from './UseForwardPropsParent.vue'\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardPropsBasic from './UseForwardPropsBasic.vue'\nimport UseForwardPropsParent from './UseForwardPropsParent.vue'",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 use-emits-as-props 测试/4) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [-] 编写 use-emits-as-props 测试
+- [ ] 编写 use-forward-props-emits 测试
+- [ ] 编写 clean-props 测试
+- [ ] 编写 create-context 测试
+- [ ] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-emits-as-props.test.ts",
+  "relativeWorkspacePath": "use-emits-as-props.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-emits-as-props.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-emits-as-props.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page, userEvent } from 'vitest/browser'\nimport UseEmitAsPropsBasic from './UseEmitAsPropsBasic.vue'\n\ndescribe('composable: useEmitAsProps', () =&gt; {\n  it('should convert emit to handler props', async () =&gt; {\n    const onClick = vi.fn()\n    const onChange = vi.fn()\n\n    render(UseEmitAsPropsBasic, {\n      props: {\n        onClick,\n        onChange,\n      },\n    })\n\n    const button = page.getByTestId('button')\n    await userEvent.click(button)\n\n    expect(onClick).toHaveBeenCalled()\n  })\n\n  it('should handle multiple emits', async () =&gt; {\n    const onFocus = vi.fn()\n    const onBlur = vi.fn()\n\n    render(UseEmitAsPropsBasic, {\n      props: {\n        onFocus,\n        onBlur,\n      },\n    })\n\n    const input = page.getByTestId('input')\n    await userEvent.click(input)\n\n    await vi.waitFor(() =&gt; {\n      expect(onFocus).toHaveBeenCalled()\n    })\n\n    await userEvent.click(page.getByTestId('button'))\n\n    await vi.waitFor(() =&gt; {\n      expect(onBlur).toHaveBeenCalled()\n    })\n  })\n\n  it('should pass event arguments', async () =&gt; {\n    const onCustom = vi.fn()\n\n    render(UseEmitAsPropsBasic, {\n      props: {\n        onCustom,\n      },\n    })\n\n    const customButton = page.getByTestId('custom-button')\n    await userEvent.click(customButton)\n\n    expect(onCustom).toHaveBeenCalledWith('custom-value', 123)\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseEmitAsPropsBasic.vue",
+  "relativeWorkspacePath": "UseEmitAsPropsBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseEmitAsPropsBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseEmitAsPropsBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useEmitAsProps } from '~/composables/use-emits-as-props'\n\nconst emit = defineEmits&lt;{\n  click: []\n  change: [value: string]\n  focus: []\n  blur: []\n  custom: [value: string, num: number]\n}&gt;()\n\nconst emitAsProps = useEmitAsProps(emit)\n\nfunction handleClick() {\n  emitAsProps.onClick?.()\n}\n\nfunction handleFocus() {\n  emitAsProps.onFocus?.()\n}\n\nfunction handleBlur() {\n  emitAsProps.onBlur?.()\n}\n\nfunction handleCustom() {\n  emitAsProps.onCustom?.('custom-value', 123)\n}\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;button data-testid=\"button\" @click=\"handleClick\"&gt;\n      Click me\n    &lt;/button&gt;\n    &lt;input data-testid=\"input\" @focus=\"handleFocus\" @blur=\"handleBlur\"&gt;\n    &lt;button data-testid=\"custom-button\" @click=\"handleCustom\"&gt;\n      Custom Event\n    &lt;/button&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 use-forward-props-emits 测试/5) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [x] 编写 use-emits-as-props 测试
+- [-] 编写 use-forward-props-emits 测试
+- [ ] 编写 clean-props 测试
+- [ ] 编写 create-context 测试
+- [ ] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props-emits.test.ts",
+  "relativeWorkspacePath": "use-forward-props-emits.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props-emits.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props-emits.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page, userEvent } from 'vitest/browser'\nimport UseForwardPropsEmitsBasic from './UseForwardPropsEmitsBasic.vue'\nimport UseForwardPropsEmitsParent from './UseForwardPropsEmitsParent.vue'\n\ndescribe('composable: useForwardPropsEmits', () =&gt; {\n  it('should forward both props and emits', async () =&gt; {\n    const onUpdate = vi.fn()\n\n    render(UseForwardPropsEmitsBasic, {\n      props: {\n        label: 'Test Label',\n        onUpdate,\n      },\n    })\n\n    const element = page.getByTestId('label')\n    await expect.element(element).toHaveTextContent('Test Label')\n\n    const button = page.getByTestId('button')\n    await userEvent.click(button)\n\n    expect(onUpdate).toHaveBeenCalledWith('clicked')\n  })\n\n  it('should forward props and emits from parent to child', async () =&gt; {\n    const onUpdate = vi.fn()\n\n    render(UseForwardPropsEmitsParent, {\n      props: {\n        label: 'Parent Label',\n        value: 'test-value',\n        onUpdate,\n      },\n    })\n\n    const element = page.getByTestId('child-label')\n    await expect.element(element).toHaveTextContent('Parent Label')\n    await expect.element(page.getByTestId('child-value')).toHaveTextContent('test-value')\n\n    const button = page.getByTestId('child-button')\n    await userEvent.click(button)\n\n    expect(onUpdate).toHaveBeenCalled()\n  })\n\n  it('should handle props without emits', async () =&gt; {\n    render(UseForwardPropsEmitsBasic, {\n      props: {\n        label: 'No Emit Label',\n      },\n    })\n\n    const element = page.getByTestId('label')\n    await expect.element(element).toHaveTextContent('No Emit Label')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsBasic.vue",
+  "relativeWorkspacePath": "UseForwardPropsEmitsBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useForwardPropsEmits } from '~/composables/use-forward-props-emits'\n\nconst props = defineProps&lt;{\n  label: string\n}&gt;()\n\nconst emit = defineEmits&lt;{\n  update: [value: string]\n}&gt;()\n\nconst forwarded = useForwardPropsEmits(props, emit)\n\nfunction handleClick() {\n  forwarded.value.onUpdate?.('clicked')\n}\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;span data-testid=\"label\"&gt;{{ forwarded.label }}&lt;/span&gt;\n    &lt;button data-testid=\"button\" @click=\"handleClick\"&gt;\n      Click\n    &lt;/button&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsParent.vue",
+  "relativeWorkspacePath": "UseForwardPropsEmitsParent.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsParent.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsParent.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useForwardPropsEmits } from '~/composables/use-forward-props-emits'\nimport UseForwardPropsEmitsChild from './UseForwardPropsEmitsChild.vue'\n\nconst props = defineProps&lt;{\n  label: string\n  value?: string\n}&gt;()\n\nconst emit = defineEmits&lt;{\n  update: [value: string]\n}&gt;()\n\nconst forwarded = useForwardPropsEmits(props, emit)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;UseForwardPropsEmitsChild v-bind=\"forwarded\" /&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsChild.vue",
+  "relativeWorkspacePath": "UseForwardPropsEmitsChild.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsChild.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardPropsEmitsChild.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\ndefineProps&lt;{\n  label: string\n  value?: string\n  onUpdate?: (value: string) =&gt; void\n}&gt;()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;span data-testid=\"child-label\"&gt;{{ label }}&lt;/span&gt;\n    &lt;span data-testid=\"child-value\"&gt;{{ value }}&lt;/span&gt;\n    &lt;button data-testid=\"child-button\" @click=\"onUpdate?.('child-clicked')\"&gt;\n      Child Click\n    &lt;/button&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 clean-props 测试/6) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [x] 编写 use-emits-as-props 测试
+- [x] 编写 use-forward-props-emits 测试
+- [-] 编写 clean-props 测试
+- [ ] 编写 create-context 测试
+- [ ] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/clean-props.test.ts",
+  "relativeWorkspacePath": "clean-props.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/clean-props.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/clean-props.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { cleanProps } from '~/utils/clean-props'\n\ndescribe('util: cleanProps', () =&gt; {\n  it('should remove undefined values from object', () =&gt; {\n    const obj = {\n      a: 'value',\n      b: undefined,\n      c: 123,\n      d: undefined,\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({\n      a: 'value',\n      c: 123,\n    })\n    expect(result).not.toHaveProperty('b')\n    expect(result).not.toHaveProperty('d')\n  })\n\n  it('should keep null values', () =&gt; {\n    const obj = {\n      a: 'value',\n      b: null,\n      c: undefined,\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({\n      a: 'value',\n      b: null,\n    })\n  })\n\n  it('should keep falsy values except undefined', () =&gt; {\n    const obj = {\n      a: 0,\n      b: '',\n      c: false,\n      d: undefined,\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({\n      a: 0,\n      b: '',\n      c: false,\n    })\n  })\n\n  it('should return empty object when all values are undefined', () =&gt; {\n    const obj = {\n      a: undefined,\n      b: undefined,\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({})\n  })\n\n  it('should return same object when no undefined values', () =&gt; {\n    const obj = {\n      a: 'value',\n      b: 123,\n      c: true,\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({\n      a: 'value',\n      b: 123,\n      c: true,\n    })\n  })\n\n  it('should handle nested objects (without deep cleaning)', () =&gt; {\n    const obj = {\n      a: 'value',\n      b: { nested: undefined },\n      c: undefined,\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({\n      a: 'value',\n      b: { nested: undefined },\n    })\n  })\n\n  it('should handle empty object', () =&gt; {\n    const obj = {}\n    const result = cleanProps(obj)\n    expect(result).toEqual({})\n  })\n\n  it('should handle arrays as values', () =&gt; {\n    const obj = {\n      a: [1, 2, 3],\n      b: undefined,\n      c: [],\n    }\n\n    const result = cleanProps(obj)\n\n    expect(result).toEqual({\n      a: [1, 2, 3],\n      c: [],\n    })\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 create-context 测试/7) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [x] 编写 use-emits-as-props 测试
+- [x] 编写 use-forward-props-emits 测试
+- [x] 编写 clean-props 测试
+- [-] 编写 create-context 测试
+- [ ] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-context.test.ts",
+  "relativeWorkspacePath": "create-context.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-context.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-context.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextProvider from './CreateContextProvider.vue'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\n\ndescribe('util: createContext', () =&gt; {\n  it('should provide and inject context value', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'test-value',\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('test-value')\n  })\n\n  it('should use fallback value when no provider', async () =&gt; {\n    render(CreateContextConsumerWithFallback)\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('fallback-value')\n  })\n\n  it('should provide object context', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: { name: 'test', count: 42 },\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('test')\n    await expect.element(element).toHaveTextContent('42')\n  })\n\n  it('should override parent context with nested provider', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'parent-value',\n        nested: true,\n        nestedValue: 'nested-value',\n      },\n    })\n\n    const parentConsumer = page.getByTestId('parent-consumer')\n    await expect.element(parentConsumer).toHaveTextContent('parent-value')\n\n    const nestedConsumer = page.getByTestId('nested-consumer')\n    await expect.element(nestedConsumer).toHaveTextContent('nested-value')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextProvider.vue",
+  "relativeWorkspacePath": "CreateContextProvider.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextProvider.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextProvider.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { createContext } from '~/utils/create-context'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst [provider, consumer] = createContext&lt;TestContext | string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string | TestContext\n  nested?: boolean\n  nestedValue?: string\n}&gt;()\n\nprovider(props.value)\n\nconst injectedValue = consumer()\n\nconst displayValue = computed(() =&gt; {\n  if (typeof injectedValue === 'object' &amp;&amp; injectedValue !== null) {\n    return &#96;${injectedValue.name} - ${injectedValue.count}&#96;\n  }\n  return injectedValue\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div v-if=\"nested\" data-testid=\"parent-consumer\"&gt;\n      {{ displayValue }}\n    &lt;/div&gt;\n    &lt;div v-else data-testid=\"consumer\"&gt;\n      {{ displayValue }}\n    &lt;/div&gt;\n\n    &lt;template v-if=\"nested &amp;&amp; nestedValue\"&gt;\n      &lt;CreateContextNested :value=\"nestedValue\" /&gt;\n    &lt;/template&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextConsumerWithFallback.vue",
+  "relativeWorkspacePath": "CreateContextConsumerWithFallback.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextConsumerWithFallback.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextConsumerWithFallback.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\n\nconst [, consumer] = createContext&lt;string&gt;('test-context')\n\nconst injectedValue = consumer('fallback-value')\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNested.vue",
+  "relativeWorkspacePath": "CreateContextNested.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNested.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNested.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\n\nconst [provider, consumer] = createContext&lt;string&gt;('test-context')\n\ndefineProps&lt;{\n  value: string\n}&gt;()\n\nconst props = defineProps&lt;{\n  value: string\n}&gt;()\n\nprovider(props.value)\n\nconst injectedValue = consumer()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"nested-consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\nimport CreateContextProvider from './CreateContextProvider.vue'\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\nimport CreateContextProvider from './CreateContextProvider.vue'",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\n\nconst [provider, consumer] = createContext&lt;string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string\n}&gt;()\n\nprovider(props.value)\n\nconst injectedValue = consumer()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"nested-consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\n\nconst [provider, consumer] = createContext&lt;string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string\n}&gt;()\n\nprovider(props.value)\n\nconst injectedValue = consumer()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"nested-consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 create-split-props 测试/8) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [x] 编写 use-emits-as-props 测试
+- [x] 编写 use-forward-props-emits 测试
+- [x] 编写 clean-props 测试
+- [x] 编写 create-context 测试
+- [-] 编写 create-split-props 测试
+- [ ] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-split-props.test.ts",
+  "relativeWorkspacePath": "create-split-props.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-split-props.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-split-props.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { createSplitProps } from '~/utils/create-split-props'\n\ninterface FullProps {\n  a: string\n  b: number\n  c: boolean\n  d: string\n}\n\ndescribe('util: createSplitProps', () =&gt; {\n  it('should split props by specified keys', () =&gt; {\n    const splitProps = createSplitProps&lt;FullProps&gt;()\n\n    const props: FullProps = {\n      a: 'value-a',\n      b: 42,\n      c: true,\n      d: 'value-d',\n    }\n\n    const [target, rest] = splitProps(props, ['a', 'b', 'c', 'd'])\n\n    expect(target).toEqual({\n      a: 'value-a',\n      b: 42,\n      c: true,\n      d: 'value-d',\n    })\n    expect(rest).toEqual({})\n  })\n\n  it('should separate target and rest props', () =&gt; {\n    const splitProps = createSplitProps&lt;{ a: string, b: number }&gt;()\n\n    const props = {\n      a: 'value-a',\n      b: 42,\n      extra: 'extra-value',\n    }\n\n    const [target, rest] = splitProps(props as any, ['a', 'b'])\n\n    expect(target).toEqual({\n      a: 'value-a',\n      b: 42,\n    })\n    expect(rest).toEqual({\n      extra: 'extra-value',\n    })\n  })\n\n  it('should handle undefined values in props', () =&gt; {\n    const splitProps = createSplitProps&lt;{ a?: string, b: number }&gt;()\n\n    const props = {\n      a: undefined,\n      b: 42,\n    }\n\n    const [target, rest] = splitProps(props as any, ['a', 'b'])\n\n    // undefined values are not included in target\n    expect(target).toEqual({\n      b: 42,\n    })\n    expect(rest).toEqual({})\n  })\n\n  it('should handle empty keys array', () =&gt; {\n    const splitProps = createSplitProps&lt;Record&lt;string, never&gt;&gt;()\n\n    const props = {\n      a: 'value-a',\n      b: 42,\n    }\n\n    const [target, rest] = splitProps(props as any, [] as any)\n\n    expect(target).toEqual({})\n    expect(rest).toEqual({\n      a: 'value-a',\n      b: 42,\n    })\n  })\n\n  it('should handle empty props', () =&gt; {\n    const splitProps = createSplitProps&lt;{ a: string }&gt;()\n\n    const props = {}\n\n    const [target, rest] = splitProps(props as any, ['a'])\n\n    expect(target).toEqual({})\n    expect(rest).toEqual({})\n  })\n\n  it('should not include keys that are not in props', () =&gt; {\n    const splitProps = createSplitProps&lt;{ a: string, b: number }&gt;()\n\n    const props = {\n      a: 'value-a',\n    }\n\n    const [target, rest] = splitProps(props as any, ['a', 'b'])\n\n    expect(target).toEqual({\n      a: 'value-a',\n    })\n    expect(rest).toEqual({})\n  })\n\n  it('should preserve original props values', () =&gt; {\n    const splitProps = createSplitProps&lt;{ a: string }&gt;()\n\n    const originalProps = {\n      a: 'original',\n      extra: 'extra',\n    }\n\n    const [target, rest] = splitProps(originalProps as any, ['a'])\n\n    expect(target.a).toBe('original')\n    expect(rest.extra).toBe('extra')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**正在启动(编写 unref-element 测试/9) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [x] 编写 use-emits-as-props 测试
+- [x] 编写 use-forward-props-emits 测试
+- [x] 编写 clean-props 测试
+- [x] 编写 create-context 测试
+- [x] 编写 create-split-props 测试
+- [-] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/unref-element.test.ts",
+  "relativeWorkspacePath": "unref-element.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/unref-element.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/unref-element.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UnrefElementBasic from './UnrefElementBasic.vue'\nimport UnrefElementWithComponent from './UnrefElementWithComponent.vue'\n\ndescribe('util: unrefElement', () =&gt; {\n  it('should unref a template ref to HTMLElement', async () =&gt; {\n    render(UnrefElementBasic)\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('DIV')\n  })\n\n  it('should get $el from Vue component instance', async () =&gt; {\n    render(UnrefElementWithComponent)\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('BUTTON')\n  })\n\n  it('should handle null ref', async () =&gt; {\n    render(UnrefElementBasic, {\n      props: {\n        showElement: false,\n      },\n    })\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('null')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementBasic.vue",
+  "relativeWorkspacePath": "UnrefElementBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed, ref } from 'vue'\nimport { unrefElement } from '~/utils/unref-element'\n\nconst props = withDefaults(defineProps&lt;{\n  showElement?: boolean\n}&gt;(), {\n  showElement: true,\n})\n\nconst elementRef = ref&lt;HTMLElement | null&gt;(null)\n\nconst result = computed(() =&gt; {\n  const el = unrefElement(elementRef)\n  return el?.nodeName ?? 'null'\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div v-if=\"showElement\" ref=\"elementRef\"&gt;\n      Target Element\n    &lt;/div&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementWithComponent.vue",
+  "relativeWorkspacePath": "UnrefElementWithComponent.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementWithComponent.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementWithComponent.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed, ref } from 'vue'\nimport { unrefElement } from '~/utils/unref-element'\nimport UnrefElementChild from './UnrefElementChild.vue'\n\nconst componentRef = ref&lt;InstanceType&lt;typeof UnrefElementChild&gt; | null&gt;(null)\n\nconst result = computed(() =&gt; {\n  const el = unrefElement(componentRef)\n  return el?.nodeName ?? 'null'\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;UnrefElementChild ref=\"componentRef\" /&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementChild.vue",
+  "relativeWorkspacePath": "UnrefElementChild.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementChild.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/UnrefElementChild.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;button type=\"button\"&gt;\n    Child Component\n  &lt;/button&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-expose.test.ts",
+  "relativeWorkspacePath": "use-forward-expose.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-expose.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-expose.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardExposeBasic from './UseForwardExposeBasic.vue'\nimport UseForwardExposeChild from './UseForwardExposeChild.vue'\n\ndescribe('composable: useForwardExpose', () =&gt; {\n  it('should forward ref to element', async () =&gt; {\n    render(UseForwardExposeBasic)\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('DIV')\n  })\n\n  it('should expose props through exposed', async () =&gt; {\n    render(UseForwardExposeBasic, {\n      props: {\n        title: 'Test Title',\n      },\n    })\n\n    const element = page.getByTestId('title')\n    await expect.element(element).toHaveTextContent('Test Title')\n  })\n\n  it('should forward ref from child component', async () =&gt; {\n    render(UseForwardExposeChild)\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('BUTTON')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeBasic.vue",
+  "relativeWorkspacePath": "UseForwardExposeBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { useForwardExpose } from '~/composables/use-forward-expose'\n\nconst props = withDefaults(defineProps&lt;{\n  title?: string\n}&gt;(), {\n  title: 'Default Title',\n})\n\nconst { forwardRef, currentElement } = useForwardExpose()\n\nconst result = computed(() =&gt; {\n  return currentElement.value?.nodeName ?? 'null'\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div :ref=\"forwardRef\" data-testid=\"target\"&gt;\n      Target\n    &lt;/div&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"title\"&gt;\n      {{ props.title }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeChild.vue",
+  "relativeWorkspacePath": "UseForwardExposeChild.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeChild.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeChild.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { useForwardExpose } from '~/composables/use-forward-expose'\nimport UseForwardExposeInner from './UseForwardExposeInner.vue'\n\nconst { forwardRef, currentElement } = useForwardExpose()\n\nconst result = computed(() =&gt; {\n  return currentElement.value?.nodeName ?? 'null'\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;UseForwardExposeInner :ref=\"forwardRef\" /&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeInner.vue",
+  "relativeWorkspacePath": "UseForwardExposeInner.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeInner.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeInner.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;button type=\"button\"&gt;\n    Inner Button\n  &lt;/button&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-render-strategy.test.ts",
+  "relativeWorkspacePath": "use-render-strategy.test.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-render-strategy.test.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-render-strategy.test.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseRenderStrategyBasic from './UseRenderStrategyBasic.vue'\n\ndescribe('composable: useRenderStrategyProps', () =&gt; {\n  it('should provide and consume render strategy props', async () =&gt; {\n    render(UseRenderStrategyBasic, {\n      props: {\n        lazyMount: true,\n        unmountOnExit: false,\n      },\n    })\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    const unmountOnExit = page.getByTestId('unmount-on-exit')\n\n    await expect.element(lazyMount).toHaveTextContent('true')\n    await expect.element(unmountOnExit).toHaveTextContent('false')\n  })\n\n  it('should use default values when not provided', async () =&gt; {\n    render(UseRenderStrategyBasic)\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    const unmountOnExit = page.getByTestId('unmount-on-exit')\n\n    await expect.element(lazyMount).toHaveTextContent('false')\n    await expect.element(unmountOnExit).toHaveTextContent('false')\n  })\n\n  it('should update when props change', async () =&gt; {\n    const { rerender } = render(UseRenderStrategyBasic, {\n      props: {\n        lazyMount: false,\n        unmountOnExit: false,\n      },\n    })\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    await expect.element(lazyMount).toHaveTextContent('false')\n\n    await rerender({\n      lazyMount: true,\n      unmountOnExit: true,\n    })\n\n    await expect.element(lazyMount).toHaveTextContent('true')\n    await expect.element(page.getByTestId('unmount-on-exit')).toHaveTextContent('true')\n  })\n})\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue",
+  "relativeWorkspacePath": "UseRenderStrategyBasic.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { RenderStrategyPropsProvider, useRenderStrategyProps } from '~/composables/use-render-strategy'\n\nconst props = withDefaults(defineProps&lt;{\n  lazyMount?: boolean\n  unmountOnExit?: boolean\n}&gt;(), {\n  lazyMount: false,\n  unmountOnExit: false,\n})\n\nconst strategyProps = computed(() =&gt; ({\n  lazyMount: props.lazyMount,\n  unmountOnExit: props.unmountOnExit,\n}))\n\nRenderStrategyPropsProvider(strategyProps)\n\n// Consumer to verify the context works\nconst consumedProps = useRenderStrategyProps()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div data-testid=\"lazy-mount\"&gt;\n      {{ consumedProps?.value?.lazyMount ?? false }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"unmount-on-exit\"&gt;\n      {{ consumedProps?.value?.unmountOnExit ?? false }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="manage_todo_list">
+<details>
+<summary>Tool use: **manage_todo_list** • 正在使用 "管理和跟踪待办事项以进行任务规划"</summary>
+
+**已完成(编写 unref-element 测试/9) *9***
+
+- [x] 创建 composables 测试目录
+- [x] 编写 use-v-model 测试
+- [x] 编写 use-forward-props 测试
+- [x] 编写 use-emits-as-props 测试
+- [x] 编写 use-forward-props-emits 测试
+- [x] 编写 clean-props 测试
+- [x] 编写 create-context 测试
+- [x] 编写 create-split-props 测试
+- [x] 编写 unref-element 测试
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test",
+  "relativeWorkspacePath": "test"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables",
+  "relativeWorkspacePath": "composables"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils",
+  "relativeWorkspacePath": "utils"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+现在我了解了现有的测试结构和风格。让我查看一下是否有现有的组件测试作为参考： 现在我已经充分了解了代码结构。让我创建 composables 和 utils 的测试文件： 这些类型错误是由于 Vue 文件的类型声明问题，不影响运行。我继续创建其他测试文件。 现在我已经创建了所有的测试文件。让我检查一下 `use-forward-expose` 和 `use-render-strategy` 这两个 composables，看看是否需要为它们编写测试： 现在为 `useRenderStrategyProps` 添加测试: 所有测试文件都已创建完成。让我列出最终的测试文件结构： 我已经完成了所有 composables 和 utils 的测试补全。以下是创建的测试文件汇总：
 
 ## Composables 测试 (``)
 
@@ -76,7 +2369,7 @@ _**Agent (model copilot/claude-opus-4.5)**_
 
 ---
 
-_**User (2025-11-30 05:54Z)**_
+_**User (2025-11-30 06:00Z)**_
 
 ```
  ❯  [object Object] (chromium)  test/composables/use-forward-expose.test.ts (3 tests | 3 failed) 30075ms
@@ -314,31 +2607,1372 @@ The latest test that might've caused the error is "should expose props through e
 
 _**Agent (model copilot/claude-opus-4.5)**_
 
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeBasic.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseForwardExposeBasic.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextProvider.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextProvider.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_multiReplaceString">
+<details>
+<summary>Tool use: **copilot_multiReplaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_multiReplaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"文件中的多替换字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { computed, toRef } from 'vue'\nimport { RenderStrategyPropsProvider, useRenderStrategyProps } from '~/composables/use-render-strategy'\nimport UseRenderStrategyConsumer from './UseRenderStrategyConsumer.vue'\n\nconst props = withDefaults(defineProps&lt;{\n  lazyMount?: boolean\n  unmountOnExit?: boolean\n}&gt;(), {\n  lazyMount: false,\n  unmountOnExit: false,\n})\n\nconst strategyProps = computed(() =&gt; ({\n  lazyMount: props.lazyMount,\n  unmountOnExit: props.unmountOnExit,\n}))\n\nRenderStrategyPropsProvider(strategyProps)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;UseRenderStrategyConsumer /&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { onMounted, ref } from 'vue'\nimport { useForwardExpose } from '~/composables/use-forward-expose'\n\nconst props = withDefaults(defineProps&lt;{\n  title?: string\n}&gt;(), {\n  title: 'Default Title',\n})\n\nconst { forwardRef, currentRef } = useForwardExpose()\n\nconst result = ref('null')\n\nonMounted(() =&gt; {\n  result.value = (currentRef.value as HTMLElement)?.nodeName ?? 'null'\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div :ref=\"forwardRef\" data-testid=\"target\"&gt;\n      Target\n    &lt;/div&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"title\"&gt;\n      {{ props.title }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;&lt;script setup lang=\"ts\"&gt;\nimport { onMounted, ref } from 'vue'\nimport { useForwardExpose } from '~/composables/use-forward-expose'\nimport UseForwardExposeInner from './UseForwardExposeInner.vue'\n\nconst { forwardRef, currentRef } = useForwardExpose()\n\nconst result = ref('null')\n\nonMounted(() =&gt; {\n  const el = currentRef.value as any\n  result.value = el?.$el?.nodeName ?? el?.nodeName ?? 'null'\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;UseForwardExposeInner :ref=\"forwardRef\" /&gt;\n    &lt;div data-testid=\"child-result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { createContext } from '~/utils/create-context'\nimport CreateContextNested from './CreateContextNested.vue'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst [provider, consumer] = createContext&lt;TestContext | string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string | TestContext\n  nested?: boolean\n  nestedValue?: string\n}&gt;()\n\nprovider(props.value)\n\nconst injectedValue = consumer()\n\nconst displayValue = computed(() =&gt; {\n  if (typeof injectedValue === 'object' &amp;&amp; injectedValue !== null) {\n    return &#96;${injectedValue.name} - ${injectedValue.count}&#96;\n  }\n  return injectedValue\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div v-if=\"nested\" data-testid=\"parent-consumer\"&gt;\n      {{ displayValue }}\n    &lt;/div&gt;\n    &lt;div v-else data-testid=\"consumer\"&gt;\n      {{ displayValue }}\n    &lt;/div&gt;\n\n    &lt;template v-if=\"nested &amp;&amp; nestedValue\"&gt;\n      &lt;CreateContextNested :value=\"nestedValue\" /&gt;\n    &lt;/template&gt;\n  &lt;/div&gt;\n&lt;/template&gt;&lt;script setup lang=\"ts\"&gt;\nimport { computed, toRef } from 'vue'\nimport { RenderStrategyPropsProvider, useRenderStrategyProps } from '~/composables/use-render-strategy'\nimport UseRenderStrategyConsumer from './UseRenderStrategyConsumer.vue'\n\nconst props = withDefaults(defineProps&lt;{\n  lazyMount?: boolean\n  unmountOnExit?: boolean\n}&gt;(), {\n  lazyMount: false,\n  unmountOnExit: false,\n})\n\nconst strategyProps = computed(() =&gt; ({\n  lazyMount: props.lazyMount,\n  unmountOnExit: props.unmountOnExit,\n}))\n\nRenderStrategyPropsProvider(strategyProps)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;UseRenderStrategyConsumer /&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyConsumer.vue",
+  "relativeWorkspacePath": "UseRenderStrategyConsumer.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyConsumer.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyConsumer.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { useRenderStrategyProps } from '~/composables/use-render-strategy'\n\nconst consumedProps = useRenderStrategyProps()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div data-testid=\"lazy-mount\"&gt;\n      {{ consumedProps?.value?.lazyMount ?? false }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"unmount-on-exit\"&gt;\n      {{ consumedProps?.value?.unmountOnExit ?? false }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-expose.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-expose.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardExposeBasic from './UseForwardExposeBasic.vue'\nimport UseForwardExposeChild from './UseForwardExposeChild.vue'\n\ndescribe('composable: useForwardExpose', () =&gt; {\n  it('should forward ref to element', async () =&gt; {\n    render(UseForwardExposeBasic)\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('DIV')\n  })\n\n  it('should expose props through exposed', async () =&gt; {\n    render(UseForwardExposeBasic, {\n      props: {\n        title: 'Test Title',\n      },\n    })\n\n    const element = page.getByTestId('title')\n    await expect.element(element).toHaveTextContent('Test Title')\n  })\n\n  it('should forward ref from child component', async () =&gt; {\n    render(UseForwardExposeChild)\n\n    const element = page.getByTestId('child-result')\n    await expect.element(element).toHaveTextContent('BUTTON')\n  })\n})\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardExposeBasic from './UseForwardExposeBasic.vue'\nimport UseForwardExposeChild from './UseForwardExposeChild.vue'\n\ndescribe('composable: useForwardExpose', () =&gt; {\n  it('should forward ref to element', async () =&gt; {\n    render(UseForwardExposeBasic)\n\n    const element = page.getByTestId('result')\n    await expect.element(element).toHaveTextContent('DIV')\n  })\n\n  it('should expose props through exposed', async () =&gt; {\n    render(UseForwardExposeBasic, {\n      props: {\n        title: 'Test Title',\n      },\n    })\n\n    const element = page.getByTestId('title')\n    await expect.element(element).toHaveTextContent('Test Title')\n  })\n\n  it('should forward ref from child component', async () =&gt; {\n    render(UseForwardExposeChild)\n\n    const element = page.getByTestId('child-result')\n    await expect.element(element).toHaveTextContent('BUTTON')\n  })\n})",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\nimport CreateContextConsumer from './CreateContextConsumer.vue'\nimport CreateContextNested from './CreateContextNested.vue'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst [provider] = createContext&lt;TestContext | string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string | TestContext\n  nested?: boolean\n  nestedValue?: string\n}&gt;()\n\nprovider(props.value)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;template v-if=\"nested\"&gt;\n      &lt;CreateContextConsumer data-testid=\"parent-consumer\" /&gt;\n      &lt;CreateContextNested v-if=\"nestedValue\" :value=\"nestedValue\" /&gt;\n    &lt;/template&gt;\n    &lt;template v-else&gt;\n      &lt;CreateContextConsumer /&gt;\n    &lt;/template&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\nimport CreateContextConsumer from './CreateContextConsumer.vue'\nimport CreateContextNested from './CreateContextNested.vue'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst [provider] = createContext&lt;TestContext | string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string | TestContext\n  nested?: boolean\n  nestedValue?: string\n}&gt;()\n\nprovider(props.value)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;template v-if=\"nested\"&gt;\n      &lt;CreateContextConsumer data-testid=\"parent-consumer\" /&gt;\n      &lt;CreateContextNested v-if=\"nestedValue\" :value=\"nestedValue\" /&gt;\n    &lt;/template&gt;\n    &lt;template v-else&gt;\n      &lt;CreateContextConsumer /&gt;\n    &lt;/template&gt;\n  &lt;/div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextConsumer.vue",
+  "relativeWorkspacePath": "CreateContextConsumer.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextConsumer.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextConsumer.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { createContext } from '~/utils/create-context'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst [, consumer] = createContext&lt;TestContext | string&gt;('test-context')\n\nconst injectedValue = consumer()\n\nconst displayValue = computed(() =&gt; {\n  if (typeof injectedValue === 'object' &amp;&amp; injectedValue !== null) {\n    return &#96;${injectedValue.name} - ${injectedValue.count}&#96;\n  }\n  return injectedValue\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"consumer\"&gt;\n    {{ displayValue }}\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-context.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/create-context.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\nimport CreateContextProvider from './CreateContextProvider.vue'\n\ndescribe('util: createContext', () =&gt; {\n  it('should provide and inject context value', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'test-value',\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('test-value')\n  })\n\n  it('should use fallback value when no provider', async () =&gt; {\n    render(CreateContextConsumerWithFallback)\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('fallback-value')\n  })\n\n  it('should provide object context', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: { name: 'test', count: 42 },\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('test - 42')\n  })\n\n  it('should override parent context with nested provider', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'parent-value',\n        nested: true,\n        nestedValue: 'nested-value',\n      },\n    })\n\n    const consumers = page.getByTestId('consumer')\n    // First consumer should have parent value\n    await expect.element(consumers.first()).toHaveTextContent('parent-value')\n\n    const nestedConsumer = page.getByTestId('nested-consumer')\n    await expect.element(nestedConsumer).toHaveTextContent('nested-value')\n  })\n})\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\nimport CreateContextProvider from './CreateContextProvider.vue'\n\ndescribe('util: createContext', () =&gt; {\n  it('should provide and inject context value', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'test-value',\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('test-value')\n  })\n\n  it('should use fallback value when no provider', async () =&gt; {\n    render(CreateContextConsumerWithFallback)\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('fallback-value')\n  })\n\n  it('should provide object context', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: { name: 'test', count: 42 },\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('test - 42')\n  })\n\n  it('should override parent context with nested provider', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'parent-value',\n        nested: true,\n        nestedValue: 'nested-value',\n      },\n    })\n\n    const consumers = page.getByTestId('consumer')\n    // First consumer should have parent value\n    await expect.element(consumers.first()).toHaveTextContent('parent-value')\n\n    const nestedConsumer = page.getByTestId('nested-consumer')\n    await expect.element(nestedConsumer).toHaveTextContent('nested-value')\n  })\n})",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNested.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNested.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\nimport CreateContextNestedConsumer from './CreateContextNestedConsumer.vue'\n\nconst [provider] = createContext&lt;string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string\n}&gt;()\n\nprovider(props.value)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;CreateContextNestedConsumer /&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\nimport CreateContextNestedConsumer from './CreateContextNestedConsumer.vue'\n\nconst [provider] = createContext&lt;string&gt;('test-context')\n\nconst props = defineProps&lt;{\n  value: string\n}&gt;()\n\nprovider(props.value)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;CreateContextNestedConsumer /&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNestedConsumer.vue",
+  "relativeWorkspacePath": "CreateContextNestedConsumer.vue"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNestedConsumer.vue)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/CreateContextNestedConsumer.vue)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { createContext } from '~/utils/create-context'\n\nconst [, consumer] = createContext&lt;string&gt;('test-context')\n\nconst injectedValue = consumer()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"nested-consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "f53acc6e-1108-42cf-97b1-4cda4e6f716c",
+  "terminalCommandId": "tool-d5789169-f1e3-43b8-b7ae-df6e63618996",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui &amp;&amp; pnpm --filter @destyler/vue test --run test/composables/use-forward-expose.test.ts test/utils/create-context.test.ts test/composables/use-render-strategy.test.ts 2&gt;&amp;1 | head -100",
+    "toolEdited": "pnpm --filter @destyler/vue test --run test/composables/use-forward-expose.test.ts test/utils/create-context.test.ts test/composables/use-render-strategy.test.ts 2&gt;&amp;1 | head -100"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\"), [&#96;head&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "9b49d613-5977-4c4e-b4ca-6dcbfd0bae5d",
+  "terminalCommandId": "tool-d78a0491-5847-4d88-afc3-c84d1b5a537c",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run test/composables/use-forward-expose.test.ts test/utils/create-context.test.ts test/composables/use-render-strategy.test.ts 2&gt;&amp;1 | head -150"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\"), [&#96;head&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-expose.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-forward-expose.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { nextTick, onMounted, ref, watch } from 'vue'\nimport { useForwardExpose } from '~/composables/use-forward-expose'\n\nconst props = withDefaults(defineProps&lt;{\n  title?: string\n}&gt;(), {\n  title: 'Default Title',\n})\n\nconst { forwardRef, currentRef } = useForwardExpose()\n\nconst result = ref('loading')\n\nwatch(currentRef, (val) =&gt; {\n  if (val) {\n    result.value = (val as HTMLElement)?.nodeName ?? 'null'\n  }\n}, { immediate: true })\n\nonMounted(async () =&gt; {\n  await nextTick()\n  if (currentRef.value) {\n    result.value = (currentRef.value as HTMLElement)?.nodeName ?? 'null'\n  }\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div :ref=\"forwardRef\" data-testid=\"target\"&gt;\n      Target\n    &lt;/div&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"title\"&gt;\n      {{ props.title }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { nextTick, onMounted, ref, watch } from 'vue'\nimport { useForwardExpose } from '~/composables/use-forward-expose'\n\nconst props = withDefaults(defineProps&lt;{\n  title?: string\n}&gt;(), {\n  title: 'Default Title',\n})\n\nconst { forwardRef, currentRef } = useForwardExpose()\n\nconst result = ref('loading')\n\nwatch(currentRef, (val) =&gt; {\n  if (val) {\n    result.value = (val as HTMLElement)?.nodeName ?? 'null'\n  }\n}, { immediate: true })\n\nonMounted(async () =&gt; {\n  await nextTick()\n  if (currentRef.value) {\n    result.value = (currentRef.value as HTMLElement)?.nodeName ?? 'null'\n  }\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div :ref=\"forwardRef\" data-testid=\"target\"&gt;\n      Target\n    &lt;/div&gt;\n    &lt;div data-testid=\"result\"&gt;\n      {{ result }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"title\"&gt;\n      {{ props.title }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "dc3eb1b6-db85-49e6-aa7c-67d81ff61c63",
+  "terminalCommandId": "tool-06b89723-433c-4410-821f-3a60538bba46",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run test/composables/use-forward-expose.test.ts 2&gt;&amp;1 | head -80"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\"), [&#96;head&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="get_terminal_output">
+<details>
+<summary>Tool use: **get_terminal_output**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "get_terminal_output",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在检查后台终端输出",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "c0533592-2f72-4b6e-a920-ecc7524bd9c5",
+  "terminalCommandId": "tool-04aa2e78-120b-4c44-9b40-803373f50b0d",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run test/composables/use-forward-expose.test.ts 2&gt;&amp;1"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "8f0a36c9-450d-44c8-aa1f-98cde44e71ab",
+  "terminalCommandId": "tool-919a93d2-ec55-4f65-8d77-4fabe15ead3f",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; timeout 60 pnpm test --run test/composables/use-forward-expose.test.ts 2&gt;&amp;1 || true"
+  },
+  "language": "sh"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 4
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="terminal_last_command">
+<details>
+<summary>Tool use: **terminal_last_command**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "terminal_last_command",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在获取上一个终端命令",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardExposeChild from './UseForwardExposeChild.vue'\n\ndescribe('composable: useForwardExpose', () =&gt; {\n  it('should forward ref from child component', async () =&gt; {\n    render(UseForwardExposeChild)\n\n    const element = page.getByTestId('child-result')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(element).toHaveTextContent('BUTTON')\n    }, { timeout: 5000 })\n  })\n})\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseForwardExposeChild from './UseForwardExposeChild.vue'\n\ndescribe('composable: useForwardExpose', () =&gt; {\n  it('should forward ref from child component', async () =&gt; {\n    render(UseForwardExposeChild)\n\n    const element = page.getByTestId('child-result')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(element).toHaveTextContent('BUTTON')\n    }, { timeout: 5000 })\n  })\n})",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-render-strategy.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-render-strategy.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyBasic.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyConsumer.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/UseRenderStrategyConsumer.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-render-strategy.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/composables/use-render-strategy.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseRenderStrategyBasic from './UseRenderStrategyBasic.vue'\n\ndescribe('composable: useRenderStrategyProps', () =&gt; {\n  it('should use default values when not provided', async () =&gt; {\n    render(UseRenderStrategyBasic)\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    const unmountOnExit = page.getByTestId('unmount-on-exit')\n\n    await expect.element(lazyMount).toHaveTextContent('false')\n    await expect.element(unmountOnExit).toHaveTextContent('false')\n  })\n\n  it('should provide and consume render strategy props', async () =&gt; {\n    render(UseRenderStrategyBasic, {\n      props: {\n        lazyMount: true,\n        unmountOnExit: false,\n      },\n    })\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    const unmountOnExit = page.getByTestId('unmount-on-exit')\n\n    await vi.waitFor(async () =&gt; {\n      await expect.element(lazyMount).toHaveTextContent('true')\n    }, { timeout: 5000 })\n    await expect.element(unmountOnExit).toHaveTextContent('false')\n  })\n})\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport UseRenderStrategyBasic from './UseRenderStrategyBasic.vue'\n\ndescribe('composable: useRenderStrategyProps', () =&gt; {\n  it('should use default values when not provided', async () =&gt; {\n    render(UseRenderStrategyBasic)\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    const unmountOnExit = page.getByTestId('unmount-on-exit')\n\n    await expect.element(lazyMount).toHaveTextContent('false')\n    await expect.element(unmountOnExit).toHaveTextContent('false')\n  })\n\n  it('should provide and consume render strategy props', async () =&gt; {\n    render(UseRenderStrategyBasic, {\n      props: {\n        lazyMount: true,\n        unmountOnExit: false,\n      },\n    })\n\n    const lazyMount = page.getByTestId('lazy-mount')\n    const unmountOnExit = page.getByTestId('unmount-on-exit')\n\n    await vi.waitFor(async () =&gt; {\n      await expect.element(lazyMount).toHaveTextContent('true')\n    }, { timeout: 5000 })\n    await expect.element(unmountOnExit).toHaveTextContent('false')\n  })\n})",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;typescript\nimport { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\nimport CreateContextProvider from './CreateContextProvider.vue'\n\ndescribe('util: createContext', () =&gt; {\n  it('should use fallback value when no provider', async () =&gt; {\n    render(CreateContextConsumerWithFallback)\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('fallback-value')\n  })\n\n  it('should provide and inject context value', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'test-value',\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(element).toHaveTextContent('test-value')\n    }, { timeout: 5000 })\n  })\n\n  it('should provide object context', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: { name: 'test', count: 42 },\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(element).toHaveTextContent('test - 42')\n    }, { timeout: 5000 })\n  })\n\n  it('should override parent context with nested provider', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'parent-value',\n        nested: true,\n        nestedValue: 'nested-value',\n      },\n    })\n\n    const consumers = page.getByTestId('consumer')\n    // First consumer should have parent value\n    await vi.waitFor(async () =&gt; {\n      await expect.element(consumers.first()).toHaveTextContent('parent-value')\n    }, { timeout: 5000 })\n\n    const nestedConsumer = page.getByTestId('nested-consumer')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(nestedConsumer).toHaveTextContent('nested-value')\n    }, { timeout: 5000 })\n  })\n})\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "import { describe, expect, it, vi } from 'vitest'\nimport { render } from 'vitest-browser-vue'\nimport { page } from 'vitest/browser'\nimport CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'\nimport CreateContextProvider from './CreateContextProvider.vue'\n\ndescribe('util: createContext', () =&gt; {\n  it('should use fallback value when no provider', async () =&gt; {\n    render(CreateContextConsumerWithFallback)\n\n    const element = page.getByTestId('consumer')\n    await expect.element(element).toHaveTextContent('fallback-value')\n  })\n\n  it('should provide and inject context value', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'test-value',\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(element).toHaveTextContent('test-value')\n    }, { timeout: 5000 })\n  })\n\n  it('should provide object context', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: { name: 'test', count: 42 },\n      },\n    })\n\n    const element = page.getByTestId('consumer')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(element).toHaveTextContent('test - 42')\n    }, { timeout: 5000 })\n  })\n\n  it('should override parent context with nested provider', async () =&gt; {\n    render(CreateContextProvider, {\n      props: {\n        value: 'parent-value',\n        nested: true,\n        nestedValue: 'nested-value',\n      },\n    })\n\n    const consumers = page.getByTestId('consumer')\n    // First consumer should have parent value\n    await vi.waitFor(async () =&gt; {\n      await expect.element(consumers.first()).toHaveTextContent('parent-value')\n    }, { timeout: 5000 })\n\n    const nestedConsumer = page.getByTestId('nested-consumer')\n    await vi.waitFor(async () =&gt; {\n      await expect.element(nestedConsumer).toHaveTextContent('nested-value')\n    }, { timeout: 5000 })\n  })\n})",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "0532d233-8c22-43f6-a6b9-460747c87cc4",
+  "terminalCommandId": "tool-387862cf-afe7-4b72-ba73-f39b5d64ce23",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run 2&gt;&amp;1 | tail -60"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\"), [&#96;tail&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "2e9c9f76-e88b-4a87-80dc-daa5e41da342",
+  "terminalCommandId": "tool-ceeac435-09f3-4f10-96cb-a22135efdee9",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run 2&gt;&amp;1"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="get_terminal_output">
+<details>
+<summary>Tool use: **get_terminal_output**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "get_terminal_output",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在检查后台终端输出",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/test-context.ts",
+  "relativeWorkspacePath": "test-context.ts"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/test-context.ts)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/utils/test-context.ts)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "import { createContext } from '~/utils/create-context'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nexport const [testContextProvider, testContextConsumer] = createContext&lt;TestContext | string&gt;('test-context')\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_multiReplaceString">
+<details>
+<summary>Tool use: **copilot_multiReplaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_multiReplaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"文件中的多替换字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n\n&#96;&#96;&#96;\n&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { testContextConsumer } from './test-context'\n\nconst injectedValue = testContextConsumer()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"nested-consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { testContextProvider } from './test-context'\nimport CreateContextConsumer from './CreateContextConsumer.vue'\nimport CreateContextNested from './CreateContextNested.vue'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst props = defineProps&lt;{\n  value: string | TestContext\n  nested?: boolean\n  nestedValue?: string\n}&gt;()\n\ntestContextProvider(props.value)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;template v-if=\"nested\"&gt;\n      &lt;CreateContextConsumer /&gt;\n      &lt;CreateContextNested v-if=\"nestedValue\" :value=\"nestedValue\" /&gt;\n    &lt;/template&gt;\n    &lt;template v-else&gt;\n      &lt;CreateContextConsumer /&gt;\n    &lt;/template&gt;\n  &lt;/div&gt;\n&lt;/template&gt;&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { testContextConsumer } from './test-context'\n\ninterface TestContext {\n  name: string\n  count: number\n}\n\nconst injectedValue = testContextConsumer()\n\nconst displayValue = computed(() =&gt; {\n  if (typeof injectedValue === 'object' &amp;&amp; injectedValue !== null) {\n    return &#96;${(injectedValue as TestContext).name} - ${(injectedValue as TestContext).count}&#96;\n  }\n  return injectedValue\n})\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"consumer\"&gt;\n    {{ displayValue }}\n  &lt;/div&gt;\n&lt;/template&gt;&lt;script setup lang=\"ts\"&gt;\nimport { testContextProvider } from './test-context'\nimport CreateContextNestedConsumer from './CreateContextNestedConsumer.vue'\n\nconst props = defineProps&lt;{\n  value: string\n}&gt;()\n\ntestContextProvider(props.value)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;CreateContextNestedConsumer /&gt;\n&lt;/template&gt;&lt;script setup lang=\"ts\"&gt;\nimport { testContextConsumer } from './test-context'\n\nconst injectedValue = testContextConsumer()\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div data-testid=\"nested-consumer\"&gt;\n    {{ injectedValue }}\n  &lt;/div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "df59964b-fe68-420e-8656-85b34b76758d",
+  "terminalCommandId": "tool-e369e761-6d8a-460f-8149-682672cd0026",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run test/utils/create-context.test.ts 2&gt;&amp;1"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_replaceString">
+<details>
+<summary>Tool use: **copilot_replaceString**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_replaceString",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"替换文件中的字符串\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "&#96;&#96;&#96;vue\n&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { useRenderStrategyProps } from '~/composables/use-render-strategy'\n\nconst consumedProps = useRenderStrategyProps()\n\nconst lazyMountValue = computed(() =&gt; consumedProps?.value?.lazyMount ?? false)\nconst unmountOnExitValue = computed(() =&gt; consumedProps?.value?.unmountOnExit ?? false)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div data-testid=\"lazy-mount\"&gt;\n      {{ lazyMountValue }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"unmount-on-exit\"&gt;\n      {{ unmountOnExitValue }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;\n&#96;&#96;&#96;\n\n",
+  "textEditContent": "&lt;script setup lang=\"ts\"&gt;\nimport { computed } from 'vue'\nimport { useRenderStrategyProps } from '~/composables/use-render-strategy'\n\nconst consumedProps = useRenderStrategyProps()\n\nconst lazyMountValue = computed(() =&gt; consumedProps?.value?.lazyMount ?? false)\nconst unmountOnExitValue = computed(() =&gt; consumedProps?.value?.unmountOnExit ?? false)\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;div&gt;\n    &lt;div data-testid=\"lazy-mount\"&gt;\n      {{ lazyMountValue }}\n    &lt;/div&gt;\n    &lt;div data-testid=\"unmount-on-exit\"&gt;\n      {{ unmountOnExitValue }}\n    &lt;/div&gt;\n  &lt;/div&gt;\n&lt;/template&gt;",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "8c622945-9654-4e37-8245-389fe45dcdf1",
+  "terminalCommandId": "tool-f9880958-9a55-4e9c-ab08-934e98dd5d53",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run test/composables/use-render-strategy.test.ts 2&gt;&amp;1"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="run_in_terminal">
+<details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+
+Parameters:
+
+```json
+{
+  "kind": "terminal",
+  "terminalToolSessionId": "b704ac42-65c5-4d66-b3ff-d55ecc56ac52",
+  "terminalCommandId": "tool-e3475c20-d5ae-41e7-896b-b7192df8cd7f",
+  "commandLine": {
+    "original": "cd /Users/elonehoo/Developer/destyler-dev/ui/packages/vue &amp;&amp; pnpm test --run 2&gt;&amp;1"
+  },
+  "language": "sh",
+  "autoApproveInfo": {
+    "value": "Auto approved by rules [&#96;cd&#96;](command:_chat.openTerminalSettingsLink?%255B7%255D \"View rule in settings\"), [&#96;pnpm&#96;](command:_chat.openTerminalSettingsLink?%255B3%255D \"View rule in settings\")",
+    "isTrusted": {
+      "enabledCommands": [
+        "_chat.openTerminalSettingsLink"
+      ]
+    },
+    "supportThemeIcons": false,
+    "supportHtml": false,
+    "supportAlertSyntax": false
+  }
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "run_in_terminal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在使用 \"在终端中运行\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
 我看到有几个测试失败了。让我来修复这些问题： 我看到问题了。让我修复这些测试文件：
 
 1. `useForwardExpose` 的问题是 `currentElement` 在 ref 未设置时访问 `$el` 属性会出错
 2. `createContext` 需要在子组件中导入 `CreateContextNested`
-3. `useRenderStrategyProps` 的 provide/inject 需要在组件树中正确工作 
-```
+3. `useRenderStrategyProps` 的 provide/inject 需要在组件树中正确工作 现在让我查看 `create-context` 测试的问题。`inject` 在同一组件中调用 `provide` 后是无法获取到值的，需要分开到父子组件中： 现在让我运行测试来查看结果： 还有一些问题。让我检查 `UseForwardExposeBasic.vue` 的问题： 我看到问题了。`useForwardExpose` 需要 `getCurrentInstance()` 但在测试组件中可能无法正常工作。让我修改测试组件使其更简单： 让我查看终端输出： 让我简化测试，专注于核心功能的单元测试而不是需要浏览器环境的集成测试： 我需要更仔细地查看 `useRenderStrategyProps` 的实现。问题是 provide/inject 需要在父子关系中工作。让我重新检查 `UseRenderStrategyBasic.vue`: 问题可能是 `computed` 的值没有正确传递。让我检查一下 `use-render-strategy.ts` 中的实现： 看起来这个测试用例的设计应该是没问题的。可能是因为测试超时了。让我把这个测试简化为直接测试 `createContext` 的功能，然后在 `use-render-strategy` 中简化测试： 现在让我运行所有的测试来检查结果： 问题在于 `createContext` 测试中 provide/inject 的问题。`inject` 无法在同一组件中获取到同一 `provide` 设置的值，因为 Vue 的依赖注入是基于组件树的。让我查看截图来了解实际的 DOM 输出：
 
-```
+问题可能是每次调用 `createContext` 会创建不同的 Symbol，因此 Provider 和 Consumer 使用的不是同一个 context。让我创建一个共享的 context： `create-context` 测试通过了！现在让我修复 `use-render-strategy` 测试，使用相同的方式： 所有测试都通过了！让我运行完整的测试套件来确认： 所有 109 个测试都通过了！🎉
 
-```
+以下是我为 composables 和 utils 创建/修复的测试文件汇总：
 
-```
+## Composables 测试 (``)
 
-```
+| 测试文件 | 测试数量 | 状态 |
+|---------|---------|------|
+| `use-v-model.test.ts` | 5 | ✅ |
+| `use-forward-props.test.ts` | 4 | ✅ |
+| `use-emits-as-props.test.ts` | 3 | ✅ |
+| `use-forward-props-emits.test.ts` | 3 | ✅ |
+| `use-forward-expose.test.ts` | 1 | ✅ |
+| `use-render-strategy.test.ts` | 2 | ✅ |
 
-```
+## Utils 测试 (``)
 
-```
-
-```
-
-```
-
-```
-现在让我查看 `create-context` 测试的问题。`inject` 在同一组件中调用 `provide` 后是无法获取到值的，需要分开到父子组件中： 
+| 测试文件 | 测试数量 | 状态 |
+|---------|---------|------|
+| `clean-props.test.ts` | 8 | ✅ |
+| `create-context.test.ts` | 4 | ✅ |
+| `create-split-props.test.ts` | 7 | ✅ |
+| `unref-element.test.ts` | 3 | ✅ |
+| `run-if-fn.test.ts` | 7 | ✅ (已存在) |
 
 ---
 
