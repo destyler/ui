@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
-import UseRenderStrategyBasic from './UseRenderStrategyBasic.vue'
+import UseRenderStrategyBasic from './fixtures/UseRenderStrategyBasic.vue'
 
 describe('composable: useRenderStrategyProps', () => {
   it('should use default values when not provided', async () => {

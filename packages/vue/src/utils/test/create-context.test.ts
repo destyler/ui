@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
-import CreateContextConsumerWithFallback from './CreateContextConsumerWithFallback.vue'
-import CreateContextProvider from './CreateContextProvider.vue'
+import CreateContextConsumerWithFallback from './fixtures/CreateContextConsumerWithFallback.vue'
+import CreateContextProvider from './fixtures/CreateContextProvider.vue'
 
 describe('util: createContext', () => {
   it('should use fallback value when no provider', async () => {

@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import MockComponent from './Mock.vue'
-import PropagateComponent from './Propagate.vue'
-import StopComponent from './Stop.vue'
-import UnderComponent from './Under.vue'
+import MockComponent from './fixtures/Mock.vue'
+import PropagateComponent from './fixtures/Propagate.vue'
+import StopComponent from './fixtures/Stop.vue'
+import UnderComponent from './fixtures/Under.vue'
 
 describe('factory', () => {
   it('should render only the child', async () => {

@@ -2,9 +2,9 @@
 
 <!-- vscode Session 5f76a377-ab04-4855-80c6-53838681f09b (2025-12-07 09:45Z) -->
 
-# Analyze this codebase to generate or update `.github/copilot-instructions.md` for guiding AI coding agents. (2025-12-07 09:45Z)
+# 更新 GitHub Copilot 指南文件内容 (2025-12-07 09:45Z)
 
-_**User (2025-12-07 09:53Z)**_
+_**User (2025-12-07 09:58Z)**_
 
 Analyze this codebase to generate or update `.github/copilot-instructions.md` for guiding AI coding agents.
 
@@ -727,9 +727,435 @@ Status: **completed**
 
 ---
 
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/index.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/index.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Root.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapsible/components/Root.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test",
+  "relativeWorkspacePath": "test"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables",
+  "relativeWorkspacePath": "composables"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props.test.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/test/composables/use-forward-props.test.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/utils/package.json)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/utils/package.json)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/.github",
+  "relativeWorkspacePath": ".github"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/.github)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/.github)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/composables/use-collapse.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/composables/use-collapse.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/composables/use-collapse-context.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/composables/use-collapse-context.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_listDirectory">
+<details>
+<summary>Tool use: **copilot_listDirectory**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale",
+  "relativeWorkspacePath": "locale"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_listDirectory",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale)",
+  "pastTenseMessage": "读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/index.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/index.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/types.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/types.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/use-locale-context.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/use-locale-context.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/LocaleProvider.vue)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/providers/locale/LocaleProvider.vue)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/create-split-props.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/create-split-props.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/dynamic.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/dynamic.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/clean-props.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/utils/clean-props.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/plopfile.cjs)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/plopfile.cjs)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/namespace.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/packages/vue/src/components/collapse/namespace.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/eslint.config.mjs)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/eslint.config.mjs)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="copilot_readFile">
+<details>
+<summary>Tool use: **copilot_readFile** • 正在读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/utils/index.ts)</summary>
+
+
+读取 [](file:///Users/elonehoo/Developer/destyler-dev/ui/utils/index.ts)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_createFile">
+<details>
+<summary>Tool use: **copilot_createFile**</summary>
+
+
+Parameters:
+
+```json
+{
+  "file_path": "/Users/elonehoo/Developer/destyler-dev/ui/.github/copilot-instructions.md",
+  "relativeWorkspacePath": "copilot-instructions.md"
+}
+```
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_createFile",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "正在创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/.github/copilot-instructions.md)",
+  "pastTenseMessage": "已创建 [](file:///Users/elonehoo/Developer/destyler-dev/ui/.github/copilot-instructions.md)",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "## Workspace Facts\n- Monorepo managed by pnpm 10 (&#96;pnpm-workspace.yaml&#96;); key publishable package is &#96;packages/vue&#96;, while &#96;utils/&#96; holds shared CSS helpers bundled via path exports.\n- Root scripts fan out with filters (see &#96;package.json&#96;); &#96;pnpm build&#96;/&#96;pnpm test:ci&#96; recurse through every package, so prefer &#96;pnpm vue &lt;script&gt;&#96; when you only target the Vue library.\n- The Vue package builds with &#96;tsdown&#96; (&#96;packages/vue/tsdown.config.ts&#96;) and uses Vite/Rolldown config in &#96;packages/vue/vite.config.ts&#96;, including the &#96;~/&#96; alias pointing at &#96;packages/vue/src&#96;.\n- &#96;src/index.ts&#96; re-exports components, composables, providers, and shared types; every new surface must be wired here to ship in the published bundle.\n\n## Build &amp; Verification\n- Install deps with &#96;pnpm install&#96;; use &#96;pnpm vue dev&#96; for a watch-mode &#96;tsdown&#96; build and &#96;pnpm vue build&#96; for production bundles.\n- Storybook lives inside the Vue package; run &#96;pnpm vue storybook&#96; (dev) or &#96;pnpm vue build-storybook&#96; to refresh &#96;packages/vue/storybook-static&#96;.\n- Browser-aware tests run through &#96;pnpm vue test&#96; (&#96;vitest run --browser.headless&#96;); &#96;vitest.dev/test:ui&#96; scripts are wired for TDD.\n- Linting is &#96;pnpm lint&#96; using &#96;@antfu/eslint-config&#96; (&#96;eslint.config.mjs&#96;); fix with &#96;pnpm lint:fix&#96; before release.\n- Release tooling is &#96;pnpm release&#96; (bumps versions across &#96;packages/**&#96;) followed by &#96;pnpm publish:ci&#96; in CI; do not hand-edit package versions.\n\n## Component System\n- Each component folder (e.g. &#96;packages/vue/src/components/collapse/&#96;) contains &#96;anatomy.ts&#96;, &#96;types.ts&#96;, &#96;namespace.ts&#96;, &#96;components/*.vue&#96;, &#96;composables/&#96;, &#96;stories/&#96;, and &#96;test/&#96;; keep this layout when adding features (Plop templates live in &#96;template/vue/**&#96;).\n- Components wrap headless state machines from &#96;@destyler/*&#96;; &#96;useCollapse&#96; (&#96;components/collapse/composables/use-collapse.ts&#96;) shows the pattern: derive a machine context, call &#96;useMachine&#96; from &#96;@destyler/vue&#96;, and expose the connected API via Vue &#96;computed&#96;.\n- Namespace exports (see &#96;components/collapse/namespace.ts&#96;) provide tree-shakable &#96;Collapse.Root&#96;, &#96;Collapse.Item&#96;, etc.—update both the flat &#96;index.ts&#96; exports and the namespace when creating or renaming pieces.\n- Anatomy tokens are re-exported straight from the upstream package (&#96;components/collapse/anatomy.ts&#96;); reference them in CSS recipes instead of inventing selectors.\n- Cross-component reuse is common: &#96;CollapseItem&#96; renders &#96;Collapsible.Root&#96; (&#96;components/collapse/components/Item.vue&#96;), so respect existing contracts before changing props/events.\n- Shared styles should be authored downstream; these Vue components are intentionally unstyled besides structural wrappers like &#96;&lt;ui.div&gt;&#96;.\n\n## Rendering &amp; Context\n- &#96;~/factory.ts&#96; defines the polymorphic &#96;ui&#96; JSX factory; every surface that accepts &#96;asChild&#96; should render through &#96;&lt;ui.tag ... :as-child=\"props.asChild\"&gt;&#96; so attributes merge correctly via &#96;utils/Dynamic&#96;.\n- Always pair &#96;PolymorphicProps&#96; with &#96;useForwardExpose&#96; and, when bridging to native elements, &#96;useForwardProps&#96;/&#96;useForwardPropsEmits&#96; to keep attrs, events, and refs flowing (see &#96;composables/use-forward-*.ts&#96;).\n- Feature hooks almost always read from providers: &#96;useCollapse&#96; consults &#96;useEnvironmentContext&#96; and &#96;useLocaleContext&#96; (from &#96;src/providers&#96;) to obtain the right window/document and text direction; wire new machines the same way.\n- &#96;RenderStrategyPropsProvider&#96; (&#96;composables/use-render-strategy.ts&#96;) shares &#96;lazyMount&#96;/&#96;unmountOnExit&#96;; roots set it, descendants consume it to coordinate presence (e.g. &#96;CollapseRoot&#96; ➔ &#96;CollapseItem&#96;).\n- &#96;createContext&#96; (&#96;src/utils/create-context.ts&#96;) returns &#96;[Provider, useCtx]&#96;; call the provider with a &#96;computed&#96; value immediately after instantiating a composable so hooks used later in the tree never see &#96;undefined&#96;.\n\n## Testing Pattern\n- Unit/integration tests live under &#96;packages/vue/test/**&#96;; each spec imports miniature fixture components from the same folder and renders them with &#96;render&#96; from &#96;vitest-browser-vue&#96; (see &#96;test/composables/use-forward-props.test.ts&#96;).\n- &#96;vitest.config.ts&#96; enables Playwright-driven Chromium runs plus a &#96;happy-dom&#96; environment, so DOM APIs like &#96;ResizeObserver&#96; are available.\n- Custom locator helpers are registered in &#96;vitest.setup.ts&#96;; extending or removing them changes every &#96;page.getBy…&#96; assertion, so modify cautiously.\n- Screenshot expectations land in sibling &#96;__screenshots__&#96; folders; keep names in sync when updating fixtures.\n\n## Scaffolding &amp; Docs\n- Use &#96;pnpm generate:vue&#96; (Plop generator) to scaffold a component; templates live in &#96;template/vue/&#96; and already include examples, stories, and tests wired to the conventions above.\n- When adding providers or utilities, co-locate TypeScript definitions (&#96;types.ts&#96;) and export them through &#96;src/providers/index.ts&#96; or &#96;src/utils/index.ts&#96; so consumers inherit typings automatically.\n- Path imports should prefer the &#96;~/&#96; alias instead of long relatives (&#96;import { useCollapse } from '~/components/collapse'&#96;).\n- Document behavioral changes in component README/stories; the repo root README is intentionally minimal, so Storybook is the source of truth for usage guidance.\n",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
 **Searching for instruction files****Planning README file reads****Verifying file content completeness****Checking README content****Outlining architecture exploration****Planning component architecture exploration**
 
-I'm mapping out how to understand the component structure, focusing on the `packages/vue/src` folder and sample components like `collapse`. To get a solid grasp, I’ll read key files—factories, anatomy, types, utils, composables—and I’m aiming to maximize efficiency by parallelizing these file reads using the multi-tool, per earlier instructions.**Planning component exploration****Inspecting collapse component files****Examining component files****Planning batch file reads for collapse component****Investigating path alias usage****Planning to review config files****Preparing to review vitest.setup.ts****Planning to inspect composables for guidelines****Checking environment provider patterns****Reviewing provider and environment modules****Planning environment files exploration****Checking EnvironmentProvider component****Reviewing createContext utility**
+I'm mapping out how to understand the component structure, focusing on the `packages/vue/src` folder and sample components like `collapse`. To get a solid grasp, I’ll read key files—factories, anatomy, types, utils, composables—and I’m aiming to maximize efficiency by parallelizing these file reads using the multi-tool, per earlier instructions.**Planning component exploration****Inspecting collapse component files****Examining component files****Planning batch file reads for collapse component****Investigating path alias usage****Planning to review config files****Preparing to review vitest.setup.ts****Planning to inspect composables for guidelines****Checking environment provider patterns****Reviewing provider and environment modules****Planning environment files exploration****Checking EnvironmentProvider component****Reviewing createContext utility****Investigating collapsible component reuse****Reviewing test structure and exports****Listing example directory path****Reviewing test structure****Summarizing testing and build setup****Evaluating project structure and tooling****Preparing to draft Copilot instructions****Identifying missing dependency****Preparing to explore locale provider****Reviewing locale-related files****Identifying required component****Checking provider files****Preparing to review Dynamic component****Considering utility function usage****Preparing to review plopfile.cjs****Analyzing template and component structure****Summarizing key project details and tooling****Listing key tools and configs****Summarizing project and doc details**
+
+I’m gathering all key info about the monorepo setup, component architecture, tooling, testing, and conventions to create a clear and concise `.github/copilot-instructions.md` doc. I plan to organize it with sections covering workspace facts, build and verification, component system, rendering and context, testing patterns, and scaffolding, each with specific file and command references to help users quickly get oriented with this Vue + destyler monorepo.**Preparing final summary message****Updated Guide**
+- Added `copilot-instructions.md` describing the pnpm/tsdown toolchain, Storybook + Vitest workflows, and how to target `` scripts without touching the whole workspace.
+- Documented the component architecture (`anatomy.ts`, `namespace.ts`, composables, stories/tests) and how headless `@destyler/*` machines are wrapped via `useMachine`, `cleanProps`, and the polymorphic `ui` factory.
+- Highlighted provider/composable conventions (`EnvironmentProvider`, `LocaleProvider`, `RenderStrategyPropsProvider`, `useForward*`) plus testing patterns using `vitest-browser-vue` and the Plop scaffolding flow.
+
+Let me know if any sections need more depth (e.g., additional component examples or publishing nuances) and I can iterate.
 
 ---
 

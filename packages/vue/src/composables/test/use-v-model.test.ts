@@ -2,10 +2,10 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { ref } from 'vue'
-import UseVModelBasic from './UseVModelBasic.vue'
-import UseVModelCustomEvent from './UseVModelCustomEvent.vue'
-import UseVModelDefaultValue from './UseVModelDefaultValue.vue'
-import UseVModelPassive from './UseVModelPassive.vue'
+import UseVModelBasic from './fixtures/UseVModelBasic.vue'
+import UseVModelCustomEvent from './fixtures/UseVModelCustomEvent.vue'
+import UseVModelDefaultValue from './fixtures/UseVModelDefaultValue.vue'
+import UseVModelPassive from './fixtures/UseVModelPassive.vue'
 
 describe('composable: useVModel', () => {
   it('should sync with v-model in non-passive mode', async () => {

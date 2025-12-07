@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
-import UnrefElementBasic from './UnrefElementBasic.vue'
-import UnrefElementWithComponent from './UnrefElementWithComponent.vue'
+import UnrefElementBasic from './fixtures/UnrefElementBasic.vue'
+import UnrefElementWithComponent from './fixtures/UnrefElementWithComponent.vue'
 
 describe('util: unrefElement', () => {
   it('should unref a template ref to HTMLElement', async () => {

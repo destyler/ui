@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
-import UseForwardPropsBasic from './UseForwardPropsBasic.vue'
-import UseForwardPropsParent from './UseForwardPropsParent.vue'
+import UseForwardPropsBasic from './fixtures/UseForwardPropsBasic.vue'
+import UseForwardPropsParent from './fixtures/UseForwardPropsParent.vue'
 
 describe('composable: useForwardProps', () => {
   it('should forward props correctly', async () => {

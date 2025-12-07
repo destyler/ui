@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import UseEmitAsPropsBasic from './UseEmitAsPropsBasic.vue'
+import UseEmitAsPropsBasic from './fixtures/UseEmitAsPropsBasic.vue'
 
 describe('composable: useEmitAsProps', () => {
   it('should convert emit to handler props', async () => {

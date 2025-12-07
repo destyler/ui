@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import UseForwardPropsEmitsBasic from './UseForwardPropsEmitsBasic.vue'
-import UseForwardPropsEmitsParent from './UseForwardPropsEmitsParent.vue'
+import UseForwardPropsEmitsBasic from './fixtures/UseForwardPropsEmitsBasic.vue'
+import UseForwardPropsEmitsParent from './fixtures/UseForwardPropsEmitsParent.vue'
 
 describe('composable: useForwardPropsEmits', () => {
   it('should forward both props and emits', async () => {

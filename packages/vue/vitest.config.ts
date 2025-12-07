@@ -6,10 +6,6 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      name: {
-        label: 'vue',
-        color: 'green',
-      },
       environment: 'happy-dom',
       browser: {
         enabled: true,
