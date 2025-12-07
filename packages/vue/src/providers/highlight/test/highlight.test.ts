@@ -52,7 +52,7 @@ describe('[highlight] provider', () => {
         if (firstH3Parent) {
           const marks = Array.from(container.querySelectorAll('mark'))
           const matchAllMarks = marks.filter(mark =>
-            mark.textContent === 'fox'
+            mark.textContent === 'fox',
           )
           expect(matchAllMarks.length).toBeGreaterThanOrEqual(2)
         }
