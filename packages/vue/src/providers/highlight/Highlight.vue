@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<HighlightProps>(), {
 })
 
 if (typeof props.text !== 'string') {
-  throw new Error('[ark-ui/highlight] text must be a string')
+  throw new Error('[@destyler/highlight] text must be a string')
 }
 
 const chunks = useHighlight(props)

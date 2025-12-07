@@ -36,7 +36,6 @@ const emit = defineEmits(['update:modelValue'])
 useForwardExpose()
 </script>
 
-<!-- TODO use ark.textarea -->
 <template>
   <ui.textarea
     :ref="autoresizeTextarea"
