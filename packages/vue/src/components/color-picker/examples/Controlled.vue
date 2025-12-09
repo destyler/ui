@@ -1,28 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ColorPicker, parseColor } from '../index'
+import { ref } from 'vue'
 
-const value = ref(parseColor('#eb5e41'))
+const value = ref(parseColor('hsl(20, 100%, 50%)'))
 </script>
 
 <template>
-  <ColorPicker.Root v-model="value">
+  <ColorPicker.Root format="hsla" v-model="value">
     <ColorPicker.Label>Color</ColorPicker.Label>
     <ColorPicker.Control>
       <ColorPicker.ChannelInput channel="hex" />
       <ColorPicker.ChannelInput channel="alpha" />
       <ColorPicker.ValueText />
-      <ColorPicker.Trigger data-testid="trigger">
+      <ColorPicker.Trigger>
         <ColorPicker.TransparencyGrid />
-        <ColorPicker.Context v-slot="colorPicker">
-          <ColorPicker.Swatch :value="colorPicker.value" data-testid="swatch-trigger" />
-        </ColorPicker.Context>
+        <ColorPicker.ValueSwatch />
       </ColorPicker.Trigger>
     </ColorPicker.Control>
-    <ColorPicker.Positioner data-testid="positioner">
+    <ColorPicker.Positioner>
       <ColorPicker.Content>
-        <ColorPicker.FormatTrigger>Toggle ColorFormat</ColorPicker.FormatTrigger>
-        <ColorPicker.FormatSelect />
         <ColorPicker.Area>
           <ColorPicker.AreaBackground />
           <ColorPicker.AreaThumb />
@@ -32,8 +28,6 @@ const value = ref(parseColor('#eb5e41'))
           <ColorPicker.ChannelSliderThumb />
         </ColorPicker.ChannelSlider>
         <ColorPicker.ChannelSlider channel="alpha">
-          <ColorPicker.ChannelSliderLabel>Alpha</ColorPicker.ChannelSliderLabel>
-          <ColorPicker.ChannelSliderValueText />
           <ColorPicker.TransparencyGrid />
           <ColorPicker.ChannelSliderTrack />
           <ColorPicker.ChannelSliderThumb />

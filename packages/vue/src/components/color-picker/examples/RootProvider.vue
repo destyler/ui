@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ColorPicker, parseColor } from '../index'
+import { ColorPicker, useColorPicker } from '../index'
 
-const value = ref(parseColor('#eb5e41'))
+const colorPicker = useColorPicker()
 </script>
 
 <template>
-  <ColorPicker.Root v-model="value">
+  <span>Color: {{ colorPicker.valueAsString }}</span>
+
+  <ColorPicker.RootProvider :value="colorPicker">
     <ColorPicker.Label>Color</ColorPicker.Label>
     <ColorPicker.Control>
       <ColorPicker.ChannelInput channel="hex" />
       <ColorPicker.ChannelInput channel="alpha" />
       <ColorPicker.ValueText />
-      <ColorPicker.Trigger data-testid="trigger">
+      <ColorPicker.Trigger>
         <ColorPicker.TransparencyGrid />
-        <ColorPicker.Context v-slot="colorPicker">
-          <ColorPicker.Swatch :value="colorPicker.value" data-testid="swatch-trigger" />
-        </ColorPicker.Context>
+        <ColorPicker.ValueSwatch />
       </ColorPicker.Trigger>
     </ColorPicker.Control>
-    <ColorPicker.Positioner data-testid="positioner">
+    <ColorPicker.Positioner>
       <ColorPicker.Content>
         <ColorPicker.FormatTrigger>Toggle ColorFormat</ColorPicker.FormatTrigger>
         <ColorPicker.FormatSelect />
@@ -32,8 +31,6 @@ const value = ref(parseColor('#eb5e41'))
           <ColorPicker.ChannelSliderThumb />
         </ColorPicker.ChannelSlider>
         <ColorPicker.ChannelSlider channel="alpha">
-          <ColorPicker.ChannelSliderLabel>Alpha</ColorPicker.ChannelSliderLabel>
-          <ColorPicker.ChannelSliderValueText />
           <ColorPicker.TransparencyGrid />
           <ColorPicker.ChannelSliderTrack />
           <ColorPicker.ChannelSliderThumb />
@@ -68,5 +65,5 @@ const value = ref(parseColor('#eb5e41'))
       </ColorPicker.Content>
     </ColorPicker.Positioner>
     <ColorPicker.HiddenInput />
-  </ColorPicker.Root>
+  </ColorPicker.RootProvider>
 </template>
