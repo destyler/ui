@@ -1,12 +1,13 @@
 catalogMode: prefer
+
 cleanupUnusedCatalogs: true
 shellEmulator: true
+
 trustPolicy: no-downgrade
 
 packages:
   - packages/*
   - utils
-
 catalogs:
   build:
     tsdown: ^0.17.0
@@ -29,6 +30,7 @@ catalogs:
     '@destyler/collapsible': ^0.2.2
     '@destyler/collection': ^0.2.2
     '@destyler/color-picker': ^0.2.2
+    '@destyler/combobox': ^0.2.2
     '@destyler/dom': ^0.2.2
     '@destyler/focus-trap': ^0.2.2
     '@destyler/highlight-text': ^0.2.2
