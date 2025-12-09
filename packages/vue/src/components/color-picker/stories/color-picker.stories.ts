@@ -1,5 +1,5 @@
 import Basic from '../examples/Basic.vue'
-import Controlled from '../examples/controlled.vue'
+import Controlled from '../examples/Controlled.vue'
 import RootProvider from '../examples/RootProvider.vue'
 import WithField from '../examples/WithField.vue'
 
