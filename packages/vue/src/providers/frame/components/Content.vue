@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, defineOptions } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 
 defineOptions({
   name: 'FrameContent'
