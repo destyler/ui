@@ -51,6 +51,7 @@
     "@destyler/collection": "catalog:prod",
     "@destyler/color-picker": "catalog:prod",
     "@destyler/combobox": "catalog:prod",
+    "@destyler/dialog": "catalog:prod",
     "@destyler/dom": "catalog:prod",
     "@destyler/focus-trap": "catalog:prod",
     "@destyler/highlight-text": "catalog:prod",
