@@ -1,9 +1,7 @@
 import type { CollectionItem, CollectionOptions, FilePathTreeNode, TreeCollectionOptions, TreeNode } from '@destyler/collection'
 import {
-
   filePathToTree,
   ListCollection,
-
   TreeCollection,
 } from '@destyler/collection'
 import { ref } from '@destyler/xstate'

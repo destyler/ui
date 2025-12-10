@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Combobox, createListCollection } from '../index'
 
 const frameworks = createListCollection({
@@ -10,19 +9,18 @@ const frameworks = createListCollection({
     { label: 'Svelte', value: 'svelte', disabled: true },
   ],
 })
-const testProps = ref<string[]>([])
 </script>
 
 <template>
-  <Combobox.Root :collection="frameworks" v-model="testProps">
+  <Combobox.Root :collection="frameworks" multiple>
     <Combobox.Label>Framework</Combobox.Label>
     <Combobox.Control>
-      <Combobox.Input data-testid="input" />
-      <Combobox.Trigger data-testid="trigger">Open</Combobox.Trigger>
+      <Combobox.Input />
+      <Combobox.Trigger>Open</Combobox.Trigger>
       <Combobox.ClearTrigger>Clear</Combobox.ClearTrigger>
     </Combobox.Control>
     <Teleport to="body">
-      <Combobox.Positioner data-testid="positioner">
+      <Combobox.Positioner>
         <Combobox.Content>
           <Combobox.ItemGroup>
             <Combobox.ItemGroupLabel>Frameworks</Combobox.ItemGroupLabel>
@@ -31,7 +29,6 @@ const testProps = ref<string[]>([])
               <Combobox.ItemIndicator>✓</Combobox.ItemIndicator>
             </Combobox.Item>
           </Combobox.ItemGroup>
-          <Combobox.List />
         </Combobox.Content>
       </Combobox.Positioner>
     </Teleport>

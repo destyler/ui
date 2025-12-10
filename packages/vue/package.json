@@ -56,6 +56,7 @@
     "@destyler/i18n": "catalog:prod",
     "@destyler/image": "catalog:prod",
     "@destyler/presence": "catalog:prod",
+    "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"
   },
