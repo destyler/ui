@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { Calendar } from '../index'
+import { Calendar, useCalendar } from '../index'
+
+const datePicker = useCalendar()
 </script>
 
 <template>
-  <Calendar.Root>
+  <button @click="datePicker.clearValue()">Clear</button>
+
+  <Calendar.RootProvider :value="datePicker">
     <Calendar.Label>Label</Calendar.Label>
     <Calendar.Control>
       <Calendar.Input />
       <Calendar.Trigger>📅</Calendar.Trigger>
       <Calendar.ClearTrigger>Clear</Calendar.ClearTrigger>
     </Calendar.Control>
-    <Calendar.PresetTrigger value="last7Days">Last 7 days</Calendar.PresetTrigger>
-
-    <Calendar.Positioner data-testid="positioner">
+    <Calendar.Positioner>
       <Calendar.Content>
         <Calendar.YearSelect />
         <Calendar.MonthSelect />
@@ -88,5 +90,5 @@ import { Calendar } from '../index'
         </Calendar.View>
       </Calendar.Content>
     </Calendar.Positioner>
-  </Calendar.Root>
+  </Calendar.RootProvider>
 </template>

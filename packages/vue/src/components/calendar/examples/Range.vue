@@ -3,16 +3,16 @@ import { Calendar } from '../index'
 </script>
 
 <template>
-  <Calendar.Root>
+  <Calendar.Root selectionMode="range">
     <Calendar.Label>Label</Calendar.Label>
     <Calendar.Control>
-      <Calendar.Input />
+      <Calendar.Input :index="0" />
+      <Calendar.Input :index="1" />
       <Calendar.Trigger>📅</Calendar.Trigger>
       <Calendar.ClearTrigger>Clear</Calendar.ClearTrigger>
     </Calendar.Control>
     <Calendar.PresetTrigger value="last7Days">Last 7 days</Calendar.PresetTrigger>
-
-    <Calendar.Positioner data-testid="positioner">
+    <Calendar.Positioner>
       <Calendar.Content>
         <Calendar.YearSelect />
         <Calendar.MonthSelect />

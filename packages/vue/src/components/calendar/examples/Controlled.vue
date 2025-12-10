@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { Calendar } from '../index'
+import { Calendar, type DateValue, parseDate } from '../index'
+import { type Ref, ref } from 'vue'
+
+const value = ref([parseDate('2022-01-01')]) as Ref<DateValue[]>
 </script>
 
 <template>
-  <Calendar.Root>
+  <Calendar.Root v-model="value">
     <Calendar.Label>Label</Calendar.Label>
     <Calendar.Control>
       <Calendar.Input />
       <Calendar.Trigger>📅</Calendar.Trigger>
       <Calendar.ClearTrigger>Clear</Calendar.ClearTrigger>
     </Calendar.Control>
-    <Calendar.PresetTrigger value="last7Days">Last 7 days</Calendar.PresetTrigger>
-
-    <Calendar.Positioner data-testid="positioner">
+    <Calendar.Positioner>
       <Calendar.Content>
         <Calendar.YearSelect />
         <Calendar.MonthSelect />
