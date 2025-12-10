@@ -1,5 +1,3 @@
-import type * as combobox from '@destyler/combobox'
-
 export interface RootProps {
   /**
    * The unique identifier of the machine.

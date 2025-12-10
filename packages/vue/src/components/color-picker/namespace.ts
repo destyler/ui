@@ -41,7 +41,7 @@ export {
 export {
   default as Context,
   type ColorPickerContextProps as ContextProps,
- } from './components/Context.vue'
+} from './components/Context.vue'
 export {
   default as Control,
   type ColorPickerControlProps as ControlProps,

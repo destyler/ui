@@ -91,31 +91,31 @@ export interface RootEmits {
   /**
    * Function called when the focus is moved outside the component
    */
-  "focusOutside": [event: colorPicker.FocusOutsideEvent]
+  'focusOutside': [event: colorPicker.FocusOutsideEvent]
   /**
    * Function called when the color format changes
    */
-  "formatChange": [details: colorPicker.FormatChangeDetails]
+  'formatChange': [details: colorPicker.FormatChangeDetails]
   /**
    * Function called when an interaction happens outside the component
    */
-  "interactOutside": [event: colorPicker.InteractOutsideEvent]
+  'interactOutside': [event: colorPicker.InteractOutsideEvent]
   /**
    * Handler that is called when the user opens or closes the color picker.
    */
-  "openChange": [details: colorPicker.OpenChangeDetails]
+  'openChange': [details: colorPicker.OpenChangeDetails]
   /**
    * Function called when the pointer is pressed down outside the component
    */
-  "pointerDownOutside": [event: colorPicker.PointerDownOutsideEvent]
+  'pointerDownOutside': [event: colorPicker.PointerDownOutsideEvent]
   /**
    * Handler that is called when the value changes, as the user drags.
    */
-  "valueChange": [details: colorPicker.ValueChangeDetails]
+  'valueChange': [details: colorPicker.ValueChangeDetails]
   /**
    * Handler that is called when the user stops dragging.
    */
-  "valueChangeEnd": [details: colorPicker.ValueChangeDetails]
+  'valueChangeEnd': [details: colorPicker.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */
