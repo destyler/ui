@@ -1,5 +1,4 @@
 catalogMode: prefer
-
 shellEmulator: true
 
 trustPolicy: no-downgrade
@@ -7,7 +6,6 @@ trustPolicy: no-downgrade
 packages:
   - packages/*
   - utils
-
 catalogs:
   build:
     tsdown: ^0.17.2
@@ -23,6 +21,7 @@ catalogs:
   prod:
     '@destyler/anatomy': ^0.2.3-beta.1
     '@destyler/auto-resize': ^0.2.3-beta.1
+    '@destyler/calendar': ^0.2.3-beta.1
     '@destyler/carousel': ^0.2.3-beta.1
     '@destyler/checkbox': ^0.2.3-beta.1
     '@destyler/clipboard': ^0.2.3-beta.1
@@ -64,7 +63,7 @@ catalogs:
     tslib: ^2.8.1
     typescript: ^5.9.3
     vue-tsc: ^3.1.8
-
 onlyBuiltDependencies:
   - esbuild
   - sharp
+

@@ -37,6 +37,9 @@ catalogs:
     '@destyler/auto-resize':
       specifier: ^0.2.3-beta.1
       version: 0.2.3-beta.1
+    '@destyler/calendar':
+      specifier: ^0.2.3-beta.1
+      version: 0.2.3-beta.1
     '@destyler/carousel':
       specifier: ^0.2.3-beta.1
       version: 0.2.3-beta.1
@@ -241,6 +244,9 @@ importers:
       '@destyler/auto-resize':
         specifier: catalog:prod
         version: 0.2.3-beta.1
+      '@destyler/calendar':
+        specifier: catalog:prod
+        version: 0.2.3-beta.1(@internationalized/date@3.10.0)
       '@destyler/carousel':
         specifier: catalog:prod
         version: 0.2.3-beta.1
@@ -422,6 +428,11 @@ packages:
   '@destyler/auto-resize@0.2.3-beta.1':
     resolution: {integrity: sha512-/+dLiCRguQ+Jo061vCccujY4wnyeUxLhCkIUIktUMgNnD9Y5pahfHOAY9XvYMSXSrryid8IIbKHQtYVQF2ulBQ==}
 
+  '@destyler/calendar@0.2.3-beta.1':
+    resolution: {integrity: sha512-IN7j/1sJfl10yTdB4hA6+YRiDcWtXvhInQ69P9YRQch3b93vd/qIDGCu3vwBn4KoJgN0Y0msG581z18hS9q3Yg==}
+    peerDependencies:
+      '@internationalized/date': '>=3.0.0'
+
   '@destyler/carousel@0.2.3-beta.1':
     resolution: {integrity: sha512-b3vpRwbn2qwa27FbuxqnwGcigCTfq1UzgqX2pAFQDUFTTiCTfQmOl/+I+zAOFEYbQOYURnLSglJK5woPO/wwcQ==}
 
@@ -449,6 +460,11 @@ packages:
   '@destyler/combobox@0.2.3-beta.1':
     resolution: {integrity: sha512-XhbfI5DTK+dprnfpDWNFprlnvc8iQx5XRTLKkJF3PHRRWT5ucgIgkqLh8N39lBUn3g9uKljSAXtlECpYltl7fA==}
 
+  '@destyler/date@0.2.3-beta.1':
+    resolution: {integrity: sha512-aBAT0QzRGLU28TiQhHxVU4rVTJzYy2B5bJQWkRMR5bX025qpCgmTfJdA8fIVjK2JFhihl8WJTtkMwnUuoyCdYQ==}
+    peerDependencies:
+      '@internationalized/date': '>=3.0.0'
+
   '@destyler/dismissable@0.2.3-beta.1':
     resolution: {integrity: sha512-a+aDf1EJ57lQp5rljbvq43uLdhn0aLn+LFWZWowj92jaR+4+pkxiekPnTIR3osCP54BFrkYU1lSLCucs4ILZhg==}
 
@@ -472,6 +488,9 @@ packages:
 
   '@destyler/interact-outside@0.2.3-beta.1':
     resolution: {integrity: sha512-lYNCG0hd8fZUFoR4C6nJk0xCTbGK/IH9XHKHwlVZXiGLw8CjY2JWHZMV2XoWWc0urXS0t/6G7CEz1EvpnbPBBg==}
+
+  '@destyler/live-region@0.2.3-beta.1':
+    resolution: {integrity: sha512-aAcCNm8HCRUTnxwYU16sn+9m6+g6z9P0P9tP/e83tWbmI2tzae7lSpKxPGrdA4wzpBYpDOpfif4OBJ6ksfRPmA==}
 
   '@destyler/popper@0.2.3-beta.1':
     resolution: {integrity: sha512-0HpJxqyOVDlCVufn/yB+8cqkg9NEfBBVpRGasjBx3N9Tjc5in0R6AtsavYUKn0T+Iabkl9DOfqrJT1pMBB+h+g==}
@@ -931,6 +950,9 @@ packages:
     resolution: {integrity: sha512-t2IEY+unGHOzAaVM5Xx6DEWKeXlDDcNPeDyUpsRc6CUhBfU3VQOEl+Vssh7VNp1dR8MdUJBWhuObjXCsVpjN5g==}
     engines: {node: '>=18'}
 
+  '@internationalized/date@3.10.0':
+    resolution: {integrity: sha512-oxDR/NTEJ1k+UFVQElaNIk65E/Z83HK1z1WI3lQyhTtnNg4R5oVXaPzK3jcpKG8UHKDVuDQHzn+wsxSz8RP3aw==}
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -1325,6 +1347,9 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=9.0.0'
+
+  '@swc/helpers@0.5.17':
+    resolution: {integrity: sha512-5IKx/Y13RsYd+sauPb2x+U/xZikHjolzfuDgTAl/Tdf3Q8rslRvC19NKDLgAJQ6wsqADk10ntlv08nPFw/gO/A==}
 
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
@@ -4367,6 +4392,19 @@ snapshots:
     dependencies:
       '@destyler/dom': 0.2.3-beta.1
 
+  '@destyler/calendar@0.2.3-beta.1(@internationalized/date@3.10.0)':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.1
+      '@destyler/date': 0.2.3-beta.1(@internationalized/date@3.10.0)
+      '@destyler/dismissable': 0.2.3-beta.1
+      '@destyler/dom': 0.2.3-beta.1
+      '@destyler/live-region': 0.2.3-beta.1
+      '@destyler/popper': 0.2.3-beta.1
+      '@destyler/types': 0.2.3-beta.1
+      '@destyler/utils': 0.2.3-beta.1
+      '@destyler/xstate': 0.2.3-beta.1
+      '@internationalized/date': 3.10.0
+
   '@destyler/carousel@0.2.3-beta.1':
     dependencies:
       '@destyler/anatomy': 0.2.3-beta.1
@@ -4440,6 +4478,10 @@ snapshots:
       '@destyler/utils': 0.2.3-beta.1
       '@destyler/xstate': 0.2.3-beta.1
 
+  '@destyler/date@0.2.3-beta.1(@internationalized/date@3.10.0)':
+    dependencies:
+      '@internationalized/date': 3.10.0
+
   '@destyler/dismissable@0.2.3-beta.1':
     dependencies:
       '@destyler/dom': 0.2.3-beta.1
@@ -4476,6 +4518,8 @@ snapshots:
     dependencies:
       '@destyler/dom': 0.2.3-beta.1
       '@destyler/utils': 0.2.3-beta.1
+
+  '@destyler/live-region@0.2.3-beta.1': {}
 
   '@destyler/popper@0.2.3-beta.1':
     dependencies:
@@ -4810,6 +4854,10 @@ snapshots:
       '@types/node': 24.10.2
 
   '@inquirer/figures@1.0.15': {}
+
+  '@internationalized/date@3.10.0':
+    dependencies:
+      '@swc/helpers': 0.5.17
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -5154,6 +5202,10 @@ snapshots:
       espree: 10.4.0
       estraverse: 5.3.0
       picomatch: 4.0.3
+
+  '@swc/helpers@0.5.17':
+    dependencies:
+      tslib: 2.8.1
 
   '@testing-library/dom@10.4.1':
     dependencies:

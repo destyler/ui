@@ -42,6 +42,7 @@
   "dependencies": {
     "@destyler/anatomy": "catalog:prod",
     "@destyler/auto-resize": "catalog:prod",
+    "@destyler/calendar": "catalog:prod",
     "@destyler/carousel": "catalog:prod",
     "@destyler/checkbox": "catalog:prod",
     "@destyler/clipboard": "catalog:prod",

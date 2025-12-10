@@ -35,11 +35,11 @@
     "happy-dom": "catalog:test",
     "playwright": "catalog:test",
     "plop": "catalog:node",
-    "vite": "catalog:runtime",
     "storybook": "catalog:stories",
     "tsdown": "catalog:build",
     "tslib": "catalog:types",
     "typescript": "catalog:types",
+    "vite": "catalog:runtime",
     "vitest": "catalog:test",
     "vitest-browser-vue": "catalog:test"
   }
