@@ -54,6 +54,7 @@
     "@destyler/dialog": "catalog:prod",
     "@destyler/dom": "catalog:prod",
     "@destyler/edit": "catalog:prod",
+    "@destyler/file-upload": "catalog:prod",
     "@destyler/focus-trap": "catalog:prod",
     "@destyler/highlight-text": "catalog:prod",
     "@destyler/i18n": "catalog:prod",
