@@ -1,16 +1,18 @@
-import type { FocusTrapOptions } from '@destyler/focus-trap'
-import { trapFocus } from '@destyler/focus-trap'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { nextTick } from 'vue'
-import { FocusTrap } from '../index'
-import FocusTrapBasic from './fixtures/FocusTrapBasic.vue'
-import FocusTrapToggle from './fixtures/FocusTrapToggle.vue'
 
 vi.mock('@destyler/focus-trap', () => ({
   trapFocus: vi.fn(),
 }))
+
+const { trapFocus } = await import('@destyler/focus-trap')
+type FocusTrapOptions = Parameters<typeof trapFocus>[1]
+
+const { FocusTrap } = await import('../index')
+const FocusTrapBasic = (await import('./fixtures/FocusTrapBasic.vue')).default
+const FocusTrapToggle = (await import('./fixtures/FocusTrapToggle.vue')).default
 
 describe('[focus-trap] provider', () => {
   beforeEach(() => {
