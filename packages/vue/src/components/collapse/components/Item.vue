@@ -8,7 +8,7 @@ export interface CollapseItemProps extends ItemProps, PolymorphicProps {}
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRenderStrategyProps, useForwardExpose } from '~/composables'
-import { Collapsible } from '~/components/collapsible'
+import * as Collapsible from '~/components/collapsible/namespace'
 import { useCollapseContext } from '../composables/use-collapse-context'
 import { CollapseItemProvider } from '../composables/use-collapse-item-context'
 import { CollapseItemPropsProvider } from '../composables/use-collapse-item-props-context'

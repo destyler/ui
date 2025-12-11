@@ -30,8 +30,6 @@ export { useCheckboxContext, type UseCheckboxContext } from './composables/use-c
 export { useCheckboxGroup, type UseCheckboxGroupProps, type UseCheckboxGroupReturn } from './composables/use-checkbox-group'
 export { useCheckboxGroupContext, type UseCheckboxGroupContext } from './composables/use-checkbox-group-context'
 
-export * as Checkbox from './namespace'
-
 export type {
   CheckedChangeDetails as CheckboxCheckedChangeDetails,
   CheckedState as CheckboxCheckedState,

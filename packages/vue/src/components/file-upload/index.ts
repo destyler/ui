@@ -72,8 +72,6 @@ export {
   type UseFileUploadContext,
 } from './composables/use-file-upload-context'
 
-export * as FileUpload from './namespace'
-
 export type {
   FileAcceptDetails as FileUploadFileAcceptDetails,
   FileChangeDetails as FileUploadFileChangeDetails,

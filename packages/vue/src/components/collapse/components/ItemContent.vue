@@ -11,7 +11,7 @@ interface VisibilityProps {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Collapsible } from '~/components/collapsible'
+import * as Collapsible from '~/components/collapsible/namespace'
 import { useForwardExpose } from '~/composables'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useCollapseContext } from '../composables/use-collapse-context'

@@ -40,6 +40,4 @@ export {
 } from './components/ValueText.vue'
 export { useClipboard, type UseClipboardProps, type UseClipboardReturn } from './composables/use-clipboard'
 export { useClipboardContext, type UseClipboardContext } from './composables/use-clipboard-context'
-
-export * as Clipboard from './namespace'
 export type { CopyStatusDetails as ClipboardCopyStatusDetails } from '@destyler/clipboard'

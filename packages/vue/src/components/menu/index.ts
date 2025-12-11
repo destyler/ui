@@ -90,8 +90,6 @@ export { useMenu, type UseMenuProps, type UseMenuReturn } from './composables/us
 export { useMenuContext, type UseMenuContext } from './composables/use-menu-context'
 export { useMenuItemContext, type UseMenuItemContext } from './composables/use-menu-item-context'
 export type { ValueChangeDetails as MenuValueChangeDetails } from './composables/use-menu-item-group-context'
-export * as Menu from './namespace'
-
 export type {
   HighlightChangeDetails as MenuHighlightChangeDetails,
   OpenChangeDetails as MenuOpenChangeDetails,

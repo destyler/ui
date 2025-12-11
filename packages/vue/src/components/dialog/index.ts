@@ -42,6 +42,4 @@ export {
 } from './components/Trigger.vue'
 export { useDialog, type UseDialogProps, type UseDialogReturn } from './composables/use-dialog'
 export { useDialogContext, type UseDialogContext } from './composables/use-dialog-context'
-export * as Dialog from './namespace'
-
 export type { OpenChangeDetails as DialogOpenChangeDetails } from '@destyler/dialog'
