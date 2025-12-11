@@ -18,9 +18,6 @@ export default mergeConfig(
           height: 1080,
         },
       },
-      setupFiles: [
-        '../../vitest.setup.ts',
-      ],
     },
   }),
 )
