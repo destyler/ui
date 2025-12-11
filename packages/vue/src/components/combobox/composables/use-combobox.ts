@@ -1,6 +1,6 @@
 import type { PropTypes } from '@destyler/vue'
 import type { ComputedRef } from 'vue'
-import type { RootEmits } from './combobox'
+import type { RootEmits } from '../namespace'
 import type { EmitFn, Optional } from '~/types'
 import type { CollectionItem } from '~/utils'
 import * as combobox from '@destyler/combobox'
