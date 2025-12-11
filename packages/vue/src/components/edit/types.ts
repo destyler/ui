@@ -111,31 +111,31 @@ export interface RootEmits {
   /**
    * The callback that is called when the edit mode is changed
    */
-  "editChange": [details: edit.EditChangeDetails]
+  'editChange': [details: edit.EditChangeDetails]
   /**
    * Function called when the focus is moved outside the component
    */
-  "focusOutside": [event: edit.FocusOutsideEvent]
+  'focusOutside': [event: edit.FocusOutsideEvent]
   /**
    * Function called when an interaction happens outside the component
    */
-  "interactOutside": [event: edit.InteractOutsideEvent]
+  'interactOutside': [event: edit.InteractOutsideEvent]
   /**
    * Function called when the pointer is pressed down outside the component
    */
-  "pointerDownOutside": [event: edit.PointerDownOutsideEvent]
+  'pointerDownOutside': [event: edit.PointerDownOutsideEvent]
   /**
    * The callback that is called when the edit's value is changed
    */
-  "valueChange": [details: edit.ValueChangeDetails]
+  'valueChange': [details: edit.ValueChangeDetails]
   /**
    * The callback that is called when the edit's value is submitted.
    */
-  "valueCommit": [details: edit.ValueChangeDetails]
+  'valueCommit': [details: edit.ValueChangeDetails]
   /**
    * The callback that is called when the esc key is pressed or the cancel button is clicked
    */
-  "valueRevert": [details: edit.ValueChangeDetails]
+  'valueRevert': [details: edit.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */

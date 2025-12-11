@@ -38,6 +38,6 @@ export interface RootEmits {
   /**
    * Function called when the hover card opens or closes.
    */
-  "openChange": [details: hoverCard.OpenChangeDetails]
+  'openChange': [details: hoverCard.OpenChangeDetails]
   'update:open': [open: boolean]
 }

@@ -26,6 +26,6 @@ export {
 export {
   useFieldsetContext,
   type UseFieldsetContext,
- } from './composables/use-fieldset-context'
+} from './composables/use-fieldset-context'
 
 export * as Fieldset from './namespace'

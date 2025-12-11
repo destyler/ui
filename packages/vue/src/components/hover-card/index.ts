@@ -13,7 +13,7 @@ export {
 } from './components/Content.vue'
 export {
   default as HoverCardContext,
-  type HoverCardContextProps
+  type HoverCardContextProps,
 } from './components/Context.vue'
 export {
   default as HoverCardPositioner,
