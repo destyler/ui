@@ -228,6 +228,7 @@ describe('[menu] component', () => {
     await userEvent.click(trigger)
 
     const reactItem = page.getByText('React')
+    await expect.element(reactItem).toBeVisible()
     await userEvent.click(reactItem)
 
     await vi.waitFor(() => {

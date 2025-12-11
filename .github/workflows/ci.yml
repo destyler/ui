@@ -37,8 +37,26 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Clear pnpm cache
+        run: |
+          pnpm store prune
+          rm -rf ~/.cache/pnpm
+          rm -rf ${{ env.STORE_PATH }}
+
       - name: Install
         run: pnpm install --no-frozen-lockfile
+
+      - name: Clear Vite cache
+        run: |
+          rm -rf node_modules/.vite
+          rm -rf node_modules/.cache
+          rm -rf packages/vue/node_modules/.vite
+          rm -rf packages/vue/node_modules/.cache
 
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps

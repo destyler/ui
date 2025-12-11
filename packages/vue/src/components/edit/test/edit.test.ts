@@ -20,7 +20,10 @@ describe('[edit] component', () => {
   it('should be possible to focus the placeholder and enter a value', async () => {
     render(Controlled)
     await page.getByText('Placeholder').click()
-    await userEvent.type(page.getByLabelText('editable input'), 'React')
+
+    const input = page.getByLabelText('editable input')
+    await expect.element(input).toBeVisible()
+    await userEvent.type(input, 'React')
 
     await expect.element(page.getByText('React')).toBeInTheDocument()
   })
