@@ -19,30 +19,31 @@ catalogs:
     bumpp: ^10.3.2
     plop: ^4.0.4
   prod:
-    '@destyler/anatomy': ^0.2.3-beta.3
-    '@destyler/auto-resize': ^0.2.3-beta.3
-    '@destyler/calendar': ^0.2.3-beta.3
-    '@destyler/carousel': ^0.2.3-beta.3
-    '@destyler/checkbox': ^0.2.3-beta.3
-    '@destyler/clipboard': ^0.2.3-beta.3
-    '@destyler/collapse': ^0.2.3-beta.3
-    '@destyler/collapsible': ^0.2.3-beta.3
-    '@destyler/collection': ^0.2.3-beta.3
-    '@destyler/color-picker': ^0.2.3-beta.3
-    '@destyler/combobox': ^0.2.3-beta.3
-    '@destyler/dialog': ^0.2.3-beta.3
-    '@destyler/dom': ^0.2.3-beta.3
-    '@destyler/edit': ^0.2.3-beta.3
-    '@destyler/file-upload': ^0.2.3-beta.3
-    '@destyler/focus-trap': ^0.2.3-beta.3
-    '@destyler/highlight-text': ^0.2.3-beta.3
-    '@destyler/hover-card': ^0.2.3-beta.3
-    '@destyler/i18n': ^0.2.3-beta.3
-    '@destyler/image': ^0.2.3-beta.3
-    '@destyler/presence': ^0.2.3-beta.3
-    '@destyler/utils': ^0.2.3-beta.3
-    '@destyler/vue': ^0.2.3-beta.3
-    '@destyler/xstate': ^0.2.3-beta.3
+    '@destyler/anatomy': ^0.2.3-beta.5
+    '@destyler/auto-resize': ^0.2.3-beta.5
+    '@destyler/calendar': ^0.2.3-beta.5
+    '@destyler/carousel': ^0.2.3-beta.5
+    '@destyler/checkbox': ^0.2.3-beta.5
+    '@destyler/clipboard': ^0.2.3-beta.5
+    '@destyler/collapse': ^0.2.3-beta.5
+    '@destyler/collapsible': ^0.2.3-beta.5
+    '@destyler/collection': ^0.2.3-beta.5
+    '@destyler/color-picker': ^0.2.3-beta.5
+    '@destyler/combobox': ^0.2.3-beta.5
+    '@destyler/dialog': ^0.2.3-beta.5
+    '@destyler/dom': ^0.2.3-beta.5
+    '@destyler/edit': ^0.2.3-beta.5
+    '@destyler/file-upload': ^0.2.3-beta.5
+    '@destyler/focus-trap': ^0.2.3-beta.5
+    '@destyler/highlight-text': ^0.2.3-beta.5
+    '@destyler/hover-card': ^0.2.3-beta.5
+    '@destyler/i18n': ^0.2.3-beta.5
+    '@destyler/image': ^0.2.3-beta.5
+    '@destyler/menu': ^0.2.3-beta.5
+    '@destyler/presence': ^0.2.3-beta.5
+    '@destyler/utils': ^0.2.3-beta.5
+    '@destyler/vue': ^0.2.3-beta.5
+    '@destyler/xstate': ^0.2.3-beta.5
   runtime:
     '@vitejs/devtools': 0.0.0-alpha.19
     '@vitejs/plugin-vue': ^6.0.2
