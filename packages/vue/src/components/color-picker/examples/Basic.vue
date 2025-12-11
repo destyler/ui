@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ColorPicker, parseColor } from '../index'
+import { ColorPicker } from '~/index'
+import { parseColor } from '../index'
 
 const value = ref(parseColor('#eb5e41'))
 </script>

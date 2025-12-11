@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Avatar, useAvatar } from '../index'
+import { Avatar, useAvatar } from '~/index'
 
 const avatar = useAvatar()
 </script>

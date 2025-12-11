@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Checkbox } from '../index'
+import { Checkbox } from '~/index'
 
 const items = [
   { label: 'React', value: 'react' },

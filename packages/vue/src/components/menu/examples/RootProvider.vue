@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Menu, useMenu } from '../index'
+import { Menu, useMenu } from '~/index'
 
 const menu = useMenu()
 </script>

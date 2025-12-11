@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Presence } from '../index'
+import { Presence } from '~/index'
 import { ref } from 'vue'
 
 const isPresent = ref(false)

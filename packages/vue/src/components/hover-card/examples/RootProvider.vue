@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HoverCard, useHoverCard } from '../index'
+import { HoverCard, useHoverCard } from '~/index'
 
 const hoverCard = useHoverCard()
 </script>

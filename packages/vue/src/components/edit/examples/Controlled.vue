@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Edit } from '../index'
+import { Edit } from '~/index'
 </script>
 
 <template>

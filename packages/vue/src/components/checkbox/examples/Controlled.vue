@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Checkbox, type CheckboxCheckedState } from '../index'
+import { Checkbox } from '~/index'
+import { type CheckboxCheckedState } from '../index'
 import { ref } from 'vue'
 
 const checked = ref<CheckboxCheckedState>(true)

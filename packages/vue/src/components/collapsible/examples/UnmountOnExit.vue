@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Collapsible } from '../index'
+import { Collapsible } from '~/index'
 </script>
 
 <template>

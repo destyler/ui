@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
+import { Menu, menuAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Checkbox from '../examples/Checkbox.vue'
@@ -9,7 +10,6 @@ import Controlled from '../examples/Controlled.vue'
 import Group from '../examples/Group.vue'
 import Nested from '../examples/Nested.vue'
 import RadioGroup from '../examples/RadioGroup.vue'
-import { Menu, menuAnatomy } from '../index'
 
 describe('[menu] component', () => {
   it.each(getParts(menuAnatomy))('should render part %s', async (part) => {

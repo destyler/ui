@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
+import { Checkbox, checkboxAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
 import Group from '../examples/Group.vue'
-import Indeterminate from '../examples/indeterminate.vue'
+import Indeterminate from '../examples/Indeterminate.vue'
 import WithField from '../examples/WithField.vue'
-import { Checkbox, checkboxAnatomy } from '../index'
 
 describe('[checkbox] component', () => {
   it.each(getParts(checkboxAnatomy).filter(p => !p.includes('group')))('should render part %s', async (part) => {

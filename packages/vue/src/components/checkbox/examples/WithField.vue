@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Checkbox } from '../index'
-import { Field } from '~/components/field'
+import { Checkbox, Field } from '~/index'
 </script>
 
 <template>

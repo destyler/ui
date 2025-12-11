@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Calendar } from '../index'
+import { Calendar } from '~/index'
 </script>
 
 <template>

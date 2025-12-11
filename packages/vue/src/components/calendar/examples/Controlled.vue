@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Calendar, type DateValue, parseDate } from '../index'
+import { Calendar } from '~/index'
+import { type DateValue, parseDate } from '../index'
 import { type Ref, ref } from 'vue'
 
 const value = ref([parseDate('2022-01-01')]) as Ref<DateValue[]>

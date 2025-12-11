@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Carousel, useCarousel } from '../index'
+import { Carousel, useCarousel } from '~/index'
 
 const images = Array.from({ length: 5 }, (_, i) => `https://picsum.photos/seed/${i + 1}/500/300`)
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HoverCard } from '../index'
+import { HoverCard } from '~/index'
 import { ref } from 'vue'
 
 const open = ref(false)

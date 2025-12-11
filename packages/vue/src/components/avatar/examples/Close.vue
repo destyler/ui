@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useForwardPropsEmits } from '../../../index'
-import { Avatar, type AvatarRootEmits, type AvatarRootProps } from '../index'
+import { Avatar } from '~/index'
+import { type AvatarRootEmits, type AvatarRootProps } from '../index'
 import { computed } from 'vue'
 
 export interface AvatarProps extends AvatarRootProps {

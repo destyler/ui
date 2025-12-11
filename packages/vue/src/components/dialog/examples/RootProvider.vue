@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Dialog, useDialog } from '../index'
+import { Dialog, useDialog } from '~/index'
 
 const dialog = useDialog()
 </script>

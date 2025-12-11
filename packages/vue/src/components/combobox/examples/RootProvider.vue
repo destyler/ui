@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Combobox, createListCollection, useCombobox } from '../index'
+import { Combobox, useCombobox } from '~/index'
+import { createListCollection } from '../index'
 import { computed, ref } from 'vue'
 
 const initialItems = ['React', 'Solid', 'Vue']

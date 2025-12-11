@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FileUpload, useFileUpload } from '../index'
+import { FileUpload, useFileUpload } from '~/index'
 
 const fileUpload = useFileUpload({ maxFiles: 5 })
 </script>

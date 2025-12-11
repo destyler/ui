@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
+import { HoverCard, hoverCardAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
-import { HoverCard, hoverCardAnatomy } from '../index'
 
 describe('[hover-card] component', () => {
   it.each(getParts(hoverCardAnatomy))('should render part %s', async (part) => {

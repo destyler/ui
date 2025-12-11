@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Edit } from '../index'
-import { Field } from '~/components/field'
+import { Edit, Field } from '~/index'
 </script>
 
 <template>
