@@ -32,6 +32,7 @@ catalogs:
     '@destyler/combobox': ^0.2.3-beta.2
     '@destyler/dialog': ^0.2.3-beta.2
     '@destyler/dom': ^0.2.3-beta.2
+    '@destyler/edit': ^0.2.3-beta.2
     '@destyler/focus-trap': ^0.2.3-beta.2
     '@destyler/highlight-text': ^0.2.3-beta.2
     '@destyler/i18n': ^0.2.3-beta.2
