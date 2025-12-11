@@ -36,6 +36,7 @@ catalogs:
     '@destyler/file-upload': ^0.2.3-beta.3
     '@destyler/focus-trap': ^0.2.3-beta.3
     '@destyler/highlight-text': ^0.2.3-beta.3
+    '@destyler/hover-card': ^0.2.3-beta.3
     '@destyler/i18n': ^0.2.3-beta.3
     '@destyler/image': ^0.2.3-beta.3
     '@destyler/presence': ^0.2.3-beta.3

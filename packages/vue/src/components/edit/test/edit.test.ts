@@ -25,7 +25,7 @@ describe('[edit] component', () => {
     await expect.element(page.getByText('React')).toBeInTheDocument()
   })
 
-  it.skip('should be possible to dbl click the placeholder to enter a value', async () => {
+  it('should be possible to dbl click the placeholder to enter a value', async () => {
     render(Controlled, { props: { activationMode: 'dblclick' } })
     await userEvent.dblClick(page.getByText('Placeholder'))
 
