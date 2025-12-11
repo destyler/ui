@@ -1,7 +1,7 @@
 {
   "name": "@destyler-ui/vue",
   "type": "module",
-  "version": "0.0.1-beta.7",
+  "version": "0.0.1-beta.8",
   "description": "A starter for creating a Vue component library.",
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",
