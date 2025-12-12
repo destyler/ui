@@ -81,22 +81,22 @@ export interface RootEmits {
   /**
    * Function called when the escape key is pressed
    */
-  escapeKeyDown: [event: KeyboardEvent]
+  'escapeKeyDown': [event: KeyboardEvent]
   /**
    * Function called when the focus is moved outside the component
    */
-  focusOutside: [event: popover.FocusOutsideEvent]
+  'focusOutside': [event: popover.FocusOutsideEvent]
   /**
    * Function called when an interaction happens outside the component
    */
-  interactOutside: [event: popover.InteractOutsideEvent]
+  'interactOutside': [event: popover.InteractOutsideEvent]
   /**
    * Function invoked when the popover opens or closes
    */
-  openChange: [details: popover.OpenChangeDetails]
+  'openChange': [details: popover.OpenChangeDetails]
   /**
    * Function called when the pointer is pressed down outside the component
    */
-  pointerDownOutside: [event: popover.PointerDownOutsideEvent]
+  'pointerDownOutside': [event: popover.PointerDownOutsideEvent]
   'update:open': [open: boolean]
 }

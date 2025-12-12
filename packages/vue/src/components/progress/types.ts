@@ -43,7 +43,7 @@ export interface RootEmits {
   /**
    * Callback fired when the value changes.
    */
-  valueChange: [details: progress.ValueChangeDetails]
+  'valueChange': [details: progress.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */

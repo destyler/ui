@@ -1,10 +1,10 @@
-import type {PropTypes} from '@destyler/vue';
-import type {ComputedRef} from 'vue';
+import type { PropTypes } from '@destyler/vue'
+import type { ComputedRef } from 'vue'
 import type { RootEmits } from '../types'
 import type { EmitFn, Optional } from '~/types'
 import * as progress from '@destyler/progress'
-import { normalizeProps,  useMachine } from '@destyler/vue'
-import { computed,  useId } from 'vue'
+import { normalizeProps, useMachine } from '@destyler/vue'
+import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
 import { cleanProps } from '~/utils'
 

@@ -31,4 +31,4 @@ export type {
   ItemLabelDetails,
   PageChangeDetails,
   PageSizeChangeDetails,
- } from '@destyler/pagination'
+} from '@destyler/pagination'
