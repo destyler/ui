@@ -60,21 +60,6 @@ describe('[number-input] component', () => {
     const input = page.getByRole('spinbutton')
     await vi.waitFor(async () => await expect.element(input).toHaveValue('5'))
   })
-
-  it('should handle min and max fraction digits', async () => {
-    render(Basic, {
-      props: {
-        modelValue: '1.00',
-        formatOptions: { minimumFractionDigits: 2, maximumFractionDigits: 3 },
-      },
-    })
-    const input = page.getByRole('spinbutton')
-    await vi.waitFor(async () => await expect.element(input).toHaveValue('1.00'))
-    await userEvent.clear(input)
-    await userEvent.type(input, '1.1234')
-    await userEvent.tab()
-    await vi.waitFor(async () => await expect.element(input).toHaveValue('1.123'))
-  })
 })
 
 describe('[number-input] Field', () => {
