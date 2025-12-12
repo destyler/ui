@@ -1,4 +1,7 @@
-export { default as Context, type CollapseContextProps as ContextProps } from './components/Context.vue'
+export {
+  default as Context,
+  type CollapseContextProps as ContextProps,
+} from './components/Context.vue'
 export {
   default as Item,
   type CollapseItemProps as ItemProps,
@@ -28,4 +31,7 @@ export {
   default as RootProvider,
   type CollapseRootProviderProps as RootProviderProps,
 } from './components/RootProvider.vue'
-export type { FocusChangeDetails, ValueChangeDetails } from '@destyler/collapse'
+export type {
+  FocusChangeDetails,
+  ValueChangeDetails,
+ } from '@destyler/collapse'

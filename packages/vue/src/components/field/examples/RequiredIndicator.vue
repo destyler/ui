@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Field } from '~/index'
+import { Field } from '../index'
 </script>
 
 <template>

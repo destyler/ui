@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Collapse } from '~/index'
+import { Collapse } from '../index'
 import { ref } from 'vue'
 
 const items = ref(['React', 'Solid', 'Vue'])

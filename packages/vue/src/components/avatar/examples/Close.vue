@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { useForwardPropsEmits } from '../../../index'
-import { Avatar } from '~/index'
-import { type AvatarRootEmits, type AvatarRootProps } from '../index'
+import { Avatar } from '../index'
 import { computed } from 'vue'
 
-export interface AvatarProps extends AvatarRootProps {
+export interface AvatarProps extends Avatar.RootProps {
   src?: string
   name: string
 }
 
 const props = defineProps<AvatarProps>()
-const emits = defineEmits<AvatarRootEmits>()
+const emits = defineEmits<Avatar.RootEmits>()
 
 const forwarded = useForwardPropsEmits(props, emits)
 

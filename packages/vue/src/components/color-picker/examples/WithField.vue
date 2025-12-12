@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ColorPicker, Field,  } from '~/index'
-import { parseColor } from '../index'
+import { parseColor, ColorPicker } from '../index'
+import { Field } from '~/components/field/index'
 
 const defaultValue = parseColor('hsl(20, 100%, 50%)')
 </script>

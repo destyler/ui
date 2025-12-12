@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
-import { Fieldset, fieldsetAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import { Fieldset, fieldsetAnatomy } from '../index'
 
 describe('[fieldset] component', () => {
   it.each(getParts(fieldsetAnatomy))('should render part %s', async (part) => {

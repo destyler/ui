@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { FieldErrorText, FieldRoot } from '../index'
+import { Field } from '../index'
 import { computed, ref } from 'vue'
 
 const errorMessage = ref('')
@@ -8,8 +8,8 @@ const invalid = computed(() => !!errorMessage.value)
 
 <template>
   <input v-model="errorMessage" />
-  <FieldRoot :invalid="invalid">
+  <Field.Root :invalid="invalid">
     IsInvalid? {{ invalid }}
-    <FieldErrorText style="color: red">{{ errorMessage }}</FieldErrorText>
-  </FieldRoot>
+    <Field.ErrorText style="color: red">{{ errorMessage }}</Field.ErrorText>
+  </Field.Root>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { createListCollection } from '../index'
-import { Field, Combobox } from '~/index'
+import {  Combobox } from '../index'
+import { Field } from '~/components/field'
 
 const frameworks = createListCollection({
   items: ['React', 'Solid', 'Vue'],

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import { Field, fieldAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Disabled from '../examples/Disabled.vue'
+import { Field, fieldAnatomy } from '../index'
 
 describe('[field] component', () => {
   it.each(getParts(fieldAnatomy))('should render part %s', async (part) => {

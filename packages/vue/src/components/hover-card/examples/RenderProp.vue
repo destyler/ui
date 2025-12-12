@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HoverCard } from '~/index'
+import { HoverCard } from '../index'
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Calendar, useCalendar } from '~/index'
+import { Calendar, useCalendar } from '../index'
 
 const datePicker = useCalendar()
 </script>

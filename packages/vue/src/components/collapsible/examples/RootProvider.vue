@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Collapsible, useCollapsible } from '~/index'
+import { Collapsible, useCollapsible } from '../index'
 
 const collapsible = useCollapsible()
 

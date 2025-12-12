@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Clipboard, useClipboard } from '~/index'
+import { Clipboard, useClipboard } from '../index'
 
 const clipboard = useClipboard({ value: 'https.//destyler.org' })
 </script>

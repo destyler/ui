@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Dialog } from '~/index'
+import { Dialog } from '../index'
 import { ref } from 'vue'
 
 const open = ref(false)

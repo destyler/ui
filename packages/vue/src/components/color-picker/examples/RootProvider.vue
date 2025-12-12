@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ColorPicker, useColorPicker } from '~/index'
+import { ColorPicker, useColorPicker } from '../index'
 
 const colorPicker = useColorPicker()
 </script>

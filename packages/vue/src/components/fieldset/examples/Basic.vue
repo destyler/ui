@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Fieldset, Field } from '~/index'
+import { Fieldset } from '../index'
+import { Field } from '~/components/field'
 </script>
 
 <template>

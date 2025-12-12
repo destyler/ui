@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { FileUpload, Field } from '~/index'
+import { FileUpload } from '../index'
+import { Field } from '~/components/field'
 </script>
 
 <template>

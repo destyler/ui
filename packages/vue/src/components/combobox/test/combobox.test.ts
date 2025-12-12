@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import { Combobox, comboboxAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import WithField from '../examples/WithField.vue'
+import { Combobox, comboboxAnatomy } from '../index'
 
 describe('[combobox] component', () => {
   it.each(getParts(comboboxAnatomy))('should render part %s', async (part) => {

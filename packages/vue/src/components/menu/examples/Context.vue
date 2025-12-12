@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Menu } from '~/index'
+import { Menu } from '../index'
 </script>
 
 <template>

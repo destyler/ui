@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Edit, useEdit } from '~/index'
+import { Edit, useEdit } from '../index'
 
 const editable = useEdit({ placeholder: 'Placeholder' })
 </script>

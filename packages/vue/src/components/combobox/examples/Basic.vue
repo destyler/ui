@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { createListCollection } from '../index'
-import { Combobox } from '~/index'
+import { Combobox } from '../index'
 
 const frameworks = createListCollection({
   items: [

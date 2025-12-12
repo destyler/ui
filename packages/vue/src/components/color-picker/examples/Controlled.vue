@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { parseColor } from '../index'
-import { ColorPicker } from '~/index'
+import { ColorPicker, parseColor } from '../index'
 import { ref } from 'vue'
 
 const value = ref(parseColor('hsl(20, 100%, 50%)'))

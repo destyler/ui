@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import { Edit, editAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
 import WithField from '../examples/WithField.vue'
+import { Edit, editAnatomy } from '../index'
 
 describe('[edit] component', () => {
   it.each(getParts(editAnatomy))('should render part %s', async (part) => {

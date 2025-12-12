@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Avatar} from '~/index'
+import {Avatar} from '../index'
 
 </script>
 

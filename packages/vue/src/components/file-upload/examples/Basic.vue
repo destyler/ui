@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FileUpload } from '~/index'
+import { FileUpload } from '../index'
 
 const testProps = ref<string[]>([])
 

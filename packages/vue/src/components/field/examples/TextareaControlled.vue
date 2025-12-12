@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Field } from '~/index'
+import { Field } from '../index'
 import { ref } from 'vue'
 
 const model = ref(['This is some text', 'then more text'])

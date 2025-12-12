@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Checkbox, useCheckbox } from '~/index'
+import { Checkbox, useCheckbox } from '../index'
 
 const checkbox = useCheckbox()
 </script>

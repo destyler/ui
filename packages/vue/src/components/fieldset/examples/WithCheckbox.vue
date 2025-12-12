@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Fieldset, Field, Checkbox } from '~/index'
+import { Fieldset } from '../index'
+import { Field } from '~/components/field';
+import { Checkbox } from '~/components/checkbox';
 </script>
 
 <template>

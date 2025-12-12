@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Combobox } from '~/index'
-import { createListCollection } from '../index'
+import { createListCollection, Combobox } from '../index'
 
 const frameworks = createListCollection({
   items: [

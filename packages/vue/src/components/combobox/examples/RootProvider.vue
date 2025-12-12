@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Combobox, useCombobox } from '~/index'
+import { Combobox, useCombobox } from '../index'
 import { createListCollection } from '../index'
 import { computed, ref } from 'vue'
 

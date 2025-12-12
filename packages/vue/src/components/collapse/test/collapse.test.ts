@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
-import { Collapse, collapseAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Collapsible from '../examples/Collapsible.vue'
 import Controlled from '../examples/Controlled.vue'
 import Disabled from '../examples/Disabled.vue'
 import Multiple from '../examples/Multiple.vue'
+import { Collapse, collapseAnatomy } from '../index'
 
 describe('[collapse] component', () => {
   it.each(getParts(collapseAnatomy))('should render part %s', async (part) => {

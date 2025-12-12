@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
-import { Carousel, carouselAnatomy } from '~/index'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import { Carousel, carouselAnatomy } from '../index'
 
 describe('[carousel] component', () => {
   it.each(getParts(carouselAnatomy))('should render part %s', async (part) => {
