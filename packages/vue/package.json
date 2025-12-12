@@ -62,6 +62,7 @@
     "@destyler/image": "catalog:prod",
     "@destyler/menu": "catalog:prod",
     "@destyler/number-input": "catalog:prod",
+    "@destyler/pagination": "catalog:prod",
     "@destyler/presence": "catalog:prod",
     "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
