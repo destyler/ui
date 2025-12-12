@@ -4,7 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import WithField from '../examples/WithField.vue'
-import { ColorPicker, colorPickerAnatomy, parseColor  } from '../index'
+import { ColorPicker, colorPickerAnatomy, parseColor } from '../index'
 
 describe('[color-picker] component', () => {
   it.each(getParts(colorPickerAnatomy))('should render part %s', async (part) => {

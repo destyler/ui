@@ -1,7 +1,7 @@
 export {
   default as Context,
   type AvatarContextProps as ContextProps,
- } from './components/Context.vue'
+} from './components/Context.vue'
 export {
   default as Fallback,
   type AvatarFallbackProps as FallbackProps,

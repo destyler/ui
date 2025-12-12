@@ -34,4 +34,4 @@ export {
 export type {
   FocusChangeDetails,
   ValueChangeDetails,
- } from '@destyler/collapse'
+} from '@destyler/collapse'
