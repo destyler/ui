@@ -2,10 +2,105 @@ import type * as otpInput from '@destyler/otp-input'
 
 export interface RootProps {
   /**
+   * Whether to auto-focus the first input.
+   */
+  autoFocus?: boolean
+  /**
+   * Whether to blur the input when the value is complete
+   */
+  blurOnComplete?: boolean
+  /**
+   * The initial value of the otp input when it is first rendered.
+   * Use when you do not need to control the state of the otp input.
+   */
+  defaultValue?: string[]
+  /**
+   * Whether the inputs are disabled
+   */
+  disabled?: boolean
+  /**
+   * The associate form of the underlying input element.
+   */
+  form?: string
+  /**
    * The unique identifier of the machine.
    */
   id?: string
+  /**
+   * The ids of the elements in the otp input. Useful for composition.
+   */
+  ids?: Partial<{
+    root: string
+    hiddenInput: string
+    label: string
+    control: string
+    input: (id: string) => string
+  }>
+  /**
+   * Whether the otp input is in the invalid state
+   */
+  invalid?: boolean
+  /**
+   * If `true`, the input's value will be masked just like `type=password`
+   */
+  mask?: boolean
+  modelValue?: string[]
+  /**
+   * The name of the input element. Useful for form submission.
+   */
+  name?: string
+  /**
+   * If `true`, the otp input component signals to its fields that they should
+   * use `autocomplete="one-time-code"`.
+   */
+  otp?: boolean
+  /**
+   * The regular expression that the user-entered input value is checked against.
+   */
+  pattern?: string
+  /**
+   * The placeholder text for the input
+   * @default "○"
+   */
+  placeholder?: string
+  /**
+   * Whether the otp input is in the valid state
+   */
+  readOnly?: boolean
+  /**
+   * Whether the otp input is required
+   */
+  required?: boolean
+  /**
+   * Whether to select input value when input is focused
+   */
+  selectOnFocus?: boolean
+  /**
+   * Specifies the localized strings that identifies the accessibility elements and their states
+   */
+  translations?: otpInput.IntlTranslations
+  /**
+   * The type of value the otp-input should allow
+   * @default "numeric"
+   */
+  type?: 'alphanumeric' | 'numeric' | 'alphabetic'
 }
 
 export interface RootEmits {
+  /**
+   * Function called on input change
+   */
+  'valueChange': [details: otpInput.ValueChangeDetails]
+  /**
+   * Function called when all inputs have valid values
+   */
+  'valueComplete': [details: otpInput.ValueChangeDetails]
+  /**
+   * Function called when an invalid value is entered
+   */
+  'valueInvalid': [details: otpInput.ValueInvalidDetails]
+  /**
+   * The callback fired when the model value changes.
+   */
+  'update:modelValue': [value: string[]]
 }

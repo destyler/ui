@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { OtpInput } from '../index'
+import { OtpInput, useOtpInput } from '../index'
+
+const pinInput = useOtpInput()
 </script>
 
 <template>
-  <OtpInput.Root>
+  <button @click="pinInput.focus()">Focus</button>
+
+  <OtpInput.RootProvider :value="pinInput">
     <OtpInput.Label>Label</OtpInput.Label>
     <OtpInput.Control>
       <OtpInput.Input v-for="id in [0, 1, 2]" :key="id" :index="id" />
     </OtpInput.Control>
     <OtpInput.HiddenInput />
-  </OtpInput.Root>
+  </OtpInput.RootProvider>
 </template>
