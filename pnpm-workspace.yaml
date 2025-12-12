@@ -45,6 +45,7 @@ catalogs:
     '@destyler/pagination': ^0.2.3-beta.5
     '@destyler/popover': ^0.2.3-beta.5
     '@destyler/presence': ^0.2.3-beta.5
+    '@destyler/progress': ^0.2.3-beta.5
     '@destyler/utils': ^0.2.3-beta.5
     '@destyler/vue': ^0.2.3-beta.5
     '@destyler/xstate': ^0.2.3-beta.5

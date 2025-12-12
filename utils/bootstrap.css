@@ -12,4 +12,6 @@
 @import url('./style/menu.css');
 @import url('./style/number-input.css');
 @import url('./style/pagination.css');
-@import url('./style/otp-input.css')
+@import url('./style/otp-input.css');
+@import url('./style/progress.css');
+@import url('./style/popover.css');

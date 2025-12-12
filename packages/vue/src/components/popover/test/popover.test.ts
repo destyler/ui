@@ -3,7 +3,6 @@ import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
-import Controlled from '../examples/Controlled.vue'
 import { Popover, popoverAnatomy } from '../index'
 
 describe('[popover] component', () => {
@@ -26,7 +25,7 @@ describe('[popover] component', () => {
     await vi.waitFor(async () => await expect.element(page.getByText('title')).not.toBeVisible())
   })
 
-  it.skip('should hide the popover when escape is pressed', async () => {
+  it('should hide the popover when escape is pressed', async () => {
     render(Basic)
 
     await userEvent.click(page.getByText('click me'))
@@ -41,19 +40,6 @@ describe('[popover] component', () => {
 
     await userEvent.click(page.getByText('click me'))
     await expect.element(page.getByRole('dialog')).toBeInTheDocument()
-  })
-
-  it.skip('should allow controlled usage', async () => {
-    render(Controlled)
-
-    await expect.element(page.getByText('title')).not.toBeVisible()
-
-    await userEvent.click(page.getByRole('button', { name: /toggle/i }))
-    await expect.element(page.getByRole('dialog')).toBeInTheDocument()
-    await expect.element(page.getByText('title')).toBeVisible()
-
-    await userEvent.click(page.getByRole('button', { name: /toggle/i }))
-    await vi.waitFor(async () => await expect.element(page.getByText('title')).not.toBeVisible())
   })
 
   it('should be able to lazy mount', async () => {
