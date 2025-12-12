@@ -40,6 +40,7 @@ catalogs:
     '@destyler/i18n': ^0.2.3-beta.5
     '@destyler/image': ^0.2.3-beta.5
     '@destyler/menu': ^0.2.3-beta.5
+    '@destyler/number-input': ^0.2.3-beta.5
     '@destyler/presence': ^0.2.3-beta.5
     '@destyler/utils': ^0.2.3-beta.5
     '@destyler/vue': ^0.2.3-beta.5

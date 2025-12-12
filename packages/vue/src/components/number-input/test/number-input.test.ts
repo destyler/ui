@@ -1,0 +1,116 @@
+import { describe, expect, it, vi } from 'vitest'
+import { render } from 'vitest-browser-vue'
+import { page, userEvent } from 'vitest/browser'
+import { getExports, getParts } from '../../../../../../utils/test'
+import Basic from '../examples/Basic.vue'
+import WithField from '../examples/WithField.vue'
+import { NumberInput, numberInputAnatomy } from '../index'
+
+describe('[number-input] component', () => {
+  it.each(getParts(numberInputAnatomy))('should render part %s', async (part) => {
+    render(Basic)
+    expect(document.querySelector(part)).toBeInTheDocument()
+  })
+
+  it.each(getExports(numberInputAnatomy))('should export %s', async (part) => {
+    expect(NumberInput[part]).toBeDefined()
+  })
+
+  it('should handle wheel event when allowMouseWheel is true', async () => {
+    render(Basic, { props: { allowMouseWheel: true } })
+    const input = page.getByRole('spinbutton')
+    await input.click()
+    const el = input.element()
+    el.dispatchEvent(
+      new WheelEvent('wheel', { deltaY: -1, bubbles: true, cancelable: true }),
+    )
+
+    await vi.waitFor(async () => await expect.element(input).toHaveValue('1'))
+  })
+
+  it('should clamp value on blur when clampValueOnBlur is true', async () => {
+    render(Basic, {
+      props: { clampValueOnBlur: true, min: 0, max: 10, modelValue: '15' },
+    })
+    const input = page.getByRole('spinbutton')
+    await input.click()
+    await userEvent.tab()
+
+    await vi.waitFor(async () => await expect.element(input).toHaveValue('10'))
+  })
+
+  it('should allow value to exceed max when allowOverflow is true', async () => {
+    render(Basic, { props: { allowOverflow: true, max: 10, modelValue: '15' } })
+    const input = page.getByRole('spinbutton')
+    expect(input).toHaveValue('15')
+  })
+
+  it('should handle custom format and parse functions', async () => {
+    render(Basic, { props: { formatOptions: { currency: 'USD' }, modelValue: '5' } })
+    const input = page.getByRole('spinbutton')
+
+    await vi.waitFor(async () => await expect.element(input).toHaveValue('5'))
+  })
+
+  it('should increment value by step when using increment button', async () => {
+    render(Basic, { props: { step: 5, modelValue: '0' } })
+    const incrementBtn = page.getByText('+1')
+    await userEvent.click(incrementBtn)
+
+    const input = page.getByRole('spinbutton')
+    await vi.waitFor(async () => await expect.element(input).toHaveValue('5'))
+  })
+
+  it('should handle min and max fraction digits', async () => {
+    render(Basic, {
+      props: {
+        modelValue: '1.00',
+        formatOptions: { minimumFractionDigits: 2, maximumFractionDigits: 3 },
+      },
+    })
+    const input = page.getByRole('spinbutton')
+    await vi.waitFor(async () => await expect.element(input).toHaveValue('1.00'))
+    await userEvent.clear(input)
+    await userEvent.type(input, '1.1234')
+    await userEvent.tab()
+    await vi.waitFor(async () => await expect.element(input).toHaveValue('1.123'))
+  })
+})
+
+describe('[number-input] Field', () => {
+  it('should set input as required', async () => {
+    render(WithField, { props: { required: true } })
+    expect(page.getByRole('spinbutton', { name: /label/i })).toBeRequired()
+  })
+
+  it('should set input as disabled', async () => {
+    render(WithField, { props: { disabled: true } })
+    expect(page.getByRole('spinbutton', { name: /label/i })).toBeDisabled()
+  })
+
+  it('should set input as readonly', async () => {
+    render(WithField, { props: { readOnly: true } })
+    expect(page.getByRole('spinbutton', { name: /label/i })).toHaveAttribute('readonly')
+  })
+
+  it('should display helper text', async () => {
+    render(WithField)
+    expect(page.getByText('Additional Info')).toBeInTheDocument()
+  })
+
+  it('should display error text when error is present', async () => {
+    render(WithField, { props: { invalid: true } })
+    expect(page.getByText('Error Info')).toBeInTheDocument()
+  })
+
+  it('should focus on input when label is clicked', async () => {
+    render(WithField)
+    await userEvent.click(page.getByText(/label/i))
+    expect(page.getByRole('spinbutton', { name: /label/i })).toHaveFocus()
+  })
+
+  it('should not display error text when no error is present', async () => {
+    render(WithField)
+    expect(page.getByText('Error Info')).not.toBeInTheDocument()
+  })
+})
