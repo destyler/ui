@@ -28,7 +28,7 @@ export interface RootEmits {
   /**
    * Callback fired when the value changes.
    */
-  "valueChange": [details: qrCode.ValueChangeDetails]
+  'valueChange': [details: qrCode.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */
