@@ -2,7 +2,7 @@
   "name": "@destyler-ui/monorepo",
   "version": "0.0.1-beta.12",
   "private": "true",
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.25.0",
   "description": "",
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",

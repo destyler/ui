@@ -32,95 +32,98 @@ catalogs:
       version: 4.0.4
   prod:
     '@destyler/anatomy':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/auto-resize':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/calendar':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/carousel':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/checkbox':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/clipboard':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/collapse':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/collapsible':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/collection':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/color-picker':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/combobox':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/dialog':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/dom':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/edit':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/file-upload':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/focus-trap':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/highlight-text':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/hover-card':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/i18n':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/image':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/menu':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/number-input':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/otp-input':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/pagination':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/popover':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/presence':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/progress':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
+    '@destyler/qr-code':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/utils':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/vue':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/xstate':
-      specifier: ^0.2.3-beta.6
-      version: 0.2.3-beta.6
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
   runtime:
     '@vitejs/devtools':
       specifier: 0.0.0-alpha.19
@@ -198,7 +201,7 @@ importers:
         version: 4.1.3(storybook@10.1.5(@testing-library/dom@10.4.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@storybook/addon-a11y':
         specifier: catalog:stories
         version: 10.1.5(storybook@10.1.5(@testing-library/dom@10.4.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))
@@ -270,94 +273,97 @@ importers:
     dependencies:
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/auto-resize':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/calendar':
         specifier: catalog:prod
-        version: 0.2.3-beta.6(@internationalized/date@3.10.0)
+        version: 0.2.3-beta.7(@internationalized/date@3.10.0)
       '@destyler/carousel':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/checkbox':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/clipboard':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/collapse':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/collapsible':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/collection':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/color-picker':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/combobox':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/dialog':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/dom':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/edit':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/file-upload':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/focus-trap':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/highlight-text':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/hover-card':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/i18n':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/image':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/menu':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/number-input':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/otp-input':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/pagination':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/popover':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/presence':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/progress':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
+      '@destyler/qr-code':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
       '@destyler/utils':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
       '@destyler/vue':
         specifier: catalog:prod
-        version: 0.2.3-beta.6(vue@3.5.25(typescript@5.9.3))
+        version: 0.2.3-beta.7(vue@3.5.25(typescript@5.9.3))
       '@destyler/xstate':
         specifier: catalog:prod
-        version: 0.2.3-beta.6
+        version: 0.2.3-beta.7
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:runtime
@@ -479,143 +485,146 @@ packages:
   '@clack/prompts@0.11.0':
     resolution: {integrity: sha512-pMN5FcrEw9hUkZA4f+zLlzivQSeQf5dRGJjSUbvVYDLvpKCdQx5OaknvKzgbtXOizhP+SJJJjqEbOe55uKKfAw==}
 
-  '@destyler/anatomy@0.2.3-beta.6':
-    resolution: {integrity: sha512-AA0agvtCk6L8fcDgcEqi/DVaFOQJKMTRQv7VZbAVFqKMrBHtljGBxzgN6T+yTIAu/ejz2+hulDhJqRDeFCKMWg==}
+  '@destyler/anatomy@0.2.3-beta.7':
+    resolution: {integrity: sha512-8LeXCfeo2ogoTNPDrX9DUGfH0vfS8rl0L+oexcj8mK/CMGT0G8meCKmol7/1kcsjcNJO7PtSCUvzNTFJEuNAvg==}
 
-  '@destyler/aria-hidden@0.2.3-beta.6':
-    resolution: {integrity: sha512-+GnedTJM8VhHGtK27ckILVkWNaXfQLhlIu9UuRwgpguDyuU5CYtU4/S+RuPmCFI52myDMxtyOdIbbZA5l8Zl/Q==}
+  '@destyler/aria-hidden@0.2.3-beta.7':
+    resolution: {integrity: sha512-ovqwlMj+o6UvKV5dlnT1049ChSFLNV/C0hiok65yv/RhM1DLs/XbW71c2ocW++pJ/Y08OCj5DktADByYYecQFQ==}
 
-  '@destyler/auto-resize@0.2.3-beta.6':
-    resolution: {integrity: sha512-L83RuAw63DunjjfXRcNM4pTJfmjuWyGl/eNJ4WFANGnOt0vprr4uPBrM9lMEBc+ctvfQ4x3KHePmL3rI7Kgy/w==}
+  '@destyler/auto-resize@0.2.3-beta.7':
+    resolution: {integrity: sha512-yR0BbIs6G1RLPNz9qwiT3qXPn50CKHT3/BY9EgGl+239XlH03lf5bCgBo49rZHt5Yqt+JZEKyENrb79dvSs3OQ==}
 
-  '@destyler/calendar@0.2.3-beta.6':
-    resolution: {integrity: sha512-7EVEl18uUKSRCRcLltl7CADlI9HoUfqMUUFKqXX0flGHaAtg2PuV1zXaXb2GgtSEBsLGAhCjOZOMKqcAWuAkig==}
+  '@destyler/calendar@0.2.3-beta.7':
+    resolution: {integrity: sha512-N0JArUWklt8LhZF87jRtCnBJ1ktN7UN5FbLAKtyJsJWnqbdDr+Ig+9A2JkyCFWVqzrQUdXfUwNbeB2oSwcAFqQ==}
     peerDependencies:
       '@internationalized/date': '>=3.0.0'
 
-  '@destyler/carousel@0.2.3-beta.6':
-    resolution: {integrity: sha512-aTDPtOHQwV7bEwTTXDzEmGT6NnhIM+y7lg8fwUVLfhK9Ru10KxBaXEvyYbxcnTnAFagchaZhOtqnr8wc+Obnlw==}
+  '@destyler/carousel@0.2.3-beta.7':
+    resolution: {integrity: sha512-LM1leV30AgBEOa6eoMlBWXNsuSwyzNOuj8zw0UxCtJnhXBh0Cv0VNl+MvXlsroFEQjG04IiZ/CYXN8xQi7IYfg==}
 
-  '@destyler/checkbox@0.2.3-beta.6':
-    resolution: {integrity: sha512-CB+gi8WsMCFaiLNIGBPh4EPlsphbB+EOfHiTvOVPkPXXxA+TiCbqJNWPhhGEY0ftophJYWgG+ht4XKveNkQfwg==}
+  '@destyler/checkbox@0.2.3-beta.7':
+    resolution: {integrity: sha512-DnrZsz6H1J4fgB1Q9Hl7GH2YIAAKPy96pC2l9bJEZ290vEN5TDB0SfKhaGco5Rdw7YCRS5Zkpi7e854JMPTR7w==}
 
-  '@destyler/clipboard@0.2.3-beta.6':
-    resolution: {integrity: sha512-cfCWKzmuhoRJCW7ReLQ2oG90uyjTb/Z3+M9gZAD7/zGJyBF4xTfAjsyYb0cSY0v5n4A+LoZ/oHhO7mEOm/IX5A==}
+  '@destyler/clipboard@0.2.3-beta.7':
+    resolution: {integrity: sha512-6JFmr/C0Mjd/oUG41iNGWS0z2yWR1alu58PyhLT7Pz23Be+khCHWpjj0+s/Z/HWQxhOgq4PNgrYT0BaD8sRR+g==}
 
-  '@destyler/collapse@0.2.3-beta.6':
-    resolution: {integrity: sha512-aL8cxqKZxflkSbipE3ItS1V3Z1VwMPbiknR00dFwOE+sQTjCw6AhfxqJAM8C8XPjuioGvuMa13aDbxa2eki+5g==}
+  '@destyler/collapse@0.2.3-beta.7':
+    resolution: {integrity: sha512-ZkyqUhShpM0E32tZlX+wKAeqb5p7oe4rXpkVNnImzPiH7Xehm9wpeHzEow7P5b7CvILPv3eZSjEuQ/6p5A6xFA==}
 
-  '@destyler/collapsible@0.2.3-beta.6':
-    resolution: {integrity: sha512-EGl7GnPbyuQ/ZuLrKUyRiFuxSY+P4vtc3BC6XoHUKyI6yEPEv527wKLqJT3wsthO87aUpPm3f/08dyb3r6ZIAQ==}
+  '@destyler/collapsible@0.2.3-beta.7':
+    resolution: {integrity: sha512-GOQD08e7bFyiqxfYp/KbpP0jDmmA4ZuXsEAZ/6Vsd5mfrFUuQMCORXXoHgFt+lrcbdYKt2QFlwoSh/zMIizI6Q==}
 
-  '@destyler/collection@0.2.3-beta.6':
-    resolution: {integrity: sha512-SHYtQ+d+UTJzvfo/pudLnwui3eJL5yu0PMxqvTk0pWIvUm5/GBrYdUorGfP0Uuf51W+4kOWotrqlBZbQnFazkQ==}
+  '@destyler/collection@0.2.3-beta.7':
+    resolution: {integrity: sha512-PW2s20VvKGr5OeGGiWY5ACiWea0Dv6V5NihRco1/uuuB8sn1+R++wBEgBBQCE3HoG4v7Hc65CJLjk+VQNLEAeA==}
 
-  '@destyler/color-picker@0.2.3-beta.6':
-    resolution: {integrity: sha512-yn1f8JCC4kDTkYXhJG0C+BFwMMMV4hE1gwgGn+QpM/KifZw3mmuP/a2asOcn10ASCjll7TbQ0WGSMQzJLLqnug==}
+  '@destyler/color-picker@0.2.3-beta.7':
+    resolution: {integrity: sha512-tqieFNEUKh7ANbMko3D5aazD3QO0A71tgBX+99B7DR4L2slwYT/XkQIVLg/5Us1Hr7tSmrH7y4JSqVY49tf1Jg==}
 
-  '@destyler/color@0.2.3-beta.6':
-    resolution: {integrity: sha512-B9PnRYXWErmYm1O4+zes+srNPq2ti3SDYYYRlw5ixwQKfHXi6M0ZBXP0QI+PL7QjXs3mjcWmPNRa0gH6Y32DJw==}
+  '@destyler/color@0.2.3-beta.7':
+    resolution: {integrity: sha512-0Bv6GTvphxq806WxcWH2VDRqwr9JPM4Us5ZDcmpVnnnlPxOLGqNRzEMjy/LUv5iIbT1D3SCpUVAlfOhNSCmwfw==}
 
-  '@destyler/combobox@0.2.3-beta.6':
-    resolution: {integrity: sha512-2yd8G13Do1BXs/fzUCkD3amXYL58jXfxdv86lcIFIKe5yDsVFEZMrgI2s2M0OozRoiM/g5JclVK1r+pxnUlzqQ==}
+  '@destyler/combobox@0.2.3-beta.7':
+    resolution: {integrity: sha512-jyIv4jZXH3bE1bW1Dx8si0UgBtTxfxO0YtiFoAtK2Xs8jSzo46Q5PrJt19QHp9EHeo0Lwf0JPxpQpoj2PMtFKQ==}
 
-  '@destyler/date@0.2.3-beta.6':
-    resolution: {integrity: sha512-HWICUwv2vgLbeTchGvk/UT0q6sFTdBDOakYBf76y8jYm7kpDa/1k7VESwOtTMS5mQiUDr37M3canohS23Xas8A==}
+  '@destyler/date@0.2.3-beta.7':
+    resolution: {integrity: sha512-c9IWVElSOz2fUr5mHK+6Ny5peSOWr5HwpwYw7X7ot0kew+CprWGTyZ/qRni6GXlXnn1DPLS6M0vEZugORy1h2Q==}
     peerDependencies:
       '@internationalized/date': '>=3.0.0'
 
-  '@destyler/dialog@0.2.3-beta.6':
-    resolution: {integrity: sha512-EgMEm3hYx5kH3HeVobDRGbopnpUtwlrERj5u1CDmu9bHH7sOjTz9GlM5mwEhT/qP+ZXAUkj0XP5zEjbBxZsAxQ==}
+  '@destyler/dialog@0.2.3-beta.7':
+    resolution: {integrity: sha512-jD9K3p2Ny5ESnAiDq1lMDo48CmqIIzkRZ1XvSK7Psy9LPa0aDm3JGVgK6Kf57rU53gNSCKZWHn8rY5Cc7eNDFw==}
 
-  '@destyler/dismissable@0.2.3-beta.6':
-    resolution: {integrity: sha512-0LBvhaFyIyw48nLqqJ7xIPLQdyJ1KxVqjnJTG4ZxRMsq856erk5wBqy+Lxw/MKTSou/k2xumPM7N6DLRktagPQ==}
+  '@destyler/dismissable@0.2.3-beta.7':
+    resolution: {integrity: sha512-qOvarpDwcKgPn1Zu4wC18OEv/6jAU1DuE64vmj1b8DS52ta+tSFhFt64f1d9JIC5EQMpj7UcTvkygGDgR2Sl4Q==}
 
-  '@destyler/dom@0.2.3-beta.6':
-    resolution: {integrity: sha512-hNvX4bWoClvkwPWlb09+fCTiqRsaHuK+Ihtcke50Rn2vwAXg/0DDg5qaX2wcViVML28ISeZqyMcyfXlK5WD5eA==}
+  '@destyler/dom@0.2.3-beta.7':
+    resolution: {integrity: sha512-FqfewAGgLXe0W0ByigzlP7Y+WNu+uxirqLcDr89DmnclseGtsRUnk/J6h6D5dznjqG13ulvF984/gCi074zm/Q==}
 
-  '@destyler/edit@0.2.3-beta.6':
-    resolution: {integrity: sha512-EAAmyaTnEknoed7B9XfARrkpWDaqMY++tFxtthWkRpt9bCFP9M3ph61xxt4lpjLUax6kTjDBIJt5dzUz1Z0Umw==}
+  '@destyler/edit@0.2.3-beta.7':
+    resolution: {integrity: sha512-gDJGSb9ZuaYnOzA9v/r/DAhc2s5fHLJ8cGKBkEMIPuKq0gbyTmDuDomQFKiqo15sapb5SeA/E4sz6gRyQ63sBQ==}
 
-  '@destyler/file-upload@0.2.3-beta.6':
-    resolution: {integrity: sha512-pUmWLn/RznaBAlXFTC6OqtT9Bo7fJbJYmH+Y/pyZyjmSC8WJpgiijALUJuIWg6lJt+0HvyeuMKf6RtUZKyIwRQ==}
+  '@destyler/file-upload@0.2.3-beta.7':
+    resolution: {integrity: sha512-mEqui+/Hq0QG+E1Z1isZZWRdPHh1mCPFR9A7IIa21JObUw4GLjMmIYdRvzn5xiVh9WkajhRD07TPRhxC6+kN3w==}
 
-  '@destyler/file@0.2.3-beta.6':
-    resolution: {integrity: sha512-ZCUKB2iTNjupIXwfdjBx9FA8Zf4GvQiDCcmLCEbmPdCt5jA/kBVciiQFSiy4yxcnBb61sdqjwX34TeGNxqqw9Q==}
+  '@destyler/file@0.2.3-beta.7':
+    resolution: {integrity: sha512-OgkoPJuM78cpyCxhKWiSLeDGfNo1FGn5SQDisk8LHIZap9E5DhQb0pETAWp7PJSaWxEvoEbrnBACTnxNn80wGA==}
 
-  '@destyler/focus-trap@0.2.3-beta.6':
-    resolution: {integrity: sha512-Mpa2JOXZlbKz9cTHOvkCe7vPsoB75CipSh7OwGnuTQAQK4/fB0AGgAiTj0DnYMbFppdSGSR1EVGfN5A6RPdVfw==}
+  '@destyler/focus-trap@0.2.3-beta.7':
+    resolution: {integrity: sha512-NBo9zKrU0X5h/WPx6Lv+im3nfoOTGihVjiSpc9g0NeZxjFoz5vzlY14zFVMPvSj8tok74QRmNfMFSU+FcTZReQ==}
 
-  '@destyler/focus-visible@0.2.3-beta.6':
-    resolution: {integrity: sha512-TJl47rEQY1cY5iVETwQOnaYFWByOeck6St4GDmKMQscafDdyhLXLn7i2DKQ2Bt26H/UwnpPvFHVyVOYXwfltQQ==}
+  '@destyler/focus-visible@0.2.3-beta.7':
+    resolution: {integrity: sha512-y/lGa1rjQcA6eDHSzCpQftnoGG+NeYLpg7+dXYpNUTClBId2OMg8w5S50pNhWtS6onO8Hj807rzPZOIR3J4ftw==}
 
-  '@destyler/highlight-text@0.2.3-beta.6':
-    resolution: {integrity: sha512-iS0nbs4LzxPGKxqU/MnM+XCCQkfoC/Mx3DbEVvGXT5h47U5PWCnpp5kICG1pe3RUFD8v9gw6/fswsgTTUiYO/g==}
+  '@destyler/highlight-text@0.2.3-beta.7':
+    resolution: {integrity: sha512-RyDIapj4NBcGaUUgjdOgrmv+WeRnyvKx25D3X1g3Zv/RSrkeJzwMSjFnxzqWTlvY8eHRPdiVj+a9ETuXjdYgMg==}
 
-  '@destyler/hover-card@0.2.3-beta.6':
-    resolution: {integrity: sha512-6MjjoPPKdTqj0AZQ8W034G9u5T9T3ShUz/aZ4EBDzNQIsuAOOL4iZrWKrElIDyuD3U116idxF9hkZskQJqMnrw==}
+  '@destyler/hover-card@0.2.3-beta.7':
+    resolution: {integrity: sha512-dnYXjuVKVyO/yblnctf+3fHPt6TsHTbKiheoj1UThVFzPWCJdcWeslsYYKXD8OX+fpmSo5ywMnaYybnQ/voGNQ==}
 
-  '@destyler/i18n@0.2.3-beta.6':
-    resolution: {integrity: sha512-dRbTZq5lTBek3oPTymOEwltBxRFIdDK1+j5x1vc4jKD4Aqeg6LTD21/BfZeYWhOE3eAGu+99P0+0IDKaSKUC/A==}
+  '@destyler/i18n@0.2.3-beta.7':
+    resolution: {integrity: sha512-uXgv4XNdPqBdxCHhozycJCvRU2vRxy0rbdKzO+YuC/9d1ktk8UP55IEch1XVe6WtzRdOy5p+eLOQfkmygFu30Q==}
 
-  '@destyler/image@0.2.3-beta.6':
-    resolution: {integrity: sha512-9dXBHqFjElElyyreWmRTZ0ay/qywbafcFkUL4yrrhAQAywNVR/4NUezqFQAJEi3MksnKPe/fdvgN8C+djXS4+w==}
+  '@destyler/image@0.2.3-beta.7':
+    resolution: {integrity: sha512-CZvxy9f+aZhnQaETfJ7naMNnJli9lMUCJ5yVwnlxAkvWIB6Zhd8Dxd87PM83scriNGjWuF9J2r2uDyYn1/JuTQ==}
 
-  '@destyler/interact-outside@0.2.3-beta.6':
-    resolution: {integrity: sha512-4O/d1NK4XMHrYvzwtMlBEjb/LQPlrpy/s0o5GfjMC+XuoiG+2uzLEPAJaL1MkbzGeoZDdoarejb0aPeYgKqmTA==}
+  '@destyler/interact-outside@0.2.3-beta.7':
+    resolution: {integrity: sha512-Mjxtci3R+NdsT+a0Pybfxaf3hpMhRKlgLnCOHqXeLVcWp9JiX5RyZ8WDe/txloq+KmC3twHnPW2gExcYJQpuwA==}
 
-  '@destyler/live-region@0.2.3-beta.6':
-    resolution: {integrity: sha512-mU+YzemTINpES7wWWhV3LUzqPP1DLmCAmulJIP/wAcNoInS/t+wCjcim7puUX/NbOJSplwr1BEnNQYcGaEhiog==}
+  '@destyler/live-region@0.2.3-beta.7':
+    resolution: {integrity: sha512-yk4+rMDockeVYCFeoHKxT/gbZCpntI853sIac7a7kUn/luc2OtDr15+YteQm7WYC9zgFa6NNPxYDlRjEsYFUbQ==}
 
-  '@destyler/menu@0.2.3-beta.6':
-    resolution: {integrity: sha512-FWucPp08xag8DwIIUSZVNJdkLf2Y9JvN/zVWXJCzOLjUp57E97KLphpfq4ESaxtzB6pyWDh1YfiyhxZ+VlYMjQ==}
+  '@destyler/menu@0.2.3-beta.7':
+    resolution: {integrity: sha512-Di3Y92xoz+9Yf3oQPCA1utg/gC7+BYYyCrUcnqSde2cfBivrlMRDgrMNuZMbJLK3vpTEdBpRI9kWZRTMJEYKdQ==}
 
-  '@destyler/number-input@0.2.3-beta.6':
-    resolution: {integrity: sha512-YQP2TSkgdStx41MCrU2JQH9xiPw6khFmWBKvD/S6suKvyrSTN5d1eH0B6hHRI0b0zwnpGVI/9fwWwsp6+/fSqA==}
+  '@destyler/number-input@0.2.3-beta.7':
+    resolution: {integrity: sha512-0oOli0J72CiwwQ+rRVEHPvXfH9AA6ui66W2NkHXejsrnY9e6r2XXC4O1XIFrNlGIZSZiTXOj12jtfTYErVXdFg==}
 
-  '@destyler/otp-input@0.2.3-beta.6':
-    resolution: {integrity: sha512-4iI8P5u8kZzPpVvg8qSuBj8o0HsEmIFoVRrzSxR0iL6KRzcsxWItjSOi5jdJruWB4wpQvpCuIgTJ0Ild6z06GQ==}
+  '@destyler/otp-input@0.2.3-beta.7':
+    resolution: {integrity: sha512-4BL04U4k4ZbHV7mj7JnTrgc4X9DL/bifQSem4IXoMDLXr4XaNfc91gKotJ2BtRAK2jbCU/nq8I+I7Z1Sqg7PpA==}
 
-  '@destyler/pagination@0.2.3-beta.6':
-    resolution: {integrity: sha512-Wt1iHTNQCNvfoGFQZZl9Ef+BxbwUuyg/IfSgpq6dfkPYhse/tqxWEM/Cyj7LMibNIaIFbj7eALc+zYX512XHmQ==}
+  '@destyler/pagination@0.2.3-beta.7':
+    resolution: {integrity: sha512-C8RRnbCOCLqJ/Ze0Lpp5Hxyrm6dNTwc93qrZq6XG+wRgDJtGejz0poCCoiLm/85qUnwoowErNlFPKsuxUoCqvQ==}
 
-  '@destyler/popover@0.2.3-beta.6':
-    resolution: {integrity: sha512-eH1jrWoL2OAvn20ZTyzYpC6fCDjpWCMLbV1F8sfWMExrWYDuXC1HGTp+tgv0R2wEFS5lNnyEK1s5d8R3bWAO+Q==}
+  '@destyler/popover@0.2.3-beta.7':
+    resolution: {integrity: sha512-Vdk/JTfR5uq0ogPKmPVKNKmJlfZ6FT3n+Jlq76P2X/Y5zOLpJQZW/FSdsbI4jlB1yNf1ifhQTu++pV0eXcr4HQ==}
 
-  '@destyler/popper@0.2.3-beta.6':
-    resolution: {integrity: sha512-XOixuoP4Q/WH7JgD3GCASv7dYJgC0V43wiONaxZ1zOo58iwFyseMO1f0IvyvjRc8tnoWIRnpP25uyExH+MV52w==}
+  '@destyler/popper@0.2.3-beta.7':
+    resolution: {integrity: sha512-mqCaNRQFkrR2GGqcSinnU+PDauxqAOLO/k/1U7TukwiIhYc+68IapbFooYxoOTMbiMEs0O69OUISfO2uGuJcsg==}
 
-  '@destyler/presence@0.2.3-beta.6':
-    resolution: {integrity: sha512-iHROPbU7TLWyP7RGr2E01Fa75xOWv7/ADSC6tWQLWG0Gbqq0bxPiR5k0gme6GTkJmux3jIWnQ1ms5Q7txuP/GQ==}
+  '@destyler/presence@0.2.3-beta.7':
+    resolution: {integrity: sha512-TxA3kbCOtFQkWX2I8nvaq08B5uLvco+i0KQXGg3vOy+e6YOr3AoAQtNh4TnKF33CyyZ5WOHCegmblOoX185c7A==}
 
-  '@destyler/progress@0.2.3-beta.6':
-    resolution: {integrity: sha512-paDKcjivw6iQ/gR3MUzGei0luu77H8wpj9Eq8LZdWDd/WmBKjoe1FbG81edaUURxROGg0I8vatnws08h8f0hiQ==}
+  '@destyler/progress@0.2.3-beta.7':
+    resolution: {integrity: sha512-XtBTVvIScnq5rpujIcPixsPDHmSWsobvKCfIggq4/wLsHsOXZ0Q4XYc6GysrDaLCDzw7KaHF3rHOBK/ZhLaJ1w==}
 
-  '@destyler/rect@0.2.3-beta.6':
-    resolution: {integrity: sha512-KX8AktLMqojtx0xUE8Jf3XLBaczTn6fomIa6wGLmCefqMGsv7op5PBwnebkbQRHHncvnKhiLyPYOm8++Y8rDPQ==}
+  '@destyler/qr-code@0.2.3-beta.7':
+    resolution: {integrity: sha512-7McAj7potR4WwxSZDzofFS4ULdlyMfz4mYMJKr68VTRCxyERQ+pl1xQTTFOVfBsfOMrp/w8sVmBKd33bS2mCBQ==}
 
-  '@destyler/remove-scroll@0.2.3-beta.6':
-    resolution: {integrity: sha512-us1P4t4F78uJNm0SrsvGWmQrjsZLMx6i1PgaZmuvuhfCkGVtHDNMSQHc2U5rOFmUKes/uCh5IGajBeQeSdgmCA==}
+  '@destyler/rect@0.2.3-beta.7':
+    resolution: {integrity: sha512-Qfz0ujFTUeECT3IRnHfeYbhvisQqQGQVt/Ho2TvsC1tjyx8+zk7F2DyIvNJmZKh9rN73bm18aQgyCpn/C8Z3fw==}
 
-  '@destyler/scroll-snap@0.2.3-beta.6':
-    resolution: {integrity: sha512-fnB0yfoO7ag8HZ947qzG4AvvnV7452dDnwIPPViyToBuW3IsZGilLE+PjGMvABoMMv+luBs2gmha3U7nFLt5YA==}
+  '@destyler/remove-scroll@0.2.3-beta.7':
+    resolution: {integrity: sha512-xDspzpC/bMpnnO4Et1o3tAJdtHbyxPwkb3bNrPvuUn6KiG9Mb211ADS+62QRA/NsZsOZPemKOCEu5yOIsup9mA==}
 
-  '@destyler/store@0.2.3-beta.6':
-    resolution: {integrity: sha512-SnmWNgsg5sQMqWwAB+RhFK1S4M1RcPlbtYQp6T4EUjcsXLjInxoHo19yKJ1GTqVr5xvXBmZWgdw8zv5S5k3MXQ==}
+  '@destyler/scroll-snap@0.2.3-beta.7':
+    resolution: {integrity: sha512-wdfNHL6T1lcUVUd/SLVGZOTZogXVVBE7BRn/8W9kDb+XLIUQ7A8PLDqm2BOacfrgjrjYXIe7zzg8nvce2cpxfA==}
 
-  '@destyler/types@0.2.3-beta.6':
-    resolution: {integrity: sha512-r06AfPrqFteuwxSakLGMkr63RY69A5e4ZazT7hmON3cvW8ngcwR7amezd791G1qN8LcqOqzJH0JRk4RWSBIxgg==}
+  '@destyler/store@0.2.3-beta.7':
+    resolution: {integrity: sha512-3/ptandLLAf/55Y7jKmQvXS2d79mAZ7isqFoRX+iWYGMnTKSgZw6acyhO/ejH9AQIcqvndCobNcPNAlFyF85Eg==}
 
-  '@destyler/utils@0.2.3-beta.6':
-    resolution: {integrity: sha512-XPEnHkBYRSNbDkQ65M8drhhu06en/EDxR4zaixfNEi58XmDBmDniixXpavu0Pj4DwjFO5oo37idVSeogXm58ug==}
+  '@destyler/types@0.2.3-beta.7':
+    resolution: {integrity: sha512-sOvT7W6RTMh9dPV/xecjIe0sh90Lpw69/lG/ohh/IGCtZuIyeZzkKZ/IvqtevG9IjA4/9/mD9BZfdk7kxQx7AQ==}
 
-  '@destyler/vue@0.2.3-beta.6':
-    resolution: {integrity: sha512-EN8Xqtu9CGZC2JbLkZz47rhvoVfnxPc60b9jxixb+9PqIbRcOAb2cuhBHVr+8KTTka6hDkADlTrqm5yFeFqADw==}
+  '@destyler/utils@0.2.3-beta.7':
+    resolution: {integrity: sha512-qg1sFUs7fADilYlM6qnjs6DuIJWEsih2239tOjVhrXtCV1awP7S1Kx7RriUPw2CWQn/qdilfetMruKEIL2SHQA==}
+
+  '@destyler/vue@0.2.3-beta.7':
+    resolution: {integrity: sha512-GiTSVgvGCBsT0iTqbidFQZATU7QGWmvifiuyQH/B6k0BxNoqxyKYj51dFp9wT2j24TCAwXznK9ClZL8wHSYZSA==}
     peerDependencies:
       vue: '>=3.0.0'
 
-  '@destyler/xstate@0.2.3-beta.6':
-    resolution: {integrity: sha512-fqNtA5Q2mTaoBah4rZJr9wPKSEhWIDemiZ1Fs+qeWibBWzSzEhkJMgIX5xLuntII50LgN+0yJWCH1Q0rRf45qw==}
+  '@destyler/xstate@0.2.3-beta.7':
+    resolution: {integrity: sha512-vXbX/pXNWee3m0qEUMUg8GniUn5nN0Fz2qRoB3CgkoHhcBEet8sBYey9OzkWfn7Dw+XoG2CYboKtLDa7zHbIbQ==}
 
   '@emnapi/core@1.7.1':
     resolution: {integrity: sha512-o1uhUASyo921r2XtHYOHy7gdkGLge8ghBEQHMWmyJFoXlpU58kIrhhN3w26lpQb6dspetweapMn2CSNwQ8I4wg==}
@@ -1196,24 +1205,28 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-arm64-musl@1.0.0-beta.53':
     resolution: {integrity: sha512-bGe5EBB8FVjHBR1mOLOPEFg1Lp3//7geqWkU5NIhxe+yH0W8FVrQ6WRYOap4SUTKdklD/dC4qPLREkMMQ855FA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rolldown/binding-linux-x64-gnu@1.0.0-beta.53':
     resolution: {integrity: sha512-qL+63WKVQs1CMvFedlPt0U9PiEKJOAL/bsHMKUDS6Vp2Q+YAv/QLPu8rcvkfIMvQ0FPU2WL0aX4eWwF6e/GAnA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-x64-musl@1.0.0-beta.53':
     resolution: {integrity: sha512-VGl9JIGjoJh3H8Mb+7xnVqODajBmrdOOb9lxWXdcmxyI+zjB2sux69br0hZJDTyLJfvBoYm439zPACYbCjGRmw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rolldown/binding-openharmony-arm64@1.0.0-beta.53':
     resolution: {integrity: sha512-B4iIserJXuSnNzA5xBLFUIjTfhNy7d9sq4FUMQY3GhQWGVhS2RWWzzDnkSU6MUt7/aHUrep0CdQfXUJI9D3W7A==}
@@ -1281,56 +1294,67 @@ packages:
     resolution: {integrity: sha512-k9oD15soC/Ln6d2Wv/JOFPzZXIAIFLp6B+i14KhxAfnq76ajt0EhYc5YPeX6W1xJkAdItcVT+JhKl1QZh44/qw==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.53.3':
     resolution: {integrity: sha512-vTNlKq+N6CK/8UktsrFuc+/7NlEYVxgaEgRXVUVK258Z5ymho29skzW1sutgYjqNnquGwVUObAaxae8rZ6YMhg==}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.53.3':
     resolution: {integrity: sha512-RGrFLWgMhSxRs/EWJMIFM1O5Mzuz3Xy3/mnxJp/5cVhZ2XoCAxJnmNsEyeMJtpK+wu0FJFWz+QF4mjCA7AUQ3w==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.53.3':
     resolution: {integrity: sha512-kASyvfBEWYPEwe0Qv4nfu6pNkITLTb32p4yTgzFCocHnJLAHs+9LjUu9ONIhvfT/5lv4YS5muBHyuV84epBo/A==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-loong64-gnu@4.53.3':
     resolution: {integrity: sha512-JiuKcp2teLJwQ7vkJ95EwESWkNRFJD7TQgYmCnrPtlu50b4XvT5MOmurWNrCj3IFdyjBQ5p9vnrX4JM6I8OE7g==}
     cpu: [loong64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-ppc64-gnu@4.53.3':
     resolution: {integrity: sha512-EoGSa8nd6d3T7zLuqdojxC20oBfNT8nexBbB/rkxgKj5T5vhpAQKKnD+h3UkoMuTyXkP5jTjK/ccNRmQrPNDuw==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.53.3':
     resolution: {integrity: sha512-4s+Wped2IHXHPnAEbIB0YWBv7SDohqxobiiPA1FIWZpX+w9o2i4LezzH/NkFUl8LRci/8udci6cLq+jJQlh+0g==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.53.3':
     resolution: {integrity: sha512-68k2g7+0vs2u9CxDt5ktXTngsxOQkSEV/xBbwlqYcUrAVh6P9EgMZvFsnHy4SEiUl46Xf0IObWVbMvPrr2gw8A==}
     cpu: [riscv64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.53.3':
     resolution: {integrity: sha512-VYsFMpULAz87ZW6BVYw3I6sWesGpsP9OPcyKe8ofdg9LHxSbRMd7zrVrr5xi/3kMZtpWL/wC+UIJWJYVX5uTKg==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.53.3':
     resolution: {integrity: sha512-3EhFi1FU6YL8HTUJZ51imGJWEX//ajQPfqWLI3BQq4TlvHy4X0MOr5q3D2Zof/ka0d5FNdPwZXm3Yyib/UEd+w==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.53.3':
     resolution: {integrity: sha512-eoROhjcc6HbZCJr+tvVT8X4fW3/5g/WkGvvmwz/88sDtSJzO7r/blvoBDgISDiCjDRZmHpwud7h+6Q9JxFwq1Q==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-openharmony-arm64@4.53.3':
     resolution: {integrity: sha512-OueLAWgrNSPGAdUdIjSWXw+u/02BRTcnfw9PN41D2vq/JSEPnJnVuBgw18VkN8wcd4fjUs+jFHVM4t9+kBSNLw==}
@@ -3005,24 +3029,28 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-arm64-musl@1.30.2:
     resolution: {integrity: sha512-5Vh9dGeblpTxWHpOx8iauV02popZDsCYMPIgiuw97OJ5uaDsL86cnqSFs5LZkG3ghHoX5isLgWzMs+eD1YzrnA==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-linux-x64-gnu@1.30.2:
     resolution: {integrity: sha512-Cfd46gdmj1vQ+lR6VRTTadNHu6ALuw2pKR9lYq4FnhvgBc4zWY1EtZcAc6EffShbb1MFrIPfLDXD6Xprbnni4w==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-x64-musl@1.30.2:
     resolution: {integrity: sha512-XJaLUUFXb6/QG2lGIW6aIk6jKdtjtcffUT0NKvIqhSBY3hh9Ch+1LCeH80dR9q9LBjG3ewbDjnumefsLsP6aiA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-win32-arm64-msvc@1.30.2:
     resolution: {integrity: sha512-FZn+vaj7zLv//D/192WFFVA0RgHawIcHqLX9xuWiQt7P0PtdFEVaxgF9rjM/IRYHQXNnk61/H/gb2Ei+kUQ4xQ==}
@@ -3519,6 +3547,9 @@ packages:
 
   proxy-compare@3.0.1:
     resolution: {integrity: sha512-V9plBAt3qjMlS1+nC8771KNf6oJ12gExvaxnNzN/9yVRLdTv/lc+oJlnSzrdYDAvBfTStPCoiaCOTmTs0adv7Q==}
+
+  proxy-memoize@3.0.1:
+    resolution: {integrity: sha512-VDdG/VYtOgdGkWJx7y0o7p+zArSf2383Isci8C+BP3YXgMYDoPd3cCBjw0JdWb6YBb9sFiOPbAADDVTPJnh+9g==}
 
   publint@0.3.15:
     resolution: {integrity: sha512-xPbRAPW+vqdiaKy5sVVY0uFAu3LaviaPO3pZ9FaRx59l9+U/RKR1OEbLhkug87cwiVKxPXyB4txsv5cad67u+A==}
@@ -4077,6 +4108,9 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
+  uqr@0.1.2:
+    resolution: {integrity: sha512-MJu7ypHq6QasgF5YRTjqscSzQp/W11zoUk6kvmlH+fmWEs63Y0Eib13hYFwAzagRJcVY8WVnlV+eBDUGMJ5IbA==}
+
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
@@ -4486,287 +4520,297 @@ snapshots:
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
-  '@destyler/anatomy@0.2.3-beta.6': {}
+  '@destyler/anatomy@0.2.3-beta.7': {}
 
-  '@destyler/aria-hidden@0.2.3-beta.6': {}
+  '@destyler/aria-hidden@0.2.3-beta.7': {}
 
-  '@destyler/auto-resize@0.2.3-beta.6':
+  '@destyler/auto-resize@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
 
-  '@destyler/calendar@0.2.3-beta.6(@internationalized/date@3.10.0)':
+  '@destyler/calendar@0.2.3-beta.7(@internationalized/date@3.10.0)':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/date': 0.2.3-beta.6(@internationalized/date@3.10.0)
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/live-region': 0.2.3-beta.6
-      '@destyler/popper': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/date': 0.2.3-beta.7(@internationalized/date@3.10.0)
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/live-region': 0.2.3-beta.7
+      '@destyler/popper': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
       '@internationalized/date': 3.10.0
 
-  '@destyler/carousel@0.2.3-beta.6':
+  '@destyler/carousel@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/scroll-snap': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/scroll-snap': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/checkbox@0.2.3-beta.6':
+  '@destyler/checkbox@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/focus-visible': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/focus-visible': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/clipboard@0.2.3-beta.6':
+  '@destyler/clipboard@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/collapse@0.2.3-beta.6':
+  '@destyler/collapse@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/collapsible@0.2.3-beta.6':
+  '@destyler/collapsible@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/collection@0.2.3-beta.6':
+  '@destyler/collection@0.2.3-beta.7':
     dependencies:
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/utils': 0.2.3-beta.7
 
-  '@destyler/color-picker@0.2.3-beta.6':
+  '@destyler/color-picker@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/color': 0.2.3-beta.6
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/popper': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/color': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/popper': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/color@0.2.3-beta.6':
+  '@destyler/color@0.2.3-beta.7':
     dependencies:
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/utils': 0.2.3-beta.7
 
-  '@destyler/combobox@0.2.3-beta.6':
+  '@destyler/combobox@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/aria-hidden': 0.2.3-beta.6
-      '@destyler/collection': 0.2.3-beta.6
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/popper': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/aria-hidden': 0.2.3-beta.7
+      '@destyler/collection': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/popper': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/date@0.2.3-beta.6(@internationalized/date@3.10.0)':
+  '@destyler/date@0.2.3-beta.7(@internationalized/date@3.10.0)':
     dependencies:
       '@internationalized/date': 3.10.0
 
-  '@destyler/dialog@0.2.3-beta.6':
+  '@destyler/dialog@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/aria-hidden': 0.2.3-beta.6
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/focus-trap': 0.2.3-beta.6
-      '@destyler/remove-scroll': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/aria-hidden': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/focus-trap': 0.2.3-beta.7
+      '@destyler/remove-scroll': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/dismissable@0.2.3-beta.6':
+  '@destyler/dismissable@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/interact-outside': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/interact-outside': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
 
-  '@destyler/dom@0.2.3-beta.6':
+  '@destyler/dom@0.2.3-beta.7':
     dependencies:
-      '@destyler/types': 0.2.3-beta.6
+      '@destyler/types': 0.2.3-beta.7
 
-  '@destyler/edit@0.2.3-beta.6':
+  '@destyler/edit@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/interact-outside': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/interact-outside': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/file-upload@0.2.3-beta.6':
+  '@destyler/file-upload@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/file': 0.2.3-beta.6
-      '@destyler/i18n': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/file': 0.2.3-beta.7
+      '@destyler/i18n': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/file@0.2.3-beta.6': {}
+  '@destyler/file@0.2.3-beta.7': {}
 
-  '@destyler/focus-trap@0.2.3-beta.6':
+  '@destyler/focus-trap@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
 
-  '@destyler/focus-visible@0.2.3-beta.6':
+  '@destyler/focus-visible@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
 
-  '@destyler/highlight-text@0.2.3-beta.6': {}
+  '@destyler/highlight-text@0.2.3-beta.7': {}
 
-  '@destyler/hover-card@0.2.3-beta.6':
+  '@destyler/hover-card@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/popper': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/popper': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/i18n@0.2.3-beta.6':
+  '@destyler/i18n@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
 
-  '@destyler/image@0.2.3-beta.6':
+  '@destyler/image@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/interact-outside@0.2.3-beta.6':
+  '@destyler/interact-outside@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
 
-  '@destyler/live-region@0.2.3-beta.6': {}
+  '@destyler/live-region@0.2.3-beta.7': {}
 
-  '@destyler/menu@0.2.3-beta.6':
+  '@destyler/menu@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/popper': 0.2.3-beta.6
-      '@destyler/rect': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/popper': 0.2.3-beta.7
+      '@destyler/rect': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/number-input@0.2.3-beta.6':
+  '@destyler/number-input@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
       '@internationalized/number': 3.6.5
 
-  '@destyler/otp-input@0.2.3-beta.6':
+  '@destyler/otp-input@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/pagination@0.2.3-beta.6':
+  '@destyler/pagination@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/popover@0.2.3-beta.6':
+  '@destyler/popover@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/aria-hidden': 0.2.3-beta.6
-      '@destyler/dismissable': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/focus-trap': 0.2.3-beta.6
-      '@destyler/popper': 0.2.3-beta.6
-      '@destyler/remove-scroll': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/aria-hidden': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/focus-trap': 0.2.3-beta.7
+      '@destyler/popper': 0.2.3-beta.7
+      '@destyler/remove-scroll': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/popper@0.2.3-beta.6':
+  '@destyler/popper@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
       '@floating-ui/dom': 1.7.4
 
-  '@destyler/presence@0.2.3-beta.6':
+  '@destyler/presence@0.2.3-beta.7':
     dependencies:
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/progress@0.2.3-beta.6':
+  '@destyler/progress@0.2.3-beta.7':
     dependencies:
-      '@destyler/anatomy': 0.2.3-beta.6
-      '@destyler/dom': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
-  '@destyler/rect@0.2.3-beta.6': {}
-
-  '@destyler/remove-scroll@0.2.3-beta.6':
+  '@destyler/qr-code@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
+      proxy-memoize: 3.0.1
+      uqr: 0.1.2
 
-  '@destyler/scroll-snap@0.2.3-beta.6':
+  '@destyler/rect@0.2.3-beta.7': {}
+
+  '@destyler/remove-scroll@0.2.3-beta.7':
     dependencies:
-      '@destyler/dom': 0.2.3-beta.6
+      '@destyler/dom': 0.2.3-beta.7
 
-  '@destyler/store@0.2.3-beta.6':
+  '@destyler/scroll-snap@0.2.3-beta.7':
+    dependencies:
+      '@destyler/dom': 0.2.3-beta.7
+
+  '@destyler/store@0.2.3-beta.7':
     dependencies:
       proxy-compare: 3.0.1
 
-  '@destyler/types@0.2.3-beta.6':
+  '@destyler/types@0.2.3-beta.7':
     dependencies:
-      '@destyler/store': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/store': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
       csstype: 3.2.3
 
-  '@destyler/utils@0.2.3-beta.6': {}
+  '@destyler/utils@0.2.3-beta.7': {}
 
-  '@destyler/vue@0.2.3-beta.6(vue@3.5.25(typescript@5.9.3))':
+  '@destyler/vue@0.2.3-beta.7(vue@3.5.25(typescript@5.9.3))':
     dependencies:
-      '@destyler/store': 0.2.3-beta.6
-      '@destyler/types': 0.2.3-beta.6
-      '@destyler/xstate': 0.2.3-beta.6
+      '@destyler/store': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
       vue: 3.5.25(typescript@5.9.3)
 
-  '@destyler/xstate@0.2.3-beta.6':
+  '@destyler/xstate@0.2.3-beta.7':
     dependencies:
-      '@destyler/store': 0.2.3-beta.6
-      '@destyler/utils': 0.2.3-beta.6
+      '@destyler/store': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
 
   '@emnapi/core@1.7.1':
     dependencies:
@@ -7917,6 +7961,10 @@ snapshots:
 
   proxy-compare@3.0.1: {}
 
+  proxy-memoize@3.0.1:
+    dependencies:
+      proxy-compare: 3.0.1
+
   publint@0.3.15:
     dependencies:
       '@publint/pack': 0.1.2
@@ -8448,6 +8496,8 @@ snapshots:
       browserslist: 4.28.1
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  uqr@0.1.2: {}
 
   uri-js@4.4.1:
     dependencies:

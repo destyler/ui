@@ -19,36 +19,37 @@ catalogs:
     bumpp: ^10.3.2
     plop: ^4.0.4
   prod:
-    '@destyler/anatomy': ^0.2.3-beta.6
-    '@destyler/auto-resize': ^0.2.3-beta.6
-    '@destyler/calendar': ^0.2.3-beta.6
-    '@destyler/carousel': ^0.2.3-beta.6
-    '@destyler/checkbox': ^0.2.3-beta.6
-    '@destyler/clipboard': ^0.2.3-beta.6
-    '@destyler/collapse': ^0.2.3-beta.6
-    '@destyler/collapsible': ^0.2.3-beta.6
-    '@destyler/collection': ^0.2.3-beta.6
-    '@destyler/color-picker': ^0.2.3-beta.6
-    '@destyler/combobox': ^0.2.3-beta.6
-    '@destyler/dialog': ^0.2.3-beta.6
-    '@destyler/dom': ^0.2.3-beta.6
-    '@destyler/edit': ^0.2.3-beta.6
-    '@destyler/file-upload': ^0.2.3-beta.6
-    '@destyler/focus-trap': ^0.2.3-beta.6
-    '@destyler/highlight-text': ^0.2.3-beta.6
-    '@destyler/hover-card': ^0.2.3-beta.6
-    '@destyler/i18n': ^0.2.3-beta.6
-    '@destyler/image': ^0.2.3-beta.6
-    '@destyler/menu': ^0.2.3-beta.6
-    '@destyler/number-input': ^0.2.3-beta.6
-    '@destyler/otp-input': ^0.2.3-beta.6
-    '@destyler/pagination': ^0.2.3-beta.6
-    '@destyler/popover': ^0.2.3-beta.6
-    '@destyler/presence': ^0.2.3-beta.6
-    '@destyler/progress': ^0.2.3-beta.6
-    '@destyler/utils': ^0.2.3-beta.6
-    '@destyler/vue': ^0.2.3-beta.6
-    '@destyler/xstate': ^0.2.3-beta.6
+    '@destyler/anatomy': ^0.2.3-beta.7
+    '@destyler/auto-resize': ^0.2.3-beta.7
+    '@destyler/calendar': ^0.2.3-beta.7
+    '@destyler/carousel': ^0.2.3-beta.7
+    '@destyler/checkbox': ^0.2.3-beta.7
+    '@destyler/clipboard': ^0.2.3-beta.7
+    '@destyler/collapse': ^0.2.3-beta.7
+    '@destyler/collapsible': ^0.2.3-beta.7
+    '@destyler/collection': ^0.2.3-beta.7
+    '@destyler/color-picker': ^0.2.3-beta.7
+    '@destyler/combobox': ^0.2.3-beta.7
+    '@destyler/dialog': ^0.2.3-beta.7
+    '@destyler/dom': ^0.2.3-beta.7
+    '@destyler/edit': ^0.2.3-beta.7
+    '@destyler/file-upload': ^0.2.3-beta.7
+    '@destyler/focus-trap': ^0.2.3-beta.7
+    '@destyler/highlight-text': ^0.2.3-beta.7
+    '@destyler/hover-card': ^0.2.3-beta.7
+    '@destyler/i18n': ^0.2.3-beta.7
+    '@destyler/image': ^0.2.3-beta.7
+    '@destyler/menu': ^0.2.3-beta.7
+    '@destyler/number-input': ^0.2.3-beta.7
+    '@destyler/otp-input': ^0.2.3-beta.7
+    '@destyler/pagination': ^0.2.3-beta.7
+    '@destyler/popover': ^0.2.3-beta.7
+    '@destyler/presence': ^0.2.3-beta.7
+    '@destyler/progress': ^0.2.3-beta.7
+    '@destyler/qr-code': ^0.2.3-beta.7
+    '@destyler/utils': ^0.2.3-beta.7
+    '@destyler/vue': ^0.2.3-beta.7
+    '@destyler/xstate': ^0.2.3-beta.7
   runtime:
     '@vitejs/devtools': 0.0.0-alpha.19
     '@vitejs/plugin-vue': ^6.0.2

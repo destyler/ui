@@ -67,6 +67,7 @@
     "@destyler/popover": "catalog:prod",
     "@destyler/presence": "catalog:prod",
     "@destyler/progress": "catalog:prod",
+    "@destyler/qr-code": "catalog:prod",
     "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"
