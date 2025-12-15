@@ -48,6 +48,7 @@ catalogs:
     '@destyler/progress': ^0.2.3-beta.7
     '@destyler/qr-code': ^0.2.3-beta.7
     '@destyler/radio': ^0.2.3-beta.7
+    '@destyler/select': ^0.2.3-beta.7
     '@destyler/utils': ^0.2.3-beta.7
     '@destyler/vue': ^0.2.3-beta.7
     '@destyler/xstate': ^0.2.3-beta.7

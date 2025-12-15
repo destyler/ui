@@ -27,6 +27,6 @@ describe('[qr-code] component', () => {
   it('should render overlay content', async () => {
     render(WithOverlay)
 
-    await expect.element(page.getByAltText('Ark UI Logo')).toBeInTheDocument()
+    await expect.element(page.getByAltText('Logo')).toBeInTheDocument()
   })
 })

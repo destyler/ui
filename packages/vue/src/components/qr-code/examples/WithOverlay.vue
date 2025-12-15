@@ -8,7 +8,7 @@ import { QrCode } from '../index'
       <QrCode.Pattern />
     </QrCode.Frame>
     <QrCode.Overlay>
-      <img src="https://ark-ui.com/icon-192.png" alt="Ark UI Logo" />
+      <img src="https://destyler.org/favicon.svg" alt="Logo" />
     </QrCode.Overlay>
   </QrCode.Root>
 </template>
