@@ -121,6 +121,9 @@ catalogs:
     '@destyler/select':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
+    '@destyler/signature':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/utils':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
@@ -365,6 +368,9 @@ importers:
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/select':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
+      '@destyler/signature':
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/utils':
@@ -629,6 +635,9 @@ packages:
 
   '@destyler/select@0.2.3-beta.7':
     resolution: {integrity: sha512-ZpfW77PKdCWT8/xd9iAq1CGSdaKkVvN3iDwllENbdqb550+xoQjGIoaKoNnAxBHydKb/ZbBWktL4XlpydhMg3w==}
+
+  '@destyler/signature@0.2.3-beta.7':
+    resolution: {integrity: sha512-Upv+RqcsTPU9ZK77efNCvGR9uUQLXU/f3R93jQpNVt0vLYJSDa0aRdAHbTrDXkWqbXdvNits9HMYbFklagqoXA==}
 
   '@destyler/store@0.2.3-beta.7':
     resolution: {integrity: sha512-3/ptandLLAf/55Y7jKmQvXS2d79mAZ7isqFoRX+iWYGMnTKSgZw6acyhO/ejH9AQIcqvndCobNcPNAlFyF85Eg==}
@@ -3493,6 +3502,9 @@ packages:
   perfect-debounce@2.0.0:
     resolution: {integrity: sha512-fkEH/OBiKrqqI/yIgjR92lMfs2K8105zt/VT6+7eTjNwisrsh47CeIED9z58zI7DfKdH3uHAn25ziRZn3kgAow==}
 
+  perfect-freehand@1.2.2:
+    resolution: {integrity: sha512-eh31l019WICQ03pkF3FSzHxB8n07ItqIQ++G5UV8JX0zVOXzgTGCqnRR0jJ2h9U8/2uW4W4mtGJELt9kEV0CFQ==}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -4831,6 +4843,15 @@ snapshots:
       '@destyler/types': 0.2.3-beta.7
       '@destyler/utils': 0.2.3-beta.7
       '@destyler/xstate': 0.2.3-beta.7
+
+  '@destyler/signature@0.2.3-beta.7':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
+      perfect-freehand: 1.2.2
 
   '@destyler/store@0.2.3-beta.7':
     dependencies:
@@ -7924,6 +7945,8 @@ snapshots:
   pathval@2.0.1: {}
 
   perfect-debounce@2.0.0: {}
+
+  perfect-freehand@1.2.2: {}
 
   picocolors@1.1.1: {}
 
