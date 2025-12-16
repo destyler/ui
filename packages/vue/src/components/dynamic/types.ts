@@ -110,31 +110,31 @@ export interface RootEmits {
   /**
    * Function called when the focus is moved outside the component
    */
-  "focusOutside": [event: dynamic.FocusOutsideEvent]
+  'focusOutside': [event: dynamic.FocusOutsideEvent]
   /**
    * Callback fired when a tag is highlighted by pointer or keyboard navigation
    */
-  "highlightChange": [details: dynamic.HighlightChangeDetails]
+  'highlightChange': [details: dynamic.HighlightChangeDetails]
   /**
    * Callback fired when the input value is updated
    */
-  "inputValueChange": [details: dynamic.InputValueChangeDetails]
+  'inputValueChange': [details: dynamic.InputValueChangeDetails]
   /**
    * Function called when an interaction happens outside the component
    */
-  "interactOutside": [event: dynamic.InteractOutsideEvent]
+  'interactOutside': [event: dynamic.InteractOutsideEvent]
   /**
    * Function called when the pointer is pressed down outside the component
    */
-  "pointerDownOutside": [event: dynamic.PointerDownOutsideEvent]
+  'pointerDownOutside': [event: dynamic.PointerDownOutsideEvent]
   /**
    * Callback fired when the tag values is updated
    */
-  "valueChange": [details: dynamic.ValueChangeDetails]
+  'valueChange': [details: dynamic.ValueChangeDetails]
   /**
    * Callback fired when the max tag count is reached or the `validateTag` function returns `false`
    */
-  "valueInvalid": [details: dynamic.ValidityChangeDetails]
+  'valueInvalid': [details: dynamic.ValidityChangeDetails]
   /**
    * The callback fired when the model value changes.
    */
