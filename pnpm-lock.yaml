@@ -124,6 +124,9 @@ catalogs:
     '@destyler/signature':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
+    '@destyler/slider':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/utils':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
@@ -371,6 +374,9 @@ importers:
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/signature':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
+      '@destyler/slider':
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/utils':
@@ -638,6 +644,12 @@ packages:
 
   '@destyler/signature@0.2.3-beta.7':
     resolution: {integrity: sha512-Upv+RqcsTPU9ZK77efNCvGR9uUQLXU/f3R93jQpNVt0vLYJSDa0aRdAHbTrDXkWqbXdvNits9HMYbFklagqoXA==}
+
+  '@destyler/size@0.2.3-beta.7':
+    resolution: {integrity: sha512-J9dztIsGJT2ppOqZfQI+57hSBZdkM/PBZ/p2LU1jWD6X3NhNHRdcu4FTjBurqmDnhx6DFgN0/c9G6Oem+ivZWw==}
+
+  '@destyler/slider@0.2.3-beta.7':
+    resolution: {integrity: sha512-uyr1fPzVdWh5mc1lt3m/bc920/jJJasjf4yFgCeK7IzjkGCMz6Un5r4gOH2JnI/ilZaAnrOMqoLMpZRTFZGeZg==}
 
   '@destyler/store@0.2.3-beta.7':
     resolution: {integrity: sha512-3/ptandLLAf/55Y7jKmQvXS2d79mAZ7isqFoRX+iWYGMnTKSgZw6acyhO/ejH9AQIcqvndCobNcPNAlFyF85Eg==}
@@ -4852,6 +4864,17 @@ snapshots:
       '@destyler/utils': 0.2.3-beta.7
       '@destyler/xstate': 0.2.3-beta.7
       perfect-freehand: 1.2.2
+
+  '@destyler/size@0.2.3-beta.7': {}
+
+  '@destyler/slider@0.2.3-beta.7':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/size': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
   '@destyler/store@0.2.3-beta.7':
     dependencies:

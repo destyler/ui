@@ -71,6 +71,7 @@
     "@destyler/radio": "catalog:prod",
     "@destyler/select": "catalog:prod",
     "@destyler/signature": "catalog:prod",
+    "@destyler/slider": "catalog:prod",
     "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"

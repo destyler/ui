@@ -50,6 +50,7 @@ catalogs:
     '@destyler/radio': ^0.2.3-beta.7
     '@destyler/select': ^0.2.3-beta.7
     '@destyler/signature': ^0.2.3-beta.7
+    '@destyler/slider': ^0.2.3-beta.7
     '@destyler/utils': ^0.2.3-beta.7
     '@destyler/vue': ^0.2.3-beta.7
     '@destyler/xstate': ^0.2.3-beta.7
