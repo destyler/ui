@@ -53,6 +53,7 @@
     "@destyler/combobox": "catalog:prod",
     "@destyler/dialog": "catalog:prod",
     "@destyler/dom": "catalog:prod",
+    "@destyler/dynamic": "catalog:prod",
     "@destyler/edit": "catalog:prod",
     "@destyler/file-upload": "catalog:prod",
     "@destyler/focus-trap": "catalog:prod",
