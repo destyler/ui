@@ -73,6 +73,7 @@
     "@destyler/signature": "catalog:prod",
     "@destyler/slider": "catalog:prod",
     "@destyler/splitter": "catalog:prod",
+    "@destyler/steps": "catalog:prod",
     "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"
