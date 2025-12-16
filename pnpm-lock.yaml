@@ -136,6 +136,9 @@ catalogs:
     '@destyler/switch':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
+    '@destyler/tabs':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/utils':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
@@ -395,6 +398,9 @@ importers:
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/switch':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
+      '@destyler/tabs':
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/utils':
@@ -680,6 +686,9 @@ packages:
 
   '@destyler/switch@0.2.3-beta.7':
     resolution: {integrity: sha512-4eoUnPf+RH/drkJJ2h+P5AixuQcAvYtlIc9DCCY+DQLDXXvm8VOzRLgQD0o6phB/hsmbnqoRn68Em4HUqemsxQ==}
+
+  '@destyler/tabs@0.2.3-beta.7':
+    resolution: {integrity: sha512-F0rdTX7J2P4Iac2xVJ/o5WhAtaZxQEHSP7vOEUuwt06Buos7J3+WXmikdmgxDwq8SnVwu+vCgiTu25RzsceJHg==}
 
   '@destyler/types@0.2.3-beta.7':
     resolution: {integrity: sha512-sOvT7W6RTMh9dPV/xecjIe0sh90Lpw69/lG/ohh/IGCtZuIyeZzkKZ/IvqtevG9IjA4/9/mD9BZfdk7kxQx7AQ==}
@@ -4928,6 +4937,15 @@ snapshots:
       '@destyler/anatomy': 0.2.3-beta.7
       '@destyler/dom': 0.2.3-beta.7
       '@destyler/focus-visible': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
+
+  '@destyler/tabs@0.2.3-beta.7':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/element-rect': 0.2.3-beta.7
       '@destyler/types': 0.2.3-beta.7
       '@destyler/utils': 0.2.3-beta.7
       '@destyler/xstate': 0.2.3-beta.7
