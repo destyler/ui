@@ -64,7 +64,7 @@ export interface RootEmits {
   /**
    * Function to call when the switch is clicked.
    */
-  checkedChange: [details: switches.CheckedChangeDetails]
+  'checkedChange': [details: switches.CheckedChangeDetails]
   /**
    * The callback fired when the model value changes.
    */

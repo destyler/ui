@@ -35,11 +35,11 @@ export interface RootEmits {
   /**
    * Callback to be called when the value changes
    */
-  stepChange: [details: steps.StepChangeDetails]
+  'stepChange': [details: steps.StepChangeDetails]
   /**
    * Callback to be called when a step is completed
    */
-  stepComplete: []
+  'stepComplete': []
   /**
    * The callback fired when the model value changes.
    */

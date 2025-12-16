@@ -54,11 +54,11 @@ export interface RootEmits {
   /**
    * Callback to be called when the focused tab changes
    */
-  focusChange: [details: tabs.FocusChangeDetails]
+  'focusChange': [details: tabs.FocusChangeDetails]
   /**
    * Callback to be called when the selected/active tab changes
    */
-  valueChange: [details: tabs.ValueChangeDetails]
+  'valueChange': [details: tabs.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */

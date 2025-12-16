@@ -28,7 +28,7 @@ export {
 } from './components/Item.vue'
 export {
   default as ItemContext,
-  type SelectItemContextProps as ItemContextProps
+  type SelectItemContextProps as ItemContextProps,
 } from './components/ItemContext.vue'
 export {
   default as ItemGroup,
