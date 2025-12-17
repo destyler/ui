@@ -77,6 +77,7 @@
     "@destyler/steps": "catalog:prod",
     "@destyler/switch": "catalog:prod",
     "@destyler/tabs": "catalog:prod",
+    "@destyler/timer": "catalog:prod",
     "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"
