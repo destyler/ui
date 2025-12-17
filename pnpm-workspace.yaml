@@ -59,6 +59,8 @@ catalogs:
     '@destyler/timer': ^0.2.3-beta.7
     '@destyler/toggle': ^0.2.3-beta.7
     '@destyler/tooltip': ^0.2.3-beta.7
+    '@destyler/tour': ^0.2.3-beta.7
+    '@destyler/tree': ^0.2.3-beta.7
     '@destyler/utils': ^0.2.3-beta.7
     '@destyler/vue': ^0.2.3-beta.7
     '@destyler/xstate': ^0.2.3-beta.7

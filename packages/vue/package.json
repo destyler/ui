@@ -80,6 +80,8 @@
     "@destyler/timer": "catalog:prod",
     "@destyler/toggle": "catalog:prod",
     "@destyler/tooltip": "catalog:prod",
+    "@destyler/tour": "catalog:prod",
+    "@destyler/tree": "catalog:prod",
     "@destyler/utils": "catalog:prod",
     "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"

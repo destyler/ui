@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ui } from '../../../factory'
+import { ui } from '~/factory'
 import { usePresence } from '../composables/use-presence'
 import { PresenceProvider } from '../composables/use-presence-context'
 import { useForwardExpose } from '../../../composables'

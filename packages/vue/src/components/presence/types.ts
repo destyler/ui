@@ -1,6 +1,4 @@
-import type { HTMLAttributes } from 'vue'
-
-import type { PolymorphicProps } from '../../factory'
+import type { PolymorphicProps } from '~/factory'
 
 export interface RootProps {
   /**
@@ -30,11 +28,6 @@ export interface RootEmits {
   exitComplete: []
 }
 
-export interface PresenceBaseProps extends RootProps, PolymorphicProps {}
-export interface PresenceProps
-  extends PresenceBaseProps,
-  /**
-   * @vue-ignore
-   */
-  HTMLAttributes {}
+export interface PresenceProps extends RootProps, PolymorphicProps {}
+
 export interface PresenceEmits extends RootEmits {}
