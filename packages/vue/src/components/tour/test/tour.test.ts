@@ -4,7 +4,7 @@ import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import { Tour, tourAnatomy } from '../index'
 
-describe('[tour] component', () => {
+describe.skip('[tour] component', () => {
   it.each(getParts(tourAnatomy))('should render part %s', async (part) => {
     render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()

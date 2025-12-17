@@ -9,44 +9,44 @@ export interface RootProps {
    * The close delay of the tooltip.
    * @default 500
    */
-  "closeDelay"?: number
+  'closeDelay'?: number
   /**
    * Whether the tooltip should close on click
    * @default true
    */
-  "closeOnClick"?: boolean
+  'closeOnClick'?: boolean
   /**
    * Whether to close the tooltip when the Escape key is pressed.
    * @default true
    */
-  "closeOnEscape"?: boolean
+  'closeOnEscape'?: boolean
   /**
    * Whether to close the tooltip on pointerdown.
    * @default true
    */
-  "closeOnPointerDown"?: boolean
+  'closeOnPointerDown'?: boolean
   /**
    * Whether the tooltip should close on scroll
    * @default true
    */
-  "closeOnScroll"?: boolean
+  'closeOnScroll'?: boolean
   /**
    * The initial open state of the tooltip when it is first rendered.
    * Use when you do not need to control its open state.
    */
-  "defaultOpen"?: boolean
+  'defaultOpen'?: boolean
   /**
    * Whether the tooltip is disabled
    */
-  "disabled"?: boolean
+  'disabled'?: boolean
   /**
    * The `id` of the tooltip.
    */
-  "id"?: string
+  'id'?: string
   /**
    * The ids of the elements in the tooltip. Useful for composition.
    */
-  "ids"?: Partial<{ trigger: string, content: string, arrow: string, positioner: string }>
+  'ids'?: Partial<{ trigger: string, content: string, arrow: string, positioner: string }>
   /**
    * Whether the tooltip's content is interactive.
    * In this mode, the tooltip will remain open when user hovers over the content.
@@ -54,26 +54,26 @@ export interface RootProps {
    *
    * @default false
    */
-  "interactive"?: boolean
+  'interactive'?: boolean
   /**
    * Whether the tooltip is open
    */
-  "open"?: boolean
+  'open'?: boolean
   /**
    * The open delay of the tooltip.
    * @default 1000
    */
-  "openDelay"?: number
+  'openDelay'?: number
   /**
    * The user provided options used to position the popover content
    */
-  "positioning"?: tooltip.PositioningOptions
+  'positioning'?: tooltip.PositioningOptions
 }
 
 export interface RootEmits {
   /**
    * Function called when the tooltip is opened.
    */
-  openChange: [details: tooltip.OpenChangeDetails]
+  'openChange': [details: tooltip.OpenChangeDetails]
   'update:open': [open: boolean]
 }

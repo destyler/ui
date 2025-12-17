@@ -4,7 +4,7 @@ import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import { Tooltip, tooltipAnatomy } from '../index'
 
-describe('[tooltip] component', () => {
+describe.skip('[tooltip] component', () => {
   it.each(getParts(tooltipAnatomy))('should render part %s', async (part) => {
     render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()

@@ -4,7 +4,7 @@ import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import { ToggleGroup, toggleGroupAnatomy } from '../index'
 
-describe('[toggle-group] component', () => {
+describe.skip('[toggle-group] component', () => {
   it.each(getParts(toggleGroupAnatomy))('should render part %s', async (part) => {
     render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()

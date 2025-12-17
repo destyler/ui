@@ -2,15 +2,15 @@ export interface RootProps {
   /**
    * Whether the toggle is disabled.
    */
-  "disabled"?: boolean
+  'disabled'?: boolean
   /**
    * The default pressed state of the toggle.
    */
-  "defaultPressed"?: boolean
+  'defaultPressed'?: boolean
   /**
    * The pressed state of the toggle.
    */
-  "modelValue"?: boolean
+  'modelValue'?: boolean
   /**
    * Event handler called when the pressed state of the toggle changes.
    */
@@ -18,6 +18,6 @@ export interface RootProps {
 }
 
 export interface RootEmits {
-  pressedChange: [value: boolean]
+  'pressedChange': [value: boolean]
   'update:modelValue': [value: boolean]
 }

@@ -1,9 +1,9 @@
 import type { PropTypes } from '@destyler/vue'
-import type {ComputedRef} from 'vue';
+import type { ComputedRef } from 'vue'
 import type { RootEmits, RootProps } from '../types'
 import type { EmitFn } from '~/types'
 import { dataAttr } from '@destyler/dom'
-import { computed  } from 'vue'
+import { computed } from 'vue'
 import { useVModel } from '~/composables/use-v-model'
 import { parts } from '../anatomy'
 

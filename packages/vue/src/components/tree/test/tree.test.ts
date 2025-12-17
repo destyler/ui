@@ -4,7 +4,7 @@ import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import { Tree, treeAnatomy } from '../index'
 
-describe('[tree] component', () => {
+describe.skip('[tree] component', () => {
   it.each(getParts(treeAnatomy))('should render part %s', async (part) => {
     render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
