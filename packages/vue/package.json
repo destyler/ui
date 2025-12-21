@@ -58,6 +58,7 @@
     "@destyler/dynamic": "catalog:prod",
     "@destyler/edit": "catalog:prod",
     "@destyler/file-upload": "catalog:prod",
+    "@destyler/floating-panel": "catalog:prod",
     "@destyler/focus-trap": "catalog:prod",
     "@destyler/highlight-text": "catalog:prod",
     "@destyler/hover-card": "catalog:prod",

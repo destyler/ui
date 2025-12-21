@@ -37,6 +37,7 @@ catalogs:
     '@destyler/dynamic': ^0.2.3-beta.7
     '@destyler/edit': ^0.2.3-beta.7
     '@destyler/file-upload': ^0.2.3-beta.7
+    '@destyler/floating-panel': ^0.2.3-beta.7
     '@destyler/focus-trap': ^0.2.3-beta.7
     '@destyler/highlight-text': ^0.2.3-beta.7
     '@destyler/hover-card': ^0.2.3-beta.7
