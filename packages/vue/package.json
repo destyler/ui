@@ -83,6 +83,7 @@
     "@destyler/switch": "catalog:prod",
     "@destyler/tabs": "catalog:prod",
     "@destyler/timer": "catalog:prod",
+    "@destyler/toast": "catalog:prod",
     "@destyler/toggle": "catalog:prod",
     "@destyler/tooltip": "catalog:prod",
     "@destyler/tour": "catalog:prod",

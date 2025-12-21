@@ -160,6 +160,9 @@ catalogs:
     '@destyler/timer':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
+    '@destyler/toast':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/toggle':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
@@ -455,6 +458,9 @@ importers:
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/timer':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
+      '@destyler/toast':
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/toggle':
@@ -776,6 +782,9 @@ packages:
 
   '@destyler/timer@0.2.3-beta.7':
     resolution: {integrity: sha512-1zlvWOHGJQChE3QQrkeW/aQsr7GVmDJ/jhCh8r6/2b422BbJx5u7yPMdbx6bf4ge3A/r9PfXv+rLvVUqA3oa9g==}
+
+  '@destyler/toast@0.2.3-beta.7':
+    resolution: {integrity: sha512-gL2jbSLGO7WcqhvX7SHiiunakNnZd/ANxv+qNHa7xMrPeoom8+TeA3iUFY4Q5LHKI+bi6ebjnyvKC+fkH4BfTw==}
 
   '@destyler/toggle@0.2.3-beta.7':
     resolution: {integrity: sha512-/lYy7OVnB8ppVBb0Vldzi7qaky9SM5Sq3rSUnrI9nQdRPcWAtAAPwaoa2UBsykP8cvrV5un6JYYXZXEBKqntCA==}
@@ -5106,6 +5115,15 @@ snapshots:
   '@destyler/timer@0.2.3-beta.7':
     dependencies:
       '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
+
+  '@destyler/toast@0.2.3-beta.7':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dismissable': 0.2.3-beta.7
       '@destyler/dom': 0.2.3-beta.7
       '@destyler/types': 0.2.3-beta.7
       '@destyler/utils': 0.2.3-beta.7
