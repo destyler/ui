@@ -43,6 +43,7 @@
     "@destyler/anatomy": "catalog:prod",
     "@destyler/aspect-ratio": "catalog:prod",
     "@destyler/auto-resize": "catalog:prod",
+    "@destyler/breadcrumbs": "catalog:prod",
     "@destyler/calendar": "catalog:prod",
     "@destyler/carousel": "catalog:prod",
     "@destyler/checkbox": "catalog:prod",
