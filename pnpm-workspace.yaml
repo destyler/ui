@@ -53,6 +53,7 @@ catalogs:
     '@destyler/qr-code': ^0.2.3-beta.7
     '@destyler/radio': ^0.2.3-beta.7
     '@destyler/select': ^0.2.3-beta.7
+    '@destyler/separator': ^0.2.3-beta.7
     '@destyler/signature': ^0.2.3-beta.7
     '@destyler/slider': ^0.2.3-beta.7
     '@destyler/splitter': ^0.2.3-beta.7
