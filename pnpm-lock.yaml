@@ -34,6 +34,9 @@ catalogs:
     '@destyler/anatomy':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
+    '@destyler/aspect-ratio':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/auto-resize':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
@@ -316,6 +319,9 @@ importers:
       '@destyler/anatomy':
         specifier: catalog:prod
         version: 0.2.3-beta.7
+      '@destyler/aspect-ratio':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
       '@destyler/auto-resize':
         specifier: catalog:prod
         version: 0.2.3-beta.7
@@ -574,6 +580,9 @@ packages:
 
   '@destyler/aria-hidden@0.2.3-beta.7':
     resolution: {integrity: sha512-ovqwlMj+o6UvKV5dlnT1049ChSFLNV/C0hiok65yv/RhM1DLs/XbW71c2ocW++pJ/Y08OCj5DktADByYYecQFQ==}
+
+  '@destyler/aspect-ratio@0.2.3-beta.7':
+    resolution: {integrity: sha512-Wnake34rNBdavEZbuBuCAeBvmS9PW91wE2+cj2vuLjm1DbJKlt8F6Feuj8pkTln1qeiRqOzc4gzg8841S/29/Q==}
 
   '@destyler/auto-resize@0.2.3-beta.7':
     resolution: {integrity: sha512-yR0BbIs6G1RLPNz9qwiT3qXPn50CKHT3/BY9EgGl+239XlH03lf5bCgBo49rZHt5Yqt+JZEKyENrb79dvSs3OQ==}
@@ -4399,8 +4408,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.1.8:
-    resolution: {integrity: sha512-oaowlmEM6BaYY+8o+9D9cuzxpWQWHqHTMKakMxXu0E+UCIOMTljyIPO15jcnaCwJtZu/zWDotK7mOIHvWD9mcw==}
+  vue-component-type-helpers@3.2.1:
+    resolution: {integrity: sha512-gKV7XOkQl4urSuLHNY1tnVQf7wVgtb/mKbRyxSLWGZUY9RK7aDPhBenTjm+i8ZFe0zC2PZeHMPtOZXZfyaFOzQ==}
 
   vue-docgen-api@4.79.2:
     resolution: {integrity: sha512-n9ENAcs+40awPZMsas7STqjkZiVlIjxIKgiJr5rSohDP0/JCrD9VtlzNojafsA1MChm/hz2h3PDtUedx3lbgfA==}
@@ -4658,6 +4667,14 @@ snapshots:
   '@destyler/anatomy@0.2.3-beta.7': {}
 
   '@destyler/aria-hidden@0.2.3-beta.7': {}
+
+  '@destyler/aspect-ratio@0.2.3-beta.7':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/dom': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
   '@destyler/auto-resize@0.2.3-beta.7':
     dependencies:
@@ -5717,7 +5734,7 @@ snapshots:
       storybook: 10.1.5(@testing-library/dom@10.4.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       type-fest: 2.19.0
       vue: 3.5.25(typescript@5.9.3)
-      vue-component-type-helpers: 3.1.8
+      vue-component-type-helpers: 3.2.1
 
   '@stylistic/eslint-plugin@5.6.1(eslint@9.39.1(jiti@2.6.1))':
     dependencies:
@@ -8875,7 +8892,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.1.8: {}
+  vue-component-type-helpers@3.2.1: {}
 
   vue-docgen-api@4.79.2(vue@3.5.25(typescript@5.9.3)):
     dependencies:

@@ -4,6 +4,9 @@ import { Toggle } from '../index'
 
 <template>
   <Toggle.Root>
-    1
+    <Toggle.Indicator>
+      ✓
+    </Toggle.Indicator>
+    Toggle
   </Toggle.Root>
 </template>

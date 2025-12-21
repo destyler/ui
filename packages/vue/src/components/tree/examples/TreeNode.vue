@@ -20,13 +20,14 @@ defineProps<Props>()
     <template v-if="node.children">
       <Tree.Branch>
         <Tree.BranchControl>
-          <Tree.BranchText>
-            📁
-            {{ node.name }}
-          </Tree.BranchText>
-          <Tree.BranchIndicator>
-            ▶
-          </Tree.BranchIndicator>
+          <Tree.BranchTrigger>
+            <Tree.BranchText>
+              {{ node.name }}
+            </Tree.BranchText>
+            <Tree.BranchIndicator>
+              ▶
+            </Tree.BranchIndicator>
+          </Tree.BranchTrigger>
         </Tree.BranchControl>
         <Tree.BranchContent>
           <Tree.BranchIndentGuide />
@@ -45,7 +46,6 @@ defineProps<Props>()
           •
         </Tree.ItemIndicator>
         <Tree.ItemText>
-          <File />
           {{ node.name }}
         </Tree.ItemText>
       </Tree.Item>

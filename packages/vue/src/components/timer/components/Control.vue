@@ -20,5 +20,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-bind="timer.getControlProps()" :as-child="asChild" />
+  <ui.div v-bind="timer.getControlProps()" :as-child="asChild">
+    <slot />
+  </ui.div>
 </template>

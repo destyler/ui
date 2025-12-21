@@ -21,7 +21,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="timer.getActionTriggerProps(props)" :as-child="asChild">
+  <ui.button v-bind="timer.getActionTriggerProps({ action: props.action })" :as-child="asChild">
     <slot />
   </ui.button>
 </template>

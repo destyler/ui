@@ -21,7 +21,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-bind="timer.getItemProps(props)" :as-child="asChild">
-    {{ timer.formattedTime[props.type] }}
+  <ui.div v-bind="timer.getItemProps({ type: props.type })" :as-child="asChild">
+    <slot>{{ timer.formattedTime[props.type] }}</slot>
   </ui.div>
 </template>

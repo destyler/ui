@@ -20,6 +20,7 @@ catalogs:
     plop: ^4.0.4
   prod:
     '@destyler/anatomy': ^0.2.3-beta.7
+    '@destyler/aspect-ratio': ^0.2.3-beta.7
     '@destyler/auto-resize': ^0.2.3-beta.7
     '@destyler/calendar': ^0.2.3-beta.7
     '@destyler/carousel': ^0.2.3-beta.7
