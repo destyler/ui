@@ -63,6 +63,7 @@
     "@destyler/hover-card": "catalog:prod",
     "@destyler/i18n": "catalog:prod",
     "@destyler/image": "catalog:prod",
+    "@destyler/label": "catalog:prod",
     "@destyler/menu": "catalog:prod",
     "@destyler/number-input": "catalog:prod",
     "@destyler/otp-input": "catalog:prod",

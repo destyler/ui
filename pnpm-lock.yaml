@@ -100,6 +100,9 @@ catalogs:
     '@destyler/image':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
+    '@destyler/label':
+      specifier: ^0.2.3-beta.7
+      version: 0.2.3-beta.7
     '@destyler/menu':
       specifier: ^0.2.3-beta.7
       version: 0.2.3-beta.7
@@ -386,6 +389,9 @@ importers:
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/image':
+        specifier: catalog:prod
+        version: 0.2.3-beta.7
+      '@destyler/label':
         specifier: catalog:prod
         version: 0.2.3-beta.7
       '@destyler/menu':
@@ -677,6 +683,9 @@ packages:
 
   '@destyler/interact-outside@0.2.3-beta.7':
     resolution: {integrity: sha512-Mjxtci3R+NdsT+a0Pybfxaf3hpMhRKlgLnCOHqXeLVcWp9JiX5RyZ8WDe/txloq+KmC3twHnPW2gExcYJQpuwA==}
+
+  '@destyler/label@0.2.3-beta.7':
+    resolution: {integrity: sha512-IS0Eu8drjxyb9IeK1YQ8KrCeceEsLctTprQKRThkdT60k91T2Fe55PjduxJgTD8HL9uEW+l6YsUI6U7RVSD+sw==}
 
   '@destyler/live-region@0.2.3-beta.7':
     resolution: {integrity: sha512-yk4+rMDockeVYCFeoHKxT/gbZCpntI853sIac7a7kUn/luc2OtDr15+YteQm7WYC9zgFa6NNPxYDlRjEsYFUbQ==}
@@ -4879,6 +4888,13 @@ snapshots:
     dependencies:
       '@destyler/dom': 0.2.3-beta.7
       '@destyler/utils': 0.2.3-beta.7
+
+  '@destyler/label@0.2.3-beta.7':
+    dependencies:
+      '@destyler/anatomy': 0.2.3-beta.7
+      '@destyler/types': 0.2.3-beta.7
+      '@destyler/utils': 0.2.3-beta.7
+      '@destyler/xstate': 0.2.3-beta.7
 
   '@destyler/live-region@0.2.3-beta.7': {}
 
