@@ -74,6 +74,7 @@
     "@destyler/progress": "catalog:prod",
     "@destyler/qr-code": "catalog:prod",
     "@destyler/radio": "catalog:prod",
+    "@destyler/scroll-area": "catalog:prod",
     "@destyler/select": "catalog:prod",
     "@destyler/separator": "catalog:prod",
     "@destyler/signature": "catalog:prod",

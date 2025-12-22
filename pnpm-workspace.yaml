@@ -52,6 +52,7 @@ catalogs:
     '@destyler/qr-code': ^0.2.6
     '@destyler/radio': ^0.2.6
     '@destyler/select': ^0.2.6
+    '@destyler/scroll-area': ^0.2.6
     '@destyler/separator': ^0.2.6
     '@destyler/signature': ^0.2.6
     '@destyler/slider': ^0.2.6
