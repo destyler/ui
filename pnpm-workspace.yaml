@@ -71,7 +71,7 @@ catalogs:
     '@destyler/vue': ^0.2.6
     '@destyler/xstate': ^0.2.6
   runtime:
-    '@vitejs/devtools': 0.0.0-alpha.19
+    '@vitejs/devtools': 0.0.0-alpha.20
     '@vitejs/plugin-vue': ^6.0.2
     vite: ^8.0.0-beta.1
   stories:

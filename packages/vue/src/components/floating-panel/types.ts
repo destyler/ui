@@ -4,77 +4,77 @@ export interface RootProps {
   /**
    * Whether the floating panel is open
    */
-  'open'?: boolean
+  open?: boolean
   /**
    * The initial open state of the floating panel when it is first rendered.
    * Use when you do not need to control its open state.
    */
-  'defaultOpen'?: boolean
+  defaultOpen?: boolean
   /**
    * The unique identifier of the machine.
    */
-  'id'?: string
+  id?: string
   /**
    * The ids of the elements in the floating panel. Useful for composition.
    */
-  'ids'?: floatingPanel.ElementIds
+  ids?: floatingPanel.ElementIds
   /**
    * Whether the panel is disabled
    */
-  'disabled'?: boolean
+  disabled?: boolean
   /**
    * Whether the panel is draggable
    * @default true
    */
-  'draggable'?: boolean
+  draggable?: boolean
   /**
    * Whether the panel is resizable
    * @default true
    */
-  'resizable'?: boolean
+  resizable?: boolean
   /**
    * Whether the panel should be strictly contained within the boundary when dragging
    * @default true
    */
-  'allowOverflow'?: boolean
+  allowOverflow?: boolean
   /**
    * The strategy to use for positioning
    * @default "absolute"
    */
-  'strategy'?: 'absolute' | 'fixed'
+  strategy?: 'absolute' | 'fixed'
   /**
    * The position of the panel
    */
-  'position'?: { x: number, y: number }
+  position?: { x: number, y: number }
   /**
    * The minimum size of the panel
    */
-  'minSize'?: { width: number, height: number }
+  minSize?: { width: number, height: number }
   /**
    * The maximum size of the panel
    */
-  'maxSize'?: { width: number, height: number }
+  maxSize?: { width: number, height: number }
   /**
    * The size of the panel
    */
-  'size'?: { width: number, height: number }
+  size?: { width: number, height: number }
   /**
    * The snap grid for the panel
    * @default 1
    */
-  'gridSize'?: number
+  gridSize?: number
   /**
    * Whether the panel is locked to its aspect ratio
    */
-  'lockAspectRatio'?: boolean
+  lockAspectRatio?: boolean
   /**
    * Whether the panel should close when the escape key is pressed
    */
-  'closeOnEscape'?: boolean
+  closeOnEscape?: boolean
   /**
    * Whether the panel size and position should be preserved when it is closed
    */
-  'persistRect'?: boolean
+  persistRect?: boolean
 }
 
 export interface RootEmits {

@@ -17,7 +17,7 @@ export function createToaster(props: CreateToasterProps): CreateToasterReturn {
   const machine = toast.group.machine({
     id: useId(),
     ...props,
- })
+  })
   const api = toast.group.connect(machine, machine.send, normalizeProps)
   return { ...api, machine }
 }
