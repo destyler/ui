@@ -24,11 +24,11 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}, emit?: Emi
   const context = computed(() => ({
     id,
     dir: locale.value.dir,
-    value: props.value ?? props.defaultValue ?? null,
+    value: props.modelValue ?? props.defaultValue ?? null,
     getRootNode: env?.value.getRootNode,
     onValueChange: (details: navigationMenu.ValueChangeDetails) => {
       emit?.('valueChange', details)
-      emit?.('update:value', details.value)
+      emit?.('update:modelValue', details.value)
     },
     ...cleanProps(props),
   }))

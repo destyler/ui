@@ -5,7 +5,7 @@ export interface RootProps {
    * The controlled value of the menu item to activate.
    * Can be used as v-model.
    */
-  'value'?: string | null
+  'modelValue'?: string | null
   /**
    * The value of the menu item to activate by default.
    * Use when you do not need to control the state.
@@ -69,5 +69,5 @@ export interface RootEmits {
   /**
    * The callback fired when the model value changes.
    */
-  'update:value': [value: string | null]
+  'update:modelValue': [value: string | null]
 }

@@ -8,7 +8,7 @@ const emits = defineEmits<RootEmits>()
 
 <template>
   <main class="main">
-    <NavigationMenu.Root v-bind="props" class="nav-root" @value-change="emits('valueChange', $event)" @update:value="emits('update:value', $event)">
+    <NavigationMenu.Root v-bind="props" class="nav-root" @value-change="emits('valueChange', $event)" @update:model-value="emits('update:modelValue', $event)">
       <NavigationMenu.List class="nav-list">
         <NavigationMenu.Item value="getting-started">
           <NavigationMenu.Trigger value="getting-started" class="nav-trigger">

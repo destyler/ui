@@ -13,7 +13,7 @@ const value = ref<string | null>(null)
     <button @click="value = null">Close All</button>
   </div>
 
-  <NavigationMenu.Root v-model:value="value">
+  <NavigationMenu.Root v-model="value">
     <NavigationMenu.List>
       <NavigationMenu.Item value="getting-started">
         <NavigationMenu.Trigger value="getting-started">
