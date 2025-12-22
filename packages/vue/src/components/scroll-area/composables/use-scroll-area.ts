@@ -27,4 +27,3 @@ export function useScrollArea(props: UseScrollAreaProps = {}, emit?: EmitFn<Root
   const [state, send] = useMachine(scrollArea.machine(context.value), { context: context as any })
   return computed(() => scrollArea.connect(state.value, send, normalizeProps))
 }
-
