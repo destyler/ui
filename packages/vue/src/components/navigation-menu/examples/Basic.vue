@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import type { RootEmits, RootProps } from '../types'
 import { NavigationMenu } from '../index'
+
+const props = defineProps<RootProps>()
+const emits = defineEmits<RootEmits>()
 </script>
 
 <template>
   <main class="main">
-    <NavigationMenu.Root class="nav-root">
+    <NavigationMenu.Root v-bind="props" class="nav-root" @value-change="emits('valueChange', $event)" @update:value="emits('update:value', $event)">
       <NavigationMenu.List class="nav-list">
         <NavigationMenu.Item value="getting-started">
           <NavigationMenu.Trigger value="getting-started" class="nav-trigger">
