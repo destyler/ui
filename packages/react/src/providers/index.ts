@@ -1,4 +1,5 @@
 export * from './client-only'
 export * from './environment'
 export * from './focus-trap'
+export * from './frame'
 export * from './locale'
