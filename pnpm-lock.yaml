@@ -145,6 +145,9 @@ catalogs:
     '@destyler/radio':
       specifier: ^0.2.6
       version: 0.2.6
+    '@destyler/react':
+      specifier: ^0.2.6
+      version: 0.2.6
     '@destyler/scroll-area':
       specifier: ^0.2.6
       version: 0.2.6
@@ -460,6 +463,9 @@ importers:
       '@destyler/radio':
         specifier: catalog:prod
         version: 0.2.6
+      '@destyler/react':
+        specifier: catalog:prod
+        version: 0.2.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@destyler/scroll-area':
         specifier: catalog:prod
         version: 0.2.6
@@ -508,9 +514,6 @@ importers:
       '@destyler/utils':
         specifier: catalog:prod
         version: 0.2.6
-      '@destyler/vue':
-        specifier: catalog:prod
-        version: 0.2.6(vue@3.5.25(typescript@5.9.3))
       '@destyler/xstate':
         specifier: catalog:prod
         version: 0.2.6
@@ -1012,6 +1015,12 @@ packages:
 
   '@destyler/radio@0.2.6':
     resolution: {integrity: sha512-rW6ibzIFnPosWTstTPEereuWczz7rN6aRwjhSqFhz0zRDHqQa32fj+XNrUZ3h7gnRm9t6qxBPKjM7g0Rp/xdwA==}
+
+  '@destyler/react@0.2.6':
+    resolution: {integrity: sha512-fz3D1QEl/QX1/WL9Wi94NkuMFPZsd3aMqqmVIbuHm7mbNAqcLkU7xS4dSXwUiAg7atyNAjW68jcBv6doAQKCmg==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
 
   '@destyler/rect@0.2.6':
     resolution: {integrity: sha512-pA+FnrUeLOeI4ImeslrrPmhPZSWaAMz4aL8n24nzLsgn9s/MAdcEhXejIu/yQ87s0Lha1+uJoOZN5sI/haIbXA==}
@@ -5520,6 +5529,15 @@ snapshots:
       '@destyler/types': 0.2.6
       '@destyler/utils': 0.2.6
       '@destyler/xstate': 0.2.6
+
+  '@destyler/react@0.2.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@destyler/store': 0.2.6
+      '@destyler/types': 0.2.6
+      '@destyler/xstate': 0.2.6
+      proxy-compare: 3.0.1
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   '@destyler/rect@0.2.6': {}
 

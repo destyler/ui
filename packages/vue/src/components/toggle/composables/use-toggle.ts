@@ -35,7 +35,6 @@ export function useToggle(props: UseToggleProps, emit?: EmitFn<RootEmits>): UseT
     },
     getRootProps() {
       return {
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         ...(parts.root.attrs as any),
         'type': 'button',
         'disabled': disabled.value,
@@ -55,7 +54,6 @@ export function useToggle(props: UseToggleProps, emit?: EmitFn<RootEmits>): UseT
 
     getIndicatorProps() {
       return {
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         ...(parts.indicator.attrs as any),
         'data-disabled': dataAttr(disabled.value),
         'data-pressed': dataAttr(pressedState.value),

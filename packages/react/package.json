@@ -76,6 +76,7 @@
     "@destyler/progress": "catalog:prod",
     "@destyler/qr-code": "catalog:prod",
     "@destyler/radio": "catalog:prod",
+    "@destyler/react": "catalog:prod",
     "@destyler/scroll-area": "catalog:prod",
     "@destyler/select": "catalog:prod",
     "@destyler/separator": "catalog:prod",
@@ -92,7 +93,6 @@
     "@destyler/tour": "catalog:prod",
     "@destyler/tree": "catalog:prod",
     "@destyler/utils": "catalog:prod",
-    "@destyler/vue": "catalog:prod",
     "@destyler/xstate": "catalog:prod"
   },
   "devDependencies": {

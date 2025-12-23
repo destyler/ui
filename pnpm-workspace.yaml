@@ -27,6 +27,7 @@ catalogs:
     '@destyler/calendar': ^0.2.6
     '@destyler/carousel': ^0.2.6
     '@destyler/checkbox': ^0.2.6
+    '@destyler/react': ^0.2.6
     '@destyler/clipboard': ^0.2.6
     '@destyler/collapse': ^0.2.6
     '@destyler/collapsible': ^0.2.6
