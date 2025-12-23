@@ -5,50 +5,50 @@ export interface RootProps {
    * The controlled value of the menu item to activate.
    * Can be used as v-model.
    */
-  'modelValue'?: string | null
+  modelValue?: string | null
   /**
    * The value of the menu item to activate by default.
    * Use when you do not need to control the state.
    */
-  'defaultValue'?: string
+  defaultValue?: string
   /**
    * The orientation of the menu.
    * @default 'horizontal'
    */
-  'orientation'?: 'horizontal' | 'vertical'
+  orientation?: 'horizontal' | 'vertical'
   /**
    * The open delay of the menu content.
    * @default 200
    */
-  'openDelay'?: number
+  openDelay?: number
   /**
    * The close delay of the menu content.
    * @default 300
    */
-  'closeDelay'?: number
+  closeDelay?: number
   /**
    * Whether to disable click trigger.
    * @default false
    */
-  'disableClickTrigger'?: boolean
+  disableClickTrigger?: boolean
   /**
    * Whether to disable hover trigger.
    * @default false
    */
-  'disableHoverTrigger'?: boolean
+  disableHoverTrigger?: boolean
   /**
    * Whether to disable pointer leave close.
    * @default false
    */
-  'disablePointerLeaveClose'?: boolean
+  disablePointerLeaveClose?: boolean
   /**
    * The unique identifier of the machine.
    */
-  'id'?: string
+  id?: string
   /**
    * The ids of the elements in the navigation menu. Useful for composition.
    */
-  'ids'?: Partial<{
+  ids?: Partial<{
     root: string
     list: string
     viewport: string
