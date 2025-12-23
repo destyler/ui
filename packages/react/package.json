@@ -1,23 +1,23 @@
 {
-  "name": "@destyler-ui/vue",
-  "type": "module",
+  "name": "@destyler-ui/react",
   "version": "0.0.1-beta.14",
-  "description": "Build scalable design systems with unstyled, accessible UI components",
+  "packageManager": "pnpm@10.25.0",
+  "description": "Build scalable design systems with unstyled, accessible UI components.",
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",
   "homepage": "https://github.com/destyler/ui",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/destyler/ui.git",
-    "directory": "packages/vue"
+    "directory": "packages/react"
   },
   "bugs": "https://github.com/destyler/ui/issues",
   "keywords": [
     "base",
     "destyler"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -37,7 +37,8 @@
     "test:ui": "vitest --ui --open"
   },
   "peerDependencies": {
-    "vue": ">=3.5.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
     "@destyler/anatomy": "catalog:prod",
@@ -95,8 +96,11 @@
     "@destyler/xstate": "catalog:prod"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "catalog:runtime",
-    "vue": "catalog:framework",
-    "vue-tsc": "catalog:types"
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
+    "@vitejs/plugin-react": "catalog:runtime",
+    "babel-plugin-react-compiler": "catalog:build",
+    "react": "catalog:framework",
+    "react-dom": "catalog:framework"
   }
 }
