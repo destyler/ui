@@ -23,6 +23,7 @@
     "@storybook/addon-a11y": "catalog:stories",
     "@storybook/addon-docs": "catalog:stories",
     "@storybook/addon-vitest": "catalog:stories",
+    "@storybook/react-vite": "catalog:stories",
     "@storybook/vue3-vite": "catalog:stories",
     "@types/node": "catalog:types",
     "@vitejs/devtools": "catalog:runtime",
