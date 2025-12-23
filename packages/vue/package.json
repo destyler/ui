@@ -66,6 +66,7 @@
     "@destyler/image": "catalog:prod",
     "@destyler/label": "catalog:prod",
     "@destyler/menu": "catalog:prod",
+    "@destyler/navigation-menu": "catalog:prod",
     "@destyler/number-input": "catalog:prod",
     "@destyler/otp-input": "catalog:prod",
     "@destyler/pagination": "catalog:prod",

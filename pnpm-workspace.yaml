@@ -43,6 +43,7 @@ catalogs:
     '@destyler/image': ^0.2.6
     '@destyler/label': ^0.2.6
     '@destyler/menu': ^0.2.6
+    '@destyler/navigation-menu': ^0.2.6
     '@destyler/number-input': ^0.2.6
     '@destyler/otp-input': ^0.2.6
     '@destyler/pagination': ^0.2.6
@@ -72,7 +73,7 @@ catalogs:
   runtime:
     '@vitejs/devtools': 0.0.0-alpha.21
     '@vitejs/plugin-vue': ^6.0.2
-    vite: ^8.0.0-beta.1
+    vite: ^8.0.0-beta.3
   stories:
     '@chromatic-com/storybook': ^4.1.3
     '@storybook/addon-a11y': ^10.1.5
