@@ -11,6 +11,7 @@ export interface NavigationMenuRootProviderProps extends RootProviderProps, Poly
 
 <script setup lang="ts">
 import { useForwardExpose } from '~/composables'
+import { ui } from '~/factory'
 import { NavigationMenuProvider } from '../composables/use-navigation-menu-context'
 
 defineOptions({
@@ -18,15 +19,15 @@ defineOptions({
 })
 
 const props = defineProps<NavigationMenuRootProviderProps>()
-const {
-  value: { api },
-} = props
+const navigationMenu = props.value.api
 
-NavigationMenuProvider(api)
+NavigationMenuProvider(navigationMenu)
 
 useForwardExpose()
 </script>
 
 <template>
-  <slot />
+  <ui.nav v-bind="navigationMenu.getRootProps()" :as-child="asChild">
+    <slot />
+  </ui.nav>
 </template>
