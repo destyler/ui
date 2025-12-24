@@ -1,17 +1,19 @@
-import { AspectRatio } from '../index'
+import { AspectRatio, useAspectRatio } from '../index'
 
-export function Basic() {
+export function RootProvider() {
+  const aspectRatio = useAspectRatio({ ratio: 4 / 3 })
+
   return (
     <main style={{ width: 300 }}>
-      <AspectRatio.Root ratio={16 / 9}>
+      <AspectRatio.RootProvider value={aspectRatio}>
         <AspectRatio.Content>
           <img
-            alt="Sunset over the mountains"
+            alt="Root provider aspect ratio example"
             src="https://elonehoo.me/gallery/20_sun.jpg"
             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
           />
         </AspectRatio.Content>
-      </AspectRatio.Root>
+      </AspectRatio.RootProvider>
     </main>
   )
 }

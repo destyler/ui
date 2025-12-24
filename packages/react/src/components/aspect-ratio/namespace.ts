@@ -1,2 +1,8 @@
+export { Content } from './components/Content'
+export type { ContentProps } from './types'
+export { Context } from './components/Context'
+export type { ContextProps } from './types'
 export { Root } from './components/Root'
 export type { RootProps } from './types'
+export { RootProvider } from './components/RootProvider'
+export type { RootProviderProps } from './types'
