@@ -1,0 +1,9 @@
+import type { RootProps } from '../types'
+import { forwardRef } from 'react'
+import { ui } from '~/factory'
+
+export const Root = forwardRef<HTMLDivElement, RootProps>((props, ref) => {
+  return <ui.div ref={ref} {...props} />
+})
+
+Root.displayName = '{{capitalize (camelize react)}}Root'

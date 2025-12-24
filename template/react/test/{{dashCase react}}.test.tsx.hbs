@@ -1,0 +1,17 @@
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom/vitest'
+import { describe, expect, it } from 'vitest'
+import { getExports, getParts } from '../../../../../../utils/test'
+import { Basic } from '../examples/Basic'
+import { {{capitalize (camelize react)}}, {{camelize react}}Anatomy } from '../index'
+
+describe('[{{dashCase react}}] component', () => {
+  it.each(getParts({{camelize react}}Anatomy))('should render part %s', (part) => {
+    const { container } = render(<Basic />)
+    expect(container.querySelector(part)).toBeInTheDocument()
+  })
+
+  it.each(getExports({{camelize react}}Anatomy))('should export %s', (part) => {
+    expect({{capitalize (camelize react)}}[part]).toBeDefined()
+  })
+})

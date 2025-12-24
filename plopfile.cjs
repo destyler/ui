@@ -47,4 +47,34 @@ module.exports = function main(plop) {
       return actions
     },
   })
+
+  plop.setGenerator('react', {
+    description: 'Generates a new React component',
+    prompts: [
+      {
+        type: 'input',
+        name: 'react',
+        message: 'Enter component name (e.g. avatar, otp-input):',
+      },
+    ],
+    actions(answers) {
+      const actions = []
+
+      if (!answers)
+        return actions
+
+      const { react } = answers
+
+      actions.push({
+        type: 'addMany',
+        templateFiles: 'template/react/**',
+        destination: `packages/react/src/components/{{dashCase react}}`,
+        base: 'template/react/',
+        data: { react, name: react },
+        abortOnFail: true,
+      })
+
+      return actions
+    },
+  })
 }
