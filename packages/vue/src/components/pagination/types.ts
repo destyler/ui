@@ -15,7 +15,7 @@ export interface RootProps {
    */
   id?: string
   /**
-   * The ids of the elements in the accordion. Useful for composition.
+   * The ids of the elements in the collapse. Useful for composition.
    */
   ids?: Partial<{
     root: string

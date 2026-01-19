@@ -119,7 +119,7 @@ describe('[collapse] component', () => {
     await expect.element(secondTrigger).toHaveFocus()
   })
 
-  it('should lazy mount an accordion item', async () => {
+  it('should lazy mount an collapse item', async () => {
     render(Basic, { props: { lazyMount: true, collapsible: true } })
 
     const button = page.getByRole('button', { name: 'React Trigger' })
@@ -146,7 +146,7 @@ describe('[collapse] component', () => {
     await expect.element(button).toHaveAttribute('aria-controls')
   })
 
-  it('should lazy mount and unmount on exit an accordion item', async () => {
+  it('should lazy mount and unmount on exit an collapse item', async () => {
     render(Basic, {
       props: { lazyMount: true, unmountOnExit: true, collapsible: true },
     })

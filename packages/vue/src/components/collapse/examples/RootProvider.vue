@@ -4,13 +4,13 @@ import { ref } from 'vue'
 
 const items = ref(['React', 'Solid', 'Vue'])
 
-const accordion = useCollapse({ defaultValue: ['React'] })
+const collapse = useCollapse({ defaultValue: ['React'] })
 </script>
 
 <template>
-  <button @click="accordion.setValue(['Vue'])">Set to Vue</button>
+  <button @click="collapse.setValue(['Vue'])">Set to Vue</button>
 
-  <Collapse.RootProvider :value="accordion">
+  <Collapse.RootProvider :value="collapse">
     <Collapse.Item v-for="item in items" :key="item" :value="item">
       <Collapse.ItemTrigger>
         What is {{ item }}?
