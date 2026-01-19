@@ -14,6 +14,7 @@
     "publish:ci": "pnpm -r publish --access public --no-git-checks",
     "test:ci": "pnpm run --filter \"./packages/**\" -r test",
     "vue": "pnpm --filter @destyler-ui/vue",
+    "react": "pnpm --filter @destyler-ui/react",
     "generate:vue": "plop vue",
     "generate:react": "plop react"
   },
