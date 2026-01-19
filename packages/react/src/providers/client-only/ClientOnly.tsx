@@ -7,7 +7,7 @@ export interface ClientOnlyProps {
 
 const noop = () => void 0
 
-export function ClientOnly (props: ClientOnlyProps): React.ReactNode {
+export function ClientOnly(props: ClientOnlyProps): React.ReactNode {
   const { children, fallback } = props
 
   const isClient = useSyncExternalStore(

@@ -6,7 +6,7 @@ interface FrameContentProps {
   children?: React.ReactNode
 }
 
-export function FrameContent (props: FrameContentProps) {
+export function FrameContent(props: FrameContentProps) {
   const { onMount, onUnmount, children } = props
   const mountedRef = useRef(false)
   const calledRef = useRef(false)

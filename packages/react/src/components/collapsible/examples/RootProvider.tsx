@@ -1,6 +1,6 @@
 import { Collapsible, useCollapsible } from '../index'
 
-export function RootProvider () {
+export function RootProvider() {
   const collapsible = useCollapsible()
 
   return (

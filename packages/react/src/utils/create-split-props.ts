@@ -2,7 +2,7 @@ type EnsureKeys<ExpectedKeys extends (keyof Target)[], Target> = keyof Target ex
   ? unknown
   : `Missing required keys: ${Exclude<keyof Target, ExpectedKeys[number]> & string}`
 
-export function createSplitProps <Target>() {
+export function createSplitProps<Target>() {
   return <Keys extends (keyof Target)[], Props extends Target = Target>(props: Props, keys: Keys & EnsureKeys<Keys, Target>) =>
     (keys as string[]).reduce<[Target, Omit<Props, Extract<(typeof keys)[number], string>>]>(
       (previousValue, currentValue) => {
