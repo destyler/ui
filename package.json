@@ -44,6 +44,7 @@
     "typescript": "catalog:types",
     "vite": "catalog:runtime",
     "vitest": "catalog:test",
+    "vitest-browser-react": "catalog:test",
     "vitest-browser-vue": "catalog:test"
   }
 }

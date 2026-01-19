@@ -95,6 +95,7 @@ catalogs:
     playwright: ^1.57.0
     vitest: ^4.0.15
     vitest-browser-vue: ^2.0.1
+    vitest-browser-react: ^2.0.2
   types:
     '@types/node': ^24.10.2
     '@types/react-dom': ^19.2.3
