@@ -1,7 +1,7 @@
 export {
   CollapseContext as Context,
   type CollapseContextProps as ContextProps,
- } from './components/Context'
+} from './components/Context'
 export {
   CollapseItem as Item,
   type CollapseItemBaseProps as ItemBaseProps,
