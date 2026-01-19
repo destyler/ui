@@ -12,7 +12,7 @@
     "lint:fix": "eslint --fix",
     "release": "bumpp package.json packages/**/package.json --commit --push --tag",
     "publish:ci": "pnpm -r publish --access public --no-git-checks",
-    "test:ci": "pnpm run --filter \"./packages/**\" -r test",
+    "test:ci": "vitest run --browser.headless",
     "dep": "taze",
     "vue": "pnpm --filter @destyler-ui/vue",
     "react": "pnpm --filter @destyler-ui/react",

@@ -6,6 +6,7 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      name: 'react',
       environment: 'happy-dom',
       browser: {
         enabled: true,
