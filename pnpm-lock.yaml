@@ -12,16 +12,6 @@ catalogs:
     tsdown:
       specifier: ^0.20.0-beta.3
       version: 0.20.0-beta.3
-  default:
-    '@eslint-react/eslint-plugin':
-      specifier: ^2.7.2
-      version: 2.7.2
-    eslint-plugin-react-hooks:
-      specifier: ^7.0.1
-      version: 7.0.1
-    eslint-plugin-react-refresh:
-      specifier: ^0.4.26
-      version: 0.4.26
   framework:
     react:
       specifier: ^19.2.3
@@ -36,9 +26,18 @@ catalogs:
     '@antfu/eslint-config':
       specifier: ^7.0.1
       version: 7.0.1
+    '@eslint-react/eslint-plugin':
+      specifier: ^2.7.2
+      version: 2.7.2
     eslint:
       specifier: ^9.39.2
       version: 9.39.2
+    eslint-plugin-react-hooks:
+      specifier: ^7.0.1
+      version: 7.0.1
+    eslint-plugin-react-refresh:
+      specifier: ^0.4.26
+      version: 0.4.26
     eslint-plugin-storybook:
       specifier: ^10.1.11
       version: 10.1.11
@@ -309,7 +308,7 @@ importers:
         specifier: catalog:prod
         version: 0.2.6
       '@eslint-react/eslint-plugin':
-        specifier: 'catalog:'
+        specifier: catalog:lint
         version: 2.7.2(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       '@storybook/addon-a11y':
         specifier: catalog:stories
@@ -348,10 +347,10 @@ importers:
         specifier: catalog:lint
         version: 9.39.2(jiti@2.6.1)
       eslint-plugin-react-hooks:
-        specifier: 'catalog:'
+        specifier: catalog:lint
         version: 7.0.1(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-react-refresh:
-        specifier: 'catalog:'
+        specifier: catalog:lint
         version: 0.4.26(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-storybook:
         specifier: catalog:lint
@@ -5234,8 +5233,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.2:
-    resolution: {integrity: sha512-x8C2nx5XlUNM0WirgfTkHjJGO/ABBxlANZDtHw2HclHtQnn+RFPTnbjMJn8jHZW4TlUam0asHcA14lf1C6Jb+A==}
+  vue-component-type-helpers@3.2.3:
+    resolution: {integrity: sha512-lpJTa8a+12Cgy/n5OdlQTzQhSWOCu+6zQoNFbl3KYxwAoB95mYIgMLKEYMvQykPJ2ucBDjJJISdIBHc1d9Hd3w==}
 
   vue-docgen-api@4.79.2:
     resolution: {integrity: sha512-n9ENAcs+40awPZMsas7STqjkZiVlIjxIKgiJr5rSohDP0/JCrD9VtlzNojafsA1MChm/hz2h3PDtUedx3lbgfA==}
@@ -6956,7 +6955,7 @@ snapshots:
       storybook: 10.1.11(@testing-library/dom@10.4.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       type-fest: 2.19.0
       vue: 3.5.26(typescript@5.9.3)
-      vue-component-type-helpers: 3.2.2
+      vue-component-type-helpers: 3.2.3
 
   '@stylistic/eslint-plugin@5.7.0(eslint@9.39.2(jiti@2.6.1))':
     dependencies:
@@ -10524,7 +10523,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.2: {}
+  vue-component-type-helpers@3.2.3: {}
 
   vue-docgen-api@4.79.2(vue@3.5.26(typescript@5.9.3)):
     dependencies:
