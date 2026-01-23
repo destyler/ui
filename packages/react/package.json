@@ -1,6 +1,6 @@
 {
   "name": "@destyler-ui/react",
-  "version": "0.0.1-beta.14",
+  "version": "0.0.1-beta.15",
   "packageManager": "pnpm@10.25.0",
   "description": "Build scalable design systems with unstyled, accessible UI components.",
   "author": "Elone Hoo <hi@elonehoo.me>",

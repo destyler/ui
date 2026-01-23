@@ -1,7 +1,7 @@
 {
   "name": "@destyler-ui/vue",
   "type": "module",
-  "version": "0.0.1-beta.14",
+  "version": "0.0.1-beta.15",
   "description": "Build scalable design systems with unstyled, accessible UI components",
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",
