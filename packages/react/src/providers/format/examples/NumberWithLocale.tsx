@@ -1,5 +1,5 @@
-import { Format } from '../index'
 import { LocaleProvider } from '../../locale'
+import { Format } from '../index'
 
 export function NumberWithLocale() {
   return (

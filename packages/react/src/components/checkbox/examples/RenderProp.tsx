@@ -9,7 +9,12 @@ export function RenderProp() {
         </Checkbox.Indicator>
       </Checkbox.Control>
       <Checkbox.Context>
-        {checkbox => <Checkbox.Label>Checkbox {checkbox.checked.toString()}</Checkbox.Label>}
+        {checkbox => (
+          <Checkbox.Label>
+            Checkbox
+            {checkbox.checked.toString()}
+          </Checkbox.Label>
+        )}
       </Checkbox.Context>
       <Checkbox.HiddenInput />
     </Checkbox.Root>

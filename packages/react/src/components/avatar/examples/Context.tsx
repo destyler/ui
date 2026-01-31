@@ -4,7 +4,7 @@ export function Context() {
   return (
     <Avatar.Root>
       <Avatar.Context>
-        {(avatar) => (
+        {avatar => (
           <Avatar.Fallback>
             {avatar.loaded ? 'EL' : 'Loading'}
           </Avatar.Fallback>

@@ -14,7 +14,7 @@ export function GroupWithInvalid() {
           <Checkbox.Label>{item.label}</Checkbox.Label>
           <Checkbox.Control>
             <Checkbox.Indicator>
-            x
+              x
             </Checkbox.Indicator>
           </Checkbox.Control>
           <Checkbox.HiddenInput />

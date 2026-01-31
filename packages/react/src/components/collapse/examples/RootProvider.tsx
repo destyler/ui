@@ -10,13 +10,20 @@ export function RootProvider() {
       <button onClick={() => collapse.setValue(['Vue'])}>Set to Vue</button>
 
       <Collapse.RootProvider value={collapse}>
-        {items.map((item) => (
+        {items.map(item => (
           <Collapse.Item key={item} value={item}>
             <Collapse.ItemTrigger>
-              What is {item}?
+              What is
+              {' '}
+              {item}
+              ?
               <Collapse.ItemIndicator>x</Collapse.ItemIndicator>
             </Collapse.ItemTrigger>
-            <Collapse.ItemContent>{item} is a JavaScript library for building user interfaces.</Collapse.ItemContent>
+            <Collapse.ItemContent>
+              {item}
+              {' '}
+              is a JavaScript library for building user interfaces.
+            </Collapse.ItemContent>
           </Collapse.Item>
         ))}
       </Collapse.RootProvider>

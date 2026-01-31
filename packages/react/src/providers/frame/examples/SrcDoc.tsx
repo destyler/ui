@@ -9,7 +9,7 @@ const srcDoc = `<html><head>
 export function SrcDoc() {
   return (
     <Frame title="Custom Frame" style={{ border: '1px solid #ccc', width: '100%' }} srcDoc={srcDoc}>
-      <h1 style={{ fontFamily: "'Open Sans', sans-serif" }}>Hello from inside the frame!</h1>
+      <h1 style={{ fontFamily: '\'Open Sans\', sans-serif' }}>Hello from inside the frame!</h1>
       <p>This content is rendered within our custom frame component using a Portal.</p>
     </Frame>
   )

@@ -53,10 +53,10 @@ export function GroupWithSelectAll() {
       </Checkbox.Group>
 
       <pre>
-Selected:
-{' '}
-{JSON.stringify(value)}
-</pre>
+        Selected:
+        {' '}
+        {JSON.stringify(value)}
+      </pre>
     </div>
   )
 }

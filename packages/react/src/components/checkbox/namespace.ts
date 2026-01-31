@@ -1,7 +1,7 @@
 export {
   CheckboxContext as Context,
   type CheckboxContextProps as ContextProps,
- } from './components/Context'
+} from './components/Context'
 export {
   CheckboxControl as Control,
   type CheckboxControlBaseProps as ControlBaseProps,

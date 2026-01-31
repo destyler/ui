@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Presence } from '../index'
 
-export function LazyMount () {
+export function LazyMount() {
   const [present, setPresent] = useState(false)
   return (
     <>

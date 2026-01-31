@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Presence } from '../index'
 
-export function UnmountOnExit () {
+export function UnmountOnExit() {
   const [present, setPresent] = useState(false)
   return (
     <>

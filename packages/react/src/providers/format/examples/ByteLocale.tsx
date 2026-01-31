@@ -1,5 +1,5 @@
-import { Format } from '../index'
 import { LocaleProvider } from '../../locale'
+import { Format } from '../index'
 
 const locales = ['de-DE', 'zh-CN']
 const value = 1450.45

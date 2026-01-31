@@ -1,6 +1,6 @@
 export {
   ClipboardContext as Context,
-  type ClipboardContextProps as ContextProps
+  type ClipboardContextProps as ContextProps,
 } from './components/Context'
 export {
   ClipboardControl as Control,
