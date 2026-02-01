@@ -1,5 +1,5 @@
-import type { HTMLProps, PolymorphicProps } from '~/factory'
 import type { ItemProps } from '@destyler/timer'
+import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
 import { ui } from '~/factory'

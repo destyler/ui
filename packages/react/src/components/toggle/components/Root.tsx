@@ -1,9 +1,10 @@
+import type { UseToggleProps } from '../hooks/use-toggle'
+import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
-import { createSplitProps } from '~/utils/create-split-props'
-import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { ui } from '~/factory'
-import { type UseToggleProps, useToggle } from '../hooks/use-toggle'
+import { createSplitProps } from '~/utils/create-split-props'
+import { useToggle } from '../hooks/use-toggle'
 import { ToggleProvider } from '../hooks/use-toggle-context'
 
 export interface ToggleRootBaseProps extends UseToggleProps, PolymorphicProps {}

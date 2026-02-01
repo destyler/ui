@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { type UseToggleContext, useToggleContext } from '../hooks/use-toggle-context'
+import type { UseToggleContext } from '../hooks/use-toggle-context'
+import { useToggleContext } from '../hooks/use-toggle-context'
 
 export interface ToggleContextProps {
   children: (context: UseToggleContext) => ReactNode
