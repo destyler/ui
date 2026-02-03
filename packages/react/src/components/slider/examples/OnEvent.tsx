@@ -9,9 +9,11 @@ export function OnEvent() {
       value={value}
       onValueChange={({ value }) => {
         setValue(value)
+        // eslint-disable-next-line no-console
         console.log('Value changed:', value)
       }}
       onValueChangeEnd={({ value }) => {
+        // eslint-disable-next-line no-console
         console.log('Value change ended:', value)
       }}
     >
