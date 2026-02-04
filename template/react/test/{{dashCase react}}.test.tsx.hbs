@@ -6,8 +6,8 @@ import { {{capitalize (camelize react)}}, {{camelize react}}Anatomy } from '../i
 
 describe('[{{dashCase react}}] component', () => {
   it.each(getParts({{camelize react}}Anatomy))('should render part %s', (part) => {
-    const { container } = render(<Basic />)
-    expect(container.querySelector(part)).toBeInTheDocument()
+    render(<Basic />)
+    expect(document.querySelector(part)).toBeInTheDocument()
   })
 
   it.each(getExports({{camelize react}}Anatomy))('should export %s', (part) => {
