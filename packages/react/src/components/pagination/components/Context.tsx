@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { type UsePaginationContext, usePaginationContext } from '../hooks/use-pagination-context'
+import type { UsePaginationContext } from '../hooks/use-pagination-context'
+import { usePaginationContext } from '../hooks/use-pagination-context'
 
 export interface PaginationContextProps {
   children: (context: UsePaginationContext) => ReactNode
