@@ -18,5 +18,8 @@ export default antfu(
     ...react({
       files: ['packages/react/**/*.{js,ts,jsx,tsx}'],
     }),
+    rules: {
+      'style/jsx-one-expression-per-line': 'off',
+    },
   },
 )
