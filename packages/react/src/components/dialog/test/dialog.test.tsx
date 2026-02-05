@@ -12,7 +12,6 @@ describe('[dialog] component', () => {
   })
 
   it.each(getExports(dialogAnatomy))('should export %s', async (part) => {
-    
     expect(Dialog[part]).toBeDefined()
   })
 
