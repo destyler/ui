@@ -1,6 +1,5 @@
-import type { UseSelectProps } from '../hooks/use-select'
-import { Select } from '../index'
 import { createListCollection } from '~/utils/collection'
+import { Select } from '../index'
 
 const collection = createListCollection({
   items: [

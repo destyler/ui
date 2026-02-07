@@ -1,5 +1,5 @@
-import { Select, useSelect } from '../index'
 import { createListCollection } from '~/utils/collection'
+import { Select, useSelect } from '../index'
 
 const collection = createListCollection({
   items: ['React', 'Solid', 'Vue'],

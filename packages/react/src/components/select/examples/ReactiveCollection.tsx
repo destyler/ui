@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { Select } from '../index'
 import { createListCollection } from '~/utils/collection'
+import { Select } from '../index'
 
 const itemsBase = [
   { label: 'React', value: 'react' },

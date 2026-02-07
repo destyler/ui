@@ -1,6 +1,6 @@
 import { Field } from '~/components/field'
-import { Select } from '../index'
 import { createListCollection } from '~/utils/collection'
+import { Select } from '../index'
 
 const collection = createListCollection({
   items: ['React', 'Solid', 'Vue'],
