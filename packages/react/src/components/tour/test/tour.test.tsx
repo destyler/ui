@@ -1,0 +1,18 @@
+import { describe, expect, it, vi } from 'vitest'
+import { render } from 'vitest-browser-react'
+import { getExports, getParts } from '../../../../../../utils/test'
+import { Basic } from '../examples/Basic'
+import { Tour, tourAnatomy } from '../index'
+
+describe('[tour] component', () => {
+  it.each(getParts(tourAnatomy))('should render part %s', async (part) => {
+    render(<Basic />)
+    await vi.waitFor(() => {
+      expect(document.querySelector(part)).toBeInTheDocument()
+    })
+  })
+
+  it.each(getExports(tourAnatomy))('should export %s', async (part) => {
+    expect(Tour[part]).toBeDefined()
+  })
+})
