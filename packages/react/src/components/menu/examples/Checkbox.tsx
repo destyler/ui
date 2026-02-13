@@ -11,7 +11,7 @@ export function Checkbox() {
         <Menu.Content>
           <Menu.CheckboxItem
             checked={checked}
-            onCheckedChange={(e) => setChecked(e as boolean)}
+            onCheckedChange={e => setChecked(e as boolean)}
             value="my-checkbox"
           >
             <Menu.ItemIndicator>✅</Menu.ItemIndicator>

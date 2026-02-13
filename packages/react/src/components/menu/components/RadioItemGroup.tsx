@@ -1,11 +1,12 @@
+import type { UseMenuItemGroupContext } from '../hooks/use-menu-item-group-context'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import type { Optional } from '~/types'
 import { mergeProps } from '@destyler/react'
 import { forwardRef, useId } from 'react'
-import { createSplitProps } from '~/utils/create-split-props'
 import { ui } from '~/factory'
+import { createSplitProps } from '~/utils/create-split-props'
 import { useMenuContext } from '../hooks/use-menu-context'
-import { MenuItemGroupProvider, type UseMenuItemGroupContext } from '../hooks/use-menu-item-group-context'
+import { MenuItemGroupProvider } from '../hooks/use-menu-item-group-context'
 
 type OptionalUseMenuItemGroupContext = Optional<UseMenuItemGroupContext, 'id'>
 

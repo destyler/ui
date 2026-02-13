@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { type UseMenuItemContext, useMenuItemContext } from '../hooks/use-menu-item-context'
+import type { UseMenuItemContext } from '../hooks/use-menu-item-context'
+import { useMenuItemContext } from '../hooks/use-menu-item-context'
 
 export interface MenuItemContextProps {
   children: (context: UseMenuItemContext) => ReactNode

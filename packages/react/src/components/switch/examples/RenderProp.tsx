@@ -7,7 +7,7 @@ export function RenderProp() {
         <Switch.Thumb />
       </Switch.Control>
       <Switch.Context>
-        {(api) => (
+        {api => (
           <Switch.Label>Feature is {api.checked ? 'enabled' : 'disabled'}</Switch.Label>
         )}
       </Switch.Context>

@@ -1,8 +1,8 @@
 'use client'
 
+import type { DrawEndDetails } from '../index'
 import { useState } from 'react'
 import { Field } from '~/components/field'
-import type { DrawEndDetails } from '../index'
 import { Signature } from '../index'
 
 export function WithField(props: Field.RootProps) {

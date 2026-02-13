@@ -18,7 +18,7 @@ function createMockImageFile(): File {
 const mockImageFile = createMockImageFile()
 
 export function Basic() {
-  const [files, setFiles] = useState<string[]>([])
+  const [_files, setFiles] = useState<string[]>([])
 
   return (
     <FileUpload.Root onFileChange={details => setFiles(details.acceptedFiles.map(f => f.name))}>

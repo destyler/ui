@@ -1,11 +1,11 @@
+import type { ReactNode } from 'react'
 import type { UseMenuProps } from '../hooks/use-menu'
 import type { UsePresenceProps } from '~/components/presence'
-import type { ReactNode } from 'react'
 import { mergeProps } from '@destyler/react'
 import { useCallback } from 'react'
-import { createSplitProps } from '~/utils/create-split-props'
-import { useEffectOnce } from '~/hooks/use-effect-once'
 import { PresenceProvider, splitPresenceProps, usePresence } from '~/components/presence'
+import { useEffectOnce } from '~/hooks/use-effect-once'
+import { createSplitProps } from '~/utils/create-split-props'
 import { useMenu } from '../hooks/use-menu'
 import { MenuProvider, useMenuContext } from '../hooks/use-menu-context'
 import { MenuMachineProvider, useMenuMachineContext } from '../hooks/use-menu-machine-context'
@@ -16,7 +16,7 @@ export interface MenuRootProps extends MenuRootBaseProps {
   children?: ReactNode
 }
 
-export const MenuRoot = (props: MenuRootProps) => {
+export function MenuRoot(props: MenuRootProps) {
   const [presenceProps, menuProps] = splitPresenceProps(props)
   const [useMenuProps, localProps] = createSplitProps<UseMenuProps>()(menuProps, [
     'anchorPoint',
@@ -47,8 +47,10 @@ export const MenuRoot = (props: MenuRootProps) => {
   const presence = usePresence(mergeProps({ present: api.open }, presenceProps))
 
   useEffectOnce(() => {
-    if (!parentMachine) return
-    if (!parentApi) return
+    if (!parentMachine)
+      return
+    if (!parentApi)
+      return
 
     parentApi.setChild(machine)
     api.setParent(parentMachine)

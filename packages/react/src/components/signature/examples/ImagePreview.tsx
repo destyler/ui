@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import type { DrawEndDetails } from '../index'
+import { useState } from 'react'
 import { Signature } from '../index'
 
 export function ImagePreview() {

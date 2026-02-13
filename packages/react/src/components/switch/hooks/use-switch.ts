@@ -1,6 +1,6 @@
-import type {PropTypes} from '@destyler/react';
+import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps,  useMachine } from '@destyler/react'
+import { normalizeProps, useMachine } from '@destyler/react'
 import * as zagSwitch from '@destyler/switch'
 import { useId } from 'react'
 import { useFieldContext } from '~/components/field'

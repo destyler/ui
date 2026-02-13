@@ -1,8 +1,8 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
-import { ui } from '~/factory'
 import { usePresenceContext } from '~/components/presence'
+import { ui } from '~/factory'
 import { useMenuContext } from '../hooks/use-menu-context'
 
 export interface MenuTriggerBaseProps extends PolymorphicProps {}

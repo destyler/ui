@@ -5,7 +5,7 @@ export function Controlled() {
   const [checked, setChecked] = useState(true)
 
   return (
-    <Switch.Root checked={checked} onCheckedChange={(e) => setChecked(e.checked)}>
+    <Switch.Root checked={checked} onCheckedChange={e => setChecked(e.checked)}>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>
