@@ -1,5 +1,5 @@
-import { Edit } from '../index'
 import { Field } from '../../field'
+import { Edit } from '../index'
 
 interface WithFieldProps {
   required?: boolean

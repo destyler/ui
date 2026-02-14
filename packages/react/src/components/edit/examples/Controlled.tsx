@@ -14,7 +14,7 @@ export function Controlled({ activationMode = 'click', placeholder = 'Placeholde
       placeholder={placeholder}
       activationMode={activationMode}
       value={value}
-      onValueChange={(e) => setValue(e.value)}
+      onValueChange={e => setValue(e.value)}
     >
       <Edit.Label>Label</Edit.Label>
       <Edit.Area>
@@ -22,18 +22,20 @@ export function Controlled({ activationMode = 'click', placeholder = 'Placeholde
         <Edit.Preview />
       </Edit.Area>
       <Edit.Context>
-        {(context) => (
+        {context => (
           <>
-            {context.editing ? (
-              <Edit.Control>
-                <Edit.SubmitTrigger>Save</Edit.SubmitTrigger>
-                <Edit.CancelTrigger>Cancel</Edit.CancelTrigger>
-              </Edit.Control>
-            ) : (
-              <Edit.Control>
-                <Edit.EditTrigger>Edit</Edit.EditTrigger>
-              </Edit.Control>
-            )}
+            {context.editing
+              ? (
+                  <Edit.Control>
+                    <Edit.SubmitTrigger>Save</Edit.SubmitTrigger>
+                    <Edit.CancelTrigger>Cancel</Edit.CancelTrigger>
+                  </Edit.Control>
+                )
+              : (
+                  <Edit.Control>
+                    <Edit.EditTrigger>Edit</Edit.EditTrigger>
+                  </Edit.Control>
+                )}
           </>
         )}
       </Edit.Context>

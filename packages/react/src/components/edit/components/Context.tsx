@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { type UseEditContext, useEditContext } from '../hooks/use-edit-context'
+import type { UseEditContext } from '../hooks/use-edit-context'
+import { useEditContext } from '../hooks/use-edit-context'
 
 export interface EditContextProps {
   children: (context: UseEditContext) => ReactNode
