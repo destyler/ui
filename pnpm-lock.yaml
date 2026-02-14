@@ -12,10 +12,6 @@ catalogs:
     tsdown:
       specifier: ^0.20.0-beta.3
       version: 0.20.0-beta.3
-  default:
-    '@destyler/types':
-      specifier: ^0.2.6
-      version: 0.2.6
   framework:
     react:
       specifier: ^19.2.3
@@ -207,6 +203,9 @@ catalogs:
       specifier: ^0.2.6
       version: 0.2.6
     '@destyler/tree':
+      specifier: ^0.2.6
+      version: 0.2.6
+    '@destyler/types':
       specifier: ^0.2.6
       version: 0.2.6
     '@destyler/utils':
@@ -559,7 +558,7 @@ importers:
         version: 0.2.6
     devDependencies:
       '@destyler/types':
-        specifier: 'catalog:'
+        specifier: catalog:prod
         version: 0.2.6
       '@types/react':
         specifier: catalog:types
