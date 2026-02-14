@@ -96,6 +96,7 @@
     "@destyler/xstate": "catalog:prod"
   },
   "devDependencies": {
+    "@destyler/types": "catalog:",
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "@vitejs/plugin-react": "catalog:runtime",

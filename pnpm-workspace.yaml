@@ -14,11 +14,11 @@ catalogs:
     vue: ^3.5.26
   lint:
     '@antfu/eslint-config': ^7.0.1
-    eslint: ^9.39.2
-    eslint-plugin-storybook: ^10.1.11
     '@eslint-react/eslint-plugin': ^2.7.2
+    eslint: ^9.39.2
     eslint-plugin-react-hooks: ^7.0.1
     eslint-plugin-react-refresh: ^0.4.26
+    eslint-plugin-storybook: ^10.1.11
   node:
     bumpp: ^10.4.0
     plop: ^4.0.4
@@ -78,6 +78,7 @@ catalogs:
     '@destyler/utils': ^0.2.6
     '@destyler/vue': ^0.2.6
     '@destyler/xstate': ^0.2.6
+    '@destyler/types': ^0.2.6
   runtime:
     '@vitejs/devtools': 0.0.0-alpha.21
     '@vitejs/plugin-react': ^5.1.2
