@@ -1,7 +1,7 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import * as scrollArea from '@destyler/scroll-area'
 import { normalizeProps, useMachine } from '@destyler/react'
+import * as scrollArea from '@destyler/scroll-area'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'

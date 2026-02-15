@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { ScrollArea, useScrollArea } from '../index'
 
 const tags = Array.from({ length: 50 }).map(

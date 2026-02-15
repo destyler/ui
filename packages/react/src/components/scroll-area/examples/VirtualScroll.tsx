@@ -13,7 +13,6 @@ export function VirtualScroll() {
   })
 
   const virtualItems = scrollArea.getVirtualItems()
-  const totalSize = scrollArea.getTotalSize()
 
   const scrollToStart = () => {
     scrollArea.scrollToIndex(0)
