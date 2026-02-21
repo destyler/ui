@@ -339,7 +339,7 @@ main:has(.landing-page) footer:not(.landing-footer) {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
 @media (min-width: 640px) {
@@ -355,11 +355,20 @@ main:has(.landing-page) footer:not(.landing-footer) {
 }
 
 .hero-stat-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: "Inter Tight", "Inter", system-ui, sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
   letter-spacing: -0.04em;
   color: var(--sl-color-text);
+}
+
+.hero-stat-number > [class*="i-"] {
+  width: 1em;
+  height: 1em;
+  font-size: inherit;
 }
 
 @media (min-width: 768px) {
