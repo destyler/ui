@@ -2,12 +2,21 @@ packages:
   - packages/*
   - utils
 
+catalog:
+  '@iconify-json/tabler': ^1.2.26
+  '@unocss/astro': ^66.6.0
+  '@unocss/reset': ^66.6.0
+  unocss: ^66.6.0
+
 catalogMode: prefer
 
 catalogs:
   build:
     babel-plugin-react-compiler: ^1.0.0
     tsdown: ^0.20.0-beta.3
+  docs:
+    '@astrojs/starlight': ^0.37.6
+    astro: ^5.17.3
   framework:
     react: ^19.2.3
     react-dom: ^19.2.3
@@ -75,10 +84,10 @@ catalogs:
     '@destyler/tooltip': ^0.2.6
     '@destyler/tour': ^0.2.6
     '@destyler/tree': ^0.2.6
+    '@destyler/types': ^0.2.6
     '@destyler/utils': ^0.2.6
     '@destyler/vue': ^0.2.6
     '@destyler/xstate': ^0.2.6
-    '@destyler/types': ^0.2.6
   runtime:
     '@vitejs/devtools': 0.0.0-alpha.21
     '@vitejs/plugin-react': ^5.1.2

@@ -1,0 +1,18 @@
+{
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "devDependencies": {
+    "@astrojs/starlight": "catalog:docs",
+    "@iconify-json/tabler": "catalog:",
+    "@unocss/astro": "catalog:",
+    "@unocss/reset": "catalog:",
+    "astro": "catalog:docs",
+    "unocss": "catalog:"
+  }
+}

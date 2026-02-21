@@ -1,0 +1,66 @@
+---
+/**
+ * Components showcase — displays available component categories
+ * with a magazine-spread typographic layout.
+ */
+const componentGroups = [
+  {
+    category: "FORM",
+    items: ["Checkbox", "Radio", "Select", "Switch", "Slider", "Number Input", "OTP Input", "File Upload", "Signature", "Color Picker", "Field", "Fieldset", "Label"],
+  },
+  {
+    category: "OVERLAY",
+    items: ["Dialog", "Popover", "Tooltip", "Hover Card", "Toast", "Tour"],
+  },
+  {
+    category: "LAYOUT",
+    items: ["Collapse", "Collapsible", "Tabs", "Splitter", "Steps", "Separator", "Scroll Area"],
+  },
+  {
+    category: "NAVIGATION",
+    items: ["Breadcrumbs", "Menu", "Navigation Menu", "Pagination", "Tree"],
+  },
+  {
+    category: "DATA",
+    items: ["Avatar", "Calendar", "Carousel", "Progress", "Timer", "QR Code", "Toggle", "Toggle Group"],
+  },
+  {
+    category: "UTILITY",
+    items: ["Clipboard", "Combobox", "Edit", "Floating Panel", "Presence", "Aspect Ratio"],
+  },
+];
+---
+
+<section class="components-section">
+  <div class="components-container">
+    <!-- Section header -->
+    <div class="components-header">
+      <p class="section-eyebrow">COMPONENT LIBRARY</p>
+      <h2 class="section-headline">
+        Everything you need,<br />
+        nothing you don't
+      </h2>
+    </div>
+
+    <!-- Component list -->
+    <div class="components-list">
+      {componentGroups.map((group) => (
+        <div class="component-group">
+          <div class="component-group-header">
+            <span class="component-group-category">{group.category}</span>
+            <span class="component-group-count">{group.items.length}</span>
+          </div>
+          <div class="component-group-border"></div>
+          <ul class="component-group-items">
+            {group.items.map((item) => (
+              <li class="component-item">
+                <span class="component-item-dot" aria-hidden="true"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

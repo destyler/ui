@@ -1,0 +1,52 @@
+---
+/**
+ * How It Works — numbered steps layout with staggered alignment.
+ */
+const steps = [
+  {
+    number: "01",
+    title: "Install the package",
+    description: "Add Destyler to your project with your preferred package manager. Zero config, no build plugins required.",
+    code: "pnpm add @destyler-ui/vue",
+  },
+  {
+    number: "02",
+    title: "Import components",
+    description: "Pull in exactly what you need. Every component is tree-shakable through namespace exports or direct imports.",
+    code: "import { Collapse } from '@destyler-ui/vue'",
+  },
+  {
+    number: "03",
+    title: "Style your way",
+    description: "Apply your design tokens, Tailwind classes, or CSS-in-JS. The components provide behavior — you provide the look.",
+    code: "<Collapse.Root>\n  <Collapse.Item value=\"a\">\n    ...\n  </Collapse.Item>\n</Collapse.Root>",
+  },
+];
+---
+
+<section class="steps-section">
+  <div class="steps-container">
+    <!-- Section header -->
+    <div class="steps-header">
+      <p class="section-eyebrow">GETTING STARTED</p>
+      <h2 class="section-headline">
+        Three steps to<br />
+        ship faster
+      </h2>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <div class="step-card">
+          <span class="step-number">{step.number}</span>
+          <div class="step-content">
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-description">{step.description}</p>
+            <pre class="step-code"><code>{step.code}</code></pre>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

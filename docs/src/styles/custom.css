@@ -1,0 +1,937 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+  /* Light mode colors */
+  --sl-color-white: #FAFAFA;
+  --sl-color-black: #0A0A0A;
+  --sl-color-gray-1: #1A1A1A;
+  --sl-color-gray-2: #262626;
+  --sl-color-gray-3: #737373;
+  --sl-color-gray-4: #A3A3A3;
+  --sl-color-gray-5: #D4D4D4;
+  --sl-color-gray-6: #E5E5E5;
+  --sl-color-gray-7: #F5F5F5;
+
+  /* Accent: Vermillion #FF3D00 */
+  --sl-color-accent-low: #ffebe5;
+  --sl-color-accent: #FF3D00;
+  --sl-color-accent-high: #cc3100;
+
+  /* Typography */
+  --sl-font: "Inter Tight", "Inter", system-ui, sans-serif;
+  --sl-font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Backgrounds */
+  --sl-color-bg: var(--sl-color-white);
+  --sl-color-bg-nav: var(--sl-color-white);
+  --sl-color-bg-sidebar: var(--sl-color-gray-7);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+
+  /* Text */
+  --sl-color-text: var(--sl-color-black);
+  --sl-color-text-accent: var(--sl-color-accent);
+  --sl-color-text-invert: var(--sl-color-white);
+
+  /* Borders */
+  --sl-color-hairline: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
+
+  /* Radius */
+  --sl-border-radius: 0px;
+
+  /* Header & Sidebar */
+  --sl-nav-height: 4rem;
+  --sl-sidebar-width: 18rem;
+}
+
+:root[data-theme='dark'] {
+  /* Dark mode colors */
+  --sl-color-white: #0A0A0A;
+  --sl-color-black: #FAFAFA;
+  --sl-color-gray-1: #E5E5E5;
+  --sl-color-gray-2: #D4D4D4;
+  --sl-color-gray-3: #A3A3A3;
+  --sl-color-gray-4: #737373;
+  --sl-color-gray-5: #262626;
+  --sl-color-gray-6: #1A1A1A;
+  --sl-color-gray-7: #0F0F0F;
+
+  /* Accent: Vermillion #FF3D00 */
+  --sl-color-accent-low: #330C00;
+  --sl-color-accent: #FF3D00;
+  --sl-color-accent-high: #FF8A66;
+
+  /* Backgrounds */
+  --sl-color-bg: var(--sl-color-white);
+  --sl-color-bg-nav: var(--sl-color-white);
+  --sl-color-bg-sidebar: var(--sl-color-gray-7);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+
+  /* Text */
+  --sl-color-text: var(--sl-color-black);
+  --sl-color-text-accent: var(--sl-color-accent);
+  --sl-color-text-invert: var(--sl-color-white);
+
+  /* Borders */
+  --sl-color-hairline: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
+}
+
+/* Bold Typography Overrides */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+/* Header & Sidebar */
+header.header {
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+.sidebar-pane {
+  border-right: 1px solid var(--sl-color-hairline);
+  background-color: var(--sl-color-bg-sidebar) !important;
+}
+
+.sidebar-content a {
+  border-radius: 0 !important;
+  font-weight: 500;
+}
+
+.sidebar-content a[aria-current="page"] {
+  background-color: transparent !important;
+  color: var(--sl-color-accent) !important;
+  border-left: 2px solid var(--sl-color-accent);
+  padding-left: calc(var(--sl-sidebar-item-padding-inline) - 2px);
+}
+
+.sidebar-content summary {
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.875rem !important;
+}
+
+.sl-markdown-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .sl-markdown-content h1 {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sl-markdown-content h1 {
+    font-size: 6rem;
+  }
+}
+
+.sl-markdown-content h2 {
+  font-size: 2.5rem;
+  margin-top: 4rem;
+  border-bottom: 1px solid var(--sl-color-hairline);
+  padding-bottom: 1rem;
+}
+
+.sl-markdown-content h3 {
+  font-size: 2rem;
+  margin-top: 3rem;
+}
+
+.sl-markdown-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.sl-markdown-content a:not(.starlight-aside a) {
+  color: var(--sl-color-accent);
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
+}
+
+.sl-markdown-content a:not(.starlight-aside a):hover {
+  color: var(--sl-color-accent);
+}
+
+.sl-markdown-content a:not(.starlight-aside a)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--sl-color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 150ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.sl-markdown-content a:not(.starlight-aside a):hover::after {
+  transform: scaleX(1);
+}
+
+/* Buttons */
+.sl-markdown-content button, .sl-markdown-content .button, .action {
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: all 150ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.action.primary {
+  background-color: transparent !important;
+  color: var(--sl-color-accent) !important;
+  border: none !important;
+  position: relative;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.action.primary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--sl-color-accent);
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 150ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.action.primary:hover::after {
+  transform: scaleX(1.1);
+}
+
+.action.secondary {
+  background-color: transparent !important;
+  color: var(--sl-color-text) !important;
+  border: 1px solid var(--sl-color-text) !important;
+}
+
+.action.secondary:hover {
+  background-color: var(--sl-color-text) !important;
+  color: var(--sl-color-bg) !important;
+}
+
+/* Cards */
+.sl-markdown-content .card, .card {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1);
+  padding: 2rem !important;
+}
+
+.sl-markdown-content .card:hover, .card:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+.card .title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 1rem !important;
+}
+
+.card .icon {
+  width: 2rem !important;
+  height: 2rem !important;
+  margin-bottom: 1rem !important;
+  color: var(--sl-color-accent) !important;
+}
+
+/* Tabs */
+starlight-tabs {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+.tablist-wrapper {
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+  margin-bottom: 2rem !important;
+}
+
+[role="tab"] {
+  border-radius: 0 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1rem 2rem !important;
+  font-size: 1.125rem !important;
+}
+
+[role="tab"][aria-selected="true"] {
+  color: var(--sl-color-accent) !important;
+  border-bottom: 2px solid var(--sl-color-accent) !important;
+}
+
+/* Noise texture */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Code blocks */
+.expressive-code {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.expressive-code .frame {
+  border-radius: 0 !important;
+}
+
+.expressive-code .header {
+  border-radius: 0 !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+}
+
+.expressive-code pre {
+  border-radius: 0 !important;
+  padding: 2rem !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Hero Section */
+.hero {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+
+.hero h1 {
+  font-size: 3.5rem !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.06em !important;
+}
+
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 4.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero h1 {
+    font-size: 6rem !important;
+  }
+}
+
+.hero .tagline {
+  font-size: 1.25rem !important;
+  letter-spacing: -0.01em !important;
+  max-width: 40rem !important;
+  margin-inline: auto !important;
+}
+
+.hero .actions {
+  justify-content: flex-start !important;
+}
+
+.hero img {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+}
+
+/* Content */
+.sl-markdown-content {
+  max-width: 48rem !important;
+}
+
+.sl-markdown-content hr {
+  border-color: var(--sl-color-hairline) !important;
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+/* Asides */
+.starlight-aside {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-left: 4px solid var(--sl-color-accent) !important;
+  background-color: transparent !important;
+}
+
+.starlight-aside__title {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 600 !important;
+}
+
+/* Pagination */
+.pagination-links a {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+}
+
+.pagination-links a:hover {
+  border-color: var(--sl-color-gray-4) !important;
+  background-color: transparent !important;
+}
+
+.pagination-links .link-title {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Right Sidebar (Table of Contents) */
+.right-sidebar-panel {
+  border-left: 1px solid var(--sl-color-hairline) !important;
+}
+
+.right-sidebar-panel h2 {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.875rem !important;
+}
+
+.right-sidebar-panel a {
+  font-weight: 500 !important;
+}
+
+.right-sidebar-panel a[aria-current="true"] {
+  color: var(--sl-color-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Inline Code */
+.sl-markdown-content code {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  background-color: var(--sl-color-bg-inline-code) !important;
+  border-radius: 0 !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 1rem !important;
+}
+
+/* Search */
+.search-button {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+}
+
+.search-button:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+/* Theme Toggle */
+starlight-theme-select select {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+}
+
+starlight-theme-select select:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+/* Language Select */
+starlight-language-select select {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+}
+
+starlight-language-select select:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+/* Site Title */
+.site-title {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+}
+
+/* Mobile Menu */
+mobile-starlight-toc nav {
+  border-top: 1px solid var(--sl-color-hairline) !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+}
+
+mobile-starlight-toc summary {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.875rem !important;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 4rem !important;
+  padding-top: 2rem !important;
+}
+
+.meta {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Badges */
+.sl-badge {
+  border-radius: 0 !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 600 !important;
+  border: 1px solid currentColor !important;
+  background-color: transparent !important;
+}
+
+/* Steps */
+.sl-steps {
+  --sl-color-hairline: var(--sl-color-gray-5);
+}
+
+.sl-steps > li {
+  border-left: 1px solid var(--sl-color-hairline) !important;
+}
+
+.sl-steps > li::before {
+  border-radius: 0 !important;
+  background-color: var(--sl-color-bg) !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  color: var(--sl-color-text) !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-weight: 600 !important;
+  transition: all 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+}
+
+.sl-steps > li:hover::before {
+  border-color: var(--sl-color-accent) !important;
+  color: var(--sl-color-accent) !important;
+}
+
+/* File Tree */
+.file-tree {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+}
+
+.file-tree .directory > details > summary {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-weight: 600 !important;
+}
+
+.file-tree .file {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+}
+
+/* Link Cards */
+.sl-link-card {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+}
+
+.sl-link-card:hover {
+  border-color: var(--sl-color-gray-4) !important;
+  background-color: transparent !important;
+}
+
+.sl-link-card .title {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Icon */
+.icon {
+  stroke-width: 1.5px !important;
+}
+
+/* Hide default Starlight shadows */
+:root {
+  --sl-shadow-sm: none !important;
+  --sl-shadow-md: none !important;
+  --sl-shadow-lg: none !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sl-color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sl-color-gray-5);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-color-gray-4);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--sl-color-accent);
+  color: var(--sl-color-text-invert);
+}
+
+/* Focus */
+*:focus-visible {
+  outline: 2px solid var(--sl-color-accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* Starlight specific overrides for the bold typography theme */
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  color: var(--sl-color-text);
+}
+
+.sl-markdown-content a {
+  color: var(--sl-color-accent);
+}
+
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent-high);
+}
+
+/* Remove rounded corners from everything */
+* {
+  border-radius: 0 !important;
+}
+
+/* Adjust the card grid to match the design system */
+.card-grid {
+  gap: 2rem !important;
+}
+
+/* Adjust the blockquotes to match the design system */
+.sl-markdown-content blockquote {
+  border-left: 4px solid var(--sl-color-accent) !important;
+  padding-left: 2rem !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  font-style: italic !important;
+  color: var(--sl-color-gray-3) !important;
+}
+
+/* Make the lists more prominent */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  padding-left: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.sl-markdown-content li {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Adjust the tables to match the design system */
+.sl-markdown-content table {
+  width: 100% !important;
+  margin-bottom: 2rem !important;
+  border-collapse: collapse !important;
+}
+
+.sl-markdown-content th,
+.sl-markdown-content td {
+  padding: 1rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  text-align: left !important;
+}
+
+.sl-markdown-content th {
+  background-color: var(--sl-color-bg-sidebar) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Make the images more prominent */
+.sl-markdown-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+/* Adjust the figure captions to match the design system */
+.sl-markdown-content figcaption {
+  text-align: center !important;
+  font-size: 0.875rem !important;
+  color: var(--sl-color-gray-3) !important;
+  margin-top: -1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Make the details/summary more prominent */
+.sl-markdown-content details {
+  border: 1px solid var(--sl-color-hairline) !important;
+  padding: 1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.sl-markdown-content summary {
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.sl-markdown-content details[open] summary {
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+  padding-bottom: 1rem !important;
+}
+
+/* Adjust the kbd elements to match the design system */
+.sl-markdown-content kbd {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  background-color: var(--sl-color-bg-sidebar) !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 0 !important;
+  padding: 0.125rem 0.25rem !important;
+  font-size: 0.875rem !important;
+  box-shadow: none !important;
+}
+
+/* Make the mark elements more prominent */
+.sl-markdown-content mark {
+  background-color: var(--sl-color-accent-low) !important;
+  color: var(--sl-color-text) !important;
+  padding: 0.125rem 0.25rem !important;
+}
+
+/* Adjust the sup/sub elements to match the design system */
+.sl-markdown-content sup,
+.sl-markdown-content sub {
+  font-size: 0.75rem !important;
+  line-height: 0 !important;
+  position: relative !important;
+  vertical-align: baseline !important;
+}
+
+.sl-markdown-content sup {
+  top: -0.5em !important;
+}
+
+.sl-markdown-content sub {
+  bottom: -0.25em !important;
+}
+
+/* Make the hr elements more prominent */
+.sl-markdown-content hr {
+  border: 0 !important;
+  border-top: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+/* Adjust the iframe elements to match the design system */
+.sl-markdown-content iframe {
+  border: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Make the video elements more prominent */
+.sl-markdown-content video {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+/* Adjust the audio elements to match the design system */
+.sl-markdown-content audio {
+  width: 100% !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Make the canvas elements more prominent */
+.sl-markdown-content canvas {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+/* Adjust the svg elements to match the design system */
+.sl-markdown-content svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Make the math elements more prominent */
+.sl-markdown-content math {
+  font-size: 1.125rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Adjust the pre elements to match the design system */
+.sl-markdown-content pre {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  padding: 1rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  overflow-x: auto !important;
+}
+
+/* Make the code elements more prominent */
+.sl-markdown-content pre code {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.875rem !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* Adjust the samp elements to match the design system */
+.sl-markdown-content samp {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.875rem !important;
+  background-color: var(--sl-color-bg-sidebar) !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 0 !important;
+  padding: 0.125rem 0.25rem !important;
+}
+
+/* Make the var elements more prominent */
+.sl-markdown-content var {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.875rem !important;
+  font-style: italic !important;
+}
+
+/* Adjust the dfn elements to match the design system */
+.sl-markdown-content dfn {
+  font-style: italic !important;
+  font-weight: 600 !important;
+}
+
+/* Make the abbr elements more prominent */
+.sl-markdown-content abbr {
+  text-decoration: underline dotted !important;
+  cursor: help !important;
+}
+
+/* Adjust the q elements to match the design system */
+.sl-markdown-content q {
+  font-style: italic !important;
+}
+
+/* Make the cite elements more prominent */
+.sl-markdown-content cite {
+  font-style: italic !important;
+}
+
+/* Adjust the small elements to match the design system */
+.sl-markdown-content small {
+  font-size: 0.875rem !important;
+}
+
+/* Make the s elements more prominent */
+.sl-markdown-content s {
+  text-decoration: line-through !important;
+}
+
+/* Adjust the u elements to match the design system */
+.sl-markdown-content u {
+  text-decoration: underline !important;
+}
+
+/* Make the b elements more prominent */
+.sl-markdown-content b {
+  font-weight: 700 !important;
+}
+
+/* Adjust the strong elements to match the design system */
+.sl-markdown-content strong {
+  font-weight: 700 !important;
+}
+
+/* Make the em elements more prominent */
+.sl-markdown-content em {
+  font-style: italic !important;
+}
+
+/* Adjust the i elements to match the design system */
+.sl-markdown-content i {
+  font-style: italic !important;
+}
+
+/* Make the del elements more prominent */
+.sl-markdown-content del {
+  text-decoration: line-through !important;
+}
+
+/* Adjust the ins elements to match the design system */
+.sl-markdown-content ins {
+  text-decoration: underline !important;
+}
+
+/* Make the ruby elements more prominent */
+.sl-markdown-content ruby {
+  font-size: 0.875rem !important;
+}

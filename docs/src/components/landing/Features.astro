@@ -1,0 +1,66 @@
+---
+/**
+ * Features section — asymmetric grid layout with icon accent bars.
+ */
+const features = [
+  {
+    title: "State Machine Driven",
+    description: "Every component is powered by a deterministic state machine, ensuring predictable behavior and eliminating impossible states.",
+    label: "01",
+  },
+  {
+    title: "Framework Agnostic Core",
+    description: "Write your logic once. Ship to Vue and React with idiomatic bindings that feel native to each framework.",
+    label: "02",
+  },
+  {
+    title: "Fully Unstyled",
+    description: "Zero visual opinions. Every component is a behavioral primitive — bring your own design system, CSS framework, or hand-rolled styles.",
+    label: "03",
+  },
+  {
+    title: "Accessible by Default",
+    description: "WAI-ARIA patterns baked into every component. Keyboard navigation, focus management, and screen reader support out of the box.",
+    label: "04",
+  },
+  {
+    title: "Composable Architecture",
+    description: "Anatomy-based API design lets you compose complex interfaces from simple, predictable parts. Slot in, swap out, extend.",
+    label: "05",
+  },
+  {
+    title: "TypeScript Native",
+    description: "Full type coverage with discriminated unions and generics. Your editor knows every prop, event, and slot before you write it.",
+    label: "06",
+  },
+];
+---
+
+<section class="features-section">
+  <div class="features-container">
+    <!-- Section header -->
+    <div class="features-header">
+      <p class="section-eyebrow">WHY DESTYLER</p>
+      <h2 class="section-headline">
+        Components that<br />
+        respect your craft
+      </h2>
+      <p class="section-tagline">
+        We handle the complex interaction patterns so you can focus on
+        what matters — your product's unique experience.
+      </p>
+    </div>
+
+    <!-- Feature grid -->
+    <div class="features-grid">
+      {features.map((feature) => (
+        <div class="feature-card">
+          <div class="feature-accent-bar" aria-hidden="true"></div>
+          <span class="feature-label">{feature.label}</span>
+          <h3 class="feature-title">{feature.title}</h3>
+          <p class="feature-description">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
