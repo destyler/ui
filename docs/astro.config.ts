@@ -19,7 +19,11 @@ export default defineConfig({
       ],
       sidebar: [],
       customCss: [
-        './src/styles/custom.css',
+        './src/styles/tokens.css',
+        './src/styles/typography.css',
+        './src/styles/layout.css',
+        './src/styles/components.css',
+        './src/styles/content.css',
         './src/styles/landing.css',
       ],
     }),

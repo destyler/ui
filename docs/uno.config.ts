@@ -1,6 +1,12 @@
 import { defineConfig, presetAttributify, presetIcons, presetWind3, transformerDirectives, transformerVariantGroup } from 'unocss'
 
 export default defineConfig({
+  theme: {
+    fontFamily: {
+      display: '"Inter Tight", Inter, system-ui, sans-serif',
+      code: '"JetBrains Mono", "Fira Code", monospace',
+    },
+  },
   presets: [
     presetWind3(),
     presetAttributify(),

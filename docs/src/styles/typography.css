@@ -1,0 +1,104 @@
+/* ============================================================
+   TYPOGRAPHY — Body, headings, inline text styles
+   ============================================================ */
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  color: var(--sl-color-text);
+}
+
+.sl-markdown-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .sl-markdown-content h1 {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sl-markdown-content h1 {
+    font-size: 6rem;
+  }
+}
+
+.sl-markdown-content h2 {
+  font-size: 2.5rem;
+  margin-top: 4rem;
+  border-bottom: 1px solid var(--sl-color-hairline);
+  padding-bottom: 1rem;
+}
+
+.sl-markdown-content h3 {
+  font-size: 2rem;
+  margin-top: 3rem;
+}
+
+.sl-markdown-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* Links */
+.sl-markdown-content a:not(.starlight-aside a) {
+  color: var(--sl-color-accent);
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
+}
+
+.sl-markdown-content a:not(.starlight-aside a):hover {
+  color: var(--sl-color-accent);
+}
+
+.sl-markdown-content a:not(.starlight-aside a)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--sl-color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 150ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.sl-markdown-content a:not(.starlight-aside a):hover::after {
+  transform: scaleX(1);
+}
+
+.sl-markdown-content a {
+  color: var(--sl-color-accent);
+}
+
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent-high);
+}
+
+/* Inline code */
+.sl-markdown-content code {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  background-color: var(--sl-color-bg-inline-code) !important;
+  border-radius: 0 !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 1rem !important;
+}

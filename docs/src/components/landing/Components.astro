@@ -31,30 +31,30 @@ const componentGroups = [
 ];
 ---
 
-<section class="components-section">
-  <div class="components-container">
+<section class="py-20 px-6 md:py-28 md:px-12 lg:py-40 lg:px-16 bg-$sl-color-gray-7 border-b border-$sl-color-hairline">
+  <div class="max-w-[1200px] mx-auto">
     <!-- Section header -->
-    <div class="components-header">
-      <p class="section-eyebrow">COMPONENT LIBRARY</p>
-      <h2 class="section-headline">
+    <div class="mb-16 md:mb-24">
+      <p class="font-code text-xs font-semibold tracking-[0.2em] uppercase text-$sl-color-accent mb-6">COMPONENT LIBRARY</p>
+      <h2 class="font-display font-bold tracking-[-0.04em] leading-[1.1] text-$sl-color-text text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] mb-6">
         Everything you need,<br />
         nothing you don't
       </h2>
     </div>
 
     <!-- Component list -->
-    <div class="components-list">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
       {componentGroups.map((group) => (
-        <div class="component-group">
-          <div class="component-group-header">
-            <span class="component-group-category">{group.category}</span>
-            <span class="component-group-count">{group.items.length}</span>
+        <div>
+          <div class="flex items-baseline justify-between mb-3">
+            <span class="font-display font-bold text-xs tracking-[0.15em] uppercase text-$sl-color-text">{group.category}</span>
+            <span class="font-code text-[0.625rem] font-semibold tracking-[0.1em] text-$sl-color-gray-4">{group.items.length}</span>
           </div>
-          <div class="component-group-border"></div>
-          <ul class="component-group-items">
+          <div class="w-full h-px bg-$sl-color-hairline mb-4"></div>
+          <ul class="list-none p-0 m-0 flex flex-col gap-2">
             {group.items.map((item) => (
-              <li class="component-item">
-                <span class="component-item-dot" aria-hidden="true"></span>
+              <li class="flex items-center gap-2.5 text-sm text-$sl-color-gray-3 tracking-[-0.01em] transition-colors duration-150 ease-out cursor-default hover:text-$sl-color-text">
+                <span class="w-1 h-1 bg-$sl-color-accent shrink-0" aria-hidden="true"></span>
                 {item}
               </li>
             ))}

@@ -1,0 +1,198 @@
+/* ============================================================
+   LAYOUT — Header, sidebar, navigation, footer, mobile menu
+   ============================================================ */
+
+/* Header */
+header.header {
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+/* Sidebar */
+.sidebar-pane {
+  border-right: 1px solid var(--sl-color-hairline);
+  background-color: var(--sl-color-bg-sidebar) !important;
+}
+
+.sidebar-content a {
+  border-radius: 0 !important;
+  font-weight: 500;
+}
+
+.sidebar-content a[aria-current="page"] {
+  background-color: transparent !important;
+  color: var(--sl-color-accent) !important;
+  border-left: 2px solid var(--sl-color-accent);
+  padding-left: calc(var(--sl-sidebar-item-padding-inline) - 2px);
+}
+
+.sidebar-content summary {
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.875rem !important;
+}
+
+/* Site Title */
+.site-title {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+}
+
+/* Right Sidebar (Table of Contents) */
+.right-sidebar-panel {
+  border-left: 1px solid var(--sl-color-hairline) !important;
+}
+
+.right-sidebar-panel h2 {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.875rem !important;
+}
+
+.right-sidebar-panel a {
+  font-weight: 500 !important;
+}
+
+.right-sidebar-panel a[aria-current="true"] {
+  color: var(--sl-color-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Pagination */
+.pagination-links a {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+}
+
+.pagination-links a:hover {
+  border-color: var(--sl-color-gray-4) !important;
+  background-color: transparent !important;
+}
+
+.pagination-links .link-title {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 4rem !important;
+  padding-top: 2rem !important;
+}
+
+.meta {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Mobile Menu */
+mobile-starlight-toc nav {
+  border-top: 1px solid var(--sl-color-hairline) !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+}
+
+mobile-starlight-toc summary {
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.875rem !important;
+}
+
+/* Search */
+.search-button {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+}
+
+.search-button:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+/* Theme Toggle */
+starlight-theme-select select {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+}
+
+starlight-theme-select select:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+/* Language Select */
+starlight-language-select select {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  background-color: transparent !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+}
+
+starlight-language-select select:hover {
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+/* Icon */
+.icon {
+  stroke-width: 1.5px !important;
+}
+
+/* Hero Section (Starlight default hero) */
+.hero {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+
+.hero h1 {
+  font-size: 3.5rem !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.06em !important;
+}
+
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 4.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero h1 {
+    font-size: 6rem !important;
+  }
+}
+
+.hero .tagline {
+  font-size: 1.25rem !important;
+  letter-spacing: -0.01em !important;
+  max-width: 40rem !important;
+  margin-inline: auto !important;
+}
+
+.hero .actions {
+  justify-content: flex-start !important;
+}
+
+.hero img {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+}

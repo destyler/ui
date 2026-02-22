@@ -1,0 +1,262 @@
+/* ============================================================
+   CONTENT — Markdown element overrides (blockquotes, lists,
+   tables, images, media, pre/code, inline elements)
+   ============================================================ */
+
+.sl-markdown-content {
+  max-width: 48rem !important;
+}
+
+.sl-markdown-content hr {
+  border: 0 !important;
+  border-top: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+/* Blockquotes */
+.sl-markdown-content blockquote {
+  border-left: 4px solid var(--sl-color-accent) !important;
+  padding-left: 2rem !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  font-style: italic !important;
+  color: var(--sl-color-gray-3) !important;
+}
+
+/* Lists */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  padding-left: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.sl-markdown-content li {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Tables */
+.sl-markdown-content table {
+  width: 100% !important;
+  margin-bottom: 2rem !important;
+  border-collapse: collapse !important;
+}
+
+.sl-markdown-content th,
+.sl-markdown-content td {
+  padding: 1rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  text-align: left !important;
+}
+
+.sl-markdown-content th {
+  background-color: var(--sl-color-bg-sidebar) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Images */
+.sl-markdown-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+.sl-markdown-content figcaption {
+  text-align: center !important;
+  font-size: 0.875rem !important;
+  color: var(--sl-color-gray-3) !important;
+  margin-top: -1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Details/Summary */
+.sl-markdown-content details {
+  border: 1px solid var(--sl-color-hairline) !important;
+  padding: 1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.sl-markdown-content summary {
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.sl-markdown-content details[open] summary {
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+  padding-bottom: 1rem !important;
+}
+
+/* Pre/Code */
+.sl-markdown-content pre {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  padding: 1rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  overflow-x: auto !important;
+}
+
+.sl-markdown-content pre code {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.875rem !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* Keyboard */
+.sl-markdown-content kbd {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  background-color: var(--sl-color-bg-sidebar) !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 0 !important;
+  padding: 0.125rem 0.25rem !important;
+  font-size: 0.875rem !important;
+  box-shadow: none !important;
+}
+
+/* Mark */
+.sl-markdown-content mark {
+  background-color: var(--sl-color-accent-low) !important;
+  color: var(--sl-color-text) !important;
+  padding: 0.125rem 0.25rem !important;
+}
+
+/* Samp */
+.sl-markdown-content samp {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.875rem !important;
+  background-color: var(--sl-color-bg-sidebar) !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 0 !important;
+  padding: 0.125rem 0.25rem !important;
+}
+
+/* Var */
+.sl-markdown-content var {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.875rem !important;
+  font-style: italic !important;
+}
+
+/* Sup/Sub */
+.sl-markdown-content sup,
+.sl-markdown-content sub {
+  font-size: 0.75rem !important;
+  line-height: 0 !important;
+  position: relative !important;
+  vertical-align: baseline !important;
+}
+
+.sl-markdown-content sup {
+  top: -0.5em !important;
+}
+
+.sl-markdown-content sub {
+  bottom: -0.25em !important;
+}
+
+/* Media elements */
+.sl-markdown-content iframe {
+  border: 1px solid var(--sl-color-hairline) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.sl-markdown-content video {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+.sl-markdown-content audio {
+  width: 100% !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.sl-markdown-content canvas {
+  max-width: 100% !important;
+  height: auto !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+}
+
+.sl-markdown-content svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.sl-markdown-content math {
+  font-size: 1.125rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Inline text elements */
+.sl-markdown-content dfn {
+  font-style: italic !important;
+  font-weight: 600 !important;
+}
+
+.sl-markdown-content abbr {
+  text-decoration: underline dotted !important;
+  cursor: help !important;
+}
+
+.sl-markdown-content q {
+  font-style: italic !important;
+}
+
+.sl-markdown-content cite {
+  font-style: italic !important;
+}
+
+.sl-markdown-content small {
+  font-size: 0.875rem !important;
+}
+
+.sl-markdown-content s {
+  text-decoration: line-through !important;
+}
+
+.sl-markdown-content u {
+  text-decoration: underline !important;
+}
+
+.sl-markdown-content b {
+  font-weight: 700 !important;
+}
+
+.sl-markdown-content strong {
+  font-weight: 700 !important;
+}
+
+.sl-markdown-content em {
+  font-style: italic !important;
+}
+
+.sl-markdown-content i {
+  font-style: italic !important;
+}
+
+.sl-markdown-content del {
+  text-decoration: line-through !important;
+}
+
+.sl-markdown-content ins {
+  text-decoration: underline !important;
+}
+
+.sl-markdown-content ruby {
+  font-size: 0.875rem !important;
+}

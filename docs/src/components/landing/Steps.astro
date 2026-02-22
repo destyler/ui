@@ -24,29 +24,39 @@ const steps = [
 ];
 ---
 
-<section class="steps-section">
-  <div class="steps-container">
+<section class="py-20 px-6 md:py-28 md:px-12 lg:py-40 lg:px-16 border-b border-$sl-color-hairline overflow-visible!">
+  <div class="max-w-[1200px] mx-auto overflow-visible!">
     <!-- Section header -->
-    <div class="steps-header">
-      <p class="section-eyebrow">GETTING STARTED</p>
-      <h2 class="section-headline">
+    <div class="mb-16 md:mb-24">
+      <p class="font-code text-xs font-semibold tracking-[0.2em] uppercase text-$sl-color-accent mb-6">GETTING STARTED</p>
+      <h2 class="font-display font-bold tracking-[-0.04em] leading-[1.1] text-$sl-color-text text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] mb-6">
         Three steps to<br />
         ship faster
       </h2>
     </div>
 
     <!-- Steps -->
-    <div class="steps-grid">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10">
       {steps.map((step) => (
-        <div class="step-card">
-          <span class="step-number">{step.number}</span>
-          <div class="step-content">
-            <h3 class="step-title">{step.title}</h3>
-            <p class="step-description">{step.description}</p>
-            <pre class="step-code"><code>{step.code}</code></pre>
+        <div class="group relative overflow-visible!">
+          <span class="block font-display font-black text-[4rem] md:text-8xl tracking-[-0.06em] leading-[1.15] text-$sl-color-hairline mb-6 transition-colors duration-150 ease-out overflow-visible! group-hover:text-$sl-color-accent">{step.number}</span>
+          <div>
+            <h3 class="font-display font-bold text-xl tracking-[-0.02em] text-$sl-color-text mb-3 leading-[1.25]">{step.title}</h3>
+            <p class="text-sm leading-[1.6] text-$sl-color-gray-3 tracking-[-0.01em] mb-6">{step.description}</p>
+            <pre class="step-code font-code! text-[0.8125rem]! leading-[1.6]! bg-$sl-color-gray-7! border! border-$sl-color-hairline! rounded-none! py-4! px-5! overflow-x-auto text-$sl-color-text whitespace-pre"><code>{step.code}</code></pre>
           </div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .step-code code {
+    font-family: inherit !important;
+    background: none !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: inherit !important;
+  }
+</style>
