@@ -18,6 +18,9 @@ export default defineConfig({
         },
       ],
       sidebar: [],
+      components: {
+        Header: './src/components/Header.astro',
+      },
       customCss: [
         './src/styles/bootstrap.css',
       ],
