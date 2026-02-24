@@ -9,6 +9,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
+  font-size: 0.8125rem;
   transition: all 150ms cubic-bezier(0.25, 0, 0, 1);
 }
 
@@ -55,8 +56,24 @@
   border: 1px solid var(--sl-color-hairline) !important;
   background: transparent !important;
   box-shadow: none !important;
-  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1);
-  padding: 2rem !important;
+  transition: all 200ms cubic-bezier(0.25, 0, 0, 1);
+  padding: 1.5rem !important;
+  position: relative;
+}
+
+.sl-markdown-content .card::before, .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--sl-color-accent);
+  transition: width 200ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.sl-markdown-content .card:hover::before, .card:hover::before {
+  width: 100%;
 }
 
 .sl-markdown-content .card:hover, .card:hover {
@@ -64,54 +81,77 @@
 }
 
 .card .title {
-  font-size: 1.5rem !important;
+  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-size: 1.125rem !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.card .body {
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+  color: var(--sl-color-gray-3) !important;
 }
 
 .card .icon {
-  width: 2rem !important;
-  height: 2rem !important;
-  margin-bottom: 1rem !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
   color: var(--sl-color-accent) !important;
 }
 
 .card-grid {
-  gap: 2rem !important;
+  gap: 1.5rem !important;
 }
 
 /* Tabs */
 starlight-tabs {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
+  overflow: hidden;
 }
 
 .tablist-wrapper {
   border-bottom: 1px solid var(--sl-color-hairline) !important;
-  margin-bottom: 2rem !important;
+  margin-bottom: 0 !important;
+  background-color: var(--sl-color-bg-sidebar) !important;
 }
 
 [role="tab"] {
   border-radius: 0 !important;
-  font-weight: 600;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 1rem 2rem !important;
-  font-size: 1.125rem !important;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 0.75rem !important;
+  color: var(--sl-color-gray-3) !important;
+  transition: all 150ms cubic-bezier(0.25, 0, 0, 1);
+  border-bottom: 2px solid transparent !important;
+}
+
+[role="tab"]:hover {
+  color: var(--sl-color-text) !important;
 }
 
 [role="tab"][aria-selected="true"] {
   color: var(--sl-color-accent) !important;
   border-bottom: 2px solid var(--sl-color-accent) !important;
+  background-color: transparent !important;
+}
+
+[role="tabpanel"] {
+  padding: 1.5rem !important;
 }
 
 /* Code blocks */
 .expressive-code {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
-  margin-top: 2rem !important;
-  margin-bottom: 2rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  overflow: hidden;
 }
 
 .expressive-code .frame {
@@ -121,27 +161,70 @@ starlight-tabs {
 .expressive-code .header {
   border-radius: 0 !important;
   border-bottom: 1px solid var(--sl-color-hairline) !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.6875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
 }
 
 .expressive-code pre {
   border-radius: 0 !important;
-  padding: 2rem !important;
-  font-size: 1rem !important;
-  line-height: 1.6 !important;
+  padding: 1.25rem 1.5rem !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.7 !important;
+}
+
+/* Copy button */
+.expressive-code .copy button {
+  border-radius: 0 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  transition: all 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+}
+
+.expressive-code .copy button:hover {
+  border-color: var(--sl-color-accent) !important;
+  color: var(--sl-color-accent) !important;
 }
 
 /* Asides */
 .starlight-aside {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
-  border-left: 4px solid var(--sl-color-accent) !important;
+  border-left: 3px solid var(--sl-color-accent) !important;
   background-color: transparent !important;
+  padding: 1.25rem 1.5rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.starlight-aside--note {
+  border-left-color: var(--sl-color-accent) !important;
+}
+
+.starlight-aside--tip {
+  border-left-color: #22c55e !important;
+}
+
+.starlight-aside--caution {
+  border-left-color: #eab308 !important;
+}
+
+.starlight-aside--danger {
+  border-left-color: #ef4444 !important;
 }
 
 .starlight-aside__title {
-  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
-  letter-spacing: -0.02em !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  letter-spacing: 0.08em !important;
   font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.6875rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.starlight-aside__content p {
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
 }
 
 /* Badges */
@@ -149,29 +232,35 @@ starlight-tabs {
   border-radius: 0 !important;
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.08em !important;
   font-weight: 600 !important;
+  font-size: 0.625rem !important;
   border: 1px solid currentColor !important;
   background-color: transparent !important;
+  padding: 0.2rem 0.5rem !important;
 }
 
 /* Steps */
 .sl-steps {
   --sl-color-hairline: var(--sl-color-gray-5);
+  margin-top: 1.5rem !important;
+  margin-bottom: 2rem !important;
 }
 
 .sl-steps > li {
   border-left: 1px solid var(--sl-color-hairline) !important;
+  padding-bottom: 1.5rem !important;
 }
 
 .sl-steps > li::before {
   border-radius: 0 !important;
   background-color: var(--sl-color-bg) !important;
   border: 1px solid var(--sl-color-hairline) !important;
-  color: var(--sl-color-text) !important;
+  color: var(--sl-color-gray-3) !important;
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-weight: 600 !important;
-  transition: all 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+  font-size: 0.6875rem !important;
+  transition: all 200ms cubic-bezier(0.25, 0, 0, 1) !important;
 }
 
 .sl-steps > li:hover::before {
@@ -184,15 +273,23 @@ starlight-tabs {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
   background-color: transparent !important;
+  padding: 1.25rem 1.5rem !important;
 }
 
 .file-tree .directory > details > summary {
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-weight: 600 !important;
+  font-size: 0.8125rem !important;
 }
 
 .file-tree .file {
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.8125rem !important;
+  color: var(--sl-color-gray-3) !important;
+}
+
+.file-tree .file:hover {
+  color: var(--sl-color-text) !important;
 }
 
 /* Link Cards */
@@ -200,7 +297,24 @@ starlight-tabs {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
   background-color: transparent !important;
-  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+  transition: all 200ms cubic-bezier(0.25, 0, 0, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.sl-link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--sl-color-accent);
+  transition: width 200ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.sl-link-card:hover::before {
+  width: 100%;
 }
 
 .sl-link-card:hover {
@@ -212,4 +326,5 @@ starlight-tabs {
   font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
   font-weight: 600 !important;
   letter-spacing: -0.02em !important;
+  font-size: 0.9375rem !important;
 }

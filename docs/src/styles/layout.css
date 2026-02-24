@@ -5,56 +5,58 @@
 /* Header */
 header.header {
   border-bottom: 1px solid var(--sl-color-hairline);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: color-mix(in srgb, var(--sl-color-bg) 85%, transparent) !important;
 }
 
-/* Sidebar */
+/* ---- SIDEBAR ---- */
 .sidebar-pane {
   border-right: 1px solid var(--sl-color-hairline);
   background-color: var(--sl-color-bg-sidebar) !important;
 }
 
-.sidebar-content a {
-  border-radius: 0 !important;
-  font-weight: 500;
-}
-
-.sidebar-content a[aria-current="page"] {
-  background-color: transparent !important;
-  color: var(--sl-color-accent) !important;
-  border-left: 2px solid var(--sl-color-accent);
-  padding-left: calc(var(--sl-sidebar-item-padding-inline) - 2px);
-}
-
-.sidebar-content summary {
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  font-size: 0.875rem !important;
+.sidebar-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Site Title */
 .site-title {
   font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   letter-spacing: -0.04em !important;
   text-transform: uppercase !important;
+  font-size: 0.9375rem !important;
 }
 
-/* Right Sidebar (Table of Contents) */
+/* ---- RIGHT SIDEBAR (Table of Contents) ---- */
 .right-sidebar-panel {
   border-left: 1px solid var(--sl-color-hairline) !important;
+  padding-top: 1.5rem !important;
 }
 
 .right-sidebar-panel h2 {
-  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  font-size: 0.875rem !important;
+  letter-spacing: 0.1em !important;
+  font-size: 0.625rem !important;
+  color: var(--sl-color-gray-4) !important;
+  margin-bottom: 1rem !important;
 }
 
 .right-sidebar-panel a {
-  font-weight: 500 !important;
+  font-weight: 400 !important;
+  font-size: 0.8125rem !important;
+  color: var(--sl-color-gray-3) !important;
+  transition: color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+  line-height: 1.4 !important;
+  padding: 0.25rem 0 !important;
+}
+
+.right-sidebar-panel a:hover {
+  color: var(--sl-color-text) !important;
 }
 
 .right-sidebar-panel a[aria-current="true"] {
@@ -62,25 +64,61 @@ header.header {
   font-weight: 600 !important;
 }
 
-/* Pagination */
+/* ---- PAGE TITLE AREA ---- */
+
+/* Override Starlight's page title styling */
+.content-panel:first-child {
+  padding-top: 2.5rem !important;
+  padding-bottom: 0 !important;
+  border-top: none !important;
+}
+
+/* Page header eyebrow */
+.content-panel h1#_top {
+  position: relative;
+}
+
+/* ---- MAIN CONTENT AREA ---- */
+.content-panel + .content-panel {
+  border-top: none !important;
+  padding-top: 1rem !important;
+}
+
+.sl-markdown-content {
+  padding-top: 0.5rem !important;
+}
+
+/* ---- PAGINATION ---- */
+.pagination-links {
+  margin-top: 4rem !important;
+  padding-top: 2rem !important;
+  border-top: 1px solid var(--sl-color-hairline) !important;
+}
+
 .pagination-links a {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
-  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
+  transition: all 200ms cubic-bezier(0.25, 0, 0, 1) !important;
+  padding: 1.25rem 1.5rem !important;
 }
 
 .pagination-links a:hover {
-  border-color: var(--sl-color-gray-4) !important;
+  border-color: var(--sl-color-accent) !important;
   background-color: transparent !important;
+}
+
+.pagination-links a:hover .link-title {
+  color: var(--sl-color-accent) !important;
 }
 
 .pagination-links .link-title {
   font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
   font-weight: 600 !important;
   letter-spacing: -0.02em !important;
+  transition: color 200ms cubic-bezier(0.25, 0, 0, 1) !important;
 }
 
-/* Footer */
+/* ---- FOOTER ---- */
 footer {
   border-top: 1px solid var(--sl-color-hairline) !important;
   margin-top: 4rem !important;
@@ -89,37 +127,25 @@ footer {
 
 .meta {
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
-  font-size: 0.75rem !important;
+  font-size: 0.6875rem !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.08em !important;
+  color: var(--sl-color-gray-4) !important;
 }
 
-/* Mobile Menu */
-mobile-starlight-toc nav {
-  border-top: 1px solid var(--sl-color-hairline) !important;
-  border-bottom: 1px solid var(--sl-color-hairline) !important;
-}
-
-mobile-starlight-toc summary {
-  font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  font-size: 0.875rem !important;
-}
-
-/* Search */
+/* ---- SEARCH ---- */
 .search-button {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
   background-color: transparent !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
 }
 
 .search-button:hover {
   border-color: var(--sl-color-gray-4) !important;
 }
 
-/* Theme Toggle */
+/* ---- THEME TOGGLE ---- */
 starlight-theme-select select {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
@@ -128,13 +154,14 @@ starlight-theme-select select {
   letter-spacing: 0.05em !important;
   font-weight: 600 !important;
   font-size: 0.75rem !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
 }
 
 starlight-theme-select select:hover {
   border-color: var(--sl-color-gray-4) !important;
 }
 
-/* Language Select */
+/* ---- LANGUAGE SELECT ---- */
 starlight-language-select select {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
@@ -143,6 +170,7 @@ starlight-language-select select {
   letter-spacing: 0.05em !important;
   font-weight: 600 !important;
   font-size: 0.75rem !important;
+  transition: border-color 150ms cubic-bezier(0.25, 0, 0, 1) !important;
 }
 
 starlight-language-select select:hover {
@@ -154,7 +182,7 @@ starlight-language-select select:hover {
   stroke-width: 1.5px !important;
 }
 
-/* Hero Section (Starlight default hero) */
+/* ---- HERO (Starlight default hero — kept for landing) ---- */
 .hero {
   padding-top: 5rem !important;
   padding-bottom: 5rem !important;

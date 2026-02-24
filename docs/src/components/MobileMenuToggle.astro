@@ -1,0 +1,56 @@
+---
+/**
+ * Custom Mobile Menu Toggle — zero-radius, dark-theme-aware button.
+ * Icons via UnoCSS presetIcons (@iconify-json/tabler).
+ * Keeps `starlight-menu-button` custom element for PageFrame compat.
+ */
+---
+
+<starlight-menu-button class="group flex print:hidden">
+  <button
+    aria-expanded="false"
+    aria-label={Astro.locals.t('menuButton.accessibleLabel')}
+    aria-controls="starlight__sidebar"
+    class="fixed top-[calc((var(--sl-nav-height)-2rem)/2)] end-[var(--sl-nav-pad-x)] z-[var(--sl-z-index-navbar)] flex items-center justify-center size-8 p-0 bg-$sl-color-bg-nav text-$sl-color-gray-3 cursor-pointer transition-colors duration-150 hover:(text-$sl-color-text border-$sl-color-accent) group-aria-expanded:(border-$sl-color-accent text-$sl-color-text) min-[50rem]:hidden"
+  >
+    <span class="i-tabler-menu-2 w-5 h-5 group-aria-expanded:hidden" />
+    <span class="i-tabler-x w-5 h-5 hidden group-aria-expanded:inline-block" />
+  </button>
+</starlight-menu-button>
+
+<style is:global>
+  [data-mobile-menu-expanded] {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  class StarlightMenuButton extends HTMLElement {
+    btn = this.querySelector('button')!
+
+    constructor() {
+      super()
+      this.btn.addEventListener('click', () => this.toggleExpanded())
+      const nav = this.closest('nav')
+      if (nav) nav.addEventListener('keyup', (e) => this.closeOnEscape(e))
+    }
+
+    setExpanded(expanded: boolean) {
+      this.setAttribute('aria-expanded', String(expanded))
+      document.body.toggleAttribute('data-mobile-menu-expanded', expanded)
+    }
+
+    toggleExpanded() {
+      this.setExpanded(this.getAttribute('aria-expanded') !== 'true')
+    }
+
+    closeOnEscape(e: KeyboardEvent) {
+      if (e.code === 'Escape') {
+        this.setExpanded(false)
+        this.btn.focus()
+      }
+    }
+  }
+
+  customElements.define('starlight-menu-button', StarlightMenuButton)
+</script>

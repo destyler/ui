@@ -1,0 +1,227 @@
+---
+/**
+ * Custom Sidebar — fully self-contained, no Starlight component imports.
+ * Uses UnoCSS utilities exclusively (no <style> block).
+ * Top-level groups render as labeled sections (no collapse arrow).
+ * Only nested sub-groups are collapsible.
+ */
+
+interface SidebarLink {
+  type: 'link';
+  label: string;
+  href: string;
+  isCurrent: boolean;
+  badge: any;
+  attrs: Record<string, any>;
+}
+
+interface SidebarGroup {
+  type: 'group';
+  label: string;
+  entries: SidebarEntry[];
+  collapsed: boolean;
+  badge: any;
+}
+
+type SidebarEntry = SidebarLink | SidebarGroup;
+
+const { sidebar } = Astro.locals.starlightRoute as { sidebar: SidebarEntry[] };
+
+/**
+ * Build a hash of the sidebar structure so we can invalidate persisted state
+ * when the sidebar shape changes.
+ */
+function hashSidebar(entries: SidebarEntry[]): string {
+  return entries.map(e => e.type === 'link' ? e.href : e.label + hashSidebar((e as SidebarGroup).entries)).join('|');
+}
+const sidebarHash = hashSidebar(sidebar);
+---
+
+<!-- Sidebar state persistence (scroll + details open/close) -->
+<sl-sidebar-state-persist data-hash={sidebarHash}>
+  <script is:inline aria-hidden="true">
+    (() => {
+      try {
+        if (!matchMedia('(min-width: 50em)').matches) return;
+        const target = document.querySelector('sl-sidebar-state-persist');
+        const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+        if (!target || !state || target.dataset.hash !== state.hash) return;
+        window._starlightScrollRestore = state.scroll;
+        customElements.define(
+          'sl-sidebar-restore',
+          class extends HTMLElement {
+            connectedCallback() {
+              try {
+                const idx = parseInt(this.dataset.index || '');
+                const details = this.closest('details');
+                if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+              } catch {}
+            }
+          }
+        );
+      } catch {}
+    })();
+  </script>
+
+  <nav aria-label="Sidebar" class="flex flex-col gap-1 py-5">
+    {
+      sidebar.map((entry: SidebarEntry) =>
+        entry.type === 'group' ? (
+          <div class="sidebar-group">
+            {/* Group label */}
+            <div class="flex items-center gap-2 px-4 pb-2 select-none">
+              <span class="block w-3 h-0.5 bg-$sl-color-accent shrink-0" aria-hidden="true" />
+              <span class="font-code text-[0.625rem] font-bold uppercase tracking-[0.14em] text-$sl-color-gray-3">
+                {entry.label}
+              </span>
+            </div>
+
+            {/* Group items */}
+            <ul class="list-none p-0 m-0 flex flex-col">
+              {entry.entries.map((child: SidebarEntry) =>
+                child.type === 'link' ? (
+                  <li>
+                    <a
+                      href={child.href}
+                      aria-current={child.isCurrent ? 'page' : undefined}
+                      class:list={[
+                        'group relative flex items-center px-4 py-1.5 text-0.8125rem font-450 leading-relaxed tracking-tight no-underline transition-colors duration-120 ease-out',
+                        child.isCurrent
+                          ? 'text-$sl-color-accent font-600'
+                          : 'text-$sl-color-gray-3 hover:text-$sl-color-text',
+                      ]}
+                      {...child.attrs}
+                    >
+                      {/* Active indicator bar */}
+                      <span
+                        class:list={[
+                          'absolute left-0 top-0 bottom-0 bg-$sl-color-accent transition-all duration-120 ease-out',
+                          child.isCurrent ? 'w-0.5' : 'w-0',
+                        ]}
+                        aria-hidden="true"
+                      />
+                      <span>{child.label}</span>
+                    </a>
+                  </li>
+                ) : child.type === 'group' ? (
+                  <li class="mt-0.5">
+                    <details open={!(child as SidebarGroup).collapsed}>
+                      <summary class="sidebar-subgroup-toggle flex items-center justify-between px-4 py-1.5 cursor-pointer select-none text-$sl-color-gray-3 text-0.75rem font-600 uppercase tracking-widest hover:text-$sl-color-text transition-colors duration-120 ease-out">
+                        <span>{child.label}</span>
+                        <svg class="sidebar-caret shrink-0 text-$sl-color-gray-4 transition-transform duration-200 ease-out" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                          <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+                        </svg>
+                      </summary>
+                      <ul class="list-none p-0 ml-4 border-l border-$sl-color-hairline flex flex-col">
+                        {(child as SidebarGroup).entries.map((sub: SidebarEntry) =>
+                          sub.type === 'link' ? (
+                            <li>
+                              <a
+                                href={sub.href}
+                                aria-current={sub.isCurrent ? 'page' : undefined}
+                                class:list={[
+                                  'group relative flex items-center px-4 py-1.5 text-0.8125rem font-450 leading-relaxed tracking-tight no-underline transition-colors duration-120 ease-out',
+                                  sub.isCurrent
+                                    ? 'text-$sl-color-accent font-600'
+                                    : 'text-$sl-color-gray-3 hover:text-$sl-color-text',
+                                ]}
+                                {...sub.attrs}
+                              >
+                                <span
+                                  class:list={[
+                                    'absolute left-0 top-0 bottom-0 bg-$sl-color-accent transition-all duration-120 ease-out',
+                                    sub.isCurrent ? 'w-0.5' : 'w-0',
+                                  ]}
+                                  aria-hidden="true"
+                                />
+                                <span>{sub.label}</span>
+                              </a>
+                            </li>
+                          ) : null
+                        )}
+                      </ul>
+                    </details>
+                  </li>
+                ) : null
+              )}
+            </ul>
+          </div>
+        ) : entry.type === 'link' ? (
+          <a
+            href={entry.href}
+            aria-current={entry.isCurrent ? 'page' : undefined}
+            class:list={[
+              'group relative flex items-center px-4 py-1.5 text-0.8125rem font-450 leading-relaxed tracking-tight no-underline transition-colors duration-120 ease-out',
+              entry.isCurrent
+                ? 'text-$sl-color-accent font-600'
+                : 'text-$sl-color-gray-3 hover:text-$sl-color-text',
+            ]}
+            {...entry.attrs}
+          >
+            <span
+              class:list={[
+                'absolute left-0 top-0 bottom-0 bg-$sl-color-accent transition-all duration-120 ease-out',
+                entry.isCurrent ? 'w-0.5' : 'w-0',
+              ]}
+              aria-hidden="true"
+            />
+            <span>{entry.label}</span>
+          </a>
+        ) : null
+      )
+    }
+  </nav>
+
+  <script is:inline aria-hidden="true">
+    (() => {
+      const scroller = document.getElementById('starlight__sidebar');
+      if (!window._starlightScrollRestore || !scroller) return;
+      scroller.scrollTop = window._starlightScrollRestore;
+      delete window._starlightScrollRestore;
+    })();
+  </script>
+</sl-sidebar-state-persist>
+
+<!-- Sidebar persist state saver (runs on navigation) -->
+<script is:inline aria-hidden="true">
+  (() => {
+    if (typeof customElements === 'undefined') return;
+    if (customElements.get('sl-sidebar-state-persist')) return;
+    customElements.define('sl-sidebar-state-persist', class extends HTMLElement {
+      connectedCallback() {
+        this.style.display = 'contents';
+        const save = () => {
+          try {
+            const scroller = document.getElementById('starlight__sidebar');
+            const details = this.querySelectorAll('details');
+            const open = /** @type {Record<number, boolean>} */ ({});
+            details.forEach((d, i) => { open[i] = d.open; });
+            sessionStorage.setItem('sl-sidebar-state', JSON.stringify({
+              hash: this.dataset.hash,
+              scroll: scroller ? scroller.scrollTop : 0,
+              open,
+            }));
+          } catch {}
+        };
+        document.addEventListener('astro:before-preparation', save);
+        window.addEventListener('beforeunload', save);
+      }
+    });
+  })();
+</script>
+
+<!-- Minimal CSS only for things UnoCSS can't express -->
+<style>
+  .sidebar-subgroup-toggle::marker,
+  .sidebar-subgroup-toggle::-webkit-details-marker {
+    display: none;
+  }
+  details[open] > .sidebar-subgroup-toggle .sidebar-caret {
+    transform: rotate(90deg);
+  }
+  .sidebar-group + .sidebar-group {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+</style>

@@ -1,0 +1,214 @@
+---
+/**
+ * Custom Mobile Table of Contents — fully self‑contained, no Starlight imports.
+ * Renders a fixed bar below the header with a collapsible list of page headings.
+ * Uses UnoCSS utilities; keeps the `mobile-starlight-toc` custom element for
+ * heading‑tracking via IntersectionObserver.
+ */
+
+interface TocItem {
+  depth: number
+  slug: string
+  text: string
+  children: TocItem[]
+}
+
+function flattenToc(items: TocItem[], out: TocItem[] = []): TocItem[] {
+  for (const item of items) {
+    out.push(item)
+    if (item.children?.length) flattenToc(item.children, out)
+  }
+  return out
+}
+
+const { toc } = Astro.locals.starlightRoute
+const flatItems = toc ? flattenToc(toc.items) : []
+---
+
+{toc && flatItems.length > 0 && (
+  <mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+    <nav
+      aria-labelledby="starlight__on-this-page--mobile"
+      class="toc-nav fixed z-[var(--sl-z-index-toc,5)] top-[calc(var(--sl-nav-height)-1px)] inset-x-0 border-y border-y-solid border-y-$sl-color-hairline bg-$sl-color-bg-nav print:hidden min-[50rem]:start-[var(--sl-content-inline-start,0)]"
+    >
+      <details id="starlight__mobile-toc">
+        <summary
+          id="starlight__on-this-page--mobile"
+          class="toc-summary flex items-center gap-2 h-[var(--sl-mobile-toc-height,2.75rem)] border-b border-b-solid border-b-$sl-color-hairline-shade px-4 py-2 cursor-pointer list-none"
+        >
+          <span class="toc-toggle rounded-md! inline-flex items-center gap-3 shrink-0 border border-solid border-$sl-color-gray-5 px-2.5 py-1.5 font-code font-600 text-11px uppercase tracking-widest leading-none bg-$sl-color-bg text-$sl-color-gray-3 select-none transition-colors duration-150 hover:(text-$sl-color-text border-$sl-color-gray-3)">
+            On this page
+            <span class="toc-caret i-tabler-chevron-right w-3 h-3 transition-transform duration-200" />
+          </span>
+          <span class="toc-display-current truncate text-xs text-$sl-color-gray-3" />
+        </summary>
+
+        <div class="border-t border-t-solid border-t-$sl-color-hairline-shade max-h-[calc(85vh-var(--sl-nav-height)-var(--sl-mobile-toc-height,2.75rem))] overflow-y-auto bg-$sl-color-bg overscroll-contain">
+          <ul class="m-0 p-0 list-none">
+            {flatItems.map((heading, i: number) => (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  class:list={[
+                    'toc-link flex items-center py-2.5 pe-4 text-sm text-$sl-color-gray-3 no-underline transition-colors duration-150 hover:text-$sl-color-text',
+                    i > 0 && 'border-t border-t-solid border-t-$sl-color-gray-6',
+                  ]}
+                  style={`padding-inline-start:${1 + (heading.depth - 2) * 0.75}rem`}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    </nav>
+  </mobile-starlight-toc>
+)}
+
+<style>
+  /* Only rules UnoCSS cannot express */
+  .toc-summary::marker,
+  .toc-summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] .toc-toggle {
+    color: var(--sl-color-text);
+    border-color: var(--sl-color-accent);
+  }
+  :global([dir='rtl']) .toc-caret { transform: rotate(180deg); }
+  details[open] .toc-caret { transform: rotate(90deg); }
+  .toc-link[aria-current='true'] {
+    color: var(--sl-color-accent);
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  const PAGE_TITLE_ID = '_top'
+
+  class MobileStarlightTOC extends HTMLElement {
+    private _current: HTMLAnchorElement | null = null
+    private minH: number
+    private maxH: number
+
+    constructor() {
+      super()
+      this.minH = Number.parseInt(this.dataset.minH || '2', 10)
+      this.maxH = Number.parseInt(this.dataset.maxH || '3', 10)
+      this._current = this.querySelector<HTMLAnchorElement>('a[aria-current="true"]')
+
+      /* ---- close behaviour ---- */
+      const details = this.querySelector('details')
+      if (details) {
+        const close = () => { details.open = false }
+        details.querySelectorAll('a').forEach(a => a.addEventListener('click', close))
+        window.addEventListener('click', e => {
+          if (!details.contains(e.target as Node)) close()
+        })
+        window.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && details.open) {
+            const had = details.contains(document.activeElement)
+            close()
+            if (had) details.querySelector('summary')?.focus()
+          }
+        })
+      }
+
+      /* ---- heading tracking ---- */
+      const onIdle = (cb: IdleRequestCallback) =>
+        (window.requestIdleCallback || ((cb: any) => setTimeout(cb, 1)))(cb)
+      onIdle(() => this.initObserver())
+    }
+
+    private set current(link: HTMLAnchorElement) {
+      if (link === this._current) return
+      if (this._current) this._current.removeAttribute('aria-current')
+      link.setAttribute('aria-current', 'true')
+      this._current = link
+      const display = this.querySelector('.toc-display-current') as HTMLSpanElement | null
+      if (display) display.textContent = link.textContent
+    }
+
+    private initObserver() {
+      const links = [...this.querySelectorAll<HTMLAnchorElement>('a')]
+      const levels = Array.from(
+        { length: 1 + this.maxH - this.minH },
+        (_, i) => `h${this.minH + i}`,
+      )
+      const sel = `h1#${PAGE_TITLE_ID},:where(${levels.join()})[id]`
+
+      const isH = (el: Element): el is HTMLHeadingElement => el.matches(sel)
+
+      const getH = (el: Element | null): HTMLHeadingElement | null => {
+        if (!el) return null
+        const origin = el
+        while (el) {
+          if (el.matches('.sl-markdown-content, main > *'))
+            return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement
+          if (isH(el)) return el
+          const child = el.querySelector<HTMLHeadingElement>(sel)
+          if (child) return child
+          el = el.previousElementSibling
+          while (el?.lastElementChild) el = el.lastElementChild
+          const h = getH(el)
+          if (h) return h
+        }
+        return getH(origin.parentElement)
+      }
+
+      const setCurrent: IntersectionObserverCallback = (entries) => {
+        for (const { isIntersecting, target } of entries) {
+          if (!isIntersecting) continue
+          const heading = getH(target)
+          if (!heading) continue
+          const link = links.find(
+            l => l.hash === `#${encodeURIComponent(heading.id)}`,
+          )
+          if (link) { this.current = link; break }
+        }
+      }
+
+      const toObserve = document.querySelectorAll(
+        [
+          `main :where(${sel})`,
+          `main :where(${sel}, .sl-heading-wrapper) ~ *:not(:has(${sel}))`,
+          `main .sl-markdown-content > *:not(:has(${sel}))`,
+          `main > *:not(:has(${sel}))`,
+        ].join(),
+      )
+
+      const computeMargin = (): `-${number}px 0% ${number}px` => {
+        const navH = document.querySelector('header')?.getBoundingClientRect().height || 0
+        const tocH = this.querySelector('summary')?.getBoundingClientRect().height || 0
+        const top = navH + tocH + 32
+        const bottom = top + 53
+        return `-${top}px 0% ${bottom - document.documentElement.clientHeight}px`
+      }
+
+      let observer: IntersectionObserver | undefined
+      const observe = () => {
+        if (observer) return
+        observer = new IntersectionObserver(setCurrent, {
+          rootMargin: computeMargin(),
+        })
+        toObserve.forEach(h => observer!.observe(h))
+      }
+      observe()
+
+      let timeout: ReturnType<typeof setTimeout>
+      window.addEventListener('resize', () => {
+        observer?.disconnect()
+        observer = undefined
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          const idle = (cb: IdleRequestCallback) =>
+            (window.requestIdleCallback || ((cb: any) => setTimeout(cb, 1)))(cb)
+          idle(observe)
+        }, 200)
+      })
+    }
+  }
+
+  customElements.define('mobile-starlight-toc', MobileStarlightTOC)
+</script>

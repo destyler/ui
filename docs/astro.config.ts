@@ -17,9 +17,19 @@ export default defineConfig({
           href: 'https://github.com/destyler/ui',
         },
       ],
-      sidebar: [],
+      sidebar: [
+        {
+          label: 'Overview',
+          items: [
+            { label: 'Introduction', slug: 'overview/introduction' },
+          ],
+        },
+      ],
       components: {
         Header: './src/components/Header.astro',
+        Sidebar: './src/components/Sidebar.astro',
+        MobileTableOfContents: './src/components/MobileTableOfContents.astro',
+        MobileMenuToggle: './src/components/MobileMenuToggle.astro',
       },
       customCss: [
         './src/styles/bootstrap.css',
