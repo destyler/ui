@@ -22,8 +22,6 @@ export default defineConfig({
           label: 'Overview',
           items: [
             { label: 'Introduction', slug: 'overview/introduction' },
-            { label: 'Guide', slug: 'overview/guide' },
-            { label: 'Guide 2', slug: 'overview/guide' },
           ],
         },
       ],
