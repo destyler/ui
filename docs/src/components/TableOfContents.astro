@@ -1,0 +1,244 @@
+---
+/**
+ * Custom Desktop Table of Contents — fully self‑contained, no Starlight imports.
+ * Renders a sticky sidebar with a hierarchical list of page headings.
+ * Uses UnoCSS utilities; keeps the `desktop-starlight-toc` custom element for
+ * heading‑tracking via IntersectionObserver.
+ * Indentation is applied based on heading depth.
+ */
+
+interface TocItem {
+  depth: number
+  slug: string
+  text: string
+  children: TocItem[]
+}
+
+function flattenToc(items: TocItem[], out: TocItem[] = []): TocItem[] {
+  for (const item of items) {
+    out.push(item)
+    if (item.children?.length) flattenToc(item.children, out)
+  }
+  return out
+}
+
+const { toc } = Astro.locals.starlightRoute
+const flatItems = toc ? flattenToc(toc.items) : []
+---
+
+{toc && flatItems.length > 0 && (
+  <desktop-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+    <div class="toc-wrapper w-full">
+      <div class="toc-header">
+        <h2
+          id="starlight__on-this-page"
+          class="toc-title m-0 font-code font-600 uppercase tracking-[0.1em] text-[0.625rem] text-$sl-color-gray-4 select-none mb-4"
+        >
+          On this page
+        </h2>
+      </div>
+
+      <nav aria-labelledby="starlight__on-this-page">
+        <ul class="toc-list m-0 p-0 list-none relative">
+          {flatItems.map((heading) => (
+            <li
+              class:list={[
+                'toc-item relative',
+                `toc-depth-${heading.depth}`,
+              ]}
+            >
+              <a
+                href={`#${heading.slug}`}
+                class="toc-link"
+                data-depth={heading.depth}
+              >
+                <span class="toc-indicator" />
+                <span class="toc-text">{heading.text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </desktop-starlight-toc>
+)}
+
+<style>
+  /* Left border rail for the whole list */
+  .toc-list::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    height: calc(100vh - 12px - var(--sl-sidebar-pad-x) - var(--sl-nav-height) - 2rem) !important;
+    background-color: var(--sl-color-hairline);
+  }
+
+  /* Link base style */
+  .toc-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+    transition: color 150ms ease-out;
+    line-height: 1.4;
+  }
+
+  .toc-link:hover {
+    color: var(--sl-color-text);
+  }
+
+  /* Depth-based sizing & indentation */
+  .toc-link[data-depth='2'] {
+    font-size: 0.8125rem;
+    font-weight: 450;
+    padding: 0.375rem 0 0.375rem 0.75rem;
+  }
+
+  .toc-link[data-depth='3'] {
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding: 0.25rem 0 0.25rem 1.625rem;
+  }
+
+  .toc-link[data-depth='4'],
+  .toc-link[data-depth='5'],
+  .toc-link[data-depth='6'] {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    padding: 0.1875rem 0 0.1875rem 2.5rem;
+  }
+
+  /* Active indicator bar */
+  .toc-indicator {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background-color: var(--sl-color-accent);
+    transition: width 120ms ease-out;
+  }
+
+  /* Active state */
+  .toc-link[aria-current='true'] {
+    color: var(--sl-color-accent);
+    font-weight: 600;
+  }
+
+  .toc-link[aria-current='true'] .toc-indicator {
+    width: 2px;
+  }
+</style>
+
+<script>
+  const PAGE_TITLE_ID = '_top'
+
+  class DesktopStarlightTOC extends HTMLElement {
+    private _current: HTMLAnchorElement | null = null
+    private minH: number
+    private maxH: number
+
+    constructor() {
+      super()
+      this.minH = Number.parseInt(this.dataset.minH || '2', 10)
+      this.maxH = Number.parseInt(this.dataset.maxH || '3', 10)
+      this._current = this.querySelector<HTMLAnchorElement>('a[aria-current="true"]')
+
+      /* ---- heading tracking ---- */
+      const onIdle = (cb: IdleRequestCallback) =>
+        (window.requestIdleCallback || ((cb: any) => setTimeout(cb, 1)))(cb)
+      onIdle(() => this.initObserver())
+    }
+
+    private set current(link: HTMLAnchorElement) {
+      if (link === this._current) return
+      if (this._current) this._current.removeAttribute('aria-current')
+      link.setAttribute('aria-current', 'true')
+      this._current = link
+    }
+
+    private initObserver() {
+      const links = [...this.querySelectorAll<HTMLAnchorElement>('a')]
+      const levels = Array.from(
+        { length: 1 + this.maxH - this.minH },
+        (_, i) => `h${this.minH + i}`,
+      )
+      const sel = `h1#${PAGE_TITLE_ID},:where(${levels.join()})[id]`
+
+      const isH = (el: Element): el is HTMLHeadingElement => el.matches(sel)
+
+      const getH = (el: Element | null): HTMLHeadingElement | null => {
+        if (!el) return null
+        const origin = el
+        while (el) {
+          if (el.matches('.sl-markdown-content, main > *'))
+            return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement
+          if (isH(el)) return el
+          const child = el.querySelector<HTMLHeadingElement>(sel)
+          if (child) return child
+          el = el.previousElementSibling
+          while (el?.lastElementChild) el = el.lastElementChild
+          const h = getH(el)
+          if (h) return h
+        }
+        return getH(origin.parentElement)
+      }
+
+      const setCurrent: IntersectionObserverCallback = (entries) => {
+        for (const { isIntersecting, target } of entries) {
+          if (!isIntersecting) continue
+          const heading = getH(target)
+          if (!heading) continue
+          const link = links.find(
+            l => l.hash === `#${encodeURIComponent(heading.id)}`,
+          )
+          if (link) { this.current = link; break }
+        }
+      }
+
+      const toObserve = document.querySelectorAll(
+        [
+          `main :where(${sel})`,
+          `main :where(${sel}, .sl-heading-wrapper) ~ *:not(:has(${sel}))`,
+          `main .sl-markdown-content > *:not(:has(${sel}))`,
+          `main > *:not(:has(${sel}))`,
+        ].join(),
+      )
+
+      const computeMargin = (): `-${number}px 0% ${number}px` => {
+        const navH = document.querySelector('header')?.getBoundingClientRect().height || 0
+        const top = navH + 32
+        const bottom = top + 53
+        return `-${top}px 0% ${bottom - document.documentElement.clientHeight}px`
+      }
+
+      let observer: IntersectionObserver | undefined
+      const observe = () => {
+        if (observer) return
+        observer = new IntersectionObserver(setCurrent, {
+          rootMargin: computeMargin(),
+        })
+        toObserve.forEach(h => observer!.observe(h))
+      }
+      observe()
+
+      let timeout: ReturnType<typeof setTimeout>
+      window.addEventListener('resize', () => {
+        observer?.disconnect()
+        observer = undefined
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          const idle = (cb: IdleRequestCallback) =>
+            (window.requestIdleCallback || ((cb: any) => setTimeout(cb, 1)))(cb)
+          idle(observe)
+        }, 200)
+      })
+    }
+  }
+
+  customElements.define('desktop-starlight-toc', DesktopStarlightTOC)
+</script>

@@ -28,6 +28,7 @@ export default defineConfig({
       components: {
         Header: './src/components/Header.astro',
         Sidebar: './src/components/Sidebar.astro',
+        TableOfContents: './src/components/TableOfContents.astro',
         MobileTableOfContents: './src/components/MobileTableOfContents.astro',
         MobileMenuToggle: './src/components/MobileMenuToggle.astro',
       },
