@@ -22,6 +22,8 @@ export default defineConfig({
           label: 'Overview',
           items: [
             { label: 'Introduction', slug: 'overview/introduction' },
+            { label: 'Guide', slug: 'overview/guide' },
+            { label: 'Guide 2', slug: 'overview/guide' },
           ],
         },
       ],
@@ -31,6 +33,7 @@ export default defineConfig({
         TableOfContents: './src/components/TableOfContents.astro',
         MobileTableOfContents: './src/components/MobileTableOfContents.astro',
         MobileMenuToggle: './src/components/MobileMenuToggle.astro',
+        Pagination: './src/components/Pagination.astro',
       },
       customCss: [
         './src/styles/bootstrap.css',

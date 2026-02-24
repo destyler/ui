@@ -1,0 +1,60 @@
+---
+/**
+ * Custom Pagination — replaces Starlight's default prev/next footer.
+ * Brutalist editorial style with UnoCSS utilities + presetIcons.
+ */
+
+const { dir, pagination } = Astro.locals.starlightRoute;
+const { prev, next } = pagination;
+const isRtl = dir === 'rtl';
+
+const prevIcon = isRtl ? 'i-tabler-chevron-right' : 'i-tabler-chevron-left';
+const nextIcon = isRtl ? 'i-tabler-chevron-left' : 'i-tabler-chevron-right';
+---
+
+<nav
+  class="grid grid-cols-[repeat(auto-fit,minmax(min(18rem,100%),1fr))] gap-4 print:hidden"
+  aria-label="Pagination"
+  dir={dir}
+>
+  {prev && (
+    <a
+      href={prev.href}
+      rel="prev"
+      class="group relative rounded-md! flex items-center gap-4 border border-[var(--sl-color-hairline)] px-6 py-5 no-underline text-[var(--sl-color-text)] overflow-hidden transition-[border-color] duration-200 ease-[cubic-bezier(0.25,0,0,1)] before:content-[''] before:absolute before:top-0 before:left-0 before:w-0 before:h-0.5 before:bg-[var(--sl-color-accent)] before:transition-[width] before:duration-200 before:ease-[cubic-bezier(0.25,0,0,1)] hover:border-[var(--sl-color-gray-4)] hover:before:w-full"
+    >
+      <span
+        class={`${prevIcon} !w-5 !h-5 shrink-0 text-[var(--sl-color-gray-4)] transition-all duration-200 ease-[cubic-bezier(0.25,0,0,1)] group-hover:text-[var(--sl-color-accent)] group-hover:-translate-x-0.5`}
+        aria-hidden="true"
+      />
+      <span>
+        <span class="block font-code text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--sl-color-gray-4)] mb-1 transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] group-hover:text-[var(--sl-color-gray-3)]">
+          {Astro.locals.t('page.previousLink')}
+        </span>
+        <span class="block font-display font-semibold text-[0.9375rem] tracking-[-0.02em] text-[var(--sl-color-text)] transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] group-hover:text-[var(--sl-color-accent)]">
+          {prev.label}
+        </span>
+      </span>
+    </a>
+  )}
+  {next && (
+    <a
+      href={next.href}
+      rel="next"
+      class="group relative rounded-md! flex items-center justify-end text-end gap-4 border border-[var(--sl-color-hairline)] px-6 py-5 no-underline text-[var(--sl-color-text)] overflow-hidden transition-[border-color] duration-200 ease-[cubic-bezier(0.25,0,0,1)] before:content-[''] before:absolute before:top-0 before:left-0 before:w-0 before:h-0.5 before:bg-[var(--sl-color-accent)] before:transition-[width] before:duration-200 before:ease-[cubic-bezier(0.25,0,0,1)] hover:border-[var(--sl-color-gray-4)] hover:before:w-full"
+    >
+      <span>
+        <span class="block font-code text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--sl-color-gray-4)] mb-1 transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] group-hover:text-[var(--sl-color-gray-3)]">
+          {Astro.locals.t('page.nextLink')}
+        </span>
+        <span class="block font-display font-semibold text-[0.9375rem] tracking-[-0.02em] text-[var(--sl-color-text)] transition-colors duration-200 ease-[cubic-bezier(0.25,0,0,1)] group-hover:text-[var(--sl-color-accent)]">
+          {next.label}
+        </span>
+      </span>
+      <span
+        class={`${nextIcon} !w-5 !h-5 shrink-0 text-[var(--sl-color-gray-4)] transition-all duration-200 ease-[cubic-bezier(0.25,0,0,1)] group-hover:text-[var(--sl-color-accent)] group-hover:translate-x-0.5`}
+        aria-hidden="true"
+      />
+    </a>
+  )}
+</nav>
