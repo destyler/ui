@@ -38,6 +38,7 @@
     "@vitest/ui": "catalog:test",
     "bumpp": "catalog:node",
     "eslint": "catalog:lint",
+    "eslint-plugin-astro": "catalog:lint",
     "eslint-plugin-react-hooks": "catalog:lint",
     "eslint-plugin-react-refresh": "catalog:lint",
     "eslint-plugin-storybook": "catalog:lint",
