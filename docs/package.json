@@ -10,11 +10,18 @@
     "astro": "astro"
   },
   "devDependencies": {
+    "@astrojs/react": "catalog:docs",
     "@astrojs/starlight": "catalog:docs",
+    "@astrojs/vue": "catalog:docs",
     "@iconify-json/tabler": "catalog:icons",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
     "@unocss/astro": "catalog:styles",
     "@unocss/reset": "catalog:styles",
     "astro": "catalog:docs",
-    "unocss": "catalog:styles"
+    "react": "catalog:framework",
+    "react-dom": "catalog:framework",
+    "unocss": "catalog:styles",
+    "vue": "catalog:framework"
   }
 }

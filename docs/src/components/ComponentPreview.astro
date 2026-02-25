@@ -1,0 +1,221 @@
+---
+/**
+ * ComponentPreview — renders a live component example with a "Show Code" toggle.
+ *
+ * Usage in MDX:
+ *   import ComponentPreview from '../../../components/ComponentPreview.astro';
+ *   <ComponentPreview component="avatar" example="Basic" />
+ *
+ * Automatically switches between the Vue and React renderings based on the
+ * global framework selection (data-framework on <html>).
+ */
+
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import ReactExample from './ReactExample.tsx'
+import VueExample from './VueExample.vue'
+
+interface Props {
+  /** Component name, e.g. "avatar", "collapse" */
+  component: string
+  /** Example file name without extension, default "Basic" */
+  example?: string
+}
+
+const { component, example = 'Basic' } = Astro.props
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const workspaceRoot = path.resolve(__dirname, '../../..')
+
+const vuePath = path.join(
+  workspaceRoot,
+  'packages/vue/src/components',
+  component,
+  'examples',
+  `${example}.vue`,
+)
+const reactPath = path.join(
+  workspaceRoot,
+  'packages/react/src/components',
+  component,
+  'examples',
+  `${example}.tsx`,
+)
+
+let vueCode = ''
+let reactCode = ''
+
+try {
+  vueCode = fs.readFileSync(vuePath, 'utf-8')
+}
+catch {
+  vueCode = `// Vue ${example} example not found for ${component}`
+}
+
+try {
+  reactCode = fs.readFileSync(reactPath, 'utf-8')
+}
+catch {
+  reactCode = `// React ${example} example not found for ${component}`
+}
+---
+
+<div class="ds-component-preview not-content">
+  <!-- Live preview area -->
+  <div class="ds-preview-container">
+    <div class="ds-preview-frame" data-fw="vue">
+      <VueExample client:load component={component} example={example} />
+    </div>
+    <div class="ds-preview-frame" data-fw="react">
+      <ReactExample client:load component={component} example={example} />
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="ds-preview-toolbar">
+    <button type="button" class="ds-show-code-btn" aria-expanded="false">
+      <span class="i-tabler-code ds-show-code-icon" aria-hidden="true"></span>
+      <span class="ds-show-code-label">Show Code</span>
+    </button>
+  </div>
+
+  <!-- Source code (collapsed by default) -->
+  <div class="ds-code-container hidden">
+    <div class="ds-code-block" data-fw="vue">
+      <pre class="ds-code-pre"><code set:text={vueCode} /></pre>
+    </div>
+    <div class="ds-code-block" data-fw="react">
+      <pre class="ds-code-pre"><code set:text={reactCode} /></pre>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ---------- Framework visibility ---------- */
+  :root[data-framework='vue'] .ds-preview-frame[data-fw='react'],
+  :root[data-framework='vue'] .ds-code-block[data-fw='react'] {
+    display: none;
+  }
+
+  :root[data-framework='react'] .ds-preview-frame[data-fw='vue'],
+  :root[data-framework='react'] .ds-code-block[data-fw='vue'] {
+    display: none;
+  }
+
+  /* Default to Vue when data-framework is not yet set */
+  :root:not([data-framework]) .ds-preview-frame[data-fw='react'],
+  :root:not([data-framework]) .ds-code-block[data-fw='react'] {
+    display: none;
+  }
+
+  /* ---------- Layout ---------- */
+  .ds-component-preview {
+    border: 1px solid var(--sl-color-hairline);
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .ds-preview-container {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+  }
+
+  .ds-preview-toolbar {
+    border-top: 1px solid var(--sl-color-hairline);
+    padding: 0.375rem 0.75rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .ds-show-code-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: transparent;
+    border: none;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: color 150ms, background-color 150ms;
+  }
+
+  .ds-show-code-btn:hover {
+    color: var(--sl-color-text);
+    background-color: var(--sl-color-gray-6);
+  }
+
+  .ds-show-code-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .ds-code-container {
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+
+  .ds-code-container.hidden {
+    display: none;
+  }
+
+  .ds-code-pre {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    background-color: var(--sl-color-bg-nav);
+    color: var(--sl-color-text);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    border-radius: 0;
+    tab-size: 2;
+    white-space: pre;
+  }
+
+  .ds-code-pre code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+  }
+
+  .ds-preview-empty {
+    color: var(--sl-color-gray-3);
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  .ds-preview-loading {
+    color: var(--sl-color-gray-3);
+    font-size: 0.875rem;
+  }
+</style>
+
+<script>
+  function initComponentPreviews() {
+    document.querySelectorAll('.ds-show-code-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const preview = btn.closest('.ds-component-preview')
+        if (!preview) return
+        const codeContainer = preview.querySelector('.ds-code-container')
+        if (!codeContainer) return
+
+        const isHidden = codeContainer.classList.contains('hidden')
+        codeContainer.classList.toggle('hidden')
+        btn.setAttribute('aria-expanded', String(isHidden))
+
+        const label = btn.querySelector('.ds-show-code-label')
+        if (label) {
+          label.textContent = isHidden ? 'Hide Code' : 'Show Code'
+        }
+      })
+    })
+  }
+
+  // Run on initial load and on Astro view-transition navigations
+  initComponentPreviews()
+  document.addEventListener('astro:after-swap', initComponentPreviews)
+</script>

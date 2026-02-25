@@ -1,6 +1,4 @@
 ---
-import { Code } from 'astro:components'
-
 /**
  * How It Works — numbered steps layout with staggered alignment.
  * Code blocks switch between Vue and React based on [data-framework] on <html>.
@@ -57,10 +55,10 @@ const steps = [
             <p class="text-sm leading-[1.6] text-$sl-color-gray-3 tracking-[-0.01em] mb-6">{step.description}</p>
             <div class="step-code mt-4">
               <div class="ds-code-vue">
-                <Code code={step.vue.code} lang={step.vue.lang} theme="vitesse-dark" />
+                <pre class="step-code-pre"><code>{step.vue.code}</code></pre>
               </div>
               <div class="ds-code-react">
-                <Code code={step.react.code} lang={step.react.lang} theme="vitesse-dark" />
+                <pre class="step-code-pre"><code>{step.react.code}</code></pre>
               </div>
             </div>
           </div>
@@ -87,7 +85,8 @@ const steps = [
     display: block;
   }
 
-  .step-code :global(pre) {
+  .step-code :global(pre),
+  .step-code-pre {
     font-family: var(--sl-font-mono) !important;
     font-size: 0.8125rem !important;
     line-height: 1.6 !important;
@@ -100,7 +99,8 @@ const steps = [
     border-radius: 0.375rem !important;
   }
 
-  .step-code :global(pre code) {
+  .step-code :global(pre code),
+  .step-code-pre code {
     font-family: inherit !important;
     background: none !important;
     padding: 0 !important;
