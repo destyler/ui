@@ -3,28 +3,35 @@ import { Code } from 'astro:components'
 
 /**
  * How It Works — numbered steps layout with staggered alignment.
+ * Code blocks switch between Vue and React based on [data-framework] on <html>.
  */
 const steps = [
   {
     number: "01",
     title: "Install the package",
     description: "Add Destyler to your project with your preferred package manager. Zero config, no build plugins required.",
-    code: "pnpm add @destyler-ui/vue",
-    lang: "shellscript" as const,
+    vue: { code: "pnpm add @destyler-ui/vue", lang: "shellscript" as const },
+    react: { code: "pnpm add @destyler-ui/react", lang: "shellscript" as const },
   },
   {
     number: "02",
     title: "Import components",
     description: "Pull in exactly what you need. Every component is tree-shakable through namespace exports or direct imports.",
-    code: "import { Collapse } from '@destyler-ui/vue'",
-    lang: "typescript" as const,
+    vue: { code: "import { Collapse } from '@destyler-ui/vue'", lang: "typescript" as const },
+    react: { code: "import { Collapse } from '@destyler-ui/react'", lang: "typescript" as const },
   },
   {
     number: "03",
     title: "Style your way",
     description: "Apply your design tokens, Tailwind classes, or CSS-in-JS. The components provide behavior — you provide the look.",
-    code: `<Collapse.Root>\n  <Collapse.Item value="a">\n    ...\n  </Collapse.Item>\n</Collapse.Root>`,
-    lang: "vue-html" as const,
+    vue: {
+      code: `<Collapse.Root>\n  <Collapse.Item value="a">\n    ...\n  </Collapse.Item>\n</Collapse.Root>`,
+      lang: "vue-html" as const,
+    },
+    react: {
+      code: `<Collapse.Root>\n  <Collapse.Item value="a">\n    ...\n  </Collapse.Item>\n</Collapse.Root>`,
+      lang: "tsx" as const,
+    },
   },
 ];
 ---
@@ -49,7 +56,12 @@ const steps = [
             <h3 class="font-display font-bold text-xl tracking-[-0.02em] text-$sl-color-text mb-3 leading-[1.25]">{step.title}</h3>
             <p class="text-sm leading-[1.6] text-$sl-color-gray-3 tracking-[-0.01em] mb-6">{step.description}</p>
             <div class="step-code mt-4">
-              <Code code={step.code} lang={step.lang} theme="vitesse-dark" />
+              <div class="ds-code-vue">
+                <Code code={step.vue.code} lang={step.vue.lang} theme="vitesse-dark" />
+              </div>
+              <div class="ds-code-react">
+                <Code code={step.react.code} lang={step.react.lang} theme="vitesse-dark" />
+              </div>
             </div>
           </div>
         </div>
@@ -59,6 +71,22 @@ const steps = [
 </section>
 
 <style>
+  /* Toggle code blocks based on selected framework */
+  :root[data-framework='vue'] .ds-code-vue,
+  :root:not([data-framework]) .ds-code-vue {
+    display: block;
+  }
+  :root[data-framework='vue'] .ds-code-react,
+  :root:not([data-framework]) .ds-code-react {
+    display: none;
+  }
+  :root[data-framework='react'] .ds-code-vue {
+    display: none;
+  }
+  :root[data-framework='react'] .ds-code-react {
+    display: block;
+  }
+
   .step-code :global(pre) {
     font-family: var(--sl-font-mono) !important;
     font-size: 0.8125rem !important;
