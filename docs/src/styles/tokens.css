@@ -91,11 +91,6 @@
   --sl-color-hairline-shade: var(--sl-color-gray-5);
 }
 
-/* Remove rounded corners globally */
-* {
-  border-radius: 0 !important;
-}
-
 /* Noise texture overlay */
 body::before {
   content: "";
