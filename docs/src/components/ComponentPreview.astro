@@ -78,19 +78,28 @@ const reactHtml = await highlight(reactCode, 'tsx')
 
   <!-- Toolbar -->
   <div class="border-t border-solid border-[var(--sl-color-hairline)] py-[0.375rem] px-3 flex justify-end">
-    <button type="button" style="border-radius: 0.375rem !important;" class="ds-show-code-btn inline-flex items-center rounded-md! gap-[0.375rem] bg-transparent border-none text-[var(--sl-color-gray-3)] cursor-pointer text-[0.8125rem] font-500 py-1 px-2 transition-[color,background-color] duration-150 hover:text-[var(--sl-color-text)] hover:bg-[var(--sl-color-gray-6)]" aria-expanded="false">
-      <span class="i-tabler-code w-4 h-4" aria-hidden="true"></span>
-      <span class="ds-show-code-label">Show Code</span>
-    </button>
+    <div class="flex items-center gap-1">
+      <button type="button" style="border-radius: 0.375rem !important;" class="ds-show-code-btn inline-flex items-center rounded-md! gap-[0.375rem] bg-transparent border-none text-[var(--sl-color-gray-3)] cursor-pointer text-[0.8125rem] font-500 py-1 px-2 transition-[color,background-color] duration-150 hover:text-[var(--sl-color-text)] hover:bg-[var(--sl-color-gray-6)]" aria-expanded="false">
+        <span class="i-tabler-code w-4 h-4" aria-hidden="true"></span>
+        <span class="ds-show-code-label">Show Code</span>
+      </button>
+      <button type="button" style="border-radius: 0.375rem !important;" class="ds-copy-code-btn inline-flex items-center rounded-md! bg-transparent border-none text-[var(--sl-color-gray-3)] cursor-pointer py-1 px-2 transition-[color,background-color] duration-150 hover:text-[var(--sl-color-text)] hover:bg-[var(--sl-color-gray-6)]" aria-label="Copy code">
+        <span class="ds-copy-icon i-tabler-copy w-4 h-4" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
 
   <!-- Source code (collapsed by default) -->
-  <div class="ds-code-container border-t border-solid border-[var(--sl-color-hairline)] hidden">
-    <div class="ds-code-block" data-fw="vue">
-      <Fragment set:html={vueHtml} />
-    </div>
-    <div class="ds-code-block" data-fw="react">
-      <Fragment set:html={reactHtml} />
+  <div class="ds-code-container grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr;">
+    <div class="overflow-hidden">
+      <div class="border-t border-solid border-[var(--sl-color-hairline)]">
+        <div class="ds-code-block" data-fw="vue">
+          <Fragment set:html={vueHtml} />
+        </div>
+        <div class="ds-code-block" data-fw="react">
+          <Fragment set:html={reactHtml} />
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -147,21 +156,55 @@ const reactHtml = await highlight(reactCode, 'tsx')
 </style>
 
 <script>
+  function getActiveFramework(): string {
+    return document.documentElement.getAttribute('data-framework') || 'vue'
+  }
+
   function initComponentPreviews() {
     document.querySelectorAll('.ds-show-code-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const preview = btn.closest('.ds-component-preview')
         if (!preview) return
-        const codeContainer = preview.querySelector('.ds-code-container')
+        const codeContainer = preview.querySelector<HTMLElement>('.ds-code-container')
         if (!codeContainer) return
 
-        const isHidden = codeContainer.classList.contains('hidden')
-        codeContainer.classList.toggle('hidden')
-        btn.setAttribute('aria-expanded', String(isHidden))
+        const isCollapsed = codeContainer.style.gridTemplateRows === '0fr'
+        codeContainer.style.gridTemplateRows = isCollapsed ? '1fr' : '0fr'
+        btn.setAttribute('aria-expanded', String(isCollapsed))
 
         const label = btn.querySelector('.ds-show-code-label')
         if (label) {
-          label.textContent = isHidden ? 'Hide Code' : 'Show Code'
+          label.textContent = isCollapsed ? 'Hide Code' : 'Show Code'
+        }
+      })
+    })
+
+    document.querySelectorAll('.ds-copy-code-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const preview = btn.closest('.ds-component-preview')
+        if (!preview) return
+
+        const fw = getActiveFramework()
+        const codeBlock = preview.querySelector(`.ds-code-block[data-fw="${fw}"]`)
+        if (!codeBlock) return
+
+        const code = codeBlock.querySelector('.shiki')?.textContent || ''
+        try {
+          await navigator.clipboard.writeText(code)
+          const icon = btn.querySelector('.ds-copy-icon')
+          if (icon) {
+            icon.classList.remove('i-tabler-copy')
+            icon.classList.add('i-tabler-check')
+          }
+          setTimeout(() => {
+            if (icon) {
+              icon.classList.remove('i-tabler-check')
+              icon.classList.add('i-tabler-copy')
+            }
+          }, 2000)
+        }
+        catch {
+          // Fallback: silently fail
         }
       })
     })
