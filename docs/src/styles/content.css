@@ -110,11 +110,8 @@
 
 /* Images */
 .sl-markdown-content img {
-  max-width: 100% !important;
-  height: auto !important;
-  margin-top: 2rem !important;
-  margin-bottom: 2rem !important;
-  border: 1px solid var(--sl-color-hairline) !important;
+  max-width: 100%;
+  height: auto;
 }
 
 .sl-markdown-content figcaption {
@@ -122,8 +119,6 @@
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-size: 0.75rem !important;
   color: var(--sl-color-gray-4) !important;
-  margin-top: -1rem !important;
-  margin-bottom: 2rem !important;
   letter-spacing: 0.02em !important;
 }
 

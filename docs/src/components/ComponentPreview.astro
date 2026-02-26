@@ -68,10 +68,10 @@ const reactHtml = await highlight(reactCode, 'tsx')
 <div class="ds-component-preview not-content border rounded-xl! border-solid border-[var(--sl-color-hairline)] my-6 overflow-hidden">
   <!-- Live preview area -->
   <div class="p-8 flex items-center justify-center min-h-[100px]">
-    <div class="ds-preview-frame" data-fw="vue">
+    <div class={`ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw="vue">
       <VueExample client:load component={component} example={example} />
     </div>
-    <div class="ds-preview-frame" data-fw="react">
+    <div class={`ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw="react">
       <ReactExample client:load component={component} example={example} />
     </div>
   </div>
