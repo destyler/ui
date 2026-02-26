@@ -13,6 +13,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { highlight } from '../utils/shiki'
 import ReactExample from './ReactExample.tsx'
 import VueExample from './VueExample.vue'
 
@@ -59,11 +60,14 @@ try {
 catch {
   reactCode = `// React ${example} example not found for ${component}`
 }
+
+const vueHtml = await highlight(vueCode, 'vue')
+const reactHtml = await highlight(reactCode, 'tsx')
 ---
 
-<div class="ds-component-preview not-content">
+<div class="ds-component-preview not-content border rounded-xl! border-solid border-[var(--sl-color-hairline)] my-6 overflow-hidden">
   <!-- Live preview area -->
-  <div class="ds-preview-container">
+  <div class="p-8 flex items-center justify-center min-h-[100px]">
     <div class="ds-preview-frame" data-fw="vue">
       <VueExample client:load component={component} example={example} />
     </div>
@@ -73,20 +77,20 @@ catch {
   </div>
 
   <!-- Toolbar -->
-  <div class="ds-preview-toolbar">
-    <button type="button" class="ds-show-code-btn" aria-expanded="false">
-      <span class="i-tabler-code ds-show-code-icon" aria-hidden="true"></span>
+  <div class="border-t border-solid border-[var(--sl-color-hairline)] py-[0.375rem] px-3 flex justify-end">
+    <button type="button" style="border-radius: 0.375rem !important;" class="ds-show-code-btn inline-flex items-center rounded-md! gap-[0.375rem] bg-transparent border-none text-[var(--sl-color-gray-3)] cursor-pointer text-[0.8125rem] font-500 py-1 px-2 transition-[color,background-color] duration-150 hover:text-[var(--sl-color-text)] hover:bg-[var(--sl-color-gray-6)]" aria-expanded="false">
+      <span class="i-tabler-code w-4 h-4" aria-hidden="true"></span>
       <span class="ds-show-code-label">Show Code</span>
     </button>
   </div>
 
   <!-- Source code (collapsed by default) -->
-  <div class="ds-code-container hidden">
+  <div class="ds-code-container border-t border-solid border-[var(--sl-color-hairline)] hidden">
     <div class="ds-code-block" data-fw="vue">
-      <pre class="ds-code-pre"><code set:text={vueCode} /></pre>
+      <Fragment set:html={vueHtml} />
     </div>
     <div class="ds-code-block" data-fw="react">
-      <pre class="ds-code-pre"><code set:text={reactCode} /></pre>
+      <Fragment set:html={reactHtml} />
     </div>
   </div>
 </div>
@@ -109,88 +113,36 @@ catch {
     display: none;
   }
 
-  /* ---------- Layout ---------- */
-  .ds-component-preview {
-    border: 1px solid var(--sl-color-hairline);
-    margin: 1.5rem 0;
-    overflow: hidden;
-  }
-
-  .ds-preview-container {
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100px;
-  }
-
-  .ds-preview-toolbar {
-    border-top: 1px solid var(--sl-color-hairline);
-    padding: 0.375rem 0.75rem;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .ds-show-code-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    background: transparent;
-    border: none;
-    color: var(--sl-color-gray-3);
-    cursor: pointer;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    transition: color 150ms, background-color 150ms;
-  }
-
-  .ds-show-code-btn:hover {
-    color: var(--sl-color-text);
-    background-color: var(--sl-color-gray-6);
-  }
-
-  .ds-show-code-icon {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .ds-code-container {
-    border-top: 1px solid var(--sl-color-hairline);
-  }
-
-  .ds-code-container.hidden {
-    display: none;
-  }
-
-  .ds-code-pre {
-    margin: 0;
-    padding: 1rem 1.25rem;
-    background-color: var(--sl-color-bg-nav);
-    color: var(--sl-color-text);
-    font-size: 0.8125rem;
-    line-height: 1.7;
-    overflow-x: auto;
-    border-radius: 0;
+  /* ---------- Shiki dual-theme ---------- */
+  .ds-code-block :global(.shiki) {
+    @apply m-0 py-4 px-5 text-[0.8125rem] leading-[1.7] overflow-x-auto rounded-0;
     tab-size: 2;
-    white-space: pre;
   }
 
-  .ds-code-pre code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
+  .ds-code-block :global(.shiki code) {
+    @apply font-mono;
   }
 
-  .ds-preview-empty {
-    color: var(--sl-color-gray-3);
-    font-size: 0.875rem;
-    font-style: italic;
+  /* Dark mode: show dark theme colors, hide light */
+  :root[data-theme='dark'] .ds-code-block :global(.shiki),
+  :root:not([data-theme]) .ds-code-block :global(.shiki) {
+    background-color: var(--shiki-dark-bg, #121212) !important;
+    color: var(--shiki-dark, #dbd7caee) !important;
   }
 
-  .ds-preview-loading {
-    color: var(--sl-color-gray-3);
-    font-size: 0.875rem;
+  :root[data-theme='dark'] .ds-code-block :global(.shiki span),
+  :root:not([data-theme]) .ds-code-block :global(.shiki span) {
+    color: var(--shiki-dark) !important;
+  }
+
+  /* Light mode: show light theme colors */
+  :root[data-theme='light'] .ds-code-block :global(.shiki) {
+    background-color: var(--shiki-light-bg, #ffffff) !important;
+    color: var(--shiki-light, #393a34) !important;
+  }
+
+  :root[data-theme='light'] .ds-code-block :global(.shiki span) {
+    color: var(--shiki-light) !important;
   }
 </style>
 

@@ -20,6 +20,7 @@ catalogs:
     '@astrojs/starlight': ^0.37.6
     '@astrojs/vue': ^5.0.0
     astro: ^5.17.3
+    shiki: ^3.7.0
   framework:
     react: ^19.2.3
     react-dom: ^19.2.3

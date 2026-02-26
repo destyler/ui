@@ -21,6 +21,7 @@
     "astro": "catalog:docs",
     "react": "catalog:framework",
     "react-dom": "catalog:framework",
+    "shiki": "catalog:docs",
     "unocss": "catalog:styles",
     "vue": "catalog:framework"
   }
