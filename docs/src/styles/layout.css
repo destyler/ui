@@ -26,7 +26,6 @@ header.header {
   font-family: "Inter Tight", "Inter", system-ui, sans-serif !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
-  text-transform: uppercase !important;
   font-size: 0.9375rem !important;
 }
 
@@ -70,7 +69,6 @@ footer {
 .meta {
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-size: 0.6875rem !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   color: var(--sl-color-gray-4) !important;
   margin-top: 0rem !important;
@@ -93,7 +91,6 @@ starlight-theme-select select {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
   background-color: transparent !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
   font-weight: 600 !important;
   font-size: 0.75rem !important;
@@ -109,7 +106,6 @@ starlight-language-select select {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
   background-color: transparent !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
   font-weight: 600 !important;
   font-size: 0.75rem !important;

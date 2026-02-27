@@ -22,6 +22,9 @@ catalogs:
     '@astrojs/vue':
       specifier: ^5.0.0
       version: 5.1.4
+    '@destyler/docs':
+      specifier: ^0.2.6
+      version: 0.2.6
     astro:
       specifier: ^5.17.3
       version: 5.17.3
@@ -432,6 +435,10 @@ importers:
         version: 2.0.1(vitest@4.0.17)(vue@3.5.26(typescript@5.9.3))
 
   docs:
+    dependencies:
+      '@destyler/docs':
+        specifier: catalog:docs
+        version: 0.2.6
     devDependencies:
       '@astrojs/react':
         specifier: catalog:docs
@@ -1227,6 +1234,9 @@ packages:
 
   '@destyler/dismissable@0.2.6':
     resolution: {integrity: sha512-it8goFjZBmllsSdlDin+iPdQETSd3ek3G+gaLOtxYDK/pkuJEQpzH9JJqOauCTpNd1oeokbFDXbhNqY+VgVhyQ==}
+
+  '@destyler/docs@0.2.6':
+    resolution: {integrity: sha512-sHmxXxYY/X23dvovsAxw/csrcttr116T4mjFCD9kX3fw9Jvp4/q7nzcWK0XoyHu9bXJIxNvQUehJWOp6jD2C2A==}
 
   '@destyler/dom@0.2.6':
     resolution: {integrity: sha512-QxbDdMJwHWV21W3tZA+jnkphRzJwbPVOqSBXr24WFBfKO4Wxq16BbYpptojwfLhuXVn+Vxm9Ysio1p/dyAil8w==}
@@ -7487,6 +7497,8 @@ snapshots:
       '@destyler/dom': 0.2.6
       '@destyler/interact-outside': 0.2.6
       '@destyler/utils': 0.2.6
+
+  '@destyler/docs@0.2.6': {}
 
   '@destyler/dom@0.2.6':
     dependencies:

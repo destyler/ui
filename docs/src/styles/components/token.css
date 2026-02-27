@@ -9,7 +9,6 @@
   --demo-coral-contrast: white;
   --demo-coral-focus-ring: #ffb2a8;
 
-  /* Neutral semantic tokens (Sand from park-ui) */
   --demo-neutral-solid: #8d8d86;
   --demo-neutral-emphasized: #82827c;
   --demo-neutral-muted: #e2e1de;
@@ -61,7 +60,6 @@
   --demo-coral-contrast: white;
   --demo-coral-focus-ring: #e2503f;
 
-  /* Neutral dark mode (Sand from park-ui) */
   --demo-neutral-solid: #6f6d66;
   --demo-neutral-emphasized: #7c7b74;
   --demo-neutral-muted: #31312e;

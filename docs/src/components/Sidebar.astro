@@ -71,7 +71,7 @@ const sidebarHash = hashSidebar(sidebar);
             {/* Group label */}
             <div class="flex items-center gap-2 px-4 pb-2 select-none">
               <span class="block w-3 h-0.5 bg-$sl-color-accent shrink-0" aria-hidden="true" />
-              <span class="font-code text-[0.625rem] font-bold uppercase tracking-[0.14em] text-$sl-color-gray-3">
+              <span class="font-code text-[0.625rem] font-bold tracking-[0.14em] text-$sl-color-gray-3">
                 {entry.label}
               </span>
             </div>
@@ -106,7 +106,7 @@ const sidebarHash = hashSidebar(sidebar);
                 ) : child.type === 'group' ? (
                   <li class="mt-0.5">
                     <details open={!(child as SidebarGroup).collapsed}>
-                      <summary class="sidebar-subgroup-toggle flex items-center justify-between px-4 py-1.5 cursor-pointer select-none text-$sl-color-gray-3 text-0.75rem font-600 uppercase tracking-widest hover:text-$sl-color-text transition-colors duration-120 ease-out">
+                      <summary class="sidebar-subgroup-toggle flex items-center justify-between px-4 py-1.5 cursor-pointer select-none text-$sl-color-gray-3 text-0.75rem font-600 tracking-widest hover:text-$sl-color-text transition-colors duration-120 ease-out">
                         <span>{child.label}</span>
                         <svg class="sidebar-caret shrink-0 text-$sl-color-gray-4 transition-transform duration-200 ease-out" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                           <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />

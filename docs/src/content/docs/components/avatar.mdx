@@ -4,6 +4,7 @@ description: An image element with a fallback for representing the user.
 ---
 
 import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
 # Avatar
@@ -52,3 +53,16 @@ Display a user's profile image with a fallback.
 
 <ComponentPreview component="avatar" example="Basic" />
 
+### Events
+
+Use `onStatusChange` to listen for loading state changes.
+
+<ComponentPreview component="avatar" example="Event" />
+
+### Root Provider
+
+<ComponentPreview component="avatar" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="avatar" />

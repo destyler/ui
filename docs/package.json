@@ -7,7 +7,13 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate:types": "tsx scripts/generate-type-docs.ts vue && tsx scripts/generate-type-docs.ts react",
+    "generate:types:vue": "tsx scripts/generate-type-docs.ts vue",
+    "generate:types:react": "tsx scripts/generate-type-docs.ts react"
+  },
+  "dependencies": {
+    "@destyler/docs": "catalog:docs"
   },
   "devDependencies": {
     "@astrojs/react": "catalog:docs",
@@ -22,6 +28,7 @@
     "react": "catalog:framework",
     "react-dom": "catalog:framework",
     "shiki": "catalog:docs",
+    "typescript": "catalog:types",
     "unocss": "catalog:styles",
     "vue": "catalog:framework"
   }

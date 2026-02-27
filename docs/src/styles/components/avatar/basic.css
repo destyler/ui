@@ -25,7 +25,6 @@
 .avatar-basic [data-part="fallback"] {
   border-radius: inherit;
   line-height: 1;
-  text-transform: uppercase;
   font-weight: 500;
   font-size: inherit;
 }

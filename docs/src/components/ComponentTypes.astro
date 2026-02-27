@@ -1,0 +1,92 @@
+---
+/**
+ * ComponentTypes — renders full API reference tables for a component.
+ *
+ * Reads generated type JSON files and renders Props/Emits tables for each
+ * component part (Root, Item, Content, etc.), switching between frameworks
+ * using the same data-fw pattern as FrameworkContent.
+ *
+ * Usage in MDX:
+ *   import ComponentTypes from '../../../components/ComponentTypes.astro';
+ *   <ComponentTypes id="avatar" />
+ */
+
+import fs from 'node:fs'
+import path from 'node:path'
+import PropsTable from './PropsTable.astro'
+import EmitsTable from './EmitsTable.astro'
+import DataAttrTable from './DataAttrTable.astro'
+
+interface DataAttrInfo {
+  name: string
+  type: string
+}
+
+interface PartTypes {
+  props?: Record<string, any>
+  emits?: Record<string, any>
+  dataAttr?: DataAttrInfo[]
+}
+
+interface Props {
+  /** Component id (directory name), e.g. "avatar", "collapse" */
+  id: string
+}
+
+const { id } = Astro.props
+
+const dataDir = path.join(process.cwd(), 'src', 'data', 'types')
+
+function loadTypes(framework: string): Record<string, PartTypes> | null {
+  const filePath = path.join(dataDir, framework, `${id}.types.json`)
+  if (!fs.existsSync(filePath)) return null
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+  }
+  catch {
+    return null
+  }
+}
+
+const vueTypes = loadTypes('vue')
+const reactTypes = loadTypes('react')
+
+function sortedEntries(types: Record<string, PartTypes>): [string, PartTypes][] {
+  return Object.entries(types).sort(([a], [b]) => {
+    // Root always comes first
+    if (a === 'Root') return -1
+    if (b === 'Root') return 1
+    return a.localeCompare(b)
+  })
+}
+---
+
+{(vueTypes || reactTypes) && (
+  <div class="not-content">
+    {vueTypes && (
+      <div class="ds-fw-content" data-fw="vue">
+        {sortedEntries(vueTypes).map(([partName, types]) => (
+          <div class="mt-6 first:mt-0">
+            <h3 class="mt-8 mb-2 text-xl font-600 scroll-mt-16" id={`${id}-${partName.toLowerCase()}-vue`}>{partName}</h3>
+            {types.props && <PropsTable props={types.props} />}
+            {types.emits && <EmitsTable emits={types.emits} />}
+            {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
+          </div>
+        ))}
+      </div>
+    )}
+
+    {reactTypes && (
+      <div class="ds-fw-content" data-fw="react">
+        {sortedEntries(reactTypes).map(([partName, types]) => (
+          <div class="mt-6 first:mt-0">
+            <h3 class="mt-8 mb-2 text-xl font-600 scroll-mt-16" id={`${id}-${partName.toLowerCase()}-react`}>{partName}</h3>
+            {types.props && <PropsTable props={types.props} />}
+            {types.emits && <EmitsTable emits={types.emits} />}
+            {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}

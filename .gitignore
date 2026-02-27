@@ -37,3 +37,6 @@ __screenshots__
 .node-modules-inspector
 .astro
 .rolldown
+
+# Generated type docs
+docs/src/data/types/

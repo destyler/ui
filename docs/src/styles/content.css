@@ -77,8 +77,6 @@
 /* Tables */
 .sl-markdown-content table {
   width: 100% !important;
-  margin-top: 1.5rem !important;
-  margin-bottom: 2rem !important;
   border-collapse: collapse !important;
   font-size: 0.875rem !important;
 }
@@ -94,7 +92,6 @@
   background-color: var(--sl-color-bg-sidebar) !important;
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-weight: 600 !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   font-size: 0.6875rem !important;
   color: var(--sl-color-gray-3) !important;

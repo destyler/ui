@@ -6,7 +6,6 @@
 /* Buttons */
 .sl-markdown-content button, .sl-markdown-content .button, .action {
   border-radius: 0 !important;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -122,7 +121,6 @@ starlight-tabs {
   border-radius: 0 !important;
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-weight: 500;
-  text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 0.75rem 1.5rem !important;
   font-size: 0.75rem !important;
@@ -163,7 +161,6 @@ starlight-tabs {
   border-bottom: 1px solid var(--sl-color-hairline) !important;
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   font-size: 0.6875rem !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
 }
 
@@ -216,7 +213,6 @@ starlight-tabs {
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
   letter-spacing: 0.08em !important;
   font-weight: 600 !important;
-  text-transform: uppercase !important;
   font-size: 0.6875rem !important;
   margin-bottom: 0.5rem !important;
 }
@@ -230,7 +226,6 @@ starlight-tabs {
 .sl-badge {
   border-radius: 0 !important;
   font-family: "JetBrains Mono", "Fira Code", monospace !important;
-  text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   font-weight: 600 !important;
   font-size: 0.625rem !important;
@@ -326,4 +321,11 @@ starlight-tabs {
   font-weight: 600 !important;
   letter-spacing: -0.02em !important;
   font-size: 0.9375rem !important;
+}
+
+/* Framework content visibility — global rules for data-fw switching */
+:root[data-framework='vue'] .ds-fw-content[data-fw='react'],
+:root[data-framework='react'] .ds-fw-content[data-fw='vue'],
+:root:not([data-framework]) .ds-fw-content[data-fw='react'] {
+  display: none;
 }

@@ -1,0 +1,49 @@
+---
+/**
+ * EmitsTable — renders a table of component emits/events.
+ *
+ * Props:
+ *   - emits: Record<string, { type: string; isRequired: boolean; description?: string }>
+ */
+
+interface EmitInfo {
+  type: string
+  isRequired: boolean
+  description?: string
+}
+
+interface Props {
+  emits: Record<string, EmitInfo> | undefined
+}
+
+const { emits } = Astro.props
+
+const entries = emits ? Object.entries(emits) : []
+
+const thClass = 'text-left font-600 text-xs tracking-wider text-$sl-color-gray-3 px-3 py-2 border-b-2 border-b-solid border-b-$sl-color-hairline whitespace-nowrap'
+const tdClass = 'px-3 py-2.5 border-b border-b-solid border-b-$sl-color-hairline align-top'
+---
+
+{entries.length > 0 && (
+  <div class="overflow-x-auto my-4 border-solid border-[var(--sl-color-hairline)] border-px rounded-md!">
+    <table class="w-full text-sm leading-normal">
+      <thead>
+        <tr>
+          <th class={thClass}>Emit</th>
+          <th class={thClass}>Event</th>
+        </tr>
+      </thead>
+      <tbody>
+        {entries.map(([name, emit]) => (
+          <tr>
+            <td class={tdClass}><code class="font-600 text-$sl-color-text whitespace-nowrap">{name}</code></td>
+            <td class={tdClass}>
+              <code class="text-$sl-color-gray-2 text-[0.8125rem] break-words">{emit.type}</code>
+              {emit.description && <p class="mt-1 mb-0 text-$sl-color-gray-3 text-[0.8125rem] leading-relaxed">{emit.description}</p>}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
