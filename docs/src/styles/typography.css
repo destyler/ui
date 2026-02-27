@@ -183,6 +183,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .sl-markdown-content .level-h2 {
+  margin-top: 0rem !important;
   margin-bottom: 2rem;
   border: none !important;
 }

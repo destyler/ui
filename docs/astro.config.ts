@@ -95,6 +95,12 @@ export default defineConfig({
     vue(),
     react(),
     starlight({
+      expressiveCode: {
+        themes: ['vitesse-dark', 'vitesse-light'],
+        styleOverrides: {
+          borderRadius: '0.75rem',
+        },
+      },
       title: 'DESTYLER',
       social: [
         {
