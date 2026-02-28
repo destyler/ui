@@ -120,6 +120,7 @@ export default defineConfig({
           label: 'Components',
           items: [
             { label: 'Avatar', slug: 'components/avatar' },
+            { label: 'Aspect Ratio', slug: 'components/aspect-ratio' },
           ],
         },
       ],
