@@ -157,6 +157,70 @@ const reactHtml = await highlight(reactCode, 'tsx')
   :root[data-theme='light'] .ds-code-block :global(.shiki span) {
     color: var(--shiki-light) !important;
   }
+
+  /* ---------- Style isolation for live preview ---------- */
+  /* Reset Starlight / markdown global styles so component demos render cleanly */
+  .ds-preview-frame :global(ul),
+  .ds-preview-frame :global(ol) {
+    padding-left: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+
+  .ds-preview-frame :global(li) {
+    margin-bottom: 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+  }
+
+  .ds-preview-frame :global(li::marker) {
+    color: inherit !important;
+  }
+
+  .ds-preview-frame :global(a) {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-weight: inherit !important;
+  }
+
+  .ds-preview-frame :global(a:hover) {
+    color: inherit !important;
+  }
+
+  .ds-preview-frame :global(a::after) {
+    display: none !important;
+  }
+
+  .ds-preview-frame :global(p) {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    color: inherit !important;
+    margin: 0 !important;
+  }
+
+  .ds-preview-frame :global(nav) {
+    all: unset !important;
+    display: block !important;
+  }
+
+  .ds-preview-frame :global(button) {
+    font-family: inherit !important;
+  }
+
+  .ds-preview-frame :global(h1),
+  .ds-preview-frame :global(h2),
+  .ds-preview-frame :global(h3),
+  .ds-preview-frame :global(h4),
+  .ds-preview-frame :global(h5),
+  .ds-preview-frame :global(h6) {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
 </style>
 
 <script>

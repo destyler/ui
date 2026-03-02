@@ -119,8 +119,9 @@ export default defineConfig({
         {
           label: 'Components',
           items: [
-            { label: 'Avatar', slug: 'components/avatar' },
             { label: 'Aspect Ratio', slug: 'components/aspect-ratio' },
+            { label: 'Avatar', slug: 'components/avatar' },
+            { label: 'Breadcrumbs', slug: 'components/breadcrumbs' },
           ],
         },
       ],
