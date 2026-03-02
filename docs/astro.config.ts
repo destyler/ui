@@ -140,6 +140,17 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tolerantPackageVueSfc(), destylerTildeAlias()],
+    optimizeDeps: {
+      // Vite 8 beta / esbuild evaluates process.env.NODE_ENV during dep
+      // pre-bundling. Without an explicit define the condition resolves to
+      // "production", which causes React to export `jsxDEV = void 0` from
+      // its CJS production build → "jsxDEV is not a function" at runtime.
+      esbuildOptions: {
+        define: {
+          'process.env.NODE_ENV': '"development"',
+        },
+      },
+    },
     server: {
       fs: {
         allow: ['..'],

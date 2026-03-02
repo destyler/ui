@@ -20,6 +20,7 @@
     "@astrojs/starlight": "catalog:docs",
     "@astrojs/vue": "catalog:docs",
     "@iconify-json/tabler": "catalog:icons",
+    "@shikijs/twoslash": "catalog:docs",
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "@unocss/astro": "catalog:styles",
@@ -28,6 +29,8 @@
     "react": "catalog:framework",
     "react-dom": "catalog:framework",
     "shiki": "catalog:docs",
+    "twoslash": "catalog:docs",
+    "twoslash-vue": "catalog:docs",
     "typescript": "catalog:types",
     "unocss": "catalog:styles",
     "vue": "catalog:framework"

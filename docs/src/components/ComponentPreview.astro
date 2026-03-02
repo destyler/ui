@@ -13,7 +13,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { highlight } from '../utils/shiki'
+import { highlight, highlightWithTwoslash } from '../utils/shiki'
 import ReactExample from './ReactExample.tsx'
 import VueExample from './VueExample.vue'
 
@@ -22,9 +22,11 @@ interface Props {
   component: string
   /** Example file name without extension, default "Basic" */
   example?: string
+  /** Enable twoslash type annotations in the code block */
+  twoslash?: boolean
 }
 
-const { component, example = 'Basic' } = Astro.props
+const { component, example = 'Basic', twoslash = false } = Astro.props
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const workspaceRoot = path.resolve(__dirname, '../../..')
@@ -65,8 +67,9 @@ catch {
 vueCode = vueCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/vue'`)
 reactCode = reactCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/react'`)
 
-const vueHtml = await highlight(vueCode, 'vue')
-const reactHtml = await highlight(reactCode, 'tsx')
+const highlightFn = twoslash ? highlightWithTwoslash : highlight
+const vueHtml = await highlightFn(vueCode, 'vue')
+const reactHtml = await highlightFn(reactCode, 'tsx')
 ---
 
 <div class="ds-component-preview not-content border rounded-xl! border-solid border-[var(--sl-color-hairline)] my-6 overflow-hidden">

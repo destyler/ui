@@ -20,8 +20,11 @@ catalogs:
     '@astrojs/starlight': ^0.37.6
     '@astrojs/vue': ^5.0.0
     '@destyler/docs': ^0.2.6
+    '@shikijs/twoslash': ^3.7.0
     astro: ^5.17.3
     shiki: ^3.7.0
+    twoslash: ^0.3.1
+    twoslash-vue: ^0.3.1
   framework:
     react: ^19.2.3
     react-dom: ^19.2.3
