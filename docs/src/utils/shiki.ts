@@ -1,10 +1,13 @@
-import type { ShikiTransformer } from '@shikijs/types'
 import type { HighlighterCore } from 'shiki/core'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { transformerTwoslash } from '@shikijs/twoslash'
 import { createHighlighterCore } from 'shiki/core'
-import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'ine: createJavaScriptRegexEngine(),
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
+
+let highlighterPromise: Promise<HighlighterCore> | null = null
+
+function getHighlighter(): Promise<HighlighterCore> {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighterCore({
+      engine: createJavaScriptRegexEngine(),
       themes: [
         import('shiki/themes/vitesse-dark.mjs'),
         import('shiki/themes/vitesse-light.mjs'),
