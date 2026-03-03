@@ -8,6 +8,10 @@ import {
 } from 'unocss'
 
 export default defineConfig({
+  safelist: [
+    'i-tabler-check',
+    'i-tabler-copy',
+  ],
   theme: {
     fontFamily: {
       display: '"Inter Tight", Inter, system-ui, sans-serif',

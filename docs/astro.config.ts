@@ -88,6 +88,7 @@ function tolerantPackageVueSfc() {
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://ui.destyler.dev',
   integrations: [
     UnoCSS({
       injectReset: true,

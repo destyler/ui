@@ -224,6 +224,7 @@ const reactHtml = await highlight(reactCode, 'tsx')
 </style>
 
 <script>
+  // @unocss-skip-start
   function getActiveFramework(): string {
     return document.documentElement.getAttribute('data-framework') || 'vue'
   }
@@ -281,4 +282,5 @@ const reactHtml = await highlight(reactCode, 'tsx')
   // Run on initial load and on Astro view-transition navigations
   initComponentPreviews()
   document.addEventListener('astro:after-swap', initComponentPreviews)
+  // @unocss-skip-end
 </script>

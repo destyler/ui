@@ -48,7 +48,7 @@
   --demo-json-boolean: #b35900;
   --demo-json-key: #116329;
   --demo-json-accent: #6f42c1;
-};
+}
 
 :root[data-theme='dark'] {
   /* Coral dark mode */
@@ -96,4 +96,4 @@
   --demo-json-boolean: #ffa657;
   --demo-json-key: #7ee787;
   --demo-json-accent: #d2a8ff;
-};
+}
