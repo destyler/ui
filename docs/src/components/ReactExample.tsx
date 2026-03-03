@@ -1,4 +1,5 @@
-import { type ComponentType, type LazyExoticComponent, Suspense, lazy, useMemo } from 'react'
+import type { ComponentType, LazyExoticComponent } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 
 interface Props {
   component: string

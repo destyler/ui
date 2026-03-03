@@ -227,9 +227,17 @@ function extractDataAttributes(
     let inMethod = false
     let end = pos.start
     for (let j = pos.start; j < code.length; j++) {
-      if (code[j] === '{') { braceCount++; inMethod = true }
-      if (code[j] === '}') { braceCount-- }
-      if (inMethod && braceCount === 0) { end = j; break }
+      if (code[j] === '{') {
+        braceCount++
+        inMethod = true
+      }
+      if (code[j] === '}') {
+        braceCount--
+      }
+      if (inMethod && braceCount === 0) {
+        end = j
+        break
+      }
     }
     const body = code.substring(pos.start, end + 1)
 
