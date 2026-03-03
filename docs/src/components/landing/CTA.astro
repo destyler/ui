@@ -1,0 +1,56 @@
+---
+/**
+ * Final CTA section — inverted colors (light bg on dark page) with
+ * email-style action or direct link.
+ */
+---
+
+<section class="relative overflow-hidden py-24 px-6 md:py-32 md:px-12 lg:py-40 lg:px-16 bg-$sl-color-text border-b border-$sl-color-hairline">
+  <div class="max-w-[1200px] mx-auto relative z-1">
+    <!-- Decorative background number -->
+    <div
+      class="absolute right-[-0.5rem] top-1/2 -translate-y-1/2 font-display font-black text-[20rem] lg:text-[30rem] leading-none text-$sl-color-bg opacity-5 pointer-events-none select-none z-0"
+      aria-hidden="true"
+    >→</div>
+
+    <p class="font-code text-xs font-semibold tracking-[0.2em] text-$sl-color-accent mb-6">READY?</p>
+    <h2 class="font-display font-extrabold tracking-[-0.06em] leading-none text-$sl-color-bg text-5xl md:text-[4.5rem] lg:text-8xl mb-6">
+      <span class="text-$sl-color-bg">Start building</span>
+      <br />
+      <span class="text-$sl-color-accent">ToDay</span>
+    </h2>
+
+    <p class="text-lg leading-[1.6] text-$sl-color-gray-4 max-w-lg tracking-[-0.01em] mb-12">
+      Open-source, MIT licensed, and ready for production.
+    </p>
+
+    <div class="flex items-center gap-8 flex-wrap">
+      <a
+        href="/docs/"
+        class="group inline-flex items-center gap-2.5 relative text-$sl-color-accent no-underline font-display font-semibold text-sm tracking-[0.1em] py-3 transition-all duration-150 ease-out whitespace-nowrap active:translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-$sl-color-accent focus-visible:outline-offset-2"
+      >
+        <span>Read the Docs</span>
+        <span class="transition-transform duration-150 ease-out group-hover:translate-x-1" aria-hidden="true">→</span>
+        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-$sl-color-accent scale-x-100 origin-left transition-transform duration-150 ease-out group-hover:scale-x-110"></span>
+      </a>
+      <a
+        href="https://github.com/destyler/ui"
+        class="inline-flex rounded-1! items-center text-$sl-color-bg no-underline font-display font-semibold text-sm tracking-[0.1em] py-2.5 px-6 border border-$sl-color-bg bg-transparent transition-all duration-150 ease-out whitespace-nowrap hover:bg-$sl-color-bg hover:text-$sl-color-text active:translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-$sl-color-accent focus-visible:outline-offset-2"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="landing-footer bg-$sl-color-bg mt-0! pt-0! pb-8!">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="w-full h-0px! bg-$sl-color-hairline mb-8" aria-hidden="true"></div>
+    <div class="flex items-baseline justify-between flex-wrap gap-4">
+      <p class="font-display font-extrabold text-sm tracking-[0.1em] text-$sl-color-text">UI</p>
+      <p class="font-code text-xs tracking-[0.05em] text-$sl-color-gray-4">MIT License</p>
+    </div>
+  </div>
+</footer>

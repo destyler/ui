@@ -1,0 +1,59 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Aspect Ratio
+
+> Displays content within a desired ratio.
+
+<ComponentPreview component="aspect-ratio" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { AspectRatio } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <AspectRatio.Root>
+    <AspectRatio.Content />
+  </AspectRatio.Root>
+</template>
+
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="aspect-ratio" example="Basic" />
+
+### Portrait
+
+<ComponentPreview component="aspect-ratio" example="Portrait" />
+
+### Square
+
+<ComponentPreview component="aspect-ratio" example="Square" />
+
+### Root Provider
+
+<ComponentPreview component="aspect-ratio" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="aspect-ratio" />

@@ -1,0 +1,33 @@
+---
+/**
+ * Header Theme Toggle — sun/moon icon button.
+ * Toggles data-theme on <html> and persists to localStorage.
+ */
+---
+
+<button
+  type="button"
+  id="ds-theme-toggle"
+  class="flex items-center rounded-md! justify-center w-8 h-8 border border-transparent bg-transparent text-$sl-color-gray-3 cursor-pointer p-0 transition-[color,border-color] duration-150 hover:(text-$sl-color-text border-$sl-color-hairline)"
+  aria-label="Toggle theme"
+>
+  <span class="i-tabler-sun !w-4 !h-4 ds-icon-sun" aria-hidden="true" />
+  <span class="i-tabler-moon !w-4 !h-4 ds-icon-moon" aria-hidden="true" />
+</button>
+
+<style>
+  :root[data-theme='dark']  .ds-icon-sun  { display: inline-block; }
+  :root[data-theme='dark']  .ds-icon-moon { display: none; }
+  :root[data-theme='light'] .ds-icon-sun  { display: none; }
+  :root[data-theme='light'] .ds-icon-moon { display: inline-block; }
+</style>
+
+<script>
+  const themeToggle = document.getElementById('ds-theme-toggle')!;
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.dataset.theme;
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('starlight-theme', next);
+  });
+</script>

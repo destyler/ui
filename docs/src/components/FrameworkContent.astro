@@ -1,0 +1,48 @@
+---
+/**
+ * FrameworkContent — shows/hides its content based on the active framework.
+ *
+ * Usage in MDX:
+ *   import { VueContent, ReactContent } from '../../../components/FrameworkContent.astro';
+ *
+ *   <VueContent>
+ *     ```vue
+ *     <template>...</template>
+ *     ```
+ *   </VueContent>
+ *
+ *   <ReactContent>
+ *     ```tsx
+ *     export default function App() { ... }
+ *     ```
+ *   </ReactContent>
+ *
+ * Props:
+ *   - fw: "vue" | "react" — which framework this content belongs to.
+ */
+
+interface Props {
+  fw: 'vue' | 'react'
+}
+
+const { fw } = Astro.props
+---
+
+<div class="ds-fw-content not-content" data-fw={fw}>
+  <slot />
+</div>
+
+<style>
+  :root[data-framework='vue'] .ds-fw-content[data-fw='react'] {
+    display: none;
+  }
+
+  :root[data-framework='react'] .ds-fw-content[data-fw='vue'] {
+    display: none;
+  }
+
+  /* Default to Vue when data-framework is not yet set */
+  :root:not([data-framework]) .ds-fw-content[data-fw='react'] {
+    display: none;
+  }
+</style>

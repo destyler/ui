@@ -1,0 +1,135 @@
+---
+/**
+ * Header Framework Switcher — single icon trigger with dropdown selector.
+ * Persists selection to localStorage and updates [data-framework] on <html>.
+ */
+---
+
+<div class="ds-framework-switcher relative">
+  <!-- Trigger: shows current framework icon -->
+  <button
+    type="button"
+    id="ds-fw-trigger"
+    class="flex items-center rounded-md! justify-center w-8 h-8 border border-transparent bg-transparent text-$sl-color-gray-3 cursor-pointer p-0 transition-[color,border-color] duration-150 hover:(text-$sl-color-text border-$sl-color-hairline)"
+    aria-label="Switch framework"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+  >
+    <span class="ds-fw-icon-vue i-tabler-brand-vue !w-4 !h-4" aria-hidden="true" />
+    <span class="ds-fw-icon-react i-tabler-brand-react !w-4 !h-4" aria-hidden="true" />
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    id="ds-fw-dropdown"
+    role="listbox"
+    aria-label="Select framework"
+    class="hidden absolute rounded-md! right-0 top-full mt-1.5 min-w-32 bg-$sl-color-bg border border-$sl-color-hairline shadow-lg rounded-lg overflow-hidden z-50"
+  >
+    <button
+      type="button"
+      role="option"
+      data-framework-option="vue"
+      class="ds-fw-option flex items-center gap-2.5 w-full px-3 py-2 border-none bg-transparent text-$sl-color-gray-2 cursor-pointer text-sm font-500 transition-[background-color,color] duration-100 hover:bg-$sl-color-gray-6"
+    >
+      <span class="i-tabler-brand-vue !w-4 !h-4 shrink-0" aria-hidden="true" />
+      <span>Vue</span>
+      <span class="ds-fw-check i-tabler-check !w-3.5 !h-3.5 ml-auto shrink-0 text-$sl-color-accent" aria-hidden="true" />
+    </button>
+    <button
+      type="button"
+      role="option"
+      data-framework-option="react"
+      class="ds-fw-option flex items-center gap-2.5 w-full px-3 py-2 border-none bg-transparent text-$sl-color-gray-2 cursor-pointer text-sm font-500 transition-[background-color,color] duration-100 hover:bg-$sl-color-gray-6"
+    >
+      <span class="i-tabler-brand-react !w-4 !h-4 shrink-0" aria-hidden="true" />
+      <span>React</span>
+      <span class="ds-fw-check i-tabler-check !w-3.5 !h-3.5 ml-auto shrink-0 text-$sl-color-accent" aria-hidden="true" />
+    </button>
+  </div>
+</div>
+
+<style>
+/* Show only the active framework icon in the trigger */
+:root[data-framework='vue'] .ds-fw-icon-vue   {
+  display: inline-block;
+}
+:root[data-framework='vue'] .ds-fw-icon-react  {
+  display: none;
+}
+:root[data-framework='react'] .ds-fw-icon-vue  {
+  display: none;
+}
+:root[data-framework='react'] .ds-fw-icon-react {
+  display: inline-block;
+}
+/* Show check only on the selected option */
+.ds-fw-option .ds-fw-check {
+  display: none;
+}
+.ds-fw-option[aria-selected='true'] .ds-fw-check {
+  display: inline-block;
+}
+.ds-fw-option[aria-selected='true'] {
+  color: var(--sl-color-text);
+}
+</style>
+
+<script>
+  const STORAGE_KEY = 'destyler-framework';
+  const trigger = document.getElementById('ds-fw-trigger')!;
+  const dropdown = document.getElementById('ds-fw-dropdown')!;
+  const options = document.querySelectorAll<HTMLButtonElement>('.ds-fw-option');
+
+  function setFramework(fw: string) {
+    document.documentElement.dataset.framework = fw;
+    localStorage.setItem(STORAGE_KEY, fw);
+    options.forEach((opt) => {
+      const isActive = opt.dataset.frameworkOption === fw;
+      opt.setAttribute('aria-selected', String(isActive));
+    });
+  }
+
+  function openDropdown() {
+    dropdown.classList.remove('hidden');
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDropdown() {
+    dropdown.classList.add('hidden');
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  // Initialize
+  const saved = localStorage.getItem(STORAGE_KEY) || 'vue';
+  setFramework(saved);
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !dropdown.classList.contains('hidden');
+    isOpen ? closeDropdown() : openDropdown();
+  });
+
+  options.forEach((opt) => {
+    opt.addEventListener('click', () => {
+      const fw = opt.dataset.frameworkOption;
+      if (fw) setFramework(fw);
+      closeDropdown();
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!dropdown.classList.contains('hidden') && !(e.target as HTMLElement).closest('.ds-framework-switcher')) {
+      closeDropdown();
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+      closeDropdown();
+      trigger.focus();
+    }
+  });
+</script>

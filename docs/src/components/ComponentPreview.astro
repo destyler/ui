@@ -1,0 +1,284 @@
+---
+/**
+ * ComponentPreview — renders a live component example with a "Show Code" toggle.
+ *
+ * Usage in MDX:
+ *   import ComponentPreview from '../../../components/ComponentPreview.astro';
+ *   <ComponentPreview component="avatar" example="Basic" />
+ *
+ * Automatically switches between the Vue and React renderings based on the
+ * global framework selection (data-framework on <html>).
+ */
+
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { highlight } from '../utils/shiki'
+import ReactExample from './ReactExample.tsx'
+import VueExample from './VueExample.vue'
+
+interface Props {
+  /** Component name, e.g. "avatar", "collapse" */
+  component: string
+  /** Example file name without extension, default "Basic" */
+  example?: string
+}
+
+const { component, example = 'Basic' } = Astro.props
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const workspaceRoot = path.resolve(__dirname, '../../..')
+
+const vuePath = path.join(
+  workspaceRoot,
+  'packages/vue/src/components',
+  component,
+  'examples',
+  `${example}.vue`,
+)
+const reactPath = path.join(
+  workspaceRoot,
+  'packages/react/src/components',
+  component,
+  'examples',
+  `${example}.tsx`,
+)
+
+let vueCode = ''
+let reactCode = ''
+
+try {
+  vueCode = fs.readFileSync(vuePath, 'utf-8')
+}
+catch {
+  vueCode = `// Vue ${example} example not found for ${component}`
+}
+
+try {
+  reactCode = fs.readFileSync(reactPath, 'utf-8')
+}
+catch {
+  reactCode = `// React ${example} example not found for ${component}`
+}
+
+// Rewrite relative imports to package imports for display in docs
+vueCode = vueCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/vue'`)
+reactCode = reactCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/react'`)
+
+const vueHtml = await highlight(vueCode, 'vue')
+const reactHtml = await highlight(reactCode, 'tsx')
+---
+
+<div class="ds-component-preview not-content border rounded-xl! border-solid border-[var(--sl-color-hairline)] my-6 overflow-hidden">
+  <!-- Live preview area -->
+  <div class="p-8 flex items-center justify-center min-h-[100px]">
+    <div class={`ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw="vue">
+      <VueExample client:load component={component} example={example} />
+    </div>
+    <div class={`ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw="react">
+      <ReactExample client:load component={component} example={example} />
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="border-t border-solid border-[var(--sl-color-hairline)] py-[0.375rem] px-3 flex justify-end">
+    <div class="flex items-center gap-1">
+      <button type="button" style="border-radius: 0.375rem !important;" class="ds-show-code-btn inline-flex items-center rounded-md! gap-[0.375rem] bg-transparent border-none text-[var(--sl-color-gray-3)] cursor-pointer text-[0.8125rem] font-500 py-1 px-2 transition-[color,background-color] duration-150 hover:text-[var(--sl-color-text)] hover:bg-[var(--sl-color-gray-6)]" aria-expanded="false">
+        <span class="i-tabler-code w-4 h-4" aria-hidden="true"></span>
+        <span class="ds-show-code-label">Show Code</span>
+      </button>
+      <button type="button" style="border-radius: 0.375rem !important;" class="ds-copy-code-btn inline-flex items-center rounded-md! bg-transparent border-none text-[var(--sl-color-gray-3)] cursor-pointer py-1 px-2 transition-[color,background-color] duration-150 hover:text-[var(--sl-color-text)] hover:bg-[var(--sl-color-gray-6)]" aria-label="Copy code">
+        <span class="ds-copy-icon i-tabler-copy w-4 h-4" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Source code (collapsed by default) -->
+  <div class="ds-code-container grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr;">
+    <div class="overflow-hidden">
+      <div class="border-t border-solid border-[var(--sl-color-hairline)]">
+        <div class="ds-code-block" data-fw="vue">
+          <Fragment set:html={vueHtml} />
+        </div>
+        <div class="ds-code-block" data-fw="react">
+          <Fragment set:html={reactHtml} />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ---------- Framework visibility ---------- */
+  :root[data-framework='vue'] .ds-preview-frame[data-fw='react'],
+  :root[data-framework='vue'] .ds-code-block[data-fw='react'] {
+    display: none;
+  }
+
+  :root[data-framework='react'] .ds-preview-frame[data-fw='vue'],
+  :root[data-framework='react'] .ds-code-block[data-fw='vue'] {
+    display: none;
+  }
+
+  /* Default to Vue when data-framework is not yet set */
+  :root:not([data-framework]) .ds-preview-frame[data-fw='react'],
+  :root:not([data-framework]) .ds-code-block[data-fw='react'] {
+    display: none;
+  }
+
+  /* ---------- Shiki dual-theme ---------- */
+  .ds-code-block :global(.shiki) {
+    @apply m-0 py-4! px-5! text-[0.8125rem] leading-[1.7] overflow-x-auto rounded-0;
+    tab-size: 2;
+  }
+
+  .ds-code-block :global(.shiki code) {
+    @apply font-mono;
+  }
+
+  /* Dark mode: show dark theme colors, hide light */
+  :root[data-theme='dark'] .ds-code-block :global(.shiki),
+  :root:not([data-theme]) .ds-code-block :global(.shiki) {
+    background-color: var(--shiki-dark-bg, #121212) !important;
+    color: var(--shiki-dark, #dbd7caee) !important;
+  }
+
+  :root[data-theme='dark'] .ds-code-block :global(.shiki span),
+  :root:not([data-theme]) .ds-code-block :global(.shiki span) {
+    color: var(--shiki-dark) !important;
+  }
+
+  /* Light mode: show light theme colors */
+  :root[data-theme='light'] .ds-code-block :global(.shiki) {
+    background-color: var(--shiki-light-bg, #ffffff) !important;
+    color: var(--shiki-light, #393a34) !important;
+  }
+
+  :root[data-theme='light'] .ds-code-block :global(.shiki span) {
+    color: var(--shiki-light) !important;
+  }
+
+  /* ---------- Style isolation for live preview ---------- */
+  /* Reset Starlight / markdown global styles so component demos render cleanly */
+  .ds-preview-frame :global(ul),
+  .ds-preview-frame :global(ol) {
+    padding-left: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+
+  .ds-preview-frame :global(li) {
+    margin-bottom: 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+  }
+
+  .ds-preview-frame :global(li::marker) {
+    color: inherit !important;
+  }
+
+  .ds-preview-frame :global(a) {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-weight: inherit !important;
+  }
+
+  .ds-preview-frame :global(a:hover) {
+    color: inherit !important;
+  }
+
+  .ds-preview-frame :global(a::after) {
+    display: none !important;
+  }
+
+  .ds-preview-frame :global(p) {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    color: inherit !important;
+    margin: 0 !important;
+  }
+
+  .ds-preview-frame :global(nav) {
+    all: unset !important;
+    display: block !important;
+  }
+
+  .ds-preview-frame :global(button) {
+    font-family: inherit !important;
+  }
+
+  .ds-preview-frame :global(h1),
+  .ds-preview-frame :global(h2),
+  .ds-preview-frame :global(h3),
+  .ds-preview-frame :global(h4),
+  .ds-preview-frame :global(h5),
+  .ds-preview-frame :global(h6) {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+</style>
+
+<script>
+  function getActiveFramework(): string {
+    return document.documentElement.getAttribute('data-framework') || 'vue'
+  }
+
+  function initComponentPreviews() {
+    document.querySelectorAll('.ds-show-code-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const preview = btn.closest('.ds-component-preview')
+        if (!preview) return
+        const codeContainer = preview.querySelector<HTMLElement>('.ds-code-container')
+        if (!codeContainer) return
+
+        const isCollapsed = codeContainer.style.gridTemplateRows === '0fr'
+        codeContainer.style.gridTemplateRows = isCollapsed ? '1fr' : '0fr'
+        btn.setAttribute('aria-expanded', String(isCollapsed))
+
+        const label = btn.querySelector('.ds-show-code-label')
+        if (label) {
+          label.textContent = isCollapsed ? 'Hide Code' : 'Show Code'
+        }
+      })
+    })
+
+    document.querySelectorAll('.ds-copy-code-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const preview = btn.closest('.ds-component-preview')
+        if (!preview) return
+
+        const fw = getActiveFramework()
+        const codeBlock = preview.querySelector(`.ds-code-block[data-fw="${fw}"]`)
+        if (!codeBlock) return
+
+        const code = codeBlock.querySelector('.shiki')?.textContent || ''
+        try {
+          await navigator.clipboard.writeText(code)
+          const icon = btn.querySelector('.ds-copy-icon')
+          if (icon) {
+            icon.classList.remove('i-tabler-copy')
+            icon.classList.add('i-tabler-check')
+          }
+          setTimeout(() => {
+            if (icon) {
+              icon.classList.remove('i-tabler-check')
+              icon.classList.add('i-tabler-copy')
+            }
+          }, 2000)
+        }
+        catch {
+          // Fallback: silently fail
+        }
+      })
+    })
+  }
+
+  // Run on initial load and on Astro view-transition navigations
+  initComponentPreviews()
+  document.addEventListener('astro:after-swap', initComponentPreviews)
+</script>

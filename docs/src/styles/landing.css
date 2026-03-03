@@ -1,0 +1,110 @@
+/* ============================================================
+   DESTYLER LANDING PAGE — Starlight Structure Overrides
+   ============================================================
+   These rules target Starlight's ancestor containers via :has()
+   and override default element styles. They CANNOT be expressed
+   as inline UnoCSS utilities because they scope to parent elements
+   outside our component tree.
+   ============================================================ */
+
+/* ---- STARLIGHT STRUCTURE OVERRIDES ---- */
+
+/* Hide the page title block */
+main:has(.landing-page) > .content-panel:first-child {
+  display: none !important;
+}
+
+/* Remove Starlight's default hero when our landing page is present */
+.content-panel:has(.landing-page) .hero {
+  display: none !important;
+}
+
+/* Remove max-width & padding from every ancestor container */
+.sl-markdown-content:has(.landing-page) {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.content-panel:has(.landing-page) {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-top: none !important;
+  overflow: visible !important;
+}
+
+.content-panel:has(.landing-page) .sl-container {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+main:has(.landing-page) {
+  padding: 0 !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.main-pane:has(.landing-page) {
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.lg\:sl-flex:has(.landing-page) {
+  max-width: none !important;
+}
+
+/* Remove Starlight footer on landing */
+main:has(.landing-page) footer:not(.landing-footer) {
+  display: none !important;
+}
+
+/* ---- LANDING WRAPPER ---- */
+
+.landing-page {
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* ---- STARLIGHT ELEMENT OVERRIDES ---- */
+
+main:has(.landing-page) .content-panel + .content-panel {
+  padding: 0 !important;
+}
+
+.landing-page a {
+  text-decoration: none !important;
+}
+
+.landing-page a::after {
+  display: none !important;
+}
+
+.landing-page h1,
+.landing-page h2,
+.landing-page h3 {
+  margin-top: 0 !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.landing-page ul {
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.landing-page li {
+  margin-bottom: 0 !important;
+}
+
+.landing-page p {
+  margin-bottom: 0 !important;
+}

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {Avatar} from '../index'
-
 </script>
 
 <template>

@@ -1,0 +1,83 @@
+---
+title: Breadcrumbs
+description: Show hierarchy and navigational context for a user’s location within an application.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Breadcrumbs
+
+> Show hierarchy and navigational context for a user’s location within an application.
+
+<ComponentPreview component="breadcrumbs" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Breadcrumbs } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Breadcrumbs.Root :items="items">
+    <Breadcrumbs.List>
+      <Breadcrumbs.Context v-slot="breadcrumbs">
+        <Breadcrumbs.Item v-for="item in breadcrumbs.items" :key="item.id" :item="item">
+          <Breadcrumbs.Link :item="item">{{ item.label }}</Breadcrumbs.Link>
+          <Breadcrumbs.Separator v-if="item.href">/</Breadcrumbs.Separator>
+        </Breadcrumbs.Item>
+      </Breadcrumbs.Context>
+    </Breadcrumbs.List>
+  </Breadcrumbs.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Breadcrumbs } from '@destyler-ui/react'
+
+export function Basic() {
+  return (
+    <Breadcrumbs.Root items={items}>
+      <Breadcrumbs.List>
+        <Breadcrumbs.Context>
+          {breadcrumbs =>
+            breadcrumbs.items.map(item => (
+              <Breadcrumbs.Item key={item.id} item={item}>
+                <Breadcrumbs.Link item={item}>{item.label}</Breadcrumbs.Link>
+                {item.href && <Breadcrumbs.Separator>/</Breadcrumbs.Separator>}
+              </Breadcrumbs.Item>
+            ))}
+        </Breadcrumbs.Context>
+      </Breadcrumbs.List>
+    </Breadcrumbs.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+Display a list of breadcrumb items showing the user's navigation path.
+
+<ComponentPreview component="breadcrumbs" example="Basic" />
+
+### Context
+
+Use `Context` to access the breadcrumbs state and customize rendering with icons and custom separators.
+
+<ComponentPreview component="breadcrumbs" example="Context" />
+
+### Root Provider
+
+<ComponentPreview component="breadcrumbs" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="breadcrumbs" />

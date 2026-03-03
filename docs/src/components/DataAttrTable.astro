@@ -1,0 +1,43 @@
+---
+/**
+ * DataAttrTable — renders a table of component data attributes.
+ *
+ * Props:
+ *   - attrs: Array<{ name: string; type: string }>
+ */
+
+interface DataAttrInfo {
+  name: string
+  type: string
+}
+
+interface Props {
+  attrs: DataAttrInfo[]
+}
+
+const { attrs } = Astro.props
+
+const thClass = 'text-left font-600 text-xs tracking-wider text-$sl-color-gray-3 px-3 py-2 border-b-2 border-b-solid border-b-$sl-color-hairline whitespace-nowrap'
+const tdClass = 'px-3 py-2.5 border-b border-b-solid border-b-$sl-color-hairline align-top'
+---
+
+{attrs.length > 0 && (
+  <div class="overflow-x-auto my-4 border-solid border-[var(--sl-color-hairline)] border-px rounded-md!">
+    <table class="w-full text-sm leading-normal">
+      <thead>
+        <tr>
+          <th class={thClass}>Attribute</th>
+          <th class={thClass}>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {attrs.map((attr) => (
+          <tr>
+            <td class={tdClass}><code class="font-600 text-$sl-color-text whitespace-nowrap">{attr.name}</code></td>
+            <td class={tdClass}><code class="text-$sl-color-gray-2 text-[0.8125rem] break-words">{attr.type}</code></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
