@@ -6,12 +6,6 @@ packages:
 catalogMode: prefer
 
 catalogs:
-  styles:
-    '@unocss/astro': ^66.6.0
-    '@unocss/reset': ^66.6.0
-    unocss: ^66.6.0
-  icons:
-    '@iconify-json/tabler': ^1.2.26
   build:
     babel-plugin-react-compiler: ^1.0.0
     tsdown: ^0.20.0-beta.3
@@ -26,15 +20,19 @@ catalogs:
     react: ^19.2.3
     react-dom: ^19.2.3
     vue: ^3.5.26
+  icons:
+    '@iconify-json/tabler': ^1.2.26
   lint:
     '@antfu/eslint-config': ^7.0.1
     '@eslint-react/eslint-plugin': ^2.7.2
     eslint: ^9.39.2
+    eslint-plugin-astro: ^1.6.0
     eslint-plugin-react-hooks: ^7.0.1
     eslint-plugin-react-refresh: ^0.4.26
     eslint-plugin-storybook: ^10.1.11
-    eslint-plugin-astro: ^1.6.0
   node:
+    '@types/archiver': ^7.0.0
+    archiver: ^7.0.1
     bumpp: ^10.4.0
     plop: ^4.0.4
     taze: ^19.9.2
@@ -107,6 +105,10 @@ catalogs:
     '@storybook/react-vite': ^10.1.11
     '@storybook/vue3-vite': ^10.1.11
     storybook: ^10.1.11
+  styles:
+    '@unocss/astro': ^66.6.0
+    '@unocss/reset': ^66.6.0
+    unocss: ^66.6.0
   test:
     '@vitest/browser-playwright': ^4.0.17
     '@vitest/coverage-v8': ^4.0.17
