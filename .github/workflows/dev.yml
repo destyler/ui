@@ -32,6 +32,9 @@ jobs:
       - name: Build Packages
         run: pnpm run build
 
+      - name: Generate Type Docs
+        run: pnpm run docs:generate:types
+
       - name: Build Document
         run: pnpm run docs:build
 
