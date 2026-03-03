@@ -1,0 +1,130 @@
+---
+title: Dynamic
+description: A component for managing a dynamic list of tags or values with add and remove capabilities.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Dynamic
+
+> A component for managing a dynamic list of tags or values with add and remove capabilities.
+
+<ComponentPreview component="dynamic" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Dynamic } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Dynamic.Root>
+    <Dynamic.Label />
+    <Dynamic.Control>
+      <Dynamic.Item>
+        <Dynamic.ItemPreview>
+          <Dynamic.ItemText />
+          <Dynamic.ItemDeleteTrigger />
+        </Dynamic.ItemPreview>
+        <Dynamic.ItemInput />
+      </Dynamic.Item>
+      <Dynamic.Input />
+      <Dynamic.ClearTrigger />
+    </Dynamic.Control>
+    <Dynamic.HiddenInput />
+  </Dynamic.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Dynamic } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Dynamic.Root>
+      <Dynamic.Label />
+      <Dynamic.Control>
+        <Dynamic.Item>
+          <Dynamic.ItemPreview>
+            <Dynamic.ItemText />
+            <Dynamic.ItemDeleteTrigger />
+          </Dynamic.ItemPreview>
+          <Dynamic.ItemInput />
+        </Dynamic.Item>
+        <Dynamic.Input />
+        <Dynamic.ClearTrigger />
+      </Dynamic.Control>
+      <Dynamic.HiddenInput />
+    </Dynamic.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="dynamic" example="Basic" />
+
+### Initial Value
+
+Set the initial values for the dynamic list.
+
+<ComponentPreview component="dynamic" example="InitialValue" />
+
+### Blur Behavior
+
+Configure behavior when the input loses focus.
+
+<ComponentPreview component="dynamic" example="BlurBehavior" />
+
+### Paste Behavior
+
+Handle pasting multiple values at once.
+
+<ComponentPreview component="dynamic" example="PasteBehavior" />
+
+### Disabled Editing
+
+Disable editing of existing items.
+
+<ComponentPreview component="dynamic" example="DisabledEditing" />
+
+### Max With Overflow
+
+Limit the maximum number of items with overflow handling.
+
+<ComponentPreview component="dynamic" example="MaxWithOverflow" />
+
+### Validated
+
+Add validation to the input values.
+
+<ComponentPreview component="dynamic" example="Validated" />
+
+### On Event
+
+Listen for add and remove events.
+
+<ComponentPreview component="dynamic" example="OnEvent" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="dynamic" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="dynamic" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="dynamic" />

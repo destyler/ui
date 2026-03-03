@@ -1,0 +1,60 @@
+---
+title: Separator
+description: A visual divider that separates content into distinct sections.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Separator
+
+> A visual divider that separates content into distinct sections.
+
+<ComponentPreview component="separator" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Separator } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Separator.Root />
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Separator } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Separator.Root />
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="separator" example="Basic" />
+
+### Vertical
+
+Display a vertical separator.
+
+<ComponentPreview component="separator" example="Vertical" />
+
+### Root Provider
+
+<ComponentPreview component="separator" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="separator" />

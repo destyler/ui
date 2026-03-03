@@ -1,0 +1,110 @@
+---
+title: Navigation Menu
+description: A collection of links for navigating websites with support for hover and keyboard interactions.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Navigation Menu
+
+> A collection of links for navigating websites with support for hover and keyboard interactions.
+
+<ComponentPreview component="navigation-menu" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { NavigationMenu } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <NavigationMenu.Root>
+    <NavigationMenu.List>
+      <NavigationMenu.Item>
+        <NavigationMenu.Trigger />
+        <NavigationMenu.Content>
+          <NavigationMenu.Link />
+        </NavigationMenu.Content>
+      </NavigationMenu.Item>
+      <NavigationMenu.Indicator />
+    </NavigationMenu.List>
+    <NavigationMenu.ViewportPositioner>
+      <NavigationMenu.Viewport />
+    </NavigationMenu.ViewportPositioner>
+  </NavigationMenu.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { NavigationMenu } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <NavigationMenu.Root>
+      <NavigationMenu.List>
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger />
+          <NavigationMenu.Content>
+            <NavigationMenu.Link />
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+        <NavigationMenu.Indicator />
+      </NavigationMenu.List>
+      <NavigationMenu.ViewportPositioner>
+        <NavigationMenu.Viewport />
+      </NavigationMenu.ViewportPositioner>
+    </NavigationMenu.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="navigation-menu" example="Basic" />
+
+### Controlled
+
+Control the active menu item programmatically.
+
+<ComponentPreview component="navigation-menu" example="Controlled" />
+
+### Custom Delay
+
+Customize the open and close delay for hover interactions.
+
+<ComponentPreview component="navigation-menu" example="CustomDelay" />
+
+### Disable Click
+
+Disable click interaction, using hover only.
+
+<ComponentPreview component="navigation-menu" example="DisableClick" />
+
+### Disable Hover
+
+Disable hover interaction, using click only.
+
+<ComponentPreview component="navigation-menu" example="DisableHover" />
+
+### Vertical
+
+Display the navigation menu in a vertical orientation.
+
+<ComponentPreview component="navigation-menu" example="Vertical" />
+
+### Root Provider
+
+<ComponentPreview component="navigation-menu" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="navigation-menu" />

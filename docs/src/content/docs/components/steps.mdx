@@ -1,0 +1,82 @@
+---
+title: Steps
+description: A component that guides users through a multi-step process.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Steps
+
+> A component that guides users through a multi-step process.
+
+<ComponentPreview component="steps" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Steps } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Steps.Root>
+    <Steps.List>
+      <Steps.Item>
+        <Steps.Trigger>
+          <Steps.Indicator />
+        </Steps.Trigger>
+        <Steps.Separator />
+      </Steps.Item>
+    </Steps.List>
+    <Steps.Content />
+    <Steps.CompletedContent />
+    <Steps.Progress />
+    <Steps.PrevTrigger />
+    <Steps.NextTrigger />
+  </Steps.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Steps } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Steps.Root>
+      <Steps.List>
+        <Steps.Item>
+          <Steps.Trigger>
+            <Steps.Indicator />
+          </Steps.Trigger>
+          <Steps.Separator />
+        </Steps.Item>
+      </Steps.List>
+      <Steps.Content />
+      <Steps.CompletedContent />
+      <Steps.Progress />
+      <Steps.PrevTrigger />
+      <Steps.NextTrigger />
+    </Steps.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="steps" example="Basic" />
+
+### Root Provider
+
+<ComponentPreview component="steps" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="steps" />

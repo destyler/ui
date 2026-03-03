@@ -1,0 +1,96 @@
+---
+title: Switch
+description: A control that allows toggling between two states, on and off.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Switch
+
+> A control that allows toggling between two states, on and off.
+
+<ComponentPreview component="switch" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Switch } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Switch.Root>
+    <Switch.Control>
+      <Switch.Thumb />
+    </Switch.Control>
+    <Switch.Label />
+    <Switch.HiddenInput />
+  </Switch.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Switch } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Switch.Root>
+      <Switch.Control>
+        <Switch.Thumb />
+      </Switch.Control>
+      <Switch.Label />
+      <Switch.HiddenInput />
+    </Switch.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="switch" example="Basic" />
+
+### Controlled
+
+Control the switch state programmatically.
+
+<ComponentPreview component="switch" example="Controlled" />
+
+### Initial Value
+
+Set the initial checked state.
+
+<ComponentPreview component="switch" example="InitialValue" />
+
+### Disabled
+
+Display a disabled switch.
+
+<ComponentPreview component="switch" example="Disabled" />
+
+### Render Prop
+
+Use render prop for custom switch rendering.
+
+<ComponentPreview component="switch" example="RenderProp" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="switch" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="switch" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="switch" />

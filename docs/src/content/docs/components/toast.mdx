@@ -1,0 +1,102 @@
+---
+title: Toast
+description: A non-intrusive notification component that provides brief messages to the user.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Toast
+
+> A non-intrusive notification component that provides brief messages to the user.
+
+<ComponentPreview component="toast" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Toast } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Toast.Root>
+    <Toast.Title />
+    <Toast.Description />
+    <Toast.ActionTrigger />
+    <Toast.CloseTrigger />
+  </Toast.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Toast } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Toast.Root>
+      <Toast.Title />
+      <Toast.Description />
+      <Toast.ActionTrigger />
+      <Toast.CloseTrigger />
+    </Toast.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="toast" example="Basic" />
+
+### Toast Types
+
+Display different toast types (success, error, warning, info).
+
+<ComponentPreview component="toast" example="ToastTypes" />
+
+### Toast Action
+
+Add action buttons to toast notifications.
+
+<ComponentPreview component="toast" example="ToastAction" />
+
+### Toast Placement
+
+Configure the toast placement position.
+
+<ComponentPreview component="toast" example="ToastPlacement" />
+
+### Toast Promise
+
+Display a toast based on a promise result.
+
+<ComponentPreview component="toast" example="ToastPromise" />
+
+### Toast Update
+
+Update an existing toast notification.
+
+<ComponentPreview component="toast" example="ToastUpdate" />
+
+### Action
+
+Handle action trigger events.
+
+<ComponentPreview component="toast" example="Action" />
+
+### Update
+
+Update toast content dynamically.
+
+<ComponentPreview component="toast" example="Update" />
+
+## API Reference
+
+<ComponentTypes id="toast" />

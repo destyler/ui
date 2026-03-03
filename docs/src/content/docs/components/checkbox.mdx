@@ -1,0 +1,96 @@
+---
+title: Checkbox
+description: A control that allows the user to toggle between checked and not checked.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Checkbox
+
+> A control that allows the user to toggle between checked and not checked.
+
+<ComponentPreview component="checkbox" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Checkbox } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Checkbox.Root>
+    <Checkbox.Control>
+      <Checkbox.Indicator />
+    </Checkbox.Control>
+    <Checkbox.Label />
+    <Checkbox.HiddenInput />
+  </Checkbox.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Checkbox } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Checkbox.Root>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Label />
+      <Checkbox.HiddenInput />
+    </Checkbox.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="checkbox" example="Basic" />
+
+### Controlled
+
+Control the checked state programmatically.
+
+<ComponentPreview component="checkbox" example="Controlled" />
+
+### Group
+
+Use `Checkbox.Group` to manage multiple checkboxes as a group.
+
+<ComponentPreview component="checkbox" example="Group" />
+
+### Indeterminate
+
+Display a checkbox in an indeterminate state.
+
+<ComponentPreview component="checkbox" example="Indeterminate" />
+
+### Render Prop
+
+Use render prop for custom checkbox rendering.
+
+<ComponentPreview component="checkbox" example="RenderProp" />
+
+### With Field
+
+Combine checkbox with a form field for validation and labeling.
+
+<ComponentPreview component="checkbox" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="checkbox" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="checkbox" />

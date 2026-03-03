@@ -1,0 +1,66 @@
+---
+title: Timer
+description: A component for displaying a countdown or stopwatch timer.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Timer
+
+> A component for displaying a countdown or stopwatch timer.
+
+<ComponentPreview component="timer" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Timer } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Timer.Root>
+    <Timer.Area>
+      <Timer.Item />
+      <Timer.Separator />
+    </Timer.Area>
+    <Timer.Control>
+      <Timer.ActionTrigger />
+    </Timer.Control>
+  </Timer.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Timer } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Timer.Root>
+      <Timer.Area>
+        <Timer.Item />
+        <Timer.Separator />
+      </Timer.Area>
+      <Timer.Control>
+        <Timer.ActionTrigger />
+      </Timer.Control>
+    </Timer.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="timer" example="Basic" />
+
+## API Reference
+
+<ComponentTypes id="timer" />

@@ -1,0 +1,70 @@
+---
+title: Fieldset
+description: A component for grouping related form fields with a legend and shared validation.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Fieldset
+
+> A component for grouping related form fields with a legend and shared validation.
+
+<ComponentPreview component="fieldset" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Fieldset } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Fieldset.Root>
+    <Fieldset.Legend />
+    <Fieldset.HelperText />
+    <Fieldset.ErrorText />
+  </Fieldset.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Fieldset } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Fieldset.Root>
+      <Fieldset.Legend />
+      <Fieldset.HelperText />
+      <Fieldset.ErrorText />
+    </Fieldset.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="fieldset" example="Basic" />
+
+### With Checkbox
+
+Group checkboxes inside a fieldset.
+
+<ComponentPreview component="fieldset" example="WithCheckbox" />
+
+### With Field
+
+Nest field components within a fieldset.
+
+<ComponentPreview component="fieldset" example="WithField" />
+
+## API Reference
+
+<ComponentTypes id="fieldset" />

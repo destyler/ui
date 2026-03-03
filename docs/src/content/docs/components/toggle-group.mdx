@@ -1,0 +1,54 @@
+---
+title: Toggle Group
+description: A group of toggle buttons where multiple or single selections can be made.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Toggle Group
+
+> A group of toggle buttons where multiple or single selections can be made.
+
+<ComponentPreview component="toggle-group" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { ToggleGroup } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <ToggleGroup.Root>
+    <ToggleGroup.Item />
+  </ToggleGroup.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { ToggleGroup } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <ToggleGroup.Root>
+      <ToggleGroup.Item />
+    </ToggleGroup.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="toggle-group" example="Basic" />
+
+## API Reference
+
+<ComponentTypes id="toggle-group" />

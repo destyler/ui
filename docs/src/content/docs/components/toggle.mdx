@@ -1,0 +1,54 @@
+---
+title: Toggle
+description: A two-state button that can be toggled on or off.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Toggle
+
+> A two-state button that can be toggled on or off.
+
+<ComponentPreview component="toggle" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Toggle } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Toggle.Root>
+    <Toggle.Indicator />
+  </Toggle.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Toggle } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Toggle.Root>
+      <Toggle.Indicator />
+    </Toggle.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="toggle" example="Basic" />
+
+## API Reference
+
+<ComponentTypes id="toggle" />

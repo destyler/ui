@@ -1,0 +1,72 @@
+---
+title: Presence
+description: A utility component for managing mount and unmount animations.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Presence
+
+> A utility component for managing mount and unmount animations.
+
+<ComponentPreview component="presence" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Presence } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Presence :present="isOpen" :lazy-mount="true" :unmount-on-exit="true">
+    <div>Content</div>
+  </Presence>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Presence } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Presence present={isOpen} lazyMount unmountOnExit>
+      <div>Content</div>
+    </Presence>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="presence" example="Basic" />
+
+### Lazy Mount
+
+Mount the content lazily when first presented.
+
+<ComponentPreview component="presence" example="LazyMount" />
+
+### Unmount On Exit
+
+Unmount the content when it is no longer present.
+
+<ComponentPreview component="presence" example="UnmountOnExit" />
+
+### Lazy Mount And Unmount On Exit
+
+Combine lazy mounting with unmount on exit.
+
+<ComponentPreview component="presence" example="LazyMountAndUnmountOnExit" />
+
+## API Reference
+
+<ComponentTypes id="presence" />

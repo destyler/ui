@@ -1,0 +1,84 @@
+---
+title: Collapsible
+description: An interactive component which expands and collapses a content area.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Collapsible
+
+> An interactive component which expands and collapses a content area.
+
+<ComponentPreview component="collapsible" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Collapsible } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Collapsible.Root>
+    <Collapsible.Trigger />
+    <Collapsible.Content />
+  </Collapsible.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Collapsible } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Collapsible.Root>
+      <Collapsible.Trigger />
+      <Collapsible.Content />
+    </Collapsible.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="collapsible" example="Basic" />
+
+### Lazy Mount
+
+Mount the content lazily when first opened.
+
+<ComponentPreview component="collapsible" example="LazyMount" />
+
+### Unmount On Exit
+
+Unmount the content when the collapsible is closed.
+
+<ComponentPreview component="collapsible" example="UnmountOnExit" />
+
+### Lazy Mount And Unmount On Exit
+
+Combine lazy mounting with unmount on exit.
+
+<ComponentPreview component="collapsible" example="LazyMountAndUnmountOnExit" />
+
+### On Exit Complete
+
+Handle the exit complete event.
+
+<ComponentPreview component="collapsible" example="OnExitComplete" />
+
+### Root Provider
+
+<ComponentPreview component="collapsible" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="collapsible" />

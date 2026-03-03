@@ -1,0 +1,78 @@
+---
+title: Clipboard
+description: A component that allows users to copy text to the clipboard.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Clipboard
+
+> A component that allows users to copy text to the clipboard.
+
+<ComponentPreview component="clipboard" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Clipboard } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Clipboard.Root>
+    <Clipboard.Label />
+    <Clipboard.Control>
+      <Clipboard.Input />
+      <Clipboard.Trigger>
+        <Clipboard.Indicator />
+      </Clipboard.Trigger>
+    </Clipboard.Control>
+    <Clipboard.ValueText />
+  </Clipboard.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Clipboard } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Clipboard.Root>
+      <Clipboard.Label />
+      <Clipboard.Control>
+        <Clipboard.Input />
+        <Clipboard.Trigger>
+          <Clipboard.Indicator />
+        </Clipboard.Trigger>
+      </Clipboard.Control>
+      <Clipboard.ValueText />
+    </Clipboard.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="clipboard" example="Basic" />
+
+### Render Function
+
+Use render function to customize the clipboard indicator.
+
+<ComponentPreview component="clipboard" example="RenderFn" />
+
+### Root Provider
+
+<ComponentPreview component="clipboard" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="clipboard" />

@@ -1,0 +1,126 @@
+---
+title: Number Input
+description: A numeric input component with increment and decrement controls.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Number Input
+
+> A numeric input component with increment and decrement controls.
+
+<ComponentPreview component="number-input" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { NumberInput } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <NumberInput.Root>
+    <NumberInput.Label />
+    <NumberInput.ValueText />
+    <NumberInput.Control>
+      <NumberInput.DecrementTrigger />
+      <NumberInput.Input />
+      <NumberInput.IncrementTrigger />
+    </NumberInput.Control>
+    <NumberInput.Scrubber />
+  </NumberInput.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { NumberInput } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <NumberInput.Root>
+      <NumberInput.Label />
+      <NumberInput.ValueText />
+      <NumberInput.Control>
+        <NumberInput.DecrementTrigger />
+        <NumberInput.Input />
+        <NumberInput.IncrementTrigger />
+      </NumberInput.Control>
+      <NumberInput.Scrubber />
+    </NumberInput.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="number-input" example="Basic" />
+
+### Min/Max
+
+Set minimum and maximum value constraints.
+
+<ComponentPreview component="number-input" example="MinMax" />
+
+### Fraction Digits
+
+Control the number of decimal places.
+
+<ComponentPreview component="number-input" example="FractionDigits" />
+
+### Formatted
+
+Display formatted numeric values with locale support.
+
+<ComponentPreview component="number-input" example="Formatted" />
+
+### Form Usage
+
+Use number input in a form context.
+
+<ComponentPreview component="number-input" example="FormUsage" />
+
+### Mouse Wheel
+
+Enable value changes via mouse wheel.
+
+<ComponentPreview component="number-input" example="MouseWheel" />
+
+### No Clamp
+
+Allow values outside the min/max range.
+
+<ComponentPreview component="number-input" example="NoClamp" />
+
+### Scrubber
+
+Use the scrubber for drag-based value changes.
+
+<ComponentPreview component="number-input" example="Scrubber" />
+
+### Render Function
+
+Use render function for custom rendering.
+
+<ComponentPreview component="number-input" example="RenderFn" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="number-input" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="number-input" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="number-input" />

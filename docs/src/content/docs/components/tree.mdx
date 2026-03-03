@@ -1,0 +1,98 @@
+---
+title: Tree
+description: A hierarchical list component for displaying nested data structures.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Tree
+
+> A hierarchical list component for displaying nested data structures.
+
+<ComponentPreview component="tree" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Tree } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Tree.Root>
+    <Tree.Label />
+    <Tree.Tree>
+      <Tree.Item>
+        <Tree.ItemIndicator />
+        <Tree.ItemText />
+      </Tree.Item>
+      <Tree.Branch>
+        <Tree.BranchControl>
+          <Tree.BranchTrigger />
+          <Tree.BranchText />
+          <Tree.BranchIndicator />
+        </Tree.BranchControl>
+        <Tree.BranchContent>
+          <Tree.BranchIndentGuide />
+          <Tree.Item>
+            <Tree.ItemText />
+          </Tree.Item>
+        </Tree.BranchContent>
+      </Tree.Branch>
+    </Tree.Tree>
+  </Tree.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Tree } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Tree.Root>
+      <Tree.Label />
+      <Tree.Tree>
+        <Tree.Item>
+          <Tree.ItemIndicator />
+          <Tree.ItemText />
+        </Tree.Item>
+        <Tree.Branch>
+          <Tree.BranchControl>
+            <Tree.BranchTrigger />
+            <Tree.BranchText />
+            <Tree.BranchIndicator />
+          </Tree.BranchControl>
+          <Tree.BranchContent>
+            <Tree.BranchIndentGuide />
+            <Tree.Item>
+              <Tree.ItemText />
+            </Tree.Item>
+          </Tree.BranchContent>
+        </Tree.Branch>
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="tree" example="Basic" />
+
+### Tree Node
+
+Use a recursive tree node pattern for dynamic data.
+
+<ComponentPreview component="tree" example="TreeNode" />
+
+## API Reference
+
+<ComponentTypes id="tree" />

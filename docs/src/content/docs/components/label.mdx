@@ -1,0 +1,54 @@
+---
+title: Label
+description: A label element that associates with a form control.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Label
+
+> A label element that associates with a form control.
+
+<ComponentPreview component="label" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Label } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Label.Root />
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Label } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Label.Root />
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="label" example="Basic" />
+
+### Root Provider
+
+<ComponentPreview component="label" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="label" />

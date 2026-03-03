@@ -1,0 +1,88 @@
+---
+title: Radio
+description: A set of checkable buttons where only one can be checked at a time.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Radio
+
+> A set of checkable buttons where only one can be checked at a time.
+
+<ComponentPreview component="radio" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Radio } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Radio.Root>
+    <Radio.Label />
+    <Radio.Indicator />
+    <Radio.Item>
+      <Radio.ItemControl />
+      <Radio.ItemText />
+      <Radio.ItemHiddenInput />
+    </Radio.Item>
+  </Radio.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Radio } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Radio.Root>
+      <Radio.Label />
+      <Radio.Indicator />
+      <Radio.Item>
+        <Radio.ItemControl />
+        <Radio.ItemText />
+        <Radio.ItemHiddenInput />
+      </Radio.Item>
+    </Radio.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="radio" example="Basic" />
+
+### Initial Value
+
+Set the initial selected value.
+
+<ComponentPreview component="radio" example="InitialValue" />
+
+### Disabled
+
+Disable the radio group or individual items.
+
+<ComponentPreview component="radio" example="Disabled" />
+
+### On Event
+
+Listen for value change events.
+
+<ComponentPreview component="radio" example="OnEvent" />
+
+### Root Provider
+
+<ComponentPreview component="radio" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="radio" />

@@ -1,0 +1,102 @@
+---
+title: Combobox
+description: An input component that combines a text input with a listbox, allowing users to filter a list of options.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Combobox
+
+> An input component that combines a text input with a listbox, allowing users to filter a list of options.
+
+<ComponentPreview component="combobox" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Combobox } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Combobox.Root>
+    <Combobox.Label />
+    <Combobox.Control>
+      <Combobox.Input />
+      <Combobox.Trigger />
+      <Combobox.ClearTrigger />
+    </Combobox.Control>
+    <Combobox.Positioner>
+      <Combobox.Content>
+        <Combobox.ItemGroup>
+          <Combobox.ItemGroupLabel />
+          <Combobox.Item>
+            <Combobox.ItemText />
+            <Combobox.ItemIndicator />
+          </Combobox.Item>
+        </Combobox.ItemGroup>
+      </Combobox.Content>
+    </Combobox.Positioner>
+  </Combobox.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Combobox } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Combobox.Root>
+      <Combobox.Label />
+      <Combobox.Control>
+        <Combobox.Input />
+        <Combobox.Trigger />
+        <Combobox.ClearTrigger />
+      </Combobox.Control>
+      <Combobox.Positioner>
+        <Combobox.Content>
+          <Combobox.ItemGroup>
+            <Combobox.ItemGroupLabel />
+            <Combobox.Item>
+              <Combobox.ItemText />
+              <Combobox.ItemIndicator />
+            </Combobox.Item>
+          </Combobox.ItemGroup>
+        </Combobox.Content>
+      </Combobox.Positioner>
+    </Combobox.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="combobox" example="Basic" />
+
+### Advanced
+
+Advanced usage with custom filtering and item rendering.
+
+<ComponentPreview component="combobox" example="Advanced" />
+
+### With Field
+
+Combine combobox with a form field for validation and labeling.
+
+<ComponentPreview component="combobox" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="combobox" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="combobox" />

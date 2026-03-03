@@ -1,0 +1,102 @@
+---
+title: OTP Input
+description: A one-time password input component for entering verification codes.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# OTP Input
+
+> A one-time password input component for entering verification codes.
+
+<ComponentPreview component="otp-input" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { OtpInput } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <OtpInput.Root>
+    <OtpInput.Label />
+    <OtpInput.Control>
+      <OtpInput.Input />
+    </OtpInput.Control>
+    <OtpInput.HiddenInput />
+  </OtpInput.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { OtpInput } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <OtpInput.Root>
+      <OtpInput.Label />
+      <OtpInput.Control>
+        <OtpInput.Input />
+      </OtpInput.Control>
+      <OtpInput.HiddenInput />
+    </OtpInput.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="otp-input" example="Basic" />
+
+### Customized
+
+Customize the OTP input appearance.
+
+<ComponentPreview component="otp-input" example="Customized" />
+
+### Initial Value
+
+Set an initial value for the OTP input.
+
+<ComponentPreview component="otp-input" example="InitialValue" />
+
+### OTP Mode
+
+Enable OTP autocomplete mode.
+
+<ComponentPreview component="otp-input" example="OtpMode" />
+
+### Blurred
+
+Handle the blurred state.
+
+<ComponentPreview component="otp-input" example="Blurred" />
+
+### With Mask
+
+Mask the input values for security.
+
+<ComponentPreview component="otp-input" example="WithMask" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="otp-input" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="otp-input" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="otp-input" />

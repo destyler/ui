@@ -1,0 +1,82 @@
+---
+title: Signature
+description: A component that allows users to draw a signature using mouse or touch input.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Signature
+
+> A component that allows users to draw a signature using mouse or touch input.
+
+<ComponentPreview component="signature" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Signature } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Signature.Root>
+    <Signature.Label />
+    <Signature.Control>
+      <Signature.Segment />
+      <Signature.Guide />
+    </Signature.Control>
+    <Signature.ClearTrigger />
+    <Signature.HiddenInput />
+  </Signature.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Signature } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Signature.Root>
+      <Signature.Label />
+      <Signature.Control>
+        <Signature.Segment />
+        <Signature.Guide />
+      </Signature.Control>
+      <Signature.ClearTrigger />
+      <Signature.HiddenInput />
+    </Signature.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="signature" example="Basic" />
+
+### Image Preview
+
+Preview the signature as an image.
+
+<ComponentPreview component="signature" example="ImagePreview" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="signature" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="signature" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="signature" />

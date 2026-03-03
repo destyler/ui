@@ -1,0 +1,118 @@
+---
+title: Color Picker
+description: A component that allows users to select a color from a color palette or input a color value.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Color Picker
+
+> A component that allows users to select a color from a color palette or input a color value.
+
+<ComponentPreview component="color-picker" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { ColorPicker } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <ColorPicker.Root>
+    <ColorPicker.Label />
+    <ColorPicker.Control>
+      <ColorPicker.ChannelInput />
+      <ColorPicker.ValueText />
+      <ColorPicker.ValueSwatch />
+      <ColorPicker.Trigger />
+    </ColorPicker.Control>
+    <ColorPicker.Positioner>
+      <ColorPicker.Content>
+        <ColorPicker.Area>
+          <ColorPicker.AreaBackground />
+          <ColorPicker.AreaThumb />
+        </ColorPicker.Area>
+        <ColorPicker.ChannelSlider>
+          <ColorPicker.ChannelSliderTrack />
+          <ColorPicker.ChannelSliderThumb />
+        </ColorPicker.ChannelSlider>
+        <ColorPicker.SwatchGroup>
+          <ColorPicker.SwatchTrigger>
+            <ColorPicker.Swatch />
+          </ColorPicker.SwatchTrigger>
+        </ColorPicker.SwatchGroup>
+      </ColorPicker.Content>
+    </ColorPicker.Positioner>
+    <ColorPicker.HiddenInput />
+  </ColorPicker.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { ColorPicker } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <ColorPicker.Root>
+      <ColorPicker.Label />
+      <ColorPicker.Control>
+        <ColorPicker.ChannelInput />
+        <ColorPicker.ValueText />
+        <ColorPicker.ValueSwatch />
+        <ColorPicker.Trigger />
+      </ColorPicker.Control>
+      <ColorPicker.Positioner>
+        <ColorPicker.Content>
+          <ColorPicker.Area>
+            <ColorPicker.AreaBackground />
+            <ColorPicker.AreaThumb />
+          </ColorPicker.Area>
+          <ColorPicker.ChannelSlider>
+            <ColorPicker.ChannelSliderTrack />
+            <ColorPicker.ChannelSliderThumb />
+          </ColorPicker.ChannelSlider>
+          <ColorPicker.SwatchGroup>
+            <ColorPicker.SwatchTrigger>
+              <ColorPicker.Swatch />
+            </ColorPicker.SwatchTrigger>
+          </ColorPicker.SwatchGroup>
+        </ColorPicker.Content>
+      </ColorPicker.Positioner>
+      <ColorPicker.HiddenInput />
+    </ColorPicker.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="color-picker" example="Basic" />
+
+### Controlled
+
+Control the selected color value programmatically.
+
+<ComponentPreview component="color-picker" example="Controlled" />
+
+### With Field
+
+Combine color picker with a form field for validation and labeling.
+
+<ComponentPreview component="color-picker" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="color-picker" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="color-picker" />

@@ -1,0 +1,100 @@
+---
+title: Floating Panel
+description: A draggable and resizable floating panel component.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Floating Panel
+
+> A draggable and resizable floating panel component.
+
+<ComponentPreview component="floating-panel" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { FloatingPanel } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <FloatingPanel.Root>
+    <FloatingPanel.Trigger />
+    <FloatingPanel.Positioner>
+      <FloatingPanel.Content>
+        <FloatingPanel.Header>
+          <FloatingPanel.Title />
+          <FloatingPanel.DragTrigger />
+          <FloatingPanel.MinimizeTrigger />
+          <FloatingPanel.MaximizeTrigger />
+          <FloatingPanel.RestoreTrigger />
+          <FloatingPanel.CloseTrigger />
+        </FloatingPanel.Header>
+        <FloatingPanel.Body />
+        <FloatingPanel.ResizeTrigger />
+      </FloatingPanel.Content>
+    </FloatingPanel.Positioner>
+    <FloatingPanel.Dock />
+  </FloatingPanel.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { FloatingPanel } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <FloatingPanel.Root>
+      <FloatingPanel.Trigger />
+      <FloatingPanel.Positioner>
+        <FloatingPanel.Content>
+          <FloatingPanel.Header>
+            <FloatingPanel.Title />
+            <FloatingPanel.DragTrigger />
+            <FloatingPanel.MinimizeTrigger />
+            <FloatingPanel.MaximizeTrigger />
+            <FloatingPanel.RestoreTrigger />
+            <FloatingPanel.CloseTrigger />
+          </FloatingPanel.Header>
+          <FloatingPanel.Body />
+          <FloatingPanel.ResizeTrigger />
+        </FloatingPanel.Content>
+      </FloatingPanel.Positioner>
+      <FloatingPanel.Dock />
+    </FloatingPanel.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="floating-panel" example="Basic" />
+
+### Controlled
+
+Control the floating panel state programmatically.
+
+<ComponentPreview component="floating-panel" example="Controlled" />
+
+### Default Open
+
+Open the floating panel by default.
+
+<ComponentPreview component="floating-panel" example="DefaultOpen" />
+
+### Root Provider
+
+<ComponentPreview component="floating-panel" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="floating-panel" />

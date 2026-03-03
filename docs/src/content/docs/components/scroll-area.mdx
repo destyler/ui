@@ -1,0 +1,82 @@
+---
+title: Scroll Area
+description: A custom scrollable area with styled scrollbars.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Scroll Area
+
+> A custom scrollable area with styled scrollbars.
+
+<ComponentPreview component="scroll-area" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { ScrollArea } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <ScrollArea.Root>
+    <ScrollArea.Viewport>
+      <ScrollArea.Content />
+    </ScrollArea.Viewport>
+    <ScrollArea.Scrollbar>
+      <ScrollArea.Thumb />
+    </ScrollArea.Scrollbar>
+    <ScrollArea.Corner />
+  </ScrollArea.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { ScrollArea } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <ScrollArea.Root>
+      <ScrollArea.Viewport>
+        <ScrollArea.Content />
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar>
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+      <ScrollArea.Corner />
+    </ScrollArea.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="scroll-area" example="Basic" />
+
+### Controlled
+
+Control the scroll position programmatically.
+
+<ComponentPreview component="scroll-area" example="Controlled" />
+
+### Virtual Scroll
+
+Use virtual scrolling for large lists.
+
+<ComponentPreview component="scroll-area" example="VirtualScroll" />
+
+### Root Provider
+
+<ComponentPreview component="scroll-area" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="scroll-area" />

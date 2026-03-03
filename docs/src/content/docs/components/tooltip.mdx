@@ -1,0 +1,102 @@
+---
+title: Tooltip
+description: A popup that displays additional information when hovering over or focusing on an element.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Tooltip
+
+> A popup that displays additional information when hovering over or focusing on an element.
+
+<ComponentPreview component="tooltip" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Tooltip } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Tooltip.Root>
+    <Tooltip.Trigger />
+    <Tooltip.Positioner>
+      <Tooltip.Content>
+        <Tooltip.Arrow>
+          <Tooltip.ArrowTip />
+        </Tooltip.Arrow>
+      </Tooltip.Content>
+    </Tooltip.Positioner>
+  </Tooltip.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Tooltip } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Tooltip.Root>
+      <Tooltip.Trigger />
+      <Tooltip.Positioner>
+        <Tooltip.Content>
+          <Tooltip.Arrow>
+            <Tooltip.ArrowTip />
+          </Tooltip.Arrow>
+        </Tooltip.Content>
+      </Tooltip.Positioner>
+    </Tooltip.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="tooltip" example="Basic" />
+
+### Arrow
+
+Display an arrow on the tooltip.
+
+<ComponentPreview component="tooltip" example="Arrow" />
+
+### Controlled
+
+Control the tooltip open state programmatically.
+
+<ComponentPreview component="tooltip" example="Controlled" />
+
+### Positioning
+
+Customize the tooltip positioning.
+
+<ComponentPreview component="tooltip" example="Positioning" />
+
+### Timings
+
+Customize the open and close delay timings.
+
+<ComponentPreview component="tooltip" example="Timings" />
+
+### Render Function
+
+Use render function for custom tooltip rendering.
+
+<ComponentPreview component="tooltip" example="RenderFn" />
+
+### Root Provider
+
+<ComponentPreview component="tooltip" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="tooltip" />

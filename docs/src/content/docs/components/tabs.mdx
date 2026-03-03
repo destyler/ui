@@ -1,0 +1,108 @@
+---
+title: Tabs
+description: A set of layered sections of content, displayed one at a time.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Tabs
+
+> A set of layered sections of content, displayed one at a time.
+
+<ComponentPreview component="tabs" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Tabs } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Tabs.Root>
+    <Tabs.List>
+      <Tabs.Trigger />
+      <Tabs.Indicator />
+    </Tabs.List>
+    <Tabs.Content />
+  </Tabs.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Tabs } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Tabs.Root>
+      <Tabs.List>
+        <Tabs.Trigger />
+        <Tabs.Indicator />
+      </Tabs.List>
+      <Tabs.Content />
+    </Tabs.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="tabs" example="Basic" />
+
+### Controlled
+
+Control the active tab programmatically.
+
+<ComponentPreview component="tabs" example="Controlled" />
+
+### Initial Tab
+
+Set the initially active tab.
+
+<ComponentPreview component="tabs" example="InitialTab" />
+
+### Disabled Tab
+
+Disable specific tabs.
+
+<ComponentPreview component="tabs" example="DisabledTab" />
+
+### Indicator
+
+Display an active tab indicator.
+
+<ComponentPreview component="tabs" example="Indicator" />
+
+### Vertical
+
+Display tabs in a vertical orientation.
+
+<ComponentPreview component="tabs" example="Vertical" />
+
+### Manual
+
+Require manual activation of tabs (click instead of arrow keys).
+
+<ComponentPreview component="tabs" example="Manual" />
+
+### Lazy Mount
+
+Mount tab content lazily when first selected.
+
+<ComponentPreview component="tabs" example="LazyMount" />
+
+### Root Provider
+
+<ComponentPreview component="tabs" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="tabs" />

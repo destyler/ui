@@ -1,0 +1,134 @@
+---
+title: Calendar
+description: A date picker component that allows users to select dates from a calendar view.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Calendar
+
+> A date picker component that allows users to select dates from a calendar view.
+
+<ComponentPreview component="calendar" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Calendar } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Calendar.Root>
+    <Calendar.Label />
+    <Calendar.Control>
+      <Calendar.PrevTrigger />
+      <Calendar.ViewTrigger />
+      <Calendar.NextTrigger />
+    </Calendar.Control>
+    <Calendar.Content>
+      <Calendar.View>
+        <Calendar.ViewControl>
+          <Calendar.PrevTrigger />
+          <Calendar.ViewTrigger />
+          <Calendar.NextTrigger />
+        </Calendar.ViewControl>
+        <Calendar.RangeText />
+        <Calendar.Table>
+          <Calendar.TableHead>
+            <Calendar.TableRow>
+              <Calendar.TableHeader />
+            </Calendar.TableRow>
+          </Calendar.TableHead>
+          <Calendar.TableBody>
+            <Calendar.TableRow>
+              <Calendar.TableCell>
+                <Calendar.TableCellTrigger />
+              </Calendar.TableCell>
+            </Calendar.TableRow>
+          </Calendar.TableBody>
+        </Calendar.Table>
+      </Calendar.View>
+    </Calendar.Content>
+  </Calendar.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Calendar } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Calendar.Root>
+      <Calendar.Label />
+      <Calendar.Control>
+        <Calendar.PrevTrigger />
+        <Calendar.ViewTrigger />
+        <Calendar.NextTrigger />
+      </Calendar.Control>
+      <Calendar.Content>
+        <Calendar.View>
+          <Calendar.ViewControl>
+            <Calendar.PrevTrigger />
+            <Calendar.ViewTrigger />
+            <Calendar.NextTrigger />
+          </Calendar.ViewControl>
+          <Calendar.RangeText />
+          <Calendar.Table>
+            <Calendar.TableHead>
+              <Calendar.TableRow>
+                <Calendar.TableHeader />
+              </Calendar.TableRow>
+            </Calendar.TableHead>
+            <Calendar.TableBody>
+              <Calendar.TableRow>
+                <Calendar.TableCell>
+                  <Calendar.TableCellTrigger />
+                </Calendar.TableCell>
+              </Calendar.TableRow>
+            </Calendar.TableBody>
+          </Calendar.Table>
+        </Calendar.View>
+      </Calendar.Content>
+    </Calendar.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="calendar" example="Basic" />
+
+### Controlled
+
+Use `v-model` / controlled state to manage the selected date programmatically.
+
+<ComponentPreview component="calendar" example="Controlled" />
+
+### Range
+
+Select a date range with start and end dates.
+
+<ComponentPreview component="calendar" example="Range" />
+
+### Standalone
+
+Display the calendar inline without a popover.
+
+<ComponentPreview component="calendar" example="Standalone" />
+
+### Root Provider
+
+<ComponentPreview component="calendar" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="calendar" />

@@ -1,0 +1,88 @@
+---
+title: Carousel
+description: A slideshow component that cycles through elements.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Carousel
+
+> A slideshow component that cycles through elements.
+
+<ComponentPreview component="carousel" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Carousel } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Carousel.Root>
+    <Carousel.Control>
+      <Carousel.PrevTrigger />
+      <Carousel.NextTrigger />
+    </Carousel.Control>
+    <Carousel.IndicatorGroup>
+      <Carousel.Indicator />
+    </Carousel.IndicatorGroup>
+    <Carousel.ItemGroup>
+      <Carousel.Item />
+    </Carousel.ItemGroup>
+  </Carousel.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Carousel } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Carousel.Root>
+      <Carousel.Control>
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
+      </Carousel.Control>
+      <Carousel.IndicatorGroup>
+        <Carousel.Indicator />
+      </Carousel.IndicatorGroup>
+      <Carousel.ItemGroup>
+        <Carousel.Item />
+      </Carousel.ItemGroup>
+    </Carousel.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="carousel" example="Basic" />
+
+### AutoPlay
+
+Automatically cycle through items at a set interval.
+
+<ComponentPreview component="carousel" example="AutoPlay" />
+
+### Controlled
+
+Control the active slide programmatically.
+
+<ComponentPreview component="carousel" example="Controlled" />
+
+### Root Provider
+
+<ComponentPreview component="carousel" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="carousel" />

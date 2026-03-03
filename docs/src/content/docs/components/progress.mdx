@@ -1,0 +1,76 @@
+---
+title: Progress
+description: A component that displays the progress status for a task.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Progress
+
+> A component that displays the progress status for a task.
+
+<ComponentPreview component="progress" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Progress } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Progress.Root>
+    <Progress.Label />
+    <Progress.ValueText />
+    <Progress.Track>
+      <Progress.Range />
+    </Progress.Track>
+    <Progress.View />
+  </Progress.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Progress } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Progress.Root>
+      <Progress.Label />
+      <Progress.ValueText />
+      <Progress.Track>
+        <Progress.Range />
+      </Progress.Track>
+      <Progress.View />
+    </Progress.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="progress" example="Basic" />
+
+### Linear
+
+Display a linear progress bar.
+
+<ComponentPreview component="progress" example="linear" />
+
+### Circular
+
+Display a circular progress indicator.
+
+<ComponentPreview component="progress" example="circular" />
+
+## API Reference
+
+<ComponentTypes id="progress" />

@@ -1,0 +1,126 @@
+---
+title: Select
+description: A component that allows users to choose from a list of options in a dropdown.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Select
+
+> A component that allows users to choose from a list of options in a dropdown.
+
+<ComponentPreview component="select" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Select } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Select.Root>
+    <Select.Label />
+    <Select.Control>
+      <Select.Trigger>
+        <Select.ValueText />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.ClearTrigger />
+    </Select.Control>
+    <Select.Positioner>
+      <Select.Content>
+        <Select.ItemGroup>
+          <Select.ItemGroupLabel />
+          <Select.Item>
+            <Select.ItemText />
+            <Select.ItemIndicator />
+          </Select.Item>
+        </Select.ItemGroup>
+      </Select.Content>
+    </Select.Positioner>
+    <Select.HiddenSelect />
+  </Select.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Select } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Select.Root>
+      <Select.Label />
+      <Select.Control>
+        <Select.Trigger>
+          <Select.ValueText />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.ClearTrigger />
+      </Select.Control>
+      <Select.Positioner>
+        <Select.Content>
+          <Select.ItemGroup>
+            <Select.ItemGroupLabel />
+            <Select.Item>
+              <Select.ItemText />
+              <Select.ItemIndicator />
+            </Select.Item>
+          </Select.ItemGroup>
+        </Select.Content>
+      </Select.Positioner>
+      <Select.HiddenSelect />
+    </Select.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="select" example="Basic" />
+
+### Advanced
+
+Advanced select usage with custom item rendering.
+
+<ComponentPreview component="select" example="Advanced" />
+
+### Controlled
+
+Control the selected value programmatically.
+
+<ComponentPreview component="select" example="Controlled" />
+
+### Multiple
+
+Enable multiple item selection.
+
+<ComponentPreview component="select" example="Multiple" />
+
+### Reactive Collection
+
+Use a reactive collection for dynamic options.
+
+<ComponentPreview component="select" example="ReactiveCollection" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="select" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="select" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="select" />

@@ -1,0 +1,122 @@
+---
+title: Field
+description: A form field component that provides labeling, validation, and helper text for form inputs.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Field
+
+> A form field component that provides labeling, validation, and helper text for form inputs.
+
+<ComponentPreview component="field" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Field } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Field.Root>
+    <Field.Label />
+    <Field.Input />
+    <Field.HelperText />
+    <Field.ErrorText />
+    <Field.RequiredIndicator />
+  </Field.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Field } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Field.Root>
+      <Field.Label />
+      <Field.Input />
+      <Field.HelperText />
+      <Field.ErrorText />
+      <Field.RequiredIndicator />
+    </Field.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="field" example="Basic" />
+
+### Input
+
+Use Field with an input element.
+
+<ComponentPreview component="field" example="Input" />
+
+### Input Controlled
+
+Controlled input field example.
+
+<ComponentPreview component="field" example="InputControlled" />
+
+### Select
+
+Use Field with a select element.
+
+<ComponentPreview component="field" example="Select" />
+
+### Select Controlled
+
+Controlled select field example.
+
+<ComponentPreview component="field" example="SelectControlled" />
+
+### Textarea
+
+Use Field with a textarea element.
+
+<ComponentPreview component="field" example="Textarea" />
+
+### Textarea Autoresize
+
+Textarea that automatically resizes based on content.
+
+<ComponentPreview component="field" example="TextareaAutoresize" />
+
+### Textarea Controlled
+
+Controlled textarea field example.
+
+<ComponentPreview component="field" example="TextareaControlled" />
+
+### Disabled
+
+Display a disabled field.
+
+<ComponentPreview component="field" example="Disabled" />
+
+### Reactive Invalid
+
+Reactively toggle the invalid state.
+
+<ComponentPreview component="field" example="ReactiveInvalid" />
+
+### Required Indicator
+
+Show a required indicator on the field label.
+
+<ComponentPreview component="field" example="RequiredIndicator" />
+
+## API Reference
+
+<ComponentTypes id="field" />

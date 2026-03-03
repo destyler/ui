@@ -1,0 +1,94 @@
+---
+title: File Upload
+description: A component that allows users to select and upload files through drag and drop or file browser.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# File Upload
+
+> A component that allows users to select and upload files through drag and drop or file browser.
+
+<ComponentPreview component="file-upload" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { FileUpload } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <FileUpload.Root>
+    <FileUpload.Label />
+    <FileUpload.Dropzone>
+      <FileUpload.Trigger />
+    </FileUpload.Dropzone>
+    <FileUpload.ItemGroup>
+      <FileUpload.Item>
+        <FileUpload.ItemPreview>
+          <FileUpload.ItemPreviewImage />
+        </FileUpload.ItemPreview>
+        <FileUpload.ItemName />
+        <FileUpload.ItemSizeText />
+        <FileUpload.ItemDeleteTrigger />
+      </FileUpload.Item>
+    </FileUpload.ItemGroup>
+    <FileUpload.ClearTrigger />
+    <FileUpload.HiddenInput />
+  </FileUpload.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { FileUpload } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <FileUpload.Root>
+      <FileUpload.Label />
+      <FileUpload.Dropzone>
+        <FileUpload.Trigger />
+      </FileUpload.Dropzone>
+      <FileUpload.ItemGroup>
+        <FileUpload.Item>
+          <FileUpload.ItemPreview>
+            <FileUpload.ItemPreviewImage />
+          </FileUpload.ItemPreview>
+          <FileUpload.ItemName />
+          <FileUpload.ItemSizeText />
+          <FileUpload.ItemDeleteTrigger />
+        </FileUpload.Item>
+      </FileUpload.ItemGroup>
+      <FileUpload.ClearTrigger />
+      <FileUpload.HiddenInput />
+    </FileUpload.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="file-upload" example="Basic" />
+
+### With Field
+
+Combine file upload with a form field for validation and labeling.
+
+<ComponentPreview component="file-upload" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="file-upload" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="file-upload" />

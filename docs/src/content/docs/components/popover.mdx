@@ -1,0 +1,134 @@
+---
+title: Popover
+description: A floating panel that appears relative to a trigger element.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Popover
+
+> A floating panel that appears relative to a trigger element.
+
+<ComponentPreview component="popover" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Popover } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Popover.Root>
+    <Popover.Trigger />
+    <Popover.Anchor />
+    <Popover.Positioner>
+      <Popover.Content>
+        <Popover.Title />
+        <Popover.Description />
+        <Popover.Arrow>
+          <Popover.ArrowTip />
+        </Popover.Arrow>
+        <Popover.CloseTrigger />
+      </Popover.Content>
+    </Popover.Positioner>
+  </Popover.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Popover } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Popover.Root>
+      <Popover.Trigger />
+      <Popover.Anchor />
+      <Popover.Positioner>
+        <Popover.Content>
+          <Popover.Title />
+          <Popover.Description />
+          <Popover.Arrow>
+            <Popover.ArrowTip />
+          </Popover.Arrow>
+          <Popover.CloseTrigger />
+        </Popover.Content>
+      </Popover.Positioner>
+    </Popover.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="popover" example="Basic" />
+
+### Arrow
+
+Display an arrow pointing to the trigger.
+
+<ComponentPreview component="popover" example="Arrow" />
+
+### Controlled
+
+Control the open state of the popover programmatically.
+
+<ComponentPreview component="popover" example="Controlled" />
+
+### Modal
+
+Display the popover as a modal overlay.
+
+<ComponentPreview component="popover" example="Modal" />
+
+### Positioning
+
+Customize the popover positioning.
+
+<ComponentPreview component="popover" example="Positioning" />
+
+### Close Behavior
+
+Configure how the popover closes.
+
+<ComponentPreview component="popover" example="CloseBehavior" />
+
+### As Child
+
+Use `asChild` to render the trigger as a custom element.
+
+<ComponentPreview component="popover" example="AsChild" />
+
+### Portalled
+
+Render the popover in a portal.
+
+<ComponentPreview component="popover" example="Portalled" />
+
+### On Open Change
+
+Handle the open state change event.
+
+<ComponentPreview component="popover" example="OnOpenChange" />
+
+### Render Function
+
+Use render function for custom popover rendering.
+
+<ComponentPreview component="popover" example="RenderFn" />
+
+### Root Provider
+
+<ComponentPreview component="popover" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="popover" />

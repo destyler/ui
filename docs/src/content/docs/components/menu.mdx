@@ -1,0 +1,146 @@
+---
+title: Menu
+description: A list of options that appears when a user interacts with a trigger element.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Menu
+
+> A list of options that appears when a user interacts with a trigger element.
+
+<ComponentPreview component="menu" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Menu } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Menu.Root>
+    <Menu.Trigger />
+    <Menu.Positioner>
+      <Menu.Content>
+        <Menu.ItemGroup>
+          <Menu.ItemGroupLabel />
+          <Menu.Item>
+            <Menu.ItemText />
+            <Menu.ItemIndicator />
+          </Menu.Item>
+        </Menu.ItemGroup>
+        <Menu.Separator />
+        <Menu.CheckboxItem>
+          <Menu.ItemIndicator />
+        </Menu.CheckboxItem>
+        <Menu.RadioItemGroup>
+          <Menu.RadioItem>
+            <Menu.ItemIndicator />
+          </Menu.RadioItem>
+        </Menu.RadioItemGroup>
+      </Menu.Content>
+    </Menu.Positioner>
+  </Menu.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Menu } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Menu.Root>
+      <Menu.Trigger />
+      <Menu.Positioner>
+        <Menu.Content>
+          <Menu.ItemGroup>
+            <Menu.ItemGroupLabel />
+            <Menu.Item>
+              <Menu.ItemText />
+              <Menu.ItemIndicator />
+            </Menu.Item>
+          </Menu.ItemGroup>
+          <Menu.Separator />
+          <Menu.CheckboxItem>
+            <Menu.ItemIndicator />
+          </Menu.CheckboxItem>
+          <Menu.RadioItemGroup>
+            <Menu.RadioItem>
+              <Menu.ItemIndicator />
+            </Menu.RadioItem>
+          </Menu.RadioItemGroup>
+        </Menu.Content>
+      </Menu.Positioner>
+    </Menu.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="menu" example="Basic" />
+
+### Context
+
+Use a context menu triggered by right-click.
+
+<ComponentPreview component="menu" example="Context" />
+
+### Controlled
+
+Control the open state of the menu programmatically.
+
+<ComponentPreview component="menu" example="Controlled" />
+
+### Nested
+
+Create nested submenus.
+
+<ComponentPreview component="menu" example="Nested" />
+
+### Group
+
+Group menu items together.
+
+<ComponentPreview component="menu" example="Group" />
+
+### Checkbox
+
+Use checkbox items in the menu.
+
+<ComponentPreview component="menu" example="Checkbox" />
+
+### Radio Group
+
+Use radio items in the menu for single selection.
+
+<ComponentPreview component="menu" example="RadioGroup" />
+
+### Separator
+
+Add visual separators between menu items.
+
+<ComponentPreview component="menu" example="Separator" />
+
+### Render Prop
+
+Use render prop for custom menu item rendering.
+
+<ComponentPreview component="menu" example="RenderProp" />
+
+### Root Provider
+
+<ComponentPreview component="menu" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="menu" />

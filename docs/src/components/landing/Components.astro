@@ -26,9 +26,13 @@ const componentGroups = [
   },
   {
     category: "UTILITY",
-    items: ["Clipboard", "Combobox", "Edit", "Floating Panel", "Presence", "Aspect Ratio"],
+    items: ["Clipboard", "Combobox", "Dynamic", "Edit", "Floating Panel", "Presence", "Aspect Ratio"],
   },
 ];
+
+function toSlug(name: string) {
+  return name.toLowerCase().replace(/\s+/g, '-');
+}
 ---
 
 <section class="py-20 px-6 md:py-28 md:px-12 lg:py-40 lg:px-16 bg-$sl-color-gray-7 border-b border-$sl-color-hairline">
@@ -53,9 +57,11 @@ const componentGroups = [
           <div class="w-full h-px bg-$sl-color-hairline mb-4"></div>
           <ul class="list-none p-0 m-0 flex flex-col gap-2">
             {group.items.map((item) => (
-              <li class="flex items-center gap-2.5 text-sm text-$sl-color-gray-3 tracking-[-0.01em] transition-colors duration-150 ease-out cursor-default hover:text-$sl-color-text">
+              <li class="flex items-center gap-2.5 text-sm text-$sl-color-gray-3 tracking-[-0.01em] transition-colors duration-150 ease-out hover:text-$sl-color-text">
                 <span class="w-1 h-1 bg-$sl-color-accent shrink-0" aria-hidden="true"></span>
-                {item}
+                <a href={`/components/${toSlug(item)}/`} class="no-underline text-$sl-color-gray-3! hover:text-$sl-color-text! transition-colors duration-150 ease-out">
+                  {item}
+                </a>
               </li>
             ))}
           </ul>

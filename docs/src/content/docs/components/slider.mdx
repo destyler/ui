@@ -1,0 +1,134 @@
+---
+title: Slider
+description: A component that allows users to select a value from a range by dragging a thumb.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Slider
+
+> A component that allows users to select a value from a range by dragging a thumb.
+
+<ComponentPreview component="slider" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Slider } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Slider.Root>
+    <Slider.Label />
+    <Slider.ValueText />
+    <Slider.Control>
+      <Slider.Track>
+        <Slider.Range />
+      </Slider.Track>
+      <Slider.Thumb />
+    </Slider.Control>
+    <Slider.MarkerGroup>
+      <Slider.Marker />
+    </Slider.MarkerGroup>
+    <Slider.HiddenInput />
+  </Slider.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Slider } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Slider.Root>
+      <Slider.Label />
+      <Slider.ValueText />
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Range />
+        </Slider.Track>
+        <Slider.Thumb />
+      </Slider.Control>
+      <Slider.MarkerGroup>
+        <Slider.Marker />
+      </Slider.MarkerGroup>
+      <Slider.HiddenInput />
+    </Slider.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="slider" example="Basic" />
+
+### Initial Value
+
+Set the initial value for the slider.
+
+<ComponentPreview component="slider" example="InitialValue" />
+
+### Min/Max
+
+Configure minimum and maximum values.
+
+<ComponentPreview component="slider" example="MinMax" />
+
+### Step
+
+Set the step increment for the slider.
+
+<ComponentPreview component="slider" example="Step" />
+
+### Range
+
+Use the slider for range selection with two thumbs.
+
+<ComponentPreview component="slider" example="Range" />
+
+### Center Origin
+
+Display the range from the center.
+
+<ComponentPreview component="slider" example="CenterOrigin" />
+
+### Vertical
+
+Display the slider in a vertical orientation.
+
+<ComponentPreview component="slider" example="Vertical" />
+
+### With Marks
+
+Add visual markers along the slider track.
+
+<ComponentPreview component="slider" example="WithMarks" />
+
+### Dragging Indicator
+
+Show an indicator while dragging.
+
+<ComponentPreview component="slider" example="DraggingIndicator" />
+
+### On Event
+
+Listen for value change events.
+
+<ComponentPreview component="slider" example="OnEvent" />
+
+### Root Provider
+
+<ComponentPreview component="slider" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="slider" />

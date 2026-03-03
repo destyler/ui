@@ -1,0 +1,134 @@
+---
+title: Collapse
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Collapse
+
+> A vertically stacked set of interactive headings that each reveal a section of content.
+
+<ComponentPreview component="collapse" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Collapse } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Collapse.Root>
+    <Collapse.Item>
+      <Collapse.ItemTrigger>
+        <Collapse.ItemIndicator />
+      </Collapse.ItemTrigger>
+      <Collapse.ItemContent />
+    </Collapse.Item>
+  </Collapse.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Collapse } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Collapse.Root>
+      <Collapse.Item>
+        <Collapse.ItemTrigger>
+          <Collapse.ItemIndicator />
+        </Collapse.ItemTrigger>
+        <Collapse.ItemContent />
+      </Collapse.Item>
+    </Collapse.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="collapse" example="Basic" />
+
+### Collapsible
+
+Allow all items to be collapsed simultaneously.
+
+<ComponentPreview component="collapse" example="Collapsible" />
+
+### Controlled
+
+Control the expanded items programmatically.
+
+<ComponentPreview component="collapse" example="Controlled" />
+
+### Multiple
+
+Allow multiple items to be expanded at the same time.
+
+<ComponentPreview component="collapse" example="Multiple" />
+
+### Disabled
+
+Disable specific collapse items.
+
+<ComponentPreview component="collapse" example="Disabled" />
+
+### Horizontal
+
+Display the collapse in a horizontal layout.
+
+<ComponentPreview component="collapse" example="Horizontal" />
+
+### Vertical
+
+Display the collapse in a vertical layout.
+
+<ComponentPreview component="collapse" example="Vertical" />
+
+### Context Value
+
+Access the collapse context value.
+
+<ComponentPreview component="collapse" example="ContextValue" />
+
+### Context Focused Value
+
+Access the focused value from the collapse context.
+
+<ComponentPreview component="collapse" example="ContextFocusedValue" />
+
+### Context Get Item State
+
+Get the state of a specific item through context.
+
+<ComponentPreview component="collapse" example="ContextGetItemState" />
+
+### Context Set Value
+
+Set the collapse value through context.
+
+<ComponentPreview component="collapse" example="ContextSetValue" />
+
+### Render Prop
+
+Use render prop for custom item rendering.
+
+<ComponentPreview component="collapse" example="RenderProp" />
+
+### Root Provider
+
+<ComponentPreview component="collapse" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="collapse" />

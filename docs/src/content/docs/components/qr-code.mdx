@@ -1,0 +1,84 @@
+---
+title: QR Code
+description: A component that generates and displays QR codes.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# QR Code
+
+> A component that generates and displays QR codes.
+
+<ComponentPreview component="qr-code" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { QrCode } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <QrCode.Root>
+    <QrCode.Frame>
+      <QrCode.Pattern />
+    </QrCode.Frame>
+    <QrCode.Overlay />
+    <QrCode.DownloadTrigger />
+  </QrCode.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { QrCode } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <QrCode.Root>
+      <QrCode.Frame>
+        <QrCode.Pattern />
+      </QrCode.Frame>
+      <QrCode.Overlay />
+      <QrCode.DownloadTrigger />
+    </QrCode.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="qr-code" example="Basic" />
+
+### Controlled
+
+Control the QR code value programmatically.
+
+<ComponentPreview component="qr-code" example="Controlled" />
+
+### Error Correction
+
+Configure the error correction level.
+
+<ComponentPreview component="qr-code" example="ErrorCorrection" />
+
+### With Overlay
+
+Display an overlay image on the QR code.
+
+<ComponentPreview component="qr-code" example="WithOverlay" />
+
+### Root Provider
+
+<ComponentPreview component="qr-code" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="qr-code" />

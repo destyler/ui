@@ -1,0 +1,80 @@
+---
+title: Splitter
+description: A component that divides the layout into resizable panels.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Splitter
+
+> A component that divides the layout into resizable panels.
+
+<ComponentPreview component="splitter" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Splitter } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Splitter.Root>
+    <Splitter.Panel />
+    <Splitter.ResizeTrigger />
+    <Splitter.Panel />
+  </Splitter.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Splitter } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Splitter.Root>
+      <Splitter.Panel />
+      <Splitter.ResizeTrigger />
+      <Splitter.Panel />
+    </Splitter.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="splitter" example="Basic" />
+
+### Events
+
+Listen for resize events.
+
+<ComponentPreview component="splitter" example="Events" />
+
+### Vertical
+
+Display a vertical splitter layout.
+
+<ComponentPreview component="splitter" example="Vertical" />
+
+### Render Prop
+
+Use render prop for custom splitter rendering.
+
+<ComponentPreview component="splitter" example="RenderProp" />
+
+### Root Provider
+
+<ComponentPreview component="splitter" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="splitter" />

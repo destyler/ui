@@ -1,0 +1,70 @@
+---
+title: Pagination
+description: A component for navigating between pages of content.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Pagination
+
+> A component for navigating between pages of content.
+
+<ComponentPreview component="pagination" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Pagination } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Pagination.Root>
+    <Pagination.PrevTrigger />
+    <Pagination.Item />
+    <Pagination.Ellipsis />
+    <Pagination.NextTrigger />
+  </Pagination.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Pagination } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Pagination.Root>
+      <Pagination.PrevTrigger />
+      <Pagination.Item />
+      <Pagination.Ellipsis />
+      <Pagination.NextTrigger />
+    </Pagination.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="pagination" example="Basic" />
+
+### Customized
+
+Customize the pagination appearance and behavior.
+
+<ComponentPreview component="pagination" example="Customized" />
+
+### Root Provider
+
+<ComponentPreview component="pagination" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="pagination" />

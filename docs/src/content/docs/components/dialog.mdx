@@ -1,0 +1,92 @@
+---
+title: Dialog
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Dialog
+
+> A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+
+<ComponentPreview component="dialog" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Dialog } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Dialog.Root>
+    <Dialog.Trigger />
+    <Dialog.Backdrop />
+    <Dialog.Positioner>
+      <Dialog.Content>
+        <Dialog.Title />
+        <Dialog.Description />
+        <Dialog.CloseTrigger />
+      </Dialog.Content>
+    </Dialog.Positioner>
+  </Dialog.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Dialog } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger />
+      <Dialog.Backdrop />
+      <Dialog.Positioner>
+        <Dialog.Content>
+          <Dialog.Title />
+          <Dialog.Description />
+          <Dialog.CloseTrigger />
+        </Dialog.Content>
+      </Dialog.Positioner>
+    </Dialog.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="dialog" example="Basic" />
+
+### Controlled
+
+Control the open state of the dialog programmatically.
+
+<ComponentPreview component="dialog" example="Controlled" />
+
+### Lazy Mount
+
+Mount the dialog content lazily when first opened.
+
+<ComponentPreview component="dialog" example="LazyMount" />
+
+### Render Function
+
+Use render function for custom dialog rendering.
+
+<ComponentPreview component="dialog" example="RenderFn" />
+
+### Root Provider
+
+<ComponentPreview component="dialog" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="dialog" />

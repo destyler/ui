@@ -1,0 +1,94 @@
+---
+title: Edit
+description: A component that allows users to edit text in place, switching between a read-only and an editable state.
+---
+
+import ComponentPreview from '../../../components/ComponentPreview.astro';
+import ComponentTypes from '../../../components/ComponentTypes.astro';
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+# Edit
+
+> A component that allows users to edit text in place, switching between a read-only and an editable state.
+
+<ComponentPreview component="edit" example="Basic" />
+
+## Anatomy
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Edit } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Edit.Root>
+    <Edit.Label />
+    <Edit.Area>
+      <Edit.Input />
+      <Edit.Preview />
+    </Edit.Area>
+    <Edit.Control>
+      <Edit.EditTrigger />
+      <Edit.SubmitTrigger />
+      <Edit.CancelTrigger />
+    </Edit.Control>
+  </Edit.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Edit } from '@destyler-ui/react'
+
+export default function Basic() {
+  return (
+    <Edit.Root>
+      <Edit.Label />
+      <Edit.Area>
+        <Edit.Input />
+        <Edit.Preview />
+      </Edit.Area>
+      <Edit.Control>
+        <Edit.EditTrigger />
+        <Edit.SubmitTrigger />
+        <Edit.CancelTrigger />
+      </Edit.Control>
+    </Edit.Root>
+  )
+}
+```
+</FrameworkContent>
+
+## Examples
+
+### Basic
+
+<ComponentPreview component="edit" example="Basic" />
+
+### Controlled
+
+Control the edit state and value programmatically.
+
+<ComponentPreview component="edit" example="Controlled" />
+
+### Custom Controls
+
+Customize the edit, submit, and cancel controls.
+
+<ComponentPreview component="edit" example="CustomControls" />
+
+### With Field
+
+Combine with a form field for validation and labeling.
+
+<ComponentPreview component="edit" example="WithField" />
+
+### Root Provider
+
+<ComponentPreview component="edit" example="RootProvider" />
+
+## API Reference
+
+<ComponentTypes id="edit" />
