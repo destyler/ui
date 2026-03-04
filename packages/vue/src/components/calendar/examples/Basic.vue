@@ -7,7 +7,7 @@ import { Calendar } from '../index'
     <Calendar.Label>Label</Calendar.Label>
     <Calendar.Control>
       <Calendar.Input />
-      <Calendar.Trigger>📅</Calendar.Trigger>
+      <Calendar.Trigger />
       <Calendar.ClearTrigger>Clear</Calendar.ClearTrigger>
     </Calendar.Control>
     <Calendar.PresetTrigger value="last7Days">Last 7 days</Calendar.PresetTrigger>

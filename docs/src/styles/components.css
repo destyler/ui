@@ -5,7 +5,6 @@
 
 /* Buttons */
 .sl-markdown-content button, .sl-markdown-content .button, .action {
-  border-radius: 0 !important;
   letter-spacing: 0.1em;
   font-weight: 600;
   font-size: 0.8125rem;
