@@ -63,7 +63,9 @@ catch {
 
 // Rewrite relative imports to package imports for display in docs
 vueCode = vueCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/vue'`)
+vueCode = vueCode.replace(/from\s+['"]~\/[^'"]*['"]/g, `from '@destyler-ui/vue'`)
 reactCode = reactCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/react'`)
+reactCode = reactCode.replace(/from\s+['"]~\/[^'"]*['"]/g, `from '@destyler-ui/react'`)
 
 const vueHtml = await highlight(vueCode, 'vue')
 const reactHtml = await highlight(reactCode, 'tsx')

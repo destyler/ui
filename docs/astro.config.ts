@@ -61,11 +61,14 @@ function tolerantPackageVueSfc() {
       // the original package build context:
       //   1. `extends Namespace.Type`         (cross-file type extension)
       //   2. `defineEmits<Namespace.Type>`     (unresolvable emit type)
-      //   3. `from '~/'`                       (alias unavailable in SFC resolver)
+      //
+      // NOTE: `from '~/'` imports are NOT flagged here because the
+      // `destylerTildeAlias` Vite plugin resolves them correctly at
+      // module-resolution time. Only type-level patterns that the SFC
+      // compiler must resolve at compile time are truly problematic.
       const problematic
         = /extends\s+\w+\.\w+/.test(script)
           || /define(?:Props|Emits)<\w+\.\w+>/.test(script)
-          || /from\s+['"]~\//.test(script)
 
       if (!problematic)
         return null
