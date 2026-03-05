@@ -1,0 +1,188 @@
+.carousel-autoplay [data-part="root"] {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-autoplay [data-part="control"] {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  background: rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(6px);
+  border-radius: 9999px;
+  padding: 0.25rem;
+  gap: 4rem;
+}
+
+.carousel-autoplay [data-part="prev-trigger"],
+.carousel-autoplay [data-part="next-trigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  border: none;
+  background: rgb(255 255 255 / 0.15);
+  color: white;
+  font-size: 0;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+}
+
+.carousel-autoplay [data-part="prev-trigger"]::before,
+.carousel-autoplay [data-part="next-trigger"]::before {
+  content: '';
+  display: block;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-style: solid;
+  border-color: white;
+}
+
+.carousel-autoplay [data-part="prev-trigger"]::before {
+  border-width: 0 0 2px 2px;
+  transform: rotate(45deg) translateX(1px);
+}
+
+.carousel-autoplay [data-part="next-trigger"]::before {
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg) translateX(-1px);
+}
+
+.carousel-autoplay [data-part="prev-trigger"]:hover,
+.carousel-autoplay [data-part="next-trigger"]:hover {
+  background: rgb(255 255 255 / 0.3);
+}
+
+.carousel-autoplay [data-part="prev-trigger"]:disabled,
+.carousel-autoplay [data-part="next-trigger"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel-autoplay [data-part="item-group"] {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  scrollbar-width: none;
+  -webkit-scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-autoplay [data-part="item-group"]::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-autoplay [data-part="item"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.carousel-autoplay [data-part="item"] img {
+  height: 300px;
+  width: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+
+.carousel-autoplay [data-part="indicator-group"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.375rem;
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.carousel-autoplay [data-part="indicator"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  border: none;
+  background: rgb(255 255 255 / 0.5);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.carousel-autoplay [data-part="indicator"]:hover {
+  background: rgb(255 255 255 / 0.8);
+}
+
+.carousel-autoplay [data-part="indicator"][data-current] {
+  background: var(--demo-coral-solid);
+}
+
+.carousel-autoplay [data-part="autoplay-trigger"] {
+  position: absolute;
+  bottom: calc(150px - 0.75rem);
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: none;
+  background: rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(6px);
+  color: white;
+  font-size: 0;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.15s;
+  pointer-events: none;
+}
+
+.carousel-autoplay [data-part="root"]:hover [data-part="autoplay-trigger"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-autoplay [data-part="autoplay-trigger"]::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.4rem 0 0.4rem 0.7rem;
+  border-color: transparent transparent transparent white;
+  margin-left: 0.1rem;
+}
+
+.carousel-autoplay [data-part="autoplay-trigger"][data-pressed]::before {
+  width: 0.5rem;
+  height: 0.7rem;
+  border-width: 0;
+  border-color: transparent;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  margin-left: 0;
+}
+
+.carousel-autoplay [data-part="autoplay-trigger"]:hover {
+  background: rgb(0 0 0 / 0.5);
+}
+
+.carousel-autoplay [data-part="autoplay-trigger"] svg {
+  display: none;
+}

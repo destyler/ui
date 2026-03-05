@@ -154,7 +154,6 @@
 .sl-markdown-content pre:not(.ds-preview-frame *) {
   border-radius: 0 !important;
   border: 1px solid var(--sl-color-hairline) !important;
-  padding: 0.25rem 0rem !important;
   overflow-x: auto !important;
 }
 
