@@ -1,0 +1,92 @@
+.checkbox-rootprovider main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkbox-rootprovider output {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 0.8125rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 0.375rem;
+  background: var(--demo-neutral-subtle);
+  color: var(--demo-neutral-fg-muted);
+}
+
+.checkbox-rootprovider button {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.375rem;
+  background: var(--demo-bg-checkbox);
+  color: var(--demo-neutral-fg);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.checkbox-rootprovider button:hover {
+  background: var(--demo-neutral-subtle);
+  border-color: var(--demo-neutral-solid);
+}
+
+.checkbox-rootprovider [data-part="root"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
+
+.checkbox-rootprovider [data-part="control"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid var(--demo-border-emphasized);
+  border-radius: 0.25rem;
+  background: var(--demo-bg-checkbox);
+  transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+
+.checkbox-rootprovider [data-part="control"][data-hover] {
+  border-color: var(--demo-neutral-solid);
+}
+
+.checkbox-rootprovider [data-part="control"][data-focus] {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+  border-color: var(--demo-coral-solid);
+}
+
+.checkbox-rootprovider [data-part="control"][data-state="checked"],
+.checkbox-rootprovider [data-part="control"][data-state="indeterminate"] {
+  background: var(--demo-coral-solid);
+  border-color: var(--demo-coral-solid);
+  color: var(--demo-coral-contrast);
+}
+
+.checkbox-rootprovider [data-part="indicator"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--demo-coral-contrast);
+}
+
+.checkbox-rootprovider [data-part="indicator"][hidden] {
+  display: flex;
+  visibility: hidden;
+}
+
+.checkbox-rootprovider [data-part="label"] {
+  font-weight: 500;
+  color: var(--demo-neutral-fg);
+}
