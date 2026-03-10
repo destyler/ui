@@ -9,9 +9,9 @@ import { Clipboard } from '../index'
       <Clipboard.Input />
       <Clipboard.Trigger>
         <Clipboard.Indicator>
-          x
+          <span class="i-tabler-copy" />
           <template #copied>
-            y
+            <span class="i-tabler-check" />
           </template>
         </Clipboard.Indicator>
       </Clipboard.Trigger>

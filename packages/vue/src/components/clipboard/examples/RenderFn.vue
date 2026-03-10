@@ -9,8 +9,8 @@ import { Clipboard } from '../index'
       <Clipboard.Input />
       <Clipboard.Trigger>
         <Clipboard.Context v-slot="{ copied }">
-          <span v-if="copied" >x</span>
-          <span v-else >y</span>
+          <span v-if="copied" class="i-tabler-check" />
+          <span v-else class="i-tabler-copy" />
         </Clipboard.Context>
       </Clipboard.Trigger>
     </Clipboard.Control>

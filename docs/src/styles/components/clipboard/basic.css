@@ -1,0 +1,75 @@
+.clipboard-basic [data-scope="clipboard"][data-part="root"] {
+  display: flex;
+  gap: 0.375rem;
+  flex-direction: column;
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="label"] {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  font-weight: 500;
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="control"] {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="input"] {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.375rem;
+  background: var(--demo-bg-popover);
+  color: var(--demo-neutral-fg);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="input"]:focus {
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="trigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.375rem;
+  background: var(--demo-bg-popover);
+  color: var(--demo-neutral-fg);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="trigger"]:hover {
+  background: var(--demo-neutral-subtle);
+  border-color: var(--demo-neutral-solid);
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="trigger"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+  border-color: var(--demo-coral-solid);
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="indicator"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clipboard-basic [data-scope="clipboard"][data-part="value-text"] {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
