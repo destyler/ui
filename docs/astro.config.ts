@@ -188,6 +188,58 @@ export default defineConfig({
   vite: {
     plugins: [tolerantPackageVueSfc(), destylerTildeAlias()],
     optimizeDeps: {
+      // Component examples are loaded via import.meta.glob at runtime, so
+      // Vite cannot statically discover the @destyler/* imports they pull
+      // in. Pre-declare them here to avoid lazy re-optimization and the
+      // "504 (Outdated Optimize Dep)" errors that follow.
+      include: [
+        '@destyler/aspect-ratio',
+        '@destyler/breadcrumbs',
+        '@destyler/calendar',
+        '@destyler/carousel',
+        '@destyler/checkbox',
+        '@destyler/clipboard',
+        '@destyler/collapse',
+        '@destyler/collapsible',
+        '@destyler/color-picker',
+        '@destyler/combobox',
+        '@destyler/dialog',
+        '@destyler/dom',
+        '@destyler/dynamic',
+        '@destyler/edit',
+        '@destyler/file-upload',
+        '@destyler/floating-panel',
+        '@destyler/hover-card',
+        '@destyler/image',
+        '@destyler/label',
+        '@destyler/menu',
+        '@destyler/navigation-menu',
+        '@destyler/number-input',
+        '@destyler/otp-input',
+        '@destyler/pagination',
+        '@destyler/popover',
+        '@destyler/presence',
+        '@destyler/progress',
+        '@destyler/qr-code',
+        '@destyler/radio',
+        '@destyler/scroll-area',
+        '@destyler/select',
+        '@destyler/separator',
+        '@destyler/signature',
+        '@destyler/slider',
+        '@destyler/splitter',
+        '@destyler/steps',
+        '@destyler/switch',
+        '@destyler/tabs',
+        '@destyler/timer',
+        '@destyler/toast',
+        '@destyler/toggle',
+        '@destyler/tooltip',
+        '@destyler/tour',
+        '@destyler/tree',
+        '@destyler/utils',
+        '@destyler/vue',
+      ],
       // Vite 8 beta / esbuild evaluates process.env.NODE_ENV during dep
       // pre-bundling. Without an explicit define the condition resolves to
       // "production", which causes React to export `jsxDEV = void 0` from

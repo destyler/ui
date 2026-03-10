@@ -11,7 +11,9 @@ const value = ref(['Vue'])
   <Collapse.Root v-model="value">
     <Collapse.Item v-for="item in items" :key="item" :value="item">
       <Collapse.ItemTrigger>{{ item }} trigger</Collapse.ItemTrigger>
-      <Collapse.ItemContent>{{ item }} content</Collapse.ItemContent>
+      <Collapse.ItemContent>
+        <div>{{ item }} content</div>
+      </Collapse.ItemContent>
     </Collapse.Item>
   </Collapse.Root>
 </template>

@@ -10,7 +10,9 @@ const items = ref(['React', 'Solid', 'Vue'])
     <Collapse.Item v-for="item in items" :key="item" :value="item">
       <Collapse.ItemContext v-slot="{ expanded }">
         <Collapse.ItemTrigger>{{ expanded ? 'Expanded' : 'Closed' }}</Collapse.ItemTrigger>
-        <Collapse.ItemContent>{{ item }} content</Collapse.ItemContent>
+        <Collapse.ItemContent>
+          <div>{{ item }} content</div>
+        </Collapse.ItemContent>
       </Collapse.ItemContext>
     </Collapse.Item>
   </Collapse.Root>
