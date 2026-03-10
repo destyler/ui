@@ -27,6 +27,7 @@
   min-width: 480px;
   border: 1px solid var(--demo-border);
   border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .collapse-basic [data-scope="collapse"][data-part="item"] + [data-scope="collapse"][data-part="item"] {
