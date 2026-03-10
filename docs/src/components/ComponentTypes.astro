@@ -31,9 +31,11 @@ interface PartTypes {
 interface Props {
   /** Component id (directory name), e.g. "avatar", "collapse" */
   id: string
+  /** Specific part to render (e.g. "Root", "Control"). If not provided, renders all parts. */
+  part?: string
 }
 
-const { id } = Astro.props
+const { id, part } = Astro.props
 
 const dataDir = path.join(process.cwd(), 'src', 'data', 'types')
 
@@ -65,27 +67,29 @@ function sortedEntries(types: Record<string, PartTypes>): [string, PartTypes][] 
   <div class="not-content">
     {vueTypes && (
       <div class="ds-fw-content" data-fw="vue">
-        {sortedEntries(vueTypes).map(([partName, types]) => (
-          <div class="mt-6 first:mt-0">
-            <h3 class="mt-8 mb-2 text-xl font-600 scroll-mt-16" id={`${id}-${partName.toLowerCase()}-vue`}>{partName}</h3>
-            {types.props && <PropsTable props={types.props} />}
-            {types.emits && <EmitsTable emits={types.emits} />}
-            {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
-          </div>
-        ))}
+        {sortedEntries(vueTypes)
+          .filter(([partName]) => !part || partName.toLowerCase() === part.toLowerCase())
+          .map(([partName, types]) => (
+            <div class="mt-6 first:mt-0">
+              {types.props && <PropsTable props={types.props} />}
+              {types.emits && <EmitsTable emits={types.emits} />}
+              {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
+            </div>
+          ))}
       </div>
     )}
 
     {reactTypes && (
       <div class="ds-fw-content" data-fw="react">
-        {sortedEntries(reactTypes).map(([partName, types]) => (
-          <div class="mt-6 first:mt-0">
-            <h3 class="mt-8 mb-2 text-xl font-600 scroll-mt-16" id={`${id}-${partName.toLowerCase()}-react`}>{partName}</h3>
-            {types.props && <PropsTable props={types.props} />}
-            {types.emits && <EmitsTable emits={types.emits} />}
-            {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
-          </div>
-        ))}
+        {sortedEntries(reactTypes)
+          .filter(([partName]) => !part || partName.toLowerCase() === part.toLowerCase())
+          .map(([partName, types]) => (
+            <div class="mt-6 first:mt-0">
+              {types.props && <PropsTable props={types.props} />}
+              {types.emits && <EmitsTable emits={types.emits} />}
+              {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
+            </div>
+          ))}
       </div>
     )}
   </div>
