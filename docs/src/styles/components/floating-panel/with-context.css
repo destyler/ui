@@ -1,4 +1,4 @@
-.floating-panel-defaultopen [data-part="trigger"] {
+.floating-panel-withcontext [data-part="trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,17 +15,17 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
-.floating-panel-defaultopen [data-part="trigger"]:hover {
+.floating-panel-withcontext [data-part="trigger"]:hover {
   background: var(--demo-coral-emphasized);
   border-color: var(--demo-coral-emphasized);
 }
 
-.floating-panel-defaultopen [data-part="trigger"]:focus {
+.floating-panel-withcontext [data-part="trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.floating-panel-defaultopen [data-part="content"] {
+.floating-panel-withcontext [data-part="content"] {
   position: relative;
   width: 20rem;
   background: var(--demo-bg-popover);
@@ -35,7 +35,7 @@
   overflow: hidden;
 }
 
-.floating-panel-defaultopen [data-part="header"] {
+.floating-panel-withcontext [data-part="header"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,19 +45,19 @@
   cursor: move;
 }
 
-.floating-panel-defaultopen [data-part="title"] {
+.floating-panel-withcontext [data-part="title"] {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--demo-neutral-fg);
 }
 
-.floating-panel-defaultopen [data-part="trigger-group"] {
+.floating-panel-withcontext [data-part="trigger-group"] {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.floating-panel-defaultopen [data-part="trigger-group"] > button {
+.floating-panel-withcontext [data-part="trigger-group"] > button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -72,32 +72,32 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.floating-panel-defaultopen [data-part="trigger-group"] > button:hover {
+.floating-panel-withcontext [data-part="trigger-group"] > button:hover {
   background: var(--demo-neutral-muted);
 }
 
-.floating-panel-defaultopen [data-part="body"] {
+.floating-panel-withcontext [data-part="body"] {
   padding: 1rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--demo-neutral-fg);
 }
 
-.floating-panel-defaultopen [data-part="body"] p {
+.floating-panel-withcontext [data-part="body"] p {
   margin: 0;
 }
 
-.floating-panel-defaultopen [data-part="body"] ul {
+.floating-panel-withcontext [data-part="body"] ul {
   margin: 0.5rem 0 0;
   padding-left: 1.25rem;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"] {
+.floating-panel-withcontext [data-part="resizeTrigger"] {
   position: absolute;
   background: transparent;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="n"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="n"] {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -106,7 +106,7 @@
   cursor: n-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="e"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="e"] {
   top: 50%;
   right: 0;
   transform: translateY(-50%);
@@ -115,7 +115,7 @@
   cursor: e-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="w"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="w"] {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
@@ -124,7 +124,7 @@
   cursor: w-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="s"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="s"] {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -133,7 +133,7 @@
   cursor: s-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="ne"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="ne"] {
   top: 0;
   right: 0;
   width: 0.5rem;
@@ -141,7 +141,7 @@
   cursor: ne-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="se"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="se"] {
   bottom: 0;
   right: 0;
   width: 0.5rem;
@@ -149,7 +149,7 @@
   cursor: se-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="sw"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="sw"] {
   bottom: 0;
   left: 0;
   width: 0.5rem;
@@ -157,7 +157,7 @@
   cursor: sw-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="nw"] {
+.floating-panel-withcontext [data-part="resizeTrigger"][data-axis="nw"] {
   top: 0;
   left: 0;
   width: 0.5rem;

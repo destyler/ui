@@ -2,6 +2,7 @@ import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
 import DefaultOpen from '../examples/DefaultOpen.vue'
 import RootProvider from '../examples/RootProvider.vue'
+import WithContext from '../examples/WithContext.vue'
 
 export default {
   title: 'Components / Floating Panel',
@@ -35,5 +36,12 @@ export function rootProvider() {
   return {
     components: { RootProvider },
     template: '<RootProvider />',
+  }
+}
+
+export function withContext() {
+  return {
+    components: { WithContext },
+    template: '<WithContext />',
   }
 }
