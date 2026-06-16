@@ -9,6 +9,8 @@ import { Calendar } from '../index'
       <Calendar.Input />
       <Calendar.Trigger />
       <Calendar.ClearTrigger>Clear</Calendar.ClearTrigger>
+      <Calendar.MonthSelect />
+      <Calendar.YearSelect />
     </Calendar.Control>
     <Calendar.PresetTrigger value="last7Days">Last 7 days</Calendar.PresetTrigger>
 
