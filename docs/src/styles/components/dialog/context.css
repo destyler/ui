@@ -1,4 +1,4 @@
-.dialog-basic [data-part="trigger"] {
+.dialog-context [data-part="trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,17 +15,17 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
-.dialog-basic [data-part="trigger"]:hover {
+.dialog-context [data-part="trigger"]:hover {
   background: var(--demo-coral-emphasized);
   border-color: var(--demo-coral-emphasized);
 }
 
-.dialog-basic [data-part="trigger"]:focus {
+.dialog-context [data-part="trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.dialog-basic [data-part="backdrop"] {
+.dialog-context [data-part="backdrop"] {
   position: fixed;
   inset: 0;
   background: rgb(0 0 0 / 0.4);
@@ -33,7 +33,7 @@
   z-index: var(--demo-popover-z-index);
 }
 
-.dialog-basic [data-part="positioner"] {
+.dialog-context [data-part="positioner"] {
   position: fixed;
   inset: 0;
   display: flex;
@@ -42,7 +42,7 @@
   z-index: var(--demo-popover-z-index);
 }
 
-.dialog-basic [data-part="content"] {
+.dialog-context [data-part="content"] {
   width: 100%;
   max-width: 24rem;
   padding: 1.5rem;
@@ -52,7 +52,7 @@
   box-shadow: var(--demo-shadow-xl);
 }
 
-.dialog-basic [data-part="title"] {
+.dialog-context [data-part="title"] {
   margin: 0 0 0.5rem;
   font-size: 1.125rem;
   font-weight: 600;
@@ -60,14 +60,14 @@
   color: var(--demo-neutral-fg);
 }
 
-.dialog-basic [data-part="description"] {
+.dialog-context [data-part="description"] {
   margin: 0 0 1.25rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.dialog-basic [data-part="closeTrigger"] {
+.dialog-context [data-part="closeTrigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -84,6 +84,6 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.dialog-basic [data-part="closeTrigger"]:hover {
+.dialog-context [data-part="closeTrigger"]:hover {
   background: var(--demo-neutral-muted);
 }

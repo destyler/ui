@@ -1,0 +1,89 @@
+.dialog-controlled [data-part="trigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-coral-contrast);
+  background: var(--demo-coral-solid);
+  border: 1px solid var(--demo-coral-solid);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.dialog-controlled [data-part="trigger"]:hover {
+  background: var(--demo-coral-emphasized);
+  border-color: var(--demo-coral-emphasized);
+}
+
+.dialog-controlled [data-part="trigger"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.dialog-controlled [data-part="backdrop"] {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.4);
+  backdrop-filter: blur(2px);
+  z-index: var(--demo-popover-z-index);
+}
+
+.dialog-controlled [data-part="positioner"] {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--demo-popover-z-index);
+}
+
+.dialog-controlled [data-part="content"] {
+  width: 100%;
+  max-width: 24rem;
+  padding: 1.5rem;
+  background: var(--demo-bg-popover);
+  border: 1px solid var(--demo-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--demo-shadow-xl);
+}
+
+.dialog-controlled [data-part="title"] {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: var(--demo-neutral-fg);
+}
+
+.dialog-controlled [data-part="description"] {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg-muted);
+}
+
+.dialog-controlled [data-part="closeTrigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-neutral-subtle);
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.dialog-controlled [data-part="closeTrigger"]:hover {
+  background: var(--demo-neutral-muted);
+}

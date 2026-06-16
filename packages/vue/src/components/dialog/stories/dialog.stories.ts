@@ -1,4 +1,5 @@
 import Basic from '../examples/Basic.vue'
+import Context from '../examples/Context.vue'
 import Controlled from '../examples/Controlled.vue'
 import LazyMount from '../examples/LazyMount.vue'
 import RenderFn from '../examples/RenderFn.vue'
@@ -22,6 +23,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function context() {
+  return {
+    components: { Context },
+    template: '<Context />',
   }
 }
 
