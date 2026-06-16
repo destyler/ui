@@ -1,4 +1,5 @@
 import Basic from '../examples/Basic.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import LazyMount from '../examples/LazyMount.vue'
 import LazyMountAndUnmountOnExit from '../examples/LazyMountAndUnmountOnExit.vue'
 import OnExitComplete from '../examples/OnExitComplete.vue'
@@ -17,6 +18,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function initialOpen() {
+  return {
+    components: { InitialOpen },
+    template: '<InitialOpen />',
   }
 }
 
