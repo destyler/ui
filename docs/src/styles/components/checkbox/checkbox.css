@@ -1,6 +1,10 @@
 @import url('./basic.css');
 @import url('./controlled.css');
 @import url('./group.css');
+@import url('./group-controlled.css');
+@import url('./group-with-form.css');
+@import url('./group-with-invalid.css');
+@import url('./group-with-select-all.css');
 @import url('./indeterminate.css');
 @import url('./render-prop.css');
 @import url('./rootprovider.css');
