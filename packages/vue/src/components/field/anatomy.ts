@@ -6,6 +6,8 @@ export const fieldAnatomy = createAnatomy('field').parts(
   'helperText',
   'input',
   'label',
+  'select',
+  'textarea',
   'requiredIndicator',
 )
 export const parts = fieldAnatomy.build()

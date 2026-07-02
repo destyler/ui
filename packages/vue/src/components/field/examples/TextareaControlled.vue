@@ -2,7 +2,7 @@
 import { Field } from '../index'
 import { ref } from 'vue'
 
-const model = ref(['This is some text', 'then more text'])
+const model = ref('This is some text\nthen more text')
 </script>
 
 <template>

@@ -33,12 +33,17 @@ const props = defineProps<FieldTextareaProps>()
 const field = useFieldContext()
 const emit = defineEmits(['update:modelValue'])
 
+function setTextareaRef(node: Element | null) {
+  if (props.autoresize && node instanceof HTMLTextAreaElement)
+    autoresizeTextarea(node)
+}
+
 useForwardExpose()
 </script>
 
 <template>
   <ui.textarea
-    :ref="autoresizeTextarea"
+    :ref="setTextareaRef"
     v-bind="field.getTextareaProps()"
     :value="modelValue"
     @input="(event) => emit('update:modelValue', (event.target as HTMLTextAreaElement).value)"
