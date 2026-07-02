@@ -37,9 +37,9 @@
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.field-reactiveinvalid [data-part="input"][data-disabled],
-.field-reactiveinvalid [data-part="select"][data-disabled],
-.field-reactiveinvalid [data-part="textarea"][data-disabled] {
+.field-reactiveinvalid [data-part="input"]:is([data-disabled], [disabled]),
+.field-reactiveinvalid [data-part="select"]:is([data-disabled], [disabled]),
+.field-reactiveinvalid [data-part="textarea"]:is([data-disabled], [disabled]) {
   cursor: not-allowed;
   opacity: 0.5;
   background: var(--demo-neutral-subtle);
@@ -75,7 +75,7 @@
   color: var(--demo-error);
 }
 
-.field-reactiveinvalid > input {
+.field-reactiveinvalid input:not([data-part]) {
   min-height: 2.25rem;
   padding: 0.5rem 0.75rem;
   margin-bottom: 0.75rem;
@@ -89,7 +89,7 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.field-reactiveinvalid > input:focus {
+.field-reactiveinvalid input:not([data-part]):focus {
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }

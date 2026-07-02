@@ -37,9 +37,9 @@
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.field-selectcontrolled [data-part="input"][data-disabled],
-.field-selectcontrolled [data-part="select"][data-disabled],
-.field-selectcontrolled [data-part="textarea"][data-disabled] {
+.field-selectcontrolled [data-part="input"]:is([data-disabled], [disabled]),
+.field-selectcontrolled [data-part="select"]:is([data-disabled], [disabled]),
+.field-selectcontrolled [data-part="textarea"]:is([data-disabled], [disabled]) {
   cursor: not-allowed;
   opacity: 0.5;
   background: var(--demo-neutral-subtle);

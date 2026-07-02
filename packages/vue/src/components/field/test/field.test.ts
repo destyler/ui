@@ -1,15 +1,18 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
+import AllParts from '../examples/AllParts.vue'
 import Basic from '../examples/Basic.vue'
 import Disabled from '../examples/Disabled.vue'
 import { Field, fieldAnatomy } from '../index'
 
 describe('[field] component', () => {
   it.each(getParts(fieldAnatomy))('should render part %s', async (part) => {
-    render(Basic)
-    expect(document.querySelector(part)).toBeInTheDocument()
+    render(AllParts)
+    await vi.waitFor(() => {
+      expect(document.querySelector(part)).not.toBeNull()
+    })
   })
 
   it.each(getExports(fieldAnatomy))('should export %s', async (part) => {
