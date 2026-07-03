@@ -4,6 +4,7 @@ export function DefaultOpen() {
   return (
     <FloatingPanel.Root defaultOpen>
       <FloatingPanel.Trigger>Toggle Panel</FloatingPanel.Trigger>
+      <FloatingPanel.Dock />
       <FloatingPanel.Positioner>
         <FloatingPanel.Content>
           <FloatingPanel.DragTrigger>

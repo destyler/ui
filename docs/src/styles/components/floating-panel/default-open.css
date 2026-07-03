@@ -92,12 +92,12 @@
   padding-left: 1.25rem;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"] {
+.floating-panel-defaultopen [data-part="resize-trigger"] {
   position: absolute;
   background: transparent;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="n"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="n"] {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -106,7 +106,7 @@
   cursor: n-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="e"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="e"] {
   top: 50%;
   right: 0;
   transform: translateY(-50%);
@@ -115,7 +115,7 @@
   cursor: e-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="w"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="w"] {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
@@ -124,7 +124,7 @@
   cursor: w-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="s"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="s"] {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -133,7 +133,7 @@
   cursor: s-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="ne"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="ne"] {
   top: 0;
   right: 0;
   width: 0.5rem;
@@ -141,7 +141,7 @@
   cursor: ne-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="se"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="se"] {
   bottom: 0;
   right: 0;
   width: 0.5rem;
@@ -149,7 +149,7 @@
   cursor: se-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="sw"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="sw"] {
   bottom: 0;
   left: 0;
   width: 0.5rem;
@@ -157,7 +157,7 @@
   cursor: sw-resize;
 }
 
-.floating-panel-defaultopen [data-part="resizeTrigger"][data-axis="nw"] {
+.floating-panel-defaultopen [data-part="resize-trigger"][data-axis="nw"] {
   top: 0;
   left: 0;
   width: 0.5rem;
