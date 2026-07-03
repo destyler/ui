@@ -21,17 +21,24 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}, emit?: Emi
   const env = useEnvironmentContext()
   const locale = useLocaleContext(DEFAULT_LOCALE)
 
-  const context = computed(() => ({
-    id,
-    dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue ?? null,
-    getRootNode: env?.value.getRootNode,
-    onValueChange: (details: navigationMenu.ValueChangeDetails) => {
-      emit?.('valueChange', details)
-      emit?.('update:modelValue', details.value)
-    },
-    ...cleanProps(props),
-  }))
+  const context = computed(() => {
+    const controlled = props.modelValue !== undefined
+    const value = controlled ? props.modelValue : props.defaultValue
+
+    return {
+      ...cleanProps(props),
+      'id': props.id ?? id,
+      'dir': locale.value.dir,
+      'value': value ?? null,
+      'defaultValue': controlled ? props.modelValue ?? undefined : props.defaultValue,
+      'value.controlled': controlled,
+      'getRootNode': env?.value.getRootNode,
+      'onValueChange': (details: navigationMenu.ValueChangeDetails) => {
+        emit?.('valueChange', details)
+        emit?.('update:modelValue', details.value)
+      },
+    }
+  })
 
   const [state, send, machine] = useMachine(navigationMenu.machine(context.value), { context })
   const api = computed(() => navigationMenu.connect(state.value, send, normalizeProps))
