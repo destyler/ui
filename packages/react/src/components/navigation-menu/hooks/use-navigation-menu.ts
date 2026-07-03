@@ -32,6 +32,7 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
     'id': useId(),
     dir,
     getRootNode,
+    defaultValue,
     'value': props.value ?? defaultValue ?? null,
     'value.controlled': props.value !== undefined,
     ...contextProps,

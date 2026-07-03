@@ -17,6 +17,8 @@ import { Calendar } from '../index'
     <Teleport to="body">
       <Calendar.Positioner class="calendar-basic" data-testid="positioner">
         <Calendar.Content>
+          <Calendar.YearSelect />
+          <Calendar.MonthSelect />
           <Calendar.View view="day">
             <Calendar.Context v-slot="api">
               <Calendar.ViewControl>
