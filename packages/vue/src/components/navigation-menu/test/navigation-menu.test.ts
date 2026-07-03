@@ -50,12 +50,18 @@ describe('[navigation-menu] component', () => {
     })
   })
 
-  it('should support controlled value', async () => {
-    render(Basic, { props: { value: 'getting-started', openDelay: 0, closeDelay: 0 } })
+  it('should support controlled modelValue', async () => {
+    render(Basic, { props: { modelValue: 'components', openDelay: 0, closeDelay: 0 } })
 
     await vi.waitFor(async () => {
-      await expect.element(page.getByText('How to install dependencies and structure your app.')).toBeVisible()
+      await expect.element(page.getByText('A modal dialog that interrupts the user with important content.')).toBeVisible()
     })
+
+    const trigger = page.getByRole('button', { name: 'Getting started' })
+    await userEvent.click(trigger)
+
+    await expect.element(page.getByText('A modal dialog that interrupts the user with important content.')).toBeVisible()
+    await expect.element(page.getByText('How to install dependencies and structure your app.')).not.toBeVisible()
   })
 
   it('should support default value', async () => {
