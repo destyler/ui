@@ -17,7 +17,7 @@ import { Checkbox } from '~/components/checkbox';
         </Checkbox.Control>
         <Checkbox.HiddenInput />
       </Checkbox.Root>
-      <Field.HelperText>Field Heler Text</Field.HelperText>
+      <Field.HelperText>Field Helper Text</Field.HelperText>
       <Field.ErrorText>Field Error Text</Field.ErrorText>
     </Field.Root>
   </Fieldset.Root>

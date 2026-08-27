@@ -1,17 +1,23 @@
+import { Checkbox } from '../../checkbox'
 import { Field } from '../../field'
 import { Fieldset } from '../index'
 
-export interface BasicProps extends Fieldset.RootProps {}
+export interface WithCheckboxProps extends Fieldset.RootProps {}
 
-export function Basic(props: BasicProps) {
+export function WithCheckbox(props: WithCheckboxProps) {
   return (
-    <Fieldset.Root invalid {...props}>
+    <Fieldset.Root {...props}>
       <Fieldset.Legend>Legend</Fieldset.Legend>
       <Fieldset.HelperText>Fieldset Helper Text</Fieldset.HelperText>
       <Fieldset.ErrorText>Fieldset Error Text</Fieldset.ErrorText>
       <Field.Root>
-        <Field.Label>Label</Field.Label>
-        <Field.Input />
+        <Checkbox.Root>
+          <Checkbox.Label>Checkbox</Checkbox.Label>
+          <Checkbox.Control>
+            <Checkbox.Indicator>✔️</Checkbox.Indicator>
+          </Checkbox.Control>
+          <Checkbox.HiddenInput />
+        </Checkbox.Root>
         <Field.HelperText>Field Helper Text</Field.HelperText>
         <Field.ErrorText>Field Error Text</Field.ErrorText>
       </Field.Root>
