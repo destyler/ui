@@ -3,3 +3,34 @@
 @import url('./positioning.css');
 @import url('./render-prop.css');
 @import url('./rootprovider.css');
+
+/* Overlay parts teleported / portaled to document.body */
+[data-scope="hover-card"][data-part="positioner"] {
+  z-index: var(--demo-popover-z-index);
+}
+
+[data-scope="hover-card"][data-part="content"] {
+  position: relative;
+  min-width: 10rem;
+  max-width: 16rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-popover);
+  border: 1px solid var(--demo-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--demo-shadow-lg);
+}
+
+[data-scope="hover-card"][data-part="arrow"] {
+  --arrow-size: 8px;
+  --arrow-background: var(--demo-bg-popover);
+}
+
+[data-scope="hover-card"][data-part="arrow-tip"],
+[data-scope="hover-card"][data-part="arrowTip"] {
+  border-top: 1px solid var(--demo-border);
+  border-left: 1px solid var(--demo-border);
+}
