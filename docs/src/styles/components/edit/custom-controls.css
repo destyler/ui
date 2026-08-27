@@ -1,0 +1,236 @@
+.edit-customcontrols [data-scope="edit"][data-part="root"] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.375rem;
+  width: 100%;
+  max-width: 20rem;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="root"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="label"] {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="label"][data-disabled] {
+  color: var(--demo-neutral-fg-muted);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="label"][data-invalid] {
+  color: var(--demo-error);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="area"] {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="area"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"],
+.edit-customcontrols [data-scope="edit"][data-part="preview"] {
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.5rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"] {
+  display: block;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"]::placeholder {
+  color: var(--demo-neutral-fg-muted);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"]:hover {
+  border-color: var(--demo-neutral-solid);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="input"][data-focus] {
+  outline: none;
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"][data-invalid] {
+  border-color: var(--demo-error);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"]:is([data-disabled], [disabled]) {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background: var(--demo-neutral-subtle);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="input"][hidden] {
+  display: none;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"] {
+  display: inline-flex;
+  align-items: center;
+  cursor: text;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"][data-placeholder-shown] {
+  color: var(--demo-neutral-fg-muted);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"]:hover {
+  border-color: var(--demo-neutral-solid);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="preview"][data-focus] {
+  outline: none;
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"][data-invalid] {
+  border-color: var(--demo-error);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background: var(--demo-neutral-subtle);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="preview"][hidden] {
+  display: none;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="control"] {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"],
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"],
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"],
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"],
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"],
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-height: 2rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  font-family: inherit;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"],
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"],
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"],
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"] {
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"]:hover,
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"]:hover,
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:hover,
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"]:hover,
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][data-hover],
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][data-hover],
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-hover],
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][data-hover] {
+  background: var(--demo-neutral-subtle);
+  border-color: var(--demo-neutral-solid);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"],
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"] {
+  color: var(--demo-coral-contrast);
+  background: var(--demo-coral-solid);
+  border: 1px solid var(--demo-coral-solid);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"]:hover,
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"]:hover,
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-hover],
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][data-hover] {
+  background: var(--demo-coral-emphasized);
+  border-color: var(--demo-coral-emphasized);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"]:focus,
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][data-focus],
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][data-focus],
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-focus],
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][data-focus],
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-focus],
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][data-focus] {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][data-disabled],
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][data-disabled],
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-disabled],
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][data-disabled],
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-disabled],
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][data-disabled],
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"]:disabled,
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"]:disabled,
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"]:disabled,
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"]:disabled,
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:disabled,
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][hidden],
+.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][hidden],
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][hidden],
+.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][hidden],
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][hidden],
+.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][hidden] {
+  display: none;
+}
