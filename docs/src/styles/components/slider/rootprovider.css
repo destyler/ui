@@ -1,0 +1,226 @@
+.slider-rootprovider .ds-vue-example,
+.slider-rootprovider .ds-react-example {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.slider-rootprovider .ds-react-example > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.slider-rootprovider button:not([data-part]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.375rem;
+  background: var(--demo-bg-checkbox);
+  color: var(--demo-neutral-fg);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.slider-rootprovider button:not([data-part]):hover {
+  background: var(--demo-neutral-subtle);
+  border-color: var(--demo-neutral-solid);
+}
+
+.slider-rootprovider button:not([data-part]):focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.slider-rootprovider [data-part="root"] {
+  --slider-thumb-size: 1.25rem;
+  --slider-track-size: 0.375rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.5rem;
+  width: 16rem;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+  user-select: none;
+}
+
+.slider-rootprovider [data-part="root"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.slider-rootprovider [data-part="label"] {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
+
+.slider-rootprovider [data-part="label"][data-disabled] {
+  color: var(--demo-neutral-fg-muted);
+}
+
+.slider-rootprovider [data-part="value-text"],
+.slider-rootprovider [data-part="valueText"] {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg-muted);
+  font-variant-numeric: tabular-nums;
+  justify-self: end;
+}
+
+.slider-rootprovider [data-part="control"] {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--slider-thumb-size);
+}
+
+.slider-rootprovider [data-part="control"][data-orientation="vertical"] {
+  width: var(--slider-thumb-size);
+  min-height: 12rem;
+  height: 12rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider-rootprovider [data-part="track"] {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+  background: var(--demo-neutral-muted);
+  border-radius: 9999px;
+}
+
+.slider-rootprovider [data-part="track"][data-orientation="horizontal"] {
+  height: var(--slider-track-size);
+  width: 100%;
+}
+
+.slider-rootprovider [data-part="track"][data-orientation="vertical"] {
+  width: var(--slider-track-size);
+  height: 100%;
+}
+
+.slider-rootprovider [data-part="range"] {
+  background: var(--demo-coral-solid);
+  border-radius: inherit;
+}
+
+.slider-rootprovider [data-part="range"][data-orientation="horizontal"] {
+  height: 100%;
+}
+
+.slider-rootprovider [data-part="range"][data-orientation="vertical"] {
+  width: 100%;
+}
+
+.slider-rootprovider [data-part="thumb"] {
+  width: var(--slider-thumb-size);
+  height: var(--slider-thumb-size);
+  background: var(--demo-bg-thumb);
+  border: 1.5px solid var(--demo-coral-solid);
+  border-radius: 9999px;
+  box-shadow: var(--demo-shadow-sm);
+  cursor: pointer;
+  outline: none;
+  z-index: 1;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.slider-rootprovider [data-part="thumb"][data-orientation="horizontal"] {
+  top: 50%;
+  margin-block-start: calc(var(--slider-thumb-size) / -2);
+}
+
+.slider-rootprovider [data-part="thumb"][data-orientation="vertical"] {
+  inset-inline-start: 50%;
+  margin-inline-start: calc(var(--slider-thumb-size) / -2);
+}
+
+.slider-rootprovider [data-part="thumb"]:hover,
+.slider-rootprovider [data-part="thumb"][data-hover] {
+  border-color: var(--demo-coral-emphasized);
+}
+
+.slider-rootprovider [data-part="thumb"][data-focus],
+.slider-rootprovider [data-part="thumb"]:focus-visible {
+  outline: none;
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.slider-rootprovider [data-part="thumb"][data-dragging] {
+  border-color: var(--demo-coral-emphasized);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring), var(--demo-shadow-sm);
+}
+
+.slider-rootprovider [data-part="thumb"][data-disabled] {
+  cursor: not-allowed;
+}
+
+.slider-rootprovider [data-part="thumb"][data-invalid] {
+  border-color: var(--demo-error);
+}
+
+.slider-rootprovider [data-part="marker-group"],
+.slider-rootprovider [data-part="markerGroup"] {
+  grid-column: 1 / -1;
+  height: 1.25rem;
+}
+
+.slider-rootprovider [data-part="marker"] {
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--demo-neutral-fg-muted);
+}
+
+.slider-rootprovider [data-part="marker"][data-state="at-value"] {
+  color: var(--demo-coral-fg);
+  font-weight: 600;
+}
+
+.slider-rootprovider [data-part="dragging-indicator"],
+.slider-rootprovider [data-part="draggingIndicator"] {
+  inset-inline-start: 50% !important;
+  bottom: auto !important;
+  top: calc(-1 * var(--slider-thumb-size) - 0.375rem);
+  transform: translateX(-50%) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--demo-coral-contrast);
+  background: var(--demo-coral-solid);
+  border-radius: 0.25rem;
+  box-shadow: var(--demo-shadow-sm);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.slider-rootprovider [data-part="dragging-indicator"][data-orientation="vertical"],
+.slider-rootprovider [data-part="draggingIndicator"][data-orientation="vertical"] {
+  top: 50%;
+  inset-inline-start: calc(100% + 0.5rem) !important;
+  transform: translateY(-50%) !important;
+}
+
+.slider-rootprovider [data-part="dragging-indicator"][hidden],
+.slider-rootprovider [data-part="draggingIndicator"][hidden] {
+  display: none;
+}
