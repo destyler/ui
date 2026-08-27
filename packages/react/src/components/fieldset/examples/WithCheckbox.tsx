@@ -1,10 +1,12 @@
-import { Checkbox } from '~/components/checkbox'
-import { Field } from '~/components/field'
+import { Checkbox } from '../../checkbox'
+import { Field } from '../../field'
 import { Fieldset } from '../index'
 
-export function WithCheckbox() {
+export interface WithCheckboxProps extends Fieldset.RootProps {}
+
+export function WithCheckbox(props: WithCheckboxProps) {
   return (
-    <Fieldset.Root>
+    <Fieldset.Root {...props}>
       <Fieldset.Legend>Legend</Fieldset.Legend>
       <Fieldset.HelperText>Fieldset Helper Text</Fieldset.HelperText>
       <Fieldset.ErrorText>Fieldset Error Text</Fieldset.ErrorText>
