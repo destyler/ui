@@ -1,0 +1,83 @@
+.separator-basic {
+  width: 100%;
+  max-width: 20rem;
+}
+
+.separator-basic .ds-vue-example,
+.separator-basic .ds-react-example {
+  width: 100%;
+}
+
+.separator-basic main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.separator-basic main > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.separator-basic.ds-preview-frame .ds-vue-example p,
+.separator-basic.ds-preview-frame .ds-react-example p {
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  color: var(--demo-neutral-fg) !important;
+}
+
+.separator-basic.ds-preview-frame .ds-vue-example main > div p:first-child,
+.separator-basic.ds-preview-frame .ds-react-example main > div p:first-child {
+  font-weight: 600 !important;
+}
+
+.separator-basic.ds-preview-frame .ds-vue-example main > div p:last-child,
+.separator-basic.ds-preview-frame .ds-react-example main > div p:last-child {
+  font-weight: 400 !important;
+  color: var(--demo-neutral-fg-muted) !important;
+}
+
+.separator-basic.ds-preview-frame .ds-vue-example nav,
+.separator-basic.ds-preview-frame .ds-react-example nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  line-height: 1.25rem !important;
+  color: var(--demo-neutral-fg) !important;
+}
+
+.separator-basic nav span {
+  color: var(--demo-neutral-fg);
+}
+
+.separator-basic [data-scope="separator"][data-part="root"] {
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: var(--demo-border-emphasized);
+  border-radius: 9999px;
+}
+
+.separator-basic [data-scope="separator"][data-part="root"][data-orientation="horizontal"] {
+  display: block;
+  width: 100%;
+  height: 1px;
+}
+
+.separator-basic [data-scope="separator"][data-part="root"][data-orientation="vertical"] {
+  display: inline-block;
+  width: 1px;
+  height: 1rem;
+  align-self: center;
+}
