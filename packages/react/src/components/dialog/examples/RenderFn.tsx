@@ -1,14 +1,14 @@
 import { createPortal } from 'react-dom'
 import { Dialog } from '../index'
 
-export function Basic(props: Dialog.RootProps) {
+export function RenderFn() {
   return (
-    <Dialog.Root {...props}>
+    <Dialog.Root>
       <Dialog.Trigger>Open Dialog</Dialog.Trigger>
       {createPortal(
         <>
           <Dialog.Backdrop />
-          <Dialog.Positioner data-testid="positioner">
+          <Dialog.Positioner>
             <Dialog.Content>
               <Dialog.Title>Dialog Title</Dialog.Title>
               <Dialog.Description>Dialog Description</Dialog.Description>
@@ -18,6 +18,9 @@ export function Basic(props: Dialog.RootProps) {
         </>,
         document.body,
       )}
+      <Dialog.Context>
+        {dialog => <p>Dialog is {dialog.open ? 'open' : 'closed'}</p>}
+      </Dialog.Context>
     </Dialog.Root>
   )
 }
