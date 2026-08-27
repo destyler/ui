@@ -5,3 +5,32 @@
 @import url('./render-fn.css');
 @import url('./rootprovider.css');
 @import url('./timings.css');
+
+/* Overlay parts teleported / portaled to document.body */
+[data-scope="tooltip"][data-part="positioner"] {
+  z-index: var(--demo-popover-z-index);
+}
+
+[data-scope="tooltip"][data-part="content"] {
+  position: relative;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-popover);
+  border: 1px solid var(--demo-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--demo-shadow-lg);
+}
+
+[data-scope="tooltip"][data-part="arrow"] {
+  --arrow-size: 8px;
+  --arrow-background: var(--demo-bg-popover);
+}
+
+[data-scope="tooltip"][data-part="arrow-tip"],
+[data-scope="tooltip"][data-part="arrowTip"] {
+  border-top: 1px solid var(--demo-border);
+  border-left: 1px solid var(--demo-border);
+}
