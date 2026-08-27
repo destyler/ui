@@ -3,7 +3,7 @@ import { Collapsible } from '../index'
 </script>
 
 <template>
-  <Collapsible.Root :defaultOpen="true">
+  <Collapsible.Root defaultOpen>
     <Collapsible.Trigger>Toggle</Collapsible.Trigger>
     <Collapsible.Content>Content</Collapsible.Content>
   </Collapsible.Root>

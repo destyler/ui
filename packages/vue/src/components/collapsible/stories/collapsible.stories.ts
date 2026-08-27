@@ -28,17 +28,17 @@ export function initialOpen() {
   }
 }
 
-export function lazyMountAndUnmountOnExit() {
-  return {
-    components: { LazyMountAndUnmountOnExit },
-    template: '<LazyMountAndUnmountOnExit />',
-  }
-}
-
 export function lazyMount() {
   return {
     components: { LazyMount },
     template: '<LazyMount />',
+  }
+}
+
+export function lazyMountAndUnmountOnExit() {
+  return {
+    components: { LazyMountAndUnmountOnExit },
+    template: '<LazyMountAndUnmountOnExit />',
   }
 }
 
