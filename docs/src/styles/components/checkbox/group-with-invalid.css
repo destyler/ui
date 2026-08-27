@@ -49,6 +49,10 @@
   color: var(--demo-coral-contrast);
 }
 
+.checkbox-groupwithinvalid [data-part="control"][data-invalid] {
+  border-color: var(--demo-error);
+}
+
 .checkbox-groupwithinvalid [data-part="indicator"] {
   display: flex;
   align-items: center;

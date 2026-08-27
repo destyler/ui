@@ -30,6 +30,7 @@
   border-radius: 0.25rem;
   background: var(--demo-bg-checkbox);
   transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  position: relative;
 }
 
 .checkbox-groupwithselectall [data-part="control"][data-hover] {
@@ -50,6 +51,7 @@
 }
 
 .checkbox-groupwithselectall [data-part="indicator"] {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
