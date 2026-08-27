@@ -8,6 +8,13 @@
   border-radius: 0.5rem;
 }
 
+.toggle-group-renderprop [data-part="root"] > span {
+  font-size: 0.875rem;
+  padding: 0 0.5rem;
+  color: var(--demo-neutral-fg-muted);
+  cursor: default;
+}
+
 .toggle-group-renderprop [data-part="item"] {
   display: inline-flex;
   align-items: center;

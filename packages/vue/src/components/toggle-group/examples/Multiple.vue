@@ -6,7 +6,6 @@ const value = ref(['a', 'b'])
 </script>
 
 <template>
-  <span>Selected: {{ value.join(', ') }}</span>
   <ToggleGroup.Root v-model="value" multiple>
     <ToggleGroup.Item value="a">A</ToggleGroup.Item>
     <ToggleGroup.Item value="b">B</ToggleGroup.Item>

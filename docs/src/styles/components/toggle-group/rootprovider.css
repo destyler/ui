@@ -1,3 +1,16 @@
+.toggle-group-rootprovider .ds-vue-example,
+.toggle-group-rootprovider .ds-react-example {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.toggle-group-rootprovider span {
+  font-size: 0.875rem;
+  color: var(--demo-neutral-fg-muted);
+}
+
 .toggle-group-rootprovider [data-part="root"] {
   display: inline-flex;
   align-items: center;
