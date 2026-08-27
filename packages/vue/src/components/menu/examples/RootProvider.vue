@@ -7,10 +7,10 @@ const menu = useMenu()
 <template>
   <button @click="menu.api.value.setHighlightedValue('solid')">Highlight Solid</button>
 
-  <Menu.Root>
+  <Menu.RootProvider :value="menu">
     <Menu.Trigger>
       Open menu
-      <Menu.Indicator>➡️</Menu.Indicator>
+      <Menu.Indicator />
     </Menu.Trigger>
     <Menu.Positioner>
       <Menu.Content>
@@ -19,5 +19,5 @@ const menu = useMenu()
         <Menu.Item value="vue">Vue</Menu.Item>
       </Menu.Content>
     </Menu.Positioner>
-  </Menu.Root>
+  </Menu.RootProvider>
 </template>
