@@ -1,0 +1,76 @@
+.qr-code-controlled [data-scope="qr-code"][data-part="root"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.qr-code-controlled [data-scope="qr-code"][data-part="frame"] {
+  display: block;
+  width: 10rem;
+  height: 10rem;
+  padding: 0.625rem;
+  box-sizing: border-box;
+  fill: currentColor;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.5rem;
+  box-shadow: var(--demo-shadow-sm);
+}
+
+.qr-code-controlled [data-scope="qr-code"][data-part="pattern"] {
+  fill: currentColor;
+}
+
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"],
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.75rem;
+  min-height: 2rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:hover,
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:hover,
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-hover],
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"][data-hover] {
+  background: var(--demo-neutral-subtle);
+  border-color: var(--demo-neutral-solid);
+}
+
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:focus,
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:focus,
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:focus-visible,
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:focus-visible,
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-focus],
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"][data-focus] {
+  outline: none;
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-disabled],
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"][data-disabled],
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:disabled,
+.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
