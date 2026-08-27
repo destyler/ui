@@ -1,4 +1,5 @@
 import Basic from '../examples/Basic.vue'
+import Close from '../examples/Close.vue'
 import Context from '../examples/Context.vue'
 import Event from '../examples/Event.vue'
 import RootProvider from '../examples/RootProvider.vue'
@@ -14,6 +15,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function close() {
+  return {
+    components: { Close },
+    template: '<Close />',
   }
 }
 
