@@ -8,7 +8,10 @@ export interface AvatarProps extends Avatar.RootProps {
   name: string
 }
 
-const props = defineProps<AvatarProps>()
+const props = withDefaults(defineProps<AvatarProps>(), {
+  name: 'Elone Hoo',
+  src: 'https://github.com/elonehoo.png',
+})
 const emits = defineEmits<Avatar.RootEmits>()
 
 const forwarded = useForwardPropsEmits(props, emits)
