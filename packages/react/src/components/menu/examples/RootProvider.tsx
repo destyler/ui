@@ -10,7 +10,7 @@ export function RootProvider() {
       <Menu.RootProvider value={menu}>
         <Menu.Trigger>
           Open menu
-          <Menu.Indicator>➡️</Menu.Indicator>
+          <Menu.Indicator />
         </Menu.Trigger>
         <Menu.Positioner>
           <Menu.Content>
