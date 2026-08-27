@@ -1,0 +1,158 @@
+.number-input-formatted [data-part="root"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+  max-width: 16rem;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.number-input-formatted [data-part="root"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.number-input-formatted [data-part="label"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
+
+.number-input-formatted [data-part="label"][data-disabled] {
+  color: var(--demo-neutral-fg-muted);
+}
+
+.number-input-formatted [data-part="value-text"],
+.number-input-formatted [data-part="valueText"] {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.number-input-formatted [data-part="input"] {
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.5rem;
+  outline: none;
+  box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.number-input-formatted [data-part="input"]:focus,
+.number-input-formatted [data-part="input"][data-focus] {
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.number-input-formatted [data-part="input"][data-invalid] {
+  border-color: var(--demo-error);
+}
+
+.number-input-formatted [data-part="input"]:is([data-disabled], [disabled]) {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background: var(--demo-neutral-subtle);
+}
+
+.number-input-formatted [data-part="control"] {
+  display: flex;
+  align-items: stretch;
+  gap: 0.375rem;
+}
+
+.number-input-formatted [data-part="increment-trigger"],
+.number-input-formatted [data-part="incrementTrigger"],
+.number-input-formatted [data-part="decrement-trigger"],
+.number-input-formatted [data-part="decrementTrigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-height: 2rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.number-input-formatted [data-part="increment-trigger"]:hover,
+.number-input-formatted [data-part="incrementTrigger"]:hover,
+.number-input-formatted [data-part="decrement-trigger"]:hover,
+.number-input-formatted [data-part="decrementTrigger"]:hover,
+.number-input-formatted [data-part="increment-trigger"][data-hover],
+.number-input-formatted [data-part="incrementTrigger"][data-hover],
+.number-input-formatted [data-part="decrement-trigger"][data-hover],
+.number-input-formatted [data-part="decrementTrigger"][data-hover] {
+  background: var(--demo-neutral-subtle);
+  border-color: var(--demo-neutral-solid);
+}
+
+.number-input-formatted [data-part="increment-trigger"]:focus,
+.number-input-formatted [data-part="incrementTrigger"]:focus,
+.number-input-formatted [data-part="decrement-trigger"]:focus,
+.number-input-formatted [data-part="decrementTrigger"]:focus,
+.number-input-formatted [data-part="increment-trigger"][data-focus],
+.number-input-formatted [data-part="incrementTrigger"][data-focus],
+.number-input-formatted [data-part="decrement-trigger"][data-focus],
+.number-input-formatted [data-part="decrementTrigger"][data-focus] {
+  outline: none;
+  border-color: var(--demo-coral-solid);
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.number-input-formatted [data-part="increment-trigger"][data-disabled],
+.number-input-formatted [data-part="incrementTrigger"][data-disabled],
+.number-input-formatted [data-part="decrement-trigger"][data-disabled],
+.number-input-formatted [data-part="decrementTrigger"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.number-input-formatted [data-part="scrubber"] {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--demo-neutral-muted);
+  cursor: ew-resize;
+}
+
+.number-input-formatted [data-part="scrubber"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.25rem;
+  height: 0.25rem;
+  border-radius: 9999px;
+  background: var(--demo-coral-solid);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.number-input-formatted [data-part="scrubber"]:hover,
+.number-input-formatted [data-part="scrubber"][data-hover] {
+  background: var(--demo-coral-muted);
+}
+
