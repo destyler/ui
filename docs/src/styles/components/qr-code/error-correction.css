@@ -1,0 +1,27 @@
+.qr-code-errorcorrection [data-scope="qr-code"][data-part="root"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.qr-code-errorcorrection [data-scope="qr-code"][data-part="frame"] {
+  display: block;
+  width: 10rem;
+  height: 10rem;
+  padding: 0.625rem;
+  box-sizing: border-box;
+  fill: currentColor;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-checkbox);
+  border: 1px solid var(--demo-border-emphasized);
+  border-radius: 0.5rem;
+  box-shadow: var(--demo-shadow-sm);
+}
+
+.qr-code-errorcorrection [data-scope="qr-code"][data-part="pattern"] {
+  fill: currentColor;
+}
