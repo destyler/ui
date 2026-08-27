@@ -1,0 +1,75 @@
+.progress-circular [data-scope="progress"][data-part="root"] {
+  --progress-circle-size: 3.5rem;
+  --progress-circle-thickness: 0.25rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.5rem;
+  width: 10rem;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.progress-circular [data-scope="progress"][data-part="root"][data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.progress-circular [data-scope="progress"][data-part="label"] {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
+
+.progress-circular [data-scope="progress"][data-part="label"][data-disabled] {
+  color: var(--demo-neutral-fg-muted);
+}
+
+.progress-circular [data-scope="progress"][data-part="value-text"],
+.progress-circular [data-scope="progress"][data-part="valueText"] {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg-muted);
+  font-variant-numeric: tabular-nums;
+  justify-self: end;
+}
+
+.progress-circular [data-scope="progress"][data-part="circle"] {
+  --size: var(--progress-circle-size);
+  --thickness: var(--progress-circle-thickness);
+  grid-column: 1 / -1;
+  justify-self: center;
+  display: block;
+}
+
+.progress-circular [data-scope="progress"][data-part="circle"][data-state="indeterminate"] {
+  animation: progress-circular-spin 1.4s linear infinite;
+}
+
+.progress-circular [data-scope="progress"][data-part="circle-track"],
+.progress-circular [data-scope="progress"][data-part="circleTrack"] {
+  stroke: var(--demo-neutral-muted);
+}
+
+.progress-circular [data-scope="progress"][data-part="circle-range"],
+.progress-circular [data-scope="progress"][data-part="circleRange"] {
+  stroke: var(--demo-coral-solid);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.2s ease, stroke-dasharray 0.2s ease;
+}
+
+.progress-circular [data-scope="progress"][data-part="circle-range"][data-state="indeterminate"],
+.progress-circular [data-scope="progress"][data-part="circleRange"][data-state="indeterminate"] {
+  stroke-dasharray: calc(var(--circumference) * 0.25) var(--circumference);
+  stroke-dashoffset: 0;
+  transition: none;
+}
+
+@keyframes progress-circular-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
