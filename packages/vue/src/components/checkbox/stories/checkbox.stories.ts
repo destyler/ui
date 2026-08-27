@@ -1,6 +1,10 @@
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
 import Group from '../examples/Group.vue'
+import GroupControlled from '../examples/GroupControlled.vue'
+import GroupWithForm from '../examples/GroupWithForm.vue'
+import GroupWithInvalid from '../examples/GroupWithInvalid.vue'
+import GroupWithSelectAll from '../examples/GroupWithSelectAll.vue'
 import Indeterminate from '../examples/Indeterminate.vue'
 import RenderProp from '../examples/RenderProp.vue'
 import RootProvider from '../examples/RootProvider.vue'
@@ -31,6 +35,34 @@ export function group() {
   return {
     components: { Group },
     template: '<Group />',
+  }
+}
+
+export function groupControlled() {
+  return {
+    components: { GroupControlled },
+    template: '<GroupControlled />',
+  }
+}
+
+export function groupWithForm() {
+  return {
+    components: { GroupWithForm },
+    template: '<GroupWithForm />',
+  }
+}
+
+export function groupWithInvalid() {
+  return {
+    components: { GroupWithInvalid },
+    template: '<GroupWithInvalid />',
+  }
+}
+
+export function groupWithSelectAll() {
+  return {
+    components: { GroupWithSelectAll },
+    template: '<GroupWithSelectAll />',
   }
 }
 
