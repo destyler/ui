@@ -1,0 +1,126 @@
+.pagination-customized [data-part="root"] {
+  display: inline-flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.125rem !important;
+  padding: 0.25rem !important;
+  font-family: inherit !important;
+  color: var(--demo-neutral-fg) !important;
+  background: var(--demo-neutral-subtle) !important;
+  border: 1px solid var(--demo-border) !important;
+  border-radius: 0.625rem !important;
+}
+
+.pagination-customized [data-part="prev-trigger"] span,
+.pagination-customized [data-part="prevTrigger"] span,
+.pagination-customized [data-part="next-trigger"] span,
+.pagination-customized [data-part="nextTrigger"] span,
+.pagination-customized .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pagination-customized [data-part="item"],
+.pagination-customized [data-part="prev-trigger"],
+.pagination-customized [data-part="prevTrigger"],
+.pagination-customized [data-part="next-trigger"],
+.pagination-customized [data-part="nextTrigger"] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--demo-neutral-fg);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.pagination-customized [data-part="item"] {
+  padding: 0 0.375rem;
+}
+
+.pagination-customized [data-part="item"]:hover,
+.pagination-customized [data-part="item"][data-hover],
+.pagination-customized [data-part="prev-trigger"]:hover,
+.pagination-customized [data-part="prevTrigger"]:hover,
+.pagination-customized [data-part="next-trigger"]:hover,
+.pagination-customized [data-part="nextTrigger"]:hover,
+.pagination-customized [data-part="prev-trigger"][data-hover],
+.pagination-customized [data-part="prevTrigger"][data-hover],
+.pagination-customized [data-part="next-trigger"][data-hover],
+.pagination-customized [data-part="nextTrigger"][data-hover] {
+  background: var(--demo-neutral-muted);
+}
+
+.pagination-customized [data-part="item"]:focus,
+.pagination-customized [data-part="item"][data-focus],
+.pagination-customized [data-part="item"]:focus-visible,
+.pagination-customized [data-part="prev-trigger"]:focus,
+.pagination-customized [data-part="prevTrigger"]:focus,
+.pagination-customized [data-part="next-trigger"]:focus,
+.pagination-customized [data-part="nextTrigger"]:focus,
+.pagination-customized [data-part="prev-trigger"][data-focus],
+.pagination-customized [data-part="prevTrigger"][data-focus],
+.pagination-customized [data-part="next-trigger"][data-focus],
+.pagination-customized [data-part="nextTrigger"][data-focus],
+.pagination-customized [data-part="prev-trigger"]:focus-visible,
+.pagination-customized [data-part="prevTrigger"]:focus-visible,
+.pagination-customized [data-part="next-trigger"]:focus-visible,
+.pagination-customized [data-part="nextTrigger"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
+}
+
+.pagination-customized [data-part="item"][data-selected] {
+  color: var(--demo-coral-contrast);
+  background: var(--demo-coral-solid);
+  border-color: var(--demo-coral-solid);
+}
+
+.pagination-customized [data-part="item"][data-selected]:hover,
+.pagination-customized [data-part="item"][data-selected][data-hover] {
+  background: var(--demo-coral-emphasized);
+  border-color: var(--demo-coral-emphasized);
+}
+
+.pagination-customized [data-part="item"]:is([data-disabled], :disabled),
+.pagination-customized [data-part="prev-trigger"]:is([data-disabled], :disabled),
+.pagination-customized [data-part="prevTrigger"]:is([data-disabled], :disabled),
+.pagination-customized [data-part="next-trigger"]:is([data-disabled], :disabled),
+.pagination-customized [data-part="nextTrigger"]:is([data-disabled], :disabled) {
+  cursor: not-allowed;
+  opacity: 0.45;
+  color: var(--demo-neutral-fg-muted);
+  background: transparent;
+}
+
+.pagination-customized [data-part="ellipsis"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg-muted);
+  user-select: none;
+}
