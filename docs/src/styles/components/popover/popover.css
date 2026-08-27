@@ -9,3 +9,78 @@
 @import url('./positioning.css');
 @import url('./render-fn.css');
 @import url('./rootprovider.css');
+
+/* Overlay parts teleported / portaled to document.body */
+[data-scope="popover"][data-part="positioner"] {
+  z-index: var(--demo-popover-z-index);
+}
+
+[data-scope="popover"][data-part="content"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 12rem;
+  max-width: 18rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-bg-popover);
+  border: 1px solid var(--demo-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--demo-shadow-lg);
+}
+
+[data-scope="popover"][data-part="title"] {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+}
+
+[data-scope="popover"][data-part="description"] {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg-muted);
+}
+
+[data-scope="popover"][data-part="close-trigger"],
+[data-scope="popover"][data-part="closeTrigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.75rem;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--demo-neutral-fg);
+  background: var(--demo-neutral-subtle);
+  border: 1px solid var(--demo-border);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+[data-scope="popover"][data-part="close-trigger"]:hover,
+[data-scope="popover"][data-part="closeTrigger"]:hover {
+  background: var(--demo-neutral-muted);
+}
+
+[data-scope="popover"][data-part="arrow"] {
+  --arrow-size: 8px;
+  --arrow-background: var(--demo-bg-popover);
+}
+
+[data-scope="popover"][data-part="arrow-tip"],
+[data-scope="popover"][data-part="arrowTip"] {
+  border-top: 1px solid var(--demo-border);
+  border-left: 1px solid var(--demo-border);
+}
