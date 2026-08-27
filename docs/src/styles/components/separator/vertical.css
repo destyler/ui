@@ -1,0 +1,51 @@
+.separator-vertical .ds-vue-example,
+.separator-vertical .ds-react-example {
+  display: flex;
+  align-items: center;
+}
+
+.separator-vertical main {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  color: var(--demo-neutral-fg);
+}
+
+.separator-vertical.ds-preview-frame .ds-vue-example nav,
+.separator-vertical.ds-preview-frame .ds-react-example nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  line-height: 1.25rem !important;
+  color: var(--demo-neutral-fg) !important;
+}
+
+.separator-vertical nav span {
+  color: var(--demo-neutral-fg);
+}
+
+.separator-vertical [data-scope="separator"][data-part="root"] {
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: var(--demo-border-emphasized);
+  border-radius: 9999px;
+}
+
+.separator-vertical [data-scope="separator"][data-part="root"][data-orientation="horizontal"] {
+  display: block;
+  width: 100%;
+  height: 1px;
+}
+
+.separator-vertical [data-scope="separator"][data-part="root"][data-orientation="vertical"] {
+  display: inline-block;
+  width: 1px;
+  height: 1rem;
+  align-self: center;
+}
