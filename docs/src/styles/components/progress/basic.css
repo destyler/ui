@@ -28,8 +28,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.progress-basic [data-scope="progress"][data-part="value-text"],
-.progress-basic [data-scope="progress"][data-part="valueText"] {
+.progress-basic [data-scope="progress"][data-part="value-text"] {
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -105,20 +104,17 @@
   animation: progress-basic-spin 1.4s linear infinite;
 }
 
-.progress-basic [data-scope="progress"][data-part="circle-track"],
-.progress-basic [data-scope="progress"][data-part="circleTrack"] {
+.progress-basic [data-scope="progress"][data-part="circle-track"] {
   stroke: var(--demo-neutral-muted);
 }
 
-.progress-basic [data-scope="progress"][data-part="circle-range"],
-.progress-basic [data-scope="progress"][data-part="circleRange"] {
+.progress-basic [data-scope="progress"][data-part="circle-range"] {
   stroke: var(--demo-coral-solid);
   stroke-linecap: round;
   transition: stroke-dashoffset 0.2s ease, stroke-dasharray 0.2s ease;
 }
 
-.progress-basic [data-scope="progress"][data-part="circle-range"][data-state="indeterminate"],
-.progress-basic [data-scope="progress"][data-part="circleRange"][data-state="indeterminate"] {
+.progress-basic [data-scope="progress"][data-part="circle-range"][data-state="indeterminate"] {
   stroke-dasharray: calc(var(--circumference) * 0.25) var(--circumference);
   stroke-dashoffset: 0;
   transition: none;

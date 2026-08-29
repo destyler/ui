@@ -29,8 +29,7 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-[data-scope="tooltip"][data-part="arrow-tip"],
-[data-scope="tooltip"][data-part="arrowTip"] {
+[data-scope="tooltip"][data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }

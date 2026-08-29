@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Tabs
-
 > A set of layered sections of content, displayed one at a time.
 
 <ComponentPreview component="tabs" example="Basic" />
@@ -48,6 +46,32 @@ export default function Basic() {
     </Tabs.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Tabs } from '@destyler-ui/svelte'
+
+  const items = [
+    { value: 'React' },
+    { value: 'Svelte' },
+    { value: 'Vue' },
+  ]
+</script>
+
+<Tabs.Root>
+  <Tabs.List>
+    {#each items as item (item.value)}
+      <Tabs.Trigger value={item.value}>{item.value}</Tabs.Trigger>
+    {/each}
+    <Tabs.Indicator />
+  </Tabs.List>
+  {#each items as item (item.value)}
+    <Tabs.Content value={item.value}>{item.value} content</Tabs.Content>
+  {/each}
+</Tabs.Root>
 ```
 </FrameworkContent>
 
@@ -105,6 +129,4 @@ Mount tab content lazily when first selected.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="tabs" part="Root" />
+<ComponentTypes id="tabs" />

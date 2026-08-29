@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Label
-
 > A label element that associates with a form control.
 
 <ComponentPreview component="label" example="Basic" />
@@ -39,6 +37,16 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Label } from '@destyler-ui/svelte'
+</script>
+
+<Label.Root>Username</Label.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -51,6 +59,4 @@ export default function Basic() {
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="label" part="Root" />
+<ComponentTypes id="label" />

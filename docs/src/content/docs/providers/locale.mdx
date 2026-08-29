@@ -1,0 +1,151 @@
+---
+title: Locale
+description: Supply locale and text direction to formatting and filtering utilities.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+`LocaleProvider` supplies a locale and its `ltr` or `rtl` direction to nested Destyler components. Formatting components read this value automatically; Svelte also provides the locale-aware `useFilter` helper.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { LocaleProvider, useLocaleContext } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { LocaleProvider, useLocaleContext } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { LocaleProvider, useFilter, useLocaleContext } from '@destyler-ui/svelte/locale'
+</script>
+```
+
+</FrameworkContent>
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Format, LocaleProvider } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <LocaleProvider locale="de-DE">
+    <p><Format.Number :value="1450.45" format-style="currency" currency="EUR" /></p>
+  </LocaleProvider>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Format, LocaleProvider } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <LocaleProvider locale="de-DE">
+      <p><Format.Number value={1450.45} style="currency" currency="EUR" /></p>
+    </LocaleProvider>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Format } from '@destyler-ui/svelte/format'
+  import { LocaleProvider } from '@destyler-ui/svelte/locale'
+</script>
+
+<LocaleProvider locale="de-DE">
+  <p><Format.Number value={1450.45} style="currency" currency="EUR" /></p>
+</LocaleProvider>
+```
+
+</FrameworkContent>
+
+## API
+
+### LocaleProvider
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `locale` | `string` | Required | BCP 47 locale tag, such as `en-US`, `de-DE`, or `ar-SA`. |
+| `children` | `Snippet` | — | Content that receives the locale context. |
+
+### useLocaleContext
+
+Returns the current `locale` and calculated `dir`. Vue returns a computed ref, React returns the context value, and Svelte returns an accessor.
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { useLocaleContext } from '@destyler-ui/vue'
+
+const locale = useLocaleContext()
+</script>
+
+<template>
+  <p :dir="locale.dir">{{ locale.locale }}</p>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { useLocaleContext } from '@destyler-ui/react'
+
+export function CurrentLocale() {
+  const locale = useLocaleContext()
+  return <p dir={locale.dir}>{locale.locale}</p>
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { useLocaleContext } from '@destyler-ui/svelte/locale'
+
+  const locale = useLocaleContext()
+</script>
+
+<p dir={locale().dir}>{locale().locale}</p>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+### useFilter
+
+`useFilter(() => options)` returns a locale-aware accessor with `startsWith`, `endsWith`, and `contains` methods. Its options extend `Intl.CollatorOptions` and accept an optional `locale` override.
+
+</FrameworkContent>

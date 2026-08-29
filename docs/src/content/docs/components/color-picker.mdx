@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Color Picker
-
 > A component that allows users to select a color from a color palette or input a color value.
 
 <ComponentPreview component="color-picker" example="Basic" />
@@ -91,6 +89,55 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { ColorPicker, parseColor } from '@destyler-ui/svelte'
+
+  let value = $state(parseColor('#eb5e41'))
+</script>
+
+<ColorPicker.Root bind:value>
+  <ColorPicker.Label>Color</ColorPicker.Label>
+  <ColorPicker.Control>
+    <ColorPicker.ChannelInput channel="hex" />
+    <ColorPicker.ChannelInput channel="alpha" />
+    <ColorPicker.ValueText />
+    <ColorPicker.Trigger>
+      <ColorPicker.TransparencyGrid />
+      <ColorPicker.Context>
+        {#snippet render(api)}
+          <ColorPicker.Swatch value={api().value} />
+        {/snippet}
+      </ColorPicker.Context>
+    </ColorPicker.Trigger>
+  </ColorPicker.Control>
+  <ColorPicker.Positioner>
+    <ColorPicker.Content>
+      <ColorPicker.Area>
+        <ColorPicker.AreaBackground />
+        <ColorPicker.AreaThumb />
+      </ColorPicker.Area>
+      <ColorPicker.ChannelSlider channel="hue">
+        <ColorPicker.ChannelSliderTrack />
+        <ColorPicker.ChannelSliderThumb />
+      </ColorPicker.ChannelSlider>
+      <ColorPicker.SwatchGroup>
+        {#each ['red', 'blue', 'green'] as swatch (swatch)}
+          <ColorPicker.SwatchTrigger value={swatch}>
+            <ColorPicker.Swatch value={swatch}>
+              <ColorPicker.SwatchIndicator>✓</ColorPicker.SwatchIndicator>
+            </ColorPicker.Swatch>
+          </ColorPicker.SwatchTrigger>
+        {/each}
+      </ColorPicker.SwatchGroup>
+    </ColorPicker.Content>
+  </ColorPicker.Positioner>
+  <ColorPicker.HiddenInput />
+</ColorPicker.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -115,110 +162,4 @@ Combine color picker with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="color-picker" part="Root" />
-
-### Area
-
-<ComponentTypes id="color-picker" part="Area" />
-
-### AreaBackground
-
-<ComponentTypes id="color-picker" part="AreaBackground" />
-
-### AreaThumb
-
-<ComponentTypes id="color-picker" part="AreaThumb" />
-
-### ChannelInput
-
-<ComponentTypes id="color-picker" part="ChannelInput" />
-
-### ChannelSlider
-
-<ComponentTypes id="color-picker" part="ChannelSlider" />
-
-### ChannelSliderLabel
-
-<ComponentTypes id="color-picker" part="ChannelSliderLabel" />
-
-### ChannelSliderThumb
-
-<ComponentTypes id="color-picker" part="ChannelSliderThumb" />
-
-### ChannelSliderTrack
-
-<ComponentTypes id="color-picker" part="ChannelSliderTrack" />
-
-### ChannelSliderValueText
-
-<ComponentTypes id="color-picker" part="ChannelSliderValueText" />
-
-### Content
-
-<ComponentTypes id="color-picker" part="Content" />
-
-### Control
-
-<ComponentTypes id="color-picker" part="Control" />
-
-### EyeDropperTrigger
-
-<ComponentTypes id="color-picker" part="EyeDropperTrigger" />
-
-### FormatSelect
-
-<ComponentTypes id="color-picker" part="FormatSelect" />
-
-### FormatTrigger
-
-<ComponentTypes id="color-picker" part="FormatTrigger" />
-
-### HiddenInput
-
-<ComponentTypes id="color-picker" part="HiddenInput" />
-
-### Label
-
-<ComponentTypes id="color-picker" part="Label" />
-
-### Positioner
-
-<ComponentTypes id="color-picker" part="Positioner" />
-
-### Swatch
-
-<ComponentTypes id="color-picker" part="Swatch" />
-
-### SwatchGroup
-
-<ComponentTypes id="color-picker" part="SwatchGroup" />
-
-### SwatchIndicator
-
-<ComponentTypes id="color-picker" part="SwatchIndicator" />
-
-### SwatchTrigger
-
-<ComponentTypes id="color-picker" part="SwatchTrigger" />
-
-### TransparencyGrid
-
-<ComponentTypes id="color-picker" part="TransparencyGrid" />
-
-### Trigger
-
-<ComponentTypes id="color-picker" part="Trigger" />
-
-### ValueSwatch
-
-<ComponentTypes id="color-picker" part="ValueSwatch" />
-
-### ValueText
-
-<ComponentTypes id="color-picker" part="ValueText" />
-
-### View
-
-<ComponentTypes id="color-picker" part="View" />
+<ComponentTypes id="color-picker" />

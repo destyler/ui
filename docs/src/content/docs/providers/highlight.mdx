@@ -1,0 +1,147 @@
+---
+title: Highlight
+description: Mark matching words or phrases inside a string.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+`Highlight` splits text into matching and non-matching chunks and renders every match with a `mark` element. It is useful for search results, command palettes, and filtered lists.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Highlight, useHighlight } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Highlight, useHighlight } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Highlight, useHighlight } from '@destyler-ui/svelte/highlight'
+</script>
+```
+
+</FrameworkContent>
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Highlight } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Highlight query="accessible" text="Build accessible components with Vue." ignore-case match-all />
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Highlight } from '@destyler-ui/react'
+
+export function Example() {
+  return <Highlight query="accessible" text="Build accessible components with React." ignoreCase matchAll />
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Highlight } from '@destyler-ui/svelte/highlight'
+</script>
+
+<Highlight
+  query={['svelte', 'accessible']}
+  text="Build accessible components with Svelte."
+  ignoreCase
+  matchAll
+/>
+```
+
+</FrameworkContent>
+
+Normal `mark` attributes are forwarded to each matching element.
+
+## API
+
+### Highlight
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | Required | Complete text to render. |
+| `query` | `string \| string[]` | Required | One or more values to highlight. |
+| `ignoreCase` | `boolean` | `false` | Matches without comparing letter case. |
+| `matchAll` | `boolean` | `false` for a string; `true` for an array | Highlights every occurrence instead of only the first. Multiple queries require this behavior. |
+
+### useHighlight
+
+`useHighlight` returns `{ text, match }` chunks. Vue returns a computed ref, React returns the array, and Svelte returns an accessor.
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { useHighlight } from '@destyler-ui/vue'
+
+const chunks = useHighlight({ text: 'Vue search result', query: 'search' })
+</script>
+
+<template>
+  <span v-for="(chunk, index) in chunks" :key="index" :class="{ match: chunk.match }">
+    {{ chunk.text }}
+  </span>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { useHighlight } from '@destyler-ui/react'
+
+export function Result() {
+  const chunks = useHighlight({ text: 'React search result', query: 'search' })
+  return chunks.map((chunk, index) => <span key={index} className={chunk.match ? 'match' : undefined}>{chunk.text}</span>)
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { useHighlight } from '@destyler-ui/svelte/highlight'
+
+  const chunks = useHighlight(() => ({ text: 'Svelte search result', query: 'search' }))
+</script>
+
+{#each chunks() as chunk}
+  <span class:match={chunk.match}>{chunk.text}</span>
+{/each}
+```
+
+</FrameworkContent>

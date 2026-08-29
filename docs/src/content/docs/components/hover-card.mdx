@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Hover Card
-
 > A card that appears when the user hovers over an element.
 
 <ComponentPreview component="hover-card" example="Basic" />
@@ -57,6 +55,28 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { HoverCard, portal } from '@destyler-ui/svelte'
+</script>
+
+<HoverCard.Root openDelay={0} closeDelay={0}>
+  <HoverCard.Trigger>Hover me</HoverCard.Trigger>
+  <div use:portal>
+    <HoverCard.Positioner>
+      <HoverCard.Content>
+        <HoverCard.Arrow>
+          <HoverCard.ArrowTip />
+        </HoverCard.Arrow>
+        Hover card content
+      </HoverCard.Content>
+    </HoverCard.Positioner>
+  </div>
+</HoverCard.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -87,26 +107,4 @@ Use render prop for custom hover card rendering.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="hover-card" part="Root" />
-
-### Arrow
-
-<ComponentTypes id="hover-card" part="Arrow" />
-
-### ArrowTip
-
-<ComponentTypes id="hover-card" part="ArrowTip" />
-
-### Content
-
-<ComponentTypes id="hover-card" part="Content" />
-
-### Positioner
-
-<ComponentTypes id="hover-card" part="Positioner" />
-
-### Trigger
-
-<ComponentTypes id="hover-card" part="Trigger" />
+<ComponentTypes id="hover-card" />

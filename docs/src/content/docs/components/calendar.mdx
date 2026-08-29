@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Calendar
-
 > A date picker component that allows users to select dates from a calendar view.
 
 <ComponentPreview component="calendar" example="Basic" />
@@ -101,6 +99,91 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script module lang="ts">
+  import type { UsePresenceProps } from '@destyler-ui/svelte/presence'
+
+  export interface BasicProps extends UsePresenceProps {}
+</script>
+
+<script lang="ts">
+  import { Calendar } from '@destyler-ui/svelte'
+
+  let { ...props }: BasicProps = $props()
+</script>
+
+{#snippet calendarViews()}
+  <Calendar.YearSelect />
+  <Calendar.MonthSelect />
+  <Calendar.View view="day">
+    <Calendar.Context>
+      {#snippet render(calendar)}
+        <Calendar.ViewControl>
+          <Calendar.PrevTrigger>Prev</Calendar.PrevTrigger>
+          <Calendar.ViewTrigger><Calendar.RangeText /></Calendar.ViewTrigger>
+          <Calendar.NextTrigger>Next</Calendar.NextTrigger>
+        </Calendar.ViewControl>
+        <Calendar.Table>
+          <Calendar.TableHead><Calendar.TableRow>
+            {#each calendar().weekDays as weekDay}<Calendar.TableHeader>{weekDay.short}</Calendar.TableHeader>{/each}
+          </Calendar.TableRow></Calendar.TableHead>
+          <Calendar.TableBody>
+            {#each calendar().weeks as week}<Calendar.TableRow>
+              {#each week as day}<Calendar.TableCell value={day}><Calendar.TableCellTrigger>{day.day}</Calendar.TableCellTrigger></Calendar.TableCell>{/each}
+            </Calendar.TableRow>{/each}
+          </Calendar.TableBody>
+        </Calendar.Table>
+      {/snippet}
+    </Calendar.Context>
+  </Calendar.View>
+  <Calendar.View view="month">
+    <Calendar.Context>
+      {#snippet render(calendar)}
+        <Calendar.ViewControl><Calendar.PrevTrigger>Prev</Calendar.PrevTrigger><Calendar.ViewTrigger><Calendar.RangeText /></Calendar.ViewTrigger><Calendar.NextTrigger>Next</Calendar.NextTrigger></Calendar.ViewControl>
+        <Calendar.Table><Calendar.TableBody>
+          {#each calendar().getMonthsGrid({ columns: 4, format: 'short' }) as months}<Calendar.TableRow>
+            {#each months as month}<Calendar.TableCell value={month.value}><Calendar.TableCellTrigger>{month.label}</Calendar.TableCellTrigger></Calendar.TableCell>{/each}
+          </Calendar.TableRow>{/each}
+        </Calendar.TableBody></Calendar.Table>
+      {/snippet}
+    </Calendar.Context>
+  </Calendar.View>
+  <Calendar.View view="year">
+    <Calendar.Context>
+      {#snippet render(calendar)}
+        <Calendar.ViewControl><Calendar.PrevTrigger>Prev</Calendar.PrevTrigger><Calendar.ViewTrigger><Calendar.RangeText /></Calendar.ViewTrigger><Calendar.NextTrigger>Next</Calendar.NextTrigger></Calendar.ViewControl>
+        <Calendar.Table><Calendar.TableBody>
+          {#each calendar().getYearsGrid({ columns: 4 }) as years}<Calendar.TableRow>
+            {#each years as year}<Calendar.TableCell value={year.value}><Calendar.TableCellTrigger>{year.label}</Calendar.TableCellTrigger></Calendar.TableCell>{/each}
+          </Calendar.TableRow>{/each}
+        </Calendar.TableBody></Calendar.Table>
+      {/snippet}
+    </Calendar.Context>
+  </Calendar.View>
+{/snippet}
+
+<Calendar.Root {...props}>
+  <Calendar.Label>Label</Calendar.Label>
+  <Calendar.Control>
+    <Calendar.Input />
+    <Calendar.Context>
+      {#snippet render(calendar)}
+        <Calendar.Trigger>{calendar().open ? 'Close calendar' : 'Open calendar'}</Calendar.Trigger>
+      {/snippet}
+    </Calendar.Context>
+    <Calendar.ClearTrigger>Clear</Calendar.ClearTrigger>
+  </Calendar.Control>
+  <Calendar.PresetTrigger value="last7Days">Last 7 days</Calendar.PresetTrigger>
+  <Calendar.Positioner data-testid="positioner">
+    <Calendar.Content>
+      {@render calendarViews()}
+    </Calendar.Content>
+  </Calendar.Positioner>
+</Calendar.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -131,98 +214,4 @@ Display the calendar inline without a popover.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="calendar" part="Root" />
-
-### ClearTrigger
-
-<ComponentTypes id="calendar" part="ClearTrigger" />
-
-### Content
-
-<ComponentTypes id="calendar" part="Content" />
-
-### Control
-
-<ComponentTypes id="calendar" part="Control" />
-
-### Input
-
-<ComponentTypes id="calendar" part="Input" />
-
-### Label
-
-<ComponentTypes id="calendar" part="Label" />
-
-### MonthSelect
-
-<ComponentTypes id="calendar" part="MonthSelect" />
-
-### NextTrigger
-
-<ComponentTypes id="calendar" part="NextTrigger" />
-
-### Positioner
-
-<ComponentTypes id="calendar" part="Positioner" />
-
-### PresetTrigger
-
-<ComponentTypes id="calendar" part="PresetTrigger" />
-
-### PrevTrigger
-
-<ComponentTypes id="calendar" part="PrevTrigger" />
-
-### RangeText
-
-<ComponentTypes id="calendar" part="RangeText" />
-
-### Table
-
-<ComponentTypes id="calendar" part="Table" />
-
-### TableBody
-
-<ComponentTypes id="calendar" part="TableBody" />
-
-### TableCell
-
-<ComponentTypes id="calendar" part="TableCell" />
-
-### TableCellTrigger
-
-<ComponentTypes id="calendar" part="TableCellTrigger" />
-
-### TableHead
-
-<ComponentTypes id="calendar" part="TableHead" />
-
-### TableHeader
-
-<ComponentTypes id="calendar" part="TableHeader" />
-
-### TableRow
-
-<ComponentTypes id="calendar" part="TableRow" />
-
-### Trigger
-
-<ComponentTypes id="calendar" part="Trigger" />
-
-### View
-
-<ComponentTypes id="calendar" part="View" />
-
-### ViewControl
-
-<ComponentTypes id="calendar" part="ViewControl" />
-
-### ViewTrigger
-
-<ComponentTypes id="calendar" part="ViewTrigger" />
-
-### YearSelect
-
-<ComponentTypes id="calendar" part="YearSelect" />
+<ComponentTypes id="calendar" />

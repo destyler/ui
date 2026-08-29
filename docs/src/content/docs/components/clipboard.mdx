@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Clipboard
-
 > A component that allows users to copy text to the clipboard.
 
 <ComponentPreview component="clipboard" example="Basic" />
@@ -57,6 +55,28 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Clipboard } from '@destyler-ui/svelte'
+</script>
+
+{#snippet copied()}
+  <span>Copied!</span>
+{/snippet}
+
+<Clipboard.Root value="https://destyler.org">
+  <Clipboard.Label>Copy this link</Clipboard.Label>
+  <Clipboard.Control>
+    <Clipboard.Input />
+    <Clipboard.Trigger>
+      <Clipboard.Indicator {copied}><span>Copy</span></Clipboard.Indicator>
+    </Clipboard.Trigger>
+  </Clipboard.Control>
+</Clipboard.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -75,30 +95,4 @@ Use render function to customize the clipboard indicator.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="clipboard" part="Root" />
-
-### Control
-
-<ComponentTypes id="clipboard" part="Control" />
-
-### Indicator
-
-<ComponentTypes id="clipboard" part="Indicator" />
-
-### Input
-
-<ComponentTypes id="clipboard" part="Input" />
-
-### Label
-
-<ComponentTypes id="clipboard" part="Label" />
-
-### Trigger
-
-<ComponentTypes id="clipboard" part="Trigger" />
-
-### ValueText
-
-<ComponentTypes id="clipboard" part="ValueText" />
+<ComponentTypes id="clipboard" />

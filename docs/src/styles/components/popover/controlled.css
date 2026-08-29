@@ -1,5 +1,4 @@
-.popover-controlled .ds-vue-example,
-.popover-controlled .ds-react-example {
+.popover-controlled .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -143,8 +142,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.popover-controlled [data-part="close-trigger"],
-.popover-controlled [data-part="closeTrigger"] {
+.popover-controlled [data-part="close-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -162,8 +160,7 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.popover-controlled [data-part="close-trigger"]:hover,
-.popover-controlled [data-part="closeTrigger"]:hover {
+.popover-controlled [data-part="close-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
@@ -172,8 +169,7 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-.popover-controlled [data-part="arrow-tip"],
-.popover-controlled [data-part="arrowTip"] {
+.popover-controlled [data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }

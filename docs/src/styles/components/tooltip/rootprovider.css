@@ -52,14 +52,12 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-.tooltip-rootprovider [data-part="arrow-tip"],
-.tooltip-rootprovider [data-part="arrowTip"] {
+.tooltip-rootprovider [data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }
 
-.tooltip-rootprovider .ds-vue-example,
-.tooltip-rootprovider .ds-react-example {
+.tooltip-rootprovider .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

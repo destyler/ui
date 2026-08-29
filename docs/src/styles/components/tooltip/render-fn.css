@@ -52,8 +52,7 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-.tooltip-renderfn [data-part="arrow-tip"],
-.tooltip-renderfn [data-part="arrowTip"] {
+.tooltip-renderfn [data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }

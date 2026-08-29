@@ -67,7 +67,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.dialog-basic [data-part="closeTrigger"] {
+.dialog-basic [data-part="close-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -84,6 +84,6 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.dialog-basic [data-part="closeTrigger"]:hover {
+.dialog-basic [data-part="close-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }

@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Progress
-
 > A component that displays the progress status for a task.
 
 <ComponentPreview component="progress" example="Basic" />
@@ -53,6 +51,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Progress } from '@destyler-ui/svelte'
+</script>
+
+<Progress.Root defaultValue={42}>
+  <Progress.Label>Label</Progress.Label>
+  <Progress.ValueText />
+  <Progress.Track>
+    <Progress.Range />
+  </Progress.Track>
+  <Progress.Circle>
+    <Progress.CircleTrack />
+    <Progress.CircleRange />
+  </Progress.Circle>
+</Progress.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -73,38 +91,4 @@ Display a circular progress indicator.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="progress" part="Root" />
-
-### Circle
-
-<ComponentTypes id="progress" part="Circle" />
-
-### CircleRange
-
-<ComponentTypes id="progress" part="CircleRange" />
-
-### CircleTrack
-
-<ComponentTypes id="progress" part="CircleTrack" />
-
-### Label
-
-<ComponentTypes id="progress" part="Label" />
-
-### Range
-
-<ComponentTypes id="progress" part="Range" />
-
-### Track
-
-<ComponentTypes id="progress" part="Track" />
-
-### ValueText
-
-<ComponentTypes id="progress" part="ValueText" />
-
-### View
-
-<ComponentTypes id="progress" part="View" />
+<ComponentTypes id="progress" />

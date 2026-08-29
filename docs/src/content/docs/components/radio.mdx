@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Radio
-
 > A set of checkable buttons where only one can be checked at a time.
 
 <ComponentPreview component="radio" example="Basic" />
@@ -55,6 +53,32 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Radio } from '@destyler-ui/svelte'
+
+  const items = [
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Svelte', value: 'svelte' },
+  ]
+</script>
+
+<Radio.Root>
+  <Radio.Label>Framework</Radio.Label>
+  <Radio.Indicator />
+  {#each items as item (item.value)}
+    <Radio.Item value={item.value}>
+      <Radio.ItemText>{item.label}</Radio.ItemText>
+      <Radio.ItemControl />
+      <Radio.ItemHiddenInput />
+    </Radio.Item>
+  {/each}
+</Radio.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -85,30 +109,4 @@ Listen for value change events.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="radio" part="Root" />
-
-### Indicator
-
-<ComponentTypes id="radio" part="Indicator" />
-
-### Item
-
-<ComponentTypes id="radio" part="Item" />
-
-### ItemControl
-
-<ComponentTypes id="radio" part="ItemControl" />
-
-### ItemHiddenInput
-
-<ComponentTypes id="radio" part="ItemHiddenInput" />
-
-### ItemText
-
-<ComponentTypes id="radio" part="ItemText" />
-
-### Label
-
-<ComponentTypes id="radio" part="Label" />
+<ComponentTypes id="radio" />

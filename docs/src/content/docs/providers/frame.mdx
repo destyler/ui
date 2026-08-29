@@ -1,0 +1,109 @@
+---
+title: Frame
+description: Render application content into an iframe while preserving component context.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+`Frame` creates an iframe and renders its children into the iframe document through a portal. It also supplies the iframe document through `EnvironmentProvider`, so nested Destyler components use the correct window and document.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Frame } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Frame } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Frame } from '@destyler-ui/svelte/frame'
+</script>
+```
+
+</FrameworkContent>
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Frame } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Frame title="Preview" :style="{ border: '1px solid #ccc', width: '100%', height: 'var(--height)' }">
+    <div style="padding: 2rem">
+      <h2>Inside the frame</h2>
+      <button type="button">Focusable content</button>
+    </div>
+  </Frame>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Frame } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <Frame title="Preview" style={{ border: '1px solid #ccc', width: '100%', height: 'var(--height)' }}>
+      <div style={{ padding: '2rem' }}>
+        <h2>Inside the frame</h2>
+        <button type="button">Focusable content</button>
+      </div>
+    </Frame>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Frame } from '@destyler-ui/svelte/frame'
+</script>
+
+<Frame title="Preview" style="border: 1px solid #ccc; width: 100%; height: var(--height);">
+  <div style="padding: 2rem;">
+    <h2>Inside the frame</h2>
+    <button type="button">Focusable content</button>
+  </div>
+</Frame>
+```
+
+</FrameworkContent>
+
+The generated iframe exposes its measured content height through the `--height` custom property.
+
+## API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| Default content | Framework content or slot | — | Content rendered into the iframe body. |
+| `head` | Prop, snippet, or Vue `#head` slot | — | Content rendered into the iframe head. |
+| `srcdoc` | `string` | Internal empty document | Initial iframe document. Include an element with `class="frame-root"` to choose the mount point. |
+| Mount lifecycle | Vue `mount`/`unmount` events or React/Svelte callbacks | — | Reports frame content mounting and unmounting. |
+| `ref` | `HTMLIFrameElement` | — | Bindable iframe reference. |
+
+All standard iframe attributes, including `title`, `sandbox`, and `allow`, are forwarded to the iframe.

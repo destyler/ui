@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Collapsible
-
 > An interactive component which expands and collapses a content area.
 
 <ComponentPreview component="collapsible" example="Basic" />
@@ -42,6 +40,19 @@ export default function Basic() {
     </Collapsible.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Collapsible } from '@destyler-ui/svelte'
+</script>
+
+<Collapsible.Root>
+  <Collapsible.Trigger>Toggle</Collapsible.Trigger>
+  <Collapsible.Content>Content</Collapsible.Content>
+</Collapsible.Root>
 ```
 </FrameworkContent>
 
@@ -87,14 +98,4 @@ Handle the exit complete event.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="collapsible" part="Root" />
-
-### Content
-
-<ComponentTypes id="collapsible" part="Content" />
-
-### Trigger
-
-<ComponentTypes id="collapsible" part="Trigger" />
+<ComponentTypes id="collapsible" />

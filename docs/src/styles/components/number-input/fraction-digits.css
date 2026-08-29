@@ -28,8 +28,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.number-input-fractiondigits [data-part="value-text"],
-.number-input-fractiondigits [data-part="valueText"] {
+.number-input-fractiondigits [data-part="value-text"] {
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -76,9 +75,7 @@
 }
 
 .number-input-fractiondigits [data-part="increment-trigger"],
-.number-input-fractiondigits [data-part="incrementTrigger"],
-.number-input-fractiondigits [data-part="decrement-trigger"],
-.number-input-fractiondigits [data-part="decrementTrigger"] {
+.number-input-fractiondigits [data-part="decrement-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -98,34 +95,24 @@
 }
 
 .number-input-fractiondigits [data-part="increment-trigger"]:hover,
-.number-input-fractiondigits [data-part="incrementTrigger"]:hover,
 .number-input-fractiondigits [data-part="decrement-trigger"]:hover,
-.number-input-fractiondigits [data-part="decrementTrigger"]:hover,
 .number-input-fractiondigits [data-part="increment-trigger"][data-hover],
-.number-input-fractiondigits [data-part="incrementTrigger"][data-hover],
-.number-input-fractiondigits [data-part="decrement-trigger"][data-hover],
-.number-input-fractiondigits [data-part="decrementTrigger"][data-hover] {
+.number-input-fractiondigits [data-part="decrement-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .number-input-fractiondigits [data-part="increment-trigger"]:focus,
-.number-input-fractiondigits [data-part="incrementTrigger"]:focus,
 .number-input-fractiondigits [data-part="decrement-trigger"]:focus,
-.number-input-fractiondigits [data-part="decrementTrigger"]:focus,
 .number-input-fractiondigits [data-part="increment-trigger"][data-focus],
-.number-input-fractiondigits [data-part="incrementTrigger"][data-focus],
-.number-input-fractiondigits [data-part="decrement-trigger"][data-focus],
-.number-input-fractiondigits [data-part="decrementTrigger"][data-focus] {
+.number-input-fractiondigits [data-part="decrement-trigger"][data-focus] {
   outline: none;
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .number-input-fractiondigits [data-part="increment-trigger"][data-disabled],
-.number-input-fractiondigits [data-part="incrementTrigger"][data-disabled],
-.number-input-fractiondigits [data-part="decrement-trigger"][data-disabled],
-.number-input-fractiondigits [data-part="decrementTrigger"][data-disabled] {
+.number-input-fractiondigits [data-part="decrement-trigger"][data-disabled] {
   cursor: not-allowed;
   opacity: 0.5;
 }

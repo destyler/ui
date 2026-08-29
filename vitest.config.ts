@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     projects: [
       'packages/*',
+      'packages/svelte/vitest.ssr.config.ts',
     ],
   },
 })

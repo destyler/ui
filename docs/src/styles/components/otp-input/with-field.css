@@ -81,15 +81,13 @@
   color: var(--demo-neutral-fg);
 }
 
-.otp-input-withfield [data-part="helper-text"],
-.otp-input-withfield [data-part="helperText"] {
+.otp-input-withfield [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.otp-input-withfield [data-part="error-text"],
-.otp-input-withfield [data-part="errorText"] {
+.otp-input-withfield [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);

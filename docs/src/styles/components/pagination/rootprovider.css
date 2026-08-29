@@ -1,5 +1,4 @@
-.pagination-rootprovider .ds-vue-example,
-.pagination-rootprovider .ds-react-example {
+.pagination-rootprovider .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,9 +42,7 @@
 }
 
 .pagination-rootprovider [data-part="prev-trigger"] span,
-.pagination-rootprovider [data-part="prevTrigger"] span,
 .pagination-rootprovider [data-part="next-trigger"] span,
-.pagination-rootprovider [data-part="nextTrigger"] span,
 .pagination-rootprovider .visually-hidden {
   position: absolute;
   width: 1px;
@@ -60,9 +57,7 @@
 
 .pagination-rootprovider [data-part="item"],
 .pagination-rootprovider [data-part="prev-trigger"],
-.pagination-rootprovider [data-part="prevTrigger"],
-.pagination-rootprovider [data-part="next-trigger"],
-.pagination-rootprovider [data-part="nextTrigger"] {
+.pagination-rootprovider [data-part="next-trigger"] {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -90,13 +85,9 @@
 .pagination-rootprovider [data-part="item"]:hover,
 .pagination-rootprovider [data-part="item"][data-hover],
 .pagination-rootprovider [data-part="prev-trigger"]:hover,
-.pagination-rootprovider [data-part="prevTrigger"]:hover,
 .pagination-rootprovider [data-part="next-trigger"]:hover,
-.pagination-rootprovider [data-part="nextTrigger"]:hover,
 .pagination-rootprovider [data-part="prev-trigger"][data-hover],
-.pagination-rootprovider [data-part="prevTrigger"][data-hover],
-.pagination-rootprovider [data-part="next-trigger"][data-hover],
-.pagination-rootprovider [data-part="nextTrigger"][data-hover] {
+.pagination-rootprovider [data-part="next-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
@@ -105,17 +96,11 @@
 .pagination-rootprovider [data-part="item"][data-focus],
 .pagination-rootprovider [data-part="item"]:focus-visible,
 .pagination-rootprovider [data-part="prev-trigger"]:focus,
-.pagination-rootprovider [data-part="prevTrigger"]:focus,
 .pagination-rootprovider [data-part="next-trigger"]:focus,
-.pagination-rootprovider [data-part="nextTrigger"]:focus,
 .pagination-rootprovider [data-part="prev-trigger"][data-focus],
-.pagination-rootprovider [data-part="prevTrigger"][data-focus],
 .pagination-rootprovider [data-part="next-trigger"][data-focus],
-.pagination-rootprovider [data-part="nextTrigger"][data-focus],
 .pagination-rootprovider [data-part="prev-trigger"]:focus-visible,
-.pagination-rootprovider [data-part="prevTrigger"]:focus-visible,
-.pagination-rootprovider [data-part="next-trigger"]:focus-visible,
-.pagination-rootprovider [data-part="nextTrigger"]:focus-visible {
+.pagination-rootprovider [data-part="next-trigger"]:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
@@ -134,9 +119,7 @@
 
 .pagination-rootprovider [data-part="item"]:is([data-disabled], :disabled),
 .pagination-rootprovider [data-part="prev-trigger"]:is([data-disabled], :disabled),
-.pagination-rootprovider [data-part="prevTrigger"]:is([data-disabled], :disabled),
-.pagination-rootprovider [data-part="next-trigger"]:is([data-disabled], :disabled),
-.pagination-rootprovider [data-part="nextTrigger"]:is([data-disabled], :disabled) {
+.pagination-rootprovider [data-part="next-trigger"]:is([data-disabled], :disabled) {
   cursor: not-allowed;
   opacity: 0.45;
   color: var(--demo-neutral-fg-muted);

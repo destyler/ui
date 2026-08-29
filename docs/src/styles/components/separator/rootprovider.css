@@ -3,8 +3,7 @@
   max-width: 20rem;
 }
 
-.separator-rootprovider .ds-vue-example,
-.separator-rootprovider .ds-react-example {
+.separator-rootprovider .ds-example-content {
   width: 100%;
 }
 
@@ -24,21 +23,18 @@
   gap: 0.25rem;
 }
 
-.separator-rootprovider.ds-preview-frame .ds-vue-example p,
-.separator-rootprovider.ds-preview-frame .ds-react-example p {
+.separator-rootprovider.ds-preview-frame .ds-example-content p {
   margin: 0 !important;
   font-size: 0.875rem !important;
   line-height: 1.25rem !important;
   color: var(--demo-neutral-fg) !important;
 }
 
-.separator-rootprovider.ds-preview-frame .ds-vue-example main > div p:first-child,
-.separator-rootprovider.ds-preview-frame .ds-react-example main > div p:first-child {
+.separator-rootprovider.ds-preview-frame .ds-example-content main > div p:first-child {
   font-weight: 600 !important;
 }
 
-.separator-rootprovider.ds-preview-frame .ds-vue-example main > div p:last-child,
-.separator-rootprovider.ds-preview-frame .ds-react-example main > div p:last-child {
+.separator-rootprovider.ds-preview-frame .ds-example-content main > div p:last-child {
   font-weight: 400 !important;
   color: var(--demo-neutral-fg-muted) !important;
 }

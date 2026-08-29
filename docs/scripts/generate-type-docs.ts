@@ -5,22 +5,24 @@
  * framework package and writes JSON files consumed by the Astro docs site.
  *
  * Usage:
- *   npx tsx docs/scripts/generate-type-docs.ts vue
- *   npx tsx docs/scripts/generate-type-docs.ts react
+ *   npx tsx docs/scripts/generate-type-docs.ts          # all frameworks
+ *   npx tsx docs/scripts/generate-type-docs.ts svelte   # one framework
  *
  * Prerequisites:
- *   The target framework package must be built first (`pnpm vue build` / `pnpm react build`)
+ *   The target framework package must be built first (`pnpm <framework> build`)
  *   so that `dist/index.d.ts` (or `dist/index.d.mts`) exists.
  *
  * Output:
  *   docs/src/data/types/<framework>/<component>.types.json
  */
 
+import type { FrameworkDefinition } from '../src/config/frameworks'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
+import { frameworks, getFramework, isFramework } from '../src/config/frameworks'
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -49,6 +51,39 @@ interface PropInfo {
 
 type PropsMap = Record<string, PropInfo>
 
+function getPropertyTypeName(
+  propertyType: ts.Type,
+  typeNode: ts.Node,
+  checker: ts.TypeChecker,
+  isOptional: boolean,
+): string {
+  const typeName = checker.typeToString(propertyType)
+  const includesUndefined = !!(propertyType.flags & ts.TypeFlags.Undefined)
+    || (propertyType.isUnion() && propertyType.types.some(type => !!(type.flags & ts.TypeFlags.Undefined)))
+  if (!isOptional || !includesUndefined)
+    return typeName
+
+  // `prop?: T` is represented as `T | undefined` by TypeScript. Hide only
+  // that optional marker while retaining meaningful nullable unions such as
+  // `T | null`. Required `T | undefined` properties remain unchanged.
+  if (!propertyType.isUnion())
+    return typeName
+
+  const members = propertyType.types.filter(member => !(member.flags & ts.TypeFlags.Undefined))
+  if (members.length === 0 || members.length === propertyType.types.length)
+    return typeName
+
+  const memberNodes = members.map(member => checker.typeToTypeNode(member, typeNode, undefined))
+  if (memberNodes.some(member => !member))
+    return typeName
+
+  const displayType = memberNodes.length === 1
+    ? memberNodes[0]!
+    : ts.factory.createUnionTypeNode(memberNodes as ts.TypeNode[])
+  return ts.createPrinter({ removeComments: true })
+    .printNode(ts.EmitHint.Unspecified, displayType, typeNode.getSourceFile())
+}
+
 function getSourceFileName(symbol: ts.Symbol): string | undefined {
   const declarations = symbol.getDeclarations()
   if (!declarations || declarations.length === 0)
@@ -63,7 +98,10 @@ function shouldIgnoreProperty(property: ts.Symbol): boolean {
   const isExternal
     = sourceFileName?.includes('node_modules')
       && !sourceFileName?.includes('@destyler')
-  const isExcludedByName = ['children', 'ref', 'key'].includes(property.getName())
+  // `children` can be the complete public API of render-prop components such
+  // as Context and Actions. Inherited framework children are already removed
+  // by the external-source check above.
+  const isExcludedByName = ['ref', 'key'].includes(property.getName())
   return !!(isExternal || isExcludedByName)
 }
 
@@ -84,9 +122,9 @@ function extractProperties(
       continue
 
     const propType = checker.getTypeOfSymbolAtLocation(property, typeNode)
-    const nonNullableType = propType.getNonNullableType()
-    const typeName = checker.typeToString(nonNullableType)
-    const isRequired = nonNullableType === propType && typeName !== 'any'
+    const isOptional = !!(property.flags & ts.SymbolFlags.Optional)
+    const typeName = getPropertyTypeName(propType, typeNode, checker, isOptional)
+    const isRequired = !isOptional
 
     const defaultTag = property
       .getJsDocTags()
@@ -114,209 +152,235 @@ function extractProperties(
   )
 }
 
+function validatePropertyExtractionRegression(): void {
+  const fileName = path.join(rootDir, '__type-docs-property-regression__.ts')
+  const sourceText = [
+    'interface RegressionProps {',
+    '  requiredAny: any',
+    '  requiredNullable: string | null | undefined',
+    '  optionalNullable?: string | null',
+    '}',
+  ].join('\n')
+  const options: ts.CompilerOptions = { noEmit: true, strict: true }
+  const host = ts.createCompilerHost(options)
+  const getSourceFile = host.getSourceFile.bind(host)
+
+  host.fileExists = requestedFile => requestedFile === fileName || ts.sys.fileExists(requestedFile)
+  host.readFile = requestedFile => requestedFile === fileName ? sourceText : ts.sys.readFile(requestedFile)
+  host.getSourceFile = (requestedFile, languageVersion, onError, shouldCreateNewSourceFile) => {
+    if (requestedFile === fileName) {
+      return ts.createSourceFile(
+        requestedFile,
+        sourceText,
+        languageVersion,
+        true,
+        ts.ScriptKind.TS,
+      )
+    }
+    return getSourceFile(requestedFile, languageVersion, onError, shouldCreateNewSourceFile)
+  }
+
+  const program = ts.createProgram([fileName], options, host)
+  const sourceFile = program.getSourceFile(fileName)
+  const declaration = sourceFile?.statements.find(ts.isInterfaceDeclaration)
+  if (!declaration)
+    throw new Error('Could not create the type docs property regression fixture')
+
+  const props = extractProperties(declaration, program.getTypeChecker())
+  const passed = props.requiredAny?.isRequired === true
+    && props.requiredAny.type === 'any'
+    && props.requiredNullable?.isRequired === true
+    && /\bnull\b/.test(props.requiredNullable.type)
+    && /\bundefined\b/.test(props.requiredNullable.type)
+    && props.optionalNullable?.isRequired === false
+    && /\bnull\b/.test(props.optionalNullable.type)
+    && !/\bundefined\b/.test(props.optionalNullable.type)
+
+  if (!passed)
+    throw new Error('Type docs property requiredness regression failed')
+}
+
 // ---------------------------------------------------------------------------
 // Main extraction logic
 // ---------------------------------------------------------------------------
 
-interface DataAttrInfo {
-  name: string
-  type: string
-}
-
 interface PartTypes {
   props?: PropsMap
   emits?: PropsMap
-  dataAttr?: DataAttrInfo[]
 }
 
 type ComponentTypesMap = Record<string, PartTypes>
 
-function extractComponentTypes(
-  sourceFile: ts.SourceFile,
+function mergeComponentTypes(target: ComponentTypesMap, source: ComponentTypesMap): void {
+  for (const [partName, partTypes] of Object.entries(source)) {
+    const current = target[partName] ?? {}
+    target[partName] = {
+      ...current,
+      ...partTypes,
+      ...(current.props || partTypes.props
+        ? { props: { ...current.props, ...partTypes.props } }
+        : {}),
+      ...(current.emits || partTypes.emits
+        ? { emits: { ...current.emits, ...partTypes.emits } }
+        : {}),
+    }
+  }
+}
+
+function resolveAliasedSymbol(symbol: ts.Symbol, checker: ts.TypeChecker): ts.Symbol {
+  return symbol.flags & ts.SymbolFlags.Alias
+    ? checker.getAliasedSymbol(symbol)
+    : symbol
+}
+
+function extractExportedProperties(symbol: ts.Symbol, checker: ts.TypeChecker): PropsMap {
+  const resolved = resolveAliasedSymbol(symbol, checker)
+  const declaration = resolved.valueDeclaration ?? resolved.getDeclarations()?.[0]
+  return declaration ? extractProperties(declaration, checker) : {}
+}
+
+function getModuleExports(
+  program: ts.Program,
   checker: ts.TypeChecker,
-  prefix: string,
+  filePath: string,
+): Map<string, ts.Symbol> {
+  const sourceFile = program.getSourceFile(filePath)
+  if (!sourceFile)
+    throw new Error(`Could not parse ${filePath}`)
+
+  const moduleSymbol = checker.getSymbolAtLocation(sourceFile)
+  if (!moduleSymbol)
+    throw new Error(`Could not resolve exports for ${filePath}`)
+
+  return new Map(checker.getExportsOfModule(moduleSymbol).map(symbol => [symbol.name, symbol]))
+}
+
+interface PublicComponentExport {
+  partName: string
+  valueName: string
+  symbols: Map<string, ts.Symbol>
+}
+
+function isPublicComponentValue(
+  exports: Map<string, ts.Symbol>,
+  valueName: string,
+  checker: ts.TypeChecker,
+): boolean {
+  const value = exports.get(valueName)
+  return !!value
+    && !!(resolveAliasedSymbol(value, checker).flags & ts.SymbolFlags.Value)
+}
+
+function getOwnedPartName(valueName: string, prefix: string): string {
+  if (valueName === prefix)
+    return 'Root'
+
+  const suffix = valueName.slice(prefix.length)
+  if (valueName.startsWith(prefix) && /^[A-Z]/.test(suffix))
+    return suffix
+
+  // Some public components belong to a family without repeating its prefix,
+  // for example `Toaster` in the toast entry point.
+  return valueName
+}
+
+function getPublicComponentExports(
+  symbols: Map<string, ts.Symbol>,
+  valueNames: Iterable<string>,
+  getPartName: (valueName: string) => string,
+  checker: ts.TypeChecker,
+): PublicComponentExport[] {
+  const components = new Map<string, PublicComponentExport>()
+
+  for (const valueName of valueNames) {
+    if (!isPublicComponentValue(symbols, valueName, checker))
+      continue
+
+    components.set(valueName, {
+      partName: getPartName(valueName),
+      valueName,
+      symbols,
+    })
+  }
+
+  return [...components.values()].sort((a, b) => a.partName.localeCompare(b.partName))
+}
+
+function extractPublicComponentTypes(
+  componentExports: PublicComponentExport[],
+  checker: ts.TypeChecker,
 ): ComponentTypesMap {
   const result: ComponentTypesMap = {}
-  // Match: <Prefix><PartName>(Props|Emits)
-  // e.g. AvatarRootProps, CollapseItemContentProps, DialogRootEmits
-  const regex = new RegExp(`^${prefix}(\\w+?)(Props|Emits)$`)
+
+  for (const component of componentExports) {
+    const part: PartTypes = {}
+
+    const propsSymbol = component.symbols.get(`${component.valueName}Props`)
+    if (propsSymbol) {
+      const props = extractExportedProperties(propsSymbol, checker)
+      if (Object.keys(props).length > 0)
+        part.props = props
+    }
+
+    const emitsSymbol = component.symbols.get(`${component.valueName}Emits`)
+    if (emitsSymbol) {
+      const emits = extractExportedProperties(emitsSymbol, checker)
+      if (Object.keys(emits).length > 0)
+        part.emits = emits
+    }
+
+    // Keep every real public component, including slot-only Vue components
+    // whose declarations expose no serializable props or emits.
+    result[component.partName] = part
+  }
+
+  return result
+}
+
+function getNamespaceExports(
+  rootExports: Map<string, ts.Symbol>,
+  namespaceName: string,
+  checker: ts.TypeChecker,
+): Map<string, ts.Symbol> {
+  const namespace = rootExports.get(namespaceName)
+  if (!namespace)
+    return new Map()
+
+  const resolved = resolveAliasedSymbol(namespace, checker)
+  return new Map(checker.getExportsOfModule(resolved).map(symbol => [symbol.name, symbol]))
+}
+
+function getPublicComponentValueNames(publicEntryFile: string): string[] {
+  const sourceFile = ts.createSourceFile(
+    publicEntryFile,
+    fs.readFileSync(publicEntryFile, 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS,
+  )
+  const names = new Set<string>()
 
   for (const statement of sourceFile.statements) {
-    if (!ts.isInterfaceDeclaration(statement) && !ts.isTypeAliasDeclaration(statement))
+    if (!ts.isExportDeclaration(statement) || statement.isTypeOnly || !statement.exportClause)
+      continue
+    if (!ts.isNamedExports(statement.exportClause))
+      continue
+    if (!statement.moduleSpecifier || !ts.isStringLiteral(statement.moduleSpecifier))
+      continue
+    if (!/(?:^|\/)components(?:\/|$)/.test(statement.moduleSpecifier.text))
       continue
 
-    const name = statement.name.getText()
-    const match = name.match(regex)
-    if (!match)
-      continue
-
-    const [, partName, kind] = match
-
-    // Skip internal types
-    if (partName.endsWith('Context'))
-      continue // Context providers (slots API)
-    if (partName.endsWith('Base'))
-      continue // React intermediate types
-    if (partName === 'RootProvider')
-      continue // Advanced provider API
-
-    const props = extractProperties(statement, checker)
-    if (Object.keys(props).length === 0)
-      continue
-
-    const part = partName || 'Root'
-    if (!result[part])
-      result[part] = {}
-
-    if (kind === 'Props') {
-      result[part].props = props
-    }
-    else if (kind === 'Emits') {
-      result[part].emits = props
+    for (const element of statement.exportClause.elements) {
+      if (!element.isTypeOnly)
+        names.add(element.name.text)
     }
   }
 
-  return result
+  return [...names].sort()
 }
 
-// ---------------------------------------------------------------------------
-// Data attribute extraction from upstream machine packages
-// ---------------------------------------------------------------------------
-
-/**
- * Reads the anatomy.ts file for a component to find the upstream @destyler/* package.
- * e.g. avatar -> @destyler/image, collapse -> @destyler/collapse
- */
-function resolveUpstreamPackage(componentDir: string): string | null {
-  const anatomyPath = path.join(componentDir, 'anatomy.ts')
-  if (!fs.existsSync(anatomyPath))
-    return null
-  const content = fs.readFileSync(anatomyPath, 'utf-8')
-  const match = content.match(/'@destyler\/([^']+)'/) || content.match(/"@destyler\/([^"]+)"/)
-  return match ? match[1] : null
-}
-
-/**
- * Parses the compiled machine JS (dist/index.mjs) to extract data-* attributes
- * for each part from the get{Part}Props methods.
- */
-function extractDataAttributes(
-  pkgDir: string,
-  upstreamPkg: string,
-): Record<string, DataAttrInfo[]> {
-  const mjsPath = path.join(pkgDir, 'node_modules', '@destyler', upstreamPkg, 'dist', 'index.mjs')
-  if (!fs.existsSync(mjsPath))
-    return {}
-
-  const code = fs.readFileSync(mjsPath, 'utf-8')
-
-  // Find all get{Part}Props methods
-  const methodRegex = /get(\w+)Props\b[^{]*\{/g
-  let m: RegExpExecArray | null = methodRegex.exec(code)
-  const positions: { name: string, start: number }[] = []
-  while (m !== null) {
-    positions.push({ name: m[1], start: m.index })
-    m = methodRegex.exec(code)
-  }
-
-  const result: Record<string, DataAttrInfo[]> = {}
-
-  for (const pos of positions) {
-    // Find the balanced closing brace to extract the method body
-    let braceCount = 0
-    let inMethod = false
-    let end = pos.start
-    for (let j = pos.start; j < code.length; j++) {
-      if (code[j] === '{') {
-        braceCount++
-        inMethod = true
-      }
-      if (code[j] === '}') {
-        braceCount--
-      }
-      if (inMethod && braceCount === 0) {
-        end = j
-        break
-      }
-    }
-    const body = code.substring(pos.start, end + 1)
-
-    const attrs: DataAttrInfo[] = []
-
-    // Check for ...parts.xxx.attrs spread (provides data-scope and data-part)
-    const partsMatch = body.match(/\.\.\.\s*parts\.(\w+)\.attrs/)
-    if (partsMatch) {
-      const partKey = partsMatch[1]
-      const partName = partKey.replace(/([A-Z])/g, '-$1').toLowerCase()
-      attrs.push(
-        { name: 'data-scope', type: `"${upstreamPkg}"` },
-        { name: 'data-part', type: `"${partName}"` },
-      )
-    }
-
-    // Extract explicit data-* attributes
-    const dataAttrRegex = /"(data-[a-z-]+)":\s*([^\n,}]+)/g
-    let attrMatch: RegExpExecArray | null = dataAttrRegex.exec(body)
-    while (attrMatch !== null) {
-      const attrName = attrMatch[1]
-      if (attrName === 'data-scope' || attrName === 'data-part') {
-        attrMatch = dataAttrRegex.exec(body)
-        continue
-      }
-
-      let value = attrMatch[2].trim()
-      value = normalizeDataAttrValue(value)
-
-      attrs.push({ name: attrName, type: value })
-      attrMatch = dataAttrRegex.exec(body)
-    }
-
-    if (attrs.length > 0) {
-      result[pos.name] = attrs
-    }
-  }
-
-  return result
-}
-
-/**
- * Convert raw JS expressions into human-readable type descriptions.
- */
-function normalizeDataAttrValue(raw: string): string {
-  // dataAttr(...) → boolean presence attribute
-  if (raw.startsWith('dataAttr('))
-    return '"" | undefined'
-
-  // Ternary with string literals: x ? "a" : "b"
-  if (raw.includes('?')) {
-    const strings = [...raw.matchAll(/"([^"]+)"/g)].map(s => s[1])
-    if (strings.length > 0) {
-      return strings.map(s => `"${s}"`).join(' | ')
-    }
-  }
-
-  // state.context.orientation → known enum
-  if (raw.includes('orientation'))
-    return '"horizontal" | "vertical"'
-  if (raw.includes('placement'))
-    return 'Placement'
-  if (raw.includes('dir'))
-    return '"ltr" | "rtl"'
-
-  // Fallback: show as string
-  return 'string'
-}
-
-/**
- * Map from anatomy part key (camelCase like "itemTrigger") to
- * component part name (PascalCase like "ItemTrigger").
- */
-function anatomyKeyToPartName(key: string): string {
-  return key.charAt(0).toUpperCase() + key.slice(1)
-}
-
-function getDistFilePath(framework: string): string {
-  const pkgDir = path.join(rootDir, 'packages', framework)
+function getDistFilePath(framework: FrameworkDefinition): string {
+  const pkgDir = path.join(rootDir, framework.packageDirectory)
   // Vue uses index.d.ts, React uses index.d.mts
   const candidates = ['dist/index.d.ts', 'dist/index.d.mts']
   for (const candidate of candidates) {
@@ -325,82 +389,106 @@ function getDistFilePath(framework: string): string {
       return fullPath
   }
   throw new Error(
-    `No declaration file found for ${framework}. Did you run \`pnpm ${framework} build\` first?`,
+    `No declaration file found for ${framework.id}. Did you build ${framework.packageName} first?`,
   )
 }
 
-function getComponentDirs(framework: string): { name: string, dir: string }[] {
-  const pkgDir = path.join(rootDir, 'packages', framework)
+function getComponentDirs(framework: FrameworkDefinition): { name: string, dir: string }[] {
+  const sourceDir = path.join(rootDir, framework.sourceDirectory)
   const dirs: { name: string, dir: string }[] = []
+  if (!fs.existsSync(sourceDir))
+    throw new Error(`Missing component source directory: ${path.relative(rootDir, sourceDir)}`)
 
-  for (const subDir of ['src/components', 'src/providers']) {
-    const fullDir = path.join(pkgDir, subDir)
-    if (!fs.existsSync(fullDir))
+  for (const entry of fs.readdirSync(sourceDir, { withFileTypes: true })) {
+    if (!entry.isDirectory())
       continue
 
-    for (const entry of fs.readdirSync(fullDir, { withFileTypes: true })) {
-      if (entry.isDirectory()) {
-        dirs.push({ name: entry.name, dir: path.join(fullDir, entry.name) })
-      }
-    }
+    const dir = path.join(sourceDir, entry.name)
+    if (!fs.existsSync(path.join(dir, 'examples')))
+      continue
+
+    dirs.push({ name: entry.name, dir })
   }
 
-  return dirs
+  return dirs.sort((a, b) => a.name.localeCompare(b.name))
 }
 
-async function extractTypesForFramework(framework: string) {
+function getPublicIndexFile(componentDir: string): string {
+  const publicIndex = path.join(componentDir, 'index.ts')
+  if (!fs.existsSync(publicIndex))
+    throw new Error(`Missing public declaration entry: ${path.relative(rootDir, publicIndex)}`)
+  return publicIndex
+}
+
+async function extractTypesForFramework(framework: FrameworkDefinition) {
   const distFile = getDistFilePath(framework)
-  const pkgDir = path.join(rootDir, 'packages', framework)
-  const outDir = path.join(rootDir, 'docs', 'src', 'data', 'types', framework)
+  const pkgDir = path.join(rootDir, framework.packageDirectory)
+  const outDir = path.join(rootDir, 'docs', 'src', 'data', 'types', framework.id)
+  const componentDirs = getComponentDirs(framework)
 
   console.log(`Reading declarations from ${path.relative(rootDir, distFile)}`)
 
   // Create a TypeScript program to parse the dist declaration file
   const configPath = path.join(pkgDir, 'tsconfig.json')
   const configFile = ts.readConfigFile(configPath, ts.sys.readFile)
-  const { options } = ts.parseJsonConfigFileContent(configFile.config, ts.sys, pkgDir)
+  if (configFile.error)
+    throw new Error(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
+
+  const parsedConfig = ts.parseJsonConfigFileContent(configFile.config, ts.sys, pkgDir)
+  if (parsedConfig.errors.length > 0) {
+    throw new Error(parsedConfig.errors.map(error => ts.flattenDiagnosticMessageText(error.messageText, '\n')).join('\n'))
+  }
 
   const program = ts.createProgram([distFile], {
-    ...options,
+    ...parsedConfig.options,
     noEmit: true,
     declaration: false,
     emitDeclarationOnly: false,
   })
 
-  const sourceFile = program.getSourceFile(distFile)
-  if (!sourceFile) {
-    throw new Error(`Could not parse ${distFile}`)
-  }
-
   const checker = program.getTypeChecker()
-  const componentDirs = getComponentDirs(framework)
+  const rootExports = getModuleExports(program, checker, distFile)
 
   let count = 0
+  const missingTypes: string[] = []
+  fs.rmSync(outDir, { recursive: true, force: true })
   fs.mkdirSync(outDir, { recursive: true })
 
   for (const comp of componentDirs) {
     const prefix = kebabToPascal(comp.name)
-    const types = extractComponentTypes(sourceFile, checker, prefix)
+    const types: ComponentTypesMap = {}
+    const namespaceExports = getNamespaceExports(rootExports, prefix, checker)
+    const publicNamespace = path.join(comp.dir, 'namespace.ts')
+    const namespaceComponents = getPublicComponentExports(
+      namespaceExports,
+      fs.existsSync(publicNamespace) ? getPublicComponentValueNames(publicNamespace) : [],
+      valueName => valueName,
+      checker,
+    )
+    mergeComponentTypes(types, extractPublicComponentTypes(namespaceComponents, checker))
 
-    if (Object.keys(types).length === 0)
+    const publicIndex = getPublicIndexFile(comp.dir)
+    const directComponents = getPublicComponentExports(
+      rootExports,
+      getPublicComponentValueNames(publicIndex),
+      valueName => getOwnedPartName(valueName, prefix),
+      checker,
+    )
+    mergeComponentTypes(types, extractPublicComponentTypes(directComponents, checker))
+
+    if (Object.keys(types).length === 0) {
+      missingTypes.push(comp.name)
       continue
-
-    // Extract data attributes from upstream machine package
-    const upstreamPkg = resolveUpstreamPackage(comp.dir)
-    if (upstreamPkg) {
-      const dataAttrs = extractDataAttributes(pkgDir, upstreamPkg)
-      for (const [anatomyKey, attrs] of Object.entries(dataAttrs)) {
-        const partName = anatomyKeyToPartName(anatomyKey)
-        if (types[partName]) {
-          types[partName].dataAttr = attrs
-        }
-      }
     }
 
     const outPath = path.join(outDir, `${comp.name}.types.json`)
     fs.writeFileSync(outPath, `${JSON.stringify(types, null, 2)}\n`)
     count++
     console.log(`  ✓ ${comp.name} (${Object.keys(types).length} parts)`)
+  }
+
+  if (missingTypes.length > 0) {
+    throw new Error(`No public component types found for: ${missingTypes.join(', ')}`)
   }
 
   console.log(`\nGenerated ${count} type files → ${path.relative(rootDir, outDir)}/`)
@@ -411,21 +499,24 @@ async function extractTypesForFramework(framework: string) {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  const framework = process.argv[2]
-  if (!framework) {
-    console.error('Usage: npx tsx docs/scripts/generate-type-docs.ts <framework>')
-    console.error('  framework: vue | react')
-    process.exit(1)
+  validatePropertyExtractionRegression()
+
+  const frameworkId = process.argv[2]
+  let selectedFrameworks: readonly FrameworkDefinition[] = frameworks
+  if (frameworkId) {
+    if (!isFramework(frameworkId))
+      throw new Error(`Unsupported framework: ${frameworkId}`)
+    selectedFrameworks = [getFramework(frameworkId)]
   }
 
-  const pkgDir = path.join(rootDir, 'packages', framework)
-  if (!fs.existsSync(pkgDir)) {
-    console.error(`Package not found: packages/${framework}`)
-    process.exit(1)
-  }
+  for (const framework of selectedFrameworks) {
+    const pkgDir = path.join(rootDir, framework.packageDirectory)
+    if (!fs.existsSync(pkgDir))
+      throw new Error(`Package not found: ${framework.packageDirectory}`)
 
-  console.log(`Generating type docs for ${framework}...\n`)
-  await extractTypesForFramework(framework)
+    console.log(`Generating type docs for ${framework.id}...\n`)
+    await extractTypesForFramework(framework)
+  }
 }
 
 main().catch((err) => {

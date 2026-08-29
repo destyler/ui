@@ -72,8 +72,7 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
-.menu-checkbox [data-part="item-indicator"],
-.menu-checkbox [data-part="itemIndicator"] {
+.menu-checkbox [data-part="item-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;

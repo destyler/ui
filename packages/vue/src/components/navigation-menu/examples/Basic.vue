@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { RootEmits, RootProps } from '../types'
+import type { NavigationMenuRootEmits, NavigationMenuRootProps } from '../../../index'
 import { NavigationMenu } from '../index'
 
-const props = defineProps<RootProps>()
-const emits = defineEmits<RootEmits>()
+const props = defineProps<NavigationMenuRootProps>()
+const emits = defineEmits<NavigationMenuRootEmits>()
 </script>
 
 <template>
@@ -46,7 +46,7 @@ const emits = defineEmits<RootEmits>()
               <li>
                 <NavigationMenu.Link value="intro" href="#">
                   <div>Introduction</div>
-                  <p>Re-usable components built using Radix UI and Tailwind CSS.</p>
+                  <p>Re-usable components built using Destyler UI and Tailwind CSS.</p>
                 </NavigationMenu.Link>
               </li>
               <li>

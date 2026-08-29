@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Select
-
 > A component that allows users to choose from a list of options in a dropdown.
 
 <ComponentPreview component="select" example="Basic" />
@@ -81,6 +79,47 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Select, createListCollection } from '@destyler-ui/svelte'
+
+  const collection = createListCollection({
+    items: [
+      { label: 'React', value: 'react' },
+      { label: 'Vue', value: 'vue' },
+      { label: 'Svelte', value: 'svelte' },
+    ],
+  })
+</script>
+
+<Select.Root {collection}>
+  <Select.Label>Framework</Select.Label>
+  <Select.Control>
+    <Select.Trigger>
+      <Select.ValueText placeholder="Select a framework" />
+      <Select.Indicator>⌄</Select.Indicator>
+    </Select.Trigger>
+    <Select.ClearTrigger>Clear</Select.ClearTrigger>
+  </Select.Control>
+  <Select.Positioner>
+    <Select.Content>
+      <Select.ItemGroup>
+        <Select.ItemGroupLabel>Frameworks</Select.ItemGroupLabel>
+        {#each collection.items as item (item.value)}
+          <Select.Item {item}>
+            <Select.ItemText>{item.label}</Select.ItemText>
+            <Select.ItemIndicator>✓</Select.ItemIndicator>
+          </Select.Item>
+        {/each}
+      </Select.ItemGroup>
+    </Select.Content>
+  </Select.Positioner>
+  <Select.HiddenSelect />
+</Select.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -123,66 +162,4 @@ Combine with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="select" part="Root" />
-
-### ClearTrigger
-
-<ComponentTypes id="select" part="ClearTrigger" />
-
-### Content
-
-<ComponentTypes id="select" part="Content" />
-
-### Control
-
-<ComponentTypes id="select" part="Control" />
-
-### HiddenSelect
-
-<ComponentTypes id="select" part="HiddenSelect" />
-
-### Indicator
-
-<ComponentTypes id="select" part="Indicator" />
-
-### Item
-
-<ComponentTypes id="select" part="Item" />
-
-### ItemGroup
-
-<ComponentTypes id="select" part="ItemGroup" />
-
-### ItemGroupLabel
-
-<ComponentTypes id="select" part="ItemGroupLabel" />
-
-### ItemIndicator
-
-<ComponentTypes id="select" part="ItemIndicator" />
-
-### ItemText
-
-<ComponentTypes id="select" part="ItemText" />
-
-### Label
-
-<ComponentTypes id="select" part="Label" />
-
-### List
-
-<ComponentTypes id="select" part="List" />
-
-### Positioner
-
-<ComponentTypes id="select" part="Positioner" />
-
-### Trigger
-
-<ComponentTypes id="select" part="Trigger" />
-
-### ValueText
-
-<ComponentTypes id="select" part="ValueText" />
+<ComponentTypes id="select" />

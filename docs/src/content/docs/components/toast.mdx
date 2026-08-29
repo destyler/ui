@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Toast
-
 > A non-intrusive notification component that provides brief messages to the user.
 
 <ComponentPreview component="toast" example="Basic" />
@@ -18,34 +16,88 @@ import FrameworkContent from '../../../components/FrameworkContent.astro';
 <FrameworkContent fw="vue">
 ```vue
 <script setup lang="ts">
-import { Toast } from '@destyler-ui/vue'
+import { Toast, Toaster, createToaster } from '@destyler-ui/vue'
+
+const toaster = createToaster({ placement: 'bottom-end' })
 </script>
 
 <template>
-  <Toast.Root>
-    <Toast.Title />
-    <Toast.Description />
-    <Toast.ActionTrigger />
-    <Toast.CloseTrigger />
-  </Toast.Root>
+  <button type="button" @click="toaster.create({ title: 'Upload complete', description: 'Your file is ready.' })">
+    Create toast
+  </button>
+  <Toaster :toaster="toaster" v-slot="toast">
+    <Toast.Root>
+      <Toast.Title>{{ toast.title }}</Toast.Title>
+      <Toast.Description>{{ toast.description }}</Toast.Description>
+      <Toast.ActionTrigger>Undo</Toast.ActionTrigger>
+      <Toast.CloseTrigger>Close</Toast.CloseTrigger>
+    </Toast.Root>
+  </Toaster>
 </template>
 ```
 </FrameworkContent>
 
 <FrameworkContent fw="react">
 ```tsx
-import { Toast } from '@destyler-ui/react'
+import { useMemo } from 'react'
+import { Toast, Toaster, createToaster } from '@destyler-ui/react'
 
 export default function Basic() {
+  const toaster = useMemo(() => createToaster({ placement: 'bottom-end' }), [])
+
   return (
-    <Toast.Root>
-      <Toast.Title />
-      <Toast.Description />
-      <Toast.ActionTrigger />
-      <Toast.CloseTrigger />
-    </Toast.Root>
+    <>
+      <button type="button" onClick={() => toaster.create({ title: 'Upload complete', description: 'Your file is ready.' })}>
+        Create toast
+      </button>
+      <Toaster toaster={toaster}>
+        {toast => (
+          <Toast.Root key={toast.id}>
+            <Toast.Title>{toast.title}</Toast.Title>
+            <Toast.Description>{toast.description}</Toast.Description>
+            <Toast.ActionTrigger>Undo</Toast.ActionTrigger>
+            <Toast.CloseTrigger>Close</Toast.CloseTrigger>
+          </Toast.Root>
+        )}
+      </Toaster>
+    </>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Toast, Toaster, createToaster } from '@destyler-ui/svelte'
+
+  const toaster = createToaster({
+    placement: 'bottom-end',
+    overlap: true,
+    gap: 24,
+  })
+</script>
+
+{#snippet title()}Upload complete{/snippet}
+{#snippet description()}Your file is ready.{/snippet}
+
+<button
+  type="button"
+  onclick={() => toaster.create({ title, description, type: 'info' })}
+>
+  Create toast
+</button>
+
+<Toaster {toaster}>
+  {#snippet children(toast)}
+    <Toast.Root>
+      <Toast.Title>{@render toast().title?.()}</Toast.Title>
+      <Toast.Description>{@render toast().description?.()}</Toast.Description>
+      <Toast.ActionTrigger>Undo</Toast.ActionTrigger>
+      <Toast.CloseTrigger>Close</Toast.CloseTrigger>
+    </Toast.Root>
+  {/snippet}
+</Toaster>
 ```
 </FrameworkContent>
 
@@ -99,22 +151,4 @@ Update toast content dynamically.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="toast" part="Root" />
-
-### ActionTrigger
-
-<ComponentTypes id="toast" part="ActionTrigger" />
-
-### CloseTrigger
-
-<ComponentTypes id="toast" part="CloseTrigger" />
-
-### Description
-
-<ComponentTypes id="toast" part="Description" />
-
-### Title
-
-<ComponentTypes id="toast" part="Title" />
+<ComponentTypes id="toast" />

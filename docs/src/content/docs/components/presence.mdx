@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Presence
-
 > A utility component for managing mount and unmount animations.
 
 <ComponentPreview component="presence" example="Basic" />
@@ -43,6 +41,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script module lang="ts">
+  import type { PresenceProps } from '@destyler-ui/svelte'
+
+  export interface BasicProps extends Omit<PresenceProps, 'children' | 'present'> {}
+</script>
+
+<script lang="ts">
+  import { Presence } from '@destyler-ui/svelte'
+
+  const props: BasicProps = $props()
+  let present = $state(false)
+</script>
+
+<button type="button" onclick={() => present = !present}>Toggle</button>
+<Presence {present} {...props} data-testid="box">I am a red box</Presence>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -69,6 +87,4 @@ Combine lazy mounting with unmount on exit.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="presence" part="Root" />
+<ComponentTypes id="presence" />

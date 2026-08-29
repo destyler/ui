@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Number Input
-
 > A numeric input component with increment and decrement controls.
 
 <ComponentPreview component="number-input" example="Basic" />
@@ -54,6 +52,26 @@ export default function Basic() {
     </NumberInput.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { NumberInput } from '@destyler-ui/svelte'
+</script>
+
+<NumberInput.Root>
+  <NumberInput.Label>
+    Quantity: <NumberInput.ValueText />
+  </NumberInput.Label>
+  <NumberInput.Input />
+  <NumberInput.Scrubber />
+  <NumberInput.Control>
+    <NumberInput.DecrementTrigger>-1</NumberInput.DecrementTrigger>
+    <NumberInput.IncrementTrigger>+1</NumberInput.IncrementTrigger>
+  </NumberInput.Control>
+</NumberInput.Root>
 ```
 </FrameworkContent>
 
@@ -123,34 +141,4 @@ Combine with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="number-input" part="Root" />
-
-### Control
-
-<ComponentTypes id="number-input" part="Control" />
-
-### DecrementTrigger
-
-<ComponentTypes id="number-input" part="DecrementTrigger" />
-
-### IncrementTrigger
-
-<ComponentTypes id="number-input" part="IncrementTrigger" />
-
-### Input
-
-<ComponentTypes id="number-input" part="Input" />
-
-### Label
-
-<ComponentTypes id="number-input" part="Label" />
-
-### Scrubber
-
-<ComponentTypes id="number-input" part="Scrubber" />
-
-### ValueText
-
-<ComponentTypes id="number-input" part="ValueText" />
+<ComponentTypes id="number-input" />

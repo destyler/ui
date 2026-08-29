@@ -1,5 +1,4 @@
-.navigation-menu-customdelay .ds-vue-example,
-.navigation-menu-customdelay .ds-react-example {
+.navigation-menu-customdelay .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,8 +163,7 @@
   inset-inline-start: 4px;
 }
 
-.navigation-menu-customdelay [data-part="item-indicator"],
-.navigation-menu-customdelay [data-part="itemIndicator"] {
+.navigation-menu-customdelay [data-part="item-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -174,22 +172,19 @@
   color: var(--demo-coral-fg);
 }
 
-.navigation-menu-customdelay [data-part="viewport-positioner"],
-.navigation-menu-customdelay [data-part="viewportPositioner"] {
+.navigation-menu-customdelay [data-part="viewport-positioner"] {
   position: relative;
   display: flex;
   justify-content: center;
   z-index: var(--demo-popover-z-index);
 }
 
-.navigation-menu-customdelay [data-part="viewport-positioner"][data-orientation="horizontal"],
-.navigation-menu-customdelay [data-part="viewportPositioner"][data-orientation="horizontal"] {
+.navigation-menu-customdelay [data-part="viewport-positioner"][data-orientation="horizontal"] {
   width: 100%;
   margin-top: 0.75rem;
 }
 
-.navigation-menu-customdelay [data-part="viewport-positioner"][data-orientation="vertical"],
-.navigation-menu-customdelay [data-part="viewportPositioner"][data-orientation="vertical"] {
+.navigation-menu-customdelay [data-part="viewport-positioner"][data-orientation="vertical"] {
   margin-inline-start: 0.75rem;
 }
 

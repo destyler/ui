@@ -58,19 +58,19 @@
   resize: vertical;
 }
 
-.field-textarea [data-part="helperText"] {
+.field-textarea [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.field-textarea [data-part="errorText"] {
+.field-textarea [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);
 }
 
-.field-textarea [data-part="requiredIndicator"] {
+.field-textarea [data-part="required-indicator"] {
   margin-left: 0.125rem;
   color: var(--demo-error);
 }

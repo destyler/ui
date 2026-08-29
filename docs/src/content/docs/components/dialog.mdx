@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Dialog
-
 > A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
 
 <ComponentPreview component="dialog" example="Basic" />
@@ -59,6 +57,28 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Dialog, portal } from '@destyler-ui/svelte'
+</script>
+
+<Dialog.Root>
+  <Dialog.Trigger>Open dialog</Dialog.Trigger>
+  <div use:portal>
+    <Dialog.Backdrop />
+    <Dialog.Positioner>
+      <Dialog.Content>
+        <Dialog.Title>Dialog title</Dialog.Title>
+        <Dialog.Description>Dialog description</Dialog.Description>
+        <Dialog.CloseTrigger>Close</Dialog.CloseTrigger>
+      </Dialog.Content>
+    </Dialog.Positioner>
+  </div>
+</Dialog.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -89,34 +109,4 @@ Use render function for custom dialog rendering.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="dialog" part="Root" />
-
-### Backdrop
-
-<ComponentTypes id="dialog" part="Backdrop" />
-
-### CloseTrigger
-
-<ComponentTypes id="dialog" part="CloseTrigger" />
-
-### Content
-
-<ComponentTypes id="dialog" part="Content" />
-
-### Description
-
-<ComponentTypes id="dialog" part="Description" />
-
-### Positioner
-
-<ComponentTypes id="dialog" part="Positioner" />
-
-### Title
-
-<ComponentTypes id="dialog" part="Title" />
-
-### Trigger
-
-<ComponentTypes id="dialog" part="Trigger" />
+<ComponentTypes id="dialog" />

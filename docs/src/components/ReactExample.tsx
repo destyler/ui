@@ -1,5 +1,8 @@
-import type { ComponentType, LazyExoticComponent } from 'react'
-import { lazy, Suspense, useMemo } from 'react'
+import type { ComponentType } from 'react'
+import { useEffect, useState } from 'react'
+import { getFramework } from '../config/frameworks'
+import { getExamplePreviewMessage } from '../utils/example-preview'
+import { getActiveFramework, onFrameworkChange } from '../utils/framework'
 
 interface Props {
   component: string
@@ -9,30 +12,65 @@ interface Props {
 const modules: Record<string, () => Promise<any>> = import.meta.glob(
   '../../../packages/react/src/components/*/examples/*.tsx',
 )
+const framework = getFramework('react')
 
 export default function ReactExample({ component, example }: Props) {
-  const Component: LazyExoticComponent<ComponentType<any>> | null = useMemo(() => {
+  const [isActive, setIsActive] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'missing' | 'error'>('idle')
+  const [Component, setComponent] = useState<ComponentType<any> | null>(null)
+
+  useEffect(() => {
+    setIsActive(getActiveFramework() === framework.id)
+    return onFrameworkChange(activeFramework => setIsActive(activeFramework === framework.id))
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    if (!isActive) {
+      setComponent(null)
+      setStatus('idle')
+      return () => {
+        cancelled = true
+      }
+    }
     const key = `../../../packages/react/src/components/${component}/examples/${example}.tsx`
     const loader = modules[key]
-    if (!loader)
-      return null
-    return lazy(async () => {
-      const mod = await loader()
-      // React examples use named exports matching the filename
-      const Comp = mod[example] || mod.default
-      return { default: Comp }
-    })
-  }, [component, example])
+    if (!loader) {
+      setComponent(null)
+      setStatus('missing')
+      return () => {
+        cancelled = true
+      }
+    }
 
-  if (!Component) {
-    return <div className="ds-preview-empty">React example not found</div>
-  }
+    setComponent(null)
+    setStatus('loading')
+    loader().then((mod) => {
+      if (cancelled)
+        return
+      const LoadedComponent = mod[example] || mod.default
+      setComponent(() => LoadedComponent ?? null)
+      setStatus(LoadedComponent ? 'ready' : 'error')
+    }).catch(() => {
+      if (!cancelled) {
+        setComponent(null)
+        setStatus('error')
+      }
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [component, example, isActive])
 
   return (
-    <div className="ds-react-example">
-      <Suspense fallback={<div className="ds-preview-loading">Loading…</div>}>
-        <Component />
-      </Suspense>
+    <div className="ds-example-content">
+      {status === 'ready' && Component && <Component />}
+      {status !== 'idle' && status !== 'ready' && (
+        <div className={status === 'loading' ? 'ds-preview-loading' : 'ds-preview-empty'}>
+          {getExamplePreviewMessage(framework.label, status)}
+        </div>
+      )}
     </div>
   )
 }

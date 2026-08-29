@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Timer
-
 > A component for displaying a countdown or stopwatch timer.
 
 <ComponentPreview component="timer" example="Basic" />
@@ -55,6 +53,32 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Timer } from '@destyler-ui/svelte'
+</script>
+
+<Timer.Root countdown autoStart startMs={60000}>
+  <Timer.Area>
+    <Timer.Item type="days" />
+    <Timer.Separator>:</Timer.Separator>
+    <Timer.Item type="hours" />
+    <Timer.Separator>:</Timer.Separator>
+    <Timer.Item type="minutes" />
+    <Timer.Separator>:</Timer.Separator>
+    <Timer.Item type="seconds" />
+  </Timer.Area>
+  <Timer.Control>
+    <Timer.ActionTrigger action="start">START</Timer.ActionTrigger>
+    <Timer.ActionTrigger action="pause">PAUSE</Timer.ActionTrigger>
+    <Timer.ActionTrigger action="resume">RESUME</Timer.ActionTrigger>
+    <Timer.ActionTrigger action="reset">RESET</Timer.ActionTrigger>
+  </Timer.Control>
+</Timer.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -63,26 +87,4 @@ export default function Basic() {
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="timer" part="Root" />
-
-### ActionTrigger
-
-<ComponentTypes id="timer" part="ActionTrigger" />
-
-### Area
-
-<ComponentTypes id="timer" part="Area" />
-
-### Control
-
-<ComponentTypes id="timer" part="Control" />
-
-### Item
-
-<ComponentTypes id="timer" part="Item" />
-
-### Separator
-
-<ComponentTypes id="timer" part="Separator" />
+<ComponentTypes id="timer" />

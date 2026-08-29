@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# QR Code
-
 > A component that generates and displays QR codes.
 
 <ComponentPreview component="qr-code" example="Basic" />
@@ -51,6 +49,20 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { QrCode } from '@destyler-ui/svelte'
+</script>
+
+<QrCode.Root value="https://destyler.com">
+  <QrCode.Frame><QrCode.Pattern data-testid="pattern" /></QrCode.Frame>
+  <QrCode.Overlay><img src="https://github.com/elonehoo.png" alt="" /></QrCode.Overlay>
+  <QrCode.DownloadTrigger fileName="qr-code.png" mimeType="image/png">Download</QrCode.DownloadTrigger>
+</QrCode.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -81,22 +93,4 @@ Display an overlay image on the QR code.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="qr-code" part="Root" />
-
-### DownloadTrigger
-
-<ComponentTypes id="qr-code" part="DownloadTrigger" />
-
-### Frame
-
-<ComponentTypes id="qr-code" part="Frame" />
-
-### Overlay
-
-<ComponentTypes id="qr-code" part="Overlay" />
-
-### Pattern
-
-<ComponentTypes id="qr-code" part="Pattern" />
+<ComponentTypes id="qr-code" />

@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Tour
-
 > A guided tour component that highlights elements and walks users through a sequence of steps.
 
 <ComponentPreview component="tour" example="Basic" />
@@ -75,6 +73,58 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { onMount } from 'svelte'
+  import type { TourStepDetails } from '@destyler-ui/svelte'
+  import { Tour, useTour } from '@destyler-ui/svelte'
+
+  let target: HTMLButtonElement
+  const steps: TourStepDetails[] = [
+    {
+      id: 'welcome',
+      type: 'tooltip',
+      title: 'Welcome',
+      description: 'Welcome to the tour!',
+      target: () => target,
+      arrow: true,
+      backdrop: true,
+    },
+  ]
+  const tour = useTour({ id: 'tour', steps })
+
+  onMount(() => tour().start())
+</script>
+
+<button bind:this={target}>Target</button>
+
+<Tour.Root {tour}>
+  <Tour.Backdrop />
+  <Tour.Spotlight />
+  <Tour.Positioner>
+    <Tour.Content>
+      <Tour.Arrow>
+        <Tour.ArrowTip />
+      </Tour.Arrow>
+      <Tour.Title />
+      <Tour.Description />
+      <Tour.ProgressText />
+      <Tour.Control>
+        <Tour.ActionTrigger action={{ label: 'Previous', action: 'prev' }}>
+          Previous
+        </Tour.ActionTrigger>
+        <Tour.ActionTrigger action={{ label: 'Next', action: 'next' }}>
+          Next
+        </Tour.ActionTrigger>
+      </Tour.Control>
+      <Tour.CloseTrigger>Close</Tour.CloseTrigger>
+    </Tour.Content>
+  </Tour.Positioner>
+</Tour.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -83,54 +133,4 @@ export default function Basic() {
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="tour" part="Root" />
-
-### ActionTrigger
-
-<ComponentTypes id="tour" part="ActionTrigger" />
-
-### Arrow
-
-<ComponentTypes id="tour" part="Arrow" />
-
-### ArrowTip
-
-<ComponentTypes id="tour" part="ArrowTip" />
-
-### Backdrop
-
-<ComponentTypes id="tour" part="Backdrop" />
-
-### CloseTrigger
-
-<ComponentTypes id="tour" part="CloseTrigger" />
-
-### Content
-
-<ComponentTypes id="tour" part="Content" />
-
-### Control
-
-<ComponentTypes id="tour" part="Control" />
-
-### Description
-
-<ComponentTypes id="tour" part="Description" />
-
-### Positioner
-
-<ComponentTypes id="tour" part="Positioner" />
-
-### ProgressText
-
-<ComponentTypes id="tour" part="ProgressText" />
-
-### Spotlight
-
-<ComponentTypes id="tour" part="Spotlight" />
-
-### Title
-
-<ComponentTypes id="tour" part="Title" />
+<ComponentTypes id="tour" />

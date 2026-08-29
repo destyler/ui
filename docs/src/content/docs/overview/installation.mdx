@@ -1,0 +1,76 @@
+---
+title: Installation
+description: Install Destyler UI for Vue, React, or Svelte.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+Choose a framework from the header. The requirements, package name, and imports below follow that selection.
+
+## Requirements
+
+<FrameworkContent fw="vue">
+Destyler UI for Vue requires `vue` `>=3.5.0`.
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+Destyler UI for React requires `react` and `react-dom` `>=18.0.0`.
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+Destyler UI for Svelte requires `svelte` `>=5.29.0`.
+</FrameworkContent>
+
+## Install the package
+
+<FrameworkContent fw="vue">
+```sh
+pnpm add @destyler-ui/vue vue
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```sh
+pnpm add @destyler-ui/react react react-dom
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```sh
+pnpm add @destyler-ui/svelte svelte
+```
+</FrameworkContent>
+
+Use the equivalent `npm install`, `yarn add`, or `bun add` command when your project uses another package manager.
+
+## Import components
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Avatar, Toggle } from '@destyler-ui/vue'
+</script>
+```
+
+Vue components and providers are exported from the package root.
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Avatar, Toggle } from '@destyler-ui/react'
+```
+
+React components and providers are exported from the package root.
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Avatar, Toggle } from '@destyler-ui/svelte'
+</script>
+```
+
+Svelte components and providers are available from the package root and from direct entries such as `@destyler-ui/svelte/avatar`.
+</FrameworkContent>
+
+No stylesheet is required. Destyler UI provides behavior, accessibility attributes, and component state while leaving the visual design to your CSS or styling system.

@@ -1,5 +1,4 @@
-.separator-vertical .ds-vue-example,
-.separator-vertical .ds-react-example {
+.separator-vertical .ds-example-content {
   display: flex;
   align-items: center;
 }
@@ -11,8 +10,7 @@
   color: var(--demo-neutral-fg);
 }
 
-.separator-vertical.ds-preview-frame .ds-vue-example nav,
-.separator-vertical.ds-preview-frame .ds-react-example nav {
+.separator-vertical.ds-preview-frame .ds-example-content nav {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;

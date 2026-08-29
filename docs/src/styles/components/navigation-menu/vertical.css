@@ -1,5 +1,4 @@
-.navigation-menu-vertical .ds-vue-example,
-.navigation-menu-vertical .ds-react-example {
+.navigation-menu-vertical .ds-example-content {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -156,8 +155,7 @@
   inset-inline-start: 4px;
 }
 
-.navigation-menu-vertical [data-part="item-indicator"],
-.navigation-menu-vertical [data-part="itemIndicator"] {
+.navigation-menu-vertical [data-part="item-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -166,22 +164,19 @@
   color: var(--demo-coral-fg);
 }
 
-.navigation-menu-vertical [data-part="viewport-positioner"],
-.navigation-menu-vertical [data-part="viewportPositioner"] {
+.navigation-menu-vertical [data-part="viewport-positioner"] {
   position: relative;
   display: flex;
   justify-content: center;
   z-index: var(--demo-popover-z-index);
 }
 
-.navigation-menu-vertical [data-part="viewport-positioner"][data-orientation="horizontal"],
-.navigation-menu-vertical [data-part="viewportPositioner"][data-orientation="horizontal"] {
+.navigation-menu-vertical [data-part="viewport-positioner"][data-orientation="horizontal"] {
   width: 100%;
   margin-top: 0.75rem;
 }
 
-.navigation-menu-vertical [data-part="viewport-positioner"][data-orientation="vertical"],
-.navigation-menu-vertical [data-part="viewportPositioner"][data-orientation="vertical"] {
+.navigation-menu-vertical [data-part="viewport-positioner"][data-orientation="vertical"] {
   margin-inline-start: 0.75rem;
 }
 

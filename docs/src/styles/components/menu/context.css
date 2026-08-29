@@ -1,5 +1,4 @@
-.menu-context [data-part="context-trigger"],
-.menu-context [data-part="contextTrigger"] {
+.menu-context [data-part="context-trigger"] {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,8 +16,7 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 }
 
-.menu-context [data-part="context-trigger"]:hover,
-.menu-context [data-part="contextTrigger"]:hover {
+.menu-context [data-part="context-trigger"]:hover {
   color: var(--demo-neutral-fg);
   border-color: var(--demo-neutral-solid);
   background: var(--demo-bg-popover);

@@ -13,19 +13,20 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import PropsTable from './PropsTable.astro'
+import { frameworks } from '../config/frameworks'
 import EmitsTable from './EmitsTable.astro'
-import DataAttrTable from './DataAttrTable.astro'
+import PropsTable from './PropsTable.astro'
 
-interface DataAttrInfo {
-  name: string
+interface PropertyInfo {
   type: string
+  isRequired: boolean
+  defaultValue?: string
+  description?: string
 }
 
 interface PartTypes {
-  props?: Record<string, any>
-  emits?: Record<string, any>
-  dataAttr?: DataAttrInfo[]
+  props?: Record<string, PropertyInfo>
+  emits?: Record<string, PropertyInfo>
 }
 
 interface Props {
@@ -50,8 +51,10 @@ function loadTypes(framework: string): Record<string, PartTypes> | null {
   }
 }
 
-const vueTypes = loadTypes('vue')
-const reactTypes = loadTypes('react')
+const frameworkTypes = frameworks.flatMap((framework) => {
+  const types = loadTypes(framework.id)
+  return types ? [{ framework, types }] : []
+})
 
 function sortedEntries(types: Record<string, PartTypes>): [string, PartTypes][] {
   return Object.entries(types).sort(([a], [b]) => {
@@ -61,36 +64,42 @@ function sortedEntries(types: Record<string, PartTypes>): [string, PartTypes][] 
     return a.localeCompare(b)
   })
 }
+
+function partSlug(partName: string): string {
+  return partName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
+function hasDetails(types: PartTypes): boolean {
+  return Object.keys(types.props ?? {}).length > 0 || Object.keys(types.emits ?? {}).length > 0
+}
 ---
 
-{(vueTypes || reactTypes) && (
+{frameworkTypes.length > 0 && (
   <div class="not-content">
-    {vueTypes && (
-      <div class="ds-fw-content" data-fw="vue">
-        {sortedEntries(vueTypes)
+    {frameworkTypes.map(({ framework, types: componentTypes }) => (
+      <div class="ds-fw-content" data-fw={framework.id}>
+        {sortedEntries(componentTypes)
           .filter(([partName]) => !part || partName.toLowerCase() === part.toLowerCase())
           .map(([partName, types]) => (
-            <div class="mt-6 first:mt-0">
+            <section class="mt-8 first:mt-0">
+              {!part && (
+                <h3
+                  id={`${id}-${partSlug(partName)}-${framework.id}`}
+                  class="m-0 text-xl font-600 tracking-tight text-$sl-color-text"
+                >
+                  {partName}
+                </h3>
+              )}
               {types.props && <PropsTable props={types.props} />}
               {types.emits && <EmitsTable emits={types.emits} />}
-              {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
-            </div>
+              {!hasDetails(types) && (
+                <p class="my-4 text-sm text-$sl-color-gray-3">
+                  No serializable props or emits are declared for this part.
+                </p>
+              )}
+            </section>
           ))}
       </div>
-    )}
-
-    {reactTypes && (
-      <div class="ds-fw-content" data-fw="react">
-        {sortedEntries(reactTypes)
-          .filter(([partName]) => !part || partName.toLowerCase() === part.toLowerCase())
-          .map(([partName, types]) => (
-            <div class="mt-6 first:mt-0">
-              {types.props && <PropsTable props={types.props} />}
-              {types.emits && <EmitsTable emits={types.emits} />}
-              {types.dataAttr && types.dataAttr.length > 0 && <DataAttrTable attrs={types.dataAttr} />}
-            </div>
-          ))}
-      </div>
-    )}
+    ))}
   </div>
 )}

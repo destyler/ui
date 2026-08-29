@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Pagination
-
 > A component for navigating between pages of content.
 
 <ComponentPreview component="pagination" example="Basic" />
@@ -49,6 +47,30 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Pagination } from '@destyler-ui/svelte'
+</script>
+
+<Pagination.Root count={100} pageSize={10} siblingCount={2}>
+  <Pagination.PrevTrigger>Previous <span class="visually-hidden">Page</span></Pagination.PrevTrigger>
+  <Pagination.Context>
+    {#snippet render(pagination)}
+      {#each pagination().pages as page, index}
+        {#if page.type === 'page'}
+          <Pagination.Item value={page.value} type={page.type}>{page.value}</Pagination.Item>
+        {:else}
+          <Pagination.Ellipsis {index}>&#8230;</Pagination.Ellipsis>
+        {/if}
+      {/each}
+    {/snippet}
+  </Pagination.Context>
+  <Pagination.NextTrigger>Next <span class="visually-hidden">Page</span></Pagination.NextTrigger>
+</Pagination.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -67,22 +89,4 @@ Customize the pagination appearance and behavior.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="pagination" part="Root" />
-
-### Ellipsis
-
-<ComponentTypes id="pagination" part="Ellipsis" />
-
-### Item
-
-<ComponentTypes id="pagination" part="Item" />
-
-### NextTrigger
-
-<ComponentTypes id="pagination" part="NextTrigger" />
-
-### PrevTrigger
-
-<ComponentTypes id="pagination" part="PrevTrigger" />
+<ComponentTypes id="pagination" />

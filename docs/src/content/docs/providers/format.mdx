@@ -1,0 +1,104 @@
+---
+title: Format
+description: Format numbers, byte values, and relative dates with the active locale.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+The `Format` components render locale-aware text with the browser's `Intl` APIs. They read the locale from `LocaleProvider` and default to `en-US` when no provider is present.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Format } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Format } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Format } from '@destyler-ui/svelte/format'
+</script>
+```
+
+</FrameworkContent>
+
+Named exports `FormatByte` and `FormatNumber` are also available.
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { Format } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <p>Price: <Format.Number :value="1234.5" format-style="currency" currency="USD" /></p>
+  <p>File size: <Format.Byte :value="1450.45" /></p>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { Format } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <>
+      <p>Price: <Format.Number value={1234.5} style="currency" currency="USD" /></p>
+      <p>File size: <Format.Byte value={1450.45} /></p>
+    </>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { Format } from '@destyler-ui/svelte/format'
+</script>
+
+<p>Price: <Format.Number value={1234.5} style="currency" currency="USD" /></p>
+<p>File size: <Format.Byte value={1450.45} /></p>
+```
+
+</FrameworkContent>
+
+## API
+
+### Format.Number
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `number` | Required | Number to format. |
+| Intl number options | `Intl.NumberFormatOptions` | Browser defaults | Options such as `style`, `currency`, `unit`, and `notation`. |
+
+### Format.Byte
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `number` | Required | Byte size to format. |
+| `unit` | `'bit' \| 'byte'` | `'byte'` | Unit used for the result. |
+| `unitDisplay` | `'long' \| 'short' \| 'narrow'` | `'short'` | Controls how the unit label is displayed. |

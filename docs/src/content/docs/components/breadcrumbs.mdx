@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Breadcrumbs
-
 > Show hierarchy and navigational context for a user’s location within an application.
 
 <ComponentPreview component="breadcrumbs" example="Basic" />
@@ -60,6 +58,38 @@ export function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Breadcrumbs } from '@destyler-ui/svelte'
+
+  const items = [
+    { id: '1', label: 'Home', href: '/' },
+    { id: '2', label: 'Products', href: '/products' },
+    { id: '3', label: 'Electronics', href: '/products/electronics' },
+    { id: '4', label: 'Smartphones' },
+  ]
+</script>
+
+<main>
+  <Breadcrumbs.Root {items}>
+    <Breadcrumbs.List>
+      <Breadcrumbs.Context>
+        {#snippet render(breadcrumbs)}
+          {#each breadcrumbs().items as item (item.id)}
+            <Breadcrumbs.Item {item}>
+              <Breadcrumbs.Link {item}>{item.label}</Breadcrumbs.Link>
+              {#if item.href}<Breadcrumbs.Separator>/</Breadcrumbs.Separator>{/if}
+            </Breadcrumbs.Item>
+          {/each}
+        {/snippet}
+      </Breadcrumbs.Context>
+    </Breadcrumbs.List>
+  </Breadcrumbs.Root>
+</main>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -80,22 +110,4 @@ Use `Context` to access the breadcrumbs state and customize rendering with icons
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="breadcrumbs" part="Root" />
-
-### Item
-
-<ComponentTypes id="breadcrumbs" part="Item" />
-
-### Link
-
-<ComponentTypes id="breadcrumbs" part="Link" />
-
-### List
-
-<ComponentTypes id="breadcrumbs" part="List" />
-
-### Separator
-
-<ComponentTypes id="breadcrumbs" part="Separator" />
+<ComponentTypes id="breadcrumbs" />

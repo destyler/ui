@@ -137,11 +137,8 @@
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"],
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"],
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"],
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"],
-.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"],
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"] {
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -159,78 +156,54 @@
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"],
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"],
-.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"],
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"] {
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"] {
   color: var(--demo-neutral-fg);
   background: var(--demo-bg-checkbox);
   border: 1px solid var(--demo-border-emphasized);
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"]:hover,
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"]:hover,
 .edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:hover,
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"]:hover,
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][data-hover],
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][data-hover],
-.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-hover],
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][data-hover] {
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
-.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"],
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"] {
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"] {
   color: var(--demo-coral-contrast);
   background: var(--demo-coral-solid);
   border: 1px solid var(--demo-coral-solid);
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"]:hover,
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"]:hover,
-.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-hover],
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][data-hover] {
+.edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-hover] {
   background: var(--demo-coral-emphasized);
   border-color: var(--demo-coral-emphasized);
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"]:focus,
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"]:focus,
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"]:focus,
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"]:focus,
 .edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:focus,
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"]:focus,
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][data-focus],
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][data-focus],
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-focus],
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][data-focus],
-.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-focus],
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][data-focus] {
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-focus] {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][data-disabled],
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][data-disabled],
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][data-disabled],
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][data-disabled],
 .edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][data-disabled],
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][data-disabled],
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"]:disabled,
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"]:disabled,
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"]:disabled,
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"]:disabled,
-.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:disabled,
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"]:disabled {
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
 .edit-customcontrols [data-scope="edit"][data-part="edit-trigger"][hidden],
-.edit-customcontrols [data-scope="edit"][data-part="editTrigger"][hidden],
 .edit-customcontrols [data-scope="edit"][data-part="submit-trigger"][hidden],
-.edit-customcontrols [data-scope="edit"][data-part="submitTrigger"][hidden],
-.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][hidden],
-.edit-customcontrols [data-scope="edit"][data-part="cancelTrigger"][hidden] {
+.edit-customcontrols [data-scope="edit"][data-part="cancel-trigger"][hidden] {
   display: none;
 }

@@ -1,0 +1,63 @@
+// Generated from package-manifest.json. Do not edit by hand.
+export const componentCategories = {
+  Form: [
+    { name: 'Checkbox', slug: 'checkbox' },
+    { name: 'Radio', slug: 'radio' },
+    { name: 'Select', slug: 'select' },
+    { name: 'Switch', slug: 'switch' },
+    { name: 'Slider', slug: 'slider' },
+    { name: 'Number Input', slug: 'number-input' },
+    { name: 'OTP Input', slug: 'otp-input' },
+    { name: 'File Upload', slug: 'file-upload' },
+    { name: 'Signature', slug: 'signature' },
+    { name: 'Color Picker', slug: 'color-picker' },
+    { name: 'Field', slug: 'field' },
+    { name: 'Fieldset', slug: 'fieldset' },
+    { name: 'Label', slug: 'label' },
+  ],
+  Overlay: [
+    { name: 'Dialog', slug: 'dialog' },
+    { name: 'Popover', slug: 'popover' },
+    { name: 'Tooltip', slug: 'tooltip' },
+    { name: 'Hover Card', slug: 'hover-card' },
+    { name: 'Toast', slug: 'toast' },
+    { name: 'Tour', slug: 'tour' },
+  ],
+  Layout: [
+    { name: 'Collapse', slug: 'collapse' },
+    { name: 'Collapsible', slug: 'collapsible' },
+    { name: 'Tabs', slug: 'tabs' },
+    { name: 'Splitter', slug: 'splitter' },
+    { name: 'Steps', slug: 'steps' },
+    { name: 'Separator', slug: 'separator' },
+    { name: 'Scroll Area', slug: 'scroll-area' },
+  ],
+  Navigation: [
+    { name: 'Breadcrumbs', slug: 'breadcrumbs' },
+    { name: 'Menu', slug: 'menu' },
+    { name: 'Navigation Menu', slug: 'navigation-menu' },
+    { name: 'Pagination', slug: 'pagination' },
+    { name: 'Tree', slug: 'tree' },
+  ],
+  Data: [
+    { name: 'Avatar', slug: 'avatar' },
+    { name: 'Calendar', slug: 'calendar' },
+    { name: 'Carousel', slug: 'carousel' },
+    { name: 'Progress', slug: 'progress' },
+    { name: 'Timer', slug: 'timer' },
+    { name: 'QR Code', slug: 'qr-code' },
+    { name: 'Toggle', slug: 'toggle' },
+    { name: 'Toggle Group', slug: 'toggle-group' },
+  ],
+  Utility: [
+    { name: 'Clipboard', slug: 'clipboard' },
+    { name: 'Combobox', slug: 'combobox' },
+    { name: 'Dynamic', slug: 'dynamic' },
+    { name: 'Edit', slug: 'edit' },
+    { name: 'Floating Panel', slug: 'floating-panel' },
+    { name: 'Presence', slug: 'presence' },
+    { name: 'Aspect Ratio', slug: 'aspect-ratio' },
+  ],
+} as const
+
+export type ComponentCategory = keyof typeof componentCategories

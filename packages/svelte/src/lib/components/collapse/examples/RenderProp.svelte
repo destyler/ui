@@ -1,0 +1,2 @@
+<script lang="ts">import { Collapse } from '../index'; const items = ['React', 'Solid', 'Vue']</script>
+<Collapse.Root>{#each items as item (item)}<Collapse.Item value={item}><Collapse.ItemContext>{#snippet render(state)}<Collapse.ItemTrigger>{state().expanded ? 'Expanded' : 'Closed'}</Collapse.ItemTrigger><Collapse.ItemContent><div>{item} content</div></Collapse.ItemContent>{/snippet}</Collapse.ItemContext></Collapse.Item>{/each}</Collapse.Root>

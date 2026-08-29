@@ -33,8 +33,7 @@
   width: 100%;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"] {
   flex: 1 1 5rem;
   min-width: 0;
   min-height: 2.25rem;
@@ -52,46 +51,38 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"][data-channel="alpha"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"][data-channel="alpha"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"][data-channel="alpha"] {
   flex: 0 0 4.25rem;
   width: 4.25rem;
   max-width: 4.5rem;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"]::placeholder,
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"]::placeholder {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"]::placeholder {
   color: var(--demo-neutral-fg-muted);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"]:hover,
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"]:hover {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"]:hover {
   border-color: var(--demo-neutral-solid);
 }
 
 .color-picker-basic [data-scope="color-picker"][data-part="channel-input"]:focus,
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"]:focus,
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"][data-focus],
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"][data-focus] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"][data-focus] {
   outline: none;
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"][data-invalid],
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"][data-invalid] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"][data-invalid] {
   border-color: var(--demo-error);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-input"]:is([data-disabled], [disabled]),
-.color-picker-basic [data-scope="color-picker"][data-part="channelInput"]:is([data-disabled], [disabled]) {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-input"]:is([data-disabled], [disabled]) {
   cursor: not-allowed;
   opacity: 0.5;
   background: var(--demo-neutral-subtle);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="value-text"],
-.color-picker-basic [data-scope="color-picker"][data-part="valueText"] {
+.color-picker-basic [data-scope="color-picker"][data-part="value-text"] {
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -139,10 +130,8 @@
 }
 
 .color-picker-basic [data-scope="color-picker"][data-part="trigger"] [data-part="transparency-grid"],
-.color-picker-basic [data-scope="color-picker"][data-part="trigger"] [data-part="transparencyGrid"],
 .color-picker-basic [data-scope="color-picker"][data-part="trigger"] [data-part="swatch"],
-.color-picker-basic [data-scope="color-picker"][data-part="trigger"] [data-part="value-swatch"],
-.color-picker-basic [data-scope="color-picker"][data-part="trigger"] [data-part="valueSwatch"] {
+.color-picker-basic [data-scope="color-picker"][data-part="trigger"] [data-part="value-swatch"] {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -170,8 +159,7 @@
   box-sizing: border-box;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="format-trigger"],
-.color-picker-basic [data-scope="color-picker"][data-part="formatTrigger"] {
+.color-picker-basic [data-scope="color-picker"][data-part="format-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -189,19 +177,16 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="format-trigger"]:hover,
-.color-picker-basic [data-scope="color-picker"][data-part="formatTrigger"]:hover {
+.color-picker-basic [data-scope="color-picker"][data-part="format-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="format-trigger"]:focus,
-.color-picker-basic [data-scope="color-picker"][data-part="formatTrigger"]:focus {
+.color-picker-basic [data-scope="color-picker"][data-part="format-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="format-select"],
-.color-picker-basic [data-scope="color-picker"][data-part="formatSelect"] {
+.color-picker-basic [data-scope="color-picker"][data-part="format-select"] {
   min-height: 1.75rem;
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
@@ -216,8 +201,7 @@
   cursor: pointer;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="format-select"]:focus,
-.color-picker-basic [data-scope="color-picker"][data-part="formatSelect"]:focus {
+.color-picker-basic [data-scope="color-picker"][data-part="format-select"]:focus {
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
@@ -232,15 +216,13 @@
   touch-action: none;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="area-background"],
-.color-picker-basic [data-scope="color-picker"][data-part="areaBackground"] {
+.color-picker-basic [data-scope="color-picker"][data-part="area-background"] {
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="area-thumb"],
-.color-picker-basic [data-scope="color-picker"][data-part="areaThumb"] {
+.color-picker-basic [data-scope="color-picker"][data-part="area-thumb"] {
   width: var(--color-picker-thumb-size);
   height: var(--color-picker-thumb-size);
   background: var(--demo-bg-thumb);
@@ -251,14 +233,11 @@
 }
 
 .color-picker-basic [data-scope="color-picker"][data-part="area-thumb"]:focus-visible,
-.color-picker-basic [data-scope="color-picker"][data-part="areaThumb"]:focus-visible,
-.color-picker-basic [data-scope="color-picker"][data-part="area-thumb"][data-focus],
-.color-picker-basic [data-scope="color-picker"][data-part="areaThumb"][data-focus] {
+.color-picker-basic [data-scope="color-picker"][data-part="area-thumb"][data-focus] {
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring), var(--demo-shadow-sm);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSlider"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider"] {
   --color-picker-channel-height: 0.75rem;
   --color-picker-thumb-size: 0.875rem;
   position: relative;
@@ -268,8 +247,7 @@
   touch-action: none;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-label"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSliderLabel"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-label"] {
   position: absolute;
   left: 0;
   bottom: 100%;
@@ -280,8 +258,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-value-text"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSliderValueText"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-value-text"] {
   position: absolute;
   right: 0;
   bottom: 100%;
@@ -293,10 +270,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider"] [data-part="transparency-grid"],
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider"] [data-part="transparencyGrid"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSlider"] [data-part="transparency-grid"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSlider"] [data-part="transparencyGrid"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider"] [data-part="transparency-grid"] {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -304,16 +278,14 @@
   pointer-events: none;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-track"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSliderTrack"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-track"] {
   position: relative;
   height: 100%;
   border-radius: inherit;
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-thumb"],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSliderThumb"] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-thumb"] {
   width: var(--color-picker-thumb-size);
   height: var(--color-picker-thumb-size);
   background: var(--demo-bg-thumb);
@@ -325,22 +297,18 @@
 }
 
 .color-picker-basic [data-scope="color-picker"][data-part="channel-slider-thumb"]:focus-visible,
-.color-picker-basic [data-scope="color-picker"][data-part="channelSliderThumb"]:focus-visible,
-.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-thumb"][data-focus],
-.color-picker-basic [data-scope="color-picker"][data-part="channelSliderThumb"][data-focus] {
+.color-picker-basic [data-scope="color-picker"][data-part="channel-slider-thumb"][data-focus] {
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring), var(--demo-shadow-sm);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-group"],
-.color-picker-basic [data-scope="color-picker"][data-part="swatchGroup"] {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-group"] {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"],
-.color-picker-basic [data-scope="color-picker"][data-part="swatchTrigger"] {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -351,23 +319,19 @@
   cursor: pointer;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"]:focus,
-.color-picker-basic [data-scope="color-picker"][data-part="swatchTrigger"]:focus {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"]:focus {
   outline: none;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"]:focus-visible,
-.color-picker-basic [data-scope="color-picker"][data-part="swatchTrigger"]:focus-visible {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"]:focus-visible {
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"][data-state="checked"],
-.color-picker-basic [data-scope="color-picker"][data-part="swatchTrigger"][data-state="checked"] {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-trigger"][data-state="checked"] {
   box-shadow: 0 0 0 2px var(--demo-coral-solid);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-group"] [data-part="swatch"],
-.color-picker-basic [data-scope="color-picker"][data-part="swatchGroup"] [data-part="swatch"] {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-group"] [data-part="swatch"] {
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
@@ -376,8 +340,7 @@
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-indicator"],
-.color-picker-basic [data-scope="color-picker"][data-part="swatchIndicator"] {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -389,8 +352,7 @@
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="swatch-indicator"][hidden],
-.color-picker-basic [data-scope="color-picker"][data-part="swatchIndicator"][hidden] {
+.color-picker-basic [data-scope="color-picker"][data-part="swatch-indicator"][hidden] {
   display: none;
 }
 
@@ -401,8 +363,7 @@
   width: 100%;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="view"] [data-part="channel-input"],
-.color-picker-basic [data-scope="color-picker"][data-part="view"] [data-part="channelInput"] {
+.color-picker-basic [data-scope="color-picker"][data-part="view"] [data-part="channel-input"] {
   flex: 1 1 0;
   min-width: 0;
   min-height: 2rem;
@@ -410,8 +371,7 @@
   font-size: 0.8125rem;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"],
-.color-picker-basic [data-scope="color-picker"][data-part="eyeDropperTrigger"] {
+.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -429,21 +389,17 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"]:hover,
-.color-picker-basic [data-scope="color-picker"][data-part="eyeDropperTrigger"]:hover {
+.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
-.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"]:focus,
-.color-picker-basic [data-scope="color-picker"][data-part="eyeDropperTrigger"]:focus {
+.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"][data-disabled],
-.color-picker-basic [data-scope="color-picker"][data-part="eyeDropperTrigger"][data-disabled],
-.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"]:disabled,
-.color-picker-basic [data-scope="color-picker"][data-part="eyeDropperTrigger"]:disabled {
+.color-picker-basic [data-scope="color-picker"][data-part="eye-dropper-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
