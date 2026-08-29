@@ -10,9 +10,15 @@
   import { UI } from '../../factory'
   import { useFieldContext } from '../hooks/use-field-context'
 
-  const props: FieldInputProps = $props()
+  let { value = $bindable(), ...props }: FieldInputProps = $props()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(field?.().getInputProps() ?? {}, props))
+  const nativeInputProps: HTMLProps<'input'> = $derived({
+    value,
+    oninput(event) {
+      value = event.currentTarget.value
+    },
+  })
+  const mergedProps = $derived(mergeProps(field?.().getInputProps() ?? {}, nativeInputProps, props))
 </script>
 
 <UI as="input" {...mergedProps} />

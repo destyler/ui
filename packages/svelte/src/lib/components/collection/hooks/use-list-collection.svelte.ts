@@ -21,18 +21,29 @@ export function useListCollection<T extends CollectionItem>(
   const create = (items: T[]) => createListCollection({ ...collectionOptions, items })
   const applyLimit = (items: T[]) => (props.limit == null ? items : items.slice(0, props.limit))
 
-  let collection = $state(untrack(() => create(applyLimit(props.initialItems))))
+  let items = $state<T[]>(untrack(() => [...props.initialItems]))
+  let filterText = $state('')
 
-  const setItems = (items: T[]) => {
-    collection = create(applyLimit(items))
+  const collection = $derived.by(() => {
+    let activeItems = items
+    if (filterText && props.filter) {
+      const source = create(items)
+      activeItems = items.filter(item => props.filter?.(source.stringifyItem(item) ?? '', filterText))
+    }
+    return create(applyLimit(activeItems))
+  })
+
+  const setItems = (nextItems: T[]) => {
+    items = nextItems
+    filterText = ''
   }
 
-  const itemValue = (item: T) => collection.getItemValue(item)
+  const itemValue = (item: T) => create(items).getItemValue(item)
   const moveItem = (value: string, to: number) => {
-    const from = collection.indexOf(value)
-    if (from < 0)
+    const from = create(items).indexOf(value)
+    if (from < 0 || from === to)
       return
-    const next = [...collection.items]
+    const next = [...items]
     const [item] = next.splice(from, 1)
     if (item !== undefined)
       next.splice(to, 0, item)
@@ -41,60 +52,59 @@ export function useListCollection<T extends CollectionItem>(
 
   return {
     collection: () => collection,
-    filter: (inputValue: string) => {
-      if (!props.filter)
-        return
-      const source = create(props.initialItems)
-      setItems(source.items.filter(item => props.filter?.(source.stringifyItem(item) ?? '', inputValue)))
-    },
+    filter: (inputValue: string) => filterText = inputValue,
     set: setItems,
     reset: () => setItems(props.initialItems),
     clear: () => setItems([]),
-    insert: (index: number, ...items: T[]) => {
-      const next = [...collection.items]
-      next.splice(index, 0, ...items)
+    insert: (index: number, ...itemsToInsert: T[]) => {
+      const next = [...items]
+      next.splice(index, 0, ...itemsToInsert)
       setItems(next)
     },
-    insertBefore: (value: string, ...items: T[]) => {
-      const index = collection.indexOf(value)
-      const next = [...collection.items]
-      next.splice(index < 0 ? 0 : index, 0, ...items)
+    insertBefore: (value: string, ...itemsToInsert: T[]) => {
+      const index = create(items).indexOf(value)
+      const next = [...items]
+      next.splice(index < 0 ? 0 : index, 0, ...itemsToInsert)
       setItems(next)
     },
-    insertAfter: (value: string, ...items: T[]) => {
-      const index = collection.indexOf(value)
-      const next = [...collection.items]
-      next.splice(index < 0 ? next.length : index + 1, 0, ...items)
+    insertAfter: (value: string, ...itemsToInsert: T[]) => {
+      const index = create(items).indexOf(value)
+      const next = [...items]
+      next.splice(index < 0 ? next.length : index + 1, 0, ...itemsToInsert)
       setItems(next)
     },
-    remove: (...items: T[]) => {
-      const values = new Set(items.map(itemValue))
-      setItems(collection.items.filter(item => !values.has(itemValue(item))))
+    remove: (...itemsToRemove: T[]) => {
+      const values = new Set(itemsToRemove.map(itemValue))
+      setItems(items.filter(item => !values.has(itemValue(item))))
     },
     move: moveItem,
     moveBefore: (value: string, beforeValue: string) => {
-      const to = collection.indexOf(beforeValue)
-      if (to >= 0)
-        moveItem(value, to)
+      const source = create(items)
+      const from = source.indexOf(value)
+      const before = source.indexOf(beforeValue)
+      if (from >= 0 && before >= 0 && from !== before)
+        moveItem(value, from < before ? before - 1 : before)
     },
     moveAfter: (value: string, afterValue: string) => {
-      const to = collection.indexOf(afterValue)
-      if (to >= 0)
-        moveItem(value, to + 1)
+      const source = create(items)
+      const from = source.indexOf(value)
+      const after = source.indexOf(afterValue)
+      if (from >= 0 && after >= 0 && from !== after)
+        moveItem(value, from < after ? after : after + 1)
     },
     reorder: (from: number, to: number) => {
-      const next = [...collection.items]
+      const next = [...items]
       const [item] = next.splice(from, 1)
       if (item !== undefined)
         next.splice(to, 0, item)
       setItems(next)
     },
-    prepend: (...items: T[]) => setItems([...items, ...collection.items]),
+    prepend: (...itemsToPrepend: T[]) => setItems([...itemsToPrepend, ...items]),
     update: (value: string, item: T) => {
-      const index = collection.indexOf(value)
+      const index = create(items).indexOf(value)
       if (index < 0)
         return
-      const next = [...collection.items]
+      const next = [...items]
       next[index] = item
       setItems(next)
     },

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { RootEmits, RootProps } from '../types'
+import type { NavigationMenuRootEmits, NavigationMenuRootProps } from '../../../index'
 import { NavigationMenu } from '../index'
 
-const props = defineProps<RootProps>()
-const emits = defineEmits<RootEmits>()
+const props = defineProps<NavigationMenuRootProps>()
+const emits = defineEmits<NavigationMenuRootEmits>()
 </script>
 
 <template>

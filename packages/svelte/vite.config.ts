@@ -17,6 +17,7 @@ export default defineConfig({
     include: [
       '@destyler/collapsible',
       '@destyler/collection',
+      '@destyler/types',
       '@destyler/xstate',
       '@destyler/i18n',
       '@destyler/dom',

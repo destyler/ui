@@ -10,9 +10,18 @@
   import { UI } from '../../factory'
   import { useFieldContext } from '../hooks/use-field-context'
 
-  const props: FieldSelectProps = $props()
+  let { value = $bindable(), multiple, ...props }: FieldSelectProps = $props()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(field?.().getSelectProps() ?? {}, props))
+  const nativeSelectProps: HTMLProps<'select'> = $derived({
+    value,
+    multiple,
+    oninput(event) {
+      value = multiple
+        ? Array.from(event.currentTarget.selectedOptions).map(option => option.value)
+        : event.currentTarget.value
+    },
+  })
+  const mergedProps = $derived(mergeProps(field?.().getSelectProps() ?? {}, nativeSelectProps, props))
 </script>
 
 <UI as="select" {...mergedProps} />

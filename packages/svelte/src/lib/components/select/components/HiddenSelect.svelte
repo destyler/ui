@@ -8,16 +8,25 @@
 <script lang="ts">
   import { mergeProps } from '@destyler/svelte'
   import { UI } from '$lib/components/factory'
+  import { useFieldContext } from '../../field'
   import { useSelectContext } from '../hooks/use-select-context'
 
   const props: SelectHiddenSelectProps = $props()
   const select = useSelectContext()
-  const mergedProps = $derived(mergeProps(select().getHiddenSelectProps(), props))
+  const field = useFieldContext()
+  const value = $derived(select().multiple ? select().value : (select().value[0] ?? ''))
+  const mergedProps = $derived(mergeProps(select().getHiddenSelectProps(), { value }, props))
 </script>
 
-<UI as="select" {...mergedProps}>
+<UI as="select" aria-describedby={field?.()?.ariaDescribedby} {...mergedProps}>
+  {#if select().value.length === 0}
+    <option value=""></option>
+  {/if}
   {#each select().collection.items as item}
-    <option value={select().collection.stringifyItem(item)}>
+    <option
+      value={select().collection.getItemValue(item) ?? ''}
+      disabled={select().collection.getItemDisabled(item)}
+    >
       {select().collection.stringifyItem(item)}
     </option>
   {/each}

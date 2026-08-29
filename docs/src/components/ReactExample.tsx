@@ -1,8 +1,8 @@
 import type { ComponentType } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getFramework } from '../config/frameworks'
 import { getExamplePreviewMessage } from '../utils/example-preview'
-import { getActiveFramework, observeVisibility, onFrameworkChange } from '../utils/framework'
+import { getActiveFramework, onFrameworkChange } from '../utils/framework'
 
 interface Props {
   component: string
@@ -16,10 +16,8 @@ const framework = getFramework('react')
 
 export default function ReactExample({ component, example }: Props) {
   const [isActive, setIsActive] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'missing' | 'error'>('idle')
   const [Component, setComponent] = useState<ComponentType<any> | null>(null)
-  const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsActive(getActiveFramework() === framework.id)
@@ -27,18 +25,8 @@ export default function ReactExample({ component, example }: Props) {
   }, [])
 
   useEffect(() => {
-    if (!rootRef.current)
-      return
-    const visibilityTarget = rootRef.current.parentElement ?? rootRef.current
-    return observeVisibility(visibilityTarget, (visible) => {
-      if (visible)
-        setIsVisible(true)
-    })
-  }, [])
-
-  useEffect(() => {
     let cancelled = false
-    if (!isActive || !isVisible) {
+    if (!isActive) {
       setComponent(null)
       setStatus('idle')
       return () => {
@@ -73,10 +61,10 @@ export default function ReactExample({ component, example }: Props) {
     return () => {
       cancelled = true
     }
-  }, [component, example, isActive, isVisible])
+  }, [component, example, isActive])
 
   return (
-    <div ref={rootRef} className="ds-example-content">
+    <div className="ds-example-content">
       {status === 'ready' && Component && <Component />}
       {status !== 'idle' && status !== 'ready' && (
         <div className={status === 'loading' ? 'ds-preview-loading' : 'ds-preview-empty'}>

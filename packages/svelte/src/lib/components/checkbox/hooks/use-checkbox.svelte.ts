@@ -5,8 +5,9 @@ import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as checkbox from '@destyler/checkbox'
-import { mergeProps, normalizeProps } from '@destyler/svelte'
+import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
@@ -27,8 +28,8 @@ export function useCheckbox(props: MaybeFunction<UseCheckboxProps>): UseCheckbox
   const machineProps = $derived.by(() => {
     const resolvedProps = runIfFn(props)
     const localProps = mergeProps(
-      resolvedProps,
       checkboxGroup?.()?.getItemProps({ value: resolvedProps.value }) ?? {},
+      resolvedProps,
     ) as UseCheckboxProps
     return createMachineProps({
       ids: {

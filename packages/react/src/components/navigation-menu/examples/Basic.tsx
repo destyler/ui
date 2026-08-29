@@ -1,7 +1,6 @@
-import type { NavigationMenuRootProps } from '../components/Root'
 import { NavigationMenu } from '../index'
 
-export function Basic(props: NavigationMenuRootProps) {
+export function Basic(props: NavigationMenu.RootProps) {
   return (
     <NavigationMenu.Root {...props}>
       <NavigationMenu.List>

@@ -15,7 +15,8 @@
 <script lang="ts">
   import type { PropTypes } from '@destyler/svelte'
   import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
-  import { mergeProps, normalizeProps } from '@destyler/svelte'
+  import { normalizeProps } from '$lib/utils/normalize-props'
+  import { mergeProps } from '@destyler/svelte'
   import * as toast from '@destyler/toast'
   import { untrack } from 'svelte'
   import { UI } from '../../factory'

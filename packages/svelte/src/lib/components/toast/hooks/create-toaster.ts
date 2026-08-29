@@ -1,6 +1,6 @@
 import type { PropTypes } from '@destyler/svelte'
 import type { Snippet } from 'svelte'
-import { normalizeProps } from '@destyler/svelte'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as toast from '@destyler/toast'
 import { uuid } from '@destyler/utils'
 

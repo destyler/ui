@@ -10,6 +10,7 @@ import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Checkbox, checkboxAnatomy } from '../index'
+import GroupPrecedence from './GroupPrecedence.svelte'
 
 const componentExports = Checkbox as unknown as Record<string, unknown>
 
@@ -64,6 +65,20 @@ describe('[checkbox] component', () => {
     await expect.element(inputs.first()).toBeChecked()
     await group.getByText('Vue').click()
     await expect.element(inputs.last()).toBeChecked()
+  })
+
+  it('gives individual checkbox state and form props precedence over the group', async () => {
+    const screen = await render(GroupPrecedence)
+    const individualTrue = screen.getByRole('checkbox', { name: 'Individual true' })
+    const individualFalse = screen.getByRole('checkbox', { name: 'Individual false' })
+
+    await expect.element(individualTrue).toBeDisabled()
+    await expect.element(individualTrue).toHaveAttribute('aria-invalid', 'true')
+    await expect.element(individualTrue).toHaveAttribute('name', 'individual-true')
+
+    await expect.element(individualFalse).not.toBeDisabled()
+    await expect.element(individualFalse).toHaveAttribute('aria-invalid', 'false')
+    await expect.element(individualFalse).toHaveAttribute('name', 'individual-false')
   })
 
   it('selects every item with Select All', async () => {

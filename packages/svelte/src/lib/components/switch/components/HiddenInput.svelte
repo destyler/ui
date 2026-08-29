@@ -8,12 +8,14 @@
 <script lang="ts">
   import { mergeProps } from '@destyler/svelte'
   import { UI } from '../../factory'
+  import { useFieldContext } from '../../field'
   import { useSwitchContext } from '../hooks/use-switch-context'
 
   const props: SwitchHiddenInputProps = $props()
 
   const switchMachine = useSwitchContext()
+  const field = useFieldContext()
   const mergedProps = $derived(mergeProps(switchMachine().getHiddenInputProps(), props))
 </script>
 
-<UI as="input" {...mergedProps} />
+<UI as="input" aria-describedby={field?.()?.ariaDescribedby} {...mergedProps} />

@@ -22,223 +22,279 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "svelte": "./dist/index.js"
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./anatomy": {
       "types": "./dist/components/anatomy.d.ts",
-      "svelte": "./dist/components/anatomy.js"
+      "svelte": "./dist/components/anatomy.js",
+      "import": "./dist/components/anatomy.js",
+      "default": "./dist/components/anatomy.js"
     },
     "./client-only": {
       "types": "./dist/providers/client-only/index.d.ts",
-      "svelte": "./dist/providers/client-only/index.js"
+      "svelte": "./dist/providers/client-only/index.js",
+      "default": "./dist/providers/client-only/index.js"
     },
     "./environment": {
       "types": "./dist/providers/environment/index.d.ts",
-      "svelte": "./dist/providers/environment/index.js"
+      "svelte": "./dist/providers/environment/index.js",
+      "default": "./dist/providers/environment/index.js"
     },
     "./focus-trap": {
       "types": "./dist/providers/focus-trap/index.d.ts",
-      "svelte": "./dist/providers/focus-trap/index.js"
+      "svelte": "./dist/providers/focus-trap/index.js",
+      "default": "./dist/providers/focus-trap/index.js"
     },
     "./format": {
       "types": "./dist/providers/format/index.d.ts",
-      "svelte": "./dist/providers/format/index.js"
+      "svelte": "./dist/providers/format/index.js",
+      "default": "./dist/providers/format/index.js"
     },
     "./frame": {
       "types": "./dist/providers/frame/index.d.ts",
-      "svelte": "./dist/providers/frame/index.js"
+      "svelte": "./dist/providers/frame/index.js",
+      "default": "./dist/providers/frame/index.js"
     },
     "./highlight": {
       "types": "./dist/providers/highlight/index.d.ts",
-      "svelte": "./dist/providers/highlight/index.js"
+      "svelte": "./dist/providers/highlight/index.js",
+      "default": "./dist/providers/highlight/index.js"
     },
     "./locale": {
       "types": "./dist/providers/locale/index.d.ts",
-      "svelte": "./dist/providers/locale/index.js"
+      "svelte": "./dist/providers/locale/index.js",
+      "default": "./dist/providers/locale/index.js"
     },
     "./aspect-ratio": {
       "types": "./dist/components/aspect-ratio/index.d.ts",
-      "svelte": "./dist/components/aspect-ratio/index.js"
+      "svelte": "./dist/components/aspect-ratio/index.js",
+      "default": "./dist/components/aspect-ratio/index.js"
     },
     "./avatar": {
       "types": "./dist/components/avatar/index.d.ts",
-      "svelte": "./dist/components/avatar/index.js"
+      "svelte": "./dist/components/avatar/index.js",
+      "default": "./dist/components/avatar/index.js"
     },
     "./breadcrumbs": {
       "types": "./dist/components/breadcrumbs/index.d.ts",
-      "svelte": "./dist/components/breadcrumbs/index.js"
+      "svelte": "./dist/components/breadcrumbs/index.js",
+      "default": "./dist/components/breadcrumbs/index.js"
     },
     "./calendar": {
       "types": "./dist/components/calendar/index.d.ts",
-      "svelte": "./dist/components/calendar/index.js"
+      "svelte": "./dist/components/calendar/index.js",
+      "default": "./dist/components/calendar/index.js"
     },
     "./carousel": {
       "types": "./dist/components/carousel/index.d.ts",
-      "svelte": "./dist/components/carousel/index.js"
+      "svelte": "./dist/components/carousel/index.js",
+      "default": "./dist/components/carousel/index.js"
     },
     "./checkbox": {
       "types": "./dist/components/checkbox/index.d.ts",
-      "svelte": "./dist/components/checkbox/index.js"
+      "svelte": "./dist/components/checkbox/index.js",
+      "default": "./dist/components/checkbox/index.js"
     },
     "./clipboard": {
       "types": "./dist/components/clipboard/index.d.ts",
-      "svelte": "./dist/components/clipboard/index.js"
+      "svelte": "./dist/components/clipboard/index.js",
+      "default": "./dist/components/clipboard/index.js"
     },
     "./collapse": {
       "types": "./dist/components/collapse/index.d.ts",
-      "svelte": "./dist/components/collapse/index.js"
+      "svelte": "./dist/components/collapse/index.js",
+      "default": "./dist/components/collapse/index.js"
     },
     "./collapsible": {
       "types": "./dist/components/collapsible/index.d.ts",
-      "svelte": "./dist/components/collapsible/index.js"
+      "svelte": "./dist/components/collapsible/index.js",
+      "default": "./dist/components/collapsible/index.js"
     },
     "./color-picker": {
       "types": "./dist/components/color-picker/index.d.ts",
-      "svelte": "./dist/components/color-picker/index.js"
+      "svelte": "./dist/components/color-picker/index.js",
+      "default": "./dist/components/color-picker/index.js"
     },
     "./combobox": {
       "types": "./dist/components/combobox/index.d.ts",
-      "svelte": "./dist/components/combobox/index.js"
+      "svelte": "./dist/components/combobox/index.js",
+      "default": "./dist/components/combobox/index.js"
     },
     "./dialog": {
       "types": "./dist/components/dialog/index.d.ts",
-      "svelte": "./dist/components/dialog/index.js"
+      "svelte": "./dist/components/dialog/index.js",
+      "default": "./dist/components/dialog/index.js"
     },
     "./dynamic": {
       "types": "./dist/components/dynamic/index.d.ts",
-      "svelte": "./dist/components/dynamic/index.js"
+      "svelte": "./dist/components/dynamic/index.js",
+      "default": "./dist/components/dynamic/index.js"
     },
     "./edit": {
       "types": "./dist/components/edit/index.d.ts",
-      "svelte": "./dist/components/edit/index.js"
+      "svelte": "./dist/components/edit/index.js",
+      "default": "./dist/components/edit/index.js"
     },
     "./field": {
       "types": "./dist/components/field/index.d.ts",
-      "svelte": "./dist/components/field/index.js"
+      "svelte": "./dist/components/field/index.js",
+      "default": "./dist/components/field/index.js"
     },
     "./fieldset": {
       "types": "./dist/components/fieldset/index.d.ts",
-      "svelte": "./dist/components/fieldset/index.js"
+      "svelte": "./dist/components/fieldset/index.js",
+      "default": "./dist/components/fieldset/index.js"
     },
     "./file-upload": {
       "types": "./dist/components/file-upload/index.d.ts",
-      "svelte": "./dist/components/file-upload/index.js"
+      "svelte": "./dist/components/file-upload/index.js",
+      "default": "./dist/components/file-upload/index.js"
     },
     "./floating-panel": {
       "types": "./dist/components/floating-panel/index.d.ts",
-      "svelte": "./dist/components/floating-panel/index.js"
+      "svelte": "./dist/components/floating-panel/index.js",
+      "default": "./dist/components/floating-panel/index.js"
     },
     "./hover-card": {
       "types": "./dist/components/hover-card/index.d.ts",
-      "svelte": "./dist/components/hover-card/index.js"
+      "svelte": "./dist/components/hover-card/index.js",
+      "default": "./dist/components/hover-card/index.js"
     },
     "./label": {
       "types": "./dist/components/label/index.d.ts",
-      "svelte": "./dist/components/label/index.js"
+      "svelte": "./dist/components/label/index.js",
+      "default": "./dist/components/label/index.js"
     },
     "./menu": {
       "types": "./dist/components/menu/index.d.ts",
-      "svelte": "./dist/components/menu/index.js"
+      "svelte": "./dist/components/menu/index.js",
+      "default": "./dist/components/menu/index.js"
     },
     "./navigation-menu": {
       "types": "./dist/components/navigation-menu/index.d.ts",
-      "svelte": "./dist/components/navigation-menu/index.js"
+      "svelte": "./dist/components/navigation-menu/index.js",
+      "default": "./dist/components/navigation-menu/index.js"
     },
     "./number-input": {
       "types": "./dist/components/number-input/index.d.ts",
-      "svelte": "./dist/components/number-input/index.js"
+      "svelte": "./dist/components/number-input/index.js",
+      "default": "./dist/components/number-input/index.js"
     },
     "./otp-input": {
       "types": "./dist/components/otp-input/index.d.ts",
-      "svelte": "./dist/components/otp-input/index.js"
+      "svelte": "./dist/components/otp-input/index.js",
+      "default": "./dist/components/otp-input/index.js"
     },
     "./pagination": {
       "types": "./dist/components/pagination/index.d.ts",
-      "svelte": "./dist/components/pagination/index.js"
+      "svelte": "./dist/components/pagination/index.js",
+      "default": "./dist/components/pagination/index.js"
     },
     "./popover": {
       "types": "./dist/components/popover/index.d.ts",
-      "svelte": "./dist/components/popover/index.js"
+      "svelte": "./dist/components/popover/index.js",
+      "default": "./dist/components/popover/index.js"
     },
     "./presence": {
       "types": "./dist/components/presence/index.d.ts",
-      "svelte": "./dist/components/presence/index.js"
+      "svelte": "./dist/components/presence/index.js",
+      "default": "./dist/components/presence/index.js"
     },
     "./progress": {
       "types": "./dist/components/progress/index.d.ts",
-      "svelte": "./dist/components/progress/index.js"
+      "svelte": "./dist/components/progress/index.js",
+      "default": "./dist/components/progress/index.js"
     },
     "./qr-code": {
       "types": "./dist/components/qr-code/index.d.ts",
-      "svelte": "./dist/components/qr-code/index.js"
+      "svelte": "./dist/components/qr-code/index.js",
+      "default": "./dist/components/qr-code/index.js"
     },
     "./radio": {
       "types": "./dist/components/radio/index.d.ts",
-      "svelte": "./dist/components/radio/index.js"
+      "svelte": "./dist/components/radio/index.js",
+      "default": "./dist/components/radio/index.js"
     },
     "./scroll-area": {
       "types": "./dist/components/scroll-area/index.d.ts",
-      "svelte": "./dist/components/scroll-area/index.js"
+      "svelte": "./dist/components/scroll-area/index.js",
+      "default": "./dist/components/scroll-area/index.js"
     },
     "./select": {
       "types": "./dist/components/select/index.d.ts",
-      "svelte": "./dist/components/select/index.js"
+      "svelte": "./dist/components/select/index.js",
+      "default": "./dist/components/select/index.js"
     },
     "./separator": {
       "types": "./dist/components/separator/index.d.ts",
-      "svelte": "./dist/components/separator/index.js"
+      "svelte": "./dist/components/separator/index.js",
+      "default": "./dist/components/separator/index.js"
     },
     "./signature": {
       "types": "./dist/components/signature/index.d.ts",
-      "svelte": "./dist/components/signature/index.js"
+      "svelte": "./dist/components/signature/index.js",
+      "default": "./dist/components/signature/index.js"
     },
     "./slider": {
       "types": "./dist/components/slider/index.d.ts",
-      "svelte": "./dist/components/slider/index.js"
+      "svelte": "./dist/components/slider/index.js",
+      "default": "./dist/components/slider/index.js"
     },
     "./splitter": {
       "types": "./dist/components/splitter/index.d.ts",
-      "svelte": "./dist/components/splitter/index.js"
+      "svelte": "./dist/components/splitter/index.js",
+      "default": "./dist/components/splitter/index.js"
     },
     "./steps": {
       "types": "./dist/components/steps/index.d.ts",
-      "svelte": "./dist/components/steps/index.js"
+      "svelte": "./dist/components/steps/index.js",
+      "default": "./dist/components/steps/index.js"
     },
     "./switch": {
       "types": "./dist/components/switch/index.d.ts",
-      "svelte": "./dist/components/switch/index.js"
+      "svelte": "./dist/components/switch/index.js",
+      "default": "./dist/components/switch/index.js"
     },
     "./tabs": {
       "types": "./dist/components/tabs/index.d.ts",
-      "svelte": "./dist/components/tabs/index.js"
+      "svelte": "./dist/components/tabs/index.js",
+      "default": "./dist/components/tabs/index.js"
     },
     "./timer": {
       "types": "./dist/components/timer/index.d.ts",
-      "svelte": "./dist/components/timer/index.js"
+      "svelte": "./dist/components/timer/index.js",
+      "default": "./dist/components/timer/index.js"
     },
     "./toast": {
       "types": "./dist/components/toast/index.d.ts",
-      "svelte": "./dist/components/toast/index.js"
+      "svelte": "./dist/components/toast/index.js",
+      "default": "./dist/components/toast/index.js"
     },
     "./toggle": {
       "types": "./dist/components/toggle/index.d.ts",
-      "svelte": "./dist/components/toggle/index.js"
+      "svelte": "./dist/components/toggle/index.js",
+      "default": "./dist/components/toggle/index.js"
     },
     "./toggle-group": {
       "types": "./dist/components/toggle-group/index.d.ts",
-      "svelte": "./dist/components/toggle-group/index.js"
+      "svelte": "./dist/components/toggle-group/index.js",
+      "default": "./dist/components/toggle-group/index.js"
     },
     "./tooltip": {
       "types": "./dist/components/tooltip/index.d.ts",
-      "svelte": "./dist/components/tooltip/index.js"
+      "svelte": "./dist/components/tooltip/index.js",
+      "default": "./dist/components/tooltip/index.js"
     },
     "./tour": {
       "types": "./dist/components/tour/index.d.ts",
-      "svelte": "./dist/components/tour/index.js"
+      "svelte": "./dist/components/tour/index.js",
+      "default": "./dist/components/tour/index.js"
     },
     "./tree": {
       "types": "./dist/components/tree/index.d.ts",
-      "svelte": "./dist/components/tree/index.js"
+      "svelte": "./dist/components/tree/index.js",
+      "default": "./dist/components/tree/index.js"
     }
   },
   "types": "./dist/index.d.ts",
@@ -256,23 +312,26 @@
     "access": "public"
   },
   "scripts": {
-    "build": "pnpm run sync:manifest:check && pnpm run clean && svelte-kit sync && svelte-package --tsconfig ./tsconfig.build.json",
+    "build": "pnpm run sync:manifest:check && pnpm run clean && pnpm run sync && svelte-package --tsconfig ./tsconfig.build.json && pnpm run fix:package-imports",
     "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
-    "dev": "svelte-kit sync && svelte-package --watch --tsconfig ./tsconfig.build.json",
+    "dev": "pnpm run sync && svelte-package --watch --tsconfig ./tsconfig.build.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "sync:manifest": "node scripts/sync-manifest.cjs",
     "sync:manifest:check": "node scripts/sync-manifest.cjs --check",
+    "sync": "svelte-kit sync",
     "check:manifest": "pnpm run sync:manifest:check && node scripts/test-component-generator.cjs",
-    "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "test": "vitest run --browser.headless && vitest run --config vitest.ssr.config.ts",
-    "test:ssr": "vitest run --config vitest.ssr.config.ts",
-    "test:dev": "vitest --browser.headless",
-    "test:ui": "vitest --ui --open",
+    "typecheck": "pnpm run sync && svelte-check --tsconfig ./tsconfig.json",
+    "test": "pnpm run sync && vitest run --browser.headless && vitest run --config vitest.ssr.config.ts",
+    "test:ssr": "pnpm run sync && vitest run --config vitest.ssr.config.ts",
+    "test:dev": "pnpm run sync && vitest --browser.headless",
+    "test:ui": "pnpm run sync && vitest --ui --open",
     "lint:package": "publint",
+    "fix:package-imports": "node scripts/rewrite-package-imports.cjs",
+    "check:package-imports": "node scripts/rewrite-package-imports.cjs --check && node scripts/check-package-consumer.cjs",
     "check:package-files": "node scripts/check-package-files.cjs",
-    "check:ci": "pnpm run check:manifest && pnpm run typecheck && pnpm run build && pnpm run lint:package && pnpm run check:package-files",
-    "check": "pnpm run check:manifest && pnpm run typecheck && pnpm run test && pnpm run build && pnpm run lint:package && pnpm run check:package-files",
+    "check:ci": "pnpm run check:manifest && pnpm run typecheck && pnpm run build && pnpm run check:package-imports && pnpm run lint:package && pnpm run check:package-files",
+    "check": "pnpm run check:manifest && pnpm run typecheck && pnpm run test && pnpm run build && pnpm run check:package-imports && pnpm run lint:package && pnpm run check:package-files",
     "prepack": "pnpm run check"
   },
   "peerDependencies": {

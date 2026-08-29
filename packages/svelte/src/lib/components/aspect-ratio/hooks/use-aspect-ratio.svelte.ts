@@ -4,8 +4,8 @@ import type { MaybeFunction } from '@destyler/utils'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { createMachineProps } from '$lib/utils/create-machine-props'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as aspectRatio from '@destyler/aspect-ratio'
-import { normalizeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseAspectRatioProps

@@ -4,7 +4,7 @@ import type { MaybeFunction } from '@destyler/utils'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
-import { normalizeProps } from '@destyler/svelte'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as timer from '@destyler/timer'
 import { runIfFn } from '@destyler/utils'
 

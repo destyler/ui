@@ -5,8 +5,8 @@ import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as splitter from '@destyler/splitter'
-import { normalizeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseSplitterProps extends Omit<splitter.Context, 'dir' | 'getRootNode' | 'id'> {

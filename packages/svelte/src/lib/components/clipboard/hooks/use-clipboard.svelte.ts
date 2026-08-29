@@ -3,8 +3,8 @@ import type { PropTypes } from '@destyler/svelte'
 import type { MaybeFunction } from '@destyler/utils'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as clipboard from '@destyler/clipboard'
-import { normalizeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseClipboardProps extends Omit<clipboard.Context, 'getRootNode' | 'id'> {

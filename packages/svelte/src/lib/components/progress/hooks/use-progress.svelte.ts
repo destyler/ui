@@ -5,8 +5,8 @@ import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as progress from '@destyler/progress'
-import { normalizeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseProgressProps extends Omit<progress.Context, 'dir' | 'getRootNode' | 'id'> {

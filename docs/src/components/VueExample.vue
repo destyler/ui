@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted, ref, shallowRef, watchEffect } from 'vue'
 import { getFramework } from '../config/frameworks'
 import { getExamplePreviewMessage } from '../utils/example-preview'
-import { getActiveFramework, observeVisibility, onFrameworkChange } from '../utils/framework'
+import { getActiveFramework, onFrameworkChange } from '../utils/framework'
 
 const props = defineProps<{
   component: string
@@ -16,11 +16,8 @@ const modules: Record<string, () => Promise<any>> = import.meta.glob(
 const framework = getFramework('vue')
 const comp = shallowRef<any>(null)
 const status = ref<'idle' | 'loading' | 'ready' | 'missing' | 'error'>('idle')
-const rootElement = ref<HTMLElement>()
 const isActive = ref(false)
-const isVisible = ref(false)
 let stopFrameworkListener: (() => void) | undefined
-let stopVisibilityObserver: (() => void) | undefined
 let loadVersion = 0
 
 onMounted(() => {
@@ -28,23 +25,15 @@ onMounted(() => {
   stopFrameworkListener = onFrameworkChange((activeFramework) => {
     isActive.value = activeFramework === framework.id
   })
-  if (rootElement.value) {
-    const visibilityTarget = rootElement.value.parentElement ?? rootElement.value
-    stopVisibilityObserver = observeVisibility(visibilityTarget, (visible) => {
-      if (visible)
-        isVisible.value = true
-    })
-  }
 })
 
 onBeforeUnmount(() => {
   stopFrameworkListener?.()
-  stopVisibilityObserver?.()
 })
 
 watchEffect(async () => {
   const version = ++loadVersion
-  if (!isActive.value || !isVisible.value) {
+  if (!isActive.value) {
     comp.value = null
     status.value = 'idle'
     return
@@ -76,7 +65,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <div ref="rootElement" class="ds-example-content">
+  <div class="ds-example-content">
     <component :is="comp" v-if="status === 'ready' && comp" />
     <div
       v-else-if="status === 'loading' || status === 'missing' || status === 'error'"

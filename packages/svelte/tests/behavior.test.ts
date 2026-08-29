@@ -4,6 +4,7 @@ import BreadcrumbsFixture from './breadcrumbs.fixture.svelte'
 import CheckboxFixture from './checkbox.fixture.svelte'
 import ContextContractFixture from './context-contract.fixture.svelte'
 import DefaultValuesFixture from './default-values.fixture.svelte'
+import FieldDescriptionsFixture from './field-descriptions.fixture.svelte'
 import GeneratedIdsFixture from './generated-ids.fixture.svelte'
 import MachineAdapterFixture from './machine-adapter.fixture.svelte'
 import PortalActionFixture from './portal-action.fixture.svelte'
@@ -50,6 +51,8 @@ it('default state props initialize machines and scroll position', async () => {
   await screen.getByRole('button', { name: 'Details' }).click()
   await expect.element(screen.getByText('Initially open')).toBeVisible()
   await expect.element(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '42')
+  await expect.element(screen.getByRole('tab', { name: 'First' })).toHaveAttribute('aria-selected', 'false')
+  await expect.element(screen.getByRole('tab', { name: 'First' })).not.toBeDisabled()
   await expect.element(screen.getByRole('tab', { name: 'Second' })).toHaveAttribute('aria-selected', 'true')
 
   const viewport = screen.container.querySelector('[data-testid="viewport"]') as HTMLElement
@@ -169,4 +172,30 @@ it('distinguishes required component contexts from optional parent contexts', as
     'ContextError:useColorPickerSwatchPropsContext returned `undefined`',
   )
   await expect.element(screen.getByTestId('optional-contexts')).toHaveTextContent('all-absent')
+})
+
+it('associates composite form controls with their field descriptions', async () => {
+  const screen = await render(FieldDescriptionsFixture)
+  const controls = [
+    ['combobox', 'input[role="combobox"]'],
+    ['dynamic', 'input[hidden]'],
+    ['edit', 'input[aria-label="editable input"]'],
+    ['file-upload', 'input[type="file"]'],
+    ['otp-input', 'input[aria-hidden="true"]'],
+    ['select', 'select[aria-hidden="true"]'],
+    ['signature', 'input[hidden]'],
+    ['switch', 'input[type="checkbox"]'],
+  ] as const
+
+  for (const [contract, selector] of controls) {
+    const control = screen.container.querySelector(
+      `[data-field-contract="${contract}"] ${selector}`,
+    )
+    expect(control, contract).not.toBeNull()
+
+    const describedBy = control?.getAttribute('aria-describedby')
+    expect(describedBy, contract).toBeTruthy()
+    for (const id of describedBy?.split(' ') ?? [])
+      expect(document.getElementById(id), `${contract}:${id}`).not.toBeNull()
+  }
 })

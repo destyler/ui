@@ -2,9 +2,9 @@ import type { Optional } from '$lib/types'
 import type { RenderStrategyProps } from '$lib/utils/render-strategy'
 import type { MaybeFunction } from '@destyler/utils'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import { splitRenderStrategyProps } from '$lib/utils/render-strategy'
 import * as presence from '@destyler/presence'
-import { normalizeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 
 export interface UsePresenceProps extends Optional<presence.Context, 'present'>, RenderStrategyProps {

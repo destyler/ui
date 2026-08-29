@@ -19,11 +19,18 @@
 
   let textareaRef = $state<HTMLTextAreaElement | null>(null)
 
-  const { autoresize, ...props }: FieldTextareaProps = $props()
+  let { value = $bindable(), autoresize, ...props }: FieldTextareaProps = $props()
 
   const field = useFieldContext()
+  const nativeTextareaProps: HTMLProps<'textarea'> = $derived({
+    value,
+    oninput(event) {
+      value = event.currentTarget.value
+    },
+    style: autoresize ? 'resize: none' : undefined,
+  })
   const mergedProps = $derived(
-    mergeProps(field?.().getTextareaProps() ?? {}, { style: { resize: autoresize ? 'none' : undefined } }, props),
+    mergeProps(field?.().getTextareaProps() ?? {}, nativeTextareaProps, props),
   )
 
   $effect(() => {

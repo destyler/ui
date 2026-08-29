@@ -8,12 +8,14 @@
 
 <script lang="ts">
   import { mergeProps } from '@destyler/svelte'
+  import { createSplitProps } from '$lib/utils/create-split-props'
   import { UI } from '../../factory'
   import { usePaginationContext } from '../hooks/use-pagination-context'
 
   const props: PaginationItemProps = $props()
+  const [itemProps, localProps] = $derived(createSplitProps<ItemProps>()(props, ['value', 'type']))
   const pagination = usePaginationContext()
-  const mergedProps = $derived(mergeProps(pagination().getItemProps(props), props))
+  const mergedProps = $derived(mergeProps(pagination().getItemProps(itemProps), localProps))
 </script>
 
 <UI as="button" {...mergedProps} />

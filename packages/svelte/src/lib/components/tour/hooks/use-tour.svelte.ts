@@ -3,7 +3,7 @@ import type { PropTypes } from '@destyler/svelte'
 import type { MaybeFunction } from '@destyler/utils'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext, useLocaleContext } from '$lib/providers'
-import { normalizeProps } from '@destyler/svelte'
+import { normalizeProps } from '$lib/utils/normalize-props'
 import * as tour from '@destyler/tour'
 import { runIfFn } from '@destyler/utils'
 

@@ -5,6 +5,7 @@ import Controlled from '../examples/Controlled.svelte'
 import ReactiveCollection from '../examples/ReactiveCollection.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Select, selectAnatomy } from '../index'
+import HiddenSelectFixture from './HiddenSelectFixture.svelte'
 
 const componentExports = Select as unknown as Record<string, unknown>
 
@@ -56,6 +57,26 @@ describe('[select] component', () => {
     expect(onOpenChange).toHaveBeenCalledTimes(1)
     await screen.getByTestId('positioner').getByText('React').click()
     expect(onValueChange).toHaveBeenCalledTimes(1)
+  })
+
+  it('uses item values and preserves empty and disabled options in the hidden select', async () => {
+    const screen = await render(HiddenSelectFixture)
+    const select = screen.getByTestId('select').element() as HTMLSelectElement
+    const form = screen.getByTestId('form').element() as HTMLFormElement
+
+    expect(Array.from(select.options, option => [option.value, option.text])).toEqual([
+      ['', ''],
+      ['svelte', 'Svelte'],
+      ['solid', 'Solid'],
+      ['disabled', 'Disabled'],
+    ])
+    expect(select.options[3]?.disabled).toBe(true)
+    expect(select.value).toBe('')
+    expect(new FormData(form).get('framework')).toBe('')
+
+    select.value = 'solid'
+    select.dispatchEvent(new Event('input', { bubbles: true }))
+    await vi.waitFor(() => expect(new FormData(form).get('framework')).toBe('solid'))
   })
 
   it('honors disabled and readonly state', async () => {

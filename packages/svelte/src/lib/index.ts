@@ -1,4 +1,4 @@
-export * from './components'
-export * from './providers'
-export type { Assign, Optional } from './types'
+export * from './components/index.js'
+export * from './providers/index.js'
+export type { Assign, Optional } from './types.js'
 export { portal } from '@destyler/svelte'

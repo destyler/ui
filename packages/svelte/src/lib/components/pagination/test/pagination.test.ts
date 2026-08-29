@@ -21,6 +21,8 @@ describe('[pagination] component', () => {
     await render(Basic)
     const pageOne = page.getByLabelText('page 1', { exact: true })
     const pageTwo = page.getByLabelText('page 2')
+    await expect.element(pageOne).toHaveAttribute('type', 'button')
+    await expect.element(pageTwo).toHaveAttribute('type', 'button')
     await expect.element(pageOne).toHaveAttribute('aria-current', 'page')
     await userEvent.click(pageTwo)
     await expect.element(pageTwo).toHaveAttribute('aria-current', 'page')

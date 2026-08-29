@@ -86,13 +86,14 @@ try {
   })
 
   const barrel = fs.readFileSync(path.join(fixtureComponents, 'index.ts'), 'utf8')
-  assert.match(barrel, /export \* from '\.\/fixture-widget'/)
+  assert.match(barrel, /export \* from '\.\/fixture-widget\/index\.js'/)
   const categories = fs.readFileSync(path.join(fixtureComponents, 'component-categories.ts'), 'utf8')
   assert.match(categories, /\{ name: 'Fixture Widget', slug: 'fixture-widget' \}/)
   const packageJson = JSON.parse(fs.readFileSync(path.join(fixtureRoot, 'package.json'), 'utf8'))
   assert.deepEqual(packageJson.exports['./fixture-widget'], {
     types: './dist/components/fixture-widget/index.d.ts',
     svelte: './dist/components/fixture-widget/index.js',
+    default: './dist/components/fixture-widget/index.js',
   })
   assert.equal(packageJson.exports['./*'], undefined)
   assert.equal(packageJson.exports['./factory'], undefined)

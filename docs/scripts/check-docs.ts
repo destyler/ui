@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { compile } from 'svelte/compiler'
+import ts from 'typescript'
 import { componentCategories, providerCategories } from '../src/config/catalog'
 import { frameworks, getFrameworkSourceAliasPath } from '../src/config/frameworks'
 import { rewriteExampleSourceImports } from '../src/utils/example-source'
@@ -55,6 +56,58 @@ function listFiles(root: string, extension?: string): string[] {
       return []
     return [file]
   }).sort()
+}
+
+function getPublicExportNames(framework: typeof frameworks[number]): Set<string> | null {
+  const entry = path.join(workspaceDirectory, framework.sourceRoot, 'index.ts')
+  const program = ts.createProgram([entry], {
+    allowJs: true,
+    module: ts.ModuleKind.ESNext,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+    skipLibCheck: true,
+    target: ts.ScriptTarget.ESNext,
+  })
+  const sourceFile = program.getSourceFile(entry)
+  const moduleSymbol = sourceFile && program.getTypeChecker().getSymbolAtLocation(sourceFile)
+
+  if (!moduleSymbol) {
+    failures.push(`${framework.label}: unable to inspect public package exports`)
+    return null
+  }
+
+  return new Set(program.getTypeChecker().getExportsOfModule(moduleSymbol).map(symbol => symbol.name))
+}
+
+function getScriptSource(source: string, framework: typeof frameworks[number]): string {
+  if (framework.extension === 'tsx')
+    return source
+
+  return [...source.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
+    .map(match => match[1])
+    .join('\n')
+}
+
+function getNamedImports(source: string, moduleSpecifier: string): string[] {
+  const sourceFile = ts.createSourceFile('displayed-example.tsx', source, ts.ScriptTarget.ESNext, true, ts.ScriptKind.TSX)
+  const names: string[] = []
+
+  for (const statement of sourceFile.statements) {
+    if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier))
+      continue
+    if (statement.moduleSpecifier.text !== moduleSpecifier || !statement.importClause)
+      continue
+
+    if (statement.importClause.name)
+      names.push('default')
+
+    const bindings = statement.importClause.namedBindings
+    if (bindings && ts.isNamedImports(bindings)) {
+      for (const element of bindings.elements)
+        names.push((element.propertyName ?? element.name).text)
+    }
+  }
+
+  return names
 }
 
 function checkUniqueCatalog(
@@ -156,9 +209,28 @@ for (const provider of providers) {
   check(source.includes('## API'), `${provider.slug}: missing API section`)
 }
 
+for (const pageName of ['format', 'locale']) {
+  const source = read(path.join(providerDocsDirectory, `${pageName}.mdx`))
+  const vueContent = [...source.matchAll(/<FrameworkContent fw="vue">([\s\S]*?)<\/FrameworkContent>/g)]
+    .map(match => match[1])
+    .join('\n')
+  check(vueContent, `${pageName}: missing Vue content`)
+  if (vueContent) {
+    check(
+      !/<Format\.Number\b[^>]*\s(?:v-bind:|:)?style=/.test(vueContent),
+      `${pageName}: Vue Format.Number must use format-style instead of the native style attribute`,
+    )
+    check(
+      /<Format\.Number\b[^>]*\sformat-style=/.test(vueContent),
+      `${pageName}: missing Vue Format.Number format-style example`,
+    )
+  }
+}
+
 let exampleSourceCount = 0
 for (const framework of frameworks) {
   const sourceDirectory = path.join(workspaceDirectory, framework.sourceDirectory)
+  const publicExportNames = getPublicExportNames(framework)
   for (const component of components) {
     const examplesDirectory = path.join(sourceDirectory, component.slug, 'examples')
     for (const file of listFiles(examplesDirectory, `.${framework.extension}`)) {
@@ -176,6 +248,16 @@ for (const framework of frameworks) {
           resolvedImport === examplesDirectory || resolvedImport.startsWith(`${examplesDirectory}${path.sep}`),
           `${path.relative(workspaceDirectory, file)}: displayed source keeps an external relative import (${specifier})`,
         )
+      }
+
+      if (publicExportNames) {
+        const publicImports = getNamedImports(getScriptSource(transformed, framework), framework.packageName)
+        for (const importedName of publicImports) {
+          check(
+            publicExportNames.has(importedName),
+            `${path.relative(workspaceDirectory, file)}: displayed source imports non-public ${importedName} from ${framework.packageName}`,
+          )
+        }
       }
     }
   }
@@ -207,7 +289,17 @@ for (const framework of frameworks) {
     !frameworks.some(candidate => wrapperSource.includes(`ds-${candidate.id}-example`)),
     `${wrapper}: uses a framework-specific preview class`,
   )
+  check(
+    !wrapperSource.includes('observeVisibility'),
+    `${wrapper}: must rely on ComponentPreview client:visible instead of adding a second visibility gate`,
+  )
 }
+
+const componentPreviewSource = read(path.join(docsDirectory, 'src/components/ComponentPreview.astro'))
+check(
+  count(componentPreviewSource, 'client:visible') === frameworks.length,
+  'ComponentPreview must hydrate each framework preview with client:visible',
+)
 
 let previewContentStyleRuleCount = 0
 for (const file of listFiles(path.join(docsDirectory, 'src/styles'), '.css')) {

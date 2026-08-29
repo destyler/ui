@@ -143,8 +143,8 @@ function propertyKey(value) {
 
 function buildBarrel(entries) {
   const exports = entries.map(entry => entry.slug)
+    .map(slug => `export * from './${slug}/index.js'`)
     .toSorted((left, right) => left.localeCompare(right))
-    .map(slug => `export * from './${slug}'`)
   return `${GENERATED_HEADER}${exports.join('\n')}\n`
 }
 
@@ -186,12 +186,14 @@ function buildPackageJson(manifest, currentPackageJson) {
     exports[`./${provider.slug}`] = {
       types: `./dist/providers/${provider.slug}/index.d.ts`,
       svelte: `./dist/providers/${provider.slug}/index.js`,
+      default: `./dist/providers/${provider.slug}/index.js`,
     }
   }
   for (const component of manifest.components.toSorted((left, right) => left.slug.localeCompare(right.slug))) {
     exports[`./${component.slug}`] = {
       types: `./dist/components/${component.slug}/index.d.ts`,
       svelte: `./dist/components/${component.slug}/index.js`,
+      default: `./dist/components/${component.slug}/index.js`,
     }
   }
   return `${JSON.stringify({ ...currentPackageJson, exports }, null, 2)}\n`

@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Accessor } from '$lib/types'
   import { useActor } from '$lib/hooks/use-destyler-machine.svelte.js'
+  import { normalizeProps } from '$lib/utils/normalize-props'
   import type { PropTypes } from '@destyler/svelte'
-  import { normalizeProps } from '@destyler/svelte'
   import * as toast from '@destyler/toast'
   import { untrack, type Snippet } from 'svelte'
   import { ToastProvider } from '../hooks/use-toast-context'

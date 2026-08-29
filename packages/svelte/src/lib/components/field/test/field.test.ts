@@ -5,6 +5,7 @@ import Basic from '../examples/Basic.svelte'
 import Disabled from '../examples/Disabled.svelte'
 import InputControlled from '../examples/InputControlled.svelte'
 import { Field, fieldAnatomy } from '../index'
+import BindableControls from './BindableControls.svelte'
 
 describe('[field] component', () => {
   it.each(fieldAnatomy.keys())('renders part %s', async (part) => {
@@ -60,5 +61,26 @@ describe('[field] component', () => {
     await expect.element(input).toHaveValue('Input is controlled')
     await input.fill('Updated')
     await expect.element(screen.getByText('Input text: Updated')).toBeVisible()
+  })
+
+  it('supports bind:value for input, textarea, and select controls', async () => {
+    const screen = await render(BindableControls)
+    const input = screen.getByRole('textbox', { name: 'Input' })
+    const textarea = screen.getByRole('textbox', { name: 'Textarea' })
+    const select = screen.getByRole('combobox', { name: 'Select' })
+
+    await expect.element(input).toHaveValue('Initial input')
+    await expect.element(textarea).toHaveValue('Initial textarea')
+    await expect.element(select).toHaveValue('one')
+
+    await input.fill('Updated input')
+    await textarea.fill('Updated textarea')
+    const selectElement = select.element() as HTMLSelectElement
+    selectElement.value = 'two'
+    selectElement.dispatchEvent(new Event('input', { bubbles: true }))
+
+    await expect.element(screen.getByTestId('input-value')).toHaveTextContent('Updated input')
+    await expect.element(screen.getByTestId('textarea-value')).toHaveTextContent('Updated textarea')
+    await expect.element(screen.getByTestId('select-value')).toHaveTextContent('two')
   })
 })
