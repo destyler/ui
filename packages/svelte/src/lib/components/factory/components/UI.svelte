@@ -22,7 +22,18 @@
         ref = null
     }
   }
-  const propsFn: PropsFn<T> = (props) => mergeProps(rest, { [refKey]: refAttachment }, props ?? {})
+  const propsFn: PropsFn<T> = (props) => {
+    const childProps = props ?? {}
+    const merged = mergeProps(rest, childProps) as Record<PropertyKey, unknown>
+
+    for (const source of [rest, childProps] as Record<PropertyKey, unknown>[]) {
+      for (const key of Object.getOwnPropertySymbols(source))
+        merged[key] = source[key]
+    }
+
+    merged[refKey] = refAttachment
+    return merged as HTMLProps<T>
+  }
 </script>
 
 {#if asChild}

@@ -11,67 +11,81 @@ import NumberWithCurrency from '../examples/NumberWithCurrency.svelte'
 import NumberWithLocale from '../examples/NumberWithLocale.svelte'
 import NumberWithPercentage from '../examples/NumberWithPercentage.svelte'
 import NumberWithUnit from '../examples/NumberWithUnit.svelte'
+import { FormatByte, FormatNumber } from '../index'
 
 describe('[format] provider', () => {
   describe('format.Byte', () => {
     it('formats byte value correctly', async () => {
       const { container } = await render(ByteBasic)
-      expect(container.textContent).toContain('kB')
+      expect(container.textContent).toBe('File size: 1.45 kB')
     })
 
     it('formats byte value with bit unit', async () => {
       const { container } = await render(ByteWithUnit)
-      expect(container.textContent).toContain('kb')
+      expect(container.textContent).toBe('File size: 1.45 kb')
     })
 
     it('formats different byte sizes', async () => {
       const { container } = await render(ByteSize)
-      expect(container.textContent).toContain('byte')
-      expect(container.textContent).toContain('kB')
-      expect(container.textContent).toContain('MB')
-      expect(container.textContent).toContain('GB')
+      expect(container.textContent).toBe('50 byte5 kB5 MB5 GB')
     })
 
     it('formats byte value with different unit displays', async () => {
       const { container } = await render(ByteWithUnitDisplay)
-      expect(container.textContent).toBeTruthy()
+      expect(container.textContent).toBe('50.3kB50.3 kB50.3 kilobytes')
     })
 
     it('respects locale from LocaleProvider', async () => {
       const { container } = await render(ByteLocale)
-      expect(container.textContent).toBeTruthy()
+      expect(container.textContent).toBe('1,45 kB1.45 kB')
+    })
+
+    it('updates the formatted output when props change', async () => {
+      const screen = await render(FormatByte, { props: { value: 1450.45 } })
+      expect(screen.container.textContent).toBe('1.45 kB')
+
+      await screen.rerender({ value: 5000000, unitDisplay: 'long' })
+      expect(screen.container.textContent).toBe('5 megabytes')
     })
   })
 
   describe('format.Number', () => {
     it('formats number correctly', async () => {
       const { container } = await render(NumberBasic)
-      expect(container.textContent).toBeTruthy()
+      expect(container.textContent).toBe('1,450.45')
     })
 
     it('formats number with compact notation', async () => {
       const { container } = await render(NumberWithCompact)
-      expect(container.textContent).toContain('M')
+      expect(container.textContent).toBe('1.5M')
     })
 
     it('formats number as currency', async () => {
       const { container } = await render(NumberWithCurrency)
-      expect(container.textContent).toContain('$')
+      expect(container.textContent).toBe('$1,234.45')
     })
 
     it('respects locale from LocaleProvider', async () => {
       const { container } = await render(NumberWithLocale)
-      expect(container.textContent).toBeTruthy()
+      expect(container.textContent).toBe('1.450,45')
     })
 
     it('formats number as percentage', async () => {
       const { container } = await render(NumberWithPercentage)
-      expect(container.textContent).toContain('%')
+      expect(container.textContent).toBe('14.50%')
     })
 
     it('formats number with unit', async () => {
       const { container } = await render(NumberWithUnit)
-      expect(container.textContent).toContain('km')
+      expect(container.textContent).toBe('384.4 km')
+    })
+
+    it('updates the formatted output when props change', async () => {
+      const screen = await render(FormatNumber, { props: { value: 1450.45 } })
+      expect(screen.container.textContent).toBe('1,450.45')
+
+      await screen.rerender({ value: 0.5, style: 'percent' })
+      expect(screen.container.textContent).toBe('50%')
     })
   })
 })

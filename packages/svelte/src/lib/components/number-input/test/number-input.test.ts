@@ -59,9 +59,21 @@ describe('[number-input] component', () => {
     await expect.element(screen.getByRole('spinbutton')).toHaveValue('15')
   })
 
-  it('accepts number-format options', async () => {
-    const screen = await render(Basic, { props: { formatOptions: { currency: 'USD' }, defaultValue: '5' } })
-    await expect.element(screen.getByRole('spinbutton')).toHaveValue('5')
+  it('formats values with the configured number-format options', async () => {
+    const screen = await render(Basic, {
+      props: {
+        formatOptions: { style: 'currency', currency: 'USD' },
+        defaultValue: '5',
+      },
+    })
+    const input = screen.getByRole('spinbutton')
+
+    await expect.element(input).toHaveValue('$5.00')
+    expect(document.querySelector('[data-part="value-text"]')).toHaveTextContent('$5.00')
+
+    await screen.getByText('+1').click()
+    await expect.element(input).toHaveValue('$6.00')
+    expect(document.querySelector('[data-part="value-text"]')).toHaveTextContent('$6.00')
   })
 
   it('renders the formatted variant', async () => {

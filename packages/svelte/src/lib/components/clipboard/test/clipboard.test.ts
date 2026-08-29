@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import RenderFn from '../examples/RenderFn.svelte'
@@ -28,5 +28,35 @@ describe('[clipboard] component', () => {
   it('keeps the RootProvider API button label consistent', async () => {
     const screen = await render(RootProvider)
     expect(screen.container.querySelector('button:not([data-scope])')).toHaveTextContent('Copy')
+  })
+
+  it('copies its value and exposes the copied state', async () => {
+    const originalClipboard = Object.getOwnPropertyDescriptor(navigator, 'clipboard')
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    })
+
+    try {
+      const screen = await render(Basic)
+      const trigger = screen.getByRole('button', { name: 'Copy to clipboard' })
+
+      await trigger.click()
+
+      expect(writeText).toHaveBeenCalledOnce()
+      expect(writeText).toHaveBeenCalledWith('https://destyler.org')
+      await expect.element(screen.getByText('Copied!')).toBeVisible()
+      await expect.element(screen.getByRole('button', { name: 'Copied to clipboard' })).toBeVisible()
+      expect(screen.container.querySelector('[data-scope="clipboard"][data-part="root"]')).toHaveAttribute(
+        'data-copied',
+      )
+    }
+    finally {
+      if (originalClipboard)
+        Object.defineProperty(navigator, 'clipboard', originalClipboard)
+      else
+        Reflect.deleteProperty(navigator, 'clipboard')
+    }
   })
 })

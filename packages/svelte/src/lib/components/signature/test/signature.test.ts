@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import ImagePreview from '../examples/ImagePreview.svelte'
@@ -7,6 +7,52 @@ import WithField from '../examples/WithField.svelte'
 import { Signature, signatureAnatomy } from '../index'
 
 const componentExports = Signature as unknown as Record<string, unknown>
+
+async function drawSignature() {
+  const control = document.querySelector<HTMLElement>('[data-scope="signature"][data-part="control"]')
+  expect(control).not.toBeNull()
+  const setPointerCapture = vi.spyOn(control!, 'setPointerCapture').mockImplementation(() => {})
+  const pointerId = 1
+
+  control!.dispatchEvent(new PointerEvent('pointerdown', {
+    bubbles: true,
+    button: 0,
+    buttons: 1,
+    clientX: 10,
+    clientY: 10,
+    pointerId,
+    pointerType: 'pen',
+    pressure: 0.5,
+  }))
+  setPointerCapture.mockRestore()
+
+  for (const [clientX, clientY] of [[20, 20], [30, 25], [40, 20], [50, 30]]) {
+    document.dispatchEvent(new PointerEvent('pointermove', {
+      bubbles: true,
+      button: -1,
+      buttons: 1,
+      clientX,
+      clientY,
+      pointerId,
+      pointerType: 'pen',
+      pressure: 0.5,
+    }))
+  }
+  document.dispatchEvent(new PointerEvent('pointerup', {
+    bubbles: true,
+    button: 0,
+    clientX: 50,
+    clientY: 30,
+    pointerId,
+    pointerType: 'pen',
+  }))
+
+  await vi.waitFor(() => {
+    expect(document.querySelectorAll('[data-scope="signature"][data-part="segment-path"]')).toHaveLength(1)
+  })
+
+  return control!
+}
 
 describe('[signature] component', () => {
   it.each(signatureAnatomy.keys().filter(part => part !== 'segmentPath'))('renders part %s', async (part) => {
@@ -43,13 +89,35 @@ describe('[signature] component', () => {
     expect(document.querySelector('img[alt="Signature preview"]')).toBeNull()
   })
 
-  it('works with RootProvider and an external clear action', async () => {
+  it('clears a drawn signature with the clear trigger', async () => {
+    const screen = await render(Basic)
+    const clear = document.querySelector('[data-scope="signature"][data-part="clear-trigger"]')
+    expect(clear).toHaveAttribute('hidden')
+
+    const control = await drawSignature()
+    expect(clear).not.toHaveAttribute('hidden')
+    await screen.getByRole('button', { name: 'Clear' }).click()
+
+    await vi.waitFor(() => {
+      expect(document.querySelector('[data-scope="signature"][data-part="segment-path"]')).toBeNull()
+    })
+    expect(clear).toHaveAttribute('hidden')
+    expect(control).toHaveFocus()
+  })
+
+  it('clears a drawn signature through the RootProvider API', async () => {
     const screen = await render(RootProvider)
-    const buttons = screen.getByRole('button', { name: 'Clear' })
-    await expect.element(buttons.first()).toBeVisible()
-    await expect.element(buttons.last()).toBeVisible()
-    await buttons.first().click()
-    expect(document.querySelector('[data-part="control"]')).not.toBeNull()
+    const control = await drawSignature()
+    const clear = document.querySelector('[data-scope="signature"][data-part="clear-trigger"]')
+    expect(clear).not.toHaveAttribute('hidden')
+
+    await screen.getByRole('button', { name: 'Clear' }).first().click()
+
+    await vi.waitFor(() => {
+      expect(document.querySelector('[data-scope="signature"][data-part="segment-path"]')).toBeNull()
+    })
+    expect(clear).toHaveAttribute('hidden')
+    expect(control).toHaveFocus()
   })
 })
 

@@ -31,6 +31,18 @@ describe('[popover] component', () => {
     await vi.waitFor(async () => expect.element(page.getByText('title')).not.toBeVisible())
   })
 
+  it('moves focus into the popover and restores it when closed', async () => {
+    await render(Basic)
+    const trigger = page.getByRole('button', { name: 'click me' })
+
+    await userEvent.click(trigger)
+    const closeTrigger = page.getByRole('button', { name: 'close' })
+    await expect.element(closeTrigger).toHaveFocus()
+
+    await userEvent.click(closeTrigger)
+    await expect.element(trigger).toHaveFocus()
+  })
+
   it('lazy mounts without unmounting on exit', async () => {
     await render(Basic, { props: { lazyMount: true } })
     const positioner = page.getByTestId('positioner')

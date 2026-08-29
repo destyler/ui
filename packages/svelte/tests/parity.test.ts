@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest'
 
-const reactComponentExamples = import.meta.glob('../../react/src/components/*/examples/*.tsx')
-const vueComponentExamples = import.meta.glob('../../vue/src/components/*/examples/*.vue')
-const svelteComponentExamples = import.meta.glob('../src/lib/components/*/examples/*.svelte')
+const reactComponentExamples = import.meta.glob('../../react/src/components/*/examples/**/*.tsx')
+const vueComponentExamples = import.meta.glob('../../vue/src/components/*/examples/**/*.vue')
+const svelteComponentExamples = import.meta.glob('../src/lib/components/*/examples/**/*.svelte')
 
-const reactComponentExampleSources = import.meta.glob('../../react/src/components/*/examples/*.tsx', {
+const reactComponentExampleSources = import.meta.glob('../../react/src/components/*/examples/**/*.tsx', {
   eager: true,
   import: 'default',
   query: '?raw',
 }) as Record<string, string>
-const vueComponentExampleSources = import.meta.glob('../../vue/src/components/*/examples/*.vue', {
+const vueComponentExampleSources = import.meta.glob('../../vue/src/components/*/examples/**/*.vue', {
   eager: true,
   import: 'default',
   query: '?raw',
 }) as Record<string, string>
-const svelteComponentExampleSources = import.meta.glob('../src/lib/components/*/examples/*.svelte', {
+const svelteComponentExampleSources = import.meta.glob('../src/lib/components/*/examples/**/*.svelte', {
   eager: true,
   import: 'default',
   query: '?raw',
@@ -23,6 +23,38 @@ const svelteComponentExampleSources = import.meta.glob('../src/lib/components/*/
 const reactProviderExamples = import.meta.glob('../../react/src/providers/*/examples/*.tsx')
 const vueProviderExamples = import.meta.glob('../../vue/src/providers/*/examples/*.vue')
 const svelteProviderExamples = import.meta.glob('../src/lib/providers/*/examples/*.svelte')
+
+const reactComponentTestSources = import.meta.glob('../../react/src/components/*/test/**/*.test.tsx', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>
+const vueComponentTestSources = import.meta.glob('../../vue/src/components/*/test/**/*.test.ts', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>
+const svelteComponentTestSources = import.meta.glob('../src/lib/components/*/test/**/*.test.ts', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>
+
+const reactProviderTestSources = import.meta.glob('../../react/src/providers/*/test/**/*.test.tsx', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>
+const vueProviderTestSources = import.meta.glob('../../vue/src/providers/*/test/**/*.test.ts', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>
+const svelteProviderTestSources = import.meta.glob('../src/lib/providers/*/test/**/*.test.ts', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>
 
 const reactComponentStories = import.meta.glob('../../react/src/components/*/stories/*.stories.tsx', {
   eager: true,
@@ -93,10 +125,61 @@ const sharedComponentStyles = import.meta.glob('../../../utils/style/*.css', {
   query: '?raw',
 }) as Record<string, string>
 
+type Framework = 'react' | 'svelte' | 'vue'
+type Section = 'components' | 'providers'
+
+const vueStoryNameAliases: Record<string, Record<string, string>> = {
+  'components/breadcrumbs': {
+    Basic: 'BasicExample',
+    Context: 'ContextExample',
+    RootProvider: 'RootProviderExample',
+  },
+  'components/checkbox': {
+    IndeterminateExample: 'Indeterminate',
+  },
+  'components/menu': {
+    CheckboxMenu: 'Checkbox',
+    ContextMenu: 'Context',
+    ControlledMenu: 'Controlled',
+    GroupMenu: 'Group',
+    NestedMenu: 'Nested',
+    RadioGroupMenu: 'RadioGroup',
+    RenderPropMenu: 'RenderProp',
+    RootProviderMenu: 'RootProvider',
+    SeparatorMenu: 'Separator',
+  },
+  'components/number-input': {
+    FormattedExample: 'Formatted',
+    ScrubberExample: 'Scrubber',
+  },
+  'components/pagination': {
+    CustomizedExample: 'Customized',
+  },
+  'components/popover': {
+    Positionning: 'Positioning',
+  },
+  'components/splitter': {
+    Event: 'Events',
+  },
+  'providers/focus-trap': {
+    AutofocusExample: 'Autofocus',
+  },
+}
+
+const providerStoryLayoutExceptions: Record<string, Record<Framework, string>> = {
+  // The existing React baseline is padded while Vue and Svelte are fullscreen.
+  // Keeping the mismatch explicit makes any future change require a deliberate review.
+  environment: {
+    react: 'padded',
+    svelte: 'fullscreen',
+    vue: 'fullscreen',
+  },
+}
+
 function exampleMap(paths: string[], section: 'components' | 'providers') {
   const result: Record<string, string[]> = {}
   for (const path of paths) {
-    const match = path.match(new RegExp(`/${section}/([^/]+)/examples/([^/.]+)\\.`))
+    const match = path.match(new RegExp(`/${section}/([^/]+)/examples/(.+)\\.[^/.]+$`))
     if (!match)
       continue
     const [, slug, example] = match
@@ -110,9 +193,23 @@ function exampleMap(paths: string[], section: 'components' | 'providers') {
 function exampleSourceMap(sources: Record<string, string>, section: 'components' | 'providers') {
   const result: Record<string, string> = {}
   for (const [path, source] of Object.entries(sources)) {
-    const match = path.match(new RegExp(`/${section}/([^/]+)/examples/([^/.]+)\.`))
+    const match = path.match(new RegExp(`/${section}/([^/]+)/examples/(.+)\\.[^/.]+$`))
     if (match)
       result[`${match[1]}/${match[2]}`] = source
+  }
+  return result
+}
+
+function testedExamples(sources: Record<string, string>, section: Section) {
+  const result = new Set<string>()
+  for (const [path, source] of Object.entries(sources)) {
+    const slug = path.match(new RegExp(`/${section}/([^/]+)/test/`))?.[1]
+    if (!slug)
+      continue
+    for (const match of source.matchAll(/from\s+['"]\.\.\/examples\/([^'"]+)['"]/g)) {
+      const example = match[1].replace(/\.(?:svelte|tsx?|vue)$/, '')
+      result.add(`${slug}/${example}`)
+    }
   }
   return result
 }
@@ -131,14 +228,14 @@ function componentTagCounts(source: string) {
   return counts
 }
 
-function literalClasses(source: string, framework: 'react' | 'svelte' | 'vue') {
+function literalClasses(source: string, framework: Framework) {
   const pattern = framework === 'react'
     ? /className\s*=\s*['"]([^'"]+)['"]/g
     : /\bclass\s*=\s*['"]([^'"]+)['"]/g
   return new Set([...source.matchAll(pattern)].flatMap(match => match[1].split(/\s+/)).filter(Boolean))
 }
 
-function hasInlineStyle(source: string, framework: 'react' | 'svelte' | 'vue') {
+function hasInlineStyle(source: string, framework: Framework) {
   if (framework === 'react')
     return /\bstyle\s*=\s*\{\{/.test(source)
   if (framework === 'vue')
@@ -149,6 +246,7 @@ function hasInlineStyle(source: string, framework: 'react' | 'svelte' | 'vue') {
 function exportedStories(source: string) {
   const names = new Set<string>()
   for (const match of source.matchAll(/export\s+const\s+([A-Za-z_$][\w$]*)/g)) names.add(match[1])
+  for (const match of source.matchAll(/export\s+function\s+([A-Za-z_$][\w$]*)/g)) names.add(match[1])
   for (const match of source.matchAll(/export\s*\{([^}]+)\}\s*from/g)) {
     for (const specifier of match[1].split(',')) {
       const parts = specifier.trim().split(/\s+as\s+/)
@@ -160,27 +258,139 @@ function exportedStories(source: string) {
 }
 
 function referencedExamples(source: string) {
-  return [...source.matchAll(/from\s+['"]\.\.\/examples\/([^.'"]+)/g)]
-    .map(match => match[1])
+  return [...new Set([...source.matchAll(/from\s+['"]\.\.\/examples\/([^'"]+)/g)]
+    .map(match => match[1].replace(/\.(?:svelte|tsx?|vue)$/, '')))]
     .sort()
 }
 
 function storyLayout(source: string) {
-  return [source.match(/layout\s*:\s*['"]([^'"]+)/)?.[1] ?? 'padded']
+  return source.match(/layout\s*:\s*['"]([^'"]+)/)?.[1] ?? 'padded'
 }
 
-function storyMap(
+function storyMap<T>(
   stories: Record<string, string>,
-  section: 'components' | 'providers',
-  readSource: (source: string) => string[],
+  section: Section,
+  readSource: (source: string, slug: string) => T,
 ) {
-  const result: Record<string, string[]> = {}
+  const result: Record<string, T> = {}
   for (const [path, source] of Object.entries(stories)) {
     const slug = path.match(new RegExp(`/${section}/([^/]+)/stories/`))?.[1]
     if (slug)
-      result[slug] = readSource(source)
+      result[slug] = readSource(source, slug)
   }
   return result
+}
+
+function exampleImports(source: string) {
+  const imports: Record<string, string> = {}
+
+  for (const match of source.matchAll(/import\s+([A-Za-z_$][\w$]*)\s+from\s+['"]\.\.\/examples\/([^'"]+)['"]/g))
+    imports[match[1]] = match[2].replace(/\.(?:svelte|tsx?|vue)$/, '')
+
+  for (const match of source.matchAll(/import\s*\{([^}]+)\}\s*from\s*['"]\.\.\/examples\/([^'"]+)['"]/g)) {
+    const example = match[2].replace(/\.(?:svelte|tsx?|vue)$/, '')
+    for (const specifier of match[1].split(',')) {
+      const [imported, local = imported] = specifier.trim().split(/\s+as\s+/)
+      if (local)
+        imports[local] = example
+    }
+  }
+
+  return imports
+}
+
+function exportedStoryBlocks(source: string) {
+  const declarations = [...source.matchAll(/export\s+(const|function)\s+([A-Za-z_$][\w$]*)/g)]
+  return declarations.map((declaration, index) => ({
+    body: source.slice(declaration.index, declarations[index + 1]?.index ?? source.length),
+    name: declaration[2],
+  }))
+}
+
+function vueStoryComponent(body: string, label: string) {
+  const template = body.match(/template\s*:\s*(['"`])([\s\S]*?)\1/)?.[2]
+  const registrations = body.match(/components\s*:\s*\{([^}]*)\}/)?.[1]
+  if (!template || !registrations)
+    return undefined
+
+  const registeredComponents = registrations.split(',').flatMap((specifier) => {
+    const [registered, local = registered] = specifier.trim().split(/\s*:\s*/)
+    return registered ? [{ local, registered }] : []
+  })
+  const renderedTags = [...template.matchAll(/<([a-z_$][\w$-]*)\b/gi)].map(match => match[1])
+  const normalizeName = (name: string) => name.replaceAll('-', '').toLowerCase()
+  const renderedComponents = registeredComponents.filter(({ registered }) =>
+    renderedTags.some(tag => normalizeName(tag) === normalizeName(registered)),
+  )
+
+  if (renderedComponents.length !== 1)
+    throw new Error(`${label}: template must render exactly one registered component`)
+  return renderedComponents[0].local
+}
+
+function storyBindings(source: string, framework: Framework, label: string) {
+  const bindings: Record<string, string> = {}
+  const imports = exampleImports(source)
+
+  for (const match of source.matchAll(/export\s*\{([^}]+)\}\s*from\s*['"]\.\.\/examples\/([^'"]+)['"]/g)) {
+    const example = match[2].replace(/\.(?:svelte|tsx?|vue)$/, '')
+    for (const specifier of match[1].split(',')) {
+      const [imported, exported = imported] = specifier.trim().split(/\s+as\s+/)
+      if (exported)
+        bindings[exported] = example
+    }
+  }
+
+  for (const { body, name } of exportedStoryBlocks(source)) {
+    if (bindings[name])
+      continue
+
+    const component = framework === 'react'
+      ? body.match(/render\s*:\s*\(\)\s*=>\s*<([A-Za-z_$][\w$]*)\b/)?.[1]
+      : framework === 'vue'
+        ? vueStoryComponent(body, `${label}/${name}`)
+        : body.match(/\bstory\s*\(\s*([A-Za-z_$][\w$]*)/)?.[1]
+          ?? body.match(/Component\s*:\s*([A-Za-z_$][\w$]*)/)?.[1]
+    const example = component && imports[component]
+    if (!example)
+      throw new Error(`${label}: cannot resolve Story ${name} to an imported example`)
+    bindings[name] = example
+  }
+
+  const exports = exportedStories(source)
+  const boundStories = Object.keys(bindings).sort()
+  if (JSON.stringify(boundStories) !== JSON.stringify(exports))
+    throw new Error(`${label}: not every Story export resolves to an example`)
+
+  const references = referencedExamples(source)
+  const boundExamples = [...new Set(Object.values(bindings))].sort()
+  if (JSON.stringify(boundExamples) !== JSON.stringify(references))
+    throw new Error(`${label}: not every referenced example is rendered by a Story export`)
+
+  return bindings
+}
+
+function pascalCaseStoryName(name: string) {
+  return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+}
+
+function canonicalVueStoryName(section: Section, slug: string, name: string) {
+  const pascalName = pascalCaseStoryName(name)
+  return vueStoryNameAliases[`${section}/${slug}`]?.[pascalName] ?? pascalName
+}
+
+function canonicalVueStoryNames(source: string, section: Section, slug: string) {
+  return exportedStories(source)
+    .map(name => canonicalVueStoryName(section, slug, name))
+    .sort()
+}
+
+function canonicalVueStoryBindings(source: string, section: Section, slug: string) {
+  const bindings = storyBindings(source, 'vue', `vue/${section}/${slug}`)
+  return Object.fromEntries(Object.entries(bindings).map(([name, example]) => [
+    canonicalVueStoryName(section, slug, name),
+    example,
+  ]))
 }
 
 function destylerTypeExports(source: string) {
@@ -292,8 +502,38 @@ describe('react, Vue, and Svelte example parity', () => {
     const react = exampleMap(Object.keys(reactComponentExamples), 'components')
     const vue = exampleMap(Object.keys(vueComponentExamples), 'components')
     const svelte = exampleMap(Object.keys(svelteComponentExamples), 'components')
+    expect(react.progress).toContain('circular/Basic')
+    expect(react.progress).toContain('linear/ValueText')
     expect(vue).toEqual(react)
     expect(svelte).toEqual(react)
+  })
+
+  it.each([
+    {
+      react: reactComponentTestSources,
+      section: 'components' as const,
+      svelte: svelteComponentTestSources,
+      vue: vueComponentTestSources,
+    },
+    {
+      react: reactProviderTestSources,
+      section: 'providers' as const,
+      svelte: svelteProviderTestSources,
+      vue: vueProviderTestSources,
+    },
+  ])('tests every $section example covered by both React and Vue', ({ react, section, svelte, vue }) => {
+    const reactExamples = testedExamples(react, section)
+    const vueExamples = testedExamples(vue, section)
+    const svelteExamples = testedExamples(svelte, section)
+    const sharedBaseline = [...reactExamples]
+      .filter(example => vueExamples.has(example))
+      .sort()
+
+    expect(sharedBaseline.length, `${section} shared behavior baseline`).toBeGreaterThan(0)
+    expect(
+      sharedBaseline.filter(example => !svelteExamples.has(example)),
+      `${section} examples missing Svelte behavior coverage`,
+    ).toEqual([])
   })
 
   it('keeps non-Basic examples self-contained', () => {
@@ -305,16 +545,64 @@ describe('react, Vue, and Svelte example parity', () => {
     expect(importsBasic).toEqual([])
   })
 
-  it('keeps every component Story export identical', () => {
+  it('keeps every component Story export aligned', () => {
     const react = storyMap(reactComponentStories, 'components', exportedStories)
+    const vue = storyMap(
+      vueComponentStories,
+      'components',
+      (source, slug) => canonicalVueStoryNames(source, 'components', slug),
+    )
     const svelte = storyMap(svelteComponentStories, 'components', exportedStories)
+    expect(vue).toEqual(react)
     expect(svelte).toEqual(react)
   })
 
-  it('renders the same component examples in every Storybook', () => {
-    const react = storyMap(reactComponentStories, 'components', referencedExamples)
-    const vue = storyMap(vueComponentStories, 'components', referencedExamples)
-    const svelte = storyMap(svelteComponentStories, 'components', referencedExamples)
+  it('resolves the component rendered by a Vue Story template', () => {
+    expect(vueStoryComponent(`components: { Basic }, template: '<Basic />'`, 'fixture')).toBe('Basic')
+    expect(() => vueStoryComponent(
+      `components: { Basic }, template: '<Other />'`,
+      'fixture',
+    )).toThrow('fixture: template must render exactly one registered component')
+  })
+
+  it('keeps Vue Story name exceptions explicit and current', () => {
+    const react = {
+      components: storyMap(reactComponentStories, 'components', exportedStories),
+      providers: storyMap(reactProviderStories, 'providers', exportedStories),
+    }
+    const vue = {
+      components: storyMap(vueComponentStories, 'components', exportedStories),
+      providers: storyMap(vueProviderStories, 'providers', exportedStories),
+    }
+
+    for (const [key, aliases] of Object.entries(vueStoryNameAliases)) {
+      const [section, slug] = key.split('/') as [Section, string]
+      const vueStories = vue[section][slug].map(pascalCaseStoryName)
+      const reactStories = react[section][slug]
+      for (const [vueStory, reactStory] of Object.entries(aliases)) {
+        expect(vueStory, `${key}: stale Vue alias`).not.toBe(reactStory)
+        expect(vueStories, `${key}: ${vueStory}`).toContain(vueStory)
+        expect(reactStories, `${key}: ${reactStory}`).toContain(reactStory)
+      }
+    }
+  })
+
+  it('binds every component Story export to the same example', () => {
+    const react = storyMap(
+      reactComponentStories,
+      'components',
+      (source, slug) => storyBindings(source, 'react', `react/components/${slug}`),
+    )
+    const vue = storyMap(
+      vueComponentStories,
+      'components',
+      (source, slug) => canonicalVueStoryBindings(source, 'components', slug),
+    )
+    const svelte = storyMap(
+      svelteComponentStories,
+      'components',
+      (source, slug) => storyBindings(source, 'svelte', `svelte/components/${slug}`),
+    )
     expect(vue).toEqual(react)
     expect(svelte).toEqual(react)
   })
@@ -378,20 +666,63 @@ describe('react, Vue, and Svelte example parity', () => {
       expect(svelte[provider], provider).toEqual(examples)
   })
 
-  it('keeps shared provider Story exports identical', () => {
+  it('keeps shared provider Story exports aligned', () => {
     const react = storyMap(reactProviderStories, 'providers', exportedStories)
+    const vue = storyMap(
+      vueProviderStories,
+      'providers',
+      (source, slug) => canonicalVueStoryNames(source, 'providers', slug),
+    )
     const svelte = storyMap(svelteProviderStories, 'providers', exportedStories)
-    for (const [provider, stories] of Object.entries(react))
+    for (const [provider, stories] of Object.entries(react)) {
+      expect(vue[provider], provider).toEqual(stories)
       expect(svelte[provider], provider).toEqual(stories)
+    }
   })
 
-  it('renders the same shared provider examples in every Storybook', () => {
-    const react = storyMap(reactProviderStories, 'providers', referencedExamples)
-    const vue = storyMap(vueProviderStories, 'providers', referencedExamples)
-    const svelte = storyMap(svelteProviderStories, 'providers', referencedExamples)
-    for (const [provider, examples] of Object.entries(react)) {
-      expect(vue[provider], provider).toEqual(examples)
-      expect(svelte[provider], provider).toEqual(examples)
+  it('binds every shared provider Story export to the same example', () => {
+    const react = storyMap(
+      reactProviderStories,
+      'providers',
+      (source, slug) => storyBindings(source, 'react', `react/providers/${slug}`),
+    )
+    const vue = storyMap(
+      vueProviderStories,
+      'providers',
+      (source, slug) => canonicalVueStoryBindings(source, 'providers', slug),
+    )
+    const svelte = storyMap(
+      svelteProviderStories,
+      'providers',
+      (source, slug) => storyBindings(source, 'svelte', `svelte/providers/${slug}`),
+    )
+    for (const [provider, bindings] of Object.entries(react)) {
+      expect(vue[provider], provider).toEqual(bindings)
+      expect(svelte[provider], provider).toEqual(bindings)
+    }
+  })
+
+  it('keeps shared provider Story layouts aligned', () => {
+    const react = storyMap(reactProviderStories, 'providers', storyLayout)
+    const vue = storyMap(vueProviderStories, 'providers', storyLayout)
+    const svelte = storyMap(svelteProviderStories, 'providers', storyLayout)
+    const sharedProviders = new Set(Object.keys(react))
+    const staleExceptions = Object.keys(providerStoryLayoutExceptions)
+      .filter(provider => !sharedProviders.has(provider))
+    expect(staleExceptions, 'stale provider layout exceptions').toEqual([])
+
+    for (const [provider, reactLayout] of Object.entries(react)) {
+      const exception = providerStoryLayoutExceptions[provider]
+      if (exception) {
+        expect({
+          react: reactLayout,
+          svelte: svelte[provider],
+          vue: vue[provider],
+        }, provider).toEqual(exception)
+        continue
+      }
+      expect(vue[provider], provider).toBe(reactLayout)
+      expect(svelte[provider], provider).toBe(reactLayout)
     }
   })
 

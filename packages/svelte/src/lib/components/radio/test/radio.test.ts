@@ -57,10 +57,11 @@ describe('[radio] component', () => {
     expect(onValueChange).toHaveBeenCalled()
   })
 
-  it('works with RootProvider focus', async () => {
+  it('focuses the first enabled radio through RootProvider', async () => {
     const screen = await render(RootProvider)
     await screen.getByRole('button', { name: 'Focus' }).click()
-    await expect.element(screen.getByText('React')).toBeVisible()
+    await expect.element(screen.getByRole('radio', { name: 'React' })).toHaveFocus()
+    await expect.element(item('React')!).toHaveAttribute('data-focus')
   })
 })
 
