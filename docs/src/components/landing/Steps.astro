@@ -1,46 +1,53 @@
 ---
+import { frameworks } from '../../config/frameworks'
 import { highlight } from '../../utils/shiki'
 
 /**
  * How It Works — numbered steps layout with staggered alignment.
- * Code blocks switch between Vue and React based on [data-framework] on <html>.
+ * Code blocks switch between Vue, React, and Svelte based on
+ * [data-framework] on <html>.
  */
 const steps = [
   {
-    number: "01",
-    title: "Install the package",
-    description: "Add Destyler to your project with your preferred package manager. Zero config, no build plugins required.",
-    vue: { code: "pnpm add @destyler-ui/vue", lang: "shellscript" as const },
-    react: { code: "pnpm add @destyler-ui/react", lang: "shellscript" as const },
+    number: '01',
+    title: 'Install the package',
+    description: 'Add Destyler to your project with your preferred package manager. Zero config, no build plugins required.',
+    snippets: frameworks.map(framework => ({
+      framework,
+      code: `pnpm add ${framework.packageName}`,
+      language: 'shellscript',
+    })),
   },
   {
-    number: "02",
-    title: "Import components",
-    description: "Pull in exactly what you need. Every component is tree-shakable through namespace exports or direct imports.",
-    vue: { code: "import { Collapse } from '@destyler-ui/vue'", lang: "typescript" as const },
-    react: { code: "import { Collapse } from '@destyler-ui/react'", lang: "typescript" as const },
+    number: '02',
+    title: 'Import components',
+    description: 'Pull in exactly what you need. Every component is tree-shakable through namespace exports or direct imports.',
+    snippets: frameworks.map(framework => ({
+      framework,
+      code: `import { Collapse } from '${framework.packageName}'`,
+      language: 'typescript',
+    })),
   },
   {
-    number: "03",
-    title: "Style your way",
-    description: "Apply your design tokens, Tailwind classes, or CSS-in-JS. The components provide behavior — you provide the look.",
-    vue: {
+    number: '03',
+    title: 'Style your way',
+    description: 'Apply your design tokens, Tailwind classes, or CSS-in-JS. The components provide behavior — you provide the look.',
+    snippets: frameworks.map(framework => ({
+      framework,
       code: `<Collapse.Root>\n  <Collapse.Item value="a">\n    ...\n  </Collapse.Item>\n</Collapse.Root>`,
-      lang: "vue-html" as const,
-    },
-    react: {
-      code: `<Collapse.Root>\n  <Collapse.Item value="a">\n    ...\n  </Collapse.Item>\n</Collapse.Root>`,
-      lang: "tsx" as const,
-    },
+      language: framework.markupLanguage,
+    })),
   },
-];
+]
 
 // Pre-render highlighted HTML for each step
 const highlightedSteps = await Promise.all(
   steps.map(async (step) => ({
     ...step,
-    vueHtml: await highlight(step.vue.code, step.vue.lang),
-    reactHtml: await highlight(step.react.code, step.react.lang),
+    snippets: await Promise.all(step.snippets.map(async snippet => ({
+      ...snippet,
+      html: await highlight(snippet.code, snippet.language),
+    }))),
   }))
 )
 ---
@@ -65,12 +72,11 @@ const highlightedSteps = await Promise.all(
             <h3 class="font-display font-bold text-xl tracking-[-0.02em] text-$sl-color-text mb-3 leading-[1.25]">{step.title}</h3>
             <p class="text-sm leading-[1.6] text-$sl-color-gray-3 tracking-[-0.01em] mb-6">{step.description}</p>
             <div class="step-code mt-4">
-              <div class="ds-code-vue">
-                <Fragment set:html={step.vueHtml} />
-              </div>
-              <div class="ds-code-react">
-                <Fragment set:html={step.reactHtml} />
-              </div>
+              {step.snippets.map(snippet => (
+                <div class="ds-fw-content" data-fw={snippet.framework.id}>
+                  <Fragment set:html={snippet.html} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -80,22 +86,6 @@ const highlightedSteps = await Promise.all(
 </section>
 
 <style>
-  /* Toggle code blocks based on selected framework */
-  :root[data-framework='vue'] .ds-code-vue,
-  :root:not([data-framework]) .ds-code-vue {
-    display: block;
-  }
-  :root[data-framework='vue'] .ds-code-react,
-  :root:not([data-framework]) .ds-code-react {
-    display: none;
-  }
-  :root[data-framework='react'] .ds-code-vue {
-    display: none;
-  }
-  :root[data-framework='react'] .ds-code-react {
-    display: block;
-  }
-
   .step-code :global(.shiki) {
     font-family: var(--sl-font-mono) !important;
     font-size: 0.8125rem !important;

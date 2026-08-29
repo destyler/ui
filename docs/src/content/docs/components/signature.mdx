@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Signature
-
 > A component that allows users to draw a signature using mouse or touch input.
 
 <ComponentPreview component="signature" example="Basic" />
@@ -55,6 +53,23 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Signature } from '@destyler-ui/svelte'
+</script>
+
+<Signature.Root>
+  <Signature.Label>Sign below</Signature.Label>
+  <Signature.Control>
+    <Signature.Segment />
+    <Signature.ClearTrigger>Clear</Signature.ClearTrigger>
+    <Signature.Guide />
+  </Signature.Control>
+</Signature.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -79,30 +94,4 @@ Combine with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="signature" part="Root" />
-
-### ClearTrigger
-
-<ComponentTypes id="signature" part="ClearTrigger" />
-
-### Control
-
-<ComponentTypes id="signature" part="Control" />
-
-### Guide
-
-<ComponentTypes id="signature" part="Guide" />
-
-### HiddenInput
-
-<ComponentTypes id="signature" part="HiddenInput" />
-
-### Label
-
-<ComponentTypes id="signature" part="Label" />
-
-### Segment
-
-<ComponentTypes id="signature" part="Segment" />
+<ComponentTypes id="signature" />

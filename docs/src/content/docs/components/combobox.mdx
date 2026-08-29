@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Combobox
-
 > An input component that combines a text input with a listbox, allowing users to filter a list of options.
 
 <ComponentPreview component="combobox" example="Basic" />
@@ -75,6 +73,63 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script module lang="ts">
+  import type { ComboboxOpenChangeDetails, ComboboxValueChangeDetails } from '@destyler-ui/svelte'
+
+  export interface BasicProps {
+    disabled?: boolean
+    multiple?: boolean
+    onValueChange?: (details: ComboboxValueChangeDetails) => void
+    onOpenChange?: (details: ComboboxOpenChangeDetails) => void
+    readOnly?: boolean
+    lazyMount?: boolean
+    unmountOnExit?: boolean
+  }
+</script>
+
+<script lang="ts">
+  import { Combobox, createListCollection } from '@destyler-ui/svelte'
+
+  const collection = createListCollection({
+    items: [
+      { label: 'React', value: 'react' },
+      { label: 'Solid', value: 'solid' },
+      { label: 'Vue', value: 'vue' },
+      { label: 'Svelte', value: 'svelte', disabled: true },
+    ],
+  })
+
+  let { onOpenChange, onValueChange, ...props }: BasicProps = $props()
+  let value = $state<string[]>([])
+</script>
+
+<Combobox.Root {collection} bind:value {onOpenChange} {onValueChange} {...props}>
+  <Combobox.Label>Framework</Combobox.Label>
+  <Combobox.Control>
+    <Combobox.Input data-testid="input" />
+    <Combobox.Trigger data-testid="trigger">Open</Combobox.Trigger>
+    <Combobox.ClearTrigger>Clear</Combobox.ClearTrigger>
+  </Combobox.Control>
+  <Combobox.Positioner data-testid="positioner">
+    <Combobox.Content>
+      <Combobox.ItemGroup>
+        <Combobox.ItemGroupLabel>Frameworks</Combobox.ItemGroupLabel>
+        {#each collection.items as item (item.value)}
+          <Combobox.Item {item}>
+            <Combobox.ItemText>{item.label}</Combobox.ItemText>
+            <Combobox.ItemIndicator>✓</Combobox.ItemIndicator>
+          </Combobox.Item>
+        {/each}
+      </Combobox.ItemGroup>
+      <Combobox.List />
+    </Combobox.Content>
+  </Combobox.Positioner>
+</Combobox.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -99,58 +154,4 @@ Combine combobox with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="combobox" part="Root" />
-
-### ClearTrigger
-
-<ComponentTypes id="combobox" part="ClearTrigger" />
-
-### Content
-
-<ComponentTypes id="combobox" part="Content" />
-
-### Control
-
-<ComponentTypes id="combobox" part="Control" />
-
-### Input
-
-<ComponentTypes id="combobox" part="Input" />
-
-### Item
-
-<ComponentTypes id="combobox" part="Item" />
-
-### ItemGroup
-
-<ComponentTypes id="combobox" part="ItemGroup" />
-
-### ItemGroupLabel
-
-<ComponentTypes id="combobox" part="ItemGroupLabel" />
-
-### ItemIndicator
-
-<ComponentTypes id="combobox" part="ItemIndicator" />
-
-### ItemText
-
-<ComponentTypes id="combobox" part="ItemText" />
-
-### Label
-
-<ComponentTypes id="combobox" part="Label" />
-
-### List
-
-<ComponentTypes id="combobox" part="List" />
-
-### Positioner
-
-<ComponentTypes id="combobox" part="Positioner" />
-
-### Trigger
-
-<ComponentTypes id="combobox" part="Trigger" />
+<ComponentTypes id="combobox" />

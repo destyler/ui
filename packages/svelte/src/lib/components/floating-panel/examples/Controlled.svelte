@@ -1,0 +1,46 @@
+<script lang="ts">
+  import { FloatingPanel } from '../index'
+
+  let open = $state(false)
+</script>
+
+<main class="p-10">
+  <button
+    type="button"
+    onclick={() => (open = !open)}
+    class="mb-4 px-4 py-2 bg-green-500 text-white rounded"
+  >
+    External Toggle: {open ? 'Close' : 'Open'}
+  </button>
+
+  <FloatingPanel.Root bind:open>
+    <FloatingPanel.Trigger class="px-4 py-2 bg-blue-500 text-white rounded">Toggle Panel</FloatingPanel.Trigger>
+    <FloatingPanel.Positioner>
+      <FloatingPanel.Content class="bg-white border rounded-lg shadow-lg overflow-hidden">
+        <FloatingPanel.DragTrigger class="cursor-move">
+          <FloatingPanel.Header class="flex items-center justify-between px-4 py-2 border-b bg-gray-50">
+            <FloatingPanel.Title class="text-sm font-medium">Controlled Panel</FloatingPanel.Title>
+            <div data-scope="floating-panel" data-part="trigger-group" class="flex gap-1">
+              <FloatingPanel.MinimizeTrigger aria-label="Minimize" class="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded">-</FloatingPanel.MinimizeTrigger>
+              <FloatingPanel.MaximizeTrigger aria-label="Maximize" class="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded">+</FloatingPanel.MaximizeTrigger>
+              <FloatingPanel.RestoreTrigger aria-label="Restore" class="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded">□</FloatingPanel.RestoreTrigger>
+              <FloatingPanel.CloseTrigger aria-label="Close" class="w-6 h-6 flex items-center justify-center hover:bg-red-100 hover:text-red-500 rounded">x</FloatingPanel.CloseTrigger>
+            </div>
+          </FloatingPanel.Header>
+        </FloatingPanel.DragTrigger>
+        <FloatingPanel.Body class="p-4 relative">
+          <p>This panel is controlled via state</p>
+          <p>Open state: {open ? 'true' : 'false'}</p>
+        </FloatingPanel.Body>
+        <FloatingPanel.ResizeTrigger axis="n" class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-1 cursor-n-resize" />
+        <FloatingPanel.ResizeTrigger axis="e" class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-4 cursor-e-resize" />
+        <FloatingPanel.ResizeTrigger axis="w" class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-4 cursor-w-resize" />
+        <FloatingPanel.ResizeTrigger axis="s" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-1 cursor-s-resize" />
+        <FloatingPanel.ResizeTrigger axis="ne" class="absolute top-0 right-0 w-2 h-2 cursor-ne-resize" />
+        <FloatingPanel.ResizeTrigger axis="se" class="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize" />
+        <FloatingPanel.ResizeTrigger axis="sw" class="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize" />
+        <FloatingPanel.ResizeTrigger axis="nw" class="absolute top-0 left-0 w-2 h-2 cursor-nw-resize" />
+      </FloatingPanel.Content>
+    </FloatingPanel.Positioner>
+  </FloatingPanel.Root>
+</main>

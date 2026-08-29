@@ -27,8 +27,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.progress-circular [data-scope="progress"][data-part="value-text"],
-.progress-circular [data-scope="progress"][data-part="valueText"] {
+.progress-circular [data-scope="progress"][data-part="value-text"] {
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -49,20 +48,17 @@
   animation: progress-circular-spin 1.4s linear infinite;
 }
 
-.progress-circular [data-scope="progress"][data-part="circle-track"],
-.progress-circular [data-scope="progress"][data-part="circleTrack"] {
+.progress-circular [data-scope="progress"][data-part="circle-track"] {
   stroke: var(--demo-neutral-muted);
 }
 
-.progress-circular [data-scope="progress"][data-part="circle-range"],
-.progress-circular [data-scope="progress"][data-part="circleRange"] {
+.progress-circular [data-scope="progress"][data-part="circle-range"] {
   stroke: var(--demo-coral-solid);
   stroke-linecap: round;
   transition: stroke-dashoffset 0.2s ease, stroke-dasharray 0.2s ease;
 }
 
-.progress-circular [data-scope="progress"][data-part="circle-range"][data-state="indeterminate"],
-.progress-circular [data-scope="progress"][data-part="circleRange"][data-state="indeterminate"] {
+.progress-circular [data-scope="progress"][data-part="circle-range"][data-state="indeterminate"] {
   stroke-dasharray: calc(var(--circumference) * 0.25) var(--circumference);
   stroke-dashoffset: 0;
   transition: none;

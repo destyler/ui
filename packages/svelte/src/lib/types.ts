@@ -1,0 +1,23 @@
+import type { Snippet } from 'svelte'
+import type { SvelteHTMLElements } from 'svelte/elements'
+
+export type Assign<T, U> = Omit<T, keyof U> & U
+export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+
+export type CollectionItem = string | object
+
+export type Accessor<T> = () => T
+
+export type HTMLTag = keyof SvelteHTMLElements
+export type PropsFn<T extends HTMLTag> = (props?: HTMLProps<T>) => HTMLProps<T>
+
+export type HTMLProps<T extends HTMLTag> = SvelteHTMLElements[T]
+
+export interface PolymorphicProps<T extends HTMLTag> {
+  children?: Snippet
+  asChild?: Snippet<[PropsFn<T>]>
+}
+
+export interface RefAttribute<T extends Element = Element> {
+  ref?: T | null | undefined
+}

@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Fieldset
-
 > A component for grouping related form fields with a legend and shared validation.
 
 <ComponentPreview component="fieldset" example="Basic" />
@@ -47,6 +45,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Field, Fieldset } from '@destyler-ui/svelte'
+</script>
+
+<Fieldset.Root>
+  <Fieldset.Legend>Contact details</Fieldset.Legend>
+  <Fieldset.HelperText>All fields are required.</Fieldset.HelperText>
+  <Field.Root>
+    <Field.Label>Email</Field.Label>
+    <Field.Input />
+  </Field.Root>
+  <Fieldset.ErrorText>Please check the form.</Fieldset.ErrorText>
+</Fieldset.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -67,18 +83,4 @@ Nest field components within a fieldset.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="fieldset" part="Root" />
-
-### ErrorText
-
-<ComponentTypes id="fieldset" part="ErrorText" />
-
-### HelperText
-
-<ComponentTypes id="fieldset" part="HelperText" />
-
-### Legend
-
-<ComponentTypes id="fieldset" part="Legend" />
+<ComponentTypes id="fieldset" />

@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Edit
-
 > A component that allows users to edit text in place, switching between a read-only and an editable state.
 
 <ComponentPreview component="edit" example="Basic" />
@@ -61,6 +59,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Edit } from '@destyler-ui/svelte'
+</script>
+
+<Edit.Root placeholder="Placeholder">
+  <Edit.Label>Label</Edit.Label>
+  <Edit.Area>
+    <Edit.Input />
+    <Edit.Preview />
+  </Edit.Area>
+  <Edit.Control>
+    <Edit.SubmitTrigger>Save</Edit.SubmitTrigger>
+    <Edit.CancelTrigger>Cancel</Edit.CancelTrigger>
+    <Edit.EditTrigger>Edit</Edit.EditTrigger>
+  </Edit.Control>
+</Edit.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -91,38 +110,4 @@ Combine with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="edit" part="Root" />
-
-### Area
-
-<ComponentTypes id="edit" part="Area" />
-
-### CancelTrigger
-
-<ComponentTypes id="edit" part="CancelTrigger" />
-
-### Control
-
-<ComponentTypes id="edit" part="Control" />
-
-### EditTrigger
-
-<ComponentTypes id="edit" part="EditTrigger" />
-
-### Input
-
-<ComponentTypes id="edit" part="Input" />
-
-### Label
-
-<ComponentTypes id="edit" part="Label" />
-
-### Preview
-
-<ComponentTypes id="edit" part="Preview" />
-
-### SubmitTrigger
-
-<ComponentTypes id="edit" part="SubmitTrigger" />
+<ComponentTypes id="edit" />

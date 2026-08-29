@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Tooltip
-
 > A popup that displays additional information when hovering over or focusing on an element.
 
 <ComponentPreview component="tooltip" example="Basic" />
@@ -57,6 +55,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Tooltip } from '@destyler-ui/svelte'
+</script>
+
+<Tooltip.Root openDelay={0} closeDelay={0}>
+  <Tooltip.Trigger>Hover me</Tooltip.Trigger>
+  <Tooltip.Positioner>
+    <Tooltip.Arrow>
+      <Tooltip.ArrowTip />
+    </Tooltip.Arrow>
+    <Tooltip.Content>Tooltip content</Tooltip.Content>
+  </Tooltip.Positioner>
+</Tooltip.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -99,26 +115,4 @@ Use render function for custom tooltip rendering.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="tooltip" part="Root" />
-
-### Arrow
-
-<ComponentTypes id="tooltip" part="Arrow" />
-
-### ArrowTip
-
-<ComponentTypes id="tooltip" part="ArrowTip" />
-
-### Content
-
-<ComponentTypes id="tooltip" part="Content" />
-
-### Positioner
-
-<ComponentTypes id="tooltip" part="Positioner" />
-
-### Trigger
-
-<ComponentTypes id="tooltip" part="Trigger" />
+<ComponentTypes id="tooltip" />

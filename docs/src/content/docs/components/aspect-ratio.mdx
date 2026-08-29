@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Aspect Ratio
-
 > Displays content within a desired ratio.
 
 <ComponentPreview component="aspect-ratio" example="Basic" />
@@ -32,7 +30,43 @@ import { AspectRatio } from '@destyler-ui/vue'
 
 <FrameworkContent fw="react">
 ```tsx
+import { AspectRatio } from '@destyler-ui/react'
 
+export default function Basic() {
+  return (
+    <main style={{ width: '300px' }}>
+      <AspectRatio.Root ratio={16 / 9}>
+        <AspectRatio.Content>
+          <img
+            src="https://elonehoo.me/gallery/20_sun.jpg"
+            alt="Sunset"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </AspectRatio.Content>
+      </AspectRatio.Root>
+    </main>
+  )
+}
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { AspectRatio } from '@destyler-ui/svelte'
+</script>
+
+<main style="width: 300px;">
+  <AspectRatio.Root ratio={16 / 9}>
+    <AspectRatio.Content>
+      <img
+        src="https://elonehoo.me/gallery/20_sun.jpg"
+        alt="Sunset"
+        style="width: 100%; height: 100%; object-fit: cover;"
+      />
+    </AspectRatio.Content>
+  </AspectRatio.Root>
+</main>
 ```
 </FrameworkContent>
 
@@ -56,10 +90,4 @@ import { AspectRatio } from '@destyler-ui/vue'
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="aspect-ratio" part="Root" />
-
-### Content
-
-<ComponentTypes id="aspect-ratio" part="Content" />
+<ComponentTypes id="aspect-ratio" />

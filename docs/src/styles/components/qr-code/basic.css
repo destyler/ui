@@ -50,8 +50,7 @@
   border-radius: 0.25rem;
 }
 
-.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"],
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"] {
+.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"] {
   position: absolute;
   top: calc(100% + 0.75rem);
   left: 50%;
@@ -76,28 +75,21 @@
 }
 
 .qr-code-basic [data-scope="qr-code"][data-part="download-trigger"]:hover,
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"]:hover,
-.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"][data-hover],
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"][data-hover] {
+.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .qr-code-basic [data-scope="qr-code"][data-part="download-trigger"]:focus,
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"]:focus,
 .qr-code-basic [data-scope="qr-code"][data-part="download-trigger"]:focus-visible,
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"]:focus-visible,
-.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"][data-focus],
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"][data-focus] {
+.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"][data-focus] {
   outline: none;
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .qr-code-basic [data-scope="qr-code"][data-part="download-trigger"][data-disabled],
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"][data-disabled],
-.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"]:disabled,
-.qr-code-basic [data-scope="qr-code"][data-part="downloadTrigger"]:disabled {
+.qr-code-basic [data-scope="qr-code"][data-part="download-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }

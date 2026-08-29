@@ -1,5 +1,4 @@
-.presence-unmountonexit .ds-vue-example,
-.presence-unmountonexit .ds-react-example {
+.presence-unmountonexit .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +8,7 @@
   min-height: 8.5rem;
 }
 
-.presence-unmountonexit .ds-vue-example > div {
+.presence-unmountonexit .ds-example-content > div:not([data-part]) {
   display: flex;
   flex-direction: column;
   align-items: center;

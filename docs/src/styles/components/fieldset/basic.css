@@ -14,13 +14,13 @@
   color: var(--demo-neutral-fg);
 }
 
-.fieldset-basic [data-part="helperText"] {
+.fieldset-basic [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.fieldset-basic [data-part="errorText"] {
+.fieldset-basic [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);

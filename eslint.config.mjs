@@ -1,4 +1,4 @@
-import antfu, { astro, react, vue } from '@antfu/eslint-config'
+import antfu, { astro, react, svelte, vue } from '@antfu/eslint-config'
 
 export default antfu(
   {
@@ -21,6 +21,19 @@ export default antfu(
     }),
     rules: {
       'style/jsx-one-expression-per-line': 'off',
+    },
+  },
+  {
+    ...svelte({
+      files: ['packages/svelte/**/*.{svelte,js,ts}'],
+    }),
+  },
+  {
+    files: ['packages/svelte/package.json'],
+    rules: {
+      // npm applies `files` patterns in order; sorting would re-include
+      // development-only files after their exclusion rules.
+      'jsonc/sort-array-values': 'off',
     },
   },
   {

@@ -1,0 +1,2 @@
+<script lang="ts">import { Collapse } from '../index'; const items = ['React', 'Solid', 'Vue']</script>
+<Collapse.Root defaultValue={['React']} orientation="horizontal">{#each items as item (item)}<Collapse.Item value={item}><Collapse.ItemTrigger>What is {item}? <Collapse.ItemIndicator>x</Collapse.ItemIndicator></Collapse.ItemTrigger><Collapse.ItemContent><div>{item} is a JavaScript library for building user interfaces.</div></Collapse.ItemContent></Collapse.Item>{/each}</Collapse.Root>

@@ -46,7 +46,7 @@ const emits = defineEmits<RootEmits>()
               <li>
                 <NavigationMenu.Link value="intro" href="#">
                   <div>Introduction</div>
-                  <p>Re-usable components built using Radix UI and Tailwind CSS.</p>
+                  <p>Re-usable components built using Destyler UI and Tailwind CSS.</p>
                 </NavigationMenu.Link>
               </li>
               <li>

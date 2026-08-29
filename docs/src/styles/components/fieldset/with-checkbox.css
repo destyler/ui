@@ -14,13 +14,13 @@
   color: var(--demo-neutral-fg);
 }
 
-.fieldset-withcheckbox [data-part="helperText"] {
+.fieldset-withcheckbox [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.fieldset-withcheckbox [data-part="errorText"] {
+.fieldset-withcheckbox [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);

@@ -1,0 +1,29 @@
+<script module lang="ts">
+  import type { Assign, HTMLProps, PolymorphicProps, RefAttribute } from '$lib/types'
+
+  export interface HoverCardContentBaseProps extends PolymorphicProps<'div'>, RefAttribute {}
+  export interface HoverCardContentProps extends Assign<HTMLProps<'div'>, HoverCardContentBaseProps> {}
+</script>
+
+<script lang="ts">
+  import { mergeProps } from '@destyler/svelte'
+  import { untrack } from 'svelte'
+  import { UI } from '../../factory'
+  import { usePresenceContext } from '../../presence'
+  import { useHoverCardContext } from '../hooks/use-hover-card-context'
+
+  let { ref = $bindable<Element | null>(), ...props }: HoverCardContentProps = $props()
+
+  const hoverCard = useHoverCardContext()
+  const presence = usePresenceContext()
+  const mergedProps = $derived(mergeProps(hoverCard().getContentProps(), presence().getPresenceProps(), props))
+
+  function setNode(node: HTMLElement | null) {
+    untrack(() => presence().setNode(node))
+    ref = node
+  }
+</script>
+
+{#if !presence().unmounted}
+  <UI as="div" {@attach setNode} {...mergedProps} />
+{/if}

@@ -58,19 +58,19 @@
   resize: vertical;
 }
 
-.field-selectcontrolled [data-part="helperText"] {
+.field-selectcontrolled [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.field-selectcontrolled [data-part="errorText"] {
+.field-selectcontrolled [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);
 }
 
-.field-selectcontrolled [data-part="requiredIndicator"] {
+.field-selectcontrolled [data-part="required-indicator"] {
   margin-left: 0.125rem;
   color: var(--demo-error);
 }

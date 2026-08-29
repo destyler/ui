@@ -3,8 +3,7 @@
   max-width: 20rem;
 }
 
-.separator-basic .ds-vue-example,
-.separator-basic .ds-react-example {
+.separator-basic .ds-example-content {
   width: 100%;
 }
 
@@ -24,27 +23,23 @@
   gap: 0.25rem;
 }
 
-.separator-basic.ds-preview-frame .ds-vue-example p,
-.separator-basic.ds-preview-frame .ds-react-example p {
+.separator-basic.ds-preview-frame .ds-example-content p {
   margin: 0 !important;
   font-size: 0.875rem !important;
   line-height: 1.25rem !important;
   color: var(--demo-neutral-fg) !important;
 }
 
-.separator-basic.ds-preview-frame .ds-vue-example main > div p:first-child,
-.separator-basic.ds-preview-frame .ds-react-example main > div p:first-child {
+.separator-basic.ds-preview-frame .ds-example-content main > div p:first-child {
   font-weight: 600 !important;
 }
 
-.separator-basic.ds-preview-frame .ds-vue-example main > div p:last-child,
-.separator-basic.ds-preview-frame .ds-react-example main > div p:last-child {
+.separator-basic.ds-preview-frame .ds-example-content main > div p:last-child {
   font-weight: 400 !important;
   color: var(--demo-neutral-fg-muted) !important;
 }
 
-.separator-basic.ds-preview-frame .ds-vue-example nav,
-.separator-basic.ds-preview-frame .ds-react-example nav {
+.separator-basic.ds-preview-frame .ds-example-content nav {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;

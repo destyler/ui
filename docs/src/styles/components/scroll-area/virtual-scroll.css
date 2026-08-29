@@ -1,5 +1,4 @@
-.scroll-area-virtualscroll .ds-vue-example,
-.scroll-area-virtualscroll .ds-react-example {
+.scroll-area-virtualscroll .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

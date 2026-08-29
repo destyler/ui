@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# OTP Input
-
 > A one-time password input component for entering verification codes.
 
 <ComponentPreview component="otp-input" example="Basic" />
@@ -48,6 +46,24 @@ export default function Basic() {
     </OtpInput.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { OtpInput } from '@destyler-ui/svelte'
+</script>
+
+<OtpInput.Root>
+  <OtpInput.Label>Verification code</OtpInput.Label>
+  <OtpInput.Control>
+    {#each [0, 1, 2] as index (index)}
+      <OtpInput.Input {index} />
+    {/each}
+  </OtpInput.Control>
+  <OtpInput.HiddenInput />
+</OtpInput.Root>
 ```
 </FrameworkContent>
 
@@ -99,22 +115,4 @@ Combine with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="otp-input" part="Root" />
-
-### Control
-
-<ComponentTypes id="otp-input" part="Control" />
-
-### HiddenInput
-
-<ComponentTypes id="otp-input" part="HiddenInput" />
-
-### Input
-
-<ComponentTypes id="otp-input" part="Input" />
-
-### Label
-
-<ComponentTypes id="otp-input" part="Label" />
+<ComponentTypes id="otp-input" />

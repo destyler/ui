@@ -1,5 +1,4 @@
-.signature-imagepreview .ds-vue-example,
-.signature-imagepreview .ds-react-example {
+.signature-imagepreview .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -103,8 +102,7 @@
   border-bottom: 1px dashed var(--demo-neutral-solid);
 }
 
-.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"],
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"] {
+.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"] {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -127,37 +125,29 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
-.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"]:hover,
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"]:hover {
+.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"]:hover {
   color: var(--demo-neutral-fg);
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .signature-imagepreview [data-scope="signature"][data-part="clear-trigger"]:focus,
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"]:focus,
 .signature-imagepreview [data-scope="signature"][data-part="clear-trigger"]:focus-visible,
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"]:focus-visible,
-.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"][data-focus],
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"][data-focus] {
+.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"][data-focus] {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .signature-imagepreview [data-scope="signature"][data-part="clear-trigger"][data-disabled],
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"][data-disabled],
-.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"]:disabled,
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"]:disabled {
+.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"][hidden],
-.signature-imagepreview [data-scope="signature"][data-part="clearTrigger"][hidden] {
+.signature-imagepreview [data-scope="signature"][data-part="clear-trigger"][hidden] {
   display: none;
 }
 
-.signature-imagepreview [data-scope="signature"][data-part="hidden-input"],
-.signature-imagepreview [data-scope="signature"][data-part="hiddenInput"] {
+.signature-imagepreview [data-scope="signature"][data-part="hidden-input"] {
   display: none;
 }

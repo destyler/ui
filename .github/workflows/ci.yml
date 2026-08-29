@@ -49,7 +49,7 @@ jobs:
           rm -rf ${{ env.STORE_PATH }}
 
       - name: Install
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Clear Vite cache
         run: |
@@ -63,3 +63,15 @@ jobs:
 
       - name: Test
         run: pnpm run test:ci
+
+      - name: Check Svelte package
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/svelte check:ci
+
+      - name: Build Svelte Storybook
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/svelte build-storybook
+
+      - name: Build documentation
+        if: matrix.node == 22
+        run: pnpm run docs:build

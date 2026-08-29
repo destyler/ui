@@ -26,8 +26,7 @@
   fill: currentColor;
 }
 
-.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"],
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"] {
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -49,28 +48,21 @@
 }
 
 .qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:hover,
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:hover,
-.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-hover],
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"][data-hover] {
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:focus,
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:focus,
 .qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:focus-visible,
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:focus-visible,
-.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-focus],
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"][data-focus] {
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-focus] {
   outline: none;
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"][data-disabled],
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"][data-disabled],
-.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:disabled,
-.qr-code-controlled [data-scope="qr-code"][data-part="downloadTrigger"]:disabled {
+.qr-code-controlled [data-scope="qr-code"][data-part="download-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }

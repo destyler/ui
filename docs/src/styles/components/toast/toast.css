@@ -90,8 +90,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-[data-scope="toast"][data-part="close-trigger"],
-[data-scope="toast"][data-part="closeTrigger"] {
+[data-scope="toast"][data-part="close-trigger"] {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -112,20 +111,17 @@
   transition: color 0.15s, background-color 0.15s;
 }
 
-[data-scope="toast"][data-part="close-trigger"]:hover,
-[data-scope="toast"][data-part="closeTrigger"]:hover {
+[data-scope="toast"][data-part="close-trigger"]:hover {
   color: var(--demo-neutral-fg);
   background: var(--demo-neutral-subtle);
 }
 
-[data-scope="toast"][data-part="close-trigger"]:focus,
-[data-scope="toast"][data-part="closeTrigger"]:focus {
+[data-scope="toast"][data-part="close-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-[data-scope="toast"][data-part="action-trigger"],
-[data-scope="toast"][data-part="actionTrigger"] {
+[data-scope="toast"][data-part="action-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -143,14 +139,12 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 }
 
-[data-scope="toast"][data-part="action-trigger"]:hover,
-[data-scope="toast"][data-part="actionTrigger"]:hover {
+[data-scope="toast"][data-part="action-trigger"]:hover {
   background: var(--demo-coral-emphasized);
   border-color: var(--demo-coral-emphasized);
 }
 
-[data-scope="toast"][data-part="action-trigger"]:focus,
-[data-scope="toast"][data-part="actionTrigger"]:focus {
+[data-scope="toast"][data-part="action-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }

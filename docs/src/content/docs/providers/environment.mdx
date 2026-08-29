@@ -1,0 +1,152 @@
+---
+title: Environment
+description: Provide the DOM root used by components when they run in a document, shadow root, or iframe.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+`EnvironmentProvider` tells Destyler components which root node, document, and window to use. A normal application can rely on the default document; add the provider when components render in a shadow root, iframe, or another DOM environment.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { EnvironmentProvider, useEnvironmentContext } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { EnvironmentProvider, useEnvironmentContext } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { EnvironmentProvider, useEnvironmentContext } from '@destyler-ui/svelte/environment'
+</script>
+```
+
+</FrameworkContent>
+
+The Svelte exports are also available from `@destyler-ui/svelte`.
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { EnvironmentProvider } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <EnvironmentProvider>
+    <button type="button">Rendered in the current document</button>
+  </EnvironmentProvider>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { EnvironmentProvider } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <EnvironmentProvider>
+      <button type="button">Rendered in the current document</button>
+    </EnvironmentProvider>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { EnvironmentProvider } from '@destyler-ui/svelte/environment'
+</script>
+
+<EnvironmentProvider>
+  <button type="button">Rendered in the current document</button>
+</EnvironmentProvider>
+```
+
+</FrameworkContent>
+
+Pass `value` when the content belongs to another root. The value may be a `Document`, `ShadowRoot`, another DOM `Node`, or a function that resolves one lazily.
+
+## API
+
+### EnvironmentProvider
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `RootNode \| () => RootNode` | Current or parent document | Root node used to resolve the document and window. |
+| `children` | `Snippet` | — | Content that receives the environment context. |
+
+`RootNode` is `ShadowRoot | Document | Node`.
+
+### useEnvironmentContext
+
+Reads `getRootNode()`, `getDocument()`, and `getWindow()` from the nearest provider. Svelte returns an accessor; React and Vue return the context value directly.
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { useEnvironmentContext } from '@destyler-ui/vue'
+
+const environment = useEnvironmentContext()
+</script>
+
+<template>
+  <button type="button" @click="environment.getWindow().scrollTo(0, 0)">
+    Scroll this environment to the top
+  </button>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { useEnvironmentContext } from '@destyler-ui/react'
+
+export function ScrollToTop() {
+  const environment = useEnvironmentContext()
+  return <button onClick={() => environment.getWindow().scrollTo(0, 0)}>Scroll this environment to the top</button>
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { useEnvironmentContext } from '@destyler-ui/svelte/environment'
+
+  const environment = useEnvironmentContext()
+</script>
+
+<button type="button" onclick={() => environment().getWindow().scrollTo(0, 0)}>
+  Scroll this environment to the top
+</button>
+```
+
+</FrameworkContent>

@@ -1,0 +1,387 @@
+{
+  "componentCategories": [
+    "Form",
+    "Overlay",
+    "Layout",
+    "Navigation",
+    "Data",
+    "Utility"
+  ],
+  "components": [
+    {
+      "name": "Checkbox",
+      "namespace": "Checkbox",
+      "slug": "checkbox",
+      "category": "Form",
+      "anatomy": "checkboxAnatomy"
+    },
+    {
+      "name": "Radio",
+      "namespace": "Radio",
+      "slug": "radio",
+      "category": "Form",
+      "anatomy": "radioAnatomy"
+    },
+    {
+      "name": "Select",
+      "namespace": "Select",
+      "slug": "select",
+      "category": "Form",
+      "anatomy": "selectAnatomy"
+    },
+    {
+      "name": "Switch",
+      "namespace": "Switch",
+      "slug": "switch",
+      "category": "Form",
+      "anatomy": "switchAnatomy"
+    },
+    {
+      "name": "Slider",
+      "namespace": "Slider",
+      "slug": "slider",
+      "category": "Form",
+      "anatomy": "sliderAnatomy"
+    },
+    {
+      "name": "Number Input",
+      "namespace": "NumberInput",
+      "slug": "number-input",
+      "category": "Form",
+      "anatomy": "numberInputAnatomy"
+    },
+    {
+      "name": "OTP Input",
+      "namespace": "OtpInput",
+      "slug": "otp-input",
+      "category": "Form",
+      "anatomy": "otpInputAnatomy"
+    },
+    {
+      "name": "File Upload",
+      "namespace": "FileUpload",
+      "slug": "file-upload",
+      "category": "Form",
+      "anatomy": "fileUploadAnatomy"
+    },
+    {
+      "name": "Signature",
+      "namespace": "Signature",
+      "slug": "signature",
+      "category": "Form",
+      "anatomy": "signatureAnatomy",
+      "anatomyExceptions": [
+        "SegmentPath"
+      ]
+    },
+    {
+      "name": "Color Picker",
+      "namespace": "ColorPicker",
+      "slug": "color-picker",
+      "category": "Form",
+      "anatomy": "colorPickerAnatomy"
+    },
+    {
+      "name": "Field",
+      "namespace": "Field",
+      "slug": "field",
+      "category": "Form",
+      "anatomy": "fieldAnatomy"
+    },
+    {
+      "name": "Fieldset",
+      "namespace": "Fieldset",
+      "slug": "fieldset",
+      "category": "Form",
+      "anatomy": "fieldsetAnatomy"
+    },
+    {
+      "name": "Label",
+      "namespace": "Label",
+      "slug": "label",
+      "category": "Form",
+      "anatomy": "labelAnatomy"
+    },
+    {
+      "name": "Dialog",
+      "namespace": "Dialog",
+      "slug": "dialog",
+      "category": "Overlay",
+      "anatomy": "dialogAnatomy"
+    },
+    {
+      "name": "Popover",
+      "namespace": "Popover",
+      "slug": "popover",
+      "category": "Overlay",
+      "anatomy": "popoverAnatomy"
+    },
+    {
+      "name": "Tooltip",
+      "namespace": "Tooltip",
+      "slug": "tooltip",
+      "category": "Overlay",
+      "anatomy": "tooltipAnatomy"
+    },
+    {
+      "name": "Hover Card",
+      "namespace": "HoverCard",
+      "slug": "hover-card",
+      "category": "Overlay",
+      "anatomy": "hoverCardAnatomy"
+    },
+    {
+      "name": "Toast",
+      "namespace": "Toast",
+      "slug": "toast",
+      "category": "Overlay",
+      "anatomy": "toastAnatomy",
+      "anatomyExceptions": [
+        "Group"
+      ]
+    },
+    {
+      "name": "Tour",
+      "namespace": "Tour",
+      "slug": "tour",
+      "category": "Overlay",
+      "anatomy": "tourAnatomy"
+    },
+    {
+      "name": "Collapse",
+      "namespace": "Collapse",
+      "slug": "collapse",
+      "category": "Layout",
+      "anatomy": "collapseAnatomy"
+    },
+    {
+      "name": "Collapsible",
+      "namespace": "Collapsible",
+      "slug": "collapsible",
+      "category": "Layout",
+      "anatomy": "collapsibleAnatomy"
+    },
+    {
+      "name": "Tabs",
+      "namespace": "Tabs",
+      "slug": "tabs",
+      "category": "Layout",
+      "anatomy": "tabsAnatomy"
+    },
+    {
+      "name": "Splitter",
+      "namespace": "Splitter",
+      "slug": "splitter",
+      "category": "Layout",
+      "anatomy": "splitterAnatomy"
+    },
+    {
+      "name": "Steps",
+      "namespace": "Steps",
+      "slug": "steps",
+      "category": "Layout",
+      "anatomy": "stepsAnatomy"
+    },
+    {
+      "name": "Separator",
+      "namespace": "Separator",
+      "slug": "separator",
+      "category": "Layout",
+      "anatomy": "separatorAnatomy"
+    },
+    {
+      "name": "Scroll Area",
+      "namespace": "ScrollArea",
+      "slug": "scroll-area",
+      "category": "Layout",
+      "anatomy": "scrollAreaAnatomy"
+    },
+    {
+      "name": "Breadcrumbs",
+      "namespace": "Breadcrumbs",
+      "slug": "breadcrumbs",
+      "category": "Navigation",
+      "anatomy": "breadcrumbsAnatomy"
+    },
+    {
+      "name": "Menu",
+      "namespace": "Menu",
+      "slug": "menu",
+      "category": "Navigation",
+      "anatomy": "menuAnatomy"
+    },
+    {
+      "name": "Navigation Menu",
+      "namespace": "NavigationMenu",
+      "slug": "navigation-menu",
+      "category": "Navigation",
+      "anatomy": "navigationMenuAnatomy"
+    },
+    {
+      "name": "Pagination",
+      "namespace": "Pagination",
+      "slug": "pagination",
+      "category": "Navigation",
+      "anatomy": "paginationAnatomy"
+    },
+    {
+      "name": "Tree",
+      "namespace": "Tree",
+      "slug": "tree",
+      "category": "Navigation",
+      "anatomy": "treeAnatomy"
+    },
+    {
+      "name": "Avatar",
+      "namespace": "Avatar",
+      "slug": "avatar",
+      "category": "Data",
+      "anatomy": "avatarAnatomy"
+    },
+    {
+      "name": "Calendar",
+      "namespace": "Calendar",
+      "slug": "calendar",
+      "category": "Data",
+      "anatomy": "calendarAnatomy"
+    },
+    {
+      "name": "Carousel",
+      "namespace": "Carousel",
+      "slug": "carousel",
+      "category": "Data",
+      "anatomy": "carouselAnatomy"
+    },
+    {
+      "name": "Progress",
+      "namespace": "Progress",
+      "slug": "progress",
+      "category": "Data",
+      "anatomy": "progressAnatomy"
+    },
+    {
+      "name": "Timer",
+      "namespace": "Timer",
+      "slug": "timer",
+      "category": "Data",
+      "anatomy": "timerAnatomy",
+      "anatomyExceptions": [
+        "ItemLabel",
+        "ItemValue"
+      ]
+    },
+    {
+      "name": "QR Code",
+      "namespace": "QrCode",
+      "slug": "qr-code",
+      "category": "Data",
+      "anatomy": "qrCodeAnatomy"
+    },
+    {
+      "name": "Toggle",
+      "namespace": "Toggle",
+      "slug": "toggle",
+      "category": "Data",
+      "anatomy": "toggleAnatomy"
+    },
+    {
+      "name": "Toggle Group",
+      "namespace": "ToggleGroup",
+      "slug": "toggle-group",
+      "category": "Data",
+      "anatomy": "toggleGroupAnatomy"
+    },
+    {
+      "name": "Clipboard",
+      "namespace": "Clipboard",
+      "slug": "clipboard",
+      "category": "Utility",
+      "anatomy": "clipboardAnatomy"
+    },
+    {
+      "name": "Combobox",
+      "namespace": "Combobox",
+      "slug": "combobox",
+      "category": "Utility",
+      "anatomy": "comboboxAnatomy"
+    },
+    {
+      "name": "Dynamic",
+      "namespace": "Dynamic",
+      "slug": "dynamic",
+      "category": "Utility",
+      "anatomy": "dynamicAnatomy"
+    },
+    {
+      "name": "Edit",
+      "namespace": "Edit",
+      "slug": "edit",
+      "category": "Utility",
+      "anatomy": "editAnatomy"
+    },
+    {
+      "name": "Floating Panel",
+      "namespace": "FloatingPanel",
+      "slug": "floating-panel",
+      "category": "Utility",
+      "anatomy": "floatingPanelAnatomy"
+    },
+    {
+      "name": "Presence",
+      "namespace": "Presence",
+      "slug": "presence",
+      "category": "Utility",
+      "anatomy": null,
+      "namespaceBarrel": false
+    },
+    {
+      "name": "Aspect Ratio",
+      "namespace": "AspectRatio",
+      "slug": "aspect-ratio",
+      "category": "Utility",
+      "anatomy": "aspectRatioAnatomy"
+    }
+  ],
+  "providerCategories": [
+    "Runtime",
+    "Behavior",
+    "Content"
+  ],
+  "providers": [
+    {
+      "name": "Client Only",
+      "slug": "client-only",
+      "category": "Runtime"
+    },
+    {
+      "name": "Environment",
+      "slug": "environment",
+      "category": "Runtime"
+    },
+    {
+      "name": "Frame",
+      "slug": "frame",
+      "category": "Runtime"
+    },
+    {
+      "name": "Locale",
+      "slug": "locale",
+      "category": "Runtime"
+    },
+    {
+      "name": "Focus Trap",
+      "slug": "focus-trap",
+      "category": "Behavior"
+    },
+    {
+      "name": "Format",
+      "slug": "format",
+      "category": "Content"
+    },
+    {
+      "name": "Highlight",
+      "slug": "highlight",
+      "category": "Content"
+    }
+  ]
+}

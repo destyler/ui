@@ -1,5 +1,4 @@
-.toast-toastaction .ds-vue-example,
-.toast-toastaction .ds-react-example {
+.toast-toastaction .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,8 +6,7 @@
   gap: 0.5rem;
 }
 
-.toast-toastaction .ds-vue-example > div:not([data-part]),
-.toast-toastaction .ds-react-example > div:not([data-part]) {
+.toast-toastaction .ds-example-content > div:not([data-part]) {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -124,8 +122,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.toast-toastaction [data-part="close-trigger"],
-.toast-toastaction [data-part="closeTrigger"] {
+.toast-toastaction [data-part="close-trigger"] {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -146,20 +143,17 @@
   transition: color 0.15s, background-color 0.15s;
 }
 
-.toast-toastaction [data-part="close-trigger"]:hover,
-.toast-toastaction [data-part="closeTrigger"]:hover {
+.toast-toastaction [data-part="close-trigger"]:hover {
   color: var(--demo-neutral-fg);
   background: var(--demo-neutral-subtle);
 }
 
-.toast-toastaction [data-part="close-trigger"]:focus,
-.toast-toastaction [data-part="closeTrigger"]:focus {
+.toast-toastaction [data-part="close-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.toast-toastaction [data-part="action-trigger"],
-.toast-toastaction [data-part="actionTrigger"] {
+.toast-toastaction [data-part="action-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -177,14 +171,12 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 }
 
-.toast-toastaction [data-part="action-trigger"]:hover,
-.toast-toastaction [data-part="actionTrigger"]:hover {
+.toast-toastaction [data-part="action-trigger"]:hover {
   background: var(--demo-coral-emphasized);
   border-color: var(--demo-coral-emphasized);
 }
 
-.toast-toastaction [data-part="action-trigger"]:focus,
-.toast-toastaction [data-part="actionTrigger"]:focus {
+.toast-toastaction [data-part="action-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }

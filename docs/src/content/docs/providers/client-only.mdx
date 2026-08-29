@@ -1,0 +1,102 @@
+---
+title: Client Only
+description: Render browser-dependent content only after the application has mounted.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+`ClientOnly` delays browser-dependent content until the selected framework has mounted in the client. Use it for code that needs `window`, `document`, canvas, or a browser-only library and cannot run during server rendering.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { ClientOnly } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { ClientOnly } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { ClientOnly } from '@destyler-ui/svelte/client-only'
+</script>
+```
+
+</FrameworkContent>
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { ClientOnly } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <ClientOnly>
+    <p>Browser content</p>
+    <template #fallback>
+      <p>Waiting for the browser…</p>
+    </template>
+  </ClientOnly>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { ClientOnly } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <ClientOnly fallback={<p>Waiting for the browser…</p>}>
+      <p>Browser content</p>
+    </ClientOnly>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { ClientOnly } from '@destyler-ui/svelte/client-only'
+</script>
+
+{#snippet fallback()}
+  <p>Waiting for the browser…</p>
+{/snippet}
+
+<ClientOnly {fallback}>
+  <p>Viewport width: {window.innerWidth}px</p>
+</ClientOnly>
+```
+
+</FrameworkContent>
+
+The fallback is rendered during server rendering and remains visible until the framework mounts.
+
+## API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| Default content | Framework content or slot | — | Content rendered after the component mounts in the browser. |
+| `fallback` | Framework content, prop, or slot | Nothing | Content rendered before the browser mount completes. |

@@ -38,8 +38,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.number-input-withfield [data-scope="number-input"][data-part="value-text"],
-.number-input-withfield [data-scope="number-input"][data-part="valueText"] {
+.number-input-withfield [data-scope="number-input"][data-part="value-text"] {
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -86,9 +85,7 @@
 }
 
 .number-input-withfield [data-scope="number-input"][data-part="increment-trigger"],
-.number-input-withfield [data-scope="number-input"][data-part="incrementTrigger"],
-.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"],
-.number-input-withfield [data-scope="number-input"][data-part="decrementTrigger"] {
+.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -108,34 +105,24 @@
 }
 
 .number-input-withfield [data-scope="number-input"][data-part="increment-trigger"]:hover,
-.number-input-withfield [data-scope="number-input"][data-part="incrementTrigger"]:hover,
 .number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"]:hover,
-.number-input-withfield [data-scope="number-input"][data-part="decrementTrigger"]:hover,
 .number-input-withfield [data-scope="number-input"][data-part="increment-trigger"][data-hover],
-.number-input-withfield [data-scope="number-input"][data-part="incrementTrigger"][data-hover],
-.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"][data-hover],
-.number-input-withfield [data-scope="number-input"][data-part="decrementTrigger"][data-hover] {
+.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .number-input-withfield [data-scope="number-input"][data-part="increment-trigger"]:focus,
-.number-input-withfield [data-scope="number-input"][data-part="incrementTrigger"]:focus,
 .number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"]:focus,
-.number-input-withfield [data-scope="number-input"][data-part="decrementTrigger"]:focus,
 .number-input-withfield [data-scope="number-input"][data-part="increment-trigger"][data-focus],
-.number-input-withfield [data-scope="number-input"][data-part="incrementTrigger"][data-focus],
-.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"][data-focus],
-.number-input-withfield [data-scope="number-input"][data-part="decrementTrigger"][data-focus] {
+.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"][data-focus] {
   outline: none;
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .number-input-withfield [data-scope="number-input"][data-part="increment-trigger"][data-disabled],
-.number-input-withfield [data-scope="number-input"][data-part="incrementTrigger"][data-disabled],
-.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"][data-disabled],
-.number-input-withfield [data-scope="number-input"][data-part="decrementTrigger"][data-disabled] {
+.number-input-withfield [data-scope="number-input"][data-part="decrement-trigger"][data-disabled] {
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -166,15 +153,13 @@
   background: var(--demo-coral-muted);
 }
 
-.number-input-withfield [data-part="helper-text"],
-.number-input-withfield [data-part="helperText"] {
+.number-input-withfield [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.number-input-withfield [data-part="error-text"],
-.number-input-withfield [data-part="errorText"] {
+.number-input-withfield [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);

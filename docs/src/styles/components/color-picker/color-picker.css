@@ -24,8 +24,7 @@
   box-sizing: border-box;
 }
 
-[data-scope="color-picker"][data-part="format-trigger"],
-[data-scope="color-picker"][data-part="formatTrigger"] {
+[data-scope="color-picker"][data-part="format-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -43,19 +42,16 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-[data-scope="color-picker"][data-part="format-trigger"]:hover,
-[data-scope="color-picker"][data-part="formatTrigger"]:hover {
+[data-scope="color-picker"][data-part="format-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
-[data-scope="color-picker"][data-part="format-trigger"]:focus,
-[data-scope="color-picker"][data-part="formatTrigger"]:focus {
+[data-scope="color-picker"][data-part="format-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-[data-scope="color-picker"][data-part="format-select"],
-[data-scope="color-picker"][data-part="formatSelect"] {
+[data-scope="color-picker"][data-part="format-select"] {
   min-height: 1.75rem;
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
@@ -70,8 +66,7 @@
   cursor: pointer;
 }
 
-[data-scope="color-picker"][data-part="format-select"]:focus,
-[data-scope="color-picker"][data-part="formatSelect"]:focus {
+[data-scope="color-picker"][data-part="format-select"]:focus {
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
@@ -86,15 +81,13 @@
   touch-action: none;
 }
 
-[data-scope="color-picker"][data-part="area-background"],
-[data-scope="color-picker"][data-part="areaBackground"] {
+[data-scope="color-picker"][data-part="area-background"] {
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
 
-[data-scope="color-picker"][data-part="area-thumb"],
-[data-scope="color-picker"][data-part="areaThumb"] {
+[data-scope="color-picker"][data-part="area-thumb"] {
   width: var(--color-picker-thumb-size);
   height: var(--color-picker-thumb-size);
   background: var(--demo-bg-thumb);
@@ -105,14 +98,11 @@
 }
 
 [data-scope="color-picker"][data-part="area-thumb"]:focus-visible,
-[data-scope="color-picker"][data-part="areaThumb"]:focus-visible,
-[data-scope="color-picker"][data-part="area-thumb"][data-focus],
-[data-scope="color-picker"][data-part="areaThumb"][data-focus] {
+[data-scope="color-picker"][data-part="area-thumb"][data-focus] {
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring), var(--demo-shadow-sm);
 }
 
-[data-scope="color-picker"][data-part="channel-slider"],
-[data-scope="color-picker"][data-part="channelSlider"] {
+[data-scope="color-picker"][data-part="channel-slider"] {
   --color-picker-channel-height: 0.75rem;
   --color-picker-thumb-size: 0.875rem;
   position: relative;
@@ -122,8 +112,7 @@
   touch-action: none;
 }
 
-[data-scope="color-picker"][data-part="channel-slider-label"],
-[data-scope="color-picker"][data-part="channelSliderLabel"] {
+[data-scope="color-picker"][data-part="channel-slider-label"] {
   position: absolute;
   left: 0;
   bottom: 100%;
@@ -134,8 +123,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-[data-scope="color-picker"][data-part="channel-slider-value-text"],
-[data-scope="color-picker"][data-part="channelSliderValueText"] {
+[data-scope="color-picker"][data-part="channel-slider-value-text"] {
   position: absolute;
   right: 0;
   bottom: 100%;
@@ -147,10 +135,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-[data-scope="color-picker"][data-part="channel-slider"] [data-part="transparency-grid"],
-[data-scope="color-picker"][data-part="channel-slider"] [data-part="transparencyGrid"],
-[data-scope="color-picker"][data-part="channelSlider"] [data-part="transparency-grid"],
-[data-scope="color-picker"][data-part="channelSlider"] [data-part="transparencyGrid"] {
+[data-scope="color-picker"][data-part="channel-slider"] [data-part="transparency-grid"] {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -158,16 +143,14 @@
   pointer-events: none;
 }
 
-[data-scope="color-picker"][data-part="channel-slider-track"],
-[data-scope="color-picker"][data-part="channelSliderTrack"] {
+[data-scope="color-picker"][data-part="channel-slider-track"] {
   position: relative;
   height: 100%;
   border-radius: inherit;
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
 }
 
-[data-scope="color-picker"][data-part="channel-slider-thumb"],
-[data-scope="color-picker"][data-part="channelSliderThumb"] {
+[data-scope="color-picker"][data-part="channel-slider-thumb"] {
   width: var(--color-picker-thumb-size);
   height: var(--color-picker-thumb-size);
   background: var(--demo-bg-thumb);
@@ -179,22 +162,18 @@
 }
 
 [data-scope="color-picker"][data-part="channel-slider-thumb"]:focus-visible,
-[data-scope="color-picker"][data-part="channelSliderThumb"]:focus-visible,
-[data-scope="color-picker"][data-part="channel-slider-thumb"][data-focus],
-[data-scope="color-picker"][data-part="channelSliderThumb"][data-focus] {
+[data-scope="color-picker"][data-part="channel-slider-thumb"][data-focus] {
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring), var(--demo-shadow-sm);
 }
 
-[data-scope="color-picker"][data-part="swatch-group"],
-[data-scope="color-picker"][data-part="swatchGroup"] {
+[data-scope="color-picker"][data-part="swatch-group"] {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
 }
 
-[data-scope="color-picker"][data-part="swatch-trigger"],
-[data-scope="color-picker"][data-part="swatchTrigger"] {
+[data-scope="color-picker"][data-part="swatch-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -205,23 +184,19 @@
   cursor: pointer;
 }
 
-[data-scope="color-picker"][data-part="swatch-trigger"]:focus,
-[data-scope="color-picker"][data-part="swatchTrigger"]:focus {
+[data-scope="color-picker"][data-part="swatch-trigger"]:focus {
   outline: none;
 }
 
-[data-scope="color-picker"][data-part="swatch-trigger"]:focus-visible,
-[data-scope="color-picker"][data-part="swatchTrigger"]:focus-visible {
+[data-scope="color-picker"][data-part="swatch-trigger"]:focus-visible {
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-[data-scope="color-picker"][data-part="swatch-trigger"][data-state="checked"],
-[data-scope="color-picker"][data-part="swatchTrigger"][data-state="checked"] {
+[data-scope="color-picker"][data-part="swatch-trigger"][data-state="checked"] {
   box-shadow: 0 0 0 2px var(--demo-coral-solid);
 }
 
-[data-scope="color-picker"][data-part="swatch-group"] [data-part="swatch"],
-[data-scope="color-picker"][data-part="swatchGroup"] [data-part="swatch"] {
+[data-scope="color-picker"][data-part="swatch-group"] [data-part="swatch"] {
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
@@ -230,8 +205,7 @@
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
 }
 
-[data-scope="color-picker"][data-part="swatch-indicator"],
-[data-scope="color-picker"][data-part="swatchIndicator"] {
+[data-scope="color-picker"][data-part="swatch-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -243,8 +217,7 @@
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
 }
 
-[data-scope="color-picker"][data-part="swatch-indicator"][hidden],
-[data-scope="color-picker"][data-part="swatchIndicator"][hidden] {
+[data-scope="color-picker"][data-part="swatch-indicator"][hidden] {
   display: none;
 }
 
@@ -255,8 +228,7 @@
   width: 100%;
 }
 
-[data-scope="color-picker"][data-part="view"] [data-part="channel-input"],
-[data-scope="color-picker"][data-part="view"] [data-part="channelInput"] {
+[data-scope="color-picker"][data-part="view"] [data-part="channel-input"] {
   flex: 1 1 0;
   min-width: 0;
   min-height: 2rem;
@@ -264,8 +236,7 @@
   font-size: 0.8125rem;
 }
 
-[data-scope="color-picker"][data-part="eye-dropper-trigger"],
-[data-scope="color-picker"][data-part="eyeDropperTrigger"] {
+[data-scope="color-picker"][data-part="eye-dropper-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -283,21 +254,17 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-[data-scope="color-picker"][data-part="eye-dropper-trigger"]:hover,
-[data-scope="color-picker"][data-part="eyeDropperTrigger"]:hover {
+[data-scope="color-picker"][data-part="eye-dropper-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
-[data-scope="color-picker"][data-part="eye-dropper-trigger"]:focus,
-[data-scope="color-picker"][data-part="eyeDropperTrigger"]:focus {
+[data-scope="color-picker"][data-part="eye-dropper-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 [data-scope="color-picker"][data-part="eye-dropper-trigger"][data-disabled],
-[data-scope="color-picker"][data-part="eyeDropperTrigger"][data-disabled],
-[data-scope="color-picker"][data-part="eye-dropper-trigger"]:disabled,
-[data-scope="color-picker"][data-part="eyeDropperTrigger"]:disabled {
+[data-scope="color-picker"][data-part="eye-dropper-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }

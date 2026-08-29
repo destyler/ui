@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Switch
-
 > A control that allows toggling between two states, on and off.
 
 <ComponentPreview component="switch" example="Basic" />
@@ -48,6 +46,22 @@ export default function Basic() {
     </Switch.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Switch } from '@destyler-ui/svelte'
+</script>
+
+<Switch.Root>
+  <Switch.Control>
+    <Switch.Thumb />
+  </Switch.Control>
+  <Switch.Label>Notifications</Switch.Label>
+  <Switch.HiddenInput />
+</Switch.Root>
 ```
 </FrameworkContent>
 
@@ -93,22 +107,4 @@ Combine with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="switch" part="Root" />
-
-### Control
-
-<ComponentTypes id="switch" part="Control" />
-
-### HiddenInput
-
-<ComponentTypes id="switch" part="HiddenInput" />
-
-### Label
-
-<ComponentTypes id="switch" part="Label" />
-
-### Thumb
-
-<ComponentTypes id="switch" part="Thumb" />
+<ComponentTypes id="switch" />

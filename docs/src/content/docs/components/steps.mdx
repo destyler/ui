@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Steps
-
 > A component that guides users through a multi-step process.
 
 <ComponentPreview component="steps" example="Basic" />
@@ -67,6 +65,42 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Steps } from '@destyler-ui/svelte'
+
+  const items = [
+    { title: 'Contact information', description: 'Enter your details' },
+    { title: 'Date and time', description: 'Choose a time' },
+    { title: 'Confirmation', description: 'Review your choices' },
+  ]
+</script>
+
+<Steps.Root count={items.length}>
+  <Steps.List>
+    {#each items as item, index (item.title)}
+      <Steps.Item {index}>
+        <Steps.Trigger>
+          <Steps.Indicator>{index + 1}</Steps.Indicator>
+          <span>{item.title}</span>
+        </Steps.Trigger>
+        <Steps.Separator />
+      </Steps.Item>
+    {/each}
+  </Steps.List>
+
+  {#each items as item, index (item.title)}
+    <Steps.Content {index}>{item.description}</Steps.Content>
+  {/each}
+
+  <Steps.CompletedContent>Complete</Steps.CompletedContent>
+  <Steps.PrevTrigger>Back</Steps.PrevTrigger>
+  <Steps.NextTrigger>Next</Steps.NextTrigger>
+</Steps.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -79,46 +113,4 @@ export default function Basic() {
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="steps" part="Root" />
-
-### CompletedContent
-
-<ComponentTypes id="steps" part="CompletedContent" />
-
-### Content
-
-<ComponentTypes id="steps" part="Content" />
-
-### Indicator
-
-<ComponentTypes id="steps" part="Indicator" />
-
-### Item
-
-<ComponentTypes id="steps" part="Item" />
-
-### List
-
-<ComponentTypes id="steps" part="List" />
-
-### NextTrigger
-
-<ComponentTypes id="steps" part="NextTrigger" />
-
-### PrevTrigger
-
-<ComponentTypes id="steps" part="PrevTrigger" />
-
-### Progress
-
-<ComponentTypes id="steps" part="Progress" />
-
-### Separator
-
-<ComponentTypes id="steps" part="Separator" />
-
-### Trigger
-
-<ComponentTypes id="steps" part="Trigger" />
+<ComponentTypes id="steps" />

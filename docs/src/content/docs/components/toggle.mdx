@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Toggle
-
 > A two-state button that can be toggled on or off.
 
 <ComponentPreview component="toggle" example="Basic" />
@@ -43,6 +41,19 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Toggle } from '@destyler-ui/svelte'
+</script>
+
+<Toggle.Root>
+  <Toggle.Indicator>✓</Toggle.Indicator>
+  Toggle
+</Toggle.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -51,22 +62,4 @@ export default function Basic() {
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="toggle" part="Root" />
-
-### GroupItem
-
-<ComponentTypes id="toggle" part="GroupItem" />
-
-### GroupRoot
-
-<ComponentTypes id="toggle" part="GroupRoot" />
-
-### GroupRootProvider
-
-<ComponentTypes id="toggle" part="GroupRootProvider" />
-
-### Indicator
-
-<ComponentTypes id="toggle" part="Indicator" />
+<ComponentTypes id="toggle" />

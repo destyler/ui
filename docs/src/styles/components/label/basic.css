@@ -3,8 +3,7 @@
   color: var(--demo-neutral-fg);
 }
 
-.label-basic .ds-vue-example,
-.label-basic .ds-react-example {
+.label-basic .ds-example-content {
   display: flex;
   align-items: center;
   justify-content: center;

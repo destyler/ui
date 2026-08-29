@@ -1,0 +1,94 @@
+---
+title: Getting Started
+description: Build your first Destyler UI component with Vue, React, or Svelte.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro';
+
+Install the package for your selected framework, then compose the component parts you need.
+
+## Create a toggle
+
+<FrameworkContent fw="vue">
+```vue
+<script setup lang="ts">
+import { Toggle } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <Toggle.Root class="notification-toggle">
+    <Toggle.Indicator aria-hidden="true">✓</Toggle.Indicator>
+    Notifications
+  </Toggle.Root>
+</template>
+```
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+```tsx
+import { Toggle } from '@destyler-ui/react'
+
+export function NotificationToggle() {
+  return (
+    <Toggle.Root className="notification-toggle">
+      <Toggle.Indicator aria-hidden="true">✓</Toggle.Indicator>
+      Notifications
+    </Toggle.Root>
+  )
+}
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Toggle } from '@destyler-ui/svelte'
+</script>
+
+<Toggle.Root class="notification-toggle">
+  <Toggle.Indicator aria-hidden="true">✓</Toggle.Indicator>
+  Notifications
+</Toggle.Root>
+```
+</FrameworkContent>
+
+`Toggle.Root` supplies the button behavior, keyboard handling, and accessibility attributes. `Toggle.Indicator` is rendered only while the toggle is pressed.
+
+## Add your styles
+
+Destyler components forward normal HTML attributes, including `class` and `style`. State is exposed through attributes such as `data-state`, so it can be styled without duplicating component state.
+
+```css
+.notification-toggle {
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.notification-toggle[data-state='on'] {
+  background: CanvasText;
+  color: Canvas;
+}
+```
+
+## Choose an import path
+
+<FrameworkContent fw="vue">
+Import Vue components from `@destyler-ui/vue`. The package build remains tree-shakable, so unused exports can be removed by your bundler.
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+Import React components from `@destyler-ui/react`. The package build remains tree-shakable, so unused exports can be removed by your bundler.
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+Use the package root for several component families, or a direct entry for one family.
+
+```svelte
+<script lang="ts">
+  import { Toggle } from '@destyler-ui/svelte/toggle'
+</script>
+```
+
+The root and direct entries expose the same Svelte components and TypeScript types.
+</FrameworkContent>

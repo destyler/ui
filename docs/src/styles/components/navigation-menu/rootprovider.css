@@ -1,27 +1,21 @@
-.navigation-menu-rootprovider .ds-vue-example,
-.navigation-menu-rootprovider .ds-react-example {
+.navigation-menu-rootprovider .ds-example-content {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.75rem;
-  width: 100%;
-}
-
-.navigation-menu-rootprovider .ds-react-example > div {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.75rem;
-  width: 100%;
-}
-
-.navigation-menu-rootprovider .ds-vue-example {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  gap: 0.75rem;
+  width: 100%;
 }
 
-.navigation-menu-rootprovider .ds-vue-example [data-part="root"] {
+.navigation-menu-rootprovider .ds-example-content > div:not([data-part]) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.navigation-menu-rootprovider .ds-example-content [data-part="root"] {
   flex: 1 0 100%;
 }
 
@@ -210,8 +204,7 @@
   inset-inline-start: 4px;
 }
 
-.navigation-menu-rootprovider [data-part="item-indicator"],
-.navigation-menu-rootprovider [data-part="itemIndicator"] {
+.navigation-menu-rootprovider [data-part="item-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -220,22 +213,19 @@
   color: var(--demo-coral-fg);
 }
 
-.navigation-menu-rootprovider [data-part="viewport-positioner"],
-.navigation-menu-rootprovider [data-part="viewportPositioner"] {
+.navigation-menu-rootprovider [data-part="viewport-positioner"] {
   position: relative;
   display: flex;
   justify-content: center;
   z-index: var(--demo-popover-z-index);
 }
 
-.navigation-menu-rootprovider [data-part="viewport-positioner"][data-orientation="horizontal"],
-.navigation-menu-rootprovider [data-part="viewportPositioner"][data-orientation="horizontal"] {
+.navigation-menu-rootprovider [data-part="viewport-positioner"][data-orientation="horizontal"] {
   width: 100%;
   margin-top: 0.75rem;
 }
 
-.navigation-menu-rootprovider [data-part="viewport-positioner"][data-orientation="vertical"],
-.navigation-menu-rootprovider [data-part="viewportPositioner"][data-orientation="vertical"] {
+.navigation-menu-rootprovider [data-part="viewport-positioner"][data-orientation="vertical"] {
   margin-inline-start: 0.75rem;
 }
 

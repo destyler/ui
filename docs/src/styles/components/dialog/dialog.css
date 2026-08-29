@@ -47,7 +47,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-[data-scope="dialog"][data-part="closeTrigger"] {
+[data-scope="dialog"][data-part="close-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -64,6 +64,6 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-[data-scope="dialog"][data-part="closeTrigger"]:hover {
+[data-scope="dialog"][data-part="close-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }

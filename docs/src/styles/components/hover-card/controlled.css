@@ -54,14 +54,12 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-.hover-card-controlled [data-part="arrow-tip"],
-.hover-card-controlled [data-part="arrowTip"] {
+.hover-card-controlled [data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }
 
-.hover-card-controlled .ds-vue-example,
-.hover-card-controlled .ds-react-example {
+.hover-card-controlled .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

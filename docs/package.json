@@ -3,14 +3,19 @@
   "private": "true",
   "packageManager": "pnpm@10.28.0",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "dev": "pnpm run prepare:docs && astro dev",
+    "start": "pnpm run dev",
+    "build": "pnpm run prepare:docs && pnpm run check:docs && astro build",
+    "prepare:docs": "pnpm run build:frameworks && pnpm run generate:types && pnpm run validate:types",
+    "build:frameworks": "pnpm --dir .. run build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate:types": "tsx scripts/generate-type-docs.ts vue && tsx scripts/generate-type-docs.ts react",
+    "generate:types": "tsx scripts/generate-type-docs.ts",
     "generate:types:vue": "tsx scripts/generate-type-docs.ts vue",
-    "generate:types:react": "tsx scripts/generate-type-docs.ts react"
+    "generate:types:react": "tsx scripts/generate-type-docs.ts react",
+    "generate:types:svelte": "tsx scripts/generate-type-docs.ts svelte",
+    "validate:types": "tsx scripts/validate-type-docs.ts",
+    "check:docs": "tsx scripts/check-docs.ts"
   },
   "dependencies": {
     "@destyler/docs": "catalog:docs"
@@ -18,6 +23,7 @@
   "devDependencies": {
     "@astrojs/react": "catalog:docs",
     "@astrojs/starlight": "catalog:docs",
+    "@astrojs/svelte": "catalog:docs",
     "@astrojs/vue": "catalog:docs",
     "@iconify-json/tabler": "catalog:icons",
     "@types/react": "catalog:types",
@@ -28,6 +34,8 @@
     "react": "catalog:framework",
     "react-dom": "catalog:framework",
     "shiki": "catalog:docs",
+    "svelte": "catalog:framework",
+    "tsx": "catalog:docs",
     "typescript": "catalog:types",
     "unocss": "catalog:styles",
     "vue": "catalog:framework"

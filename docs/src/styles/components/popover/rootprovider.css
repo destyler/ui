@@ -1,5 +1,4 @@
-.popover-rootprovider .ds-vue-example,
-.popover-rootprovider .ds-react-example {
+.popover-rootprovider .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -143,8 +142,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.popover-rootprovider [data-part="close-trigger"],
-.popover-rootprovider [data-part="closeTrigger"] {
+.popover-rootprovider [data-part="close-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -162,8 +160,7 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.popover-rootprovider [data-part="close-trigger"]:hover,
-.popover-rootprovider [data-part="closeTrigger"]:hover {
+.popover-rootprovider [data-part="close-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
@@ -172,8 +169,7 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-.popover-rootprovider [data-part="arrow-tip"],
-.popover-rootprovider [data-part="arrowTip"] {
+.popover-rootprovider [data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }

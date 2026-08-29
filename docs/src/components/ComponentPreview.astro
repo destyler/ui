@@ -6,15 +6,18 @@
  *   import ComponentPreview from '../../../components/ComponentPreview.astro';
  *   <ComponentPreview component="avatar" example="Basic" />
  *
- * Automatically switches between the Vue and React renderings based on the
+ * Automatically switches between the Vue, React, and Svelte renderings based on the
  * global framework selection (data-framework on <html>).
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { frameworks } from '../config/frameworks'
+import { formatExampleSourceComment, getExampleSourcePath, rewriteExampleSourceImports } from '../utils/example-source'
 import { highlight } from '../utils/shiki'
 import ReactExample from './ReactExample.tsx'
+import SvelteExample from './SvelteExample.svelte'
 import VueExample from './VueExample.vue'
 
 interface Props {
@@ -29,57 +32,35 @@ const { component, example = 'Basic' } = Astro.props
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const workspaceRoot = path.resolve(__dirname, '../../..')
 
-const vuePath = path.join(
-  workspaceRoot,
-  'packages/vue/src/components',
-  component,
-  'examples',
-  `${example}.vue`,
-)
-const reactPath = path.join(
-  workspaceRoot,
-  'packages/react/src/components',
-  component,
-  'examples',
-  `${example}.tsx`,
-)
+const highlightedExamples = await Promise.all(frameworks.map(async (framework) => {
+  const sourcePath = getExampleSourcePath(workspaceRoot, framework, component, example)
+  let code: string
 
-let vueCode = ''
-let reactCode = ''
+  try {
+    code = fs.readFileSync(sourcePath, 'utf-8')
+  }
+  catch {
+    const message = `${framework.label} ${example} example not found for ${component}`
+    code = formatExampleSourceComment(framework, message)
+  }
 
-try {
-  vueCode = fs.readFileSync(vuePath, 'utf-8')
-}
-catch {
-  vueCode = `// Vue ${example} example not found for ${component}`
-}
-
-try {
-  reactCode = fs.readFileSync(reactPath, 'utf-8')
-}
-catch {
-  reactCode = `// React ${example} example not found for ${component}`
-}
-
-// Rewrite relative imports to package imports for display in docs
-vueCode = vueCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/vue'`)
-vueCode = vueCode.replace(/from\s+['"]~\/[^'"]*['"]/g, `from '@destyler-ui/vue'`)
-reactCode = reactCode.replace(/from\s+['"]\.\.\/(\.\.\/)*index['"]/g, `from '@destyler-ui/react'`)
-reactCode = reactCode.replace(/from\s+['"]~\/[^'"]*['"]/g, `from '@destyler-ui/react'`)
-
-const vueHtml = await highlight(vueCode, 'vue')
-const reactHtml = await highlight(reactCode, 'tsx')
+  return {
+    ...framework,
+    html: await highlight(rewriteExampleSourceImports(code, framework, sourcePath), framework.language),
+  }
+}))
 ---
 
 <div class="ds-component-preview not-content border rounded-xl! border-solid border-[var(--sl-color-hairline)] my-6 overflow-hidden">
   <!-- Live preview area -->
   <div class="p-8 flex items-center justify-center min-h-[100px]">
-    <div class={`ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw="vue">
-      <VueExample client:load component={component} example={example} />
-    </div>
-    <div class={`ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw="react">
-      <ReactExample client:load component={component} example={example} />
-    </div>
+    {frameworks.map(framework => (
+      <div class={`ds-fw-content ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw={framework.id}>
+        {framework.id === 'vue' && <VueExample client:visible component={component} example={example} />}
+        {framework.id === 'react' && <ReactExample client:visible component={component} example={example} />}
+        {framework.id === 'svelte' && <SvelteExample client:visible component={component} example={example} />}
+      </div>
+    ))}
   </div>
 
   <!-- Toolbar -->
@@ -99,35 +80,17 @@ const reactHtml = await highlight(reactCode, 'tsx')
   <div class="ds-code-container grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr;">
     <div class="overflow-hidden">
       <div class="border-t border-solid border-[var(--sl-color-hairline)]">
-        <div class="ds-code-block" data-fw="vue">
-          <Fragment set:html={vueHtml} />
-        </div>
-        <div class="ds-code-block" data-fw="react">
-          <Fragment set:html={reactHtml} />
-        </div>
+        {highlightedExamples.map(framework => (
+          <div class="ds-fw-content ds-code-block" data-fw={framework.id}>
+            <Fragment set:html={framework.html} />
+          </div>
+        ))}
       </div>
     </div>
   </div>
 </div>
 
 <style>
-  /* ---------- Framework visibility ---------- */
-  :root[data-framework='vue'] .ds-preview-frame[data-fw='react'],
-  :root[data-framework='vue'] .ds-code-block[data-fw='react'] {
-    display: none;
-  }
-
-  :root[data-framework='react'] .ds-preview-frame[data-fw='vue'],
-  :root[data-framework='react'] .ds-code-block[data-fw='vue'] {
-    display: none;
-  }
-
-  /* Default to Vue when data-framework is not yet set */
-  :root:not([data-framework]) .ds-preview-frame[data-fw='react'],
-  :root:not([data-framework]) .ds-code-block[data-fw='react'] {
-    display: none;
-  }
-
   /* ---------- Shiki dual-theme ---------- */
   .ds-code-block :global(.shiki) {
     @apply m-0 py-4! px-5! text-[0.8125rem] leading-[1.7] overflow-x-auto rounded-0;
@@ -226,11 +189,9 @@ const reactHtml = await highlight(reactCode, 'tsx')
 </style>
 
 <script>
-  // @unocss-skip-start
-  function getActiveFramework(): string {
-    return document.documentElement.getAttribute('data-framework') || 'vue'
-  }
+  import { getActiveFramework } from '../utils/framework'
 
+  // @unocss-skip-start
   function initComponentPreviews() {
     document.querySelectorAll('.ds-show-code-btn').forEach((btn) => {
       btn.addEventListener('click', () => {

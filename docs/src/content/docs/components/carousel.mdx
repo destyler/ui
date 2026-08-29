@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Carousel
-
 > A slideshow component that cycles through elements.
 
 <ComponentPreview component="carousel" example="Basic" />
@@ -61,6 +59,31 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Carousel } from '@destyler-ui/svelte'
+  const images = Array.from({ length: 5 }, (_, index) => `https://picsum.photos/seed/${index + 1}/500/300`)
+</script>
+
+<Carousel.Root>
+  <Carousel.Control>
+    <Carousel.PrevTrigger>Previous</Carousel.PrevTrigger>
+    <Carousel.NextTrigger>Next</Carousel.NextTrigger>
+    <Carousel.AutoplayTrigger>
+      <Carousel.Context>{#snippet render(api)}{api().isPlaying ? 'Pause' : 'Play'}{/snippet}</Carousel.Context>
+    </Carousel.AutoplayTrigger>
+  </Carousel.Control>
+  <Carousel.IndicatorGroup>
+    {#each images as _, index}<Carousel.Indicator {index} />{/each}
+  </Carousel.IndicatorGroup>
+  <Carousel.ItemGroup>
+    {#each images as image, index}<Carousel.Item {index}><img src={image} alt="" style="height: 300px; width: 100%; object-fit: cover;" /></Carousel.Item>{/each}
+  </Carousel.ItemGroup>
+</Carousel.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -85,38 +108,4 @@ Control the active slide programmatically.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="carousel" part="Root" />
-
-### AutoplayTrigger
-
-<ComponentTypes id="carousel" part="AutoplayTrigger" />
-
-### Control
-
-<ComponentTypes id="carousel" part="Control" />
-
-### Indicator
-
-<ComponentTypes id="carousel" part="Indicator" />
-
-### IndicatorGroup
-
-<ComponentTypes id="carousel" part="IndicatorGroup" />
-
-### Item
-
-<ComponentTypes id="carousel" part="Item" />
-
-### ItemGroup
-
-<ComponentTypes id="carousel" part="ItemGroup" />
-
-### NextTrigger
-
-<ComponentTypes id="carousel" part="NextTrigger" />
-
-### PrevTrigger
-
-<ComponentTypes id="carousel" part="PrevTrigger" />
+<ComponentTypes id="carousel" />

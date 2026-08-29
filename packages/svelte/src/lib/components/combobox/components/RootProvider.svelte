@@ -1,0 +1,40 @@
+<script lang="ts" module>
+  import type { Assign, HTMLProps, PolymorphicProps } from '$lib/types.js'
+  import type { Snippet } from 'svelte'
+  import type { CollectionItem } from '../../collection/index.js'
+  import type { UsePresenceProps } from '../../presence'
+  import type { UseComboboxReturn } from '../hooks/use-combobox.svelte.js'
+
+  interface RootProviderProps<T extends CollectionItem> {
+    value: UseComboboxReturn<T>
+  }
+
+  export interface ComboboxRootProviderBaseProps<T extends CollectionItem>
+    extends RootProviderProps<T>,
+      UsePresenceProps,
+      PolymorphicProps<'div'> {
+    children?: Snippet
+  }
+  export interface ComboboxRootProviderProps<T extends CollectionItem>
+    extends Assign<HTMLProps<'div'>, ComboboxRootProviderBaseProps<T>> {}
+</script>
+
+<script lang="ts" generics="T extends CollectionItem">
+  import { mergeProps } from '@destyler/svelte'
+  import { UI } from '../../factory/index.js'
+  import { PresenceProvider, splitPresenceProps, usePresence } from '../../presence/index.js'
+  import { ComboboxProvider } from '../hooks/use-combobox-context.js'
+
+  let { value, children, ...props }: ComboboxRootProviderProps<T> = $props()
+
+  const [presenceProps, otherProps] = $derived(splitPresenceProps(props))
+  const presence = usePresence(() => mergeProps({ present: value().open }, presenceProps))
+  const mergedProps = $derived(mergeProps(value().getRootProps(), otherProps))
+
+  ComboboxProvider(() => value())
+  PresenceProvider(() => presence())
+</script>
+
+<UI as="div" {...mergedProps}>
+  {@render children?.()}
+</UI>

@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Slider
-
 > A component that allows users to select a value from a range by dragging a thumb.
 
 <ComponentPreview component="slider" example="Basic" />
@@ -62,6 +60,37 @@ export default function Basic() {
     </Slider.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Slider } from '@destyler-ui/svelte'
+
+  let value = $state([-20, 20])
+</script>
+
+<Slider.Root min={-50} max={50} bind:value>
+  <Slider.Label>Range</Slider.Label>
+  <Slider.ValueText />
+  <Slider.Control>
+    <Slider.Track>
+      <Slider.Range />
+    </Slider.Track>
+    {#each value as _, index (index)}
+      <Slider.Thumb {index}>
+        <Slider.DraggingIndicator />
+        <Slider.HiddenInput />
+      </Slider.Thumb>
+    {/each}
+  </Slider.Control>
+  <Slider.MarkerGroup>
+    <Slider.Marker value={-30}>-30</Slider.Marker>
+    <Slider.Marker value={0}>0</Slider.Marker>
+    <Slider.Marker value={30}>30</Slider.Marker>
+  </Slider.MarkerGroup>
+</Slider.Root>
 ```
 </FrameworkContent>
 
@@ -131,46 +160,4 @@ Listen for value change events.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="slider" part="Root" />
-
-### Control
-
-<ComponentTypes id="slider" part="Control" />
-
-### DraggingIndicator
-
-<ComponentTypes id="slider" part="DraggingIndicator" />
-
-### HiddenInput
-
-<ComponentTypes id="slider" part="HiddenInput" />
-
-### Label
-
-<ComponentTypes id="slider" part="Label" />
-
-### Marker
-
-<ComponentTypes id="slider" part="Marker" />
-
-### MarkerGroup
-
-<ComponentTypes id="slider" part="MarkerGroup" />
-
-### Range
-
-<ComponentTypes id="slider" part="Range" />
-
-### Thumb
-
-<ComponentTypes id="slider" part="Thumb" />
-
-### Track
-
-<ComponentTypes id="slider" part="Track" />
-
-### ValueText
-
-<ComponentTypes id="slider" part="ValueText" />
+<ComponentTypes id="slider" />

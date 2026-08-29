@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Separator
-
 > A visual divider that separates content into distinct sections.
 
 <ComponentPreview component="separator" example="Basic" />
@@ -39,6 +37,20 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Separator } from '@destyler-ui/svelte'
+</script>
+
+<div>
+  <span>Blog</span>
+  <Separator.Root orientation="vertical" />
+  <span>Docs</span>
+</div>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -57,6 +69,4 @@ Display a vertical separator.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="separator" part="Root" />
+<ComponentTypes id="separator" />

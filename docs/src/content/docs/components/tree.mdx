@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Tree
-
 > A hierarchical list component for displaying nested data structures.
 
 <ComponentPreview component="tree" example="Basic" />
@@ -81,6 +79,75 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Tree, createTreeCollection } from '@destyler-ui/svelte'
+
+  interface Node {
+    id: string
+    name: string
+    children?: Node[]
+  }
+
+  const collection = createTreeCollection<Node>({
+    nodeToValue: (node) => node.id,
+    nodeToString: (node) => node.name,
+    rootNode: {
+      id: 'ROOT',
+      name: '',
+      children: [
+        {
+          id: 'src',
+          name: 'src',
+          children: [
+            { id: 'src/app.svelte', name: 'app.svelte' },
+            { id: 'src/index.ts', name: 'index.ts' },
+          ],
+        },
+        { id: 'package.json', name: 'package.json' },
+      ],
+    },
+  })
+</script>
+
+{#snippet renderNode(node: Node, indexPath: number[])}
+  <Tree.NodeProvider {node} {indexPath}>
+    {#if node.children}
+      <Tree.Branch>
+        <Tree.BranchControl>
+          <Tree.BranchTrigger>
+            <Tree.BranchText>{node.name}</Tree.BranchText>
+            <Tree.BranchIndicator>▶</Tree.BranchIndicator>
+          </Tree.BranchTrigger>
+        </Tree.BranchControl>
+        <Tree.BranchContent>
+          <Tree.BranchIndentGuide />
+          {#each node.children as child, index (child.id)}
+            {@render renderNode(child, [...indexPath, index])}
+          {/each}
+        </Tree.BranchContent>
+      </Tree.Branch>
+    {:else}
+      <Tree.Item>
+        <Tree.ItemIndicator>•</Tree.ItemIndicator>
+        <Tree.ItemText>{node.name}</Tree.ItemText>
+      </Tree.Item>
+    {/if}
+  </Tree.NodeProvider>
+{/snippet}
+
+<Tree.Root {collection}>
+  <Tree.Label>Tree</Tree.Label>
+  <Tree.Tree>
+    {#each collection.rootNode.children ?? [] as node, index (node.id)}
+      {@render renderNode(node, [index])}
+    {/each}
+  </Tree.Tree>
+</Tree.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -95,58 +162,4 @@ Use a recursive tree node pattern for dynamic data.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="tree" part="Root" />
-
-### Branch
-
-<ComponentTypes id="tree" part="Branch" />
-
-### BranchContent
-
-<ComponentTypes id="tree" part="BranchContent" />
-
-### BranchControl
-
-<ComponentTypes id="tree" part="BranchControl" />
-
-### BranchIndentGuide
-
-<ComponentTypes id="tree" part="BranchIndentGuide" />
-
-### BranchIndicator
-
-<ComponentTypes id="tree" part="BranchIndicator" />
-
-### BranchText
-
-<ComponentTypes id="tree" part="BranchText" />
-
-### BranchTrigger
-
-<ComponentTypes id="tree" part="BranchTrigger" />
-
-### Item
-
-<ComponentTypes id="tree" part="Item" />
-
-### ItemIndicator
-
-<ComponentTypes id="tree" part="ItemIndicator" />
-
-### ItemText
-
-<ComponentTypes id="tree" part="ItemText" />
-
-### Label
-
-<ComponentTypes id="tree" part="Label" />
-
-### NodeProvider
-
-<ComponentTypes id="tree" part="NodeProvider" />
-
-### Tree
-
-<ComponentTypes id="tree" part="Tree" />
+<ComponentTypes id="tree" />

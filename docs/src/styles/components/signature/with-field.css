@@ -92,8 +92,7 @@
   border-bottom: 1px dashed var(--demo-neutral-solid);
 }
 
-.signature-withfield [data-scope="signature"][data-part="clear-trigger"],
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"] {
+.signature-withfield [data-scope="signature"][data-part="clear-trigger"] {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -116,50 +115,40 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
-.signature-withfield [data-scope="signature"][data-part="clear-trigger"]:hover,
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"]:hover {
+.signature-withfield [data-scope="signature"][data-part="clear-trigger"]:hover {
   color: var(--demo-neutral-fg);
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .signature-withfield [data-scope="signature"][data-part="clear-trigger"]:focus,
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"]:focus,
 .signature-withfield [data-scope="signature"][data-part="clear-trigger"]:focus-visible,
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"]:focus-visible,
-.signature-withfield [data-scope="signature"][data-part="clear-trigger"][data-focus],
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"][data-focus] {
+.signature-withfield [data-scope="signature"][data-part="clear-trigger"][data-focus] {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .signature-withfield [data-scope="signature"][data-part="clear-trigger"][data-disabled],
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"][data-disabled],
-.signature-withfield [data-scope="signature"][data-part="clear-trigger"]:disabled,
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"]:disabled {
+.signature-withfield [data-scope="signature"][data-part="clear-trigger"]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.signature-withfield [data-scope="signature"][data-part="clear-trigger"][hidden],
-.signature-withfield [data-scope="signature"][data-part="clearTrigger"][hidden] {
+.signature-withfield [data-scope="signature"][data-part="clear-trigger"][hidden] {
   display: none;
 }
 
-.signature-withfield [data-scope="signature"][data-part="hidden-input"],
-.signature-withfield [data-scope="signature"][data-part="hiddenInput"] {
+.signature-withfield [data-scope="signature"][data-part="hidden-input"] {
   display: none;
 }
 
-.signature-withfield [data-part="helper-text"],
-.signature-withfield [data-part="helperText"] {
+.signature-withfield [data-part="helper-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-neutral-fg-muted);
 }
 
-.signature-withfield [data-part="error-text"],
-.signature-withfield [data-part="errorText"] {
+.signature-withfield [data-part="error-text"] {
   font-size: 0.75rem;
   line-height: 1rem;
   color: var(--demo-error);

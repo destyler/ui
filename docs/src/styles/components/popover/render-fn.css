@@ -113,8 +113,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.popover-renderfn [data-part="close-trigger"],
-.popover-renderfn [data-part="closeTrigger"] {
+.popover-renderfn [data-part="close-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -132,8 +131,7 @@
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-.popover-renderfn [data-part="close-trigger"]:hover,
-.popover-renderfn [data-part="closeTrigger"]:hover {
+.popover-renderfn [data-part="close-trigger"]:hover {
   background: var(--demo-neutral-muted);
 }
 
@@ -142,8 +140,7 @@
   --arrow-background: var(--demo-bg-popover);
 }
 
-.popover-renderfn [data-part="arrow-tip"],
-.popover-renderfn [data-part="arrowTip"] {
+.popover-renderfn [data-part="arrow-tip"] {
   border-top: 1px solid var(--demo-border);
   border-left: 1px solid var(--demo-border);
 }

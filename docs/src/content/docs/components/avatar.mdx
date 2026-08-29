@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Avatar
-
 > An image element with a fallback for representing the user.
 
 <ComponentPreview component="avatar" example="Basic" />
@@ -45,6 +43,19 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Avatar } from '@destyler-ui/svelte'
+</script>
+
+<Avatar.Root>
+  <Avatar.Fallback>EL</Avatar.Fallback>
+  <Avatar.Image src="https://github.com/elonehoo.png" alt="avatar" />
+</Avatar.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -77,15 +88,4 @@ Use `onStatusChange` to listen for loading state changes.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="avatar" part="Root" />
-
-### Fallback
-
-<ComponentTypes id="avatar" part="Fallback" />
-
-### Image
-
-<ComponentTypes id="avatar" part="Image" />
-
+<ComponentTypes id="avatar" />

@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Splitter
-
 > A component that divides the layout into resizable panels.
 
 <ComponentPreview component="splitter" example="Basic" />
@@ -47,6 +45,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Splitter } from '@destyler-ui/svelte'
+
+  let size = $state([
+    { id: 'a', size: 50 },
+    { id: 'b', size: 50 },
+  ])
+</script>
+
+<Splitter.Root bind:size>
+  <Splitter.Panel id="a">Panel A</Splitter.Panel>
+  <Splitter.ResizeTrigger id="a:b">
+    <div class="bar"></div>
+  </Splitter.ResizeTrigger>
+  <Splitter.Panel id="b">Panel B</Splitter.Panel>
+</Splitter.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -77,14 +96,4 @@ Use render prop for custom splitter rendering.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="splitter" part="Root" />
-
-### Panel
-
-<ComponentTypes id="splitter" part="Panel" />
-
-### ResizeTrigger
-
-<ComponentTypes id="splitter" part="ResizeTrigger" />
+<ComponentTypes id="splitter" />

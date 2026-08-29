@@ -9,9 +9,7 @@
 }
 
 .pagination-basic [data-part="prev-trigger"] span,
-.pagination-basic [data-part="prevTrigger"] span,
 .pagination-basic [data-part="next-trigger"] span,
-.pagination-basic [data-part="nextTrigger"] span,
 .pagination-basic .visually-hidden {
   position: absolute;
   width: 1px;
@@ -26,9 +24,7 @@
 
 .pagination-basic [data-part="item"],
 .pagination-basic [data-part="prev-trigger"],
-.pagination-basic [data-part="prevTrigger"],
-.pagination-basic [data-part="next-trigger"],
-.pagination-basic [data-part="nextTrigger"] {
+.pagination-basic [data-part="next-trigger"] {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -56,13 +52,9 @@
 .pagination-basic [data-part="item"]:hover,
 .pagination-basic [data-part="item"][data-hover],
 .pagination-basic [data-part="prev-trigger"]:hover,
-.pagination-basic [data-part="prevTrigger"]:hover,
 .pagination-basic [data-part="next-trigger"]:hover,
-.pagination-basic [data-part="nextTrigger"]:hover,
 .pagination-basic [data-part="prev-trigger"][data-hover],
-.pagination-basic [data-part="prevTrigger"][data-hover],
-.pagination-basic [data-part="next-trigger"][data-hover],
-.pagination-basic [data-part="nextTrigger"][data-hover] {
+.pagination-basic [data-part="next-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
@@ -71,17 +63,11 @@
 .pagination-basic [data-part="item"][data-focus],
 .pagination-basic [data-part="item"]:focus-visible,
 .pagination-basic [data-part="prev-trigger"]:focus,
-.pagination-basic [data-part="prevTrigger"]:focus,
 .pagination-basic [data-part="next-trigger"]:focus,
-.pagination-basic [data-part="nextTrigger"]:focus,
 .pagination-basic [data-part="prev-trigger"][data-focus],
-.pagination-basic [data-part="prevTrigger"][data-focus],
 .pagination-basic [data-part="next-trigger"][data-focus],
-.pagination-basic [data-part="nextTrigger"][data-focus],
 .pagination-basic [data-part="prev-trigger"]:focus-visible,
-.pagination-basic [data-part="prevTrigger"]:focus-visible,
-.pagination-basic [data-part="next-trigger"]:focus-visible,
-.pagination-basic [data-part="nextTrigger"]:focus-visible {
+.pagination-basic [data-part="next-trigger"]:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
@@ -100,9 +86,7 @@
 
 .pagination-basic [data-part="item"]:is([data-disabled], :disabled),
 .pagination-basic [data-part="prev-trigger"]:is([data-disabled], :disabled),
-.pagination-basic [data-part="prevTrigger"]:is([data-disabled], :disabled),
-.pagination-basic [data-part="next-trigger"]:is([data-disabled], :disabled),
-.pagination-basic [data-part="nextTrigger"]:is([data-disabled], :disabled) {
+.pagination-basic [data-part="next-trigger"]:is([data-disabled], :disabled) {
   cursor: not-allowed;
   opacity: 0.45;
   color: var(--demo-neutral-fg-muted);

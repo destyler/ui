@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# File Upload
-
 > A component that allows users to select and upload files through drag and drop or file browser.
 
 <ComponentPreview component="file-upload" example="Basic" />
@@ -73,6 +71,39 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { FileUpload } from '@destyler-ui/svelte'
+</script>
+
+<FileUpload.Root>
+  <FileUpload.Dropzone>
+    <FileUpload.Label>Drag your files here</FileUpload.Label>
+  </FileUpload.Dropzone>
+  <FileUpload.Trigger>Choose files</FileUpload.Trigger>
+  <FileUpload.ClearTrigger>Clear</FileUpload.ClearTrigger>
+  <FileUpload.ItemGroup>
+    <FileUpload.Context>
+      {#snippet render(api)}
+        {#each api().acceptedFiles as file (file.name)}
+          <FileUpload.Item {file}>
+            <FileUpload.ItemPreview>
+              <FileUpload.ItemPreviewImage />
+            </FileUpload.ItemPreview>
+            <FileUpload.ItemName>{file.name}</FileUpload.ItemName>
+            <FileUpload.ItemSizeText>{api().getFileSize(file)}</FileUpload.ItemSizeText>
+            <FileUpload.ItemDeleteTrigger>Remove</FileUpload.ItemDeleteTrigger>
+          </FileUpload.Item>
+        {/each}
+      {/snippet}
+    </FileUpload.Context>
+  </FileUpload.ItemGroup>
+  <FileUpload.HiddenInput />
+</FileUpload.Root>
+```
+</FrameworkContent>
+
 ## Examples
 
 ### Basic
@@ -91,54 +122,4 @@ Combine file upload with a form field for validation and labeling.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="file-upload" part="Root" />
-
-### ClearTrigger
-
-<ComponentTypes id="file-upload" part="ClearTrigger" />
-
-### Dropzone
-
-<ComponentTypes id="file-upload" part="Dropzone" />
-
-### HiddenInput
-
-<ComponentTypes id="file-upload" part="HiddenInput" />
-
-### Item
-
-<ComponentTypes id="file-upload" part="Item" />
-
-### ItemDeleteTrigger
-
-<ComponentTypes id="file-upload" part="ItemDeleteTrigger" />
-
-### ItemGroup
-
-<ComponentTypes id="file-upload" part="ItemGroup" />
-
-### ItemName
-
-<ComponentTypes id="file-upload" part="ItemName" />
-
-### ItemPreview
-
-<ComponentTypes id="file-upload" part="ItemPreview" />
-
-### ItemPreviewImage
-
-<ComponentTypes id="file-upload" part="ItemPreviewImage" />
-
-### ItemSizeText
-
-<ComponentTypes id="file-upload" part="ItemSizeText" />
-
-### Label
-
-<ComponentTypes id="file-upload" part="Label" />
-
-### Trigger
-
-<ComponentTypes id="file-upload" part="Trigger" />
+<ComponentTypes id="file-upload" />

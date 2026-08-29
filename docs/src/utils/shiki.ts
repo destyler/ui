@@ -15,6 +15,7 @@ function getHighlighter(): Promise<HighlighterCore> {
       langs: [
         import('shiki/langs/vue.mjs'),
         import('shiki/langs/vue-html.mjs'),
+        import('shiki/langs/svelte.mjs'),
         import('shiki/langs/tsx.mjs'),
         import('shiki/langs/typescript.mjs'),
         import('shiki/langs/shellscript.mjs'),

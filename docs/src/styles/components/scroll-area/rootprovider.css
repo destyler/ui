@@ -1,5 +1,4 @@
-.scroll-area-rootprovider .ds-vue-example,
-.scroll-area-rootprovider .ds-react-example {
+.scroll-area-rootprovider .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

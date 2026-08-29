@@ -13,9 +13,7 @@
 }
 
 .pagination-customized [data-part="prev-trigger"] span,
-.pagination-customized [data-part="prevTrigger"] span,
 .pagination-customized [data-part="next-trigger"] span,
-.pagination-customized [data-part="nextTrigger"] span,
 .pagination-customized .visually-hidden {
   position: absolute;
   width: 1px;
@@ -30,9 +28,7 @@
 
 .pagination-customized [data-part="item"],
 .pagination-customized [data-part="prev-trigger"],
-.pagination-customized [data-part="prevTrigger"],
-.pagination-customized [data-part="next-trigger"],
-.pagination-customized [data-part="nextTrigger"] {
+.pagination-customized [data-part="next-trigger"] {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -60,13 +56,9 @@
 .pagination-customized [data-part="item"]:hover,
 .pagination-customized [data-part="item"][data-hover],
 .pagination-customized [data-part="prev-trigger"]:hover,
-.pagination-customized [data-part="prevTrigger"]:hover,
 .pagination-customized [data-part="next-trigger"]:hover,
-.pagination-customized [data-part="nextTrigger"]:hover,
 .pagination-customized [data-part="prev-trigger"][data-hover],
-.pagination-customized [data-part="prevTrigger"][data-hover],
-.pagination-customized [data-part="next-trigger"][data-hover],
-.pagination-customized [data-part="nextTrigger"][data-hover] {
+.pagination-customized [data-part="next-trigger"][data-hover] {
   background: var(--demo-neutral-muted);
 }
 
@@ -74,17 +66,11 @@
 .pagination-customized [data-part="item"][data-focus],
 .pagination-customized [data-part="item"]:focus-visible,
 .pagination-customized [data-part="prev-trigger"]:focus,
-.pagination-customized [data-part="prevTrigger"]:focus,
 .pagination-customized [data-part="next-trigger"]:focus,
-.pagination-customized [data-part="nextTrigger"]:focus,
 .pagination-customized [data-part="prev-trigger"][data-focus],
-.pagination-customized [data-part="prevTrigger"][data-focus],
 .pagination-customized [data-part="next-trigger"][data-focus],
-.pagination-customized [data-part="nextTrigger"][data-focus],
 .pagination-customized [data-part="prev-trigger"]:focus-visible,
-.pagination-customized [data-part="prevTrigger"]:focus-visible,
-.pagination-customized [data-part="next-trigger"]:focus-visible,
-.pagination-customized [data-part="nextTrigger"]:focus-visible {
+.pagination-customized [data-part="next-trigger"]:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
@@ -103,9 +89,7 @@
 
 .pagination-customized [data-part="item"]:is([data-disabled], :disabled),
 .pagination-customized [data-part="prev-trigger"]:is([data-disabled], :disabled),
-.pagination-customized [data-part="prevTrigger"]:is([data-disabled], :disabled),
-.pagination-customized [data-part="next-trigger"]:is([data-disabled], :disabled),
-.pagination-customized [data-part="nextTrigger"]:is([data-disabled], :disabled) {
+.pagination-customized [data-part="next-trigger"]:is([data-disabled], :disabled) {
   cursor: not-allowed;
   opacity: 0.45;
   color: var(--demo-neutral-fg-muted);

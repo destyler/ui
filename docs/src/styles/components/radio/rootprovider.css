@@ -1,6 +1,5 @@
 .radio-rootprovider,
-.radio-rootprovider .ds-vue-example,
-.radio-rootprovider .ds-react-example {
+.radio-rootprovider .ds-example-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

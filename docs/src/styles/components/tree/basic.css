@@ -26,8 +26,7 @@
   max-width: 22rem;
 }
 
-.tree-basic .ds-vue-example,
-.tree-basic .ds-react-example {
+.tree-basic .ds-example-content {
   width: 100%;
 }
 
@@ -78,8 +77,7 @@
 }
 
 .tree-basic [data-scope="tree-view"][data-part="item"],
-.tree-basic [data-scope="tree-view"][data-part="branch-control"],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"] {
   --padding-inline: 0.875rem;
   display: flex;
   align-items: center;
@@ -105,15 +103,12 @@
 .tree-basic [data-scope="tree-view"][data-part="item"]:hover,
 .tree-basic [data-scope="tree-view"][data-part="item"][data-hover],
 .tree-basic [data-scope="tree-view"][data-part="branch-control"]:hover,
-.tree-basic [data-scope="tree-view"][data-part="branchControl"]:hover,
-.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-hover],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-hover] {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-hover] {
   background: var(--demo-neutral-subtle);
 }
 
 .tree-basic [data-scope="tree-view"][data-part="item"][data-selected],
-.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-selected] {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected] {
   color: var(--demo-coral-fg);
   background: var(--demo-coral-subtle);
 }
@@ -122,30 +117,24 @@
 .tree-basic [data-scope="tree-view"][data-part="item"][data-focus],
 .tree-basic [data-scope="tree-view"][data-part="item"]:focus-visible,
 .tree-basic [data-scope="tree-view"][data-part="branch-control"]:focus,
-.tree-basic [data-scope="tree-view"][data-part="branchControl"]:focus,
 .tree-basic [data-scope="tree-view"][data-part="branch-control"][data-focus],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-focus],
-.tree-basic [data-scope="tree-view"][data-part="branch-control"]:focus-visible,
-.tree-basic [data-scope="tree-view"][data-part="branchControl"]:focus-visible {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"]:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .tree-basic [data-scope="tree-view"][data-part="item"][data-selected]:hover,
-.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected]:hover,
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-selected]:hover {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected]:hover {
   background: var(--demo-coral-muted);
 }
 
 .tree-basic [data-scope="tree-view"][data-part="item"][data-disabled],
-.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-disabled],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-disabled] {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-disabled] {
   cursor: not-allowed;
   opacity: 0.45;
 }
 
-.tree-basic [data-scope="tree-view"][data-part="branch-trigger"],
-.tree-basic [data-scope="tree-view"][data-part="branchTrigger"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-trigger"] {
   display: flex;
   align-items: center;
   gap: 0.375rem;
@@ -161,9 +150,7 @@
 }
 
 .tree-basic [data-scope="tree-view"][data-part="item-text"],
-.tree-basic [data-scope="tree-view"][data-part="itemText"],
-.tree-basic [data-scope="tree-view"][data-part="branch-text"],
-.tree-basic [data-scope="tree-view"][data-part="branchText"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-text"] {
   flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
@@ -171,8 +158,7 @@
   white-space: nowrap;
 }
 
-.tree-basic [data-scope="tree-view"][data-part="item-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="itemIndicator"] {
+.tree-basic [data-scope="tree-view"][data-part="item-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -184,13 +170,11 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.tree-basic [data-scope="tree-view"][data-part="item"][data-selected] [data-part="item-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="item"][data-selected] [data-part="itemIndicator"] {
+.tree-basic [data-scope="tree-view"][data-part="item"][data-selected] [data-part="item-indicator"] {
   color: var(--demo-coral-fg);
 }
 
-.tree-basic [data-scope="tree-view"][data-part="branch-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="branchIndicator"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-indicator"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -203,27 +187,19 @@
   transition: transform 0.2s, color 0.15s;
 }
 
-.tree-basic [data-scope="tree-view"][data-part="branch-control"]:hover [data-part="branch-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"]:hover [data-part="branch-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="branch-control"]:hover [data-part="branchIndicator"],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"]:hover [data-part="branchIndicator"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"]:hover [data-part="branch-indicator"] {
   color: var(--demo-neutral-fg);
 }
 
-.tree-basic [data-scope="tree-view"][data-part="branch-indicator"][data-state="open"],
-.tree-basic [data-scope="tree-view"][data-part="branchIndicator"][data-state="open"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-indicator"][data-state="open"] {
   transform: rotate(90deg);
 }
 
-.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected] [data-part="branch-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-selected] [data-part="branch-indicator"],
-.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected] [data-part="branchIndicator"],
-.tree-basic [data-scope="tree-view"][data-part="branchControl"][data-selected] [data-part="branchIndicator"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-control"][data-selected] [data-part="branch-indicator"] {
   color: var(--demo-coral-fg);
 }
 
 .tree-basic [data-scope="tree-view"][data-part="branch-content"],
-.tree-basic [data-scope="tree-view"][data-part="branchContent"],
 .tree-basic [data-scope="collapsible"][data-part="content"] {
   position: relative;
   isolation: isolate;
@@ -231,19 +207,16 @@
 }
 
 .tree-basic [data-scope="tree-view"][data-part="branch-content"][data-state="open"],
-.tree-basic [data-scope="tree-view"][data-part="branchContent"][data-state="open"],
 .tree-basic [data-scope="collapsible"][data-part="content"][data-state="open"] {
   animation: tree-basic-slide-down 250ms cubic-bezier(0.25, 0, 0, 1) both;
 }
 
 .tree-basic [data-scope="tree-view"][data-part="branch-content"][data-state="closed"],
-.tree-basic [data-scope="tree-view"][data-part="branchContent"][data-state="closed"],
 .tree-basic [data-scope="collapsible"][data-part="content"][data-state="closed"] {
   animation: tree-basic-slide-up 200ms cubic-bezier(0.25, 0, 0, 1) both;
 }
 
-.tree-basic [data-scope="tree-view"][data-part="branch-indent-guide"],
-.tree-basic [data-scope="tree-view"][data-part="branchIndentGuide"] {
+.tree-basic [data-scope="tree-view"][data-part="branch-indent-guide"] {
   position: absolute;
   top: 0;
   bottom: 0;

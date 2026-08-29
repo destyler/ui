@@ -7,8 +7,6 @@ import ComponentPreview from '../../../components/ComponentPreview.astro';
 import ComponentTypes from '../../../components/ComponentTypes.astro';
 import FrameworkContent from '../../../components/FrameworkContent.astro';
 
-# Field
-
 > A form field component that provides labeling, validation, and helper text for form inputs.
 
 <ComponentPreview component="field" example="Basic" />
@@ -48,6 +46,24 @@ export default function Basic() {
     </Field.Root>
   )
 }
+```
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+```svelte
+<script lang="ts">
+  import { Field } from '@destyler-ui/svelte'
+</script>
+
+<Field.Root invalid required>
+  <Field.Label>
+    Email
+    <Field.RequiredIndicator />
+  </Field.Label>
+  <Field.Input />
+  <Field.HelperText>Enter your email address.</Field.HelperText>
+  <Field.ErrorText>This field is required.</Field.ErrorText>
+</Field.Root>
 ```
 </FrameworkContent>
 
@@ -119,34 +135,4 @@ Show a required indicator on the field label.
 
 ## API Reference
 
-### Root
-
-<ComponentTypes id="field" part="Root" />
-
-### ErrorText
-
-<ComponentTypes id="field" part="ErrorText" />
-
-### HelperText
-
-<ComponentTypes id="field" part="HelperText" />
-
-### Input
-
-<ComponentTypes id="field" part="Input" />
-
-### Label
-
-<ComponentTypes id="field" part="Label" />
-
-### RequiredIndicator
-
-<ComponentTypes id="field" part="RequiredIndicator" />
-
-### Select
-
-<ComponentTypes id="field" part="Select" />
-
-### Textarea
-
-<ComponentTypes id="field" part="Textarea" />
+<ComponentTypes id="field" />

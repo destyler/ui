@@ -27,13 +27,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install Dependencies
-        run: pnpm install --no-frozen-lockfile
-
-      - name: Build Packages
-        run: pnpm run build
-
-      - name: Generate Type Docs
-        run: pnpm run docs:generate:types
+        run: pnpm install --frozen-lockfile
 
       - name: Build Document
         run: pnpm run docs:build

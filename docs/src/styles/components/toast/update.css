@@ -1,12 +1,10 @@
-.toast-update .ds-vue-example,
-.toast-update .ds-react-example {
+.toast-update .ds-example-content {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.toast-update .ds-vue-example > div,
-.toast-update .ds-react-example > div {
+.toast-update .ds-example-content > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,8 +132,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.toast-update [data-part="close-trigger"],
-.toast-update [data-part="closeTrigger"] {
+.toast-update [data-part="close-trigger"] {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -156,20 +153,17 @@
   transition: color 0.15s, background-color 0.15s;
 }
 
-.toast-update [data-part="close-trigger"]:hover,
-.toast-update [data-part="closeTrigger"]:hover {
+.toast-update [data-part="close-trigger"]:hover {
   color: var(--demo-neutral-fg);
   background: var(--demo-neutral-subtle);
 }
 
-.toast-update [data-part="close-trigger"]:focus,
-.toast-update [data-part="closeTrigger"]:focus {
+.toast-update [data-part="close-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
-.toast-update [data-part="action-trigger"],
-.toast-update [data-part="actionTrigger"] {
+.toast-update [data-part="action-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -187,14 +181,12 @@
   transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 }
 
-.toast-update [data-part="action-trigger"]:hover,
-.toast-update [data-part="actionTrigger"]:hover {
+.toast-update [data-part="action-trigger"]:hover {
   background: var(--demo-coral-emphasized);
   border-color: var(--demo-coral-emphasized);
 }
 
-.toast-update [data-part="action-trigger"]:focus,
-.toast-update [data-part="actionTrigger"]:focus {
+.toast-update [data-part="action-trigger"]:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }

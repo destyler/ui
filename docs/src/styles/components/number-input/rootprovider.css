@@ -1,12 +1,5 @@
-.number-input-rootprovider .ds-vue-example,
-.number-input-rootprovider .ds-react-example {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.number-input-rootprovider .ds-react-example > div {
+.number-input-rootprovider .ds-example-content,
+.number-input-rootprovider .ds-example-content > div:not([data-part]) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -68,8 +61,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.number-input-rootprovider [data-part="value-text"],
-.number-input-rootprovider [data-part="valueText"] {
+.number-input-rootprovider [data-part="value-text"] {
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -116,9 +108,7 @@
 }
 
 .number-input-rootprovider [data-part="increment-trigger"],
-.number-input-rootprovider [data-part="incrementTrigger"],
-.number-input-rootprovider [data-part="decrement-trigger"],
-.number-input-rootprovider [data-part="decrementTrigger"] {
+.number-input-rootprovider [data-part="decrement-trigger"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -138,34 +128,24 @@
 }
 
 .number-input-rootprovider [data-part="increment-trigger"]:hover,
-.number-input-rootprovider [data-part="incrementTrigger"]:hover,
 .number-input-rootprovider [data-part="decrement-trigger"]:hover,
-.number-input-rootprovider [data-part="decrementTrigger"]:hover,
 .number-input-rootprovider [data-part="increment-trigger"][data-hover],
-.number-input-rootprovider [data-part="incrementTrigger"][data-hover],
-.number-input-rootprovider [data-part="decrement-trigger"][data-hover],
-.number-input-rootprovider [data-part="decrementTrigger"][data-hover] {
+.number-input-rootprovider [data-part="decrement-trigger"][data-hover] {
   background: var(--demo-neutral-subtle);
   border-color: var(--demo-neutral-solid);
 }
 
 .number-input-rootprovider [data-part="increment-trigger"]:focus,
-.number-input-rootprovider [data-part="incrementTrigger"]:focus,
 .number-input-rootprovider [data-part="decrement-trigger"]:focus,
-.number-input-rootprovider [data-part="decrementTrigger"]:focus,
 .number-input-rootprovider [data-part="increment-trigger"][data-focus],
-.number-input-rootprovider [data-part="incrementTrigger"][data-focus],
-.number-input-rootprovider [data-part="decrement-trigger"][data-focus],
-.number-input-rootprovider [data-part="decrementTrigger"][data-focus] {
+.number-input-rootprovider [data-part="decrement-trigger"][data-focus] {
   outline: none;
   border-color: var(--demo-coral-solid);
   box-shadow: 0 0 0 2px var(--demo-coral-focus-ring);
 }
 
 .number-input-rootprovider [data-part="increment-trigger"][data-disabled],
-.number-input-rootprovider [data-part="incrementTrigger"][data-disabled],
-.number-input-rootprovider [data-part="decrement-trigger"][data-disabled],
-.number-input-rootprovider [data-part="decrementTrigger"][data-disabled] {
+.number-input-rootprovider [data-part="decrement-trigger"][data-disabled] {
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -195,4 +175,3 @@
 .number-input-rootprovider [data-part="scrubber"][data-hover] {
   background: var(--demo-coral-muted);
 }
-

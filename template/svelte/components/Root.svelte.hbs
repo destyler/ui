@@ -1,0 +1,14 @@
+<script module lang="ts">
+  import type { Assign, HTMLProps, PolymorphicProps } from '$lib/types'
+
+  export interface {{namespace}}RootBaseProps extends PolymorphicProps<'div'> {}
+  export interface {{namespace}}RootProps extends Assign<HTMLProps<'div'>, {{namespace}}RootBaseProps> {}
+</script>
+
+<script lang="ts">
+  import { UI } from '../../factory'
+
+  const props: {{namespace}}RootProps = $props()
+</script>
+
+<UI as="div" {...props} />

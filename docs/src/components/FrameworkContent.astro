@@ -3,26 +3,28 @@
  * FrameworkContent — shows/hides its content based on the active framework.
  *
  * Usage in MDX:
- *   import { VueContent, ReactContent } from '../../../components/FrameworkContent.astro';
+ *   import FrameworkContent from '../../../components/FrameworkContent.astro';
  *
- *   <VueContent>
+ *   <FrameworkContent fw="vue">
  *     ```vue
  *     <template>...</template>
  *     ```
- *   </VueContent>
+ *   </FrameworkContent>
  *
- *   <ReactContent>
+ *   <FrameworkContent fw="react">
  *     ```tsx
  *     export default function App() { ... }
  *     ```
- *   </ReactContent>
+ *   </FrameworkContent>
  *
  * Props:
- *   - fw: "vue" | "react" — which framework this content belongs to.
+ *   - fw: "vue" | "react" | "svelte" — which framework this content belongs to.
  */
 
+import type { Framework } from '../config/frameworks'
+
 interface Props {
-  fw: 'vue' | 'react'
+  fw: Framework
 }
 
 const { fw } = Astro.props
@@ -31,18 +33,3 @@ const { fw } = Astro.props
 <div class="ds-fw-content not-content" data-fw={fw}>
   <slot />
 </div>
-
-<style>
-  :root[data-framework='vue'] .ds-fw-content[data-fw='react'] {
-    display: none;
-  }
-
-  :root[data-framework='react'] .ds-fw-content[data-fw='vue'] {
-    display: none;
-  }
-
-  /* Default to Vue when data-framework is not yet set */
-  :root:not([data-framework]) .ds-fw-content[data-fw='react'] {
-    display: none;
-  }
-</style>

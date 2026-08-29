@@ -8,21 +8,19 @@
 
 /* Overlay parts teleported / portaled to document.body */
 [data-scope="navigation-menu"][data-part="viewport-positioner"],
-[data-scope="navigation-menu"][data-part="viewportPositioner"] {
+[data-scope="navigation-menu"][data-part="viewport-positioner"] {
   position: relative;
   display: flex;
   justify-content: center;
   z-index: var(--demo-popover-z-index);
 }
 
-[data-scope="navigation-menu"][data-part="viewport-positioner"][data-orientation="horizontal"],
-[data-scope="navigation-menu"][data-part="viewportPositioner"][data-orientation="horizontal"] {
+[data-scope="navigation-menu"][data-part="viewport-positioner"][data-orientation="horizontal"] {
   width: 100%;
   margin-top: 0.75rem;
 }
 
-[data-scope="navigation-menu"][data-part="viewport-positioner"][data-orientation="vertical"],
-[data-scope="navigation-menu"][data-part="viewportPositioner"][data-orientation="vertical"] {
+[data-scope="navigation-menu"][data-part="viewport-positioner"][data-orientation="vertical"] {
   margin-inline-start: 0.75rem;
 }
 

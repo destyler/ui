@@ -26,8 +26,7 @@
   color: var(--demo-neutral-fg-muted);
 }
 
-.progress-linear [data-scope="progress"][data-part="value-text"],
-.progress-linear [data-scope="progress"][data-part="valueText"] {
+.progress-linear [data-scope="progress"][data-part="value-text"] {
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;

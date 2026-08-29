@@ -21,7 +21,19 @@ jobs:
           node-version: lts/*
           registry-url: https://registry.npmjs.org/
       - uses: pnpm/action-setup@v4
-      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm playwright install --with-deps chromium
+
+      - name: Verify release
+        run: |
+          pnpm run lint
+          pnpm run test:ci
+          pnpm --filter @destyler-ui/svelte check:ci
+          pnpm --filter @destyler-ui/svelte build-storybook
+          pnpm run docs:build
+
       - run: npx changelogithub
         continue-on-error: true
         env:

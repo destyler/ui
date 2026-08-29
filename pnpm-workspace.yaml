@@ -7,18 +7,25 @@ catalogMode: prefer
 
 catalogs:
   build:
+    '@sveltejs/kit': ^2.70.3
+    '@sveltejs/package': ^2.5.8
     babel-plugin-react-compiler: ^1.0.0
+    publint: ^0.3.24
+    svelte-check: ^4.7.6
     tsdown: ^0.20.0-beta.3
   docs:
     '@astrojs/react': ^4.2.0
+    '@astrojs/svelte': ^7.2.5
     '@astrojs/starlight': ^0.37.6
     '@astrojs/vue': ^5.0.0
     '@destyler/docs': ^0.2.6
     astro: ^5.17.3
     shiki: ^3.7.0
+    tsx: ^4.23.12
   framework:
     react: ^19.2.3
     react-dom: ^19.2.3
+    svelte: ^5.56.10
     vue: ^3.5.26
   icons:
     '@iconify-json/tabler': ^1.2.26
@@ -30,6 +37,7 @@ catalogs:
     eslint-plugin-react-hooks: ^7.0.1
     eslint-plugin-react-refresh: ^0.4.26
     eslint-plugin-storybook: ^10.1.11
+    eslint-plugin-svelte: ^3.23.0
   node:
     '@types/archiver': ^7.0.0
     archiver: ^7.0.1
@@ -80,6 +88,8 @@ catalogs:
     '@destyler/slider': ^0.2.6
     '@destyler/splitter': ^0.2.6
     '@destyler/steps': ^0.2.6
+    '@destyler/store': ^0.2.6
+    '@destyler/svelte': ^0.2.6
     '@destyler/switch': ^0.2.6
     '@destyler/tabs': ^0.2.6
     '@destyler/timer': ^0.2.6
@@ -97,12 +107,16 @@ catalogs:
     '@vitejs/plugin-react': ^5.1.2
     '@vitejs/plugin-vue': ^6.0.3
     vite: ^8.0.0-beta.3
+  svelte-runtime:
+    '@sveltejs/vite-plugin-svelte': ^6.2.4
+    vite: ^7.2.7
   stories:
     '@chromatic-com/storybook': ^5.0.0
     '@storybook/addon-a11y': ^10.1.11
     '@storybook/addon-docs': ^10.1.11
     '@storybook/addon-vitest': ^10.1.11
     '@storybook/react-vite': ^10.1.11
+    '@storybook/svelte-vite': 10.1.11
     '@storybook/vue3-vite': ^10.1.11
     storybook: ^10.1.11
   styles:
@@ -117,6 +131,7 @@ catalogs:
     playwright: ^1.57.0
     vitest: ^4.0.17
     vitest-browser-react: ^2.0.2
+    vitest-browser-svelte: ^3.0.0
     vitest-browser-vue: ^2.0.1
   types:
     '@types/node': ^25.0.9

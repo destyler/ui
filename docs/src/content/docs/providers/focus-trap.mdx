@@ -1,0 +1,122 @@
+---
+title: Focus Trap
+description: Keep keyboard focus inside a region while it is active.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+`FocusTrap` keeps Tab and Shift+Tab navigation inside its content. It is useful for custom dialogs, drawers, and other temporary interfaces that must prevent focus from escaping.
+
+## Import
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { FocusTrap } from '@destyler-ui/vue'
+</script>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { FocusTrap } from '@destyler-ui/react'
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { FocusTrap } from '@destyler-ui/svelte/focus-trap'
+</script>
+```
+
+</FrameworkContent>
+
+## Basic usage
+
+<FrameworkContent fw="vue">
+
+```vue
+<script setup lang="ts">
+import { FocusTrap } from '@destyler-ui/vue'
+import { ref } from 'vue'
+
+const trapped = ref(false)
+</script>
+
+<template>
+  <button type="button" @click="trapped = true">Start trap</button>
+  <FocusTrap :disabled="!trapped" return-focus-on-deactivate>
+    <input aria-label="Name" />
+    <button type="button" @click="trapped = false">End trap</button>
+  </FocusTrap>
+</template>
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="react">
+
+```tsx
+import { FocusTrap } from '@destyler-ui/react'
+import { useState } from 'react'
+
+export function Example() {
+  const [trapped, setTrapped] = useState(false)
+  return (
+    <>
+      <button type="button" onClick={() => setTrapped(true)}>Start trap</button>
+      <FocusTrap disabled={!trapped} returnFocusOnDeactivate>
+        <input aria-label="Name" />
+        <button type="button" onClick={() => setTrapped(false)}>End trap</button>
+      </FocusTrap>
+    </>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="svelte">
+
+```svelte
+<script lang="ts">
+  import { FocusTrap } from '@destyler-ui/svelte/focus-trap'
+
+  let trapped = $state(false)
+</script>
+
+<button type="button" onclick={() => (trapped = true)}>Start trap</button>
+
+<FocusTrap disabled={!trapped} returnFocusOnDeactivate>
+  <label>
+    Name
+    <input />
+  </label>
+  <button type="button" onclick={() => (trapped = false)}>End trap</button>
+</FocusTrap>
+```
+
+</FrameworkContent>
+
+The component renders a `div` and accepts normal `div` attributes in addition to the options below. Always provide at least one focusable child, or set `fallbackFocus` to a focusable target.
+
+## API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `disabled` | `boolean` | `false` | Stops trapping focus while preserving the rendered content. |
+| `initialFocus` | `FocusTarget \| false` | First tabbable element | Chooses the target focused when the trap activates. |
+| `fallbackFocus` | `FocusTarget` | — | Target used when the trap contains no tabbable element. |
+| `returnFocusOnDeactivate` | `boolean` | `true` | Returns focus to the previously focused element when disabled or removed. |
+| `setReturnFocus` | `FocusTarget \| false` | Previously focused element | Overrides the target that receives returned focus. |
+| `onActivate` | `() => void` | — | Runs before focus moves into the trap. |
+| `onDeactivate` | `() => void` | — | Runs when the trap is deactivated. |
+| `ref` | `Element` | — | Bindable reference to the rendered element. |
+
+`FocusTarget` can be an element, a selector, or a function returning either one.
