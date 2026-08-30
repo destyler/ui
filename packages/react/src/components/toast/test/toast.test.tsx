@@ -65,28 +65,28 @@ describe('[toast] component', () => {
 
   describe('toast types', () => {
     it('should create success toast', async () => {
-      render(<ToastTypes />)
+      render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Success'))
       await vi.waitFor(async () => await expect.element(page.getByText('Success Toast')).toBeVisible())
     })
 
     it('should create error toast', async () => {
-      render(<ToastTypes />)
+      render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Error'))
       await vi.waitFor(async () => await expect.element(page.getByText('Error Toast')).toBeVisible())
     })
 
     it('should create loading toast', async () => {
-      render(<ToastTypes />)
+      render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Loading'))
       await vi.waitFor(async () => await expect.element(page.getByText('Loading Toast')).toBeVisible())
     })
 
     it('should create info toast', async () => {
-      render(<ToastTypes />)
+      render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Info'))
       await vi.waitFor(async () => await expect.element(page.getByText('Info Toast')).toBeVisible())

@@ -4,14 +4,16 @@ import { getParts } from '../../../setup-test'
 import { toastAnatomy } from '../anatomy'
 import { ComponentUnderTest } from './basic'
 
+const testToastDuration = 60_000
+
 describe('toast', () => {
   it.skip.each(getParts(toastAnatomy))('should render part! %s', async (part) => {
-    render(() => <ComponentUnderTest />)
+    render(() => <ComponentUnderTest duration={testToastDuration} />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
   it('should show and hide a toast message', async () => {
-    render(() => <ComponentUnderTest />)
+    render(() => <ComponentUnderTest duration={testToastDuration} />)
     await user.click(screen.getByText('Create Toast'))
 
     await waitFor(() => expect(screen.queryByText('Title')).toBeVisible())

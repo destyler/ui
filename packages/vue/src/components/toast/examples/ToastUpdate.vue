@@ -2,6 +2,10 @@
 import { ref } from 'vue'
 import { Toast, Toaster, createToaster } from '../index'
 
+const props = defineProps<{
+  duration?: number
+}>()
+
 const toaster = createToaster({ placement: 'bottom-end' })
 const toastId = ref<string | undefined>()
 
@@ -10,6 +14,7 @@ const createToast = () => {
     title: 'Original Title',
     description: 'Original Description',
     type: 'info',
+    duration: props.duration,
   })
 }
 
@@ -19,6 +24,7 @@ const updateToast = () => {
       title: 'Updated Title',
       description: 'Updated Description',
       type: 'success',
+      duration: props.duration,
     })
   }
 }

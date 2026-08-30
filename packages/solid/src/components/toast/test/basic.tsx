@@ -4,7 +4,11 @@ const toaster = createToaster({
   placement: 'bottom-end',
 })
 
-export function ComponentUnderTest() {
+interface ComponentUnderTestProps {
+  duration?: number
+}
+
+export function ComponentUnderTest(props: ComponentUnderTestProps = {}) {
   return (
     <div>
       <button
@@ -14,6 +18,7 @@ export function ComponentUnderTest() {
             title: 'Title',
             description: 'Description',
             type: 'info',
+            duration: props.duration,
           })}
       >
         Create Toast

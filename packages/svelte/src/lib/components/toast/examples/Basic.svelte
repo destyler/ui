@@ -1,5 +1,13 @@
+<script module lang="ts">
+  export interface BasicProps {
+    duration?: number
+  }
+</script>
+
 <script lang="ts">
   import { Toast, Toaster, createToaster } from '../index'
+
+  let { duration }: BasicProps = $props()
 
   const toaster = createToaster({ placement: 'bottom-end', overlap: true, gap: 24 })
 </script>
@@ -7,7 +15,7 @@
 {#snippet title()}Title{/snippet}
 {#snippet description()}Description{/snippet}
 
-<button type="button" onclick={() => toaster.create({ title, description, type: 'info' })}>Create Toast</button>
+<button type="button" onclick={() => toaster.create({ title, description, type: 'info', duration })}>Create Toast</button>
 
 <Toaster {toaster}>
   {#snippet children(toast)}

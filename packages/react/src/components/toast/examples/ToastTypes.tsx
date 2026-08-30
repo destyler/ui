@@ -1,8 +1,15 @@
 import { useMemo } from 'react'
 import { createToaster, Toast, Toaster } from '../index'
 
-export function ToastTypes() {
-  const toaster = useMemo(() => createToaster({ placement: 'bottom-end' }), [])
+interface ToastTypesProps {
+  duration?: number
+}
+
+export function ToastTypes(props: ToastTypesProps = {}) {
+  const toaster = useMemo(
+    () => createToaster({ placement: 'bottom-end', duration: props.duration }),
+    [props.duration],
+  )
 
   const createSuccess = () => {
     toaster.success({

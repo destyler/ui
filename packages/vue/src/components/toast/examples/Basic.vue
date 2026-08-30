@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { Toast, Toaster, createToaster } from '../index'
 
-const toaster = createToaster({ placement: 'bottom-end', overlap: true, gap: 24 })
+const props = defineProps<{
+  duration?: number
+}>()
+
+const toaster = createToaster({ placement: 'bottom-end', overlap: true, gap: 24, duration: props.duration })
 
 const createToast = () => {
   toaster.create({

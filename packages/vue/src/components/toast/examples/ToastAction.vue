@@ -2,7 +2,11 @@
 import { ref } from 'vue'
 import { Toast, Toaster, createToaster } from '../index'
 
-const toaster = createToaster({ placement: 'bottom-end' })
+const props = defineProps<{
+  duration?: number
+}>()
+
+const toaster = createToaster({ placement: 'bottom-end', duration: props.duration })
 const actionTriggered = ref(false)
 
 const createToast = () => {
