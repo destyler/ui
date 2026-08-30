@@ -1,8 +1,15 @@
 import { useMemo } from 'react'
 import { createToaster, Toast, Toaster } from '../index'
 
-export function Basic() {
-  const toaster = useMemo(() => createToaster({ placement: 'bottom-end', overlap: true, gap: 24 }), [])
+interface BasicProps {
+  duration?: number
+}
+
+export function Basic(props: BasicProps = {}) {
+  const toaster = useMemo(
+    () => createToaster({ placement: 'bottom-end', overlap: true, gap: 24, duration: props.duration }),
+    [props.duration],
+  )
 
   const createToast = () => {
     toaster.create({

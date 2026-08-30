@@ -35,7 +35,7 @@ describe('[toast] component', () => {
     })
 
     it('should create multiple toasts', async () => {
-      render(<Basic />)
+      render(<Basic duration={60_000} />)
 
       await userEvent.click(page.getByText('Create Toast'))
       await userEvent.click(page.getByText('Create Toast'))

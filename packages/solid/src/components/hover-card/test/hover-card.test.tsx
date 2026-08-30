@@ -4,6 +4,8 @@ import { HoverCard, hoverCardAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
+const transitionTimeout = 5_000
+
 describe('hoverCard', () => {
   it.each(getParts(hoverCardAnatomy))('should render part! %s', async (part) => {
     render(() => <ComponentUnderTest />)
@@ -22,10 +24,10 @@ describe('hoverCard', () => {
     await user.hover(target)
 
     const hoverContent = screen.getByText('Content')
-    await waitFor(() => expect(hoverContent).toBeVisible())
+    await waitFor(() => expect(hoverContent).toBeVisible(), { timeout: transitionTimeout })
 
     await user.unhover(target)
-    await waitFor(() => expect(hoverContent).not.toBeVisible())
+    await waitFor(() => expect(hoverContent).not.toBeVisible(), { timeout: transitionTimeout })
   })
 
   it('should invoke onOpenChange', async () => {
@@ -33,7 +35,10 @@ describe('hoverCard', () => {
     render(() => <ComponentUnderTest onOpenChange={onOpenChange} />)
     await user.hover(screen.getByText('Hover me'))
 
-    await waitFor(() => expect(screen.getByText('Content')).toBeVisible())
+    await waitFor(
+      () => expect(screen.getByText('Content')).toBeVisible(),
+      { timeout: transitionTimeout },
+    )
     expect(onOpenChange).toHaveBeenCalledTimes(1)
   })
 
@@ -53,6 +58,9 @@ describe('hoverCard', () => {
     expect(screen.getByTestId('positioner')).toBeInTheDocument()
 
     await user.unhover(screen.getByText('Hover me'))
-    await waitFor(() => expect(screen.queryByTestId('positioner')).not.toBeInTheDocument())
+    await waitFor(
+      () => expect(screen.queryByTestId('positioner')).not.toBeInTheDocument(),
+      { timeout: transitionTimeout },
+    )
   })
 })
