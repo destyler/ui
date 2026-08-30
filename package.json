@@ -22,7 +22,7 @@
     "publish:ci": "pnpm -r publish --access public --no-git-checks",
     "svelte:sync": "pnpm --filter @destyler-ui/svelte exec svelte-kit sync",
     "test": "pnpm run svelte:sync && vitest run --browser.headless",
-    "test:ci": "pnpm run svelte:sync && vitest run --browser.headless",
+    "test:ci": "pnpm run svelte:sync && vitest run --browser.headless --no-file-parallelism",
     "test:ui": "pnpm run svelte:sync && vitest --ui --open",
     "dep": "taze",
     "vue": "pnpm --filter @destyler-ui/vue",

@@ -1,5 +1,4 @@
-import { render, screen, waitFor } from '@solidjs/testing-library'
-import user from '@testing-library/user-event'
+import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { HoverCard, hoverCardAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
@@ -21,32 +20,50 @@ describe('hoverCard', () => {
     render(() => <ComponentUnderTest />)
 
     const target = screen.getByText('Hover me')
-    await user.hover(target)
+    fireEvent.pointerEnter(target, { pointerType: 'mouse' })
 
     const hoverContent = screen.getByText('Content')
     await waitFor(() => expect(hoverContent).toBeVisible(), { timeout: transitionTimeout })
 
-    await user.unhover(target)
+    fireEvent.pointerLeave(target, { pointerType: 'mouse' })
     await waitFor(() => expect(hoverContent).not.toBeVisible(), { timeout: transitionTimeout })
   })
 
   it('should invoke onOpenChange', async () => {
     const onOpenChange = vi.fn()
     render(() => <ComponentUnderTest onOpenChange={onOpenChange} />)
-    await user.hover(screen.getByText('Hover me'))
+    const target = screen.getByText('Hover me')
+    fireEvent.pointerEnter(target, { pointerType: 'mouse' })
 
     await waitFor(
       () => expect(screen.getByText('Content')).toBeVisible(),
       { timeout: transitionTimeout },
     )
-    expect(onOpenChange).toHaveBeenCalledTimes(1)
+    expect(onOpenChange).toHaveBeenLastCalledWith({ open: true })
+
+    fireEvent.pointerLeave(target, { pointerType: 'mouse' })
+    await waitFor(
+      () => expect(onOpenChange).toHaveBeenLastCalledWith({ open: false }),
+      { timeout: transitionTimeout },
+    )
   })
 
   it('should lazy mount', async () => {
     render(() => <ComponentUnderTest lazyMount />)
     expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()
 
-    await user.hover(screen.getByText('Hover me'))
+    const target = screen.getByText('Hover me')
+    fireEvent.pointerEnter(target, { pointerType: 'mouse' })
+    await waitFor(
+      () => expect(screen.getByTestId('positioner')).toBeInTheDocument(),
+      { timeout: transitionTimeout },
+    )
+
+    fireEvent.pointerLeave(target, { pointerType: 'mouse' })
+    await waitFor(
+      () => expect(screen.getByText('Content')).not.toBeVisible(),
+      { timeout: transitionTimeout },
+    )
     expect(screen.getByTestId('positioner')).toBeInTheDocument()
   })
 
@@ -54,10 +71,14 @@ describe('hoverCard', () => {
     render(() => <ComponentUnderTest lazyMount unmountOnExit />)
     expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()
 
-    await user.hover(screen.getByText('Hover me'))
-    expect(screen.getByTestId('positioner')).toBeInTheDocument()
+    const target = screen.getByText('Hover me')
+    fireEvent.pointerEnter(target, { pointerType: 'mouse' })
+    await waitFor(
+      () => expect(screen.getByTestId('positioner')).toBeInTheDocument(),
+      { timeout: transitionTimeout },
+    )
 
-    await user.unhover(screen.getByText('Hover me'))
+    fireEvent.pointerLeave(target, { pointerType: 'mouse' })
     await waitFor(
       () => expect(screen.queryByTestId('positioner')).not.toBeInTheDocument(),
       { timeout: transitionTimeout },

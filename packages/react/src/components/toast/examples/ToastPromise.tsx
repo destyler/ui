@@ -1,7 +1,11 @@
 import { useMemo } from 'react'
 import { createToaster, Toast, Toaster } from '../index'
 
-export function ToastPromise() {
+interface ToastPromiseProps {
+  duration?: number
+}
+
+export function ToastPromise(props: ToastPromiseProps = {}) {
   const toaster = useMemo(() => createToaster({ placement: 'bottom-end' }), [])
 
   const createSuccessPromise = () => {
@@ -12,6 +16,7 @@ export function ToastPromise() {
         success: { title: 'Success!', description: 'Operation completed' },
         error: { title: 'Failed!', description: 'Something went wrong' },
       },
+      { duration: props.duration },
     )
   }
 
@@ -23,6 +28,7 @@ export function ToastPromise() {
         success: { title: 'Success!', description: 'Operation completed' },
         error: { title: 'Failed!', description: 'Something went wrong' },
       },
+      { duration: props.duration },
     )
   }
 

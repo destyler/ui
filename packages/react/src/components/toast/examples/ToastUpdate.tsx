@@ -1,7 +1,11 @@
 import { useMemo, useRef } from 'react'
 import { createToaster, Toast, Toaster } from '../index'
 
-export function ToastUpdate() {
+interface ToastUpdateProps {
+  duration?: number
+}
+
+export function ToastUpdate(props: ToastUpdateProps = {}) {
   const toaster = useMemo(() => createToaster({ placement: 'bottom-end' }), [])
   const toastIdRef = useRef<string | undefined>(undefined)
 
@@ -10,6 +14,7 @@ export function ToastUpdate() {
       title: 'Original Title',
       description: 'Original Description',
       type: 'info',
+      duration: props.duration,
     })
   }
 
@@ -19,6 +24,7 @@ export function ToastUpdate() {
         title: 'Updated Title',
         description: 'Updated Description',
         type: 'success',
+        duration: props.duration,
       })
     }
   }

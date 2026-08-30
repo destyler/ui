@@ -1,7 +1,11 @@
 import { useMemo, useState } from 'react'
 import { createToaster, Toast, Toaster } from '../index'
 
-export function ToastAction() {
+interface ToastActionProps {
+  duration?: number
+}
+
+export function ToastAction(props: ToastActionProps = {}) {
   const toaster = useMemo(() => createToaster({ placement: 'bottom-end' }), [])
   const [actionTriggered, setActionTriggered] = useState(false)
 
@@ -11,6 +15,7 @@ export function ToastAction() {
       title: 'File deleted',
       description: 'The file has been deleted',
       type: 'info',
+      duration: props.duration,
     })
   }
 
