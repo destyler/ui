@@ -16,7 +16,8 @@ export interface ClipboardRootProviderProps
   ClipboardRootProviderBaseProps {}
 
 export function ClipboardRootProvider(props: ClipboardRootProviderProps) {
-  const [{ value: clipboard }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const clipboard = () => providerProps.value()
   const mergedProps = mergeProps(() => clipboard().getRootProps(), localProps)
 
   return (

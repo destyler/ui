@@ -26,11 +26,12 @@ export interface CalendarRootProviderProps
 
 export function CalendarRootProvider(props: CalendarRootProviderProps) {
   const [presenceProps, calendarProps] = splitPresenceProps(props)
-  const [{ value: calendar }, localProps] = createSplitProps<RootProviderProps>()(
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(
     calendarProps,
     ['value'],
   )
-  const presence = usePresence(mergeProps(presenceProps, () => ({ present: calendar().open })))
+  const calendar: UseCalendarReturn = () => providerProps.value()
+  const presence = usePresence(mergeProps(() => ({ present: calendar().open }), presenceProps))
   const mergedProps = mergeProps(() => calendar().getRootProps(), localProps)
 
   return (

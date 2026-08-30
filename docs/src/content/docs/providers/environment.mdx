@@ -126,7 +126,7 @@ Pass `value` when the content belongs to another root. The value may be a `Docum
 
 ### useEnvironmentContext
 
-Reads `getRootNode()`, `getDocument()`, and `getWindow()` from the nearest provider. Svelte returns an accessor; React and Vue return the context value directly.
+Reads `getRootNode()`, `getDocument()`, and `getWindow()` from the nearest provider. Solid and Svelte return accessors; React and Vue return the context value directly.
 
 <FrameworkContent fw="vue">
 
@@ -166,7 +166,7 @@ import { useEnvironmentContext } from '@destyler-ui/solid'
 
 export function ScrollToTop() {
   const environment = useEnvironmentContext()
-  return <button onClick={() => environment.getWindow().scrollTo(0, 0)}>Scroll this environment to the top</button>
+  return <button onClick={() => environment().getWindow().scrollTo(0, 0)}>Scroll this environment to the top</button>
 }
 ```
 

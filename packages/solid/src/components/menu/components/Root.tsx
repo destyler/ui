@@ -48,20 +48,22 @@ export function MenuRoot(props: MenuRootProps) {
   const parentApi = useMenuContext()
   const parentMachine = useMenuMachineContext()
   const menu = useMenu(useMenuProps)
-  const presenceApi = usePresence(mergeProps(presenceProps, () => ({ present: menu.api().open })))
+  const menuMachine = () => menu.machine
+  const presenceApi = usePresence(mergeProps(() => ({ present: menu.api().open }), presenceProps))
 
   createEffect(() => {
-    if (!parentMachine)
+    const machine = parentMachine?.()
+    if (!machine)
       return
     parentApi?.().setChild(menu.machine)
-    menu.api().setParent(parentMachine)
+    menu.api().setParent(machine)
   })
 
   const triggerItemContext = () => parentApi?.().getTriggerItemProps(menu.api())
 
   return (
     <MenuTriggerItemProvider value={triggerItemContext}>
-      <MenuMachineProvider value={menu.machine}>
+      <MenuMachineProvider value={menuMachine}>
         <MenuProvider value={menu.api}>
           <PresenceProvider value={presenceApi}>{localProps.children}</PresenceProvider>
         </MenuProvider>

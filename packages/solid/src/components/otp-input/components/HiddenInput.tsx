@@ -11,7 +11,10 @@ export interface OtpInputHiddenInputProps
 
 export function OtpInputHiddenInput(props: OtpInputHiddenInputProps) {
   const otpInput = useOtpInputContext()
-  const mergedProps = mergeProps(() => otpInput().getHiddenInputProps(), props)
+  const mergedProps = mergeProps(
+    () => ({ readOnly: undefined, ...otpInput().getHiddenInputProps() }),
+    props,
+  )
   const field = useFieldContext()
 
   return <ui.input aria-describedby={field?.().ariaDescribedby} {...mergedProps} />

@@ -16,7 +16,8 @@ export interface ProgressRootProviderProps
   ProgressRootProviderBaseProps {}
 
 export function ProgressRootProvider(props: ProgressRootProviderProps) {
-  const [{ value: progress }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const progress = () => providerProps.value()
   const mergedProps = mergeProps(() => progress().getRootProps(), localProps)
 
   return (

@@ -1,4 +1,5 @@
-import { render, screen } from '@solidjs/testing-library'
+import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
+import { createSignal } from 'solid-js'
 import { Separator, separatorAnatomy, useSeparator } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
@@ -54,5 +55,35 @@ describe('separator', () => {
     render(() => <ContextUnderTest />)
 
     expect(screen.getByText('vertical')).toBeVisible()
+  })
+
+  it('switches the API used by RootProvider when value changes', async () => {
+    function DynamicRootProvider() {
+      const horizontal = useSeparator({ orientation: 'horizontal' })
+      const vertical = useSeparator({ orientation: 'vertical' })
+      const [useVertical, setUseVertical] = createSignal(false)
+
+      return (
+        <>
+          <button type="button" onClick={() => setUseVertical(value => !value)}>
+            Switch API
+          </button>
+          <Separator.RootProvider value={useVertical() ? vertical : horizontal}>
+            <Separator.Context>
+              {api => <span>{api().isVertical ? 'vertical' : 'horizontal'}</span>}
+            </Separator.Context>
+          </Separator.RootProvider>
+        </>
+      )
+    }
+
+    render(() => <DynamicRootProvider />)
+    expect(screen.getByText('horizontal')).toBeVisible()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Switch API' }))
+    await waitFor(() => expect(screen.getByText('vertical')).toBeVisible())
+
+    fireEvent.click(screen.getByRole('button', { name: 'Switch API' }))
+    await waitFor(() => expect(screen.getByText('horizontal')).toBeVisible())
   })
 })

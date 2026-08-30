@@ -16,9 +16,10 @@ export interface SignatureRootProviderProps
   SignatureRootProviderBaseProps {}
 
 export function SignatureRootProvider(props: SignatureRootProviderProps) {
-  const [{ value: signature }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const signature = () => providerProps.value()
   const mergedProps = mergeProps(() => signature().getRootProps(), localProps)
 
   return (

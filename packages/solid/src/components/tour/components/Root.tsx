@@ -25,7 +25,7 @@ export function TourRoot(props: TourRootProps) {
   const [renderStrategyProps] = splitRenderStrategyProps(presenceProps)
 
   const presence = usePresence(
-    mergeProps(presenceProps, () => ({ present: rootProps.tour().open })),
+    mergeProps(() => ({ present: rootProps.tour().open }), presenceProps),
   )
 
   return (

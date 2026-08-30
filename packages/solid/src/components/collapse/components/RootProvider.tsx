@@ -25,9 +25,10 @@ export interface CollapseRootProviderProps
 
 export function CollapseRootProvider(props: CollapseRootProviderProps) {
   const [renderStrategyProps, collapseProps] = splitRenderStrategyProps(props)
-  const [{ value: collapse }, localProps] = createSplitProps<RootProviderProps>()(collapseProps, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(collapseProps, [
     'value',
   ])
+  const collapse = () => providerProps.value()
 
   const mergedProps = mergeProps(() => collapse().getRootProps(), localProps)
 

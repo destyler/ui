@@ -9,7 +9,10 @@ export interface NumberInputInputProps extends HTMLProps<'input'>, NumberInputIn
 
 export function NumberInputInput(props: NumberInputInputProps) {
   const api = useNumberInputContext()
-  const mergedProps = mergeProps(() => api().getInputProps(), props)
+  const mergedProps = mergeProps(
+    () => ({ readOnly: undefined, ...api().getInputProps() }),
+    props,
+  )
   const field = useFieldContext()
 
   return <ui.input aria-describedby={field?.().ariaDescribedby} {...mergedProps} />

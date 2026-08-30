@@ -13,7 +13,8 @@ export interface TimerRootProviderBaseProps extends RootProviderProps, Polymorph
 export interface TimerRootProviderProps extends HTMLProps<'div'>, TimerRootProviderBaseProps {}
 
 export function TimerRootProvider(props: TimerRootProviderProps) {
-  const [{ value: timer }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const timer = () => providerProps.value()
   const mergedProps = mergeProps(() => timer().getRootProps(), localProps)
 
   return (

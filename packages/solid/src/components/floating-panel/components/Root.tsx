@@ -49,7 +49,7 @@ export function FloatingPanelRoot(props: FloatingPanelRootProps) {
     ],
   )
   const api = useFloatingPanel(useFloatingPanelProps)
-  const presence = usePresence(mergeProps(presenceProps, () => ({ present: api().open })))
+  const presence = usePresence(mergeProps(() => ({ present: api().open }), presenceProps))
 
   return (
     <FloatingPanelProvider value={api}>

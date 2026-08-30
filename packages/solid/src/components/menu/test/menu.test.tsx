@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
-import { Index, splitProps } from 'solid-js'
-import { Menu, menuAnatomy } from '..'
+import { createSignal, Index, splitProps } from 'solid-js'
+import { Menu, menuAnatomy, useMenu } from '..'
 import { getExports, getParts } from '../../../setup-test'
 
 interface ComponentUnderTestProps extends Menu.RootProps {
@@ -174,6 +174,53 @@ describe('menu', () => {
     await waitFor(() => expect(screen.getByText(/Destyler UI/i)).toBeVisible())
     fireEvent.click(screen.getByText(/CSS Frameworks/i))
     await waitFor(() => expect(screen.getByText(/Panda/i)).toBeVisible())
+  })
+
+  it('switches RootProvider API and machine contexts together', async () => {
+    function DynamicRootProvider() {
+      const first = useMenu({ id: 'first' })
+      const second = useMenu({ id: 'second' })
+      const [useSecond, setUseSecond] = createSignal(false)
+      const current = () => useSecond() ? second : first
+
+      return (
+        <>
+          <button type="button" onClick={() => setUseSecond(true)}>
+            Switch API
+          </button>
+          <Menu.RootProvider value={current()}>
+            <Menu.Trigger>Provider trigger</Menu.Trigger>
+            <Menu.Positioner>
+              <Menu.Content>
+                <Menu.Root>
+                  <Menu.TriggerItem>Nested provider trigger</Menu.TriggerItem>
+                  <Menu.Positioner>
+                    <Menu.Content>
+                      <Menu.Item value="nested-item">Nested provider item</Menu.Item>
+                    </Menu.Content>
+                  </Menu.Positioner>
+                </Menu.Root>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Menu.RootProvider>
+        </>
+      )
+    }
+
+    render(() => <DynamicRootProvider />)
+    const trigger = screen.getByRole('button', { name: 'Provider trigger' })
+    expect(trigger).toHaveAttribute('id', 'menu:first:trigger')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Switch API' }))
+    await waitFor(() => expect(trigger).toHaveAttribute('id', 'menu:second:trigger'))
+
+    fireEvent.click(trigger)
+    await waitFor(() => expect(screen.getByText('Nested provider trigger')).toBeVisible())
+    fireEvent.click(screen.getByText('Nested provider trigger'))
+    await waitFor(() => expect(screen.getByText('Nested provider item')).toBeVisible())
+
+    fireEvent.click(screen.getByText('Nested provider item'))
+    await waitFor(() => expect(trigger).not.toHaveAttribute('aria-expanded'))
   })
 
   it('should select a radio option', async () => {

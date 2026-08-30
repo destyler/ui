@@ -58,7 +58,7 @@ export function CalendarRoot(props: CalendarRootProps) {
     'view',
   ])
   const api = useCalendar(useCalendarProps)
-  const apiPresence = usePresence(mergeProps(presenceProps, () => ({ present: api().open })))
+  const apiPresence = usePresence(mergeProps(() => ({ present: api().open }), presenceProps))
   const mergedProps = mergeProps(() => api().getRootProps(), localProps)
 
   return (

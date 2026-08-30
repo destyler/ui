@@ -4,6 +4,7 @@ import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { PresenceProvider, usePresence } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useRenderStrategyContext } from '~/utils/render-strategy'
 import { useTabsContext } from '../hooks/use-tabs-context'
@@ -30,7 +31,10 @@ export function TabContent(props: TabContentProps) {
   return (
     <PresenceProvider value={presenceApi}>
       <Show when={!presenceApi().unmounted}>
-        <ui.div {...mergedProps} />
+        <ui.div
+          {...mergedProps}
+          ref={composeRefs(presenceApi().presenceProps.ref, localProps.ref)}
+        />
       </Show>
     </PresenceProvider>
   )

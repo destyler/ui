@@ -11,7 +11,10 @@ export interface ColorPickerHiddenInputProps
 
 export function ColorPickerHiddenInput(props: ColorPickerHiddenInputProps) {
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(() => colorPicker().getHiddenInputProps(), props)
+  const mergedProps = mergeProps(() => {
+    const inputProps = colorPicker().getHiddenInputProps()
+    return { ...inputProps, readOnly: inputProps.readOnly }
+  }, props)
   const field = useFieldContext()
 
   return <ui.input aria-describedby={field?.().ariaDescribedby} {...mergedProps} />

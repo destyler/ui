@@ -17,7 +17,8 @@ export interface FieldRootProviderProps
   FieldRootProviderBaseProps {}
 
 export function FieldRootProvider(props: FieldRootProviderProps) {
-  const [{ value: field }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const field = () => providerProps.value()
   const mergedProps = mergeProps(() => field().getRootProps(), localProps)
 
   return (

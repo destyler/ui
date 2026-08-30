@@ -3,6 +3,7 @@ import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useRenderStrategyContext } from '~/utils/render-strategy'
 import { useTourContext } from '../hooks/use-tour-context'
 
@@ -21,7 +22,11 @@ export function TourBackdrop(props: TourBackdropProps) {
 
   return (
     <Show when={!presence().unmounted}>
-      <ui.div {...mergedProps} hidden={!tour().step?.backdrop} />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(presence().presenceProps.ref, props.ref)}
+        hidden={!tour().step?.backdrop}
+      />
     </Show>
   )
 }

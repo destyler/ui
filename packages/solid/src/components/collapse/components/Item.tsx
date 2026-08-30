@@ -18,14 +18,14 @@ export function CollapseItem(props: CollapseItemProps) {
   const renderStrategyProps = useRenderStrategyContext()
   const mergedProps = mergeProps(() => collapse().getItemProps(itemProps), localProps)
   const itemState = createMemo(() => collapse().getItemState(itemProps))
-  const itemContentProps = collapse().getItemContentProps(itemProps)
+  const itemContentProps = createMemo(() => collapse().getItemContentProps(itemProps))
 
   return (
     <CollapseItemPropsProvider value={itemProps}>
       <CollapseItemProvider value={itemState}>
         <Collapsible.Root
           open={itemState().expanded}
-          ids={{ content: itemContentProps.id }}
+          ids={{ content: itemContentProps().id }}
           {...renderStrategyProps}
           {...mergedProps}
         />

@@ -16,9 +16,10 @@ export interface CollapsibleRootProviderProps
   CollapsibleRootProviderBaseProps {}
 
 export function CollapsibleRootProvider(props: CollapsibleRootProviderProps) {
-  const [{ value: collapsible }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const collapsible = () => providerProps.value()
   const mergedProps = mergeProps(() => collapsible().getRootProps(), localProps)
 
   return (

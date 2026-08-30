@@ -3,6 +3,7 @@ import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { usePresenceContext } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useNavigationMenuContext } from '../hooks/use-navigation-menu-context'
 
 export interface NavigationMenuIndicatorBaseProps extends PolymorphicProps<'div'> {}
@@ -21,7 +22,10 @@ export function NavigationMenuIndicator(props: NavigationMenuIndicatorProps) {
 
   return (
     <Show when={!presence().unmounted}>
-      <ui.div {...mergedProps} />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(presence().presenceProps.ref, props.ref)}
+      />
     </Show>
   )
 }

@@ -16,9 +16,10 @@ export interface RadioRootProviderProps
   RadioRootProviderBaseProps {}
 
 export function RadioRootProvider(props: RadioRootProviderProps) {
-  const [{ value: radio }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const radio = () => providerProps.value()
   const mergedProps = mergeProps(() => radio().getRootProps(), localProps)
 
   return (

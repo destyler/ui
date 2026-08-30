@@ -29,16 +29,17 @@ export function NavigationMenuRootProvider(props: NavigationMenuRootProviderProp
     navigationMenuProps,
     ['value'],
   )
+  const navigationMenu: UseNavigationMenuReturn = () => providerProps.value()
   const presence = usePresence(
-    mergeProps(() => ({ present: providerProps.value().open }), presenceProps),
+    mergeProps(() => ({ present: navigationMenu().open }), presenceProps),
   )
   const mergedProps = mergeProps(
-    () => providerProps.value().getRootProps(),
+    () => navigationMenu().getRootProps(),
     localProps,
   )
 
   return (
-    <NavigationMenuProvider value={providerProps.value}>
+    <NavigationMenuProvider value={navigationMenu}>
       <PresenceProvider value={presence}>
         <ui.nav {...mergedProps} />
       </PresenceProvider>

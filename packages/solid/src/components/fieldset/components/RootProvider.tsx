@@ -18,7 +18,8 @@ export interface FieldsetRootProviderProps
   FieldsetRootProviderBaseProps {}
 
 export function FieldsetRootProvider(props: FieldsetRootProviderProps) {
-  const [{ value: fieldset }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const fieldset = () => providerProps.value()
   const mergedProps = mergeProps(() => fieldset().getRootProps(), localProps)
 
   return (

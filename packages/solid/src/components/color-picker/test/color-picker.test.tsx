@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
-import { ColorPicker, colorPickerAnatomy } from '../'
+import { createSignal } from 'solid-js'
+import { ColorPicker, colorPickerAnatomy, parseColor } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
@@ -42,6 +43,34 @@ describe('colorPicker', () => {
     await waitFor(() => {
       expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()
     })
+  })
+
+  it('updates channel and hidden inputs when readOnly changes', async () => {
+    const [readOnly, setReadOnly] = createSignal(false)
+    render(() => (
+      <>
+        <button type="button" onClick={() => setReadOnly(value => !value)}>
+          Toggle readonly
+        </button>
+        <ColorPicker.Root value={parseColor('#eb5e41')} readOnly={readOnly()}>
+          <ColorPicker.ChannelInput channel="hex" data-testid="channel-input" />
+          <ColorPicker.HiddenInput data-testid="hidden-input" />
+        </ColorPicker.Root>
+      </>
+    ))
+
+    const channelInput = screen.getByTestId('channel-input')
+    const hiddenInput = screen.getByTestId('hidden-input')
+    expect(channelInput).not.toHaveAttribute('readonly')
+    expect(hiddenInput).not.toHaveAttribute('readonly')
+
+    await user.click(screen.getByRole('button', { name: 'Toggle readonly' }))
+    await waitFor(() => expect(channelInput).toHaveAttribute('readonly'))
+    expect(hiddenInput).toHaveAttribute('readonly')
+
+    await user.click(screen.getByRole('button', { name: 'Toggle readonly' }))
+    await waitFor(() => expect(channelInput).not.toHaveAttribute('readonly'))
+    expect(hiddenInput).not.toHaveAttribute('readonly')
   })
 })
 

@@ -13,7 +13,7 @@ export function Basic() {
             <h3 id="step-2">Step 2</h3>
             <div class="h-100px" />
           </div>
-          <Frame>
+          <Frame title="Tour step content">
             <h1 id="step-2a">Iframe Content</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor

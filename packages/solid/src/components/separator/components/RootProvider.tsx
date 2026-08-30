@@ -8,5 +8,6 @@ export interface SeparatorRootProviderProps {
 }
 
 export function SeparatorRootProvider(props: SeparatorRootProviderProps) {
-  return <SeparatorProvider value={props.value}>{props.children}</SeparatorProvider>
+  const separator: UseSeparatorReturn = () => props.value()
+  return <SeparatorProvider value={separator}>{props.children}</SeparatorProvider>
 }

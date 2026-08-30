@@ -3,6 +3,7 @@ import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { usePresenceContext } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useComboboxContext } from '../hooks/use-combobox-context'
 
 export interface ComboboxContentBaseProps extends PolymorphicProps<'div'> {}
@@ -19,7 +20,10 @@ export function ComboboxContent(props: ComboboxContentProps) {
 
   return (
     <Show when={!presenceApi().unmounted}>
-      <ui.div {...mergedProps} />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(presenceApi().presenceProps.ref, props.ref)}
+      />
     </Show>
   )
 }

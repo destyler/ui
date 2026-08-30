@@ -16,7 +16,8 @@ export interface CarouselRootProviderProps
   CarouselRootProviderBaseProps {}
 
 export function CarouselRootProvider(props: CarouselRootProviderProps) {
-  const [{ value: carousel }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const carousel = () => providerProps.value()
   const mergedProps = mergeProps(() => carousel().getRootProps(), localProps)
 
   return (

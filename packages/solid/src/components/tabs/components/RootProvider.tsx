@@ -23,7 +23,8 @@ export interface TabsRootProviderProps extends HTMLProps<'div'>, TabsRootProvide
 
 export function TabsRootProvider(props: TabsRootProviderProps) {
   const [renderStrategyProps, tabsProps] = splitRenderStrategyProps(props)
-  const [{ value: tabs }, localprops] = createSplitProps<RootProviderProps>()(tabsProps, ['value'])
+  const [providerProps, localprops] = createSplitProps<RootProviderProps>()(tabsProps, ['value'])
+  const tabs: UseTabsReturn = () => providerProps.value()
   const mergedProps = mergeProps(() => tabs().getRootProps(), localprops)
 
   return (

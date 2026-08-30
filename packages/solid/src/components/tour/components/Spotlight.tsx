@@ -3,6 +3,7 @@ import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useRenderStrategyContext } from '~/utils/render-strategy'
 import { useTourContext } from '../hooks/use-tour-context'
 
@@ -21,7 +22,11 @@ export function TourSpotlight(props: TourSpotlightProps) {
 
   return (
     <Show when={!presenceApi().unmounted}>
-      <ui.div {...mergedProps} hidden={!tour().open || !tour().step?.target?.()} />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(presenceApi().presenceProps.ref, props.ref)}
+        hidden={!tour().open || !tour().step?.target?.()}
+      />
     </Show>
   )
 }

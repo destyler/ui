@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
-import { Checkbox, checkboxAnatomy } from '../'
+import { Checkbox, checkboxAnatomy, useCheckbox } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
@@ -78,6 +78,38 @@ describe('checkbox', () => {
     await waitFor(() => expect(checkbox).toBeDisabled())
     expect(checkbox).not.toBeChecked()
     expect(control).toHaveAttribute('data-state', 'unchecked')
+  })
+
+  it('should switch the API used by RootProvider when value changes', async () => {
+    function SwitchableRootProvider() {
+      const unchecked = useCheckbox({ checked: false })
+      const checked = useCheckbox({ checked: true })
+      const [useChecked, setUseChecked] = createSignal(false)
+
+      return (
+        <>
+          <button type="button" onClick={() => setUseChecked(true)}>
+            switch API
+          </button>
+          <Checkbox.RootProvider value={useChecked() ? checked : unchecked}>
+            <Checkbox.Label>Provider checkbox</Checkbox.Label>
+            <Checkbox.Control data-testid="provider-control" />
+            <Checkbox.HiddenInput />
+          </Checkbox.RootProvider>
+        </>
+      )
+    }
+
+    render(() => <SwitchableRootProvider />)
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Provider checkbox' })
+    expect(checkbox).not.toBeChecked()
+    expect(screen.getByTestId('provider-control')).toHaveAttribute('data-state', 'unchecked')
+
+    await user.click(screen.getByRole('button', { name: 'switch API' }))
+
+    await waitFor(() => expect(checkbox).toBeChecked())
+    expect(screen.getByTestId('provider-control')).toHaveAttribute('data-state', 'checked')
   })
 })
 

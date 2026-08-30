@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { OtpInput, otpInputAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
@@ -106,6 +107,28 @@ describe('otpInput', () => {
     await waitFor(() =>
       expect(onComplete).toHaveBeenCalledWith({ value: ['1', '2', '3'], valueAsString: '123' }),
     )
+  })
+
+  it('should update visible and hidden inputs when readOnly changes', async () => {
+    const [readOnly, setReadOnly] = createSignal(false)
+    render(() => (
+      <>
+        <ComponentUnderTest readOnly={readOnly()} />
+        <button type="button" onClick={() => setReadOnly(true)}>
+          make readonly
+        </button>
+      </>
+    ))
+
+    const visibleInput = screen.getByLabelText('pin code 1 of 3')
+    const hiddenInput = document.querySelector('input[aria-hidden="true"]')
+    expect(visibleInput).not.toHaveAttribute('readonly')
+    expect(hiddenInput).not.toHaveAttribute('readonly')
+
+    await user.click(screen.getByRole('button', { name: 'make readonly' }))
+
+    await waitFor(() => expect(visibleInput).toHaveAttribute('readonly'))
+    expect(hiddenInput).toHaveAttribute('readonly')
   })
 })
 

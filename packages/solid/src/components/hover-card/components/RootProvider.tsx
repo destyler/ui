@@ -21,12 +21,13 @@ export interface HoverCardRootProviderProps extends HoverCardRootProviderBasePro
 
 export function HoverCardRootProvider(props: HoverCardRootProviderProps) {
   const [presenceProps, hoverCardProps] = splitPresenceProps(props)
+  const hoverCard: UseHoverCardReturn = () => hoverCardProps.value()
   const presence = usePresence(
-    mergeProps(presenceProps, () => ({ present: hoverCardProps.value().open })),
+    mergeProps(() => ({ present: hoverCard().open }), presenceProps),
   )
 
   return (
-    <HoverCardProvider value={hoverCardProps.value}>
+    <HoverCardProvider value={hoverCard}>
       <PresenceProvider value={presence}>{hoverCardProps.children}</PresenceProvider>
     </HoverCardProvider>
   )

@@ -159,7 +159,7 @@ import { useLocaleContext } from '@destyler-ui/solid'
 
 export function CurrentLocale() {
   const locale = useLocaleContext()
-  return <p dir={locale.dir}>{locale.locale}</p>
+  return <p dir={locale().dir}>{locale().locale}</p>
 }
 ```
 

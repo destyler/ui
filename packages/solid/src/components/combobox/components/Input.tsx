@@ -9,7 +9,10 @@ export interface ComboboxInputProps extends HTMLProps<'input'>, ComboboxInputBas
 
 export function ComboboxInput(props: ComboboxInputProps) {
   const combobox = useComboboxContext()
-  const mergedProps = mergeProps(() => combobox().getInputProps(), props)
+  const mergedProps = mergeProps(() => {
+    const inputProps = combobox().getInputProps()
+    return { ...inputProps, readOnly: inputProps.readOnly }
+  }, props)
   const field = useFieldContext()
 
   return <ui.input aria-describedby={field?.().ariaDescribedby} {...mergedProps} />

@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { NumberInput, numberInputAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
@@ -69,6 +70,25 @@ describe('numberInput', () => {
     await waitFor(() => {
       expect(input).toHaveValue('5')
     })
+  })
+
+  it('should update the input when readOnly changes', async () => {
+    const [readOnly, setReadOnly] = createSignal(false)
+    render(() => (
+      <>
+        <ComponentUnderTest readOnly={readOnly()} />
+        <button type="button" onClick={() => setReadOnly(true)}>
+          make readonly
+        </button>
+      </>
+    ))
+
+    const input = screen.getByRole('spinbutton')
+    expect(input).not.toHaveAttribute('readonly')
+
+    await user.click(screen.getByRole('button', { name: 'make readonly' }))
+
+    await waitFor(() => expect(input).toHaveAttribute('readonly'))
   })
 
   it.skip('should handle min and max fraction digits', async () => {

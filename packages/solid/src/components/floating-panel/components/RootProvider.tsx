@@ -23,12 +23,13 @@ export interface FloatingPanelRootProviderProps extends FloatingPanelRootProvide
 
 export function FloatingPanelRootProvider(props: FloatingPanelRootProviderProps) {
   const [presenceProps, floatingPanelProps] = splitPresenceProps(props)
+  const floatingPanel: UseFloatingPanelReturn = () => floatingPanelProps.value()
   const presence = usePresence(
-    mergeProps(presenceProps, () => ({ present: floatingPanelProps.value().open })),
+    mergeProps(() => ({ present: floatingPanel().open }), presenceProps),
   )
 
   return (
-    <FloatingPanelProvider value={floatingPanelProps.value}>
+    <FloatingPanelProvider value={floatingPanel}>
       <PresenceProvider value={presence}>{floatingPanelProps.children}</PresenceProvider>
     </FloatingPanelProvider>
   )

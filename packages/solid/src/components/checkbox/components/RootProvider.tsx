@@ -16,7 +16,8 @@ export interface CheckboxRootProviderProps
   CheckboxRootProviderBaseProps {}
 
 export function CheckboxRootProvider(props: CheckboxRootProviderProps) {
-  const [{ value: checkbox }, labelprops] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, labelprops] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const checkbox = () => providerProps.value()
   const mergedProps = mergeProps(() => checkbox().getRootProps(), labelprops)
 
   return (

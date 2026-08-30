@@ -16,7 +16,8 @@ export interface AvatarRootProviderProps
   AvatarRootProviderBaseProps {}
 
 export function AvatarRootProvider(props: AvatarRootProviderProps) {
-  const [{ value: avatar }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const avatar = () => providerProps.value()
   const mergedProps = mergeProps(() => avatar().getRootProps(), localProps)
 
   return (

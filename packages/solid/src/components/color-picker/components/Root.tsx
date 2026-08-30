@@ -51,7 +51,7 @@ export function ColorPickerRoot(props: ColorPickerRootProps) {
     ],
   )
   const api = useColorPicker(useColorPickerProps)
-  const apiPresence = usePresence(mergeProps(presenceProps, () => ({ present: api().open })))
+  const apiPresence = usePresence(mergeProps(() => ({ present: api().open }), presenceProps))
   const mergedProps = mergeProps(() => api().getRootProps(), localProps)
 
   return (

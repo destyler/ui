@@ -26,12 +26,13 @@ export interface ComboboxRootProviderProps<T extends CollectionItem>
 
 export function ComboboxRootProvider<T extends CollectionItem>(props: ComboboxRootProviderProps<T>) {
   const [presenceProps, comboboxProps] = splitPresenceProps(props)
-  const [{ value: combobox }, localProps] = createSplitProps<RootProviderProps<T>>()(
+  const [providerProps, localProps] = createSplitProps<RootProviderProps<T>>()(
     comboboxProps,
     ['value'],
   )
 
-  const apiPresence = usePresence(mergeProps(presenceProps, () => ({ present: combobox().open })))
+  const combobox: UseComboboxReturn<T> = () => providerProps.value()
+  const apiPresence = usePresence(mergeProps(() => ({ present: combobox().open }), presenceProps))
   const mergedProps = mergeProps(() => combobox().getRootProps(), localProps)
 
   return (

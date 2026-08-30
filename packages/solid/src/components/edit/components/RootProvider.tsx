@@ -16,7 +16,8 @@ export interface EditRootProviderProps
   EditRootProviderBaseProps {}
 
 export function EditRootProvider(props: EditRootProviderProps) {
-  const [{ value: edit }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const edit = () => providerProps.value()
   const mergedProps = mergeProps(() => edit().getRootProps(), localProps)
 
   return (

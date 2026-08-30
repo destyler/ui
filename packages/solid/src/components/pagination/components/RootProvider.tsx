@@ -16,9 +16,10 @@ export interface PaginationRootProviderProps
   PaginationRootProviderBaseProps {}
 
 export function PaginationRootProvider(props: PaginationRootProviderProps) {
-  const [{ value: pagination }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const pagination = () => providerProps.value()
   const mergedProps = mergeProps(() => pagination().getRootProps(), localProps)
 
   return (

@@ -16,7 +16,8 @@ export interface SwitchRootProviderProps
   SwitchRootProviderBaseProps {}
 
 export function SwitchRootProvider(props: SwitchRootProviderProps) {
-  const [{ value: api }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const api = () => providerProps.value()
   const mergedProps = mergeProps(() => api().getRootProps(), localProps)
 
   return (

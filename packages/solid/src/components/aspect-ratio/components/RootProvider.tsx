@@ -17,9 +17,10 @@ export interface AspectRatioRootProviderProps
   AspectRatioRootProviderBaseProps {}
 
 export function AspectRatioRootProvider(props: AspectRatioRootProviderProps) {
-  const [{ value: aspectRatio }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const aspectRatio = () => providerProps.value()
   const mergedProps = mergeProps(() => aspectRatio().getRootProps(), localProps)
 
   return (

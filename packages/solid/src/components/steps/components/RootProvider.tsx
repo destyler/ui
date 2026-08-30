@@ -13,7 +13,8 @@ export interface StepsRootProviderBaseProps extends RootProviderProps, Polymorph
 export interface StepsRootProviderProps extends HTMLProps<'div'>, StepsRootProviderBaseProps {}
 
 export function StepsRootProvider(props: StepsRootProviderProps) {
-  const [{ value: steps }, rootProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, rootProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const steps = () => providerProps.value()
   const mergedProps = mergeProps(() => steps().getRootProps(), rootProps)
 
   return (

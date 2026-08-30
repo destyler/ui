@@ -16,7 +16,8 @@ export interface QrCodeRootProviderProps
   QrCodeRootProviderBaseProps {}
 
 export function QrCodeRootProvider(props: QrCodeRootProviderProps) {
-  const [{ value: qrCode }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const qrCode = () => providerProps.value()
   const mergedProps = mergeProps(() => qrCode().getRootProps(), localProps)
 
   return (

@@ -15,7 +15,8 @@ export interface LabelRootProviderBaseProps
 export interface LabelRootProviderProps extends HTMLProps<'label'>, LabelRootProviderBaseProps {}
 
 export function LabelRootProvider(props: LabelRootProviderProps) {
-  const [{ value: label }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const label = () => providerProps.value()
   const mergedProps = mergeProps(() => label().getRootProps(), localProps)
 
   return (

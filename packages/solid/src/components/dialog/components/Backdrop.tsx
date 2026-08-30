@@ -3,6 +3,7 @@ import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useRenderStrategyContext } from '~/utils/render-strategy'
 import { useDialogContext } from '../hooks/use-dialog-context'
 
@@ -21,7 +22,10 @@ export function DialogBackdrop(props: DialogBackdropProps) {
 
   return (
     <Show when={!presenceApi().unmounted}>
-      <ui.div {...mergedProps} />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(presenceApi().presenceProps.ref, props.ref)}
+      />
     </Show>
   )
 }

@@ -16,9 +16,10 @@ export interface FileUploadRootProviderProps
   FileUploadRootProviderBaseProps {}
 
 export function FileUploadRootProvider(props: FileUploadRootProviderProps) {
-  const [{ value: fileUpload }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const fileUpload = () => providerProps.value()
   const mergedProps = mergeProps(() => fileUpload().getRootProps(), localProps)
 
   return (

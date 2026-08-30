@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
-import { Popover, popoverAnatomy } from '../'
+import { createSignal } from 'solid-js'
+import { Popover, popoverAnatomy, usePopover } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 import { ControlledComponentUnderTest } from './controlled'
@@ -53,6 +54,55 @@ describe('popover', () => {
 
     await user.click(screen.getByRole('button', { name: /toggle/i }))
     await waitFor(() => expect(screen.queryByText('title')).not.toBeVisible())
+  })
+
+  it('lets present force the content to render independently of the machine state', () => {
+    render(() => (
+      <Popover.Root present>
+        <Popover.Content data-testid="forced-content">Forced content</Popover.Content>
+      </Popover.Root>
+    ))
+
+    expect(screen.getByTestId('forced-content')).toBeVisible()
+    expect(screen.getByTestId('forced-content')).toHaveAttribute('data-state', 'open')
+  })
+
+  it('switches the API used by RootProvider when value changes', async () => {
+    function DynamicRootProvider() {
+      const first = usePopover({ id: 'first' })
+      const second = usePopover({ id: 'second' })
+      const [useSecond, setUseSecond] = createSignal(false)
+      const current = () => useSecond() ? second : first
+
+      return (
+        <>
+          <button type="button" onClick={() => setUseSecond(true)}>
+            Switch API
+          </button>
+          <button type="button" onClick={() => current()().setOpen(true)}>
+            Open current API
+          </button>
+          <Popover.RootProvider value={current()}>
+            <Popover.Trigger>Provider trigger</Popover.Trigger>
+            <Popover.Content>Provider content</Popover.Content>
+          </Popover.RootProvider>
+        </>
+      )
+    }
+
+    render(() => <DynamicRootProvider />)
+    const trigger = screen.getByRole('button', { name: 'Provider trigger' })
+    expect(trigger).toHaveAttribute('id', 'popover:first:trigger')
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByText('Provider content')).not.toBeVisible()
+
+    await user.click(screen.getByRole('button', { name: 'Switch API' }))
+    await waitFor(() => expect(trigger).toHaveAttribute('id', 'popover:second:trigger'))
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+
+    await user.click(screen.getByRole('button', { name: 'Open current API' }))
+    await waitFor(() => expect(trigger).toHaveAttribute('aria-expanded', 'true'))
+    expect(screen.getByText('Provider content')).toBeVisible()
   })
 
   it('should be able to lazy mount', async () => {

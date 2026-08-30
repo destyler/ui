@@ -101,7 +101,10 @@ describe('navigationMenu', () => {
         closeDelay={0}
       />
     ))
-    await waitFor(() => expect(screen.getByText(installationText)).not.toBeVisible())
+    const content = screen.getByText(installationText).closest('[data-part="content"]')
+    expect(content).not.toBeNull()
+    await waitFor(() => expect(content).not.toBeVisible())
+    expect(content).toHaveAttribute('data-state', 'closed')
   })
 
   it('works through RootProvider', async () => {

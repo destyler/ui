@@ -16,7 +16,8 @@ export interface OtpInputRootProviderProps
   OtpInputRootProviderBaseProps {}
 
 export function OtpInputRootProvider(props: OtpInputRootProviderProps) {
-  const [{ value: otpInput }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const otpInput = () => providerProps.value()
   const mergedProps = mergeProps(() => otpInput().getRootProps(), localProps)
 
   return (

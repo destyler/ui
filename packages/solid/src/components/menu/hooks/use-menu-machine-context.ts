@@ -1,7 +1,8 @@
+import type { Accessor } from 'solid-js'
 import type { UseMenuReturn } from './use-menu'
 import { createContext } from '~/utils/create-context'
 
-export type UseMenuMachineContext = UseMenuReturn['machine'] | undefined
+export type UseMenuMachineContext = Accessor<UseMenuReturn['machine']> | undefined
 
 const menuMachineProviderTuple = createContext<UseMenuMachineContext>({
   hookName: 'useMenuMachineContext',

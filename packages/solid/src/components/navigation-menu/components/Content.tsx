@@ -5,6 +5,7 @@ import { mergeProps } from '@destyler/solid'
 import { createMemo, Show, splitProps } from 'solid-js'
 import { usePresenceContext } from '~/components/presence'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useNavigationMenuContext } from '../hooks/use-navigation-menu-context'
 import { useNavigationMenuItemPropsContext } from '../hooks/use-navigation-menu-item-props-context'
 
@@ -30,15 +31,27 @@ export function NavigationMenuContent(props: NavigationMenuContentProps) {
     }
     return { value }
   })
-  const mergedProps = mergeProps(
-    () => presence().presenceProps,
-    () => navigationMenu().getContentProps(resolvedProps()),
-    localProps,
-  )
+  const contentApiProps = createMemo(() => navigationMenu().getContentProps(resolvedProps()))
+  const combinedPresenceProps = createMemo(() => {
+    const presenceProps = presence().presenceProps
+    const hidden = Boolean(contentApiProps().hidden || presenceProps.hidden)
+    const closed = Boolean(contentApiProps().hidden)
+      || presenceProps['data-state'] === 'closed'
+
+    return {
+      ...presenceProps,
+      hidden,
+      'data-state': closed ? 'closed' : 'open',
+    }
+  })
+  const mergedProps = mergeProps(contentApiProps, combinedPresenceProps, localProps)
 
   return (
     <Show when={!presence().unmounted}>
-      <ui.div {...mergedProps} />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(presence().presenceProps.ref, localProps.ref)}
+      />
     </Show>
   )
 }

@@ -45,7 +45,7 @@ export function DialogRoot(props: DialogRootProps) {
   ])
 
   const api = useDialog(useDialogProps)
-  const apiPresence = usePresence(mergeProps(presenceProps, () => ({ present: api().open })))
+  const apiPresence = usePresence(mergeProps(() => ({ present: api().open }), presenceProps))
 
   return (
     <DialogProvider value={api}>

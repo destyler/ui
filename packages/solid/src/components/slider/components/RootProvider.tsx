@@ -16,7 +16,8 @@ export interface SliderRootProviderProps
   SliderRootProviderBaseProps {}
 
 export function SliderRootProvider(props: SliderRootProviderProps) {
-  const [{ value: slider }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const slider = () => providerProps.value()
   const mergedProps = mergeProps(() => slider().getRootProps(), localProps)
 
   return (

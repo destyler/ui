@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
-import { Tabs, tabsAnatomy } from '../'
+import { Tabs, tabsAnatomy, useTabs } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
@@ -106,6 +106,38 @@ describe('tabs', () => {
     await user.click(screen.getByRole('button', { name: 'vertical' }))
     await waitFor(() => expect(solidTab).toHaveAttribute('data-orientation', 'vertical'))
     expect(solidTab).toHaveAttribute('aria-selected', 'true')
+  })
+
+  it('reacts when RootProvider receives a different api', async () => {
+    function DynamicRootProvider() {
+      const first = useTabs({ defaultValue: 'first' })
+      const second = useTabs({ defaultValue: 'second' })
+      const [tabs, setTabs] = createSignal(first)
+
+      return (
+        <>
+          <button type="button" onClick={() => setTabs(() => second)}>
+            Switch api
+          </button>
+          <Tabs.RootProvider value={tabs()}>
+            <Tabs.List>
+              <Tabs.Trigger value="first">First</Tabs.Trigger>
+              <Tabs.Trigger value="second">Second</Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="first">First content</Tabs.Content>
+            <Tabs.Content value="second">Second content</Tabs.Content>
+          </Tabs.RootProvider>
+        </>
+      )
+    }
+
+    render(() => <DynamicRootProvider />)
+    expect(screen.getByText('First content')).toBeVisible()
+    expect(screen.getByText('Second content')).not.toBeVisible()
+
+    await user.click(screen.getByRole('button', { name: 'Switch api' }))
+    await waitFor(() => expect(screen.getByText('Second content')).toBeVisible())
+    expect(screen.getByText('First content')).not.toBeVisible()
   })
 
   it('should lazy mount a tab', async () => {

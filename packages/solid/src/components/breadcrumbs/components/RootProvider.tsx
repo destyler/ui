@@ -17,9 +17,10 @@ export interface BreadcrumbsRootProviderProps
   BreadcrumbsRootProviderBaseProps {}
 
 export function BreadcrumbsRootProvider(props: BreadcrumbsRootProviderProps) {
-  const [{ value: breadcrumbs }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const breadcrumbs = () => providerProps.value()
   const mergedProps = mergeProps(() => breadcrumbs().getRootProps(), localProps)
 
   return (

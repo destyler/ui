@@ -15,6 +15,8 @@ import { composeRefs } from '~/utils/compose-refs'
 import { FrameContent } from './Content'
 
 export interface FrameBaseProps {
+  /** Accessible name that describes the embedded frame content */
+  title: string
   /** Additional content to be inserted into the frame's <head> */
   head?: JSX.Element
   /** Callback function to be executed when the frame is mounted */
@@ -45,6 +47,7 @@ export function Frame(props: FrameProps) {
     'onMount',
     'onUnmount',
     'srcdoc',
+    'title',
   ])
 
   const srcdoc = createMemo(() => frameProps.srcdoc ?? initialSrcDoc)
@@ -70,15 +73,12 @@ export function Frame(props: FrameProps) {
 
   createEffect(() => {
     const frame = frameRef()
-    if (!frame || !frame.contentDocument)
+    const node = mountNode()
+    if (!frame || !frame.contentDocument || !node)
       return
 
     const win = frame.contentWindow as Window & typeof globalThis
     if (!win)
-      return
-
-    const node = getMountNode(frame)
-    if (!node)
       return
 
     const exec = () => {
@@ -103,17 +103,21 @@ export function Frame(props: FrameProps) {
 
   return (
     <EnvironmentProvider value={() => frameRef()?.contentDocument ?? document}>
-      <iframe {...localProps} ref={composeRefs(setFrameRef, localProps.ref)}>
-        <Show when={mountNode()}>
+      <iframe
+        title={frameProps.title || 'Embedded content'}
+        {...localProps}
+        ref={composeRefs(setFrameRef, localProps.ref)}
+      >
+        <Show when={mountNode()} keyed>
           {node => (
-            <Portal mount={node()}>
+            <Portal mount={node}>
               <FrameContent onMount={frameProps.onMount} onUnmount={frameProps.onUnmount}>
                 {frameProps.children}
               </FrameContent>
             </Portal>
           )}
         </Show>
-        <Show when={mountNode()}>
+        <Show when={mountNode()} keyed>
           {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
           <Portal mount={frameRef()!.contentDocument!.head}>{frameProps.head}</Portal>
         </Show>

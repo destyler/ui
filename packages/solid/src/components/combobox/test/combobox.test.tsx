@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Combobox, comboboxAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
@@ -60,6 +61,27 @@ describe('combobox', () => {
     fireEvent.click(screen.getByTestId('trigger'))
 
     await waitFor(() => expect(screen.queryByText('React')).not.toBeVisible())
+  })
+
+  it('updates the input when readOnly changes', async () => {
+    const [readOnly, setReadOnly] = createSignal(false)
+    render(() => (
+      <>
+        <button type="button" onClick={() => setReadOnly(value => !value)}>
+          Toggle readonly
+        </button>
+        <ComponentUnderTest readOnly={readOnly()} />
+      </>
+    ))
+
+    const input = screen.getByRole('combobox')
+    expect(input).not.toHaveAttribute('readonly')
+
+    await user.click(screen.getByRole('button', { name: 'Toggle readonly' }))
+    await waitFor(() => expect(input).toHaveAttribute('readonly'))
+
+    await user.click(screen.getByRole('button', { name: 'Toggle readonly' }))
+    await waitFor(() => expect(input).not.toHaveAttribute('readonly'))
   })
 
   it('should be able to lazy mount its items', async () => {

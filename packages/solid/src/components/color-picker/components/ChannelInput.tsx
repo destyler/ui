@@ -18,7 +18,10 @@ export function ColorPickerChannelInput(props: ColorPickerChannelInputProps) {
     'orientation',
   ])
   const api = useColorPickerContext()
-  const mergedProps = mergeProps(() => api().getChannelInputProps(channelProps), inputProps)
+  const mergedProps = mergeProps(() => {
+    const channelInputProps = api().getChannelInputProps(channelProps)
+    return { ...channelInputProps, readOnly: channelInputProps.readOnly }
+  }, inputProps)
 
   return <ui.input {...mergedProps} />
 }

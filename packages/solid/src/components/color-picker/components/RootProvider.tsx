@@ -26,12 +26,13 @@ export interface ColorPickerRootProviderProps
 
 export function ColorPickerRootProvider(props: ColorPickerRootProviderProps) {
   const [presenceProps, colorPickerProps] = splitPresenceProps(props)
-  const [{ value: colorPicker }, localProps] = createSplitProps<RootProviderProps>()(
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(
     colorPickerProps,
     ['value'],
   )
+  const colorPicker: UseColorPickerReturn = () => providerProps.value()
   const apiPresence = usePresence(
-    mergeProps(presenceProps, () => ({ present: colorPicker().open })),
+    mergeProps(() => ({ present: colorPicker().open }), presenceProps),
   )
   const mergedProps = mergeProps(() => colorPicker().getRootProps(), localProps)
 

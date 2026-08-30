@@ -1,5 +1,6 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
+import { ui } from '~/factory'
 import { useToastContext } from '../hooks/use-toast-context'
 
 export interface ToastRootBaseProps extends PolymorphicProps<'div'> {}
@@ -10,10 +11,10 @@ export function ToastRoot(props: ToastRootProps) {
   const mergedProps = mergeProps(() => toast().getRootProps(), props)
 
   return (
-    <div {...mergedProps}>
-      <div {...toast().getGhostBeforeProps()} />
+    <ui.div {...mergedProps}>
+      <ui.div {...toast().getGhostBeforeProps()} />
       {props.children}
-      <div {...toast().getGhostAfterProps()} />
-    </div>
+      <ui.div {...toast().getGhostAfterProps()} />
+    </ui.div>
   )
 }

@@ -26,23 +26,27 @@ export function MenuRootProvider(props: MenuRootProviderProps) {
   const parentApi = useMenuContext()
   const parentMachine = useMenuMachineContext()
   const [presenceProps, menuProps] = splitPresenceProps(props)
+  const menu = () => menuProps.value
+  const menuApi: UseMenuReturn['api'] = () => menu().api()
+  const menuMachine = () => menu().machine
   const presenceApi = usePresence(
-    mergeProps(presenceProps, () => ({ present: menuProps.value.api().open })),
+    mergeProps(() => ({ present: menuApi().open }), presenceProps),
   )
 
   createEffect(() => {
-    if (!parentMachine)
+    const machine = parentMachine?.()
+    if (!machine)
       return
-    parentApi?.().setChild(menuProps.value.machine)
-    menuProps.value.api().setParent(parentMachine)
+    parentApi?.().setChild(menuMachine())
+    menuApi().setParent(machine)
   })
 
-  const triggerItemContext = () => parentApi?.().getTriggerItemProps(menuProps.value.api())
+  const triggerItemContext = () => parentApi?.().getTriggerItemProps(menuApi())
 
   return (
     <MenuTriggerItemProvider value={triggerItemContext}>
-      <MenuMachineProvider value={menuProps.value.machine}>
-        <MenuProvider value={menuProps.value.api}>
+      <MenuMachineProvider value={menuMachine}>
+        <MenuProvider value={menuApi}>
           <PresenceProvider value={presenceApi}>{menuProps.children}</PresenceProvider>
         </MenuProvider>
       </MenuMachineProvider>

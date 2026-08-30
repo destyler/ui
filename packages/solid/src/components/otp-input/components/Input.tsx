@@ -11,7 +11,10 @@ export interface OtpInputInputProps extends HTMLProps<'input'>, OtpInputInputBas
 export function OtpInputInput(props: OtpInputInputProps) {
   const [inputProps, localProps] = createSplitProps<InputProps>()(props, ['index'])
   const api = useOtpInputContext()
-  const mergedProps = mergeProps(() => api().getInputProps(inputProps), localProps)
+  const mergedProps = mergeProps(
+    () => ({ readOnly: undefined, ...api().getInputProps(inputProps) }),
+    localProps,
+  )
 
   return <ui.input {...mergedProps} />
 }

@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Collapse, collapseAnatomy } from '../'
 import { LocaleProvider } from '../../../providers'
 import { getExports, getParts } from '../../../setup-test'
@@ -194,5 +195,32 @@ describe('collapse', () => {
     await user.click(screen.getByRole('button', { name: 'React Trigger' }))
 
     await waitFor(() => expect(screen.queryByText('React Content')).not.toBeInTheDocument())
+  })
+
+  it('should complete exit when an item value changes', async () => {
+    function DynamicItem() {
+      const [itemValue, setItemValue] = createSignal('React')
+
+      return (
+        <>
+          <button type="button" onClick={() => setItemValue('Solid')}>
+            change item value
+          </button>
+          <Collapse.Root value={['React']} unmountOnExit>
+            <Collapse.Item value={itemValue()}>
+              <Collapse.ItemTrigger>Dynamic Trigger</Collapse.ItemTrigger>
+              <Collapse.ItemContent>Dynamic Content</Collapse.ItemContent>
+            </Collapse.Item>
+          </Collapse.Root>
+        </>
+      )
+    }
+
+    render(() => <DynamicItem />)
+
+    expect(screen.getByText('Dynamic Content')).toBeVisible()
+    await user.click(screen.getByRole('button', { name: 'change item value' }))
+
+    await waitFor(() => expect(screen.queryByText('Dynamic Content')).not.toBeInTheDocument())
   })
 })

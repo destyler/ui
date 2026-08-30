@@ -3,6 +3,7 @@ import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { splitPresenceProps } from '../hooks/split-presence-props'
 import { usePresence } from '../hooks/use-presence'
 
@@ -16,7 +17,12 @@ export function Presence(props: PresenceProps) {
 
   return (
     <Show when={!api().unmounted}>
-      <ui.div {...mergedProps} data-scope="presence" data-part="root" />
+      <ui.div
+        {...mergedProps}
+        ref={composeRefs(api().presenceProps.ref, localProps.ref)}
+        data-scope="presence"
+        data-part="root"
+      />
     </Show>
   )
 }

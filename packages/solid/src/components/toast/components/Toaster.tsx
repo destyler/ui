@@ -17,13 +17,13 @@ export interface ToasterProps extends Assign<HTMLProps<'div'>, ToasterBaseProps>
 export function Toaster(props: ToasterProps) {
   const [toasterProps, localProps] = splitProps(props, ['toaster', 'children'])
   const [state, send] = useMachine(toasterProps.toaster.machine)
-  const placement = state.context.placement
+  const placement = createMemo(() => state.context.placement)
 
   const api = createMemo(() =>
     toast.group.connect(state as toast.GroupState<JSX.Element>, send, normalizeProps))
-  const toasts = createMemo(() => api().getToastsByPlacement(placement))
+  const toasts = createMemo(() => api().getToastsByPlacement(placement()))
 
-  const mergedProps = mergeProps(api().getGroupProps({ placement }), localProps)
+  const mergedProps = mergeProps(() => api().getGroupProps({ placement: placement() }), localProps)
 
   return (
     <ui.div {...mergedProps}>

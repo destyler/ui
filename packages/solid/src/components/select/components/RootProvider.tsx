@@ -26,9 +26,10 @@ export interface SelectRootProviderProps<T extends CollectionItem>
 
 export function SelectRootProvider<T extends CollectionItem>(props: SelectRootProviderProps<T>) {
   const [presenceProps, selectProps] = splitPresenceProps(props)
-  const [{ value: select }, localProps] = createSplitProps<RootProviderProps<T>>()(selectProps, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps<T>>()(selectProps, [
     'value',
   ])
+  const select: UseSelectReturn<T> = () => providerProps.value()
   const presence = usePresence(mergeProps(() => ({ present: select().open }), presenceProps))
   const mergedProps = mergeProps(() => select().getRootProps(), localProps)
 

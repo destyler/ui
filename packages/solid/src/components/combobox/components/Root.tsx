@@ -68,7 +68,7 @@ export function ComboboxRoot<T extends CollectionItem>(props: ComboboxRootProps<
   ])
 
   const api = useCombobox(useComboboxProps)
-  const apiPresence = usePresence(mergeProps(presenceProps, () => ({ present: api().open })))
+  const apiPresence = usePresence(mergeProps(() => ({ present: api().open }), presenceProps))
   const mergedProps = mergeProps(() => api().getRootProps(), localProps)
 
   return (

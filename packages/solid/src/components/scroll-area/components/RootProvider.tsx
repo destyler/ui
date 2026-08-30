@@ -20,13 +20,14 @@ export function ScrollAreaRootProvider(props: ScrollAreaRootProviderProps) {
   const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const scrollArea: UseScrollAreaReturn = () => providerProps.value()
   const mergedProps = mergeProps(
-    () => providerProps.value().getRootProps(),
+    () => scrollArea().getRootProps(),
     localProps,
   )
 
   return (
-    <ScrollAreaProvider value={providerProps.value}>
+    <ScrollAreaProvider value={scrollArea}>
       <ui.div {...mergedProps} />
     </ScrollAreaProvider>
   )

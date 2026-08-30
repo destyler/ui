@@ -16,9 +16,10 @@ export interface NumberInputRootProviderProps
   NumberInputRootProviderBaseProps {}
 
 export function NumberInputRootProvider(props: NumberInputRootProviderProps) {
-  const [{ value: numberInput }, localProps] = createSplitProps<RootProviderProps>()(props, [
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, [
     'value',
   ])
+  const numberInput = () => providerProps.value()
   const mergedProps = mergeProps(() => numberInput().getRootProps(), localProps)
 
   return (

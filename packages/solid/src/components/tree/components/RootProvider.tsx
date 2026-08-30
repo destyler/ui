@@ -25,10 +25,11 @@ export interface TreeRootProviderProps<T extends TreeNode>
 
 export function TreeRootProvider<T extends TreeNode>(props: TreeRootProviderProps<T>) {
   const [renderStrategyProps, treeProps] = splitRenderStrategyProps(props)
-  const [{ value: tree }, localProps] = createSplitProps<RootProviderProps<T>>()(
+  const [providerProps, localProps] = createSplitProps<RootProviderProps<T>>()(
     treeProps,
     ['value'],
   )
+  const tree = () => providerProps.value()
   const mergedProps = mergeProps(() => tree().getRootProps(), localProps)
 
   return (

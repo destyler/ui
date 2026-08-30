@@ -16,7 +16,8 @@ export interface DynamicRootProviderProps
   DynamicRootProviderBaseProps {}
 
 export function DynamicRootProvider(props: DynamicRootProviderProps) {
-  const [{ value: dynamic }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const [providerProps, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+  const dynamic = () => providerProps.value()
   const mergedProps = mergeProps(() => dynamic().getRootProps(), localProps)
 
   return (

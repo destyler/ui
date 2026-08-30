@@ -1,14 +1,14 @@
 import { createToaster, Toast, Toaster } from '../'
 
-const toaster = createToaster({
-  placement: 'bottom-end',
-})
-
 interface ComponentUnderTestProps {
   duration?: number
 }
 
 export function ComponentUnderTest(props: ComponentUnderTestProps = {}) {
+  const toaster = createToaster({
+    placement: 'bottom-end',
+  })
+
   return (
     <div>
       <button
