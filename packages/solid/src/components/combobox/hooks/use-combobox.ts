@@ -58,7 +58,11 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
 
   const context = createMemo(() => {
     const [, restProps] = splitProps(initialContext(), ['collection'])
-    return restProps
+    return {
+      ...restProps,
+      open: props.open,
+      value: props.value,
+    }
   })
 
   const [state, send, service] = useMachine(combobox.machine(initialContext()), {

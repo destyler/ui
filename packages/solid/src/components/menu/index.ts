@@ -71,7 +71,11 @@ export {
 export { useMenu, type UseMenuProps, type UseMenuReturn } from './hooks/use-menu'
 export { useMenuContext, type UseMenuContext } from './hooks/use-menu-context'
 export { useMenuItemContext, type UseMenuItemContext } from './hooks/use-menu-item-context'
-export type { ValueChangeDetails as MenuValueChangeDetails } from './hooks/use-menu-item-group-context'
+export {
+  type ValueChangeDetails as MenuValueChangeDetails,
+  useMenuItemGroupContext,
+  type UseMenuItemGroupContext,
+} from './hooks/use-menu-item-group-context'
 export * as Menu from './namespace'
 
 export type {

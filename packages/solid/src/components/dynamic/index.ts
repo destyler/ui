@@ -67,6 +67,7 @@ export {
   useDynamicItemContext,
   type UseDynamicItemContext,
 } from './hooks/use-dynamic-item-context'
+export { useDynamicItemPropsContext } from './hooks/use-dynamic-item-props-context'
 export * as Dynamic from './namespace'
 
 export type {

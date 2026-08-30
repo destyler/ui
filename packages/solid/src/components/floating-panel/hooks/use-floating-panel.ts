@@ -25,7 +25,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -34,7 +34,12 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
     ...props,
   }))
 
-  const [state, send] = useMachine(floatingPanel.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+
+  const [state, send] = useMachine(floatingPanel.machine(initialContext()), { context })
   const api = createMemo(() => floatingPanel.connect(state, send, normalizeProps))
 
   createEffect(() => {

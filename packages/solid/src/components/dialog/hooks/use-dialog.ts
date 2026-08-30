@@ -21,7 +21,7 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -29,7 +29,11 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
     'open.controlled': props.open !== undefined,
     ...props,
   }))
-  const [state, send] = useMachine(dialog.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+  const [state, send] = useMachine(dialog.machine(initialContext()), { context })
 
   return createMemo(() => dialog.connect(state, send, normalizeProps))
 }

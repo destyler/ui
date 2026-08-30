@@ -23,7 +23,7 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
   const id = createUniqueId()
   const field = useFieldContext()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     ids: {
       label: field?.().ids.label,
@@ -38,7 +38,11 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
     value: props.defaultValue,
     ...props,
   }))
-  const [state, send] = useMachine(dynamic.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+  const [state, send] = useMachine(dynamic.machine(initialContext()), { context })
 
   return createMemo(() => dynamic.connect(state, send, normalizeProps))
 }

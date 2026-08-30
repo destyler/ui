@@ -21,7 +21,7 @@ export function useProgress(props: UseProgressProps = {}): UseProgressReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
@@ -29,6 +29,11 @@ export function useProgress(props: UseProgressProps = {}): UseProgressReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(progress.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+
+  const [state, send] = useMachine(progress.machine(initialContext()), { context })
   return createMemo(() => progress.connect(state, send, normalizeProps))
 }

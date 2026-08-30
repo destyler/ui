@@ -1,4 +1,4 @@
-export { Presence, type PresenceProps } from './components/Presence'
+export { Presence, type PresenceBaseProps, type PresenceProps } from './components/Presence'
 export { splitPresenceProps } from './hooks/split-presence-props'
 export { usePresence, type UsePresenceProps, type UsePresenceReturn } from './hooks/use-presence'
 export {

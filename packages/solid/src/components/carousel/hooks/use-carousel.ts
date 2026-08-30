@@ -21,14 +21,19 @@ export function useCarousel(props: UseCarouselProps = {}): UseCarouselReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    index: props.defaultPage,
+    page: props.defaultPage,
     ...props,
   }))
 
-  const [state, send] = useMachine(carousel.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    page: props.page,
+  }))
+
+  const [state, send] = useMachine(carousel.machine(initialContext()), { context })
   return createMemo(() => carousel.connect(state, send, normalizeProps))
 }

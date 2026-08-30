@@ -49,6 +49,7 @@ export { useSignatureContext, type UseSignatureContext } from './hooks/use-signa
 export * as Signature from './namespace'
 
 export type {
+  DrawEndDetails,
   DrawDetails as SignatureDrawDetails,
   DrawEndDetails as SignatureDrawEndDetails,
   DrawingOptions as SignatureDrawingOptions,

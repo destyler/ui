@@ -28,7 +28,7 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -39,7 +39,14 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(calendar.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+    value: props.value,
+    view: props.view,
+  }))
+
+  const [state, send] = useMachine(calendar.machine(initialContext()), { context })
 
   return createMemo(() => calendar.connect(state, send, normalizeProps))
 }

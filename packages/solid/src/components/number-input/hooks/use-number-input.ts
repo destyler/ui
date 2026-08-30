@@ -23,7 +23,7 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
   const environment = useEnvironmentContext()
   const field = useFieldContext()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     ids: {
       label: field?.().ids.label,
@@ -40,7 +40,12 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
     ...props,
   }))
 
-  const [state, send] = useMachine(numberInput.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+
+  const [state, send] = useMachine(numberInput.machine(initialContext()), { context })
 
   return createMemo(() => numberInput.connect(state, send, normalizeProps))
 }

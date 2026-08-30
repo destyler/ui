@@ -1,4 +1,6 @@
-import { render, screen } from '@solidjs/testing-library'
+import { render, screen, waitFor } from '@solidjs/testing-library'
+import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Fieldset } from '../'
 import { Field } from '../..'
 import { getExports, getParts } from '../../../setup-test'
@@ -55,5 +57,42 @@ describe('fieldset', () => {
   it('should not display error text when no error is present', async () => {
     render(() => <ComponentUnderTest />)
     expect(screen.queryByText('Error Info')).not.toBeInTheDocument()
+  })
+
+  it('should react to disabled and invalid prop changes', async () => {
+    const [disabled, setDisabled] = createSignal(false)
+    const [invalid, setInvalid] = createSignal(false)
+    render(() => (
+      <>
+        <button onClick={() => setDisabled(true)}>Disable</button>
+        <button onClick={() => setInvalid(true)}>Invalidate</button>
+        <ComponentUnderTest disabled={disabled()} invalid={invalid()} />
+      </>
+    ))
+
+    const fieldset = document.querySelector('fieldset')!
+    const fieldRoot = document.querySelector<HTMLElement>('[data-scope="field"][data-part="root"]')!
+    const input = screen.getByRole('textbox', { name: /label/i })
+    const helperText = screen.getByText('Fieldset Helper Text')
+
+    await waitFor(() => expect(fieldset).toHaveAttribute('aria-describedby', helperText.id))
+
+    await user.click(screen.getByRole('button', { name: 'Disable' }))
+    expect(fieldset).toBeDisabled()
+    expect(input).toBeDisabled()
+    expect(input).toHaveAttribute('disabled')
+    expect(fieldRoot).toHaveAttribute('data-disabled')
+    expect(screen.getByText('Legend')).toHaveAttribute('data-disabled')
+
+    await user.click(screen.getByRole('button', { name: 'Invalidate' }))
+    const errorText = screen.getByText('Fieldset Error Text')
+    expect(fieldset).toHaveAttribute('data-invalid')
+    expect(screen.getByText('Legend')).toHaveAttribute('data-invalid')
+    await waitFor(() =>
+      expect(fieldset).toHaveAttribute(
+        'aria-describedby',
+        `${errorText.id} ${helperText.id}`,
+      ),
+    )
   })
 })

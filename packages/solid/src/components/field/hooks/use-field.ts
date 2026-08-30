@@ -52,23 +52,30 @@ export function useField(props: UseFieldProps) {
   const fieldset: UseFieldsetReturn | undefined = useFieldsetContext()
 
   const fieldProps = mergeProps(
-    { disabled: Boolean(fieldset?.().disabled), required: false, invalid: false, readOnly: false },
+    () => ({
+      disabled: Boolean(fieldset?.().disabled),
+      required: false,
+      invalid: false,
+      readOnly: false,
+    }),
     props,
   )
 
   const [hasErrorText, setHasErrorText] = createSignal(false)
   const [hasHelperText, setHasHelperText] = createSignal(false)
 
-  const id = fieldProps.id ?? createUniqueId()
-  let rootRef: HTMLDivElement | undefined
+  const generatedId = createUniqueId()
+  const id = createMemo(() => fieldProps.id ?? generatedId)
+  const [rootRef, setRootRef] = createSignal<HTMLDivElement>()
 
-  const rootId = fieldProps.ids?.control ?? `field::${id}`
-  const errorTextId = fieldProps.ids?.errorText ?? `field::${id}::error-text`
-  const helperTextId = fieldProps.ids?.helperText ?? `field::${id}::helper-text`
-  const labelId = fieldProps.ids?.label ?? `field::${id}::label`
+  const rootId = createMemo(() => fieldProps.ids?.root ?? `field::${id()}`)
+  const controlId = createMemo(() => fieldProps.ids?.control ?? id())
+  const errorTextId = createMemo(() => fieldProps.ids?.errorText ?? `field::${id()}::error-text`)
+  const helperTextId = createMemo(() => fieldProps.ids?.helperText ?? `field::${id()}::helper-text`)
+  const labelId = createMemo(() => fieldProps.ids?.label ?? `field::${id()}::label`)
 
   createEffect(() => {
-    const rootNode = rootRef
+    const rootNode = rootRef()
     if (!rootNode)
       return
 
@@ -76,8 +83,8 @@ export function useField(props: UseFieldProps) {
     const doc = win.document
 
     const checkTextElements = () => {
-      setHasErrorText(!!doc.getElementById(errorTextId))
-      setHasHelperText(!!doc.getElementById(helperTextId))
+      setHasErrorText(!!doc.getElementById(errorTextId()))
+      setHasHelperText(!!doc.getElementById(helperTextId()))
     }
 
     checkTextElements()
@@ -90,7 +97,8 @@ export function useField(props: UseFieldProps) {
 
   const getRootProps = () => ({
     ...parts.root.attrs,
-    'id': rootId,
+    'id': rootId(),
+    'ref': setRootRef,
     'role': 'group',
     'data-disabled': dataAttr(fieldProps.disabled),
     'data-invalid': dataAttr(fieldProps.invalid),
@@ -99,27 +107,29 @@ export function useField(props: UseFieldProps) {
 
   const getLabelProps = () => ({
     ...parts.label.attrs,
-    'id': labelId,
+    'id': labelId(),
     'data-disabled': dataAttr(fieldProps.disabled),
     'data-invalid': dataAttr(fieldProps.invalid),
     'data-readonly': dataAttr(fieldProps.readOnly),
-    'htmlFor': id,
+    'htmlFor': controlId(),
   })
 
-  const labelIds: string[] = []
-
-  if (hasErrorText() && fieldProps.invalid)
-    labelIds.push(errorTextId)
-  if (hasHelperText())
-    labelIds.push(helperTextId)
+  const ariaDescribedby = createMemo(() => {
+    const labelIds: string[] = []
+    if (hasErrorText() && fieldProps.invalid)
+      labelIds.push(errorTextId())
+    if (hasHelperText())
+      labelIds.push(helperTextId())
+    return labelIds.join(' ') || undefined
+  })
 
   const getControlProps = () => ({
-    'aria-describedby': labelIds.join(' ') || undefined,
+    'aria-describedby': ariaDescribedby(),
     'aria-invalid': ariaAttr(fieldProps.invalid),
     'data-invalid': dataAttr(fieldProps.invalid),
     'data-required': dataAttr(fieldProps.required),
     'data-readonly': dataAttr(fieldProps.readOnly),
-    id,
+    'id': controlId(),
     'required': fieldProps.required,
     'disabled': fieldProps.disabled,
     'readOnly': fieldProps.readOnly || undefined,
@@ -141,13 +151,13 @@ export function useField(props: UseFieldProps) {
   })
 
   const getHelperTextProps = () => ({
-    'id': helperTextId,
+    'id': helperTextId(),
     ...parts.helperText.attrs,
     'data-disabled': dataAttr(fieldProps.disabled),
   })
 
   const getErrorTextProps = () => ({
-    'id': errorTextId,
+    'id': errorTextId(),
     ...parts.errorText.attrs,
     'aria-live': 'polite',
   })
@@ -158,16 +168,18 @@ export function useField(props: UseFieldProps) {
   })
 
   return createMemo(() => ({
-    ariaDescribedby: labelIds.join(' '),
+    ariaDescribedby: ariaDescribedby(),
     ids: {
-      control: id,
-      label: labelId,
-      errorText: errorTextId,
-      helperText: helperTextId,
+      root: rootId(),
+      control: controlId(),
+      label: labelId(),
+      errorText: errorTextId(),
+      helperText: helperTextId(),
     },
     refs: {
-      rootRef,
+      rootRef: rootRef(),
     },
+    setRootRef,
     disabled: fieldProps.disabled,
     invalid: fieldProps.invalid,
     readOnly: fieldProps.readOnly,

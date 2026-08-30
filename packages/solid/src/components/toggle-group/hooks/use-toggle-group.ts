@@ -21,14 +21,18 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
     value: props.defaultValue,
     ...props,
   }))
-  const [state, send] = useMachine(toggleGroup.machine(context()), {
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+  const [state, send] = useMachine(toggleGroup.machine(initialContext()), {
     context,
   })
 

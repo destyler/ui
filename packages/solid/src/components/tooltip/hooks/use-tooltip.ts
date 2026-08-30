@@ -21,7 +21,7 @@ export function useTooltip(props: UseTooltipProps = {}): UseTooltipReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -30,6 +30,11 @@ export function useTooltip(props: UseTooltipProps = {}): UseTooltipReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(tooltip.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+
+  const [state, send] = useMachine(tooltip.machine(initialContext()), { context })
   return createMemo(() => tooltip.connect(state, send, normalizeProps))
 }

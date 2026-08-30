@@ -25,7 +25,7 @@ export function useMenu(props: UseMenuProps = {}): UseMenuReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -34,7 +34,12 @@ export function useMenu(props: UseMenuProps = {}): UseMenuReturn {
     ...props,
   }))
 
-  const [state, send, machine] = useMachine(menu.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+
+  const [state, send, machine] = useMachine(menu.machine(initialContext()), { context })
   const api = createMemo(() => menu.connect(state, send, normalizeProps))
 
   return {

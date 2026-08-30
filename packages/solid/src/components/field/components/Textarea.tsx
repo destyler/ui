@@ -1,8 +1,9 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { autoresizeTextarea } from '@destyler/auto-resize'
 import { mergeProps } from '@destyler/solid'
-import { createEffect } from 'solid-js'
+import { createEffect, onCleanup, splitProps } from 'solid-js'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { useFieldContext } from '../hooks/use-field-context'
 
 export interface FieldTextareaBaseProps extends PolymorphicProps<'textarea'> {
@@ -17,27 +18,31 @@ export interface FieldTextareaProps extends HTMLProps<'textarea'>, FieldTextarea
 export function FieldTextarea(props: FieldTextareaProps) {
   const field = useFieldContext()
   let textareaRef: HTMLTextAreaElement
-  const { autoresize, ...textareaProps } = props
+  const [autoresizeProps, textareaProps] = splitProps(props, ['autoresize'])
 
   const mergedProps = mergeProps(
     () => field?.().getTextareaProps(),
-    () => ({ style: { resize: autoresize ? 'none' : undefined } }),
+    () => ({ style: { resize: autoresizeProps.autoresize ? 'none' : undefined } }),
     textareaProps,
   )
 
   createEffect(() => {
-    if (!autoresize)
+    if (!autoresizeProps.autoresize)
       return
     const cleanup = autoresizeTextarea(textareaRef)
-    return cleanup
+    if (cleanup)
+      onCleanup(cleanup)
   })
 
   return (
     <ui.textarea
       {...mergedProps}
-      ref={(el) => {
-        textareaRef = el
-      }}
+      ref={composeRefs(
+        (el) => {
+          textareaRef = el
+        },
+        textareaProps.ref,
+      )}
     />
   )
 }

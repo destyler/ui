@@ -3,6 +3,7 @@ import type { Assign } from '~/types'
 import { mergeProps } from '@destyler/solid'
 import { splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
+import { composeRefs } from '~/utils/compose-refs'
 
 type ElementType = keyof JSX.IntrinsicElements
 
@@ -33,8 +34,14 @@ function withAsProp<T extends ElementType>(Component: T) {
     if (localProps.asChild) {
       // @ts-expect-error -- Solid's generic splitProps result cannot express the polymorphic ref omission.
       const propsFn = (userProps) => {
-        const [, restProps] = splitProps(parentProps, ['ref'])
-        return mergeProps(restProps, userProps)
+        const [parentRefProps, restProps] = splitProps(parentProps, ['ref'])
+        type ElementRef = Element | ((element: Element) => void) | undefined
+        return mergeProps(restProps, userProps, {
+          ref: composeRefs<Element>(
+            parentRefProps.ref as unknown as ElementRef,
+            userProps?.ref as unknown as ElementRef,
+          ),
+        })
       }
       return localProps.asChild(propsFn)
     }

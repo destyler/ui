@@ -21,7 +21,7 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -30,6 +30,11 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
     ...props,
   }))
 
-  const [state, send] = useMachine(hoverCard.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+
+  const [state, send] = useMachine(hoverCard.machine(initialContext()), { context })
   return createMemo(() => hoverCard.connect(state, send, normalizeProps))
 }

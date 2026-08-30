@@ -4,7 +4,12 @@ import type { Optional } from '~/types'
 import * as navigationMenu from '@destyler/navigation-menu'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
+import { isServer } from 'solid-js/web'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+
+const serverRootNode = {
+  getElementById: () => null,
+} as unknown as Document
 
 export interface UseNavigationMenuProps
   extends Optional<
@@ -35,7 +40,7 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
       ...props,
       'id': props.id ?? generatedId,
       'dir': locale().dir,
-      'getRootNode': environment().getRootNode,
+      'getRootNode': isServer ? () => serverRootNode : environment().getRootNode,
       'defaultValue': controlled ? (props.value ?? undefined) : props.defaultValue,
       'value': props.value,
       'value.controlled': controlled,

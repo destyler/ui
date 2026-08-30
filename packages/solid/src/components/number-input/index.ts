@@ -50,7 +50,11 @@ export {
   type UseNumberInputProps,
   type UseNumberInputReturn,
 } from './hooks/use-number-input'
-export { useNumberInputContext, type UseNumberInputContext } from './hooks/use-number-input-context'
+export {
+  NumberInputProvider,
+  useNumberInputContext,
+  type UseNumberInputContext,
+} from './hooks/use-number-input-context'
 export * as NumberInput from './namespace'
 
 export type {

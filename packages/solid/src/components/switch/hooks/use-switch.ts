@@ -23,7 +23,7 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
   const id = createUniqueId()
   const field = useFieldContext()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     ids: {
       label: field?.().ids.label,
@@ -39,7 +39,12 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(zagSwitch.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    checked: props.checked,
+  }))
+
+  const [state, send] = useMachine(zagSwitch.machine(initialContext()), { context })
 
   return createMemo(() => zagSwitch.connect(state, send, normalizeProps))
 }

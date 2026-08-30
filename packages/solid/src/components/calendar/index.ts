@@ -127,6 +127,18 @@ export {
 } from './components/YearSelect'
 export { useCalendar, type UseCalendarProps, type UseCalendarReturn } from './hooks/use-calendar'
 export { useCalendarContext, type UseCalendarContext } from './hooks/use-calendar-context'
+export {
+  useCalendarTableCellContext as useCalendarTableCellPropsContext,
+  type UseCalendarTableCellContext as UseCalendarTableCellPropsContext,
+} from './hooks/use-calendar-table-cell-props-context'
+export {
+  useCalendarTableContext as useCalendarTablePropsContext,
+  type UseCalendarTableContext as UseCalendarTablePropsContext,
+} from './hooks/use-calendar-table-props-context'
+export {
+  type UseCalendarViewContext,
+  useCalendarViewContext as useCalendarViewPropsContext,
+} from './hooks/use-calendar-view-props-context'
 export * as Calendar from './namespace'
 export { parse as parseDate } from '@destyler/calendar'
 

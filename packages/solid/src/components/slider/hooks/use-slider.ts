@@ -21,14 +21,18 @@ export function useSlider(props: UseSliderProps = {}): UseSliderReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
     value: props.defaultValue,
     ...props,
   }))
-  const [state, send] = useMachine(slider.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+  const [state, send] = useMachine(slider.machine(initialContext()), { context })
 
   return createMemo(() => slider.connect(state, send, normalizeProps))
 }

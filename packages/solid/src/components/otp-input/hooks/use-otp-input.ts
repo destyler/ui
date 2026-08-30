@@ -23,7 +23,7 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
   const id = createUniqueId()
   const field = useFieldContext()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     ids: {
       label: field?.().ids.label,
@@ -38,7 +38,11 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
     value: props.defaultValue,
     ...props,
   }))
-  const [state, send] = useMachine(otpInput.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+  const [state, send] = useMachine(otpInput.machine(initialContext()), { context })
 
   return createMemo(() => otpInput.connect(state, send, normalizeProps))
 }

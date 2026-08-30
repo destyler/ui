@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Checkbox, checkboxAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
@@ -47,6 +48,36 @@ describe('checkbox', () => {
     expect(screen.getByRole('checkbox')).not.toBeChecked()
     await user.click(screen.getByText('set checked'))
     await waitFor(() => expect(screen.getByRole('checkbox')).toBeChecked())
+  })
+
+  it('should preserve an uncontrolled value when reactive props change', async () => {
+    const [disabled, setDisabled] = createSignal(false)
+    render(() => (
+      <>
+        <Checkbox.Root defaultChecked disabled={disabled()}>
+          <Checkbox.Label>Standalone checkbox</Checkbox.Label>
+          <Checkbox.Control />
+          <Checkbox.HiddenInput />
+        </Checkbox.Root>
+        <button type="button" onClick={() => setDisabled(true)}>
+          disable
+        </button>
+      </>
+    ))
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Standalone checkbox' })
+    const control = document.querySelector<HTMLElement>('[data-scope="checkbox"][data-part="control"]')!
+    expect(checkbox).toBeChecked()
+    expect(control).toHaveAttribute('data-state', 'checked')
+
+    await user.click(checkbox)
+    expect(checkbox).not.toBeChecked()
+    expect(control).toHaveAttribute('data-state', 'unchecked')
+
+    await user.click(screen.getByRole('button', { name: 'disable' }))
+    await waitFor(() => expect(checkbox).toBeDisabled())
+    expect(checkbox).not.toBeChecked()
+    expect(control).toHaveAttribute('data-state', 'unchecked')
   })
 })
 

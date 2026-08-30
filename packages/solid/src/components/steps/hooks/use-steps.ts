@@ -20,7 +20,7 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
   const locale = useLocaleContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
@@ -28,7 +28,12 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(steps.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    step: props.step,
+  }))
+
+  const [state, send] = useMachine(steps.machine(initialContext()), { context })
 
   return createMemo(() => steps.connect<PropTypes>(state, send, normalizeProps))
 }

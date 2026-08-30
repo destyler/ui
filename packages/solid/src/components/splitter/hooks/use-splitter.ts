@@ -21,14 +21,18 @@ export function useSplitter(props: UseSplitterProps = {}): UseSplitterReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    size: props.defaultSize,
     ...props,
+    size: props.size ?? props.defaultSize,
   }))
-  const [state, send] = useMachine(splitter.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    size: props.size,
+  }))
+  const [state, send] = useMachine(splitter.machine(initialContext()), { context })
 
   return createMemo(() => splitter.connect(state, send, normalizeProps))
 }

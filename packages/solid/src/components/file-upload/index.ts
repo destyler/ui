@@ -72,6 +72,10 @@ export {
 } from './components/Trigger'
 export { useFileUpload, type UseFileUploadProps, type UseFileUploadReturn } from './hooks/use-file-upload'
 export { useFileUploadContext, type UseFileUploadContext } from './hooks/use-file-upload-context'
+export {
+  type UseFileUploadItemPropsContext as UseFileUploadItemContext,
+  useFileUploadItemPropsContext,
+} from './hooks/use-file-upload-item-props-context'
 export * as FileUpload from './namespace'
 
 export type {

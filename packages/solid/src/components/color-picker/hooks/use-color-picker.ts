@@ -28,7 +28,7 @@ export function useColorPicker(props: UseColorPickerProps = {}): UseColorPickerR
   const field = useFieldContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'ids': {
       label: field?.().ids.label,
@@ -45,7 +45,12 @@ export function useColorPicker(props: UseColorPickerProps = {}): UseColorPickerR
     'value': props.defaultValue,
     ...props,
   }))
-  const [state, send] = useMachine(colorPicker.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+    value: props.value,
+  }))
+  const [state, send] = useMachine(colorPicker.machine(initialContext()), { context })
 
   return createMemo(() => colorPicker.connect(state, send, normalizeProps))
 }

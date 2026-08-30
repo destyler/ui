@@ -34,7 +34,7 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
   const [renderStrategyProps, collapsibleProps] = splitRenderStrategyProps(props)
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -42,7 +42,11 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
     'open.controlled': props.open !== undefined,
     ...collapsibleProps,
   }))
-  const [state, send] = useMachine(collapsible.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+  const [state, send] = useMachine(collapsible.machine(initialContext()), { context })
   const [wasVisible, setWasVisible] = createSignal(false)
   const api = createMemo(() => collapsible.connect(state, send, normalizeProps))
 

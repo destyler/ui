@@ -49,4 +49,14 @@ describe('dialog', () => {
     render(() => <ComponentUnderTest lazyMount />)
     expect(screen.getByRole('button', { name: 'Open Dialog' })).not.toHaveAttribute('aria-controls')
   })
+
+  it('should point aria-controls at the mounted dialog content', async () => {
+    render(() => <ComponentUnderTest lazyMount unmountOnExit={false} />)
+    const trigger = screen.getByRole('button', { name: 'Open Dialog' })
+
+    await user.click(trigger)
+
+    const content = screen.getByRole('dialog')
+    expect(trigger).toHaveAttribute('aria-controls', content.id)
+  })
 })

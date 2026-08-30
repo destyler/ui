@@ -20,7 +20,7 @@ export function useTabs(props: UseTabsProps = {}): UseTabsReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
@@ -28,6 +28,11 @@ export function useTabs(props: UseTabsProps = {}): UseTabsReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(tabs.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+
+  const [state, send] = useMachine(tabs.machine(initialContext()), { context })
   return createMemo(() => tabs.connect(state, send, normalizeProps))
 }

@@ -122,6 +122,34 @@ describe('menu', () => {
     expect(screen.getByRole('button', { name: 'Open menu' })).not.toHaveAttribute('aria-controls')
   })
 
+  it('should point aria-controls at the mounted menu content', async () => {
+    render(() => <ComponentUnderTest lazyMount unmountOnExit={false} />)
+    const trigger = screen.getByRole('button', { name: 'Open menu' })
+
+    fireEvent.click(trigger)
+
+    const content = await screen.findByRole('menu')
+    expect(trigger).toHaveAttribute('aria-controls', content.id)
+  })
+
+  it('should expose checkbox checked state through ItemContext', async () => {
+    render(() => (
+      <Menu.Root open>
+        <Menu.Positioner>
+          <Menu.Content>
+            <Menu.CheckboxItem checked value="notifications">
+              <Menu.ItemContext>
+                {state => <span>{state().checked ? 'checked' : 'unchecked'}</span>}
+              </Menu.ItemContext>
+            </Menu.CheckboxItem>
+          </Menu.Content>
+        </Menu.Positioner>
+      </Menu.Root>
+    ))
+
+    expect(await screen.findByText('checked')).toBeVisible()
+  })
+
   it('should lazy mount and unmount on exit', async () => {
     render(() => <ComponentUnderTest lazyMount unmountOnExit />)
     expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()

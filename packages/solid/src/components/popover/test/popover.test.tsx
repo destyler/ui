@@ -71,6 +71,16 @@ describe('popover', () => {
     expect(screen.getByRole('button', { name: 'click me' })).not.toHaveAttribute('aria-controls')
   })
 
+  it('should point aria-controls at the mounted popover content', async () => {
+    render(() => <ComponentUnderTest lazyMount unmountOnExit={false} />)
+    const trigger = screen.getByRole('button', { name: 'click me' })
+
+    await user.click(trigger)
+
+    const content = screen.getByRole('dialog')
+    expect(trigger).toHaveAttribute('aria-controls', content.id)
+  })
+
   it('should lazy mount and unmount on exit', async () => {
     render(() => <ComponentUnderTest lazyMount unmountOnExit />)
 

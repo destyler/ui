@@ -21,7 +21,7 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
   const locale = useLocaleContext()
   const environment = useEnvironmentContext()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     value: props.defaultValue,
@@ -29,7 +29,12 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(collapse.machine(context()), {
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+
+  const [state, send] = useMachine(collapse.machine(initialContext()), {
     context,
   })
 

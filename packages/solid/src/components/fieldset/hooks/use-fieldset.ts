@@ -1,4 +1,5 @@
 import { getWindow } from '@destyler/dom'
+import { mergeProps } from '@destyler/solid'
 import { createEffect, createMemo, createSignal, createUniqueId, onCleanup } from 'solid-js'
 import { parts } from '../anatomy'
 
@@ -26,8 +27,8 @@ export interface UseFieldsetProps {
 export type UseFieldsetReturn = ReturnType<typeof useFieldset>
 
 export function useFieldset(props: UseFieldsetProps) {
-  const { disabled = false, invalid = false } = props
-  let rootRef: HTMLFieldSetElement | undefined
+  const fieldsetProps = mergeProps({ disabled: false, invalid: false }, props)
+  const [rootRef, setRootRef] = createSignal<HTMLFieldSetElement>()
   const id = props.id ?? createUniqueId()
 
   const errorTextId = `fieldset::${id}::error-text`
@@ -37,7 +38,7 @@ export function useFieldset(props: UseFieldsetProps) {
   const [hasHelperText, setHasHelperText] = createSignal(false)
 
   createEffect(() => {
-    const rootNode = rootRef
+    const rootNode = rootRef()
     if (!rootNode)
       return
 
@@ -56,25 +57,28 @@ export function useFieldset(props: UseFieldsetProps) {
     onCleanup(() => observer.disconnect())
   })
 
-  const labelIds: string[] = []
-
-  if (hasErrorText() && invalid)
-    labelIds.push(errorTextId)
-  if (hasHelperText())
-    labelIds.push(helperTextId)
+  const ariaDescribedby = createMemo(() => {
+    const labelIds: string[] = []
+    if (hasErrorText() && fieldsetProps.invalid)
+      labelIds.push(errorTextId)
+    if (hasHelperText())
+      labelIds.push(helperTextId)
+    return labelIds.join(' ') || undefined
+  })
 
   const getRootProps = () => ({
     ...parts.root.attrs,
-    disabled,
-    'data-disabled': dataAttr(disabled),
-    'data-invalid': dataAttr(invalid),
-    'aria-describedby': labelIds.join(' ') || undefined,
+    'ref': setRootRef,
+    'disabled': fieldsetProps.disabled,
+    'data-disabled': dataAttr(fieldsetProps.disabled),
+    'data-invalid': dataAttr(fieldsetProps.invalid),
+    'aria-describedby': ariaDescribedby(),
   })
 
   const getLegendProps = () => ({
     ...parts.legend.attrs,
-    'data-disabled': dataAttr(disabled),
-    'data-invalid': dataAttr(invalid),
+    'data-disabled': dataAttr(fieldsetProps.disabled),
+    'data-invalid': dataAttr(fieldsetProps.invalid),
   })
 
   const getHelperTextProps = () => ({
@@ -90,10 +94,11 @@ export function useFieldset(props: UseFieldsetProps) {
 
   return createMemo(() => ({
     refs: {
-      rootRef,
+      rootRef: rootRef(),
     },
-    disabled,
-    invalid,
+    setRootRef,
+    disabled: fieldsetProps.disabled,
+    invalid: fieldsetProps.invalid,
     getRootProps,
     getLegendProps,
     getHelperTextProps,

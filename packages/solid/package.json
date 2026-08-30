@@ -20,77 +20,66 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "solid": "./dist/index.jsx",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./anatomy": {
-      "source": "./src/anatomy.ts",
       "types": "./dist/anatomy.d.ts",
       "solid": "./dist/anatomy.jsx",
       "import": "./dist/anatomy.js",
       "default": "./dist/anatomy.js"
     },
     "./collection": {
-      "source": "./src/utils/collection.ts",
       "types": "./dist/utils/collection.d.ts",
       "solid": "./dist/utils/collection.jsx",
       "import": "./dist/utils/collection.js",
       "default": "./dist/utils/collection.js"
     },
     "./factory": {
-      "source": "./src/factory/index.tsx",
       "types": "./dist/factory/index.d.ts",
       "solid": "./dist/factory/index.jsx",
       "import": "./dist/factory/index.js",
       "default": "./dist/factory/index.js"
     },
     "./client-only": {
-      "source": "./src/providers/client-only/index.ts",
       "types": "./dist/providers/client-only/index.d.ts",
       "solid": "./dist/providers/client-only/index.jsx",
       "import": "./dist/providers/client-only/index.js",
       "default": "./dist/providers/client-only/index.js"
     },
     "./environment": {
-      "source": "./src/providers/environment/index.ts",
       "types": "./dist/providers/environment/index.d.ts",
       "solid": "./dist/providers/environment/index.jsx",
       "import": "./dist/providers/environment/index.js",
       "default": "./dist/providers/environment/index.js"
     },
     "./focus-trap": {
-      "source": "./src/providers/focus-trap/index.ts",
       "types": "./dist/providers/focus-trap/index.d.ts",
       "solid": "./dist/providers/focus-trap/index.jsx",
       "import": "./dist/providers/focus-trap/index.js",
       "default": "./dist/providers/focus-trap/index.js"
     },
     "./format": {
-      "source": "./src/providers/format/index.ts",
       "types": "./dist/providers/format/index.d.ts",
       "solid": "./dist/providers/format/index.jsx",
       "import": "./dist/providers/format/index.js",
       "default": "./dist/providers/format/index.js"
     },
     "./frame": {
-      "source": "./src/providers/frame/index.ts",
       "types": "./dist/providers/frame/index.d.ts",
       "solid": "./dist/providers/frame/index.jsx",
       "import": "./dist/providers/frame/index.js",
       "default": "./dist/providers/frame/index.js"
     },
     "./highlight": {
-      "source": "./src/providers/highlight/index.ts",
       "types": "./dist/providers/highlight/index.d.ts",
       "solid": "./dist/providers/highlight/index.jsx",
       "import": "./dist/providers/highlight/index.js",
       "default": "./dist/providers/highlight/index.js"
     },
     "./locale": {
-      "source": "./src/providers/locale/index.ts",
       "types": "./dist/providers/locale/index.d.ts",
       "solid": "./dist/providers/locale/index.jsx",
       "import": "./dist/providers/locale/index.js",

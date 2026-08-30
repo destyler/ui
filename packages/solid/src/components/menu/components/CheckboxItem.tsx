@@ -30,7 +30,7 @@ export function MenuCheckboxItem(props: MenuCheckboxItemProps) {
 
   const context = useMenuContext()
   const mergedProps = mergeProps(() => context().getOptionItemProps(optionItemProps), localProps)
-  const optionItemState = createMemo(() => context().getItemState(optionItemProps))
+  const optionItemState = createMemo(() => context().getOptionItemState(optionItemProps))
 
   return (
     <MenuOptionItemPropsProvider value={optionItemProps}>

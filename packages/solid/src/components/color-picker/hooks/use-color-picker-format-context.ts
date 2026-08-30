@@ -1,11 +1,11 @@
 import type { ColorFormat } from '@destyler/color-picker'
 import { createContext } from '~/utils/create-context'
 
-export interface UseColorPickerSwatchPropsContext {
+export interface UseColorPickerFormatPropsContext {
   format: ColorFormat
 }
 
-const colorPickerFormatPropsProviderTuple = createContext<UseColorPickerSwatchPropsContext>({
+const colorPickerFormatPropsProviderTuple = createContext<UseColorPickerFormatPropsContext>({
   hookName: 'useColorPickerFormatPropsContext',
   providerName: '<ColorPickerFormatPropsProvider />',
   strict: false,

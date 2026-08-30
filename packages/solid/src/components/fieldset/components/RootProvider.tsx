@@ -2,6 +2,7 @@ import type { UseFieldsetReturn } from '../hooks/use-fieldset'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { createSplitProps } from '~/utils/create-split-props'
 import { FieldsetProvider } from '../hooks/use-fieldset-context'
 
@@ -22,7 +23,7 @@ export function FieldsetRootProvider(props: FieldsetRootProviderProps) {
 
   return (
     <FieldsetProvider value={fieldset}>
-      <ui.fieldset {...mergedProps} />
+      <ui.fieldset {...mergedProps} ref={composeRefs(fieldset().setRootRef, localProps.ref)} />
     </FieldsetProvider>
   )
 }

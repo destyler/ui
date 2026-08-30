@@ -21,7 +21,7 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'dir': locale().dir,
     'getRootNode': environment().getRootNode,
@@ -30,6 +30,11 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(popover.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    open: props.open,
+  }))
+
+  const [state, send] = useMachine(popover.machine(initialContext()), { context })
   return createMemo(() => popover.connect(state, send, normalizeProps))
 }

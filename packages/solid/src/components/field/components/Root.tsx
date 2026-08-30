@@ -2,6 +2,7 @@ import type { UseFieldProps } from '../hooks/use-field'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
 import { ui } from '~/factory'
+import { composeRefs } from '~/utils/compose-refs'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useField } from '../hooks/use-field'
 import { FieldProvider } from '../hooks/use-field-context'
@@ -23,7 +24,7 @@ export function FieldRoot(props: FieldRootProps) {
 
   return (
     <FieldProvider value={field}>
-      <ui.div {...mergedProps} />
+      <ui.div {...mergedProps} ref={composeRefs(field().setRootRef, localProps.ref)} />
     </FieldProvider>
   )
 }

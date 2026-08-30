@@ -32,7 +32,7 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
@@ -41,6 +41,12 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     ...props,
   }))
 
-  const [state, send] = useMachine(tree.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    selectedValue: props.selectedValue,
+    expandedValue: props.expandedValue,
+  }))
+
+  const [state, send] = useMachine(tree.machine(initialContext()), { context })
   return createMemo(() => tree.connect(state, send, normalizeProps))
 }

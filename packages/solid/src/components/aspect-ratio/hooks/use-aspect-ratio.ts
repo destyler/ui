@@ -22,7 +22,7 @@ export function useAspectRatio(props: UseAspectRatioProps = {}): UseAspectRatioR
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
@@ -30,7 +30,12 @@ export function useAspectRatio(props: UseAspectRatioProps = {}): UseAspectRatioR
     ...props,
   }))
 
-  const [state, send] = useMachine(aspectRatio.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    ratio: props.ratio ?? props.defaultRatio,
+  }))
+
+  const [state, send] = useMachine(aspectRatio.machine(initialContext()), { context })
 
   return createMemo(() => aspectRatio.connect(state, send, normalizeProps))
 }

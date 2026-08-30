@@ -41,32 +41,36 @@ export type UseToggleReturn = Accessor<{
 }>
 
 export function useToggle(props: UseToggleProps): UseToggleReturn {
-  const { defaultPressed, pressed, onPressedChange, disabled } = props
-
   const [pressedState, setPressedState] = useControllableState({
-    defaultValue: !!defaultPressed,
-    value: pressed,
-    onChange: onPressedChange,
+    get defaultValue() {
+      return !!props.defaultPressed
+    },
+    get value() {
+      return props.pressed
+    },
+    get onChange() {
+      return props.onPressedChange
+    },
   })
 
   return createMemo(() => ({
     pressed: pressedState(),
-    disabled: !!disabled,
+    disabled: !!props.disabled,
     setPressed: setPressedState,
 
     getRootProps() {
       return {
         ...(parts.root.attrs as JSX.IntrinsicElements['button']),
         'type': 'button',
-        disabled,
+        'disabled': props.disabled,
         'aria-pressed': pressedState(),
         'data-state': pressedState() ? 'on' : 'off',
         'data-pressed': dataAttr(pressedState()),
-        'data-disabled': dataAttr(disabled),
+        'data-disabled': dataAttr(props.disabled),
         onClick(event) {
           if (event.defaultPrevented)
             return
-          if (disabled)
+          if (props.disabled)
             return
           setPressedState(!pressedState())
         },
@@ -76,7 +80,7 @@ export function useToggle(props: UseToggleProps): UseToggleReturn {
     getIndicatorProps() {
       return {
         ...(parts.indicator.attrs as JSX.IntrinsicElements['div']),
-        'data-disabled': dataAttr(disabled),
+        'data-disabled': dataAttr(props.disabled),
         'data-pressed': dataAttr(pressedState()),
         'data-state': pressedState() ? 'on' : 'off',
       }

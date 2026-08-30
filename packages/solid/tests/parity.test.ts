@@ -41,7 +41,10 @@ const infrastructureEntries = import.meta.glob([
   '../src/factory/index.tsx',
 ], { eager: true }) as Record<string, ModuleExports>
 
-const reactExamples = import.meta.glob('../../react/src/components/*/examples/**/*.tsx')
+const reactExamples = import.meta.glob('../../react/src/components/*/examples/**/*.tsx', {
+  import: 'default',
+  query: '?raw',
+})
 const solidExamples = import.meta.glob('../src/components/*/examples/**/*.tsx')
 const solidComponentFiles = import.meta.glob('../src/components/**/*.{ts,tsx}')
 const solidProviderFiles = import.meta.glob('../src/providers/**/*.{ts,tsx}')
@@ -49,6 +52,14 @@ const solidTemplateFiles = import.meta.glob('../../../template/solid/**/*')
 
 const reactComponentIndexSources = import.meta.glob(
   '../../react/src/components/*/index.ts',
+  {
+    eager: true,
+    import: 'default',
+    query: '?raw',
+  },
+) as Record<string, string>
+const solidComponentIndexSources = import.meta.glob(
+  '../src/components/*/index.ts',
   {
     eager: true,
     import: 'default',
@@ -129,6 +140,22 @@ function runtimeExports(source: string) {
   return [...names].toSorted()
 }
 
+function typeExports(source: string) {
+  const names = new Set<string>()
+  for (const match of source.matchAll(
+    /export\s+(type\s+)?\{([\s\S]*?)\}\s*from\s*['"][^'"]+['"]/g,
+  )) {
+    const declarationIsTypeOnly = !!match[1]
+    for (const specifier of match[2].split(',')) {
+      const value = specifier.trim()
+      if (!value || (!declarationIsTypeOnly && !value.startsWith('type ')))
+        continue
+      names.add(value.replace(/^type\s+/, '').split(/\s+as\s+/).at(-1)!)
+    }
+  }
+  return [...names].toSorted()
+}
+
 function componentEntry(slug: string) {
   const entry = Object.entries(solidComponentEntries)
     .find(([path]) => path.endsWith(`/components/${slug}/index.ts`))?.[1]
@@ -172,11 +199,12 @@ function expandedSubpaths(componentSlugs: string[], providerSlugs: string[]) {
     })
   }
 
-  add('.', conditionalExport('.'))
-  for (const subpath of ['./anatomy', './collection', './factory'])
-    add(subpath, conditionalExport(subpath))
+  add('.', conditionalExport('.'), undefined, './src/index.ts')
+  add('./anatomy', conditionalExport('./anatomy'), undefined, './src/anatomy.ts')
+  add('./collection', conditionalExport('./collection'), undefined, './src/utils/collection.ts')
+  add('./factory', conditionalExport('./factory'), undefined, './src/factory/index.tsx')
   for (const slug of providerSlugs)
-    add(`./${slug}`, conditionalExport(`./${slug}`))
+    add(`./${slug}`, conditionalExport(`./${slug}`), undefined, `./src/providers/${slug}/index.ts`)
 
   const componentExport = conditionalExport('./*')
   for (const slug of componentSlugs)
@@ -279,6 +307,7 @@ describe('solid package structure parity', () => {
 
 describe('solid public component API parity', () => {
   const reactIndexes = sourceBySlug(reactComponentIndexSources, 'index\\.ts')
+  const solidIndexes = sourceBySlug(solidComponentIndexSources, 'index\\.ts')
   const reactNamespaces = sourceBySlug(reactNamespaceSources, 'namespace\\.ts')
   const componentSlugs = slugsFromEntries(reactComponentIndexes, 'components')
 
@@ -309,6 +338,49 @@ describe('solid public component API parity', () => {
       slug,
       solid: Object.keys(namespace as ModuleExports).toSorted(),
     }
+  })
+
+  const indexComparisons = componentSlugs.map((slug) => {
+    const indexSource = reactIndexes.get(slug)
+    if (!indexSource)
+      throw new Error(`${slug}: missing React index source`)
+
+    return {
+      react: runtimeExports(indexSource),
+      slug,
+      solid: Object.keys(componentEntry(slug)).toSorted(),
+    }
+  })
+
+  it('keeps every React runtime export available from each component index', () => {
+    const missing = indexComparisons.flatMap(({ react, slug, solid }) => {
+      const solidSet = new Set(solid)
+      return react.filter(name => !solidSet.has(name)).map(name => `${slug}: ${name}`)
+    })
+
+    expect(
+      missing,
+      `Solid component indexes are missing ${missing.length} React runtime export(s):\n${missing.join('\n')}`,
+    ).toEqual([])
+  })
+
+  it('keeps every React type export available from each component index', () => {
+    const missing = componentSlugs.flatMap((slug) => {
+      const reactIndex = reactIndexes.get(slug)
+      const solidIndex = solidIndexes.get(slug)
+      if (!reactIndex || !solidIndex)
+        return [`${slug}: missing React or Solid index source`]
+
+      const solidTypes = new Set(typeExports(solidIndex))
+      return typeExports(reactIndex)
+        .filter(name => !solidTypes.has(name))
+        .map(name => `${slug}: ${name}`)
+    })
+
+    expect(
+      missing,
+      `Solid component indexes are missing ${missing.length} React type export(s):\n${missing.join('\n')}`,
+    ).toEqual([])
   })
 
   it('keeps every namespace runtime part identical to React', () => {

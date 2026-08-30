@@ -89,8 +89,8 @@ for (const [subpath, conditions, slug] of entries) {
     failures.push(`${subpath}: default and import targets differ`)
   if (conditions.source) {
     const source = expandTarget(conditions.source, slug)
-    if (!fs.existsSync(path.join(packageRoot, source)))
-      failures.push(`${subpath}: local source target is missing ${source}`)
+    if (!packedFiles.has(source))
+      failures.push(`${subpath}: packed package is missing source target ${source}`)
   }
 }
 

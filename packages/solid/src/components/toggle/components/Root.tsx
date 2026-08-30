@@ -1,6 +1,7 @@
 import type { UseToggleProps } from '../hooks/use-toggle'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
+import { ui } from '~/factory'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useToggle } from '../hooks/use-toggle'
 import { ToggleProvider } from '../hooks/use-toggle-context'
@@ -22,7 +23,7 @@ export function ToggleRoot(props: ToggleRootProps) {
 
   return (
     <ToggleProvider value={toggle}>
-      <button {...mergedProps} />
+      <ui.button {...mergedProps} />
     </ToggleProvider>
   )
 }

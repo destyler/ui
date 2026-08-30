@@ -22,7 +22,7 @@ export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
@@ -30,7 +30,12 @@ export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
     ...props,
   }))
 
-  const [state, send] = useMachine(qrCode.machine(context()), {
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+
+  const [state, send] = useMachine(qrCode.machine(initialContext()), {
     context,
   })
   return createMemo(() => qrCode.connect(state, send, normalizeProps))

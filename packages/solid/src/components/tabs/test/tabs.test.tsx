@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Tabs, tabsAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
@@ -85,6 +86,26 @@ describe('tabs', () => {
   it('should render the content of tab when active', async () => {
     render(() => <ComponentUnderTest value="React" />)
     expect(screen.getByText('React Content')).toBeVisible()
+  })
+
+  it('should preserve an uncontrolled value when reactive props change', async () => {
+    const [orientation, setOrientation] = createSignal<'horizontal' | 'vertical'>('horizontal')
+    render(() => (
+      <>
+        <ComponentUnderTest defaultValue="React" orientation={orientation()} />
+        <button type="button" onClick={() => setOrientation('vertical')}>
+          vertical
+        </button>
+      </>
+    ))
+
+    const solidTab = screen.getByText('Solid Trigger')
+    await user.click(solidTab)
+    expect(solidTab).toHaveAttribute('aria-selected', 'true')
+
+    await user.click(screen.getByRole('button', { name: 'vertical' }))
+    await waitFor(() => expect(solidTab).toHaveAttribute('data-orientation', 'vertical'))
+    expect(solidTab).toHaveAttribute('aria-selected', 'true')
   })
 
   it('should lazy mount a tab', async () => {

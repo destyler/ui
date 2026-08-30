@@ -28,7 +28,7 @@ export function useEdit(props: UseEditProps = {}) {
   const id = createUniqueId()
   const field = useFieldContext()
 
-  const context = createMemo(() => ({
+  const initialContext = createMemo(() => ({
     id,
     'ids': {
       label: field?.().ids.label,
@@ -45,7 +45,12 @@ export function useEdit(props: UseEditProps = {}) {
     'edit.controlled': props.edit !== undefined,
     ...props,
   }))
-  const [state, send] = useMachine(edit.machine(context()), { context })
+  const context = createMemo(() => ({
+    ...initialContext(),
+    edit: props.edit,
+    value: props.value,
+  }))
+  const [state, send] = useMachine(edit.machine(initialContext()), { context })
 
   return createMemo(() => edit.connect(state, send, normalizeProps))
 }

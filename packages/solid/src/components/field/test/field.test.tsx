@@ -1,5 +1,6 @@
-import { render, screen } from '@solidjs/testing-library'
+import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Field, fieldAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 
@@ -70,5 +71,52 @@ describe('field / Input', () => {
   it('should not display error text when no error is present', async () => {
     render(() => <ComponentUnderTest />)
     expect(screen.queryByText('Error Info')).not.toBeInTheDocument()
+  })
+
+  it('should reactively associate helper and error text with the input', async () => {
+    const [invalid, setInvalid] = createSignal(false)
+    render(() => (
+      <>
+        <button onClick={() => setInvalid(value => !value)}>Toggle invalid</button>
+        <ComponentUnderTest invalid={invalid()} />
+      </>
+    ))
+
+    const input = screen.getByRole('textbox', { name: /label/i })
+    const helperText = screen.getByText('Some additional Info')
+
+    await waitFor(() => expect(input).toHaveAttribute('aria-describedby', helperText.id))
+
+    await user.click(screen.getByRole('button', { name: 'Toggle invalid' }))
+    const errorText = screen.getByText('Error Info')
+
+    await waitFor(() =>
+      expect(input).toHaveAttribute('aria-describedby', `${errorText.id} ${helperText.id}`),
+    )
+  })
+
+  it('should apply custom root and control ids consistently', () => {
+    render(() => (
+      <Field.Root ids={{ root: 'custom-root', control: 'custom-control' }}>
+        <Field.Label>Custom label</Field.Label>
+        <Field.Input />
+        <Field.Context>
+          {field => (
+            <span data-testid="field-ids">
+              {field().ids.root}|{field().ids.control}
+            </span>
+          )}
+        </Field.Context>
+      </Field.Root>
+    ))
+
+    const root = document.querySelector('[data-scope="field"][data-part="root"]')
+    const input = screen.getByRole('textbox', { name: 'Custom label' })
+    const label = screen.getByText('Custom label')
+
+    expect(root).toHaveAttribute('id', 'custom-root')
+    expect(input).toHaveAttribute('id', 'custom-control')
+    expect(label).toHaveAttribute('for', 'custom-control')
+    expect(screen.getByTestId('field-ids')).toHaveTextContent('custom-root|custom-control')
   })
 })

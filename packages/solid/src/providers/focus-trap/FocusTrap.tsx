@@ -44,8 +44,11 @@ export function FocusTrap(props: FocusTrapProps) {
     if (!localNode || trapProps.disabled)
       return
     const autoFocusNode = localNode.querySelector<HTMLElement>('[autofocus], [data-autofocus]')
-    trapProps.initialFocus ||= autoFocusNode ?? undefined
-    onCleanup(trapFocus(localNode, trapProps))
+    const { disabled: _disabled, ...options } = trapProps
+    onCleanup(trapFocus(localNode, {
+      ...options,
+      initialFocus: options.initialFocus ?? autoFocusNode ?? undefined,
+    }))
   })
 
   // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
