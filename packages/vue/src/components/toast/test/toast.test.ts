@@ -10,6 +10,9 @@ import ToastTypes from '../examples/ToastTypes.vue'
 import ToastUpdate from '../examples/ToastUpdate.vue'
 import { Toast, toastAnatomy } from '../index'
 
+const testPromiseDelay = 5_000
+const testToastDuration = 60_000
+
 describe('[toast] component', () => {
   it.each(getParts(toastAnatomy))('should render part %s', async (part) => {
     render(Basic)
@@ -104,19 +107,23 @@ describe('[toast] component', () => {
 
   describe('toast promise', () => {
     it('should show loading then success toast for resolved promise', async () => {
-      render(ToastPromise)
+      render(ToastPromise, { props: { duration: testToastDuration, promiseDelay: testPromiseDelay } })
 
       await userEvent.click(page.getByText('Promise Success'))
       await vi.waitFor(async () => await expect.element(page.getByText('Loading...')).toBeVisible())
-      await vi.waitFor(async () => await expect.element(page.getByText('Success!')).toBeVisible(), { timeout: 3000 })
+      await vi.waitFor(async () => await expect.element(page.getByText('Success!')).toBeVisible(), {
+        timeout: testPromiseDelay + 3_000,
+      })
     })
 
     it('should show loading then error toast for rejected promise', async () => {
-      render(ToastPromise)
+      render(ToastPromise, { props: { duration: testToastDuration, promiseDelay: testPromiseDelay } })
 
       await userEvent.click(page.getByText('Promise Error'))
       await vi.waitFor(async () => await expect.element(page.getByText('Loading...')).toBeVisible())
-      await vi.waitFor(async () => await expect.element(page.getByText('Failed!')).toBeVisible(), { timeout: 3000 })
+      await vi.waitFor(async () => await expect.element(page.getByText('Failed!')).toBeVisible(), {
+        timeout: testPromiseDelay + 3_000,
+      })
     })
   })
 

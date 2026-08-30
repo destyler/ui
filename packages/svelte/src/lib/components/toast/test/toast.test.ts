@@ -13,6 +13,9 @@ import { Toast, toastAnatomy } from '../index'
 
 const componentExports = Toast as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+const testPromiseDelay = 5_000
+const testToastDuration = 60_000
+const promiseTestTimeout = 30_000
 
 describe('[toast] component', () => {
   it('exports Toaster from the Toast namespace', () => {
@@ -86,17 +89,25 @@ describe('[toast] component', () => {
   })
 
   it('updates resolved and rejected promises', async () => {
-    const success = await render(ToastPromise)
+    const success = await render(ToastPromise, {
+      props: { duration: testToastDuration, promiseDelay: testPromiseDelay },
+    })
     await userEvent.click(success.getByText('Promise Success'))
     await expect.element(page.getByText('Loading...')).toBeVisible()
-    await vi.waitFor(async () => expect.element(page.getByText('Success!')).toBeVisible(), { timeout: 3000 })
+    await vi.waitFor(async () => expect.element(page.getByText('Success!')).toBeVisible(), {
+      timeout: testPromiseDelay + 3_000,
+    })
     success.unmount()
 
-    await render(ToastPromise)
+    await render(ToastPromise, {
+      props: { duration: testToastDuration, promiseDelay: testPromiseDelay },
+    })
     await userEvent.click(page.getByText('Promise Error'))
     await expect.element(page.getByText('Loading...')).toBeVisible()
-    await vi.waitFor(async () => expect.element(page.getByText('Failed!')).toBeVisible(), { timeout: 3000 })
-  })
+    await vi.waitFor(async () => expect.element(page.getByText('Failed!')).toBeVisible(), {
+      timeout: testPromiseDelay + 3_000,
+    })
+  }, promiseTestTimeout)
 
   it('updates an existing toast', async () => {
     await render(ToastUpdate)
