@@ -28,9 +28,11 @@
     "vue": "pnpm --filter @destyler-ui/vue",
     "react": "pnpm --filter @destyler-ui/react",
     "svelte": "pnpm --filter @destyler-ui/svelte",
+    "solid": "pnpm --filter @destyler-ui/solid",
     "generate:vue": "plop vue",
     "generate:react": "plop react",
-    "generate:svelte": "plop svelte"
+    "generate:svelte": "plop svelte",
+    "generate:solid": "plop solid"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
@@ -55,6 +57,7 @@
     "eslint-plugin-astro": "catalog:lint",
     "eslint-plugin-react-hooks": "catalog:lint",
     "eslint-plugin-react-refresh": "catalog:lint",
+    "eslint-plugin-solid": "catalog:lint",
     "eslint-plugin-storybook": "catalog:lint",
     "eslint-plugin-svelte": "catalog:lint",
     "happy-dom": "catalog:test",

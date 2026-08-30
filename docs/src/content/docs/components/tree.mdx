@@ -79,6 +79,39 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Tree } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Tree.Root>
+      <Tree.Label />
+      <Tree.Tree>
+        <Tree.Item>
+          <Tree.ItemIndicator />
+          <Tree.ItemText />
+        </Tree.Item>
+        <Tree.Branch>
+          <Tree.BranchControl>
+            <Tree.BranchTrigger />
+            <Tree.BranchText />
+            <Tree.BranchIndicator />
+          </Tree.BranchControl>
+          <Tree.BranchContent>
+            <Tree.BranchIndentGuide />
+            <Tree.Item>
+              <Tree.ItemText />
+            </Tree.Item>
+          </Tree.BranchContent>
+        </Tree.Branch>
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

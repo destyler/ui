@@ -43,6 +43,21 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Avatar } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Avatar.Root>
+      <Avatar.Fallback>EL</Avatar.Fallback>
+      <Avatar.Image src="https://github.com/elonehoo.png" alt="avatar" />
+    </Avatar.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

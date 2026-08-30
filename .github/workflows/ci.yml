@@ -57,6 +57,8 @@ jobs:
           rm -rf node_modules/.cache
           rm -rf packages/vue/node_modules/.vite
           rm -rf packages/vue/node_modules/.cache
+          rm -rf packages/solid/node_modules/.vite
+          rm -rf packages/solid/node_modules/.cache
 
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps
@@ -68,9 +70,17 @@ jobs:
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte check:ci
 
+      - name: Check Solid package
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/solid check
+
       - name: Build Svelte Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte build-storybook
+
+      - name: Build Solid Storybook
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/solid build-storybook
 
       - name: Build documentation
         if: matrix.node == 22

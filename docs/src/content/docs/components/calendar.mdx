@@ -99,6 +99,49 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Calendar } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Calendar.Root>
+      <Calendar.Label />
+      <Calendar.Control>
+        <Calendar.PrevTrigger />
+        <Calendar.ViewTrigger />
+        <Calendar.NextTrigger />
+      </Calendar.Control>
+      <Calendar.Content>
+        <Calendar.View>
+          <Calendar.ViewControl>
+            <Calendar.PrevTrigger />
+            <Calendar.ViewTrigger />
+            <Calendar.NextTrigger />
+          </Calendar.ViewControl>
+          <Calendar.RangeText />
+          <Calendar.Table>
+            <Calendar.TableHead>
+              <Calendar.TableRow>
+                <Calendar.TableHeader />
+              </Calendar.TableRow>
+            </Calendar.TableHead>
+            <Calendar.TableBody>
+              <Calendar.TableRow>
+                <Calendar.TableCell>
+                  <Calendar.TableCellTrigger />
+                </Calendar.TableCell>
+              </Calendar.TableRow>
+            </Calendar.TableBody>
+          </Calendar.Table>
+        </Calendar.View>
+      </Calendar.Content>
+    </Calendar.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script module lang="ts">

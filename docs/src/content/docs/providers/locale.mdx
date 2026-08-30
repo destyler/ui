@@ -27,6 +27,14 @@ import { LocaleProvider, useLocaleContext } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { LocaleProvider, useLocaleContext } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -71,6 +79,22 @@ export function Example() {
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { Format, LocaleProvider } from '@destyler-ui/solid'
+
+export function Example() {
+  return (
+    <LocaleProvider locale="de-DE">
+      <p><Format.Number value={1450.45} style="currency" currency="EUR" /></p>
+    </LocaleProvider>
+  )
+}
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -97,7 +121,7 @@ export function Example() {
 
 ### useLocaleContext
 
-Returns the current `locale` and calculated `dir`. Vue returns a computed ref, React returns the context value, and Svelte returns an accessor.
+Returns the current `locale` and calculated `dir`. Vue returns a computed ref, React returns the context value, and Solid/Svelte return accessors.
 
 <FrameworkContent fw="vue">
 
@@ -119,6 +143,19 @@ const locale = useLocaleContext()
 
 ```tsx
 import { useLocaleContext } from '@destyler-ui/react'
+
+export function CurrentLocale() {
+  const locale = useLocaleContext()
+  return <p dir={locale.dir}>{locale.locale}</p>
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { useLocaleContext } from '@destyler-ui/solid'
 
 export function CurrentLocale() {
   const locale = useLocaleContext()

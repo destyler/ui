@@ -51,6 +51,25 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Progress } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Progress.Root>
+      <Progress.Label />
+      <Progress.ValueText />
+      <Progress.Track>
+        <Progress.Range />
+      </Progress.Track>
+      <Progress.View />
+    </Progress.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

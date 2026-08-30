@@ -1,0 +1,21 @@
+import type { HTMLProps, PolymorphicProps } from '~/factory'
+import { mergeProps } from '@destyler/solid'
+import { Show } from 'solid-js'
+import { usePresenceContext } from '~/components/presence'
+import { ui } from '~/factory'
+import { useHoverCardContext } from '../hooks/use-hover-card-context'
+
+export interface HoverCardPositionerBaseProps extends PolymorphicProps<'div'> {}
+export interface HoverCardPositionerProps extends HTMLProps<'div'>, HoverCardPositionerBaseProps {}
+
+export function HoverCardPositioner(props: HoverCardPositionerProps) {
+  const api = useHoverCardContext()
+  const presenceApi = usePresenceContext()
+  const mergedProps = mergeProps(() => api().getPositionerProps(), props)
+
+  return (
+    <Show when={!presenceApi().unmounted}>
+      <ui.div {...mergedProps} />
+    </Show>
+  )
+}

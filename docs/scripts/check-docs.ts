@@ -58,10 +58,24 @@ function listFiles(root: string, extension?: string): string[] {
   }).sort()
 }
 
+function findTypeScriptEntry(root: string): string | null {
+  for (const fileName of ['index.ts', 'index.tsx']) {
+    const candidate = path.join(root, fileName)
+    if (fs.existsSync(candidate))
+      return candidate
+  }
+  return null
+}
+
 function getPublicExportNames(framework: typeof frameworks[number]): Set<string> | null {
-  const entry = path.join(workspaceDirectory, framework.sourceRoot, 'index.ts')
+  const entry = findTypeScriptEntry(path.join(workspaceDirectory, framework.sourceRoot))
+  if (!entry) {
+    failures.push(`${framework.label}: unable to find public package entry`)
+    return null
+  }
   const program = ts.createProgram([entry], {
     allowJs: true,
+    jsx: ts.JsxEmit.Preserve,
     module: ts.ModuleKind.ESNext,
     moduleResolution: ts.ModuleResolutionKind.Bundler,
     skipLibCheck: true,
@@ -149,13 +163,13 @@ for (const framework of frameworks) {
   for (const component of components) {
     const sourceDirectory = path.join(componentSourceDirectory, component.slug)
     const basicExample = path.join(sourceDirectory, 'examples', `Basic.${framework.extension}`)
-    check(fs.existsSync(path.join(sourceDirectory, 'index.ts')), `${framework.label}: missing ${component.slug} public entry`)
+    check(!!findTypeScriptEntry(sourceDirectory), `${framework.label}: missing ${component.slug} public entry`)
     check(fs.existsSync(basicExample), `${framework.label}: missing ${component.slug} Basic example`)
   }
 
   for (const provider of providers) {
     check(
-      fs.existsSync(path.join(providerSourceDirectory, provider.slug, 'index.ts')),
+      !!findTypeScriptEntry(path.join(providerSourceDirectory, provider.slug)),
       `${framework.label}: missing ${provider.slug} provider entry`,
     )
   }
@@ -362,7 +376,9 @@ check(
 
 for (const root of [
   path.join(docsDirectory, 'src'),
+  path.join(workspaceDirectory, 'packages/solid/src'),
   path.join(workspaceDirectory, 'packages/svelte/src'),
+  path.join(workspaceDirectory, 'template/solid'),
   path.join(workspaceDirectory, 'template/svelte'),
 ]) {
   for (const file of listFiles(root)) {

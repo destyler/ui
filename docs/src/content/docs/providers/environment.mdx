@@ -27,6 +27,14 @@ import { EnvironmentProvider, useEnvironmentContext } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { EnvironmentProvider, useEnvironmentContext } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -61,6 +69,22 @@ import { EnvironmentProvider } from '@destyler-ui/vue'
 
 ```tsx
 import { EnvironmentProvider } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <EnvironmentProvider>
+      <button type="button">Rendered in the current document</button>
+    </EnvironmentProvider>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { EnvironmentProvider } from '@destyler-ui/solid'
 
 export function Example() {
   return (
@@ -126,6 +150,19 @@ const environment = useEnvironmentContext()
 
 ```tsx
 import { useEnvironmentContext } from '@destyler-ui/react'
+
+export function ScrollToTop() {
+  const environment = useEnvironmentContext()
+  return <button onClick={() => environment.getWindow().scrollTo(0, 0)}>Scroll this environment to the top</button>
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { useEnvironmentContext } from '@destyler-ui/solid'
 
 export function ScrollToTop() {
   const environment = useEnvironmentContext()

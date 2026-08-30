@@ -49,6 +49,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Field } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Field.Root>
+      <Field.Label />
+      <Field.Input />
+      <Field.HelperText />
+      <Field.ErrorText />
+      <Field.RequiredIndicator />
+    </Field.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

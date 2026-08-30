@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Build your first Destyler UI component with Vue, React, or Svelte.
+description: Build your first Destyler UI component with Vue, React, Solid, or Svelte.
 ---
 
 import FrameworkContent from '../../../components/FrameworkContent.astro';
@@ -31,6 +31,21 @@ import { Toggle } from '@destyler-ui/react'
 export function NotificationToggle() {
   return (
     <Toggle.Root className="notification-toggle">
+      <Toggle.Indicator aria-hidden="true">✓</Toggle.Indicator>
+      Notifications
+    </Toggle.Root>
+  )
+}
+```
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+```tsx
+import { Toggle } from '@destyler-ui/solid'
+
+export function NotificationToggle() {
+  return (
+    <Toggle.Root class="notification-toggle">
       <Toggle.Indicator aria-hidden="true">✓</Toggle.Indicator>
       Notifications
     </Toggle.Root>
@@ -79,6 +94,10 @@ Import Vue components from `@destyler-ui/vue`. The package build remains tree-sh
 
 <FrameworkContent fw="react">
 Import React components from `@destyler-ui/react`. The package build remains tree-shakable, so unused exports can be removed by your bundler.
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+Import Solid components from `@destyler-ui/solid`. The package build remains tree-shakable, so unused exports can be removed by your bundler.
 </FrameworkContent>
 
 <FrameworkContent fw="svelte">

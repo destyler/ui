@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@astrojs/react'
+import solid from '@astrojs/solid-js'
 import starlight from '@astrojs/starlight'
 import svelte from '@astrojs/svelte'
 import vue from '@astrojs/vue'
@@ -67,7 +68,12 @@ export default defineConfig({
       injectReset: true,
     }),
     vue(),
-    react(),
+    react({
+      include: ['**/packages/react/**', '**/docs/src/components/ReactExample.tsx'],
+    }),
+    solid({
+      include: ['**/packages/solid/**', '**/docs/src/components/SolidExample.tsx'],
+    }),
     svelte(),
     starlight({
       expressiveCode: {

@@ -81,6 +81,40 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Menu } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Menu.Root>
+      <Menu.Trigger />
+      <Menu.Positioner>
+        <Menu.Content>
+          <Menu.ItemGroup>
+            <Menu.ItemGroupLabel />
+            <Menu.Item>
+              <Menu.ItemText />
+              <Menu.ItemIndicator />
+            </Menu.Item>
+          </Menu.ItemGroup>
+          <Menu.Separator />
+          <Menu.CheckboxItem>
+            <Menu.ItemIndicator />
+          </Menu.CheckboxItem>
+          <Menu.RadioItemGroup>
+            <Menu.RadioItem>
+              <Menu.ItemIndicator />
+            </Menu.RadioItem>
+          </Menu.RadioItemGroup>
+        </Menu.Content>
+      </Menu.Positioner>
+    </Menu.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

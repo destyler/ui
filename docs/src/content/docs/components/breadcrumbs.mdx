@@ -58,6 +58,30 @@ export function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Breadcrumbs } from '@destyler-ui/solid'
+
+export function Basic() {
+  return (
+    <Breadcrumbs.Root items={items}>
+      <Breadcrumbs.List>
+        <Breadcrumbs.Context>
+          {breadcrumbs =>
+            breadcrumbs.items.map(item => (
+              <Breadcrumbs.Item key={item.id} item={item}>
+                <Breadcrumbs.Link item={item}>{item.label}</Breadcrumbs.Link>
+                {item.href && <Breadcrumbs.Separator>/</Breadcrumbs.Separator>}
+              </Breadcrumbs.Item>
+            ))}
+        </Breadcrumbs.Context>
+      </Breadcrumbs.List>
+    </Breadcrumbs.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

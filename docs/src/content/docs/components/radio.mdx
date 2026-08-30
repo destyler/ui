@@ -53,6 +53,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Radio } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Radio.Root>
+      <Radio.Label />
+      <Radio.Indicator />
+      <Radio.Item>
+        <Radio.ItemControl />
+        <Radio.ItemText />
+        <Radio.ItemHiddenInput />
+      </Radio.Item>
+    </Radio.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

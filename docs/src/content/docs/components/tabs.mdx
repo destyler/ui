@@ -49,6 +49,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Tabs } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Tabs.Root>
+      <Tabs.List>
+        <Tabs.Trigger />
+        <Tabs.Indicator />
+      </Tabs.List>
+      <Tabs.Content />
+    </Tabs.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

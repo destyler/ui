@@ -65,6 +65,32 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Dynamic } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Dynamic.Root>
+      <Dynamic.Label />
+      <Dynamic.Control>
+        <Dynamic.Item>
+          <Dynamic.ItemPreview>
+            <Dynamic.ItemText />
+            <Dynamic.ItemDeleteTrigger />
+          </Dynamic.ItemPreview>
+          <Dynamic.ItemInput />
+        </Dynamic.Item>
+        <Dynamic.Input />
+        <Dynamic.ClearTrigger />
+      </Dynamic.Control>
+      <Dynamic.HiddenInput />
+    </Dynamic.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

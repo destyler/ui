@@ -89,6 +89,44 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { ColorPicker } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <ColorPicker.Root>
+      <ColorPicker.Label />
+      <ColorPicker.Control>
+        <ColorPicker.ChannelInput />
+        <ColorPicker.ValueText />
+        <ColorPicker.ValueSwatch />
+        <ColorPicker.Trigger />
+      </ColorPicker.Control>
+      <ColorPicker.Positioner>
+        <ColorPicker.Content>
+          <ColorPicker.Area>
+            <ColorPicker.AreaBackground />
+            <ColorPicker.AreaThumb />
+          </ColorPicker.Area>
+          <ColorPicker.ChannelSlider>
+            <ColorPicker.ChannelSliderTrack />
+            <ColorPicker.ChannelSliderThumb />
+          </ColorPicker.ChannelSlider>
+          <ColorPicker.SwatchGroup>
+            <ColorPicker.SwatchTrigger>
+              <ColorPicker.Swatch />
+            </ColorPicker.SwatchTrigger>
+          </ColorPicker.SwatchGroup>
+        </ColorPicker.Content>
+      </ColorPicker.Positioner>
+      <ColorPicker.HiddenInput />
+    </ColorPicker.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

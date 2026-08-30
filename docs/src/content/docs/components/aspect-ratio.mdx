@@ -50,6 +50,28 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { AspectRatio } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <main style={{ width: '300px' }}>
+      <AspectRatio.Root ratio={16 / 9}>
+        <AspectRatio.Content>
+          <img
+            src="https://elonehoo.me/gallery/20_sun.jpg"
+            alt="Sunset"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </AspectRatio.Content>
+      </AspectRatio.Root>
+    </main>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

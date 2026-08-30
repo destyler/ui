@@ -49,6 +49,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Checkbox } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Checkbox.Root>
+      <Checkbox.Control>
+        <Checkbox.Indicator />
+      </Checkbox.Control>
+      <Checkbox.Label />
+      <Checkbox.HiddenInput />
+    </Checkbox.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

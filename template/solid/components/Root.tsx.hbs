@@ -1,0 +1,12 @@
+import type { HTMLProps, PolymorphicProps } from '~/factory'
+import { mergeProps } from '@destyler/solid'
+import { ui } from '~/factory'
+import { parts } from '../anatomy'
+
+export interface {{capitalize (camelize solid)}}RootBaseProps extends PolymorphicProps<'div'> {}
+export interface {{capitalize (camelize solid)}}RootProps extends HTMLProps<'div'>, {{capitalize (camelize solid)}}RootBaseProps {}
+
+export const {{capitalize (camelize solid)}}Root = (props: {{capitalize (camelize solid)}}RootProps) => {
+  const rootProps = mergeProps(parts.root.attrs, props)
+  return <ui.div {...rootProps} />
+}

@@ -47,6 +47,23 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Pagination } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Pagination.Root>
+      <Pagination.PrevTrigger />
+      <Pagination.Item />
+      <Pagination.Ellipsis />
+      <Pagination.NextTrigger />
+    </Pagination.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

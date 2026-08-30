@@ -27,6 +27,14 @@ import { Highlight, useHighlight } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { Highlight, useHighlight } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -65,6 +73,18 @@ export function Example() {
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { Highlight } from '@destyler-ui/solid'
+
+export function Example() {
+  return <Highlight query="accessible" text="Build accessible components with Solid." ignoreCase matchAll />
+}
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -97,7 +117,7 @@ Normal `mark` attributes are forwarded to each matching element.
 
 ### useHighlight
 
-`useHighlight` returns `{ text, match }` chunks. Vue returns a computed ref, React returns the array, and Svelte returns an accessor.
+`useHighlight` returns `{ text, match }` chunks. Vue returns a computed ref, React returns the array, and Solid/Svelte return accessors.
 
 <FrameworkContent fw="vue">
 
@@ -125,6 +145,20 @@ import { useHighlight } from '@destyler-ui/react'
 export function Result() {
   const chunks = useHighlight({ text: 'React search result', query: 'search' })
   return chunks.map((chunk, index) => <span key={index} className={chunk.match ? 'match' : undefined}>{chunk.text}</span>)
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { useHighlight } from '@destyler-ui/solid'
+import { For } from 'solid-js'
+
+export function Result() {
+  const chunks = useHighlight({ text: 'Solid search result', query: 'search' })
+  return <For each={chunks()}>{chunk => <span class={chunk.match ? 'match' : undefined}>{chunk.text}</span>}</For>
 }
 ```
 

@@ -27,6 +27,14 @@ import { Format } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { Format } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -60,6 +68,23 @@ import { Format } from '@destyler-ui/vue'
 
 ```tsx
 import { Format } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <>
+      <p>Price: <Format.Number value={1234.5} style="currency" currency="USD" /></p>
+      <p>File size: <Format.Byte value={1450.45} /></p>
+    </>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { Format } from '@destyler-ui/solid'
 
 export function Example() {
   return (

@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install Destyler UI for Vue, React, or Svelte.
+description: Install Destyler UI for Vue, React, Solid, or Svelte.
 ---
 
 import FrameworkContent from '../../../components/FrameworkContent.astro';
@@ -15,6 +15,10 @@ Destyler UI for Vue requires `vue` `>=3.5.0`.
 
 <FrameworkContent fw="react">
 Destyler UI for React requires `react` and `react-dom` `>=18.0.0`.
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+Destyler UI for Solid requires `solid-js` `>=1.8.0 <2.0.0`.
 </FrameworkContent>
 
 <FrameworkContent fw="svelte">
@@ -32,6 +36,12 @@ pnpm add @destyler-ui/vue vue
 <FrameworkContent fw="react">
 ```sh
 pnpm add @destyler-ui/react react react-dom
+```
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+```sh
+pnpm add @destyler-ui/solid solid-js
 ```
 </FrameworkContent>
 
@@ -61,6 +71,14 @@ import { Avatar, Toggle } from '@destyler-ui/react'
 ```
 
 React components and providers are exported from the package root.
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+```tsx
+import { Avatar, Toggle } from '@destyler-ui/solid'
+```
+
+Solid components and providers are exported from the package root.
 </FrameworkContent>
 
 <FrameworkContent fw="svelte">

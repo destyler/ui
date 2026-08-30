@@ -55,6 +55,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Clipboard } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Clipboard.Root>
+      <Clipboard.Label />
+      <Clipboard.Control>
+        <Clipboard.Input />
+        <Clipboard.Trigger>
+          <Clipboard.Indicator />
+        </Clipboard.Trigger>
+      </Clipboard.Control>
+      <Clipboard.ValueText />
+    </Clipboard.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

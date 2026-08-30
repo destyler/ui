@@ -53,6 +53,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Signature } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Signature.Root>
+      <Signature.Label />
+      <Signature.Control>
+        <Signature.Segment />
+        <Signature.Guide />
+      </Signature.Control>
+      <Signature.ClearTrigger />
+      <Signature.HiddenInput />
+    </Signature.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

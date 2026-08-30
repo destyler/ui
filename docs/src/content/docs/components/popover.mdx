@@ -63,6 +63,31 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Popover } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Popover.Root>
+      <Popover.Trigger />
+      <Popover.Anchor />
+      <Popover.Positioner>
+        <Popover.Content>
+          <Popover.Title />
+          <Popover.Description />
+          <Popover.Arrow>
+            <Popover.ArrowTip />
+          </Popover.Arrow>
+          <Popover.CloseTrigger />
+        </Popover.Content>
+      </Popover.Positioner>
+    </Popover.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

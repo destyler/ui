@@ -63,6 +63,31 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Slider } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Slider.Root>
+      <Slider.Label />
+      <Slider.ValueText />
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Range />
+        </Slider.Track>
+        <Slider.Thumb />
+      </Slider.Control>
+      <Slider.MarkerGroup>
+        <Slider.Marker />
+      </Slider.MarkerGroup>
+      <Slider.HiddenInput />
+    </Slider.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

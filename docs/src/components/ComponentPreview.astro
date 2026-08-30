@@ -6,7 +6,7 @@
  *   import ComponentPreview from '../../../components/ComponentPreview.astro';
  *   <ComponentPreview component="avatar" example="Basic" />
  *
- * Automatically switches between the Vue, React, and Svelte renderings based on the
+ * Automatically switches between the Vue, React, Solid, and Svelte renderings based on the
  * global framework selection (data-framework on <html>).
  */
 
@@ -17,6 +17,7 @@ import { frameworks } from '../config/frameworks'
 import { formatExampleSourceComment, getExampleSourcePath, rewriteExampleSourceImports } from '../utils/example-source'
 import { highlight } from '../utils/shiki'
 import ReactExample from './ReactExample.tsx'
+import SolidExample from './SolidExample.tsx'
 import SvelteExample from './SvelteExample.svelte'
 import VueExample from './VueExample.vue'
 
@@ -58,6 +59,7 @@ const highlightedExamples = await Promise.all(frameworks.map(async (framework) =
       <div class={`ds-fw-content ds-preview-frame ${component}-${example.toLowerCase()}`} data-fw={framework.id}>
         {framework.id === 'vue' && <VueExample client:visible component={component} example={example} />}
         {framework.id === 'react' && <ReactExample client:visible component={component} example={example} />}
+        {framework.id === 'solid' && <SolidExample client:visible component={component} example={example} />}
         {framework.id === 'svelte' && <SvelteExample client:visible component={component} example={example} />}
       </div>
     ))}

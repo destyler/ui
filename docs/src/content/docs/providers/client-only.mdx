@@ -27,6 +27,14 @@ import { ClientOnly } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { ClientOnly } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -62,6 +70,22 @@ import { ClientOnly } from '@destyler-ui/vue'
 
 ```tsx
 import { ClientOnly } from '@destyler-ui/react'
+
+export function Example() {
+  return (
+    <ClientOnly fallback={<p>Waiting for the browser…</p>}>
+      <p>Browser content</p>
+    </ClientOnly>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { ClientOnly } from '@destyler-ui/solid'
 
 export function Example() {
   return (

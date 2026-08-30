@@ -79,6 +79,39 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Select } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Select.Root>
+      <Select.Label />
+      <Select.Control>
+        <Select.Trigger>
+          <Select.ValueText />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.ClearTrigger />
+      </Select.Control>
+      <Select.Positioner>
+        <Select.Content>
+          <Select.ItemGroup>
+            <Select.ItemGroupLabel />
+            <Select.Item>
+              <Select.ItemText />
+              <Select.ItemIndicator />
+            </Select.Item>
+          </Select.ItemGroup>
+        </Select.Content>
+      </Select.Positioner>
+      <Select.HiddenSelect />
+    </Select.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

@@ -1,0 +1,27 @@
+import type { HTMLProps, PolymorphicProps } from '~/factory'
+import { mergeProps } from '@destyler/solid'
+import { Show } from 'solid-js'
+import { usePresence } from '~/components/presence'
+import { ui } from '~/factory'
+import { useRenderStrategyContext } from '~/utils/render-strategy'
+import { useTourContext } from '../hooks/use-tour-context'
+
+export interface TourContentBaseProps extends PolymorphicProps<'div'> {}
+export interface TourContentProps extends HTMLProps<'div'>, TourContentBaseProps {}
+
+export function TourContent(props: TourContentProps) {
+  const tour = useTourContext()
+  const renderStrategyProps = useRenderStrategyContext()
+  const presence = usePresence(mergeProps(renderStrategyProps, () => ({ present: tour().open })))
+  const mergedProps = mergeProps(
+    () => tour().getContentProps(),
+    () => presence().presenceProps,
+    props,
+  )
+
+  return (
+    <Show when={!presence().unmounted}>
+      <ui.div {...mergedProps} />
+    </Show>
+  )
+}
