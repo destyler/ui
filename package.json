@@ -65,6 +65,7 @@
     "plop": "catalog:node",
     "storybook": "catalog:stories",
     "taze": "catalog:node",
+    "tsx": "catalog:docs",
     "tsdown": "catalog:build",
     "tslib": "catalog:types",
     "typescript": "catalog:types",
