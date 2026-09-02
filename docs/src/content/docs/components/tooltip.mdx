@@ -55,6 +55,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Tooltip } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Tooltip.Root>
+      <Tooltip.Trigger />
+      <Tooltip.Positioner>
+        <Tooltip.Content>
+          <Tooltip.Arrow>
+            <Tooltip.ArrowTip />
+          </Tooltip.Arrow>
+        </Tooltip.Content>
+      </Tooltip.Positioner>
+    </Tooltip.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

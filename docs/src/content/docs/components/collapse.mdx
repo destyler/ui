@@ -51,6 +51,25 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Collapse } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Collapse.Root>
+      <Collapse.Item value="details">
+        <Collapse.ItemTrigger>
+          <Collapse.ItemIndicator />
+        </Collapse.ItemTrigger>
+        <Collapse.ItemContent />
+      </Collapse.Item>
+    </Collapse.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

@@ -89,6 +89,44 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { ColorPicker, parseColor } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <ColorPicker.Root defaultValue={parseColor('#eb5e41')}>
+      <ColorPicker.Label>Color</ColorPicker.Label>
+      <ColorPicker.Control>
+        <ColorPicker.ChannelInput channel="hex" />
+        <ColorPicker.ValueText />
+        <ColorPicker.ValueSwatch />
+        <ColorPicker.Trigger />
+      </ColorPicker.Control>
+      <ColorPicker.Positioner>
+        <ColorPicker.Content>
+          <ColorPicker.Area>
+            <ColorPicker.AreaBackground />
+            <ColorPicker.AreaThumb />
+          </ColorPicker.Area>
+          <ColorPicker.ChannelSlider channel="hue">
+            <ColorPicker.ChannelSliderTrack />
+            <ColorPicker.ChannelSliderThumb />
+          </ColorPicker.ChannelSlider>
+          <ColorPicker.SwatchGroup>
+            <ColorPicker.SwatchTrigger value="red">
+              <ColorPicker.Swatch value="red" />
+            </ColorPicker.SwatchTrigger>
+          </ColorPicker.SwatchGroup>
+        </ColorPicker.Content>
+      </ColorPicker.Positioner>
+      <ColorPicker.HiddenInput />
+    </ColorPicker.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

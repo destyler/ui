@@ -128,17 +128,37 @@ function readPublicComponentValueNames(file: string): Set<string> {
       continue
     if (!ts.isNamedExports(statement.exportClause))
       continue
-    if (!statement.moduleSpecifier || !ts.isStringLiteral(statement.moduleSpecifier))
-      continue
-    if (!/(?:^|\/)components(?:\/|$)/.test(statement.moduleSpecifier.text))
-      continue
-
     for (const element of statement.exportClause.elements) {
-      if (!element.isTypeOnly)
+      if (!element.isTypeOnly && /^[A-Z]/.test(element.name.text))
         values.add(element.name.text)
     }
   }
 
+  return values
+}
+
+function readPublicNamespaceValueNames(file: string): Set<string> {
+  if (!fs.existsSync(file))
+    return new Set()
+
+  const sourceFile = ts.createSourceFile(
+    file,
+    fs.readFileSync(file, 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+    file.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
+  )
+  const values = new Set<string>()
+  for (const statement of sourceFile.statements) {
+    if (!ts.isExportDeclaration(statement) || statement.isTypeOnly || !statement.exportClause)
+      continue
+    if (!ts.isNamedExports(statement.exportClause))
+      continue
+    for (const element of statement.exportClause.elements) {
+      if (!element.isTypeOnly && /^[A-Z]/.test(element.name.text))
+        values.add(element.name.text)
+    }
+  }
   return values
 }
 
@@ -147,9 +167,15 @@ function getPublicParts(framework: FrameworkDefinition, component: string): Set<
   const prefix = kebabToPascal(component)
   const parts = new Set<string>()
 
-  for (const valueName of readPublicComponentValueNames(path.join(componentDir, 'namespace.ts')))
+  const namespaceFile = ['namespace.ts', `${component}.ts`]
+    .map(fileName => path.join(componentDir, fileName))
+    .find(fileName => fs.existsSync(fileName))
+  for (const valueName of namespaceFile ? readPublicNamespaceValueNames(namespaceFile) : [])
     parts.add(valueName)
-  for (const valueName of readPublicComponentValueNames(path.join(componentDir, 'index.ts')))
+  const indexFile = ['index.ts', 'index.tsx']
+    .map(fileName => path.join(componentDir, fileName))
+    .find(fileName => fs.existsSync(fileName))
+  for (const valueName of indexFile ? readPublicComponentValueNames(indexFile) : [])
     parts.add(getOwnedPartName(valueName, prefix))
   return parts
 }

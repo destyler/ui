@@ -79,6 +79,41 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { createListCollection, Select } from '@destyler-ui/solid'
+
+const collection = createListCollection({ items: ['React', 'Solid', 'Vue'] })
+
+export default function Basic() {
+  return (
+    <Select.Root collection={collection}>
+      <Select.Label />
+      <Select.Control>
+        <Select.Trigger>
+          <Select.ValueText />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.ClearTrigger />
+      </Select.Control>
+      <Select.Positioner>
+        <Select.Content>
+          <Select.ItemGroup>
+            <Select.ItemGroupLabel />
+            <Select.Item item={collection.items[0]}>
+              <Select.ItemText>{collection.items[0]}</Select.ItemText>
+              <Select.ItemIndicator />
+            </Select.Item>
+          </Select.ItemGroup>
+        </Select.Content>
+      </Select.Positioner>
+      <Select.HiddenSelect />
+    </Select.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

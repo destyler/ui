@@ -1,0 +1,204 @@
+{
+  "name": "@destyler-ui/solid",
+  "type": "module",
+  "version": "0.0.1-beta.16",
+  "description": "Build scalable design systems with unstyled, accessible UI components for Solid",
+  "author": "Elone Hoo <hi@elonehoo.me>",
+  "license": "MIT",
+  "homepage": "https://github.com/destyler/ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/destyler/ui.git",
+    "directory": "packages/solid"
+  },
+  "bugs": "https://github.com/destyler/ui/issues",
+  "keywords": [
+    "base",
+    "destyler",
+    "solid"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "solid": "./dist/index.jsx",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./anatomy": {
+      "types": "./dist/anatomy.d.ts",
+      "solid": "./dist/anatomy.jsx",
+      "import": "./dist/anatomy.js",
+      "default": "./dist/anatomy.js"
+    },
+    "./collection": {
+      "types": "./dist/utils/collection.d.ts",
+      "solid": "./dist/utils/collection.jsx",
+      "import": "./dist/utils/collection.js",
+      "default": "./dist/utils/collection.js"
+    },
+    "./factory": {
+      "types": "./dist/factory/index.d.ts",
+      "solid": "./dist/factory/index.jsx",
+      "import": "./dist/factory/index.js",
+      "default": "./dist/factory/index.js"
+    },
+    "./client-only": {
+      "types": "./dist/providers/client-only/index.d.ts",
+      "solid": "./dist/providers/client-only/index.jsx",
+      "import": "./dist/providers/client-only/index.js",
+      "default": "./dist/providers/client-only/index.js"
+    },
+    "./environment": {
+      "types": "./dist/providers/environment/index.d.ts",
+      "solid": "./dist/providers/environment/index.jsx",
+      "import": "./dist/providers/environment/index.js",
+      "default": "./dist/providers/environment/index.js"
+    },
+    "./focus-trap": {
+      "types": "./dist/providers/focus-trap/index.d.ts",
+      "solid": "./dist/providers/focus-trap/index.jsx",
+      "import": "./dist/providers/focus-trap/index.js",
+      "default": "./dist/providers/focus-trap/index.js"
+    },
+    "./format": {
+      "types": "./dist/providers/format/index.d.ts",
+      "solid": "./dist/providers/format/index.jsx",
+      "import": "./dist/providers/format/index.js",
+      "default": "./dist/providers/format/index.js"
+    },
+    "./frame": {
+      "types": "./dist/providers/frame/index.d.ts",
+      "solid": "./dist/providers/frame/index.jsx",
+      "import": "./dist/providers/frame/index.js",
+      "default": "./dist/providers/frame/index.js"
+    },
+    "./highlight": {
+      "types": "./dist/providers/highlight/index.d.ts",
+      "solid": "./dist/providers/highlight/index.jsx",
+      "import": "./dist/providers/highlight/index.js",
+      "default": "./dist/providers/highlight/index.js"
+    },
+    "./locale": {
+      "types": "./dist/providers/locale/index.d.ts",
+      "solid": "./dist/providers/locale/index.jsx",
+      "import": "./dist/providers/locale/index.js",
+      "default": "./dist/providers/locale/index.js"
+    },
+    "./*": {
+      "types": "./dist/components/*/index.d.ts",
+      "solid": "./dist/components/*/index.jsx",
+      "import": "./dist/components/*/index.js",
+      "default": "./dist/components/*/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "storybook": "storybook dev -p 6009",
+    "build-storybook": "storybook build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --browser.headless && vitest run --config vitest.ssr.config.ts",
+    "test:ssr": "vitest run --config vitest.ssr.config.ts",
+    "test:dev": "vitest --browser.headless",
+    "test:ui": "vitest --ui --open",
+    "lint:package": "publint",
+    "check:package-files": "node ./scripts/check-package-files.cjs",
+    "check:package-types": "tsc --project ./tsconfig.package-consumer.json",
+    "check": "pnpm run typecheck && pnpm run test && pnpm run build && pnpm run check:package-types && pnpm run check:package-files && pnpm run lint:package",
+    "prepack": "pnpm run check"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.0 <2.0.0"
+  },
+  "dependencies": {
+    "@destyler/anatomy": "catalog:prod",
+    "@destyler/aspect-ratio": "catalog:prod",
+    "@destyler/auto-resize": "catalog:prod",
+    "@destyler/breadcrumbs": "catalog:prod",
+    "@destyler/calendar": "catalog:prod",
+    "@destyler/carousel": "catalog:prod",
+    "@destyler/checkbox": "catalog:prod",
+    "@destyler/clipboard": "catalog:prod",
+    "@destyler/collapse": "catalog:prod",
+    "@destyler/collapsible": "catalog:prod",
+    "@destyler/collection": "catalog:prod",
+    "@destyler/color-picker": "catalog:prod",
+    "@destyler/combobox": "catalog:prod",
+    "@destyler/dialog": "catalog:prod",
+    "@destyler/dom": "catalog:prod",
+    "@destyler/dynamic": "catalog:prod",
+    "@destyler/edit": "catalog:prod",
+    "@destyler/file-upload": "catalog:prod",
+    "@destyler/floating-panel": "catalog:prod",
+    "@destyler/focus-trap": "catalog:prod",
+    "@destyler/highlight-text": "catalog:prod",
+    "@destyler/hover-card": "catalog:prod",
+    "@destyler/i18n": "catalog:prod",
+    "@destyler/image": "catalog:prod",
+    "@destyler/label": "catalog:prod",
+    "@destyler/menu": "catalog:prod",
+    "@destyler/navigation-menu": "catalog:prod",
+    "@destyler/number-input": "catalog:prod",
+    "@destyler/otp-input": "catalog:prod",
+    "@destyler/pagination": "catalog:prod",
+    "@destyler/popover": "catalog:prod",
+    "@destyler/presence": "catalog:prod",
+    "@destyler/progress": "catalog:prod",
+    "@destyler/qr-code": "catalog:prod",
+    "@destyler/radio": "catalog:prod",
+    "@destyler/scroll-area": "catalog:prod",
+    "@destyler/select": "catalog:prod",
+    "@destyler/separator": "catalog:prod",
+    "@destyler/signature": "catalog:prod",
+    "@destyler/slider": "catalog:prod",
+    "@destyler/solid": "catalog:prod",
+    "@destyler/splitter": "catalog:prod",
+    "@destyler/steps": "catalog:prod",
+    "@destyler/store": "catalog:prod",
+    "@destyler/switch": "catalog:prod",
+    "@destyler/tabs": "catalog:prod",
+    "@destyler/timer": "catalog:prod",
+    "@destyler/toast": "catalog:prod",
+    "@destyler/toggle": "catalog:prod",
+    "@destyler/tooltip": "catalog:prod",
+    "@destyler/tour": "catalog:prod",
+    "@destyler/tree": "catalog:prod",
+    "@destyler/types": "catalog:prod",
+    "@destyler/utils": "catalog:prod",
+    "@destyler/xstate": "catalog:prod"
+  },
+  "devDependencies": {
+    "@modular-forms/solid": "catalog:solid-test",
+    "@solidjs/router": "catalog:solid-test",
+    "@solidjs/testing-library": "catalog:solid-test",
+    "@testing-library/jest-dom": "catalog:solid-test",
+    "@testing-library/user-event": "catalog:solid-test",
+    "@vitest/browser-playwright": "catalog:test",
+    "@vitest/ui": "catalog:test",
+    "jsdom": "catalog:solid-test",
+    "lucide-solid": "catalog:solid-test",
+    "publint": "catalog:build",
+    "resize-observer-polyfill": "catalog:solid-test",
+    "solid-js": "catalog:framework",
+    "storybook-solidjs-vite": "catalog:stories",
+    "typescript": "catalog:types",
+    "unplugin-solid": "catalog:solid-build",
+    "vite": "catalog:runtime",
+    "vite-plugin-solid": "catalog:solid-build",
+    "vitest": "catalog:test",
+    "vitest-browser-solid": "catalog:solid-test"
+  }
+}

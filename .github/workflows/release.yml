@@ -31,7 +31,9 @@ jobs:
           pnpm run lint
           pnpm run test:ci
           pnpm --filter @destyler-ui/svelte check:ci
+          pnpm --filter @destyler-ui/solid check
           pnpm --filter @destyler-ui/svelte build-storybook
+          pnpm --filter @destyler-ui/solid build-storybook
           pnpm run docs:build
 
       - run: npx changelogithub

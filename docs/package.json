@@ -13,6 +13,7 @@
     "generate:types": "tsx scripts/generate-type-docs.ts",
     "generate:types:vue": "tsx scripts/generate-type-docs.ts vue",
     "generate:types:react": "tsx scripts/generate-type-docs.ts react",
+    "generate:types:solid": "tsx scripts/generate-type-docs.ts solid",
     "generate:types:svelte": "tsx scripts/generate-type-docs.ts svelte",
     "validate:types": "tsx scripts/validate-type-docs.ts",
     "check:docs": "tsx scripts/check-docs.ts"
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@astrojs/react": "catalog:docs",
+    "@astrojs/solid-js": "catalog:docs",
     "@astrojs/starlight": "catalog:docs",
     "@astrojs/svelte": "catalog:docs",
     "@astrojs/vue": "catalog:docs",
@@ -34,6 +36,7 @@
     "react": "catalog:framework",
     "react-dom": "catalog:framework",
     "shiki": "catalog:docs",
+    "solid-js": "catalog:framework",
     "svelte": "catalog:framework",
     "tsx": "catalog:docs",
     "typescript": "catalog:types",

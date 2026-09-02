@@ -55,6 +55,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { HoverCard } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <HoverCard.Root>
+      <HoverCard.Trigger />
+      <HoverCard.Positioner>
+        <HoverCard.Content>
+          <HoverCard.Arrow>
+            <HoverCard.ArrowTip />
+          </HoverCard.Arrow>
+        </HoverCard.Content>
+      </HoverCard.Positioner>
+    </HoverCard.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

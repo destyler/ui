@@ -1,16 +1,24 @@
+<script module lang="ts">
+  export interface ToastUpdateProps {
+    duration?: number
+  }
+</script>
+
 <script lang="ts">
   import { Toast, Toaster, createToaster } from '../index'
+
+  let { duration }: ToastUpdateProps = $props()
 
   const toaster = createToaster({ placement: 'bottom-end' })
   let toastId: string | undefined
 
   function createToast() {
-    toastId = toaster.create({ title: originalTitle, description: originalDescription, type: 'info' })
+    toastId = toaster.create({ title: originalTitle, description: originalDescription, type: 'info', duration })
   }
 
   function updateToast() {
     if (toastId)
-      toaster.update(toastId, { title: updatedTitle, description: updatedDescription, type: 'success' })
+      toaster.update(toastId, { title: updatedTitle, description: updatedDescription, type: 'success', duration })
   }
 </script>
 

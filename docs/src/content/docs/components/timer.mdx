@@ -53,6 +53,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Timer } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Timer.Root>
+      <Timer.Area>
+        <Timer.Item type="seconds" />
+        <Timer.Separator />
+      </Timer.Area>
+      <Timer.Control>
+        <Timer.ActionTrigger action="start">Start</Timer.ActionTrigger>
+      </Timer.Control>
+    </Timer.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

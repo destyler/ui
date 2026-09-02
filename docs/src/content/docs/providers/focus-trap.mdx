@@ -27,6 +27,14 @@ import { FocusTrap } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { FocusTrap } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -72,6 +80,28 @@ export function Example() {
     <>
       <button type="button" onClick={() => setTrapped(true)}>Start trap</button>
       <FocusTrap disabled={!trapped} returnFocusOnDeactivate>
+        <input aria-label="Name" />
+        <button type="button" onClick={() => setTrapped(false)}>End trap</button>
+      </FocusTrap>
+    </>
+  )
+}
+```
+
+</FrameworkContent>
+
+<FrameworkContent fw="solid">
+
+```tsx
+import { FocusTrap } from '@destyler-ui/solid'
+import { createSignal } from 'solid-js'
+
+export function Example() {
+  const [trapped, setTrapped] = createSignal(false)
+  return (
+    <>
+      <button type="button" onClick={() => setTrapped(true)}>Start trap</button>
+      <FocusTrap disabled={!trapped()} returnFocusOnDeactivate>
         <input aria-label="Name" />
         <button type="button" onClick={() => setTrapped(false)}>End trap</button>
       </FocusTrap>

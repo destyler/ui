@@ -1,12 +1,20 @@
+<script module lang="ts">
+  export interface ToastActionProps {
+    duration?: number
+  }
+</script>
+
 <script lang="ts">
   import { Toast, Toaster, createToaster } from '../index'
+
+  let { duration }: ToastActionProps = $props()
 
   const toaster = createToaster({ placement: 'bottom-end' })
   let actionTriggered = $state(false)
 
   function createToast() {
     actionTriggered = false
-    toaster.create({ title, description, type: 'info' })
+    toaster.create({ title, description, type: 'info', duration })
   }
 </script>
 

@@ -73,6 +73,38 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Combobox, createListCollection } from '@destyler-ui/solid'
+
+const collection = createListCollection({ items: ['React', 'Solid', 'Vue'] })
+
+export default function Basic() {
+  return (
+    <Combobox.Root collection={collection}>
+      <Combobox.Label>Framework</Combobox.Label>
+      <Combobox.Control>
+        <Combobox.Input />
+        <Combobox.Trigger />
+        <Combobox.ClearTrigger />
+      </Combobox.Control>
+      <Combobox.Positioner>
+        <Combobox.Content>
+          <Combobox.ItemGroup>
+            <Combobox.ItemGroupLabel>Frameworks</Combobox.ItemGroupLabel>
+            <Combobox.Item item={collection.items[0]}>
+              <Combobox.ItemText>{collection.items[0]}</Combobox.ItemText>
+              <Combobox.ItemIndicator />
+            </Combobox.Item>
+          </Combobox.ItemGroup>
+        </Combobox.Content>
+      </Combobox.Positioner>
+    </Combobox.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script module lang="ts">

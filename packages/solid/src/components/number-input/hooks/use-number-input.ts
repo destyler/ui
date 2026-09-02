@@ -1,0 +1,51 @@
+import type { PropTypes } from '@destyler/solid'
+import type { Accessor } from 'solid-js'
+import type { Optional } from '~/types'
+import * as numberInput from '@destyler/number-input'
+import { normalizeProps, useMachine } from '@destyler/solid'
+import { createMemo, createUniqueId } from 'solid-js'
+import { useFieldContext } from '~/components/field'
+import { useEnvironmentContext, useLocaleContext } from '~/providers'
+
+export interface UseNumberInputProps
+  extends Optional<Omit<numberInput.Context, 'dir' | 'getRootNode'>, 'id'> {
+  /**
+   * The initial value of the number input when it is first rendered.
+   * Use when you do not need to control the state of the number input.
+   */
+  defaultValue?: numberInput.Context['value']
+}
+export interface UseNumberInputReturn extends Accessor<numberInput.Api<PropTypes>> {}
+
+export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputReturn {
+  const id = createUniqueId()
+  const locale = useLocaleContext()
+  const environment = useEnvironmentContext()
+  const field = useFieldContext()
+
+  const initialContext = createMemo(() => ({
+    id,
+    ids: {
+      label: field?.().ids.label,
+      input: field?.().ids.control,
+    },
+    disabled: field?.().disabled,
+    readOnly: field?.().readOnly,
+    required: field?.().required,
+    invalid: field?.().invalid,
+    dir: locale().dir,
+    locale: locale().locale,
+    getRootNode: environment().getRootNode,
+    value: props.defaultValue,
+    ...props,
+  }))
+
+  const context = createMemo(() => ({
+    ...initialContext(),
+    value: props.value,
+  }))
+
+  const [state, send] = useMachine(numberInput.machine(initialContext()), { context })
+
+  return createMemo(() => numberInput.connect(state, send, normalizeProps))
+}

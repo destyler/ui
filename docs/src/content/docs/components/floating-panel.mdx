@@ -71,6 +71,35 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { FloatingPanel } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <FloatingPanel.Root>
+      <FloatingPanel.Trigger />
+      <FloatingPanel.Positioner>
+        <FloatingPanel.Content>
+          <FloatingPanel.Header>
+            <FloatingPanel.Title />
+            <FloatingPanel.DragTrigger />
+            <FloatingPanel.MinimizeTrigger />
+            <FloatingPanel.MaximizeTrigger />
+            <FloatingPanel.RestoreTrigger />
+            <FloatingPanel.CloseTrigger />
+          </FloatingPanel.Header>
+          <FloatingPanel.Body />
+          <FloatingPanel.ResizeTrigger axis="se" />
+        </FloatingPanel.Content>
+      </FloatingPanel.Positioner>
+      <FloatingPanel.Dock />
+    </FloatingPanel.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

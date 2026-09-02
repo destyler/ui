@@ -63,6 +63,31 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { NavigationMenu } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <NavigationMenu.Root>
+      <NavigationMenu.List>
+        <NavigationMenu.Item value="docs">
+          <NavigationMenu.Trigger />
+          <NavigationMenu.Content>
+            <NavigationMenu.Link />
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+        <NavigationMenu.Indicator />
+      </NavigationMenu.List>
+      <NavigationMenu.ViewportPositioner>
+        <NavigationMenu.Viewport />
+      </NavigationMenu.ViewportPositioner>
+    </NavigationMenu.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

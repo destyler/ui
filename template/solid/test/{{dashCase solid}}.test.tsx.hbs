@@ -1,0 +1,15 @@
+import { render } from '@solidjs/testing-library'
+import { {{capitalize (camelize solid)}}, {{camelize solid}}Anatomy } from '../'
+import { getExports, getParts } from '../../../setup-test'
+import { Basic } from '../examples/Basic'
+
+describe('{{multiCapitalize solid}}', () => {
+  it.each(getParts({{camelize solid}}Anatomy))('should render part %s', (part) => {
+    render(() => <Basic />)
+    expect(document.querySelector(part)).toBeInTheDocument()
+  })
+
+  it.each(getExports({{camelize solid}}Anatomy))('should export %s', (part) => {
+    expect({{capitalize (camelize solid)}}[part]).toBeDefined()
+  })
+})

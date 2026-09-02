@@ -59,6 +59,29 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Edit } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Edit.Root>
+      <Edit.Label />
+      <Edit.Area>
+        <Edit.Input />
+        <Edit.Preview />
+      </Edit.Area>
+      <Edit.Control>
+        <Edit.EditTrigger />
+        <Edit.SubmitTrigger />
+        <Edit.CancelTrigger />
+      </Edit.Control>
+    </Edit.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

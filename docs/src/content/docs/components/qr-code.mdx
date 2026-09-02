@@ -49,6 +49,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { QrCode } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <QrCode.Root>
+      <QrCode.Frame>
+        <QrCode.Pattern />
+      </QrCode.Frame>
+      <QrCode.Overlay />
+      <QrCode.DownloadTrigger fileName="qr-code.png" mimeType="image/png" />
+    </QrCode.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

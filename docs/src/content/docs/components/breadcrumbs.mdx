@@ -58,6 +58,41 @@ export function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Breadcrumbs } from '@destyler-ui/solid'
+import { For, Show } from 'solid-js'
+
+const items = [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'docs', label: 'Docs' },
+]
+
+export function Basic() {
+  return (
+    <Breadcrumbs.Root items={items}>
+      <Breadcrumbs.List>
+        <Breadcrumbs.Context>
+          {breadcrumbs => (
+            <For each={breadcrumbs().items}>
+              {item => (
+                <Breadcrumbs.Item item={item}>
+                  <Breadcrumbs.Link item={item}>{item.label}</Breadcrumbs.Link>
+                  <Show when={item.href}>
+                    <Breadcrumbs.Separator>/</Breadcrumbs.Separator>
+                  </Show>
+                </Breadcrumbs.Item>
+              )}
+            </For>
+          )}
+        </Breadcrumbs.Context>
+      </Breadcrumbs.List>
+    </Breadcrumbs.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

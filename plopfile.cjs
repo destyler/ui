@@ -94,6 +94,36 @@ module.exports = function main(plop) {
     },
   })
 
+  plop.setGenerator('solid', {
+    description: 'Generates a new Solid component',
+    prompts: [
+      {
+        type: 'input',
+        name: 'solid',
+        message: 'Enter component name (e.g. avatar, otp-input):',
+      },
+    ],
+    actions(answers) {
+      const actions = []
+
+      if (!answers)
+        return actions
+
+      const { solid } = answers
+
+      actions.push({
+        type: 'addMany',
+        templateFiles: 'template/solid/**',
+        destination: `packages/solid/src/components/{{dashCase solid}}`,
+        base: 'template/solid/',
+        data: { solid, name: solid },
+        abortOnFail: true,
+      })
+
+      return actions
+    },
+  })
+
   plop.setGenerator('svelte', {
     description: 'Generates a state-machine-free Svelte component scaffold and updates its manifest',
     prompts: [

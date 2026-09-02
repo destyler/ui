@@ -53,6 +53,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { ScrollArea } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <ScrollArea.Root>
+      <ScrollArea.Viewport>
+        <ScrollArea.Content />
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar>
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+      <ScrollArea.Corner />
+    </ScrollArea.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

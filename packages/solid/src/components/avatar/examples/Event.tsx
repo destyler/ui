@@ -1,0 +1,11 @@
+import { Avatar } from '../index'
+
+export function Event() {
+  return (
+    // eslint-disable-next-line no-console
+    <Avatar.Root onStatusChange={event => console.log(event.status)}>
+      <Avatar.Fallback>EL</Avatar.Fallback>
+      <Avatar.Image src="https://github.com/elonehoo.png" alt="avatar" />
+    </Avatar.Root>
+  )
+}

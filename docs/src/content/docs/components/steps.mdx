@@ -65,6 +65,32 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Steps } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Steps.Root>
+      <Steps.List>
+        <Steps.Item index={0}>
+          <Steps.Trigger>
+            <Steps.Indicator />
+          </Steps.Trigger>
+          <Steps.Separator />
+        </Steps.Item>
+      </Steps.List>
+      <Steps.Content index={0} />
+      <Steps.CompletedContent />
+      <Steps.Progress />
+      <Steps.PrevTrigger />
+      <Steps.NextTrigger />
+    </Steps.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

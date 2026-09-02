@@ -365,13 +365,32 @@ function getPublicComponentValueNames(publicEntryFile: string): string[] {
       continue
     if (!ts.isNamedExports(statement.exportClause))
       continue
-    if (!statement.moduleSpecifier || !ts.isStringLiteral(statement.moduleSpecifier))
-      continue
-    if (!/(?:^|\/)components(?:\/|$)/.test(statement.moduleSpecifier.text))
-      continue
-
     for (const element of statement.exportClause.elements) {
-      if (!element.isTypeOnly)
+      if (!element.isTypeOnly && /^[A-Z]/.test(element.name.text))
+        names.add(element.name.text)
+    }
+  }
+
+  return [...names].sort()
+}
+
+function getPublicNamespaceValueNames(publicEntryFile: string): string[] {
+  const sourceFile = ts.createSourceFile(
+    publicEntryFile,
+    fs.readFileSync(publicEntryFile, 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+    publicEntryFile.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
+  )
+  const names = new Set<string>()
+
+  for (const statement of sourceFile.statements) {
+    if (!ts.isExportDeclaration(statement) || statement.isTypeOnly || !statement.exportClause)
+      continue
+    if (!ts.isNamedExports(statement.exportClause))
+      continue
+    for (const element of statement.exportClause.elements) {
+      if (!element.isTypeOnly && /^[A-Z]/.test(element.name.text))
         names.add(element.name.text)
     }
   }
@@ -414,10 +433,12 @@ function getComponentDirs(framework: FrameworkDefinition): { name: string, dir: 
 }
 
 function getPublicIndexFile(componentDir: string): string {
-  const publicIndex = path.join(componentDir, 'index.ts')
-  if (!fs.existsSync(publicIndex))
-    throw new Error(`Missing public declaration entry: ${path.relative(rootDir, publicIndex)}`)
-  return publicIndex
+  for (const fileName of ['index.ts', 'index.tsx']) {
+    const publicIndex = path.join(componentDir, fileName)
+    if (fs.existsSync(publicIndex))
+      return publicIndex
+  }
+  throw new Error(`Missing public declaration entry: ${path.relative(rootDir, componentDir)}`)
 }
 
 async function extractTypesForFramework(framework: FrameworkDefinition) {
@@ -458,10 +479,12 @@ async function extractTypesForFramework(framework: FrameworkDefinition) {
     const prefix = kebabToPascal(comp.name)
     const types: ComponentTypesMap = {}
     const namespaceExports = getNamespaceExports(rootExports, prefix, checker)
-    const publicNamespace = path.join(comp.dir, 'namespace.ts')
+    const publicNamespace = ['namespace.ts', `${comp.name}.ts`]
+      .map(fileName => path.join(comp.dir, fileName))
+      .find(fileName => fs.existsSync(fileName))
     const namespaceComponents = getPublicComponentExports(
       namespaceExports,
-      fs.existsSync(publicNamespace) ? getPublicComponentValueNames(publicNamespace) : [],
+      publicNamespace ? getPublicNamespaceValueNames(publicNamespace) : [],
       valueName => valueName,
       checker,
     )

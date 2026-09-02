@@ -325,6 +325,7 @@ starlight-tabs {
 /* Framework content visibility — global rules for data-fw switching */
 :root[data-framework='vue'] .ds-fw-content:not([data-fw='vue']),
 :root[data-framework='react'] .ds-fw-content:not([data-fw='react']),
+:root[data-framework='solid'] .ds-fw-content:not([data-fw='solid']),
 :root[data-framework='svelte'] .ds-fw-content:not([data-fw='svelte']),
 :root:not([data-framework]) .ds-fw-content:not([data-fw='vue']) {
   display: none;

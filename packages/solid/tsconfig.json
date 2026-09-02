@@ -1,0 +1,79 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ],
+      "@destyler-ui/solid": [
+        "./src/index.ts"
+      ],
+      "@destyler-ui/solid/anatomy": [
+        "./src/anatomy.ts"
+      ],
+      "@destyler-ui/solid/collection": [
+        "./src/utils/collection.ts"
+      ],
+      "@destyler-ui/solid/factory": [
+        "./src/factory/index.tsx"
+      ],
+      "@destyler-ui/solid/environment": [
+        "./src/providers/environment/index.ts"
+      ],
+      "@destyler-ui/solid/client-only": [
+        "./src/providers/client-only/index.ts"
+      ],
+      "@destyler-ui/solid/focus-trap": [
+        "./src/providers/focus-trap/index.ts"
+      ],
+      "@destyler-ui/solid/format": [
+        "./src/providers/format/index.ts"
+      ],
+      "@destyler-ui/solid/frame": [
+        "./src/providers/frame/index.ts"
+      ],
+      "@destyler-ui/solid/highlight": [
+        "./src/providers/highlight/index.ts"
+      ],
+      "@destyler-ui/solid/locale": [
+        "./src/providers/locale/index.ts"
+      ],
+      "@destyler-ui/solid/*": [
+        "./src/components/*/index.ts"
+      ]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "declaration": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".storybook/**/*.ts",
+    "tsdown.config.ts",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "storybook-static"
+  ]
+}

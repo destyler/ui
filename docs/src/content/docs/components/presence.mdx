@@ -41,6 +41,26 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Presence } from '@destyler-ui/solid'
+import { createSignal } from 'solid-js'
+
+export default function Basic() {
+  const [isOpen, setIsOpen] = createSignal(false)
+
+  return (
+    <>
+      <button type="button" onClick={() => setIsOpen(open => !open)}>Toggle</button>
+      <Presence present={isOpen()} lazyMount unmountOnExit>
+        <div>Content</div>
+      </Presence>
+    </>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script module lang="ts">

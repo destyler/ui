@@ -1,5 +1,13 @@
+<script module lang="ts">
+  export interface ToastTypesProps {
+    duration?: number
+  }
+</script>
+
 <script lang="ts">
   import { Toast, Toaster, createToaster } from '../index'
+
+  let { duration }: ToastTypesProps = $props()
 
   const toaster = createToaster({ placement: 'bottom-end' })
 </script>
@@ -13,14 +21,14 @@
 {#snippet infoTitle()}Info Toast{/snippet}
 {#snippet infoDescription()}Here is some information{/snippet}
 
-<button type="button" onclick={() => toaster.success({ title: successTitle, description: successDescription })}>
+<button type="button" onclick={() => toaster.success({ title: successTitle, description: successDescription, duration })}>
   Success
 </button>
-<button type="button" onclick={() => toaster.error({ title: errorTitle, description: errorDescription })}>Error</button>
-<button type="button" onclick={() => toaster.loading({ title: loadingTitle, description: loadingDescription })}>
+<button type="button" onclick={() => toaster.error({ title: errorTitle, description: errorDescription, duration })}>Error</button>
+<button type="button" onclick={() => toaster.loading({ title: loadingTitle, description: loadingDescription, duration })}>
   Loading
 </button>
-<button type="button" onclick={() => toaster.create({ title: infoTitle, description: infoDescription, type: 'info' })}>
+<button type="button" onclick={() => toaster.create({ title: infoTitle, description: infoDescription, type: 'info', duration })}>
   Info
 </button>
 

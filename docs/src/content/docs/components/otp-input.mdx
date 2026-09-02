@@ -49,6 +49,24 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { OtpInput } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <OtpInput.Root>
+      <OtpInput.Label />
+      <OtpInput.Control>
+        <OtpInput.Input index={0} />
+      </OtpInput.Control>
+      <OtpInput.HiddenInput />
+    </OtpInput.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

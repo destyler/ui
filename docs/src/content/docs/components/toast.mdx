@@ -66,6 +66,34 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Toast, Toaster, createToaster } from '@destyler-ui/solid'
+
+export default function Basic() {
+  const toaster = createToaster({ placement: 'bottom-end' })
+
+  return (
+    <>
+      <button type="button" onClick={() => toaster.create({ title: 'Upload complete', description: 'Your file is ready.' })}>
+        Create toast
+      </button>
+      <Toaster toaster={toaster}>
+        {toast => (
+          <Toast.Root>
+            <Toast.Title>{toast().title}</Toast.Title>
+            <Toast.Description>{toast().description}</Toast.Description>
+            <Toast.ActionTrigger>Undo</Toast.ActionTrigger>
+            <Toast.CloseTrigger>Close</Toast.CloseTrigger>
+          </Toast.Root>
+        )}
+      </Toaster>
+    </>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

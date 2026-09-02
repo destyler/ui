@@ -1,4 +1,4 @@
-import antfu, { astro, react, svelte, vue } from '@antfu/eslint-config'
+import antfu, { astro, react, solid, svelte, vue } from '@antfu/eslint-config'
 
 export default antfu(
   {
@@ -26,6 +26,11 @@ export default antfu(
   {
     ...svelte({
       files: ['packages/svelte/**/*.{svelte,js,ts}'],
+    }),
+  },
+  {
+    ...solid({
+      files: ['packages/solid/**/*.{js,ts,jsx,tsx}'],
     }),
   },
   {

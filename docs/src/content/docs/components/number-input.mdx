@@ -55,6 +55,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { NumberInput } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <NumberInput.Root>
+      <NumberInput.Label />
+      <NumberInput.ValueText />
+      <NumberInput.Control>
+        <NumberInput.DecrementTrigger />
+        <NumberInput.Input />
+        <NumberInput.IncrementTrigger />
+      </NumberInput.Control>
+      <NumberInput.Scrubber />
+    </NumberInput.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

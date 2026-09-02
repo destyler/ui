@@ -99,6 +99,65 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Calendar } from '@destyler-ui/solid'
+import { Index } from 'solid-js'
+
+export default function Basic() {
+  return (
+    <Calendar.Root>
+      <Calendar.Label>Date</Calendar.Label>
+      <Calendar.Control>
+        <Calendar.Trigger>Choose date</Calendar.Trigger>
+      </Calendar.Control>
+      <Calendar.Positioner>
+        <Calendar.Content>
+          <Calendar.View view="day">
+            <Calendar.Context>
+              {api => (
+                <>
+                  <Calendar.ViewControl>
+                    <Calendar.PrevTrigger>Previous</Calendar.PrevTrigger>
+                    <Calendar.ViewTrigger><Calendar.RangeText /></Calendar.ViewTrigger>
+                    <Calendar.NextTrigger>Next</Calendar.NextTrigger>
+                  </Calendar.ViewControl>
+                  <Calendar.Table>
+                    <Calendar.TableHead>
+                      <Calendar.TableRow>
+                        <Index each={api().weekDays}>
+                          {weekDay => <Calendar.TableHeader>{weekDay().short}</Calendar.TableHeader>}
+                        </Index>
+                      </Calendar.TableRow>
+                    </Calendar.TableHead>
+                    <Calendar.TableBody>
+                      <Index each={api().weeks}>
+                        {week => (
+                          <Calendar.TableRow>
+                            <Index each={week()}>
+                              {day => (
+                                <Calendar.TableCell value={day()}>
+                                  <Calendar.TableCellTrigger>{day().day}</Calendar.TableCellTrigger>
+                                </Calendar.TableCell>
+                              )}
+                            </Index>
+                          </Calendar.TableRow>
+                        )}
+                      </Index>
+                    </Calendar.TableBody>
+                  </Calendar.Table>
+                </>
+              )}
+            </Calendar.Context>
+          </Calendar.View>
+        </Calendar.Content>
+      </Calendar.Positioner>
+    </Calendar.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script module lang="ts">

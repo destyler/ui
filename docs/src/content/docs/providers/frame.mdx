@@ -27,6 +27,14 @@ import { Frame } from '@destyler-ui/react'
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { Frame } from '@destyler-ui/solid'
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -77,6 +85,25 @@ export function Example() {
 
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+
+```tsx
+import { Frame } from '@destyler-ui/solid'
+
+export function Example() {
+  return (
+    <Frame title="Preview" style={{ border: '1px solid #ccc', width: '100%', height: 'var(--height)' }}>
+      <div style={{ padding: '2rem' }}>
+        <h2>Inside the frame</h2>
+        <button type="button">Focusable content</button>
+      </div>
+    </Frame>
+  )
+}
+```
+
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 
 ```svelte
@@ -102,8 +129,9 @@ The generated iframe exposes its measured content height through the `--height` 
 | --- | --- | --- | --- |
 | Default content | Framework content or slot | — | Content rendered into the iframe body. |
 | `head` | Prop, snippet, or Vue `#head` slot | — | Content rendered into the iframe head. |
-| `srcdoc` | `string` | Internal empty document | Initial iframe document. Include an element with `class="frame-root"` to choose the mount point. |
-| Mount lifecycle | Vue `mount`/`unmount` events or React/Svelte callbacks | — | Reports frame content mounting and unmounting. |
+| `title` | `string` | — | Accessible iframe title. Required by the Solid component; forwarded as a standard iframe attribute by React, Vue, and Svelte. |
+| `srcDoc` / `srcdoc` | `string` | Internal empty document | Initial iframe document. Use `srcDoc` in React, `srcDoc` (`src-doc` in templates) in Vue, and `srcdoc` in Solid and Svelte. Include an element with `class="frame-root"` to choose the mount point. |
+| Mount lifecycle | Vue `mount`/`unmount` events or React/Solid/Svelte callbacks | — | Reports frame content mounting and unmounting. |
 | `ref` | `HTMLIFrameElement` | — | Bindable iframe reference. |
 
-All standard iframe attributes, including `title`, `sandbox`, and `allow`, are forwarded to the iframe.
+Other standard iframe attributes, including `sandbox` and `allow`, are forwarded to the iframe.

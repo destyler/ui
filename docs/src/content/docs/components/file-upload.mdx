@@ -71,6 +71,44 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { FileUpload } from '@destyler-ui/solid'
+import { For } from 'solid-js'
+
+export default function Basic() {
+  return (
+    <FileUpload.Root>
+      <FileUpload.Label />
+      <FileUpload.Dropzone>
+        <FileUpload.Trigger />
+      </FileUpload.Dropzone>
+      <FileUpload.ItemGroup>
+        <FileUpload.Context>
+          {api => (
+            <For each={api().acceptedFiles}>
+              {file => (
+                <FileUpload.Item file={file}>
+                  <FileUpload.ItemPreview type="image/*">
+                    <FileUpload.ItemPreviewImage />
+                  </FileUpload.ItemPreview>
+                  <FileUpload.ItemName />
+                  <FileUpload.ItemSizeText />
+                  <FileUpload.ItemDeleteTrigger />
+                </FileUpload.Item>
+              )}
+            </For>
+          )}
+        </FileUpload.Context>
+      </FileUpload.ItemGroup>
+      <FileUpload.ClearTrigger />
+      <FileUpload.HiddenInput />
+    </FileUpload.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

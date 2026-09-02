@@ -79,6 +79,80 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { createTreeCollection, Tree } from '@destyler-ui/solid'
+import { For, Show } from 'solid-js'
+
+interface Node {
+  id: string
+  name: string
+  children?: Node[]
+}
+
+const collection = createTreeCollection<Node>({
+  nodeToValue: node => node.id,
+  nodeToString: node => node.name,
+  rootNode: {
+    id: 'root',
+    name: '',
+    children: [
+      {
+        id: 'src',
+        name: 'src',
+        children: [{ id: 'src/index.ts', name: 'index.ts' }],
+      },
+      { id: 'package.json', name: 'package.json' },
+    ],
+  },
+})
+
+export default function Basic() {
+  return (
+    <Tree.Root collection={collection}>
+      <Tree.Label>Files</Tree.Label>
+      <Tree.Tree>
+        <For each={collection.rootNode.children}>
+          {(node, index) => <TreeNode node={node} indexPath={[index()]} />}
+        </For>
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+function TreeNode(props: Tree.NodeProviderProps<Node>) {
+  return (
+    <Tree.NodeProvider node={props.node} indexPath={props.indexPath}>
+      <Show
+        when={props.node.children}
+        fallback={(
+          <Tree.Item>
+            <Tree.ItemText>{props.node.name}</Tree.ItemText>
+          </Tree.Item>
+        )}
+      >
+        <Tree.Branch>
+          <Tree.BranchControl>
+            <Tree.BranchTrigger />
+            <Tree.BranchText>{props.node.name}</Tree.BranchText>
+            <Tree.BranchIndicator />
+          </Tree.BranchControl>
+          <Tree.BranchContent>
+            <Tree.BranchIndentGuide />
+            <For each={props.node.children}>
+              {(child, index) => (
+                <TreeNode node={child} indexPath={[...props.indexPath, index()]} />
+              )}
+            </For>
+          </Tree.BranchContent>
+        </Tree.Branch>
+      </Show>
+    </Tree.NodeProvider>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

@@ -45,6 +45,27 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Splitter } from '@destyler-ui/solid'
+
+export default function Basic() {
+  return (
+    <Splitter.Root
+      size={[
+        { id: 'left', size: 50 },
+        { id: 'right', size: 50 },
+      ]}
+    >
+      <Splitter.Panel id="left" />
+      <Splitter.ResizeTrigger id="left:right" />
+      <Splitter.Panel id="right" />
+    </Splitter.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

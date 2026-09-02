@@ -53,6 +53,37 @@ export default function Basic() {
 ```
 </FrameworkContent>
 
+<FrameworkContent fw="solid">
+```tsx
+import { Signature } from '@destyler-ui/solid'
+import { createSignal } from 'solid-js'
+
+export default function Basic() {
+  const [value, setValue] = createSignal('')
+
+  return (
+    <Signature.Root
+      onDrawEnd={(details) => {
+        if (details.paths.length === 0) {
+          setValue('')
+          return
+        }
+        void details.getDataUrl('image/png').then(setValue)
+      }}
+    >
+      <Signature.Label />
+      <Signature.Control>
+        <Signature.Segment />
+        <Signature.Guide />
+      </Signature.Control>
+      <Signature.ClearTrigger />
+      <Signature.HiddenInput value={value()} />
+    </Signature.Root>
+  )
+}
+```
+</FrameworkContent>
+
 <FrameworkContent fw="svelte">
 ```svelte
 <script lang="ts">

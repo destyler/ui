@@ -1,28 +1,35 @@
 import { useMemo } from 'react'
 import { createToaster, Toast, Toaster } from '../index'
 
-export function ToastPromise() {
+interface ToastPromiseProps {
+  duration?: number
+  promiseDelay?: number
+}
+
+export function ToastPromise(props: ToastPromiseProps = {}) {
   const toaster = useMemo(() => createToaster({ placement: 'bottom-end' }), [])
 
   const createSuccessPromise = () => {
     toaster.promise(
-      new Promise(resolve => setTimeout(() => resolve('done'), 1000)),
+      new Promise(resolve => setTimeout(() => resolve('done'), props.promiseDelay ?? 1000)),
       {
         loading: { title: 'Loading...', description: 'Please wait' },
         success: { title: 'Success!', description: 'Operation completed' },
         error: { title: 'Failed!', description: 'Something went wrong' },
       },
+      { duration: props.duration },
     )
   }
 
   const createErrorPromise = () => {
     toaster.promise(
-      new Promise((_, reject) => setTimeout(() => reject(new Error('error')), 1000)),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('error')), props.promiseDelay ?? 1000)),
       {
         loading: { title: 'Loading...', description: 'Please wait' },
         success: { title: 'Success!', description: 'Operation completed' },
         error: { title: 'Failed!', description: 'Something went wrong' },
       },
+      { duration: props.duration },
     )
   }
 
