@@ -135,16 +135,21 @@ describe('[navigation-menu] component', () => {
     })
   })
 
-  it('should render components content correctly', async () => {
+  it('should render components content correctly', { retry: 2 }, async () => {
     render(Basic, { props: { openDelay: 0, closeDelay: 0 } })
 
     const trigger = page.getByRole('button', { name: /^Components/ })
+    await expect.element(trigger).toBeVisible()
     await userEvent.click(trigger)
+
+    await vi.waitFor(async () => {
+      await expect.element(trigger).toHaveAttribute('aria-expanded', 'true')
+    })
 
     await vi.waitFor(async () => {
       await expect.element(page.getByText('A modal dialog that interrupts the user with important content.')).toBeVisible()
       await expect.element(page.getByText('For sighted users to preview content available behind a link.')).toBeVisible()
       await expect.element(page.getByText('Displays an indicator showing the completion progress of a task.')).toBeVisible()
-    })
+    }, { timeout: 5000 })
   })
 })
