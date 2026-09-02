@@ -10,29 +10,65 @@ export interface UsePresenceProps
   RenderStrategyProps {}
 export interface UsePresenceReturn extends ReturnType<typeof usePresence> {}
 
+function eventType(event: unknown) {
+  if (typeof event === 'string')
+    return event
+  if (event && typeof event === 'object' && 'type' in event)
+    return String((event as { type: unknown }).type)
+  return ''
+}
+
 export function usePresence(props: UsePresenceProps) {
-  const [renderStrategyProps, context] = splitRenderStrategyProps(props)
+  const [renderStrategyProps, presenceProps] = splitRenderStrategyProps(props)
   const [wasEverPresent, setWasEverPresent] = createSignal(false)
-  const [state, send] = useMachine(presence.machine(context), {
-    context,
-  })
-  const api = createMemo(() => presence.connect(state, send, normalizeProps))
+
+  const context = createMemo(() => ({
+    ...presenceProps,
+    present: presenceProps.present,
+    immediate: presenceProps.immediate,
+    onExitComplete: presenceProps.onExitComplete,
+  }))
+
+  const [state, send, service] = useMachine(presence.machine(context()), { context })
+
+  const requestedPresent = () => Boolean(presenceProps.present)
+
+  const guardedSend: typeof send = (event) => {
+    const type = eventType(event)
+    if ((type === 'UNMOUNT' || type === 'UNMOUNT.SUSPEND') && requestedPresent())
+      return
+    send(event)
+  }
+
+  service.send = guardedSend
+
+  const api = createMemo(() => presence.connect(state, guardedSend, normalizeProps))
 
   createEffect(() => {
-    const present = api().present
-    if (present)
+    if (api().present)
       setWasEverPresent(true)
+  })
+
+  createEffect(() => {
+    if (requestedPresent() && !api().present)
+      guardedSend({ type: 'MOUNT' })
   })
 
   return createMemo(() => ({
     unmounted:
-      (!api().present && !wasEverPresent() && renderStrategyProps.lazyMount)
-      || (renderStrategyProps.unmountOnExit && !api().present && wasEverPresent()),
+      (!requestedPresent()
+        && !api().present
+        && !wasEverPresent()
+        && renderStrategyProps.lazyMount)
+      || (renderStrategyProps.unmountOnExit
+        && !requestedPresent()
+        && !api().present
+        && wasEverPresent()),
     present: api().present,
     presenceProps: {
       'ref': api().setNode,
       'hidden': !api().present,
-      'data-state': context.present ? 'open' : 'closed',
+      'data-state': requestedPresent() ? 'open' : 'closed',
     },
   }))
 }

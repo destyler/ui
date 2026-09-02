@@ -99,4 +99,51 @@ describe('presence', () => {
     fireEvent.animationEnd(box)
     await waitFor(() => expect(screen.queryByTestId('animated-box')).not.toBeInTheDocument())
   })
+
+  it('should remount after unmountOnExit when opened again', async () => {
+    render(() => <ComponentUnderTest lazyMount unmountOnExit />)
+
+    expect(screen.queryByTestId('box')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button'))
+    expect(screen.queryByTestId('box')).toBeVisible()
+
+    await user.click(screen.getByRole('button'))
+    await waitFor(() => expect(screen.queryByTestId('box')).not.toBeInTheDocument())
+
+    await user.click(screen.getByRole('button'))
+    expect(screen.queryByTestId('box')).toBeVisible()
+  })
+
+  it('should remount on fast close and reopen', async () => {
+    render(() => <ComponentUnderTest lazyMount unmountOnExit />)
+
+    await user.click(screen.getByRole('button'))
+    expect(screen.queryByTestId('box')).toBeVisible()
+
+    await user.click(screen.getByRole('button'))
+    await user.click(screen.getByRole('button'))
+    expect(screen.queryByTestId('box')).toBeVisible()
+  })
+
+  it('should stay mounted when reopened before the first animation frame', async () => {
+    const [present, setPresent] = createSignal(true)
+
+    render(() => (
+      <Presence present={present()} lazyMount unmountOnExit data-testid="box">
+        I am a red box
+      </Presence>
+    ))
+
+    expect(screen.getByTestId('box')).toBeVisible()
+
+    setPresent(false)
+    setPresent(true)
+
+    await new Promise((resolve) => {
+      requestAnimationFrame(() => resolve(undefined))
+    })
+
+    expect(screen.getByTestId('box')).toBeVisible()
+  })
 })
