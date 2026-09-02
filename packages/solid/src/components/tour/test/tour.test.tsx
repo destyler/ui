@@ -4,9 +4,8 @@ import { createSignal } from 'solid-js'
 import { Tour, tourAnatomy, useTour } from '../'
 import { getExports } from '../../../setup-test'
 
-
 function emitAnimationEnd(element: Element, animationName: string) {
-  element.dispatchEvent(new AnimationEvent("animationend", { animationName, bubbles: true }))
+  element.dispatchEvent(new AnimationEvent('animationend', { animationName, bubbles: true }))
 }
 
 function nextFrame() {
@@ -216,14 +215,16 @@ describe('tour', () => {
 
     await user.click(screen.getByRole('button', { name: 'Advance tour step' }))
     await waitFor(() => expect(screen.getByTestId('changing-tour-status')).toHaveTextContent('open'))
-    expect(backdrop).toBeVisible()
-    expect(spotlight).toBeVisible()
-    expect(backdrop).toHaveAttribute('data-state', 'closed')
-    expect(spotlight).toHaveAttribute('data-state', 'closed')
+    const exitingBackdrop = await waitFor(() => screen.getByTestId('changing-tour-backdrop'))
+    const exitingSpotlight = await waitFor(() => screen.getByTestId('changing-tour-spotlight'))
+    expect(exitingBackdrop).toBeInTheDocument()
+    expect(exitingSpotlight).toBeInTheDocument()
+    expect(exitingBackdrop).toHaveAttribute('data-state', 'closed')
+    expect(exitingSpotlight).toHaveAttribute('data-state', 'closed')
 
     await nextFrame()
-    emitAnimationEnd(backdrop, 'backdrop-exit')
-    emitAnimationEnd(spotlight, 'spotlight-exit')
+    emitAnimationEnd(exitingBackdrop, 'backdrop-exit')
+    emitAnimationEnd(exitingSpotlight, 'spotlight-exit')
     await waitFor(() => expect(screen.queryByTestId('changing-tour-backdrop')).not.toBeInTheDocument())
     await waitFor(() => expect(screen.queryByTestId('changing-tour-spotlight')).not.toBeInTheDocument())
     expect(screen.getByRole('button', { name: 'Advance tour step' })).toBeVisible()
@@ -259,8 +260,8 @@ describe('tour', () => {
             />
             <Tour.Content
               style={{
-                "animation-name": tour().open ? "tour-enter" : "tour-exit",
-                "animation-duration": "60s",
+                'animation-name': tour().open ? 'tour-enter' : 'tour-exit',
+                'animation-duration': '60s',
               }}
             >
               <Tour.CloseTrigger>Close spotlight tour</Tour.CloseTrigger>
