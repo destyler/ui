@@ -13,7 +13,7 @@ export interface TourSpotlightProps extends HTMLProps<'div'>, TourSpotlightBaseP
 export function TourSpotlight(props: TourSpotlightProps) {
   const tour = useTourContext()
   const renderStrategyProps = useRenderStrategyContext()
-  const present = createMemo(() => tour().open && Boolean(tour().step?.target?.()))
+  const present = createMemo(() => Boolean(tour().open && tour().step?.target))
   const presenceApi = usePresence(
     mergeProps(renderStrategyProps, () => ({ present: present() })),
   )

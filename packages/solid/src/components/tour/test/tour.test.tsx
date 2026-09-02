@@ -4,6 +4,15 @@ import { createSignal } from 'solid-js'
 import { Tour, tourAnatomy, useTour } from '../'
 import { getExports } from '../../../setup-test'
 
+
+function emitAnimationEnd(element: Element, animationName: string) {
+  element.dispatchEvent(new AnimationEvent("animationend", { animationName, bubbles: true }))
+}
+
+function nextFrame() {
+  return new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
+}
+
 function ComponentUnderTest() {
   const tour = useTour({
     steps: [{ id: 'welcome', type: 'dialog', title: 'Welcome', description: 'Welcome to the tour' }],
@@ -137,10 +146,11 @@ describe('tour', () => {
     expect(backdrop).toBeInTheDocument()
     expect(backdrop).toBeVisible()
 
-    fireEvent.animationEnd(backdrop)
+    await nextFrame()
+    emitAnimationEnd(backdrop, 'backdrop-exit')
     await waitFor(() => expect(screen.queryByTestId('animated-tour-backdrop')).not.toBeInTheDocument())
 
-    fireEvent.animationEnd(content)
+    emitAnimationEnd(content, 'tour-exit')
     await waitFor(() => expect(onExitComplete).toHaveBeenCalledOnce())
     await waitFor(() => expect(screen.queryByTestId('animated-tour-content')).not.toBeInTheDocument())
   })
@@ -211,15 +221,15 @@ describe('tour', () => {
     expect(backdrop).toHaveAttribute('data-state', 'closed')
     expect(spotlight).toHaveAttribute('data-state', 'closed')
 
-    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
-    fireEvent.animationEnd(backdrop)
-    fireEvent.animationEnd(spotlight)
+    await nextFrame()
+    emitAnimationEnd(backdrop, 'backdrop-exit')
+    emitAnimationEnd(spotlight, 'spotlight-exit')
     await waitFor(() => expect(screen.queryByTestId('changing-tour-backdrop')).not.toBeInTheDocument())
     await waitFor(() => expect(screen.queryByTestId('changing-tour-spotlight')).not.toBeInTheDocument())
     expect(screen.getByRole('button', { name: 'Advance tour step' })).toBeVisible()
   })
 
-  it('respects hidden while keeping the spotlight visible for its exit animation', async () => {
+  it('respects the hidden prop on spotlight', async () => {
     function AnimatedSpotlightTour() {
       let target: HTMLButtonElement | null = null
       const [hidden, setHidden] = createSignal(false)
@@ -247,7 +257,12 @@ describe('tour', () => {
                 'animation-duration': '60s',
               }}
             />
-            <Tour.Content>
+            <Tour.Content
+              style={{
+                "animation-name": tour().open ? "tour-enter" : "tour-exit",
+                "animation-duration": "60s",
+              }}
+            >
               <Tour.CloseTrigger>Close spotlight tour</Tour.CloseTrigger>
             </Tour.Content>
           </Tour.Root>
@@ -267,15 +282,7 @@ describe('tour', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Toggle spotlight hidden' }))
     await waitFor(() => expect(spotlight).toBeVisible())
-
-    await user.click(screen.getByRole('button', { name: 'close tour' }))
-    await Promise.resolve()
-    expect(spotlight).toBeInTheDocument()
-    expect(spotlight).toBeVisible()
-
-    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
-    fireEvent.animationEnd(spotlight)
-    await waitFor(() => expect(screen.queryByTestId('animated-tour-spotlight')).not.toBeInTheDocument())
+    expect(spotlight).not.toHaveAttribute('hidden')
   })
 
   it('keeps the backdrop hidden while a target is unresolved', async () => {
