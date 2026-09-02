@@ -24,6 +24,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
   const locale = useLocaleContext()
   const environment = useEnvironmentContext()
   const id = createUniqueId()
+  let syncingControlledOpen = false
 
   const initialContext = createMemo(() => ({
     id,
@@ -32,6 +33,10 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
     'open': props.defaultOpen,
     'open.controlled': props.open !== undefined,
     ...props,
+    onOpenChange(details: floatingPanel.OpenChangeDetails) {
+      if (!syncingControlledOpen)
+        props.onOpenChange?.(details)
+    },
   }))
 
   const context = createMemo(() => ({
@@ -40,12 +45,37 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
   }))
 
   const [state, send] = useMachine(floatingPanel.machine(initialContext()), { context })
-  const api = createMemo(() => floatingPanel.connect(state, send, normalizeProps))
+  const controlledSend: typeof send = (event) => {
+    const eventType = typeof event === 'string' ? event : event.type
+    const controlledOpen = props.open
+    let requestedOpen: boolean | undefined
+    if (eventType === 'OPEN')
+      requestedOpen = true
+    else if (eventType === 'CLOSE')
+      requestedOpen = false
+    else if (eventType === 'ESCAPE' && state.matches('open') && state.context.closeOnEscape)
+      requestedOpen = false
+
+    if (controlledOpen !== undefined && requestedOpen !== undefined) {
+      if (requestedOpen !== controlledOpen)
+        props.onOpenChange?.({ open: requestedOpen })
+      return
+    }
+
+    send(event)
+  }
+  const api = createMemo(() => floatingPanel.connect(state, controlledSend, normalizeProps))
 
   createEffect(() => {
     const open = props.open
     if (open !== undefined && open !== api().open) {
-      api().setOpen(open)
+      syncingControlledOpen = true
+      try {
+        send(open ? 'OPEN' : 'CLOSE')
+      }
+      finally {
+        syncingControlledOpen = false
+      }
     }
   })
 

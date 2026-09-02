@@ -39,6 +39,24 @@ describe('field / Input', () => {
     expect(screen.getByText('*')).toBeInTheDocument()
   })
 
+  it('uses RequiredIndicator fallback without leaking it to the DOM', async () => {
+    const [required, setRequired] = createSignal(true)
+    render(() => (
+      <Field.Root required={required()}>
+        <Field.RequiredIndicator
+          fallback={<span>Optional</span>}
+          data-testid="required-indicator"
+        />
+      </Field.Root>
+    ))
+
+    expect(screen.getByTestId('required-indicator')).not.toHaveAttribute('fallback')
+
+    setRequired(false)
+    await waitFor(() => expect(screen.getByText('Optional')).toBeInTheDocument())
+    expect(screen.queryByTestId('required-indicator')).not.toBeInTheDocument()
+  })
+
   it('should set textbox as disabled', async () => {
     render(() => <ComponentUnderTest disabled />)
     expect(screen.getByRole('textbox', { name: /label/i })).toBeDisabled()
@@ -118,5 +136,35 @@ describe('field / Input', () => {
     expect(input).toHaveAttribute('id', 'custom-control')
     expect(label).toHaveAttribute('for', 'custom-control')
     expect(screen.getByTestId('field-ids')).toHaveTextContent('custom-root|custom-control')
+  })
+
+  it('associates helper and error text inside a shadow root', async () => {
+    const host = document.createElement('div')
+    const shadowRoot = host.attachShadow({ mode: 'open' })
+    const container = document.createElement('div')
+    shadowRoot.append(container)
+    document.body.append(host)
+
+    try {
+      render(() => <ComponentUnderTest invalid />, { container })
+
+      const input = shadowRoot.querySelector('input')
+      const helperText = shadowRoot.querySelector<HTMLElement>('[data-part="helper-text"]')
+      const errorText = shadowRoot.querySelector<HTMLElement>('[data-part="error-text"]')
+
+      expect(input).not.toBeNull()
+      expect(helperText).not.toBeNull()
+      expect(errorText).not.toBeNull()
+      expect(document.getElementById(helperText!.id)).toBeNull()
+      await waitFor(() =>
+        expect(input).toHaveAttribute(
+          'aria-describedby',
+          `${errorText!.id} ${helperText!.id}`,
+        ),
+      )
+    }
+    finally {
+      host.remove()
+    }
   })
 })

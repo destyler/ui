@@ -31,6 +31,19 @@ function ReactiveFrame() {
   )
 }
 
+function ReactiveFrameContent() {
+  const [content, setContent] = createSignal('Initial content')
+
+  return (
+    <>
+      <button type="button" onClick={() => setContent('Updated content')}>
+        Update content
+      </button>
+      <Frame title="Reactive content preview">{content()}</Frame>
+    </>
+  )
+}
+
 describe('frame', () => {
   it('requires and renders an accessible title', () => {
     render(() => <Frame title="Account preview" />)
@@ -55,5 +68,33 @@ describe('frame', () => {
       expect(frame.contentDocument?.querySelector('#frame-head-style')).not.toBeNull()
       expect(frame.style.getPropertyValue('--height')).toBe('200px')
     })
+  })
+
+  it('updates portalled children without replacing the frame document', async () => {
+    render(() => <ReactiveFrameContent />)
+    const frame = document.querySelector('iframe')!
+
+    await waitFor(() => {
+      expect(frame.contentDocument?.querySelector('.frame-root')).toHaveTextContent(
+        'Initial content',
+      )
+    })
+
+    fireEvent.click(document.querySelector('button')!)
+
+    await waitFor(() => {
+      expect(frame.contentDocument?.querySelector('.frame-root')).toHaveTextContent(
+        'Updated content',
+      )
+    })
+  })
+
+  it('calls a callback ref once when the iframe mounts', () => {
+    const ref = vi.fn()
+
+    render(() => <Frame ref={ref} title="Ref preview" />)
+
+    expect(ref).toHaveBeenCalledTimes(1)
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLIFrameElement))
   })
 })

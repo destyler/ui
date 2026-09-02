@@ -3,15 +3,15 @@ import type { UsePresenceProps } from '~/components/presence'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import type { Assign } from '~/types'
 import { mergeProps } from '@destyler/solid'
-import {
-  PresenceProvider,
-  splitPresenceProps,
-  usePresence,
-} from '~/components/presence'
+import { splitPresenceProps } from '~/components/presence'
 import { ui } from '~/factory'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useNavigationMenu } from '../hooks/use-navigation-menu'
 import { NavigationMenuProvider } from '../hooks/use-navigation-menu-context'
+import {
+  createNavigationMenuPresence,
+  NavigationMenuPresenceProvider,
+} from '../hooks/use-navigation-menu-presence'
 
 export interface NavigationMenuRootBaseProps
   extends UseNavigationMenuProps,
@@ -37,8 +37,9 @@ export function NavigationMenuRoot(props: NavigationMenuRootProps) {
       'value',
     ])
   const navigationMenu = useNavigationMenu(useNavigationMenuProps)
-  const presence = usePresence(
-    mergeProps(() => ({ present: navigationMenu().open }), presenceProps),
+  const presence = createNavigationMenuPresence(
+    presenceProps,
+    () => navigationMenu().value !== null,
   )
   const mergedProps = mergeProps(
     () => navigationMenu().getRootProps(),
@@ -47,9 +48,9 @@ export function NavigationMenuRoot(props: NavigationMenuRootProps) {
 
   return (
     <NavigationMenuProvider value={navigationMenu}>
-      <PresenceProvider value={presence}>
+      <NavigationMenuPresenceProvider value={presence}>
         <ui.nav {...mergedProps} />
-      </PresenceProvider>
+      </NavigationMenuPresenceProvider>
     </NavigationMenuProvider>
   )
 }

@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Slider, sliderAnatomy } from '../'
 import { LocaleProvider } from '../../../providers'
 import { getExports, getParts } from '../../../setup-test'
@@ -108,5 +109,42 @@ describe('slider', () => {
     await user.keyboard('[ArrowRight]')
 
     await waitFor(() => expect(onValueChange).toHaveBeenCalledTimes(1))
+  })
+
+  it('separates range values with a comma and space', () => {
+    render(() => <ComponentUnderTest />)
+
+    expect(document.querySelector('[data-part="value-text"]')).toHaveTextContent('-20, 20')
+  })
+
+  it('preserves falsy custom ValueText children', () => {
+    render(() => (
+      <Slider.Root defaultValue={[5, 10]}>
+        <Slider.ValueText data-testid="slider-value-text">{0}</Slider.ValueText>
+      </Slider.Root>
+    ))
+
+    expect(screen.getByTestId('slider-value-text')).toHaveTextContent('0')
+    expect(screen.getByTestId('slider-value-text')).not.toHaveTextContent('5, 10')
+  })
+
+  it('updates hidden input props when the slider context changes', async () => {
+    const [name, setName] = createSignal('initial-volume')
+    render(() => <ComponentUnderTest name={name()} />)
+
+    const [leftThumb] = screen.getAllByRole('slider', { hidden: true })
+    const [leftInput] = document.querySelectorAll<HTMLInputElement>(
+      'input[type="text"][hidden]',
+    )
+    expect(leftInput).toHaveValue('-20')
+    expect(leftInput).toHaveAttribute('name', 'initial-volume[]')
+
+    setName('updated-volume')
+    await waitFor(() => expect(leftInput).toHaveAttribute('name', 'updated-volume[]'))
+
+    leftThumb.focus()
+    await user.keyboard('[ArrowRight]')
+
+    await waitFor(() => expect(leftInput).toHaveValue('-19'))
   })
 })

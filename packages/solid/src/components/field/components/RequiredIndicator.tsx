@@ -1,7 +1,7 @@
 import type { JSX } from 'solid-js'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
-import { Show } from 'solid-js'
+import { Show, splitProps } from 'solid-js'
 import { ui } from '~/factory'
 import { useFieldContext } from '../hooks/use-field-context'
 
@@ -13,12 +13,13 @@ export interface FieldRequiredIndicatorProps
   FieldRequiredIndicatorBaseProps {}
 
 export function FieldRequiredIndicator(props: FieldRequiredIndicatorProps) {
+  const [localProps, restProps] = splitProps(props, ['children', 'fallback'])
   const field = useFieldContext()
-  const mergedProps = mergeProps(() => field().getRequiredIndicatorProps(), props)
+  const mergedProps = mergeProps(() => field().getRequiredIndicatorProps(), restProps)
 
   return (
-    <Show when={field().required} fallback={props.fallback}>
-      <ui.span {...mergedProps}>{props.children ?? '*'}</ui.span>
+    <Show when={field().required} fallback={localProps.fallback}>
+      <ui.span {...mergedProps}>{localProps.children ?? '*'}</ui.span>
     </Show>
   )
 }

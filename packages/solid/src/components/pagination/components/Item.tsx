@@ -13,7 +13,9 @@ export function PaginationItem(props: PaginationItemProps) {
   const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['value', 'type'])
 
   const api = usePaginationContext()
-  const mergedProps = mergeProps(() => api().getItemProps(itemProps), localProps)
+  const mergedProps = mergeProps(() => {
+    return { type: undefined, ...api().getItemProps(itemProps) }
+  }, localProps)
 
   return <ui.button {...mergedProps} />
 }

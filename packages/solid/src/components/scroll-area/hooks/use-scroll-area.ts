@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { ref } from '@destyler/store'
 import { createMemo, createUniqueId, onMount } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveQueryRoot } from '~/utils/resolve-query-root'
 
 export interface UseScrollAreaProps
   extends Optional<Omit<scrollArea.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -17,21 +18,12 @@ export interface UseScrollAreaProps
 
 export interface UseScrollAreaReturn extends Accessor<scrollArea.Api<PropTypes>> {}
 
-type QueryRoot = Pick<Document, 'getElementById'>
-
 type ResizeObserverContext = scrollArea.Context & {
   viewportWidth: number
   viewportHeight: number
   contentWidth: number
   contentHeight: number
   _resizeObserver?: ResizeObserver
-}
-
-function resolveQueryRoot(rootNode: Node, fallbackDocument: Document): QueryRoot {
-  if ('getElementById' in rootNode && typeof rootNode.getElementById === 'function') {
-    return rootNode as QueryRoot
-  }
-  return rootNode.ownerDocument ?? fallbackDocument
 }
 
 export function useScrollArea(props: UseScrollAreaProps = {}): UseScrollAreaReturn {

@@ -76,12 +76,13 @@ export default function Basic() {
         <Slider.Track>
           <Slider.Range />
         </Slider.Track>
-        <Slider.Thumb />
+        <Slider.Thumb index={0}>
+          <Slider.HiddenInput />
+        </Slider.Thumb>
       </Slider.Control>
       <Slider.MarkerGroup>
-        <Slider.Marker />
+        <Slider.Marker value={50} />
       </Slider.MarkerGroup>
-      <Slider.HiddenInput />
     </Slider.Root>
   )
 }

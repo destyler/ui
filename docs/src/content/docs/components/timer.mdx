@@ -61,11 +61,11 @@ export default function Basic() {
   return (
     <Timer.Root>
       <Timer.Area>
-        <Timer.Item />
+        <Timer.Item type="seconds" />
         <Timer.Separator />
       </Timer.Area>
       <Timer.Control>
-        <Timer.ActionTrigger />
+        <Timer.ActionTrigger action="start">Start</Timer.ActionTrigger>
       </Timer.Control>
     </Timer.Root>
   )

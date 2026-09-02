@@ -72,6 +72,27 @@ describe('numberInput', () => {
     })
   })
 
+  it('renders the current value in ValueText by default', async () => {
+    render(() => <ComponentUnderTest defaultValue="5" />)
+
+    const valueText = document.querySelector('[data-part="value-text"]')
+    expect(valueText).toHaveTextContent('5')
+
+    await user.click(screen.getByText('+1'))
+    await waitFor(() => expect(valueText).toHaveTextContent('6'))
+  })
+
+  it('preserves falsy custom ValueText children', () => {
+    render(() => (
+      <NumberInput.Root defaultValue="5">
+        <NumberInput.ValueText data-testid="value-text">{0}</NumberInput.ValueText>
+      </NumberInput.Root>
+    ))
+
+    expect(screen.getByTestId('value-text')).toHaveTextContent('0')
+    expect(screen.getByTestId('value-text')).not.toHaveTextContent('5')
+  })
+
   it('should update the input when readOnly changes', async () => {
     const [readOnly, setReadOnly] = createSignal(false)
     render(() => (

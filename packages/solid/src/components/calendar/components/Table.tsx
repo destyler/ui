@@ -14,12 +14,23 @@ export interface CalendarTableBaseProps
 export interface CalendarTableProps extends HTMLProps<'table'>, CalendarTableBaseProps {}
 
 export function CalendarTable(props: CalendarTableProps) {
-  const [{ columns }, localProps] = createSplitProps<Pick<TableProps, 'columns'>>()(props, [
+  const [tableInputProps, localProps] = createSplitProps<Pick<TableProps, 'columns'>>()(props, [
     'columns',
   ])
   const api = useCalendarContext()
   const viewProps = useCalendarViewContext()
-  const tableProps = { columns, id: createUniqueId(), ...viewProps }
+  const id = createUniqueId()
+  const tableProps: TableProps = {
+    get columns() {
+      return tableInputProps.columns
+    },
+    get id() {
+      return id
+    },
+    get view() {
+      return viewProps.view
+    },
+  }
   const mergedProps = mergeProps(() => api().getTableProps(tableProps), localProps)
 
   return (

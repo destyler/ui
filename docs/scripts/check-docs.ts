@@ -101,6 +101,67 @@ function getScriptSource(source: string, framework: typeof frameworks[number]): 
     .join('\n')
 }
 
+interface TypeScriptSnippet {
+  fileName: string
+  label: string
+  source: string
+}
+
+function checkTypeScriptSnippets(snippets: TypeScriptSnippet[]): void {
+  const configFileName = path.join(workspaceDirectory, 'packages/solid/tsconfig.json')
+  const configFile = ts.readConfigFile(configFileName, ts.sys.readFile)
+  if (configFile.error) {
+    failures.push(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
+    return
+  }
+
+  const parsedConfig = ts.parseJsonConfigFileContent(
+    configFile.config,
+    ts.sys,
+    path.dirname(configFileName),
+    {
+      declaration: false,
+      noEmit: true,
+      noUnusedLocals: false,
+      noUnusedParameters: false,
+    },
+    configFileName,
+  )
+  for (const diagnostic of parsedConfig.errors) {
+    failures.push(`Solid snippet compiler config: ${ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')}`)
+  }
+
+  const snippetSources = new Map(snippets.map(snippet => [path.resolve(snippet.fileName), snippet.source]))
+  const defaultHost = ts.createCompilerHost(parsedConfig.options)
+  const host: ts.CompilerHost = {
+    ...defaultHost,
+    fileExists: fileName => snippetSources.has(path.resolve(fileName)) || defaultHost.fileExists(fileName),
+    readFile: fileName => snippetSources.get(path.resolve(fileName)) ?? defaultHost.readFile(fileName),
+    getSourceFile(fileName, languageVersionOrOptions, onError, shouldCreateNewSourceFile) {
+      const source = snippetSources.get(path.resolve(fileName))
+      if (source !== undefined)
+        return ts.createSourceFile(fileName, source, languageVersionOrOptions, true, ts.ScriptKind.TSX)
+      return defaultHost.getSourceFile(fileName, languageVersionOrOptions, onError, shouldCreateNewSourceFile)
+    },
+  }
+  const program = ts.createProgram([...snippetSources.keys()], parsedConfig.options, host)
+  const snippetByFileName = new Map(snippets.map(snippet => [path.resolve(snippet.fileName), snippet]))
+
+  for (const diagnostic of ts.getPreEmitDiagnostics(program)) {
+    const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
+    if (!diagnostic.file) {
+      failures.push(`Solid snippet compiler: ${message}`)
+      continue
+    }
+    const snippet = snippetByFileName.get(path.resolve(diagnostic.file.fileName))
+    if (!snippet)
+      continue
+
+    const start = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start ?? 0)
+    failures.push(`${snippet.label}:${start.line + 1}:${start.character + 1}: invalid Solid TSX snippet: ${message}`)
+  }
+}
+
 function getNamedImports(source: string, moduleSpecifier: string): string[] {
   const sourceFile = ts.createSourceFile('displayed-example.tsx', source, ts.ScriptTarget.ESNext, true, ts.ScriptKind.TSX)
   const names: string[] = []
@@ -339,7 +400,9 @@ for (const file of listFiles(path.join(docsDirectory, 'src/styles'), '.css')) {
 }
 check(previewContentStyleRuleCount > 0, 'No shared preview content styles were checked')
 
+let solidSnippetCount = 0
 let svelteSnippetCount = 0
+const solidSnippets: TypeScriptSnippet[] = []
 for (const file of listFiles(contentDirectory, '.mdx')) {
   const source = read(file)
   const relativeFile = path.relative(contentDirectory, file)
@@ -350,6 +413,30 @@ for (const file of listFiles(contentDirectory, '.mdx')) {
     !source.includes('@destyler-ui/svelte/portal'),
     `${relativeFile}: obsolete Svelte portal subpath import is forbidden`,
   )
+
+  for (const frameworkMatch of source.matchAll(/<FrameworkContent fw="solid">([\s\S]*?)<\/FrameworkContent>/g)) {
+    const solidContent = frameworkMatch[1]
+    const snippetMatches = [
+      ...solidContent.matchAll(/^```tsx\b[^\r\n]*\r?\n([\s\S]*?)\r?\n```[ \t]*\r?$/gm),
+    ]
+    const tsxFenceCount = [...solidContent.matchAll(/^```tsx\b[^\r\n]*\r?$/gm)].length
+    check(
+      snippetMatches.length === tsxFenceCount,
+      `${relativeFile}: Solid usage block contains an unrecognized TSX fence`,
+    )
+    if (relativeFile.startsWith('components/') || relativeFile.startsWith('providers/')) {
+      check(snippetMatches.length > 0, `${relativeFile}: Solid usage block is missing a TSX snippet`)
+    }
+
+    for (const snippetMatch of snippetMatches) {
+      solidSnippetCount++
+      solidSnippets.push({
+        fileName: path.join(workspaceDirectory, 'packages/solid/.docs-snippets', `snippet-${solidSnippetCount}.tsx`),
+        label: `${relativeFile}#${solidSnippetCount}`,
+        source: snippetMatch[1],
+      })
+    }
+  }
 
   for (const match of source.matchAll(/```svelte\n([\s\S]*?)\n```/g)) {
     svelteSnippetCount++
@@ -369,6 +456,11 @@ for (const file of listFiles(contentDirectory, '.mdx')) {
     }
   }
 }
+checkTypeScriptSnippets(solidSnippets)
+check(
+  solidSnippetCount >= components.length + providers.length,
+  `Expected at least ${components.length + providers.length} Solid snippets, found ${solidSnippetCount}`,
+)
 check(
   svelteSnippetCount >= components.length + providers.length,
   `Expected at least ${components.length + providers.length} Svelte snippets, found ${svelteSnippetCount}`,
@@ -428,6 +520,7 @@ console.log([
   `${components.length} components`,
   `${providers.length} providers`,
   `${exampleSourceCount} example sources`,
+  `${solidSnippetCount} Solid snippets`,
   `${svelteSnippetCount} Svelte snippets`,
   `${previewContentStyleRuleCount} shared preview content rules`,
 ].join(' '))

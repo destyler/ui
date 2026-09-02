@@ -75,29 +75,51 @@ export default function Basic() {
 
 <FrameworkContent fw="solid">
 ```tsx
-import { Tour } from '@destyler-ui/solid'
+import type { TourStepDetails } from '@destyler-ui/solid'
+import { Tour, useTour } from '@destyler-ui/solid'
+import { For } from 'solid-js'
+
+const steps: TourStepDetails[] = [
+  {
+    id: 'welcome',
+    type: 'dialog',
+    title: 'Welcome',
+    description: 'Welcome to the tour!',
+    actions: [{ label: 'Finish', action: 'dismiss' }],
+  },
+]
 
 export default function Basic() {
+  const tour = useTour({ steps })
+
   return (
-    <Tour.Root>
-      <Tour.Backdrop />
-      <Tour.Spotlight />
-      <Tour.Positioner>
-        <Tour.Content>
-          <Tour.Arrow>
-            <Tour.ArrowTip />
-          </Tour.Arrow>
-          <Tour.Title />
-          <Tour.Description />
-          <Tour.ProgressText />
-          <Tour.Actions>
-            <Tour.ActionTrigger />
-          </Tour.Actions>
-          <Tour.CloseTrigger />
-        </Tour.Content>
-      </Tour.Positioner>
-      <Tour.Control />
-    </Tour.Root>
+    <>
+      <button type="button" onClick={() => tour().start()}>Start tour</button>
+      <Tour.Root tour={tour}>
+        <Tour.Backdrop />
+        <Tour.Spotlight />
+        <Tour.Positioner>
+          <Tour.Content>
+            <Tour.Arrow>
+              <Tour.ArrowTip />
+            </Tour.Arrow>
+            <Tour.Title />
+            <Tour.Description />
+            <Tour.ProgressText />
+            <Tour.Control>
+              <Tour.Actions>
+                {actions => (
+                  <For each={actions()}>
+                    {action => <Tour.ActionTrigger action={action} />}
+                  </For>
+                )}
+              </Tour.Actions>
+            </Tour.Control>
+            <Tour.CloseTrigger />
+          </Tour.Content>
+        </Tour.Positioner>
+      </Tour.Root>
+    </>
   )
 }
 ```

@@ -27,6 +27,21 @@ describe('popover', () => {
     await waitFor(() => expect(screen.queryByText('title')).not.toBeVisible())
   })
 
+  it('does not send focus events after the popover is unmounted', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const view = render(() => <ComponentUnderTest />)
+
+    await user.click(screen.getByText('click me'))
+    await user.click(screen.getByText('close'))
+    view.unmount()
+    await Promise.resolve()
+
+    expect(warn).not.toHaveBeenCalledWith(
+      expect.stringContaining('Cannot transition a stopped machine'),
+    )
+    warn.mockRestore()
+  })
+
   it.skip('should hide the popover when escape is pressed', async () => {
     render(() => <ComponentUnderTest />)
 

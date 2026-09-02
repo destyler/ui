@@ -10,7 +10,7 @@ export interface SliderHiddenInputProps extends HTMLProps<'input'>, SliderHidden
 export function SliderHiddenInput(props: SliderHiddenInputProps) {
   const slider = useSliderContext()
   const thumbProps = useSliderThumbPropsContext()
-  const mergedProps = mergeProps(slider().getHiddenInputProps(thumbProps), props)
+  const mergedProps = mergeProps(() => slider().getHiddenInputProps(thumbProps), props)
 
   return <ui.input {...mergedProps} />
 }

@@ -20,4 +20,13 @@ describe('steps', () => {
     await user.click(screen.getByRole('button', { name: 'Next' }))
     expect(screen.getByText('Second - Date & Time')).toBeVisible()
   })
+
+  it('renders list and items as div elements', () => {
+    render(() => <Basic />)
+
+    expect(document.querySelector('[data-part="list"]')?.tagName).toBe('DIV')
+    for (const item of document.querySelectorAll('[data-part="item"]')) {
+      expect(item.tagName).toBe('DIV')
+    }
+  })
 })

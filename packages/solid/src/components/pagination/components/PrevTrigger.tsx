@@ -10,7 +10,13 @@ export interface PaginationPrevTriggerProps
 
 export function PaginationPrevTrigger(props: PaginationPrevTriggerProps) {
   const api = usePaginationContext()
-  const mergedProps = mergeProps(() => api().getPrevTriggerProps(), props)
+  const mergedProps = mergeProps(() => {
+    return {
+      disabled: undefined,
+      type: undefined,
+      ...api().getPrevTriggerProps(),
+    }
+  }, props)
 
   return <ui.button {...mergedProps} />
 }

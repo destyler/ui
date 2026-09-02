@@ -73,14 +73,14 @@ export default function Basic() {
   return (
     <Steps.Root>
       <Steps.List>
-        <Steps.Item>
+        <Steps.Item index={0}>
           <Steps.Trigger>
             <Steps.Indicator />
           </Steps.Trigger>
           <Steps.Separator />
         </Steps.Item>
       </Steps.List>
-      <Steps.Content />
+      <Steps.Content index={0} />
       <Steps.CompletedContent />
       <Steps.Progress />
       <Steps.PrevTrigger />

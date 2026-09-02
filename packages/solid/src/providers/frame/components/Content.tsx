@@ -1,5 +1,5 @@
 import type { JSX } from 'solid-js'
-import { createEffect, onCleanup } from 'solid-js'
+import { onCleanup, onMount } from 'solid-js'
 
 interface FrameContentProps {
   onMount?: () => void
@@ -8,15 +8,13 @@ interface FrameContentProps {
 }
 
 export function FrameContent(props: FrameContentProps) {
-  const { onMount, onUnmount, children } = props
-
-  createEffect(() => {
-    onMount?.()
+  onMount(() => {
+    props.onMount?.()
 
     onCleanup(() => {
-      onUnmount?.()
+      props.onUnmount?.()
     })
   })
 
-  return children
+  return <>{props.children}</>
 }

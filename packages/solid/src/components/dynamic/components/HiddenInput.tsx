@@ -11,7 +11,10 @@ export interface DynamicHiddenInputProps
 
 export function DynamicHiddenInput(props: DynamicHiddenInputProps) {
   const dynamic = useDynamicContext()
-  const mergedProps = mergeProps(() => dynamic().getHiddenInputProps(), props)
+  const mergedProps = mergeProps(() => {
+    const apiProps = dynamic().getHiddenInputProps()
+    return { ...apiProps, readOnly: apiProps.readOnly }
+  }, props)
   const field = useFieldContext()
 
   return <ui.input aria-describedby={field?.().ariaDescribedby} {...mergedProps} />

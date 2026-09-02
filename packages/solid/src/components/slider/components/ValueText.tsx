@@ -10,5 +10,5 @@ export function SliderValueText(props: SliderValueTextProps) {
   const api = useSliderContext()
   const mergedProps = mergeProps(() => api().getValueTextProps(), props)
 
-  return <ui.span {...mergedProps}>{props.children || api().value.join(',')}</ui.span>
+  return <ui.span {...mergedProps}>{props.children ?? api().value.join(', ')}</ui.span>
 }

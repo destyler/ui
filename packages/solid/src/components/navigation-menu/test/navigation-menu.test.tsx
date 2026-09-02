@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
+import { createSignal, Show } from 'solid-js'
 import { NavigationMenu, navigationMenuAnatomy } from '..'
 import { getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
@@ -110,5 +111,227 @@ describe('navigationMenu', () => {
   it('works through RootProvider', async () => {
     render(() => <RootProvider />)
     await waitFor(() => expect(screen.getByText('Installation')).toBeVisible())
+  })
+
+  it('keeps the previous content visible while switching default values', async () => {
+    const onExitComplete = vi.fn()
+
+    function SwitchingNavigationMenu() {
+      return (
+        <NavigationMenu.Root
+          defaultValue="first"
+          immediate
+          lazyMount
+          unmountOnExit
+          onExitComplete={onExitComplete}
+        >
+          <NavigationMenu.Context>
+            {api => (
+              <>
+                <button type="button" onClick={() => api().setValue('second')}>
+                  Open second content
+                </button>
+                <NavigationMenu.Content
+                  value="first"
+                  data-testid="first-navigation-content"
+                  style={{
+                    'animation-name': api().value === 'first' ? 'navigation-enter' : 'navigation-exit',
+                    'animation-duration': '60s',
+                  }}
+                >
+                  First content
+                </NavigationMenu.Content>
+                <NavigationMenu.Content value="second" data-testid="second-navigation-content">
+                  Second content
+                </NavigationMenu.Content>
+              </>
+            )}
+          </NavigationMenu.Context>
+        </NavigationMenu.Root>
+      )
+    }
+
+    render(() => <SwitchingNavigationMenu />)
+
+    const firstContent = screen.getByTestId('first-navigation-content')
+    expect(firstContent).toBeVisible()
+    expect(screen.queryByTestId('second-navigation-content')).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open second content' }))
+    await waitFor(() => expect(screen.getByTestId('second-navigation-content')).toBeVisible())
+
+    expect(firstContent).toBeVisible()
+    expect(firstContent).toHaveAttribute('data-state', 'closed')
+    expect(onExitComplete).not.toHaveBeenCalled()
+
+    await new Promise(resolve => setTimeout(resolve, 0))
+    fireEvent.animationEnd(firstContent)
+    await waitFor(() => expect(screen.queryByTestId('first-navigation-content')).not.toBeInTheDocument())
+    expect(onExitComplete).not.toHaveBeenCalled()
+  })
+
+  it('tracks viewport and indicator exit animations independently', async () => {
+    const onExitComplete = vi.fn()
+
+    render(() => (
+      <NavigationMenu.Root
+        defaultValue="first"
+        immediate
+        unmountOnExit
+        onExitComplete={onExitComplete}
+      >
+        <NavigationMenu.Context>
+          {api => (
+            <>
+              <button type="button" onClick={() => api().setValue(null)}>Close menu</button>
+              <NavigationMenu.Viewport
+                data-testid="animated-navigation-viewport"
+                style={{
+                  'animation-name': api().value !== null ? 'viewport-enter' : 'viewport-exit',
+                  'animation-duration': '60s',
+                }}
+              />
+              <NavigationMenu.Indicator
+                data-testid="animated-navigation-indicator"
+                style={{
+                  'animation-name': api().value !== null ? 'indicator-enter' : 'indicator-exit',
+                  'animation-duration': '60s',
+                }}
+              />
+            </>
+          )}
+        </NavigationMenu.Context>
+      </NavigationMenu.Root>
+    ))
+
+    const viewport = screen.getByTestId('animated-navigation-viewport')
+    const indicator = screen.getByTestId('animated-navigation-indicator')
+    expect(viewport).toBeVisible()
+    expect(indicator).toBeVisible()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Close menu' }))
+    await Promise.resolve()
+    expect(viewport).toBeVisible()
+    expect(indicator).toBeVisible()
+    expect(onExitComplete).not.toHaveBeenCalled()
+
+    await new Promise(resolve => setTimeout(resolve, 0))
+    fireEvent.animationEnd(viewport)
+    await waitFor(() => expect(screen.queryByTestId('animated-navigation-viewport')).not.toBeInTheDocument())
+    expect(indicator).toBeInTheDocument()
+    expect(onExitComplete).not.toHaveBeenCalled()
+
+    fireEvent.animationEnd(indicator)
+    await waitFor(() => expect(screen.queryByTestId('animated-navigation-indicator')).not.toBeInTheDocument())
+    await waitFor(() => expect(onExitComplete).toHaveBeenCalledOnce())
+  })
+
+  it('does not wait on a detached active content when closing', async () => {
+    const onExitComplete = vi.fn()
+
+    function DynamicallyMountedNavigationMenu() {
+      const [showContent, setShowContent] = createSignal(true)
+
+      return (
+        <NavigationMenu.Root
+          defaultValue="first"
+          immediate
+          unmountOnExit
+          onExitComplete={onExitComplete}
+        >
+          <NavigationMenu.Context>
+            {api => (
+              <>
+                <button type="button" onClick={() => setShowContent(false)}>Unmount content</button>
+                <button type="button" onClick={() => api().setValue(null)}>Close menu</button>
+                <Show when={showContent()}>
+                  <NavigationMenu.Content
+                    value="first"
+                    data-testid="dynamic-navigation-content"
+                    style={{
+                      'animation-name': api().value !== null ? 'navigation-enter' : 'navigation-exit',
+                      'animation-duration': '60s',
+                    }}
+                  >
+                    Dynamic content
+                  </NavigationMenu.Content>
+                </Show>
+              </>
+            )}
+          </NavigationMenu.Context>
+        </NavigationMenu.Root>
+      )
+    }
+
+    render(() => <DynamicallyMountedNavigationMenu />)
+    expect(screen.getByTestId('dynamic-navigation-content')).toBeVisible()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Unmount content' }))
+    expect(screen.queryByTestId('dynamic-navigation-content')).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Close menu' }))
+    await waitFor(() => expect(onExitComplete).toHaveBeenCalledOnce())
+  })
+
+  it('keeps controlled content visible while its exit animation runs', async () => {
+    const onExitComplete = vi.fn()
+
+    function ControlledAnimatedNavigationMenu() {
+      const [value, setValue] = createSignal<string | null>('first')
+
+      return (
+        <>
+          <button type="button" onClick={() => setValue(null)}>Close controlled menu</button>
+          <NavigationMenu.Root
+            value={value()}
+            immediate
+            unmountOnExit
+            onExitComplete={onExitComplete}
+          >
+            <NavigationMenu.Content
+              value="first"
+              data-testid="controlled-navigation-content"
+              style={{
+                'animation-name': value() !== null ? 'navigation-enter' : 'navigation-exit',
+                'animation-duration': '60s',
+              }}
+            >
+              Controlled content
+            </NavigationMenu.Content>
+          </NavigationMenu.Root>
+        </>
+      )
+    }
+
+    render(() => <ControlledAnimatedNavigationMenu />)
+
+    const content = screen.getByTestId('controlled-navigation-content')
+    expect(content).toBeVisible()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Close controlled menu' }))
+    await Promise.resolve()
+    expect(onExitComplete).not.toHaveBeenCalled()
+    expect(content).toBeInTheDocument()
+    expect(content).toBeVisible()
+
+    await new Promise(resolve => setTimeout(resolve, 0))
+    fireEvent.animationEnd(content)
+    await waitFor(() => expect(onExitComplete).toHaveBeenCalledOnce())
+    await waitFor(() => expect(screen.queryByTestId('controlled-navigation-content')).not.toBeInTheDocument())
+  })
+
+  it('forwards viewport and indicator refs', () => {
+    let viewport: HTMLDivElement | undefined
+    let indicator: HTMLDivElement | undefined
+
+    render(() => (
+      <NavigationMenu.Root defaultValue="first">
+        <NavigationMenu.Viewport ref={node => (viewport = node)} />
+        <NavigationMenu.Indicator ref={node => (indicator = node)} />
+      </NavigationMenu.Root>
+    ))
+
+    expect(viewport).toBe(screen.getByRole('navigation').querySelector('[data-part="viewport"]'))
+    expect(indicator).toBe(screen.getByRole('navigation').querySelector('[data-part="indicator"]'))
   })
 })

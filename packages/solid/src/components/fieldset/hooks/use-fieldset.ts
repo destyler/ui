@@ -1,6 +1,7 @@
 import { getWindow } from '@destyler/dom'
 import { mergeProps } from '@destyler/solid'
 import { createEffect, createMemo, createSignal, createUniqueId, onCleanup } from 'solid-js'
+import { resolveQueryRoot } from '~/utils/resolve-query-root'
 import { parts } from '../anatomy'
 
 type Booleanish = boolean | 'true' | 'false'
@@ -29,10 +30,11 @@ export type UseFieldsetReturn = ReturnType<typeof useFieldset>
 export function useFieldset(props: UseFieldsetProps) {
   const fieldsetProps = mergeProps({ disabled: false, invalid: false }, props)
   const [rootRef, setRootRef] = createSignal<HTMLFieldSetElement>()
-  const id = props.id ?? createUniqueId()
+  const defaultId = createUniqueId()
+  const id = createMemo(() => props.id ?? defaultId)
 
-  const errorTextId = `fieldset::${id}::error-text`
-  const helperTextId = `fieldset::${id}::helper-text`
+  const errorTextId = createMemo(() => `fieldset::${id()}::error-text`)
+  const helperTextId = createMemo(() => `fieldset::${id()}::helper-text`)
 
   const [hasErrorText, setHasErrorText] = createSignal(false)
   const [hasHelperText, setHasHelperText] = createSignal(false)
@@ -43,16 +45,23 @@ export function useFieldset(props: UseFieldsetProps) {
       return
 
     const win = getWindow(rootNode)
-    const doc = win.document
+    const queryRoot = resolveQueryRoot(rootNode.getRootNode(), win.document)
+    const currentErrorTextId = errorTextId()
+    const currentHelperTextId = helperTextId()
 
     const checkTextElements = () => {
-      setHasErrorText(!!doc.getElementById(errorTextId))
-      setHasHelperText(!!doc.getElementById(helperTextId))
+      setHasErrorText(!!queryRoot.getElementById(currentErrorTextId))
+      setHasHelperText(!!queryRoot.getElementById(currentHelperTextId))
     }
 
     checkTextElements()
     const observer = new win.MutationObserver(checkTextElements)
-    observer.observe(rootNode, { childList: true, subtree: true })
+    observer.observe(rootNode, {
+      attributeFilter: ['id'],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    })
 
     onCleanup(() => observer.disconnect())
   })
@@ -60,9 +69,9 @@ export function useFieldset(props: UseFieldsetProps) {
   const ariaDescribedby = createMemo(() => {
     const labelIds: string[] = []
     if (hasErrorText() && fieldsetProps.invalid)
-      labelIds.push(errorTextId)
+      labelIds.push(errorTextId())
     if (hasHelperText())
-      labelIds.push(helperTextId)
+      labelIds.push(helperTextId())
     return labelIds.join(' ') || undefined
   })
 
@@ -82,12 +91,12 @@ export function useFieldset(props: UseFieldsetProps) {
   })
 
   const getHelperTextProps = () => ({
-    id: helperTextId,
+    id: helperTextId(),
     ...parts.helperText.attrs,
   })
 
   const getErrorTextProps = () => ({
-    'id': errorTextId,
+    'id': errorTextId(),
     ...parts.errorText.attrs,
     'aria-live': 'polite',
   })

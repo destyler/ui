@@ -42,9 +42,15 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps = {}) {
   const interactive = createMemo(() => !(props.disabled || props.readOnly))
 
   const [value, setValue] = useControllableState({
-    value: props.value,
-    defaultValue: props.defaultValue || [],
-    onChange: props.onValueChange,
+    get value() {
+      return props.value
+    },
+    get defaultValue() {
+      return props.defaultValue || []
+    },
+    get onChange() {
+      return props.onValueChange
+    },
   })
 
   return createMemo(() => {

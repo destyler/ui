@@ -7,7 +7,7 @@ import { useColorPickerContext } from '../hooks/use-color-picker-context'
 
 export interface ColorPickerChannelSliderValueTextBaseProps extends PolymorphicProps<'span'> {}
 export interface ColorPickerChannelSliderValueTextProps
-  extends HTMLProps<'div'>,
+  extends HTMLProps<'span'>,
   ColorPickerChannelSliderValueTextBaseProps {}
 
 export function ColorPickerChannelSliderValueText(props: ColorPickerChannelSliderValueTextProps) {
@@ -22,7 +22,7 @@ export function ColorPickerChannelSliderValueText(props: ColorPickerChannelSlide
   return (
     <ui.span {...mergedProps}>
       {props.children
-        || colorPicker().getChannelValueText(channelProps.channel, localeContext().locale)}
+        ?? colorPicker().getChannelValueText(channelProps.channel, localeContext().locale)}
     </ui.span>
   )
 }

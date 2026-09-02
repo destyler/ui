@@ -1,7 +1,6 @@
 import type { SwatchProps } from '@destyler/color-picker'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
-import { createMemo } from 'solid-js'
 import { ui } from '~/factory'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useColorPickerContext } from '../hooks/use-color-picker-context'
@@ -17,18 +16,22 @@ export interface ColorPickerValueSwatchProps
   ColorPickerValueSwatchBaseProps {}
 
 export function ColorPickerValueSwatch(props: ColorPickerValueSwatchProps) {
-  const [{ respectAlpha }, localProps] = createSplitProps<ValueSwatchProps>()(props, [
+  const [valueSwatchProps, localProps] = createSplitProps<ValueSwatchProps>()(props, [
     'respectAlpha',
   ])
   const colorPicker = useColorPickerContext()
-  const swatchProps = createMemo(() => ({
-    respectAlpha,
-    value: colorPicker().value,
-  }))
-  const mergedProps = mergeProps(() => colorPicker().getSwatchProps(swatchProps()), localProps)
+  const swatchProps: SwatchProps = {
+    get respectAlpha() {
+      return valueSwatchProps.respectAlpha
+    },
+    get value() {
+      return colorPicker().value
+    },
+  }
+  const mergedProps = mergeProps(() => colorPicker().getSwatchProps(swatchProps), localProps)
 
   return (
-    <ColorPickerSwatchPropsProvider value={swatchProps()}>
+    <ColorPickerSwatchPropsProvider value={swatchProps}>
       <ui.div {...mergedProps} />
     </ColorPickerSwatchPropsProvider>
   )

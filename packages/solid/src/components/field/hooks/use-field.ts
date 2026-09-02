@@ -9,6 +9,7 @@ import {
   onCleanup,
 } from 'solid-js'
 import { useFieldsetContext } from '~/components/fieldset'
+import { resolveQueryRoot } from '~/utils/resolve-query-root'
 import { parts } from '../anatomy'
 
 export interface ElementIds {
@@ -80,11 +81,11 @@ export function useField(props: UseFieldProps) {
       return
 
     const win = getWindow(rootNode)
-    const doc = win.document
+    const queryRoot = resolveQueryRoot(rootNode.getRootNode(), win.document)
 
     const checkTextElements = () => {
-      setHasErrorText(!!doc.getElementById(errorTextId()))
-      setHasHelperText(!!doc.getElementById(helperTextId()))
+      setHasErrorText(!!queryRoot.getElementById(errorTextId()))
+      setHasHelperText(!!queryRoot.getElementById(helperTextId()))
     }
 
     checkTextElements()

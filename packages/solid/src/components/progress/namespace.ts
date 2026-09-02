@@ -52,3 +52,4 @@ export {
   type ProgressViewBaseProps as ViewBaseProps,
   type ProgressViewProps as ViewProps,
 } from './components/View'
+export type { ValueChangeDetails } from '@destyler/progress'

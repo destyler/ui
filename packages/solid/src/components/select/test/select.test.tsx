@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
-import { Select, selectAnatomy } from '../'
+import { createListCollection, Select, selectAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
@@ -54,6 +54,25 @@ describe('select', () => {
     await user.click(itemReact)
     await user.click(itemVue)
     await waitFor(() => expect(trigger).toHaveTextContent('React, Vue'))
+  })
+
+  it('prefers falsy custom ValueText children without leaking placeholder to the DOM', () => {
+    const collection = createListCollection({
+      items: [{ label: 'React', value: 'react' }],
+    })
+
+    render(() => (
+      <Select.Root collection={collection} defaultValue={['react']}>
+        <Select.ValueText placeholder="Choose a framework" data-testid="value-text">
+          {0}
+        </Select.ValueText>
+      </Select.Root>
+    ))
+
+    const valueText = screen.getByTestId('value-text')
+    expect(valueText).toHaveTextContent('0')
+    expect(valueText).not.toHaveTextContent('React')
+    expect(valueText).not.toHaveAttribute('placeholder')
   })
 
   it.skip('should call onValueChange when item is selected', async () => {

@@ -1,10 +1,10 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
 import { Show } from 'solid-js'
-import { usePresenceContext } from '~/components/presence'
 import { ui } from '~/factory'
 import { composeRefs } from '~/utils/compose-refs'
 import { useNavigationMenuContext } from '../hooks/use-navigation-menu-context'
+import { useNavigationMenuPresence } from '../hooks/use-navigation-menu-presence'
 
 export interface NavigationMenuIndicatorBaseProps extends PolymorphicProps<'div'> {}
 export interface NavigationMenuIndicatorProps
@@ -13,7 +13,7 @@ export interface NavigationMenuIndicatorProps
 
 export function NavigationMenuIndicator(props: NavigationMenuIndicatorProps) {
   const navigationMenu = useNavigationMenuContext()
-  const presence = usePresenceContext()
+  const presence = useNavigationMenuPresence(() => navigationMenu().value !== null)
   const mergedProps = mergeProps(
     () => navigationMenu().getIndicatorProps(),
     () => presence().presenceProps,

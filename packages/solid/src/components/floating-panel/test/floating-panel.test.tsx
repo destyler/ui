@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@solidjs/testing-library'
+import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { FloatingPanel, floatingPanelAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
@@ -46,6 +46,22 @@ describe('floating panel', () => {
 
     await user.click(screen.getByRole('button', { name: /external toggle/i }))
     await waitFor(() => expect(screen.getByText('Controlled Panel')).not.toBeVisible())
+  })
+
+  it('keeps rejected controlled close requests open without duplicate callbacks', () => {
+    const onOpenChange = vi.fn()
+    render(() => <ComponentUnderTest open onOpenChange={onOpenChange} />)
+
+    const panel = screen.getByText('Floating Panel')
+    const content = panel.closest<HTMLElement>('[data-part="content"]')!
+    expect(panel).toBeVisible()
+
+    fireEvent.click(screen.getByRole('button', { name: /close/i }))
+
+    expect(onOpenChange).toHaveBeenCalledOnce()
+    expect(onOpenChange).toHaveBeenCalledWith({ open: false })
+    expect(panel).toBeVisible()
+    expect(content).toHaveAttribute('data-state', 'open')
   })
 
   it('should expose reactive context state', async () => {

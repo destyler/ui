@@ -46,6 +46,7 @@ export function Frame(props: FrameProps) {
     'head',
     'onMount',
     'onUnmount',
+    'ref',
     'srcdoc',
     'title',
   ])
@@ -106,7 +107,7 @@ export function Frame(props: FrameProps) {
       <iframe
         title={frameProps.title || 'Embedded content'}
         {...localProps}
-        ref={composeRefs(setFrameRef, localProps.ref)}
+        ref={composeRefs(setFrameRef, frameProps.ref)}
       >
         <Show when={mountNode()} keyed>
           {node => (

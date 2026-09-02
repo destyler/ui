@@ -95,4 +95,65 @@ describe('fieldset', () => {
       ),
     )
   })
+
+  it('updates text ids and aria-describedby when id changes', async () => {
+    const [id, setId] = createSignal('billing')
+    render(() => <ComponentUnderTest id={id()} invalid />)
+
+    const fieldset = document.querySelector('fieldset')!
+    const helperText = screen.getByText('Fieldset Helper Text')
+    const errorText = screen.getByText('Fieldset Error Text')
+
+    await waitFor(() =>
+      expect(fieldset).toHaveAttribute(
+        'aria-describedby',
+        'fieldset::billing::error-text fieldset::billing::helper-text',
+      ),
+    )
+    expect(helperText).toHaveAttribute('id', 'fieldset::billing::helper-text')
+    expect(errorText).toHaveAttribute('id', 'fieldset::billing::error-text')
+
+    setId('shipping')
+
+    await waitFor(() =>
+      expect(helperText).toHaveAttribute('id', 'fieldset::shipping::helper-text'),
+    )
+    expect(errorText).toHaveAttribute('id', 'fieldset::shipping::error-text')
+    await waitFor(() =>
+      expect(fieldset).toHaveAttribute(
+        'aria-describedby',
+        'fieldset::shipping::error-text fieldset::shipping::helper-text',
+      ),
+    )
+  })
+
+  it('associates helper and error text inside a shadow root', async () => {
+    const host = document.createElement('div')
+    const shadowRoot = host.attachShadow({ mode: 'open' })
+    const container = document.createElement('div')
+    shadowRoot.append(container)
+    document.body.append(host)
+
+    try {
+      render(() => <ComponentUnderTest id="shadow-fieldset" invalid />, { container })
+
+      const fieldset = shadowRoot.querySelector('fieldset')
+      const helperText = shadowRoot.getElementById('fieldset::shadow-fieldset::helper-text')
+      const errorText = shadowRoot.getElementById('fieldset::shadow-fieldset::error-text')
+
+      expect(fieldset).not.toBeNull()
+      expect(helperText).not.toBeNull()
+      expect(errorText).not.toBeNull()
+      expect(document.getElementById(helperText!.id)).toBeNull()
+      await waitFor(() =>
+        expect(fieldset).toHaveAttribute(
+          'aria-describedby',
+          `${errorText!.id} ${helperText!.id}`,
+        ),
+      )
+    }
+    finally {
+      host.remove()
+    }
+  })
 })

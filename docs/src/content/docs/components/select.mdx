@@ -81,11 +81,13 @@ export default function Basic() {
 
 <FrameworkContent fw="solid">
 ```tsx
-import { Select } from '@destyler-ui/solid'
+import { createListCollection, Select } from '@destyler-ui/solid'
+
+const collection = createListCollection({ items: ['React', 'Solid', 'Vue'] })
 
 export default function Basic() {
   return (
-    <Select.Root>
+    <Select.Root collection={collection}>
       <Select.Label />
       <Select.Control>
         <Select.Trigger>
@@ -98,8 +100,8 @@ export default function Basic() {
         <Select.Content>
           <Select.ItemGroup>
             <Select.ItemGroupLabel />
-            <Select.Item>
-              <Select.ItemText />
+            <Select.Item item={collection.items[0]}>
+              <Select.ItemText>{collection.items[0]}</Select.ItemText>
               <Select.ItemIndicator />
             </Select.Item>
           </Select.ItemGroup>

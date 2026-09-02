@@ -53,10 +53,10 @@ import { Pagination } from '@destyler-ui/solid'
 
 export default function Basic() {
   return (
-    <Pagination.Root>
+    <Pagination.Root count={100}>
       <Pagination.PrevTrigger />
-      <Pagination.Item />
-      <Pagination.Ellipsis />
+      <Pagination.Item type="page" value={1}>1</Pagination.Item>
+      <Pagination.Ellipsis index={1} />
       <Pagination.NextTrigger />
     </Pagination.Root>
   )

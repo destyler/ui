@@ -1,5 +1,6 @@
-import { render, screen } from '@solidjs/testing-library'
+import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Signature, signatureAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
@@ -19,6 +20,22 @@ describe('signature / Parts & Exports', () => {
   it.skip.each(getExports(signatureAnatomy))('should export %s', async (part) => {
     // @ts-expect-error -- Anatomy contains two internal parts that are intentionally not public exports.
     expect(Signature[part]).toBeDefined()
+  })
+
+  it('adds readonly to the hidden input when readOnly changes', async () => {
+    const [readOnly, setReadOnly] = createSignal(false)
+
+    render(() => (
+      <Signature.Root readOnly={readOnly()}>
+        <Signature.HiddenInput value="" data-testid="hidden-input" />
+      </Signature.Root>
+    ))
+
+    const input = screen.getByTestId('hidden-input')
+    expect(input).not.toHaveAttribute('readonly')
+
+    setReadOnly(true)
+    await waitFor(() => expect(input).toHaveAttribute('readonly'))
   })
 })
 

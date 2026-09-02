@@ -34,4 +34,4 @@ export {
   type TimerSeparatorBaseProps as SeparatorBaseProps,
   type TimerSeparatorProps as SeparatorProps,
 } from './components/Separator'
-export type { TickDetails } from '@destyler/timer'
+export type { TickDetails, Time } from '@destyler/timer'

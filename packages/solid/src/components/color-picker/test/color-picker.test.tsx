@@ -72,6 +72,83 @@ describe('colorPicker', () => {
     await waitFor(() => expect(channelInput).not.toHaveAttribute('readonly'))
     expect(hiddenInput).not.toHaveAttribute('readonly')
   })
+
+  it('prefers custom children in ValueText', () => {
+    render(() => (
+      <ColorPicker.Root value={parseColor('#eb5e41')}>
+        <ColorPicker.ValueText>Custom color</ColorPicker.ValueText>
+      </ColorPicker.Root>
+    ))
+
+    expect(screen.getByText('Custom color')).toBeInTheDocument()
+  })
+
+  it('renders ChannelSliderValueText as a span', () => {
+    let valueText: HTMLSpanElement | undefined
+
+    render(() => (
+      <ColorPicker.Root value={parseColor('#eb5e41')}>
+        <ColorPicker.ChannelSlider channel="alpha">
+          <ColorPicker.ChannelSliderValueText
+            ref={(element) => {
+              // @ts-expect-error -- ChannelSliderValueText exposes a span ref, not div-only properties.
+              void element.align
+              valueText = element
+            }}
+          />
+        </ColorPicker.ChannelSlider>
+      </ColorPicker.Root>
+    ))
+
+    expect(valueText).toBeInstanceOf(HTMLSpanElement)
+    expect(valueText?.tagName).toBe('SPAN')
+  })
+
+  it('preserves falsy custom ChannelSliderValueText children', () => {
+    render(() => (
+      <ColorPicker.Root value={parseColor('#eb5e41')}>
+        <ColorPicker.ChannelSlider channel="alpha">
+          <ColorPicker.ChannelSliderValueText data-testid="channel-value-text">
+            {0}
+          </ColorPicker.ChannelSliderValueText>
+        </ColorPicker.ChannelSlider>
+      </ColorPicker.Root>
+    ))
+
+    expect(screen.getByTestId('channel-value-text')).toHaveTextContent('0')
+    expect(screen.getByTestId('channel-value-text')).not.toHaveTextContent('100%')
+  })
+
+  it('keeps ValueSwatch props and indicator in sync', async () => {
+    const initialValue = parseColor('#eb5e41')
+    const nextValue = parseColor('#2563eb')
+    const [value, setValue] = createSignal(initialValue)
+    const [respectAlpha, setRespectAlpha] = createSignal(false)
+
+    render(() => (
+      <ColorPicker.Root value={value()}>
+        <ColorPicker.ValueSwatch
+          respectAlpha={respectAlpha()}
+          data-testid="value-swatch"
+        >
+          <ColorPicker.SwatchIndicator data-testid="value-swatch-indicator" />
+        </ColorPicker.ValueSwatch>
+      </ColorPicker.Root>
+    ))
+
+    const swatch = screen.getByTestId('value-swatch')
+    const indicator = screen.getByTestId('value-swatch-indicator')
+    expect(swatch.style.getPropertyValue('--color')).toBe(initialValue.toString('hex'))
+    expect(indicator).not.toHaveAttribute('hidden')
+
+    setValue(nextValue)
+    setRespectAlpha(true)
+
+    await waitFor(() =>
+      expect(swatch.style.getPropertyValue('--color')).toBe(nextValue.toString('css')),
+    )
+    expect(indicator).not.toHaveAttribute('hidden')
+  })
 })
 
 describe('color Picker / Field', () => {

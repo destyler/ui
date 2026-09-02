@@ -11,7 +11,7 @@ export interface HighlightProps extends Assign<ComponentProps<'mark'>, Highlight
 
 export function Highlight(props: HighlightProps) {
   if (typeof props.text !== 'string') {
-    throw new TypeError('[ui-ui/highlight] text must be a string')
+    throw new TypeError('[destyler-ui/highlight] text must be a string')
   }
 
   const [highlightProps, localProps] = createSplitProps<HighlightBaseProps>()(props, [

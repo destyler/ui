@@ -68,22 +68,33 @@ export default function Basic() {
 <FrameworkContent fw="solid">
 ```tsx
 import { Dynamic } from '@destyler-ui/solid'
+import { Index } from 'solid-js'
 
 export default function Basic() {
   return (
-    <Dynamic.Root>
-      <Dynamic.Label />
-      <Dynamic.Control>
-        <Dynamic.Item>
-          <Dynamic.ItemPreview>
-            <Dynamic.ItemText />
-            <Dynamic.ItemDeleteTrigger />
-          </Dynamic.ItemPreview>
-          <Dynamic.ItemInput />
-        </Dynamic.Item>
-        <Dynamic.Input />
-        <Dynamic.ClearTrigger />
-      </Dynamic.Control>
+    <Dynamic.Root defaultValue={['Solid']}>
+      <Dynamic.Context>
+        {api => (
+          <>
+            <Dynamic.Label />
+            <Dynamic.Control>
+              <Index each={api().value}>
+                {(value, index) => (
+                  <Dynamic.Item index={index} value={value()}>
+                    <Dynamic.ItemPreview>
+                      <Dynamic.ItemText>{value()}</Dynamic.ItemText>
+                      <Dynamic.ItemDeleteTrigger />
+                    </Dynamic.ItemPreview>
+                    <Dynamic.ItemInput />
+                  </Dynamic.Item>
+                )}
+              </Index>
+              <Dynamic.Input />
+              <Dynamic.ClearTrigger />
+            </Dynamic.Control>
+          </>
+        )}
+      </Dynamic.Context>
       <Dynamic.HiddenInput />
     </Dynamic.Root>
   )

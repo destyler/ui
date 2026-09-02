@@ -1,6 +1,6 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
-import { Show } from 'solid-js'
+import { createMemo, Show } from 'solid-js'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
 import { composeRefs } from '~/utils/compose-refs'
@@ -13,7 +13,10 @@ export interface TourSpotlightProps extends HTMLProps<'div'>, TourSpotlightBaseP
 export function TourSpotlight(props: TourSpotlightProps) {
   const tour = useTourContext()
   const renderStrategyProps = useRenderStrategyContext()
-  const presenceApi = usePresence(mergeProps(renderStrategyProps, () => ({ present: tour().open })))
+  const present = createMemo(() => tour().open && Boolean(tour().step?.target?.()))
+  const presenceApi = usePresence(
+    mergeProps(renderStrategyProps, () => ({ present: present() })),
+  )
   const mergedProps = mergeProps(
     () => tour().getSpotlightProps(),
     () => presenceApi().presenceProps,
@@ -25,7 +28,10 @@ export function TourSpotlight(props: TourSpotlightProps) {
       <ui.div
         {...mergedProps}
         ref={composeRefs(presenceApi().presenceProps.ref, props.ref)}
-        hidden={!tour().open || !tour().step?.target?.()}
+        hidden={Boolean(
+          presenceApi().presenceProps.hidden
+          || props.hidden,
+        )}
       />
     </Show>
   )

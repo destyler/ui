@@ -21,6 +21,17 @@ describe('edit', () => {
     render(() => <ControlledComponentUnderTest />)
   })
 
+  it('prefers falsy custom preview children over the machine value', () => {
+    render(() => (
+      <Edit.Root defaultValue="Machine value">
+        <Edit.Preview data-testid="preview">{0}</Edit.Preview>
+      </Edit.Root>
+    ))
+
+    expect(screen.getByTestId('preview')).toHaveTextContent('0')
+    expect(screen.queryByText('Machine value')).not.toBeInTheDocument()
+  })
+
   it('should be possible to focus the placeholder and enter a value', async () => {
     render(() => <ControlledComponentUnderTest />)
     screen.getByText('Placeholder').focus()

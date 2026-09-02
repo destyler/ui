@@ -1,7 +1,7 @@
 import type { ComponentProps, JSX } from 'solid-js'
 import type { Assign } from '~/types'
 import { mergeProps } from '@destyler/solid'
-import { splitProps } from 'solid-js'
+import { Show, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { composeRefs } from '~/utils/compose-refs'
 
@@ -31,22 +31,39 @@ function withAsProp<T extends ElementType>(Component: T) {
   const UIComponent: UIComponent<T> = (props) => {
     const [localProps, parentProps] = splitProps(props, ['asChild'])
 
-    if (localProps.asChild) {
-      // @ts-expect-error -- Solid's generic splitProps result cannot express the polymorphic ref omission.
-      const propsFn = (userProps) => {
-        const [parentRefProps, restProps] = splitProps(parentProps, ['ref'])
-        type ElementRef = Element | ((element: Element) => void) | undefined
-        return mergeProps(restProps, userProps, {
-          ref: composeRefs<Element>(
-            parentRefProps.ref as unknown as ElementRef,
-            userProps?.ref as unknown as ElementRef,
-          ),
-        })
-      }
-      return localProps.asChild(propsFn)
+    // @ts-expect-error -- Solid's generic splitProps result cannot express the polymorphic ref omission.
+    const propsFn = (userProps) => {
+      const [parentRefProps, restProps] = splitProps(parentProps, ['ref'])
+      type ElementRef = Element | ((element: Element) => void) | undefined
+      return mergeProps(restProps, userProps, {
+        get classList() {
+          const parentClassList = restProps.classList
+          const childClassList = userProps?.classList
+
+          if (parentClassList == null)
+            return childClassList
+          if (childClassList == null)
+            return parentClassList
+
+          return { ...parentClassList, ...childClassList }
+        },
+        ref: composeRefs<Element>(
+          parentRefProps.ref as unknown as ElementRef,
+          userProps?.ref as unknown as ElementRef,
+        ),
+      })
     }
-    // @ts-expect-error -- Dynamic cannot infer the intrinsic element selected by this generic factory.
-    return <Dynamic component={Component} {...parentProps} />
+
+    return (
+      <Show
+        keyed
+        when={localProps.asChild}
+        // @ts-expect-error -- Dynamic cannot infer the intrinsic element selected by this generic factory.
+        fallback={<Dynamic component={Component} {...parentProps} />}
+      >
+        {asChild => asChild(propsFn)}
+      </Show>
+    )
   }
 
   return UIComponent

@@ -8,8 +8,8 @@ import { useStepsContext } from '../hooks/use-steps-context'
 import { StepsItemProvider } from '../hooks/use-steps-item-context'
 import { StepsItemPropsProvider } from '../hooks/use-steps-item-props-context'
 
-export interface StepsItemBaseProps extends ItemProps, PolymorphicProps<'li'> {}
-export interface StepsItemProps extends HTMLProps<'li'>, StepsItemBaseProps {}
+export interface StepsItemBaseProps extends ItemProps, PolymorphicProps<'div'> {}
+export interface StepsItemProps extends HTMLProps<'div'>, StepsItemBaseProps {}
 
 export function StepsItem(props: StepsItemProps) {
   const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['index'])
@@ -20,7 +20,7 @@ export function StepsItem(props: StepsItemProps) {
   return (
     <StepsItemPropsProvider value={itemProps}>
       <StepsItemProvider value={itemState}>
-        <ui.li {...mergedProps} />
+        <ui.div {...mergedProps} />
       </StepsItemProvider>
     </StepsItemPropsProvider>
   )

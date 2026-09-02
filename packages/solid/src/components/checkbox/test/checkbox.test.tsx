@@ -111,6 +111,48 @@ describe('checkbox', () => {
     await waitFor(() => expect(checkbox).toBeChecked())
     expect(screen.getByTestId('provider-control')).toHaveAttribute('data-state', 'checked')
   })
+
+  it('uses the latest group value accessor and callback', async () => {
+    const [useSecondState, setUseSecondState] = createSignal(false)
+    const [firstValue] = createSignal(['react'])
+    const [secondValue] = createSignal(['solid'])
+    const firstOnValueChange = vi.fn()
+    const secondOnValueChange = vi.fn()
+
+    render(() => (
+      <>
+        <button type="button" onClick={() => setUseSecondState(true)}>
+          switch group state
+        </button>
+        <Checkbox.Group
+          value={useSecondState() ? secondValue : firstValue}
+          onValueChange={useSecondState() ? secondOnValueChange : firstOnValueChange}
+        >
+          <Checkbox.Root value="react">
+            <Checkbox.Label>React</Checkbox.Label>
+            <Checkbox.HiddenInput />
+          </Checkbox.Root>
+          <Checkbox.Root value="solid">
+            <Checkbox.Label>Solid</Checkbox.Label>
+            <Checkbox.HiddenInput />
+          </Checkbox.Root>
+        </Checkbox.Group>
+      </>
+    ))
+
+    const react = screen.getByRole('checkbox', { name: 'React' })
+    const solid = screen.getByRole('checkbox', { name: 'Solid' })
+    expect(react).toBeChecked()
+    expect(solid).not.toBeChecked()
+
+    await user.click(screen.getByRole('button', { name: 'switch group state' }))
+    await waitFor(() => expect(solid).toBeChecked())
+    expect(react).not.toBeChecked()
+
+    await user.click(react)
+    expect(secondOnValueChange).toHaveBeenCalledWith(['solid', 'react'])
+    expect(firstOnValueChange).not.toHaveBeenCalled()
+  })
 })
 
 describe('checkbox / Field', () => {

@@ -23,13 +23,14 @@ export interface TourRootProps extends TourRootBaseProps {
 export function TourRoot(props: TourRootProps) {
   const [presenceProps, rootProps] = splitPresenceProps(props)
   const [renderStrategyProps] = splitRenderStrategyProps(presenceProps)
+  const tour: UseTourReturn = () => rootProps.tour()
 
   const presence = usePresence(
-    mergeProps(() => ({ present: rootProps.tour().open }), presenceProps),
+    mergeProps(() => ({ present: tour().open }), presenceProps),
   )
 
   return (
-    <TourProvider value={rootProps.tour}>
+    <TourProvider value={tour}>
       <RenderStrategyProvider value={renderStrategyProps}>
         <PresenceProvider value={presence}>{rootProps.children}</PresenceProvider>
       </RenderStrategyProvider>

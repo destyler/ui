@@ -1,11 +1,11 @@
 import { createToaster, Toast, Toaster } from '@destyler-ui/solid/toast'
 
-const toaster = createToaster({
-  placement: 'bottom-end',
-  gap: 24,
-})
-
 export function Action() {
+  const toaster = createToaster({
+    placement: 'bottom-end',
+    gap: 24,
+  })
+
   return (
     <div>
       <button

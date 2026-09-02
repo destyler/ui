@@ -1,5 +1,6 @@
-import { render, screen } from '@solidjs/testing-library'
+import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { FileUpload, fileUploadAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
@@ -14,6 +15,31 @@ describe('fileUpload', () => {
 
   it.each(getExports(fileUploadAnatomy))('should export %s', async (part) => {
     expect(FileUpload[part]).toBeDefined()
+  })
+
+  it('updates item preview when type and file change', async () => {
+    const [file, setFile] = createSignal(new File([''], 'photo.png', { type: 'image/png' }))
+    const [type, setType] = createSignal('^image/')
+
+    render(() => (
+      <FileUpload.Root>
+        <FileUpload.Item file={file()}>
+          <FileUpload.ItemPreview type={type()} data-testid="preview">
+            Preview
+          </FileUpload.ItemPreview>
+        </FileUpload.Item>
+      </FileUpload.Root>
+    ))
+
+    expect(screen.getByTestId('preview')).toBeInTheDocument()
+    expect(screen.getByTestId('preview')).not.toHaveAttribute('type')
+
+    setType('^text/')
+    await waitFor(() => expect(screen.queryByTestId('preview')).not.toBeInTheDocument())
+
+    setFile(new File([''], 'notes.txt', { type: 'text/plain' }))
+    await waitFor(() => expect(screen.getByTestId('preview')).toBeInTheDocument())
+    expect(screen.getByTestId('preview')).not.toHaveAttribute('type')
   })
 })
 

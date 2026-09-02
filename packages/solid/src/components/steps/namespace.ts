@@ -63,4 +63,4 @@ export {
   type StepsTriggerBaseProps as TriggerBaseProps,
   type StepsTriggerProps as TriggerProps,
 } from './components/Trigger'
-export type { StepChangeDetails as ChangeDetails } from '@destyler/steps'
+export type { StepChangeDetails as ChangeDetails, StepChangeDetails } from '@destyler/steps'

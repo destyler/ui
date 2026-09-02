@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { createSignal } from 'solid-js'
 import { Calendar, calendarAnatomy } from '../'
 import { getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
@@ -58,5 +59,47 @@ describe('date Picker', () => {
 
     await user.click(screen.getByRole('button', { name: 'Open calendar' }))
     expect(closeButton).not.toBeInTheDocument()
+  })
+
+  it('updates table columns and view props reactively', async () => {
+    const [columns, setColumns] = createSignal(7)
+    const [view, setView] = createSignal<'day' | 'month'>('day')
+
+    render(() => (
+      <Calendar.Root>
+        <Calendar.View view={view()}>
+          <Calendar.Table columns={columns()} data-testid="table">
+            <Calendar.TableBody data-testid="table-body" />
+          </Calendar.Table>
+        </Calendar.View>
+      </Calendar.Root>
+    ))
+
+    expect(screen.getByTestId('table')).toHaveAttribute('data-columns', '7')
+    expect(screen.getByTestId('table')).toHaveAttribute('data-view', 'day')
+    expect(screen.getByTestId('table-body')).toHaveAttribute('data-view', 'day')
+
+    setColumns(4)
+    setView('month')
+
+    await waitFor(() => expect(screen.getByTestId('table')).toHaveAttribute('data-columns', '4'))
+    expect(screen.getByTestId('table')).toHaveAttribute('data-view', 'month')
+    expect(screen.getByTestId('table-body')).toHaveAttribute('data-view', 'month')
+  })
+
+  it('adds readonly to the input when readOnly changes', async () => {
+    const [readOnly, setReadOnly] = createSignal(false)
+
+    render(() => (
+      <Calendar.Root readOnly={readOnly()}>
+        <Calendar.Input data-testid="calendar-input" />
+      </Calendar.Root>
+    ))
+
+    const input = screen.getByTestId('calendar-input')
+    expect(input).not.toHaveAttribute('readonly')
+
+    setReadOnly(true)
+    await waitFor(() => expect(input).toHaveAttribute('readonly'))
   })
 })

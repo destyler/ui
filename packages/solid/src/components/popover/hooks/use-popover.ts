@@ -3,6 +3,7 @@ import type { Accessor } from 'solid-js'
 import type { Optional } from '~/types'
 import * as popover from '@destyler/popover'
 import { normalizeProps, useMachine } from '@destyler/solid'
+import { MachineStatus } from '@destyler/xstate'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
@@ -35,6 +36,11 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
     open: props.open,
   }))
 
-  const [state, send] = useMachine(popover.machine(initialContext()), { context })
-  return createMemo(() => popover.connect(state, send, normalizeProps))
+  const [state, send, service] = useMachine(popover.machine(initialContext()), { context })
+  const safeSend: typeof send = (event) => {
+    if (service.status !== MachineStatus.Stopped)
+      send(event)
+  }
+
+  return createMemo(() => popover.connect(state, safeSend, normalizeProps))
 }

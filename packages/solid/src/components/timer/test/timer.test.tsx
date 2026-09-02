@@ -23,7 +23,9 @@ describe('timer', () => {
 
   it('renders timer controls', () => {
     render(() => <Basic />)
-    expect(screen.getByRole('button', { name: 'Play' })).toBeInTheDocument()
+    const playButton = screen.getByRole('button', { name: 'Play' })
+    expect(playButton).toBeInTheDocument()
+    expect(playButton).not.toHaveAttribute('action')
     expect(screen.getByText('Pause')).toBeInTheDocument()
   })
 })

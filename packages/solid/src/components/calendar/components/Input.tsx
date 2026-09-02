@@ -11,7 +11,10 @@ export interface CalendarInputProps extends HTMLProps<'input'>, CalendarInputBas
 export function CalendarInput(props: CalendarInputProps) {
   const [inputProps, localProps] = createSplitProps<InputProps>()(props, ['index', 'fixOnBlur'])
   const calendar = useCalendarContext()
-  const mergedProps = mergeProps(() => calendar().getInputProps(inputProps), localProps)
+  const mergedProps = mergeProps(() => {
+    const apiProps = calendar().getInputProps(inputProps)
+    return { ...apiProps, readOnly: apiProps.readOnly }
+  }, localProps)
 
   return <ui.input {...mergedProps} />
 }

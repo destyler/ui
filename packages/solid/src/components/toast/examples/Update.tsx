@@ -1,13 +1,12 @@
 import { createToaster, Toast, Toaster } from '@destyler-ui/solid/toast'
 import { createSignal } from 'solid-js'
 
-const toaster = createToaster({
-  placement: 'bottom-end',
-  overlap: true,
-  gap: 24,
-})
-
 export function Update() {
+  const toaster = createToaster({
+    placement: 'bottom-end',
+    overlap: true,
+    gap: 24,
+  })
   const [id, setId] = createSignal<string | undefined>(undefined)
 
   const createToast = () => {

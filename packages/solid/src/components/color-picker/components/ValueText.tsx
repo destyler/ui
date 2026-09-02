@@ -12,5 +12,5 @@ export function ColorPickerValueText(props: ColorPickerValueTextProps) {
   const colorPicker = useColorPickerContext()
   const mergedProps = mergeProps(() => colorPicker().getValueTextProps(), props)
 
-  return <ui.span {...mergedProps}>{colorPicker().valueAsString || props.children}</ui.span>
+  return <ui.span {...mergedProps}>{props.children ?? colorPicker().valueAsString}</ui.span>
 }

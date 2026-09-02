@@ -1,6 +1,6 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
-import { Show } from 'solid-js'
+import { createMemo, Show } from 'solid-js'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
 import { composeRefs } from '~/utils/compose-refs'
@@ -13,19 +13,25 @@ export interface TourBackdropProps extends HTMLProps<'div'>, TourBackdropBasePro
 export function TourBackdrop(props: TourBackdropProps) {
   const tour = useTourContext()
   const renderStrategyProps = useRenderStrategyContext()
-  const presence = usePresence(mergeProps(renderStrategyProps, () => ({ present: tour().open })))
+  const present = createMemo(() => tour().open && Boolean(tour().step?.backdrop))
+  const backdropPresence = usePresence(
+    mergeProps(renderStrategyProps, () => ({ present: present() })),
+  )
   const mergedProps = mergeProps(
     () => tour().getBackdropProps(),
-    () => presence().presenceProps,
+    () => backdropPresence().presenceProps,
     props,
   )
 
   return (
-    <Show when={!presence().unmounted}>
+    <Show when={!backdropPresence().unmounted}>
       <ui.div
         {...mergedProps}
-        ref={composeRefs(presence().presenceProps.ref, props.ref)}
-        hidden={!tour().step?.backdrop}
+        ref={composeRefs(backdropPresence().presenceProps.ref, props.ref)}
+        hidden={Boolean(
+          backdropPresence().presenceProps.hidden
+          || props.hidden,
+        )}
       />
     </Show>
   )
