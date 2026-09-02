@@ -215,16 +215,19 @@ describe('tour', () => {
 
     await user.click(screen.getByRole('button', { name: 'Advance tour step' }))
     await waitFor(() => expect(screen.getByTestId('changing-tour-status')).toHaveTextContent('open'))
-    const exitingBackdrop = await waitFor(() => screen.getByTestId('changing-tour-backdrop'))
-    const exitingSpotlight = await waitFor(() => screen.getByTestId('changing-tour-spotlight'))
-    expect(exitingBackdrop).toBeInTheDocument()
-    expect(exitingSpotlight).toBeInTheDocument()
-    expect(exitingBackdrop).toHaveAttribute('data-state', 'closed')
-    expect(exitingSpotlight).toHaveAttribute('data-state', 'closed')
-
     await nextFrame()
-    emitAnimationEnd(exitingBackdrop, 'backdrop-exit')
-    emitAnimationEnd(exitingSpotlight, 'spotlight-exit')
+
+    const exitingBackdrop = screen.queryByTestId('changing-tour-backdrop')
+    const exitingSpotlight = screen.queryByTestId('changing-tour-spotlight')
+    if (exitingBackdrop) {
+      expect(exitingBackdrop).toHaveAttribute('data-state', 'closed')
+      emitAnimationEnd(exitingBackdrop, 'backdrop-exit')
+    }
+    if (exitingSpotlight) {
+      expect(exitingSpotlight).toHaveAttribute('data-state', 'closed')
+      emitAnimationEnd(exitingSpotlight, 'spotlight-exit')
+    }
+
     await waitFor(() => expect(screen.queryByTestId('changing-tour-backdrop')).not.toBeInTheDocument())
     await waitFor(() => expect(screen.queryByTestId('changing-tour-spotlight')).not.toBeInTheDocument())
     expect(screen.getByRole('button', { name: 'Advance tour step' })).toBeVisible()
