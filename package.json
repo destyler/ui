@@ -1,6 +1,6 @@
 {
   "name": "@destyler-ui/monorepo",
-  "version": "0.0.1-beta.16",
+  "version": "0.0.1-beta.17",
   "private": "true",
   "packageManager": "pnpm@10.28.0",
   "description": "",

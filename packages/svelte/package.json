@@ -1,7 +1,7 @@
 {
   "name": "@destyler-ui/svelte",
   "type": "module",
-  "version": "0.0.1-beta.16",
+  "version": "0.0.1-beta.17",
   "description": "Build scalable design systems with unstyled, accessible UI components for Svelte",
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",
