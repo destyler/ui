@@ -26,7 +26,7 @@ interface HotkeyRegistration {
 }
 
 interface HotkeyRegistry {
-  handleKeyDown: (event: KeyboardEvent) => void
+  handleKeyDown: (event: Event) => void
   registrations: Set<HotkeyRegistration>
   routingVersion: number
 }
@@ -70,6 +70,9 @@ function registerHotkey(target: Document | ShadowRoot, registration: HotkeyRegis
       registrations,
       routingVersion: 0,
       handleKeyDown(event) {
+        if (!(event instanceof KeyboardEvent))
+          return
+
         const matching = [...registrations].filter(item => matchesHotkey(event, item.hotkey()))
         if (matching.length === 0)
           return
