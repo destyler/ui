@@ -81,7 +81,3 @@ jobs:
       - name: Build Solid Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/solid build-storybook
-
-      - name: Build documentation
-        if: matrix.node == 22
-        run: pnpm run docs:build

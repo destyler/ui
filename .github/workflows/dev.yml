@@ -33,10 +33,10 @@ jobs:
         run: pnpm run docs:build
 
       - name: Zip dev.destyler.org
-        run: npx tsx scripts/zip.ts docs/dist docs-dist
+        run: pnpm exec tsx scripts/zip.ts docs/dist docs-dist
 
       - name: Deploy dev.destyler.org
-        run: npx tsx scripts/deploy.ts ${TOKEN} ${ENV} ${SERVICE} docs-dist.zip
+        run: pnpm exec tsx scripts/deploy.ts ${TOKEN} ${ENV} ${SERVICE} docs-dist.zip
         env:
           TOKEN: ${{secrets.ZEABUR_TOKEN}}
           ENV: ${{secrets.DEV_UI_DESTYLER_ENV}}

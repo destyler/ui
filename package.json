@@ -67,6 +67,7 @@
     "taze": "catalog:node",
     "tsdown": "catalog:build",
     "tslib": "catalog:types",
+    "tsx": "catalog:docs",
     "typescript": "catalog:types",
     "vite": "catalog:runtime",
     "vitest": "catalog:test",
