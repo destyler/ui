@@ -4,7 +4,7 @@ import type { HTMLProps, PolymorphicProps } from '~/factory'
 import type { Assign } from '~/types'
 import { mergeProps, normalizeProps, useActor, useMachine } from '@destyler/solid'
 import * as toast from '@destyler/toast'
-import { createEffect, createMemo, createUniqueId, For, onCleanup, onMount, splitProps } from 'solid-js'
+import { createEffect, createMemo, createSignal, For, onCleanup, splitProps } from 'solid-js'
 import { ui } from '~/factory'
 import { composeRefs } from '~/utils/compose-refs'
 import { getToasterInternal } from '../hooks/create-toaster'
@@ -31,7 +31,7 @@ interface HotkeyRegistry {
   routingVersion: number
 }
 
-const hotkeyRegistries = new WeakMap<Document, HotkeyRegistry>()
+const hotkeyRegistries = new WeakMap<object, HotkeyRegistry>()
 let toasterActivity = 0
 let toasterMountOrder = 0
 
@@ -51,8 +51,19 @@ function getNewestRegistration(
   }, undefined)
 }
 
-function registerHotkey(document: Document, registration: HotkeyRegistration) {
-  let registry = hotkeyRegistries.get(document)
+function getDeepActiveElement(root: Document | ShadowRoot | null | undefined): Element | null {
+  if (!root)
+    return null
+
+  let active = root.activeElement
+  while (active?.shadowRoot?.activeElement)
+    active = active.shadowRoot.activeElement
+
+  return active
+}
+
+function registerHotkey(target: Document | ShadowRoot, registration: HotkeyRegistration) {
+  let registry = hotkeyRegistries.get(target)
   if (!registry) {
     const registrations = new Set<HotkeyRegistration>()
     registry = {
@@ -63,7 +74,7 @@ function registerHotkey(document: Document, registration: HotkeyRegistration) {
         if (matching.length === 0)
           return
 
-        const activeElement = document.activeElement
+        const activeElement = getDeepActiveElement(target)
         const focused = matching.find((item) => {
           const element = item.element()
           return Boolean(element && activeElement && (element === activeElement || element.contains(activeElement)))
@@ -92,8 +103,8 @@ function registerHotkey(document: Document, registration: HotkeyRegistration) {
         })
       },
     }
-    hotkeyRegistries.set(document, registry)
-    document.addEventListener('keydown', registry.handleKeyDown, true)
+    hotkeyRegistries.set(target, registry)
+    target.addEventListener('keydown', registry.handleKeyDown, true)
   }
 
   registry.registrations.add(registration)
@@ -103,8 +114,8 @@ function registerHotkey(document: Document, registration: HotkeyRegistration) {
     registry!.registrations.delete(registration)
     if (registry!.registrations.size > 0)
       return
-    document.removeEventListener('keydown', registry!.handleKeyDown, true)
-    hotkeyRegistries.delete(document)
+    target.removeEventListener('keydown', registry!.handleKeyDown, true)
+    hotkeyRegistries.delete(target)
   }
 }
 
@@ -112,11 +123,9 @@ export function Toaster(props: ToasterProps) {
   const [toasterProps, localProps] = splitProps(props, ['toaster', 'children', 'ref'])
   const [state, send] = useMachine(toasterProps.toaster.machine)
   const placement = createMemo(() => state.context.placement)
-  const instanceId = createUniqueId()
   const internal = getToasterInternal(toasterProps.toaster)
-  let groupElement: HTMLElement | null = null
+  const [groupElement, setGroupElement] = createSignal<HTMLElement | null>(null)
   let activity = 0
-  let unregisterHotkey: VoidFunction | undefined
 
   const api = createMemo(() =>
     toast.group.connect(state as toast.GroupState<JSX.Element>, send, normalizeProps))
@@ -131,32 +140,37 @@ export function Toaster(props: ToasterProps) {
     return toastIds
   }, [])
 
-  onMount(() => {
-    if (!groupElement)
+  createEffect(() => {
+    const element = groupElement()
+    if (!element)
       return
+
     toasterMountOrder += 1
-    unregisterHotkey = registerHotkey(groupElement.ownerDocument, {
+    const registration: HotkeyRegistration = {
       activity: () => activity,
       count: () => toasts().length,
-      element: () => groupElement,
+      element: () => groupElement(),
       hotkey: () => state.context.hotkey,
       internal,
       mountOrder: toasterMountOrder,
+    }
+
+    const ownerDocument = element.ownerDocument
+    const unregister = registerHotkey(ownerDocument, registration)
+
+    onCleanup(() => {
+      unregister()
     })
   })
 
   onCleanup(() => {
-    unregisterHotkey?.()
-    if (internal.groupElement === groupElement)
+    if (internal.groupElement === groupElement())
       internal.groupElement = null
-    groupElement = null
+    setGroupElement(null)
   })
 
   const mergedProps = mergeProps(
-    () => ({
-      ...api().getGroupProps({ placement: placement() }),
-      id: `toast-group:${placement()}:${instanceId}`,
-    }),
+    () => api().getGroupProps({ placement: placement() }),
     localProps,
   )
 
@@ -165,7 +179,7 @@ export function Toaster(props: ToasterProps) {
       {...mergedProps}
       ref={composeRefs(
         (node: HTMLElement) => {
-          groupElement = node
+          setGroupElement(node)
           internal.groupElement = node
         },
         toasterProps.ref,

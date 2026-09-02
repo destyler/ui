@@ -8,7 +8,7 @@ export interface TooltipTriggerProps extends HTMLProps<'button'>, TooltipTrigger
 
 export function TooltipTrigger(props: TooltipTriggerProps) {
   const api = useTooltipContext()
-  const mergedProps = mergeProps(() => api().getTriggerProps(), props)
+  const mergedProps = mergeProps({ type: 'button' }, () => api().getTriggerProps(), props)
 
   return <ui.button {...mergedProps} />
 }

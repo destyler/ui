@@ -10,7 +10,7 @@ export interface StepsTriggerProps extends HTMLProps<'button'>, StepsTriggerBase
 export function StepsTrigger(props: StepsTriggerProps) {
   const steps = useStepsContext()
   const itemProps = useStepsItemPropsContext()
-  const mergedProps = mergeProps(() => steps().getTriggerProps(itemProps), props)
+  const mergedProps = mergeProps({ type: 'button' }, () => steps().getTriggerProps(itemProps), props)
 
   return <ui.button {...mergedProps} />
 }

@@ -8,7 +8,7 @@ export interface HoverCardTriggerProps extends HTMLProps<'button'>, HoverCardTri
 
 export function HoverCardTrigger(props: HoverCardTriggerProps) {
   const hoverCard = useHoverCardContext()
-  const mergedProps = mergeProps(() => hoverCard().getTriggerProps(), props)
+  const mergedProps = mergeProps({ type: 'button' }, () => hoverCard().getTriggerProps(), props)
 
   return <ui.button {...mergedProps} />
 }

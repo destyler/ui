@@ -19,7 +19,7 @@ export function SplitterResizeTrigger(props: SplitterResizeTriggerProps) {
     'step',
   ])
   const api = useSplitterContext()
-  const mergedProps = mergeProps(() => api().getResizeTriggerProps(resizeTriggerProps), restProps)
+  const mergedProps = mergeProps({ type: 'button' }, () => api().getResizeTriggerProps(resizeTriggerProps), restProps)
 
   return <ui.button {...mergedProps} />
 }

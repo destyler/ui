@@ -133,7 +133,7 @@ describe('toast', () => {
     await waitFor(() => expect(screen.getAllByText('Toast Title')).toHaveLength(1))
   })
 
-  it('uses unique group ids and focuses the most recently active toaster', async () => {
+  it('keeps getGroupProps ids on the DOM and focuses the most recently active toaster', async () => {
     function MultipleToasters() {
       const first = createToaster({ placement: 'bottom-end' })
       const second = createToaster({ placement: 'bottom-end' })
@@ -166,9 +166,8 @@ describe('toast', () => {
     const firstGroup = screen.getByTestId('first-toast-group')
     const secondGroup = screen.getByTestId('second-toast-group')
 
-    expect(firstGroup.id).not.toBe(secondGroup.id)
-    expect(firstGroup.id).toMatch(/^toast-group:bottom-end:/)
-    expect(secondGroup.id).toMatch(/^toast-group:bottom-end:/)
+    expect(firstGroup.id).toBe('toast-group:bottom-end')
+    expect(secondGroup.id).toBe('toast-group:bottom-end')
 
     await user.click(screen.getByRole('button', { name: 'Create second toast' }))
     await screen.findByText('Second toast')

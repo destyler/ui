@@ -3,6 +3,7 @@ import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
 import { ui } from '~/factory'
 import { createSplitProps } from '~/utils/create-split-props'
+import { orFallback } from '~/utils/or-fallback'
 import { useTourContext } from '../hooks/use-tour-context'
 
 export interface TourActionTriggerBaseProps
@@ -19,7 +20,7 @@ export function TourActionTrigger(props: TourActionTriggerProps) {
 
   return (
     <ui.button {...mergedProps}>
-      {mergedProps.children || actionTriggerProps.action.label}
+      {orFallback(mergedProps.children, actionTriggerProps.action.label)}
     </ui.button>
   )
 }

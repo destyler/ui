@@ -8,7 +8,7 @@ export interface TourCloseTriggerProps extends HTMLProps<'button'>, TourCloseTri
 
 export function TourCloseTrigger(props: TourCloseTriggerProps) {
   const tour = useTourContext()
-  const mergedProps = mergeProps(() => tour().getCloseTriggerProps(), props)
+  const mergedProps = mergeProps({ type: 'button' }, () => tour().getCloseTriggerProps(), props)
 
   return <ui.button {...mergedProps} />
 }

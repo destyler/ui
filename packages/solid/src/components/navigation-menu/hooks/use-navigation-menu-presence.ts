@@ -89,6 +89,13 @@ export function createNavigationMenuPresence(
     previousPresent = nextPresent
   })
 
+  onCleanup(() => {
+    cycle += 1
+    closing = false
+    completed = true
+    pending.clear()
+  })
+
   return {
     presenceProps,
     present,

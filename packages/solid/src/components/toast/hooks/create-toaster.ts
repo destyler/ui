@@ -61,8 +61,8 @@ export function createToaster(props: CreateToasterProps): CreateToasterReturn {
 
   const getRootNode = () => {
     const target = getIdRoot(
-      props.getRootNode?.()
-      ?? internal.groupElement?.getRootNode()
+      internal.groupElement?.getRootNode()
+      ?? props.getRootNode?.()
       ?? getDocumentRoot(),
     )
     if (target === scopedTarget && scopedRoot)

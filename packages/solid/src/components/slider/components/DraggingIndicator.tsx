@@ -1,6 +1,7 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
 import { mergeProps } from '@destyler/solid'
 import { ui } from '~/factory'
+import { orFallback } from '~/utils/or-fallback'
 import { useSliderContext } from '../hooks/use-slider-context'
 import { useSliderThumbPropsContext } from '../hooks/use-slider-thumb-props-context'
 
@@ -16,7 +17,7 @@ export function SliderDraggingIndicator(props: SliderDraggingIndicatorProps) {
 
   return (
     <ui.span {...mergedProps}>
-      {props.children || slider().getThumbValue(thumbProps.index)}
+      {orFallback(props.children, slider().getThumbValue(thumbProps.index))}
     </ui.span>
   )
 }

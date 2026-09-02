@@ -4,10 +4,10 @@ import { Index } from 'solid-js'
 export function Standalone() {
   return (
     <Calendar.Root open>
-      <Calendar.Context>
-        {context => (
-          <>
-            <Calendar.View view="day">
+      <Calendar.View view="day">
+        <Calendar.Context>
+          {context => (
+            <>
               <Calendar.ViewControl>
                 <Calendar.PrevTrigger>Prev</Calendar.PrevTrigger>
                 <Calendar.ViewTrigger>
@@ -43,10 +43,82 @@ export function Standalone() {
                   </Index>
                 </Calendar.TableBody>
               </Calendar.Table>
-            </Calendar.View>
-          </>
-        )}
-      </Calendar.Context>
+            </>
+          )}
+        </Calendar.Context>
+      </Calendar.View>
+
+      <Calendar.View view="month">
+        <Calendar.Context>
+          {context => (
+            <>
+              <Calendar.ViewControl>
+                <Calendar.PrevTrigger>Prev</Calendar.PrevTrigger>
+                <Calendar.ViewTrigger>
+                  <Calendar.RangeText />
+                </Calendar.ViewTrigger>
+                <Calendar.NextTrigger>Next</Calendar.NextTrigger>
+              </Calendar.ViewControl>
+
+              <Calendar.Table>
+                <Calendar.TableBody>
+                  <Index each={context().getMonthsGrid({ columns: 4, format: 'short' })}>
+                    {months => (
+                      <Calendar.TableRow>
+                        <Index each={months()}>
+                          {month => (
+                            <Calendar.TableCell value={month().value}>
+                              <Calendar.TableCellTrigger>
+                                {month().label}
+                              </Calendar.TableCellTrigger>
+                            </Calendar.TableCell>
+                          )}
+                        </Index>
+                      </Calendar.TableRow>
+                    )}
+                  </Index>
+                </Calendar.TableBody>
+              </Calendar.Table>
+            </>
+          )}
+        </Calendar.Context>
+      </Calendar.View>
+
+      <Calendar.View view="year">
+        <Calendar.Context>
+          {context => (
+            <>
+              <Calendar.ViewControl>
+                <Calendar.PrevTrigger>Prev</Calendar.PrevTrigger>
+                <Calendar.ViewTrigger>
+                  <Calendar.RangeText />
+                </Calendar.ViewTrigger>
+                <Calendar.NextTrigger>Next</Calendar.NextTrigger>
+              </Calendar.ViewControl>
+
+              <Calendar.Table>
+                <Calendar.TableBody>
+                  <Index each={context().getYearsGrid({ columns: 4 })}>
+                    {years => (
+                      <Calendar.TableRow>
+                        <Index each={years()}>
+                          {year => (
+                            <Calendar.TableCell value={year().value}>
+                              <Calendar.TableCellTrigger>
+                                {year().label}
+                              </Calendar.TableCellTrigger>
+                            </Calendar.TableCell>
+                          )}
+                        </Index>
+                      </Calendar.TableRow>
+                    )}
+                  </Index>
+                </Calendar.TableBody>
+              </Calendar.Table>
+            </>
+          )}
+        </Calendar.Context>
+      </Calendar.View>
     </Calendar.Root>
   )
 }

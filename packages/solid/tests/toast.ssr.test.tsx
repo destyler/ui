@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { createToaster, Toaster } from '../src/components/toast'
 
 describe('toast server rendering', () => {
-  it('renders multiple same-placement toaster groups with unique ids', () => {
+  it('renders toaster groups with the public getGroupProps id', () => {
     function MultipleToasters() {
       const first = createToaster({ placement: 'bottom-end' })
       const second = createToaster({ placement: 'bottom-end' })
@@ -17,10 +17,10 @@ describe('toast server rendering', () => {
     }
 
     const html = renderToString(() => <MultipleToasters />)
-    const ids = [...html.matchAll(/id="(toast-group:bottom-end:[^"]+)"/g)]
+    const ids = [...html.matchAll(/id="(toast-group:bottom-end)"/g)]
       .map(match => match[1])
 
     expect(ids).toHaveLength(2)
-    expect(new Set(ids).size).toBe(2)
+    expect(ids.every(id => id === 'toast-group:bottom-end')).toBe(true)
   })
 })
