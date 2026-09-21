@@ -8,8 +8,8 @@ const meta = {
 export default meta
 
 export { Basic } from '../examples/Basic'
-export { Controlled } from '../examples/Controlled'
 export { BlurBehavior } from '../examples/BlurBehavior'
+export { Controlled } from '../examples/Controlled'
 export { DisabledEditing } from '../examples/DisabledEditing'
 export { InitialValue } from '../examples/InitialValue'
 export { MaxWithOverflow } from '../examples/MaxWithOverflow'

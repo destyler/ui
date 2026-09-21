@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
-import ControlledExample from '../examples/Controlled.svelte'
 import CenterOriginExample from '../examples/CenterOrigin.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import DraggingIndicatorExample from '../examples/DraggingIndicator.svelte'
 import InitialValueExample from '../examples/InitialValue.svelte'
 import MinMaxExample from '../examples/MinMax.svelte'

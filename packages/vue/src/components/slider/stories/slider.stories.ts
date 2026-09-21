@@ -1,6 +1,6 @@
 import Basic from '../examples/Basic.vue'
-import Controlled from '../examples/Controlled.vue'
 import CenterOrigin from '../examples/CenterOrigin.vue'
+import Controlled from '../examples/Controlled.vue'
 import DraggingIndicator from '../examples/DraggingIndicator.vue'
 import InitialValue from '../examples/InitialValue.vue'
 import MinMax from '../examples/MinMax.vue'

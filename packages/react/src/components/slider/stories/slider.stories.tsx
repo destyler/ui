@@ -8,8 +8,8 @@ const meta = {
 export default meta
 
 export { Basic } from '../examples/Basic'
-export { Controlled } from '../examples/Controlled'
 export { CenterOrigin } from '../examples/CenterOrigin'
+export { Controlled } from '../examples/Controlled'
 export { DraggingIndicator } from '../examples/DraggingIndicator'
 export { InitialValue } from '../examples/InitialValue'
 export { MinMax } from '../examples/MinMax'

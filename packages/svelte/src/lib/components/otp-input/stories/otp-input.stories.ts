@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
-import ControlledExample from '../examples/Controlled.svelte'
 import BlurredExample from '../examples/Blurred.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import CustomizedExample from '../examples/Customized.svelte'
 import InitialValueExample from '../examples/InitialValue.svelte'
 import OtpModeExample from '../examples/OtpMode.svelte'
