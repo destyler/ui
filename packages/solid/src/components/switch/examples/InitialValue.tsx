@@ -2,7 +2,7 @@ import { Switch } from '@destyler-ui/solid/switch'
 
 export function InitialValue() {
   return (
-    <Switch.Root checked>
+    <Switch.Root defaultChecked>
       <Switch.Control>
         <Switch.Thumb />
       </Switch.Control>

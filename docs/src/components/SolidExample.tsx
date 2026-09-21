@@ -13,7 +13,7 @@ interface Props {
 type PreviewStatus = 'idle' | 'loading' | 'ready' | 'missing' | 'error'
 
 const modules: Record<string, () => Promise<Record<string, Component>>> = import.meta.glob(
-  '../../../packages/solid/src/components/*/examples/*.tsx',
+  '../../../packages/solid/src/components/*/examples/**/*.{tsx,ts}',
 )
 const framework = getFramework('solid')
 
@@ -49,7 +49,8 @@ export default function SolidExample(props: Props) {
     void loader().then((module) => {
       if (version !== loadVersion)
         return
-      const loadedComponent = module[props.example] ?? module.default
+      const exportName = props.example.includes('/') ? props.example.split('/').pop()! : props.example
+      const loadedComponent = module[exportName] ?? module.default
       setExampleComponent(() => loadedComponent ?? null)
       setStatus(loadedComponent ? 'ready' : 'error')
     }).catch(() => {

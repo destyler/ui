@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 
 const modules: Record<string, () => Promise<any>> = import.meta.glob(
-  '../../../packages/vue/src/components/*/examples/*.vue',
+  '../../../packages/vue/src/components/*/examples/**/*.vue',
 )
 
 const framework = getFramework('vue')
