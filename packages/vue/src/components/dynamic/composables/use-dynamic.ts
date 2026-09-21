@@ -36,7 +36,7 @@ export function useDynamic(props: UseDynamicProps = {}, emit?: EmitFn<RootEmits>
     readOnly: field?.value.readOnly,
     required: field?.value.required,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onValueChange(details) {
       emit?.('valueChange', details)

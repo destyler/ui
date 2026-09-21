@@ -10,7 +10,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseEditProps
-  extends Optional<Omit<editable.Context, 'dir' | 'getRootNode' | 'value' | 'edit.controlled'>, 'id'> {
+  extends Optional<Omit<editable.Context, 'dir' | 'getRootNode' | 'value'>, 'id'> {
   /**
    * The initial edit state of the editable when it is first rendered.
    * Use when you do not need to control its edit state.
@@ -33,20 +33,18 @@ export function useEdit(props: UseEditProps = {}, emit?: EmitFn<RootEmits>): Use
   const field = useFieldContext()
   const context = computed<editable.Context>(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.value.ids.label,
       input: field?.value.ids.control,
     },
-    'disabled': field?.value.disabled,
-    'invalid': field?.value.invalid,
-    'readOnly': field?.value.readOnly,
-    'required': field?.value.required,
-    'dir': locale.value.dir,
-    'edit': props.defaultEdit,
-    'edit.controlled': props.edit !== undefined,
-    'value': props.modelValue ?? props.defaultValue,
-    'getRootNode': env?.value.getRootNode,
-    'onEditChange': (details) => {
+    disabled: field?.value.disabled,
+    invalid: field?.value.invalid,
+    readOnly: field?.value.readOnly,
+    required: field?.value.required,
+    dir: locale.value.dir,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
+    getRootNode: env?.value.getRootNode,
+    onEditChange: (details) => {
       emit?.('editChange', details)
       emit?.('update:edit', details.edit)
     },
@@ -54,11 +52,11 @@ export function useEdit(props: UseEditProps = {}, emit?: EmitFn<RootEmits>): Use
       emit?.('valueChange', details)
       emit?.('update:modelValue', details.value)
     },
-    'onFocusOutside': details => emit?.('focusOutside', details),
-    'onInteractOutside': details => emit?.('interactOutside', details),
-    'onPointerDownOutside': details => emit?.('pointerDownOutside', details),
-    'onValueCommit': details => emit?.('valueCommit', details),
-    'onValueRevert': details => emit?.('valueRevert', details),
+    onFocusOutside: details => emit?.('focusOutside', details),
+    onInteractOutside: details => emit?.('interactOutside', details),
+    onPointerDownOutside: details => emit?.('pointerDownOutside', details),
+    onValueCommit: details => emit?.('valueCommit', details),
+    onValueRevert: details => emit?.('valueRevert', details),
     ...cleanProps(props),
   }))
 

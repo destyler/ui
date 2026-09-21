@@ -37,8 +37,6 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>, emit?: EmitF
   const context = computed<tree.Context>(() => ({
     id,
     dir: locale.value.dir,
-    expandedValue: props.expandedValue ?? props.defaultExpandedValue,
-    selectedValue: props.selectedValue ?? props.defaultSelectedValue,
     getRootNode: env?.value.getRootNode,
     onFocusChange: (details) => {
       emit?.('focusChange', details)

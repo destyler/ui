@@ -36,7 +36,6 @@ export function useSwitch(props: UseSwitchProps = {}, emit?: EmitFn<RootEmits>):
     invalid: field?.value.invalid,
     required: field?.value.required,
     dir: locale.value.dir,
-    checked: props.defaultChecked,
     getRootNode: env?.value.getRootNode,
     onCheckedChange(details) {
       emit?.('checkedChange', details)

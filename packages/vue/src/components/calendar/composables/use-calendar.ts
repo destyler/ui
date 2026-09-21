@@ -9,7 +9,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseCalendarProps
-  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'parse' | 'open.controlled' | 'value'>, 'id'> {
+  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'parse' | 'value'>, 'id'> {
   /**
    * The v-model value of the calendar
    */
@@ -37,22 +37,19 @@ export function useCalendar(props: UseCalendarProps = {}, emit?: EmitFn<RootEmit
   const context = computed<calendar.Context>(() => {
     return {
       id,
-      'dir': locale.value.dir,
-      'open': props.open ?? props.defaultOpen,
-      'open.controlled': props.open !== undefined,
-      'value': props.defaultValue ?? props.modelValue,
-      'view': props.defaultView ?? props.view,
-      'getRootNode': env?.value.getRootNode,
-      'onFocusChange': details => emit?.('focusChange', details),
-      'onViewChange': (details) => {
+      dir: locale.value.dir,
+      ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onFocusChange: details => emit?.('focusChange', details),
+      onViewChange: (details) => {
         emit?.('viewChange', details)
         emit?.('update:view', details.view)
       },
-      'onOpenChange': (details) => {
+      onOpenChange: (details) => {
         emit?.('openChange', details)
         emit?.('update:open', details.open)
       },
-      'onValueChange': (details) => {
+      onValueChange: (details) => {
         emit?.('valueChange', details)
         emit?.('update:modelValue', details.value)
       },

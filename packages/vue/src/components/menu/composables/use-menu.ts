@@ -8,7 +8,7 @@ import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
 import { cleanProps } from '~/utils'
 
-export interface UseMenuProps extends Optional<Omit<menu.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+export interface UseMenuProps extends Optional<Omit<menu.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the menu when it is first rendered.
    * Use when you do not need to control its open state.
@@ -28,20 +28,18 @@ export function useMenu(props: UseMenuProps = {}, emit?: EmitFn<RootEmits>): Use
 
   const context = computed<menu.Context>(() => ({
     id,
-    'dir': locale.value.dir,
-    'open': props.open ?? props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'getRootNode': env?.value.getRootNode,
-    'onOpenChange': (details) => {
+    dir: locale.value.dir,
+    getRootNode: env?.value.getRootNode,
+    onOpenChange: (details) => {
       emit?.('openChange', details)
       emit?.('update:open', details.open)
     },
-    'onEscapeKeyDown': details => emit?.('escapeKeyDown', details),
-    'onFocusOutside': details => emit?.('focusOutside', details),
-    'onHighlightChange': details => emit?.('highlightChange', details),
-    'onInteractOutside': details => emit?.('interactOutside', details),
-    'onPointerDownOutside': details => emit?.('pointerDownOutside', details),
-    'onSelect': details => emit?.('select', details),
+    onEscapeKeyDown: details => emit?.('escapeKeyDown', details),
+    onFocusOutside: details => emit?.('focusOutside', details),
+    onHighlightChange: details => emit?.('highlightChange', details),
+    onInteractOutside: details => emit?.('interactOutside', details),
+    onPointerDownOutside: details => emit?.('pointerDownOutside', details),
+    onSelect: details => emit?.('select', details),
     ...cleanProps(props),
   }))
 

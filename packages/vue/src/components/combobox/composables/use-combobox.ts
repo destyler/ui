@@ -12,7 +12,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseComboboxProps<T extends CollectionItem>
-  extends Optional<Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'open.controlled' | 'value'>, 'id'> {
+  extends Optional<Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'value'>, 'id'> {
   modelValue?: combobox.Context<T>['value']
   /**
    * The initial open state of the combobox when it is first rendered.
@@ -37,29 +37,27 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
   const context = computed<combobox.Context<T>>(() => {
     return {
       id,
-      'ids': {
+      ids: {
         label: field?.value.ids.label,
         input: field?.value.ids.control,
       },
-      'disabled': field?.value.disabled,
-      'readOnly': field?.value.readOnly,
-      'required': field?.value.required,
-      'invalid': field?.value.invalid,
-      'dir': locale.value.dir,
-      'open': props.defaultOpen,
-      'open.controlled': props.open !== undefined,
-      'value': props.modelValue ?? props.defaultValue,
-      'getRootNode': env?.value.getRootNode,
-      'onFocusOutside': details => emit?.('focusOutside', details),
-      'onHighlightChange': details => emit?.('highlightChange', details),
-      'onInputValueChange': details => emit?.('inputValueChange', details),
-      'onInteractOutside': details => emit?.('interactOutside', details),
-      'onPointerDownOutside': details => emit?.('pointerDownOutside', details),
-      'onOpenChange': (details) => {
+      disabled: field?.value.disabled,
+      readOnly: field?.value.readOnly,
+      required: field?.value.required,
+      invalid: field?.value.invalid,
+      dir: locale.value.dir,
+      ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onFocusOutside: details => emit?.('focusOutside', details),
+      onHighlightChange: details => emit?.('highlightChange', details),
+      onInputValueChange: details => emit?.('inputValueChange', details),
+      onInteractOutside: details => emit?.('interactOutside', details),
+      onPointerDownOutside: details => emit?.('pointerDownOutside', details),
+      onOpenChange: (details) => {
         emit?.('openChange', details)
         emit?.('update:open', details.open)
       },
-      'onValueChange': (details) => {
+      onValueChange: (details) => {
         emit?.('valueChange', details)
         emit?.('update:modelValue', details.value)
       },

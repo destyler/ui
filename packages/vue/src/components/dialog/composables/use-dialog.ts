@@ -9,7 +9,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseDialogProps
-  extends Optional<Omit<dialog.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<dialog.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the dialog when it is first rendered.
    * Use when you do not need to control its open state.
@@ -25,18 +25,16 @@ export function useDialog(props: UseDialogProps = {}, emit?: EmitFn<RootEmits>) 
   const locale = useLocaleContext(DEFAULT_LOCALE)
   const context = computed<dialog.Context>(() => ({
     id,
-    'dir': locale.value.dir,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'getRootNode': env?.value.getRootNode,
-    'onOpenChange': (details) => {
+    dir: locale.value.dir,
+    getRootNode: env?.value.getRootNode,
+    onOpenChange: (details) => {
       emit?.('openChange', details)
       emit?.('update:open', details.open)
     },
-    'onEscapeKeyDown': details => emit?.('escapeKeyDown', details),
-    'onFocusOutside': details => emit?.('focusOutside', details),
-    'onInteractOutside': details => emit?.('interactOutside', details),
-    'onPointerDownOutside': details => emit?.('pointerDownOutside', details),
+    onEscapeKeyDown: details => emit?.('escapeKeyDown', details),
+    onFocusOutside: details => emit?.('focusOutside', details),
+    onInteractOutside: details => emit?.('interactOutside', details),
+    onPointerDownOutside: details => emit?.('pointerDownOutside', details),
     ...cleanProps(props),
   }))
 

@@ -25,7 +25,7 @@ export function useRadio(props: UseRadioProps = {}, emit?: EmitFn<RootEmits>): U
   const context = computed<radio.Context>(() => ({
     id,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onValueChange: (details) => {
       emit?.('valueChange', details)

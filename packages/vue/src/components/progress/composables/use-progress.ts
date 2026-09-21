@@ -29,7 +29,7 @@ export function useProgress(props: UseProgressProps = {}, emit?: EmitFn<RootEmit
   const context = computed<progress.Context>(() => ({
     id,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onValueChange: (details) => {
       emit?.('valueChange', details)
