@@ -41,7 +41,7 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(numberInput.machine(initialContext()), { context })

@@ -4,6 +4,7 @@ import type { MaybeFunction } from '@destyler/utils'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
+import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
 import * as navigationMenu from '@destyler/navigation-menu'
 import { runIfFn } from '@destyler/utils'
@@ -18,18 +19,18 @@ export function useNavigationMenu(props: MaybeFunction<UseNavigationMenuProps>):
   const env = useEnvironmentContext()
   const locale = useLocaleContext()
 
-  const context = $derived.by(() => {
+  const machineProps = $derived.by(() => {
     const resolvedProps = runIfFn(props) || {}
-    return {
+    return createMachineProps({
       dir: locale().dir,
       getRootNode: env().getRootNode,
       ...resolvedProps,
-    }
+    })
   })
 
-  const [state, send] = useMachine(() => navigationMenu.machine(context as navigationMenu.Context), {
+  const [state, send] = useMachine(() => navigationMenu.machine(machineProps.initial as navigationMenu.Context), {
     get context() {
-      return context as navigationMenu.Context
+      return machineProps.context as navigationMenu.Context
     },
   })
   const api = $derived(navigationMenu.connect(state, send, normalizeProps))

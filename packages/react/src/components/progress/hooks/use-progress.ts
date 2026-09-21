@@ -19,18 +19,28 @@ export interface UseProgressReturn extends progress.Api<PropTypes> {}
 export function useProgress(props: UseProgressProps = {}): UseProgressReturn {
   const { getRootNode } = useEnvironmentContext()
   const { dir } = useLocaleContext()
+  const { defaultValue, value, onValueChange, ...rest } = props
 
+  // @destyler/progress@0.2.7 has no controllable defaultValue — seed initial only.
   const initialContext: progress.Context = {
     id: useId(),
     dir,
     getRootNode,
-    ...props,
+    ...rest,
+    ...(value !== undefined
+      ? { value }
+      : defaultValue !== undefined
+        ? { value: defaultValue }
+        : {}),
   }
 
   const context: progress.Context = {
-    ...initialContext,
-    value: props.value,
-    onValueChange: useEvent(props.onValueChange, { sync: true }),
+    id: initialContext.id,
+    dir,
+    getRootNode,
+    ...rest,
+    ...(value !== undefined ? { value } : {}),
+    onValueChange: useEvent(onValueChange, { sync: true }),
   }
 
   const [state, send] = useMachine(progress.machine(initialContext), { context })

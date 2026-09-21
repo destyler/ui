@@ -47,7 +47,7 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
 
   const context = createMemo(() => ({
     ...initialContext(),
-    checked: props().checked,
+    ...(props().checked !== undefined ? { checked: props().checked } : {}),
   }))
 
   const [state, send] = useMachine(checkbox.machine(initialContext()), { context })

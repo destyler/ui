@@ -45,7 +45,8 @@ export function useEdit(props: UseEditProps = {}): UseEditReturn {
 
   const context: edit.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
+    ...(props.edit !== undefined ? { edit: props.edit } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onEditChange: useEvent(props.onEditChange),
     onValueCommit: useEvent(props.onValueCommit),

@@ -26,19 +26,33 @@ export function useProgress(props: UseProgressProps = {}, emit?: EmitFn<RootEmit
   const env = useEnvironmentContext()
   const locale = useLocaleContext(DEFAULT_LOCALE)
 
-  const context = computed<progress.Context>(() => ({
-    id,
-    dir: locale.value.dir,
-    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
-    getRootNode: env?.value.getRootNode,
-    onValueChange: (details) => {
-      emit?.('valueChange', details)
-      emit?.('update:modelValue', details.value)
-    },
-    ...cleanProps(props),
-  }))
+  // @destyler/progress@0.2.7 has no controllable defaultValue — seed initial value only.
+  const initialValue = props.modelValue !== undefined
+    ? props.modelValue
+    : props.defaultValue
 
-  const [state, send] = useMachine(progress.machine(context.value), { context })
+  const context = computed<progress.Context>(() => {
+    const { defaultValue: _defaultValue, modelValue, ...rest } = props
+    return {
+      id,
+      dir: locale.value.dir,
+      ...(modelValue !== undefined ? { value: modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onValueChange: (details) => {
+        emit?.('valueChange', details)
+        emit?.('update:modelValue', details.value)
+      },
+      ...cleanProps(rest),
+    }
+  })
+
+  const [state, send] = useMachine(
+    progress.machine({
+      ...context.value,
+      ...(initialValue !== undefined && props.modelValue === undefined ? { value: initialValue } : {}),
+    }),
+    { context },
+  )
 
   return computed(() => progress.connect(state.value, send, normalizeProps))
 }

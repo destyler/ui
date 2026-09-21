@@ -44,8 +44,8 @@ export function useEdit(props: UseEditProps = {}) {
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    edit: props.edit,
-    value: props.value,
+    ...(props.edit !== undefined ? { edit: props.edit } : {}),
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(edit.machine(initialContext()), { context })
 

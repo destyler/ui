@@ -46,7 +46,7 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
 
   const context: checkbox.Context = {
     ...initialContext,
-    checked: props.checked,
+    ...(props.checked !== undefined ? { checked: props.checked } : {}),
     onCheckedChange: useEvent(props.onCheckedChange, { sync: true }),
   }
 

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Edit } from '../index'
 
 interface ControlledProps {
@@ -7,14 +6,10 @@ interface ControlledProps {
 }
 
 export function Controlled({ activationMode = 'click', placeholder = 'Placeholder' }: ControlledProps) {
-  const [value, setValue] = useState('')
-
   return (
     <Edit.Root
       placeholder={placeholder}
       activationMode={activationMode}
-      value={value}
-      onValueChange={e => setValue(e.value)}
     >
       <Edit.Label>Label</Edit.Label>
       <Edit.Area>

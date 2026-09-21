@@ -39,7 +39,7 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
 
   const context: numberInput.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueInvalid: useEvent(props.onValueInvalid),
     onFocusChange: useEvent(props.onFocusChange),
