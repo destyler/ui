@@ -3,6 +3,7 @@ import type { Component } from 'svelte'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
 import ErrorCorrectionExample from '../examples/ErrorCorrection.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import WithOverlayExample from '../examples/WithOverlay.svelte'
 
@@ -17,6 +18,7 @@ const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 
 export const Basic = story(BasicExample)
 export const Controlled = story(ControlledExample)
+export const InitialValue = story(InitialValueExample)
 export const ErrorCorrection = story(ErrorCorrectionExample)
 export const RootProvider = story(RootProviderExample)
 export const WithOverlay = story(WithOverlayExample)

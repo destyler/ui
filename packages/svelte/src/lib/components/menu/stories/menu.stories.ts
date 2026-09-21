@@ -5,6 +5,7 @@ import CheckboxExample from '../examples/Checkbox.svelte'
 import ContextExample from '../examples/Context.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
 import GroupExample from '../examples/Group.svelte'
+import InitialOpenExample from '../examples/InitialOpen.svelte'
 import NestedExample from '../examples/Nested.svelte'
 import RadioGroupExample from '../examples/RadioGroup.svelte'
 import RenderPropExample from '../examples/RenderProp.svelte'
@@ -24,6 +25,7 @@ export const Basic = story(BasicExample)
 export const Checkbox = story(CheckboxExample)
 export const Context = story(ContextExample)
 export const Controlled = story(ControlledExample)
+export const InitialOpen = story(InitialOpenExample)
 export const Group = story(GroupExample)
 export const Nested = story(NestedExample)
 export const RadioGroup = story(RadioGroupExample)

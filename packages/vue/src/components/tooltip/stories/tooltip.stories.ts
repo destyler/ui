@@ -1,6 +1,7 @@
 import Arrow from '../examples/Arrow.vue'
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import Positioning from '../examples/Positioning.vue'
 import RenderFn from '../examples/RenderFn.vue'
 import RootProvider from '../examples/RootProvider.vue'
@@ -31,6 +32,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialOpen() {
+  return {
+    components: { InitialOpen },
+    template: '<InitialOpen />',
   }
 }
 

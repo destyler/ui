@@ -4,6 +4,7 @@ import ControlledExample from '../examples/Controlled.svelte'
 import FormattedExample from '../examples/Formatted.svelte'
 import FormUsageExample from '../examples/FormUsage.svelte'
 import FractionDigitsExample from '../examples/FractionDigits.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import MinMaxExample from '../examples/MinMax.svelte'
 import MouseWheelExample from '../examples/MouseWheel.svelte'
 import NoClampExample from '../examples/NoClamp.svelte'
@@ -33,3 +34,4 @@ export const RenderFn = { render: () => ({ Component: RenderFnExample }) }
 export const RootProvider = { render: () => ({ Component: RootProviderExample }) }
 export const Scrubber = { render: () => ({ Component: ScrubberExample }) }
 export const WithField = { render: () => ({ Component: WithFieldExample }) }
+export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

@@ -1,5 +1,6 @@
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
+import InitialStep from '../examples/InitialStep.vue'
 import RootProvider from '../examples/RootProvider.vue'
 
 export default {
@@ -20,6 +21,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialStep() {
+  return {
+    components: { InitialStep },
+    template: '<InitialStep />',
   }
 }
 

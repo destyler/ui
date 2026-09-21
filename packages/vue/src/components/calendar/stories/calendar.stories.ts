@@ -1,5 +1,6 @@
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import Range from '../examples/Range.vue'
 import RootProvider from '../examples/RootProvider.vue'
 import Standalone from '../examples/Standalone.vue'
@@ -22,6 +23,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

@@ -8,4 +8,5 @@ export default meta
 
 export { Basic } from '../examples/Basic'
 export { Controlled } from '../examples/Controlled'
+export { InitialValue } from '../examples/InitialValue'
 export { RootProvider } from '../examples/root-provider'

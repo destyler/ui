@@ -7,6 +7,7 @@ import GroupWithFormExample from '../examples/GroupWithForm.svelte'
 import GroupWithInvalidExample from '../examples/GroupWithInvalid.svelte'
 import GroupWithSelectAllExample from '../examples/GroupWithSelectAll.svelte'
 import IndeterminateExample from '../examples/Indeterminate.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import RenderPropExample from '../examples/RenderProp.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import WithFieldExample from '../examples/WithField.svelte'
@@ -29,3 +30,4 @@ export const Indeterminate = { render: () => ({ Component: IndeterminateExample 
 export const RenderProp = { render: () => ({ Component: RenderPropExample }) }
 export const RootProvider = { render: () => ({ Component: RootProviderExample }) }
 export const WithField = { render: () => ({ Component: WithFieldExample }) }
+export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

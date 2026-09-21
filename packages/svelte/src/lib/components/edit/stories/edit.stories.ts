@@ -3,6 +3,7 @@ import type { Component } from 'svelte'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
 import CustomControlsExample from '../examples/CustomControls.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import WithFieldExample from '../examples/WithField.svelte'
 
@@ -19,6 +20,7 @@ const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 
 export const Basic = story(BasicExample)
 export const Controlled = story(ControlledExample)
+export const InitialValue = story(InitialValueExample)
 export const CustomControls = story(CustomControlsExample)
 export const RootProvider = story(RootProviderExample)
 export const WithField = story(WithFieldExample)

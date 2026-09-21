@@ -3,6 +3,7 @@ import Controlled from '../examples/Controlled.vue'
 import Formatted from '../examples/Formatted.vue'
 import FormUsage from '../examples/FormUsage.vue'
 import FractionDigits from '../examples/FractionDigits.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import MinMax from '../examples/MinMax.vue'
 import MouseWheel from '../examples/MouseWheel.vue'
 import NoClamp from '../examples/NoClamp.vue'
@@ -29,6 +30,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

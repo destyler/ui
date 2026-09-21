@@ -3,6 +3,7 @@ import type { Component } from 'svelte'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
 import EventsExample from '../examples/Events.svelte'
+import InitialSizeExample from '../examples/InitialSize.svelte'
 import RenderPropExample from '../examples/RenderProp.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import VerticalExample from '../examples/Vertical.svelte'
@@ -13,6 +14,7 @@ const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 export default meta
 export const Basic = story(BasicExample)
 export const Controlled = story(ControlledExample)
+export const InitialSize = story(InitialSizeExample)
 export const Events = story(EventsExample)
 export const RenderProp = story(RenderPropExample)
 export const RootProvider = story(RootProviderExample)

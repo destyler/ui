@@ -3,6 +3,7 @@ import Controlled from '../examples/Controlled.vue'
 import CustomDelay from '../examples/CustomDelay.vue'
 import DisableClick from '../examples/DisableClick.vue'
 import DisableHover from '../examples/DisableHover.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import RootProvider from '../examples/RootProvider.vue'
 import Vertical from '../examples/Vertical.vue'
 
@@ -24,6 +25,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

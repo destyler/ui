@@ -3,6 +3,7 @@ import checkbox from '../examples/Checkbox.vue'
 import Context from '../examples/Context.vue'
 import Controlled from '../examples/Controlled.vue'
 import Group from '../examples/Group.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import Nested from '../examples/Nested.vue'
 import RadioGroup from '../examples/RadioGroup.vue'
 import RenderProp from '../examples/RenderProp.vue'
@@ -20,6 +21,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function initialOpen() {
+  return {
+    components: { InitialOpen },
+    template: '<InitialOpen />',
   }
 }
 
