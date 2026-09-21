@@ -1,0 +1,121 @@
+---
+title: Controllable State
+description: Use uncontrolled default* seeds or controlled live props and Vue v-model with Destyler UI compound components.
+---
+
+import FrameworkContent from '../../../components/FrameworkContent.astro'
+
+> Most Destyler UI roots can be **uncontrolled** (the component owns state after an optional seed) or **controlled** (your app owns state and syncs it back). This page covers the compound UI API (`Dialog.Root`, `Checkbox.Root`, and friends).
+
+For the lower-level machine contract (`machine()`, `context`, adapters), see the [primitives Controllable State guide](https://destyler.org/guide/controllable-state).
+
+## Uncontrolled (default)
+
+Prefer `defaultOpen`, `defaultChecked`, `defaultValue`, `defaultPage`, `defaultStep`, `defaultSize`, or `defaultPressed` for the initial seed. The component keeps the value afterward and still fires change callbacks (`onOpenChange`, `onValueChange`, and so on) if you only need to observe updates.
+
+```vue
+<script setup lang="ts">
+import { Dialog, Checkbox, Tabs } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <!-- Dialog — start open once, component owns open afterward -->
+  <Dialog.Root default-open>
+    <!-- … -->
+  </Dialog.Root>
+
+  <!-- Checkbox — start checked, component owns checked afterward -->
+  <Checkbox.Root default-checked>
+    <!-- … -->
+  </Checkbox.Root>
+
+  <!-- Tabs — seed the first tab without taking ownership -->
+  <Tabs.Root default-value="react">
+    <!-- … -->
+  </Tabs.Root>
+</template>
+```
+
+## Controlled
+
+Pass the live prop (`open`, `checked`, `value`, `page`, `step`, `size`, `pressed`, …) so **prop presence** marks the field as controlled. Keep that prop in sync when the component requests a change.
+
+### Vue — `v-model` / `v-model:*`
+
+```vue
+<script setup lang="ts">
+import { Dialog, Checkbox, Tabs } from '@destyler-ui/vue'
+import { ref } from 'vue'
+
+const open = ref(false)
+const checked = ref(false)
+const tab = ref('react')
+</script>
+
+<template>
+  <Dialog.Root v-model:open="open">
+    <!-- … -->
+  </Dialog.Root>
+
+  <Checkbox.Root v-model:checked="checked">
+    <!-- … -->
+  </Checkbox.Root>
+
+  <Tabs.Root v-model="tab">
+    <!-- … -->
+  </Tabs.Root>
+</template>
+```
+
+### React — live prop + `on*Change`
+
+```tsx
+import { useState } from 'react'
+import { Dialog, Checkbox, Tabs } from '@destyler-ui/react'
+
+export function ControlledExamples() {
+  const [open, setOpen] = useState(false)
+  const [checked, setChecked] = useState(false)
+  const [tab, setTab] = useState('react')
+
+  return (
+    <>
+      <Dialog.Root open={open} onOpenChange={({ open }) => setOpen(open)}>
+        {/* … */}
+      </Dialog.Root>
+
+      <Checkbox.Root checked={checked} onCheckedChange={e => setChecked(e.checked)}>
+        {/* … */}
+      </Checkbox.Root>
+
+      <Tabs.Root value={tab} onValueChange={({ value }) => setTab(value)}>
+        {/* … */}
+      </Tabs.Root>
+    </>
+  )
+}
+```
+
+### Solid / Svelte
+
+Solid mirrors React (`open={open()}` + `onOpenChange`). Svelte uses `bind:open`, `bind:checked`, `bind:value`, and similar bindable props on the root.
+
+## Important: no more `*.controlled` flags
+
+:::caution
+Passing `open`, `checked`, `value`, or other live keys into a root is treated as **controlled**. For demos and uncontrolled UIs, omit those keys and use `default*` instead. Explicit `*.controlled` flags are **removed** in Destyler core 0.2.7 (Destyler UI is aligned).
+:::
+
+| Intent | Pass on the root |
+|--------|------------------|
+| Uncontrolled seed | `defaultOpen` / `defaultChecked` / `defaultValue` / … (omit the live key) |
+| Controlled | Live `open` / `checked` / `value` / … + sync via `v-model` or `on*Change` |
+
+## Progress special case
+
+Core progress does **not** expose a controllable `defaultValue` machine API the same way interactive inputs do. In Destyler UI, prefer `defaultValue` only to **seed** an initial displayed value. Do not treat progress as a fully controlled form control unless you are driving a read-only display from your own state.
+
+## Related
+
+- [Getting Started](/docs/overview/getting-started)
+- Component pages under **Examples → Controlled** / **Initial Value**
