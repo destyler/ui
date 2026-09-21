@@ -15,13 +15,13 @@ function item(label: string) {
 }
 
 describe('[radio] component', () => {
-  it.each<[string]>(radioAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async ([part]) => {
+  it.each<[string]>(radioAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="radio-group"][data-part="${dataPart}"]`)).not.toBeNull()
   })
 
-  it.each<[string]>(radioAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', ([part]) => {
+  it.each<[string]>(radioAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Radio.${exportName}`).toBeDefined()
   })

@@ -22,7 +22,7 @@ describe('[toast] component', () => {
     expect(Toast.Toaster).toBeDefined()
   })
 
-  it.each<[string]>(toastAnatomy.keys().map((part: string) => [part] as [string]))('renders the %s anatomy part', async ([part]) => {
+  it.each<[string]>(toastAnatomy.keys().map((part: string) => [part] as [string]))('renders the %s anatomy part', async (part) => {
     await render(Basic, { props: { duration: testToastDuration } })
     await userEvent.click(page.getByText('Create Toast'))
     await vi.waitFor(() => {
@@ -30,7 +30,7 @@ describe('[toast] component', () => {
     })
   })
 
-  it.each<[string]>(toastAnatomy.keys().filter((part: string) => part !== 'group').map((part: string) => [part] as [string]))('exports the %s anatomy part', ([part]) => {
+  it.each<[string]>(toastAnatomy.keys().filter((part: string) => part !== 'group').map((part: string) => [part] as [string]))('exports the %s anatomy part', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Toast.${exportName}`).toBeDefined()
   })

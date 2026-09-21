@@ -13,13 +13,13 @@ const componentExports = FloatingPanel as unknown as Record<string, unknown>
 const exceptions: string[] = []
 
 describe('[floating-panel] component', () => {
-  it.each<[string]>(floatingPanelAnatomy.keys().map((part: string) => [part] as [string]))('renders the %s anatomy part', async ([part]) => {
+  it.each<[string]>(floatingPanelAnatomy.keys().map((part: string) => [part] as [string]))('renders the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="floating-panel"][data-part="${dataPart}"]`)).toBeInTheDocument()
   })
 
-  it.each<[string]>(floatingPanelAnatomy.keys().map((part: string) => [part] as [string]))('exports the %s anatomy part', ([part]) => {
+  it.each<[string]>(floatingPanelAnatomy.keys().map((part: string) => [part] as [string]))('exports the %s anatomy part', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     if (!exceptions.includes(exportName))
       expect(componentExports[exportName], `FloatingPanel.${exportName}`).toBeDefined()

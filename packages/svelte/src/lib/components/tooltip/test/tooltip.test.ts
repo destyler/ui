@@ -11,7 +11,7 @@ const componentExports = Tooltip as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[tooltip] component', () => {
-  it.each<[string]>(tooltipAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
+  it.each<[string]>(tooltipAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     expect(document.querySelector(`[data-scope="tooltip"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`

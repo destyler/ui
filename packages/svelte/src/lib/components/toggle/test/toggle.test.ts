@@ -8,7 +8,7 @@ const componentExports = Toggle as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[toggle] component', () => {
-  it.each<[string]>(toggleAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
+  it.each<[string]>(toggleAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="toggle"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`

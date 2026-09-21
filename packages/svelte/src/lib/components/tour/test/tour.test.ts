@@ -8,7 +8,7 @@ const componentExports = Tour as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[tour] component', () => {
-  it.each<[string]>(tourAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
+  it.each<[string]>(tourAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     await vi.waitFor(() => {
       expect(document.querySelector(`[data-scope="tour"][data-part="${partName(part)}"]`)).toBeInTheDocument()

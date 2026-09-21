@@ -8,13 +8,13 @@ import { Field, fieldAnatomy } from '../index'
 import BindableControls from './BindableControls.svelte'
 
 describe('[field] component', () => {
-  it.each<[string]>(fieldAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async ([part]) => {
+  it.each<[string]>(fieldAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     const screen = await render(AllParts)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="field"][data-part="${dataPart}"]`)).not.toBeNull()
   })
 
-  it.each<[string]>(fieldAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', ([part]) => {
+  it.each<[string]>(fieldAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const name = `${part.charAt(0).toUpperCase()}${part.slice(1)}` as keyof typeof Field
     expect(Field[name]).toBeDefined()
   })

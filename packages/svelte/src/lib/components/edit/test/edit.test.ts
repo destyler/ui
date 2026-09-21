@@ -9,7 +9,7 @@ import { Edit, editAnatomy } from '../index'
 const componentExports = Edit as unknown as Record<string, unknown>
 
 describe('[edit] component', () => {
-  it.each<[string]>(editAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
+  it.each<[string]>(editAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="edit"][data-part="${dataPart}"]`)).toBeInTheDocument()

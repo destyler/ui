@@ -6,12 +6,12 @@ import { Label, labelAnatomy } from '../index'
 
 const componentExports = Label as unknown as Record<string, unknown>
 describe('[label] component', () => {
-  it.each<[string]>(labelAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async ([part]) => {
+  it.each<[string]>(labelAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="label"][data-part="${part}"]`)).not.toBeNull()
   })
 
-  it.each<[string]>(labelAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', ([part]) => {
+  it.each<[string]>(labelAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Label.${exportName}`).toBeDefined()
   })

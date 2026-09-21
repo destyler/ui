@@ -10,7 +10,7 @@ import { AspectRatio, aspectRatioAnatomy } from '../index'
 const componentExports = AspectRatio as unknown as Record<string, unknown>
 
 describe('[aspect-ratio] component', () => {
-  it.each<[string]>(aspectRatioAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
+  it.each<[string]>(aspectRatioAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="aspect-ratio"][data-part="${part}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
