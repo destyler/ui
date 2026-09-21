@@ -11,7 +11,7 @@ import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 
 export interface UseEditProps
-  extends Omit<edit.Context, 'dir' | 'getRootNode' | 'edit.controlled' | 'id'> {
+  extends Omit<edit.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultEdit?: edit.Context['edit']
   defaultValue?: edit.Context['value']

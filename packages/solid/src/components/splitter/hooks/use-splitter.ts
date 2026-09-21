@@ -26,7 +26,6 @@ export function useSplitter(props: UseSplitterProps = {}): UseSplitterReturn {
     dir: locale().dir,
     getRootNode: environment().getRootNode,
     ...props,
-    size: props.size ?? props.defaultSize,
   }))
   const context = createMemo(() => ({
     ...initialContext(),

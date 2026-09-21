@@ -24,7 +24,6 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
   const initialContext = createMemo(() => ({
     id,
     dir: locale().dir,
-    value: props.defaultValue,
     getRootNode: environment().getRootNode,
     ...props,
   }))

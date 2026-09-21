@@ -4,32 +4,29 @@ type StringKey<T> = Extract<keyof T, string>
 type DefaultPropMap<T> = Partial<Record<StringKey<T>, StringKey<T>>>
 
 /**
- * Separates one-time default values from the reactive machine context.
+ * Build machine initial + reactive context from UI props.
  *
- * Destyler machines read defaults when they are created, while controlled
- * values continue to flow through `setContext`. Keeping those two objects
- * separate prevents a later prop update from resetting uncontrolled state.
+ * Destyler 0.2.7 (Phase 3 HARD): controllable state is prop-presence based.
+ * Pass `open` / `defaultOpen` (etc.) through as-is — do NOT remap `default*` into
+ * the live prop, and do NOT stamp `*.controlled` flags.
+ *
+ * Undefined values are omitted so presence detection treats omitted live props as
+ * uncontrolled. The `_defaults` / `_controlled` parameters are retained for
+ * call-site compatibility and are ignored.
  */
 export function createMachineProps<T extends MachineProps>(
   props: T,
-  defaults: DefaultPropMap<T> = {},
-  controlled: readonly StringKey<T>[] = [],
+  _defaults: DefaultPropMap<T> = {},
+  _controlled: readonly StringKey<T>[] = [],
 ) {
-  const initial = { ...props } as MachineProps
-  const context = { ...props } as MachineProps
-
-  for (const [prop, defaultProp] of Object.entries(defaults) as [StringKey<T>, StringKey<T>][]) {
-    initial[prop] = props[prop] !== undefined ? props[prop] : props[defaultProp]
-    delete initial[defaultProp]
-    delete context[defaultProp]
+  const cleaned: MachineProps = {}
+  for (const [key, value] of Object.entries(props)) {
+    if (value === undefined)
+      continue
+    if (key.endsWith('.controlled'))
+      continue
+    cleaned[key] = value
   }
 
-  for (const prop of controlled) {
-    const key = `${prop}.controlled`
-    const isControlled = props[prop] !== undefined
-    initial[key] = isControlled
-    context[key] = isControlled
-  }
-
-  return { initial, context }
+  return { initial: { ...cleaned }, context: { ...cleaned } }
 }

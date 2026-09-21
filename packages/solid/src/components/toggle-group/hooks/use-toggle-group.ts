@@ -25,7 +25,6 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
   const context = createMemo(() => ({

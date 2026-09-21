@@ -42,7 +42,6 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
     required: field?.().required,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    checked: props().defaultChecked,
     ...props(),
   }))
 

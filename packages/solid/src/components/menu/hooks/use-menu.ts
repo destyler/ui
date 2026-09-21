@@ -7,7 +7,7 @@ import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseMenuProps
-  extends Optional<Omit<menu.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<menu.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the menu when it is first rendered.
    * Use when you do not need to control its open state.
@@ -27,10 +27,8 @@ export function useMenu(props: UseMenuProps = {}): UseMenuReturn {
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
 

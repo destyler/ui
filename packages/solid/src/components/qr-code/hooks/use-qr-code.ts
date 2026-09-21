@@ -26,7 +26,6 @@ export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
 

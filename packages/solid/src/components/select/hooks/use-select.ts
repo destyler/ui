@@ -10,7 +10,7 @@ import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseSelectProps<T extends CollectionItem>
   extends Optional<
-    Omit<select.Context<T>, 'collection' | 'dir' | 'getRootNode' | 'open.controlled'>,
+    Omit<select.Context<T>, 'collection' | 'dir' | 'getRootNode'>,
     'id'
   > {
   /**
@@ -40,19 +40,16 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
 
   const initialContext = createMemo(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.().ids.label,
       hiddenSelect: field?.().ids.control,
     },
-    'disabled': field?.().disabled,
-    'readOnly': field?.().readOnly,
-    'invalid': field?.().invalid,
-    'required': field?.().required,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'value': props.defaultValue,
-    'open.controlled': props.open !== undefined,
+    disabled: field?.().disabled,
+    readOnly: field?.().readOnly,
+    invalid: field?.().invalid,
+    required: field?.().required,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
 

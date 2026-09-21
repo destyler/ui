@@ -24,7 +24,6 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    step: props.defaultStep,
     ...props,
   }))
 

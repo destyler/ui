@@ -8,7 +8,7 @@ import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseFloatingPanelProps
   extends Optional<
-    Omit<floatingPanel.Context, 'dir' | 'getRootNode' | 'open.controlled'>,
+    Omit<floatingPanel.Context, 'dir' | 'getRootNode'>,
     'id'
   > {
   /**
@@ -28,10 +28,8 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
     onOpenChange(details: floatingPanel.OpenChangeDetails) {
       if (!syncingControlledOpen)

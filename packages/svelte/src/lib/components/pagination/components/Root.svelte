@@ -26,6 +26,7 @@
       'onPageSizeChange',
       'page',
       'pageSize',
+    'defaultPageSize',
       'siblingCount',
       'translations',
       'type',

@@ -19,6 +19,7 @@ export function PaginationRoot(props: PaginationRootProps) {
     'onPageSizeChange',
     'page',
     'pageSize',
+    'defaultPageSize',
     'siblingCount',
     'translations',
     'type',

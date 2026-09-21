@@ -25,7 +25,6 @@ export function useCarousel(props: UseCarouselProps = {}): UseCarouselReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    page: props.defaultPage,
     ...props,
   }))
 

@@ -25,7 +25,6 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
 

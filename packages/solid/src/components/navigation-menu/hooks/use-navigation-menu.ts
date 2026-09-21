@@ -15,7 +15,7 @@ export interface UseNavigationMenuProps
   extends Optional<
     Omit<
       navigationMenu.Context,
-      'defaultValue' | 'dir' | 'getRootNode' | 'value.controlled'
+      'dir' | 'getRootNode'
     >,
     'id'
   > {
@@ -35,21 +35,16 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
   const generatedId = createUniqueId()
 
   const context = createMemo<navigationMenu.Context>(() => {
-    const controlled = props.value !== undefined
     return {
       ...props,
-      'id': props.id ?? generatedId,
-      'dir': locale().dir,
-      'getRootNode': isServer ? () => serverRootNode : environment().getRootNode,
-      'defaultValue': controlled ? (props.value ?? undefined) : props.defaultValue,
-      'value': props.value,
-      'value.controlled': controlled,
+      id: props.id ?? generatedId,
+      dir: locale().dir,
+      getRootNode: isServer ? () => serverRootNode : environment().getRootNode,
     } as navigationMenu.Context
   })
 
   const initialContext = {
     ...context(),
-    value: props.value ?? props.defaultValue ?? null,
   }
   const [state, send] = useMachine(navigationMenu.machine(initialContext), { context })
 

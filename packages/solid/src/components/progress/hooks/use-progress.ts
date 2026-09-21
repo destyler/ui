@@ -25,7 +25,6 @@ export function useProgress(props: UseProgressProps = {}): UseProgressReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
 

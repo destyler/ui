@@ -7,7 +7,7 @@ import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseHoverCardProps
-  extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the hover card when it is first rendered.
    * Use when you do not need to control its open state.
@@ -23,10 +23,8 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
 

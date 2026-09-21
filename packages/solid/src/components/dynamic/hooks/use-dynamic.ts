@@ -35,7 +35,6 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
     readOnly: field?.().readOnly,
     required: field?.().required,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
   const context = createMemo(() => ({

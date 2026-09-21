@@ -10,7 +10,7 @@ import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseComboboxProps<T extends CollectionItem>
   extends Optional<
-    Omit<combobox.Context<T>, 'collection' | 'dir' | 'getRootNode' | 'open.controlled'>,
+    Omit<combobox.Context<T>, 'collection' | 'dir' | 'getRootNode'>,
     'id'
   > {
   /**
@@ -40,19 +40,16 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
 
   const initialContext = createMemo(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.().ids.label,
       input: field?.().ids.control,
     },
-    'disabled': field?.().disabled,
-    'readOnly': field?.().readOnly,
-    'required': field?.().required,
-    'invalid': field?.().invalid,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'value': props.defaultValue,
-    'open.controlled': props.open !== undefined,
+    disabled: field?.().disabled,
+    readOnly: field?.().readOnly,
+    required: field?.().required,
+    invalid: field?.().invalid,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
 

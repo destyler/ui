@@ -9,7 +9,7 @@ import { useEnvironmentContext, useLocaleContext } from '../../../providers/inde
 import { createMachineProps } from '../../../utils/create-machine-props.js'
 
 export interface UseCalendarProps
-  extends Omit<calendar.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<calendar.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: calendar.Context['open']
   defaultValue?: calendar.Context['value']

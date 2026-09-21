@@ -12,7 +12,7 @@ import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 
 export interface UseComboboxProps<T extends CollectionItem>
-  extends Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'open.controlled' | 'id'> {
+  extends Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'id'> {
   id: string
   defaultOpen?: combobox.Context<T>['open']
   defaultValue?: combobox.Context<T>['value']

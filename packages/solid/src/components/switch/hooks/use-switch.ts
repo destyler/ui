@@ -35,7 +35,6 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     required: field?.().required,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    checked: props.defaultChecked,
     ...props,
   }))
 

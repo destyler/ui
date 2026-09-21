@@ -35,7 +35,6 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
     invalid: field?.().invalid,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
   const context = createMemo(() => ({

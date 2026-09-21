@@ -11,7 +11,7 @@ import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 
 export interface UseSelectProps<T extends CollectionItem>
-  extends Omit<select.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'open.controlled' | 'id'> {
+  extends Omit<select.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'id'> {
   id: string
   defaultOpen?: select.Context<T>['open']
   defaultValue?: select.Context<T>['value']
