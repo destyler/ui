@@ -1,6 +1,5 @@
 import type {
   CollectionItem,
-  UseAspectRatioProps,
   UseCalendarProps,
   UseCarouselProps,
   UseCheckboxGroupProps,
