@@ -18,7 +18,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to focus the placeholder and enter a value', async () => {
-    render(Controlled)
+    render(Basic)
     await page.getByText('Placeholder').click()
 
     const input = page.getByLabelText('editable input')
@@ -29,7 +29,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to dbl click the placeholder to enter a value', async () => {
-    render(Controlled, { props: { activationMode: 'dblclick' } })
+    render(Basic)
     await userEvent.dblClick(page.getByText('Placeholder'))
 
     await userEvent.clear(page.getByRole('textbox'))

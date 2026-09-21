@@ -9,7 +9,7 @@ const value = ref('')
   <Edit.Root v-model="value" placeholder="Placeholder">
     <Edit.Label>Label</Edit.Label>
     <Edit.Area>
-      <Edit.Input />
+      <Edit.Input aria-label="editable input" />
       <Edit.Preview />
     </Edit.Area>
     <Edit.Context v-slot="{ editing }">
