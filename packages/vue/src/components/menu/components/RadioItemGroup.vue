@@ -29,7 +29,7 @@ const id = props.id ?? useId()
 
 const itemGroupProps: UseMenuItemGroupContext = computed(() => ({
   id,
-  value: props.modelValue,
+  ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
   onValueChange: (e) => emits('update:modelValue', e.value),
 }))
 
