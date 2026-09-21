@@ -2,7 +2,6 @@ import { Calendar, parseDate } from '@destyler-ui/solid/calendar'
 import { Index, Portal } from 'solid-js/web'
 
 export function InitialValue() {
-
   return (
     <Calendar.Root defaultValue={[parseDate('2022-01-01')]}>
       <Calendar.Label>Label</Calendar.Label>

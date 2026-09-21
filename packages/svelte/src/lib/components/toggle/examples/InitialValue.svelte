@@ -3,3 +3,6 @@
 </script>
 
 <Toggle.Root defaultPressed>
+  <Toggle.Indicator>✓</Toggle.Indicator>
+  Toggle
+</Toggle.Root>

@@ -7,3 +7,15 @@
 </script>
 
 <Dialog.Root {...props} defaultOpen>
+  <Dialog.Trigger>Open Dialog</Dialog.Trigger>
+  <div use:portal>
+    <Dialog.Backdrop />
+    <Dialog.Positioner data-testid="positioner">
+      <Dialog.Content>
+        <Dialog.Title>Dialog Title</Dialog.Title>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+        <Dialog.CloseTrigger>Close</Dialog.CloseTrigger>
+      </Dialog.Content>
+    </Dialog.Positioner>
+  </div>
+</Dialog.Root>

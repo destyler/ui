@@ -1,7 +1,6 @@
 import { Calendar, parseDate } from '../index'
 
 export function InitialValue() {
-
   return (
     <Calendar.Root defaultValue={[parseDate('2022-01-01')]}>
       <Calendar.Label>Label</Calendar.Label>

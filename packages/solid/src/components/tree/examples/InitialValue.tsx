@@ -48,19 +48,18 @@ const collection = createTreeCollection<Node>({
 })
 
 export function InitialValue() {
-
   return (
-      <Tree.Root
-        collection={collection}
-        defaultSelectedValue={['src']}
-        defaultExpandedValue={['node_modules', 'src']}
-      >
-        <Tree.Label>Tree</Tree.Label>
-        <Tree.Tree>
-          <For each={collection.rootNode.children}>
-            {(node, index) => <TreeNode node={node} indexPath={[index()]} />}
-          </For>
-        </Tree.Tree>
-      </Tree.Root>
+    <Tree.Root
+      collection={collection}
+      defaultSelectedValue={['src']}
+      defaultExpandedValue={['node_modules', 'src']}
+    >
+      <Tree.Label>Tree</Tree.Label>
+      <Tree.Tree>
+        <For each={collection.rootNode.children}>
+          {(node, index) => <TreeNode node={node} indexPath={[index()]} />}
+        </For>
+      </Tree.Tree>
+    </Tree.Root>
   )
 }
