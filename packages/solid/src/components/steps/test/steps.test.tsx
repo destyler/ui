@@ -1,7 +1,7 @@
 import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Steps, stepsAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 
 describe('steps', () => {
@@ -11,7 +11,7 @@ describe('steps', () => {
   })
 
   it.each(getExports(stepsAnatomy))('exports %s', (part) => {
-    expect(Steps[part]).toBeDefined()
+    expectExport(Steps, part)
   })
 
   it('moves to the next step', async () => {

@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Collapsible, collapsibleAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 
 function ComponentUnderTest(props: Collapsible.RootProps) {
   return (
@@ -20,7 +20,7 @@ describe('collapsible / Parts & Exports', () => {
   })
 
   it.each(getExports(collapsibleAnatomy))('should export %s', async (part) => {
-    expect(Collapsible[part]).toBeDefined()
+    expectExport(Collapsible, part)
   })
 })
 

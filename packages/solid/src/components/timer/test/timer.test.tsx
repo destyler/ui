@@ -1,6 +1,6 @@
 import { render, screen } from '@solidjs/testing-library'
 import { Timer, timerAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 
 describe('timer', () => {
@@ -18,7 +18,7 @@ describe('timer', () => {
   ) as Array<keyof typeof Timer>
 
   it.each(exports)('exports %s', (part) => {
-    expect(Timer[part]).toBeDefined()
+    expectExport(Timer, part)
   })
 
   it('renders timer controls', () => {

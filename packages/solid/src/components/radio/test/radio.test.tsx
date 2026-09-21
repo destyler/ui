@@ -1,7 +1,7 @@
 import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Radio, radioAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('radio Group', () => {
@@ -12,7 +12,7 @@ describe('radio Group', () => {
   })
 
   it.each(getExports(radioAnatomy))('should export %s', async (part) => {
-    expect(Radio[part]).toBeDefined()
+    expectExport(Radio, part)
   })
 
   it('should invoke onValueChange if another value has selected', async () => {

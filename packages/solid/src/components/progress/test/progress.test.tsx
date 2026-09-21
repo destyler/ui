@@ -1,6 +1,6 @@
 import { render, screen } from '@solidjs/testing-library'
 import { Progress, progressAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('progress', () => {
@@ -11,7 +11,7 @@ describe('progress', () => {
   })
 
   it.each(getExports(progressAnatomy))('should export %s', async (part) => {
-    expect(Progress[part]).toBeDefined()
+    expectExport(Progress, part)
   })
 
   it('should handle value', async () => {

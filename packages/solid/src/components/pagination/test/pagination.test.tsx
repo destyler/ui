@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Pagination, paginationAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('pagination', () => {
@@ -13,7 +13,7 @@ describe('pagination', () => {
   })
 
   it.each(getExports(paginationAnatomy))('should export %s', async (part) => {
-    expect(Pagination[part]).toBeDefined()
+    expectExport(Pagination, part)
   })
 
   it('should update page when item is clicked', async () => {

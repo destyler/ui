@@ -1,7 +1,7 @@
 import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Edit, editAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 import { ControlledComponentUnderTest } from './controlled'
@@ -14,7 +14,7 @@ describe('edit', () => {
   })
 
   it.each(getExports(editAnatomy))('should export %s', async (part) => {
-    expect(Edit[part]).toBeDefined()
+    expectExport(Edit, part)
   })
 
   it('should render controlled component', async () => {

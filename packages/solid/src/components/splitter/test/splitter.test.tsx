@@ -1,6 +1,6 @@
 import { render } from '@solidjs/testing-library'
 import { Splitter, splitterAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('splitter', () => {
@@ -11,6 +11,6 @@ describe('splitter', () => {
   })
 
   it.each(getExports(splitterAnatomy))('should export %s', async (part) => {
-    expect(Splitter[part]).toBeDefined()
+    expectExport(Splitter, part)
   })
 })

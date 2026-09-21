@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Dynamic, dynamicAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -14,7 +14,7 @@ describe('dynamic', () => {
   })
 
   it.each(getExports(dynamicAnatomy))('should export %s', async (part) => {
-    expect(Dynamic[part]).toBeDefined()
+    expectExport(Dynamic, part)
   })
 
   it('should allow to add a new item', async () => {

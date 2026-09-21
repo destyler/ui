@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { ColorPicker, colorPickerAnatomy, parseColor } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -14,7 +14,7 @@ describe('colorPicker', () => {
   })
 
   it.each(getExports(colorPickerAnatomy))('should export %s', async (part) => {
-    expect(ColorPicker[part]).toBeDefined()
+    expectExport(ColorPicker, part)
   })
 
   it('should be able to lazy mount', async () => {

@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Calendar, calendarAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('date Picker', () => {
@@ -13,7 +13,7 @@ describe('date Picker', () => {
   })
 
   it.each(getExports(calendarAnatomy))('should export %s', async (part) => {
-    expect(Calendar[part]).toBeDefined()
+    expectExport(Calendar, part)
   })
 
   it('should be able to lazy mount', async () => {

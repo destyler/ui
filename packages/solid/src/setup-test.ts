@@ -1,6 +1,6 @@
 import type { AnatomyInstance } from '@destyler/anatomy'
 import ResizeObserver from 'resize-observer-polyfill'
-import { vi } from 'vitest'
+import { expect, vi } from 'vitest'
 import '@testing-library/jest-dom/vitest'
 
 export function getParts(anatomy: AnatomyInstance<string>) {
@@ -9,8 +9,12 @@ export function getParts(anatomy: AnatomyInstance<string>) {
   )
 }
 
-export function getExports<T extends string>(anatomy: AnatomyInstance<T>) {
-  return anatomy.keys().map(x => (x.charAt(0).toUpperCase() + x.slice(1)) as Capitalize<T>)
+export function getExports<T extends string>(anatomy: AnatomyInstance<T>): string[] {
+  return anatomy.keys().map(x => x.charAt(0).toUpperCase() + x.slice(1))
+}
+
+export function expectExport(namespace: object, part: string) {
+  expect((namespace as Record<string, unknown>)[part]).toBeDefined()
 }
 
 globalThis.document.execCommand = () => true

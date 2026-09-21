@@ -2,7 +2,7 @@ import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Toggle, toggleAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 
 function ComponentUnderTest() {
   return (
@@ -20,7 +20,7 @@ describe('toggle', () => {
   })
 
   it.each(getExports(toggleAnatomy))('exports %s', (part) => {
-    expect(Toggle[part]).toBeDefined()
+    expectExport(Toggle, part)
   })
 
   it('changes pressed state when clicked', async () => {

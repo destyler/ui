@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Dialog, dialogAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('dialog', () => {
@@ -12,7 +12,7 @@ describe('dialog', () => {
   })
 
   it.each(getExports(dialogAnatomy))('should export %s', async (part) => {
-    expect(Dialog[part]).toBeDefined()
+    expectExport(Dialog, part)
   })
 
   it('should show dialog content when opened', async () => {

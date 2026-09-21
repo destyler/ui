@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Tooltip, tooltipAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('tooltip', () => {
@@ -12,7 +12,7 @@ describe('tooltip', () => {
   })
 
   it.each(getExports(tooltipAnatomy))('should export %s', async (part) => {
-    expect(Tooltip[part]).toBeDefined()
+    expectExport(Tooltip, part)
   })
 
   it('should show the tooltip on pointerover and close on pointer leave', async () => {

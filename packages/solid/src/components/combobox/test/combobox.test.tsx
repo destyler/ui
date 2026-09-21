@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Combobox, comboboxAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -14,7 +14,7 @@ describe('combobox', () => {
   })
 
   it.each(getExports(comboboxAnatomy))('should export %s', async (part) => {
-    expect(Combobox[part]).toBeDefined()
+    expectExport(Combobox, part)
   })
 
   it('should show options on click', async () => {

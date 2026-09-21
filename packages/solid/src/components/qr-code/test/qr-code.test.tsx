@@ -1,6 +1,6 @@
 import { render } from '@solidjs/testing-library'
 import { QrCode, qrCodeAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('qrCode', () => {
@@ -11,6 +11,6 @@ describe('qrCode', () => {
   })
 
   it.each(getExports(qrCodeAnatomy))('should export %s', async (part) => {
-    expect(QrCode[part]).toBeDefined()
+    expectExport(QrCode, part)
   })
 })

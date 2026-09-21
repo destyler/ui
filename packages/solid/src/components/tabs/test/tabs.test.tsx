@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Tabs, tabsAnatomy, useTabs } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('tabs', () => {
@@ -13,7 +13,7 @@ describe('tabs', () => {
   })
 
   it.each(getExports(tabsAnatomy))('should export %s', async (part) => {
-    expect(Tabs[part]).toBeDefined()
+    expectExport(Tabs, part)
   })
 
   it('should activate tab on click', async () => {

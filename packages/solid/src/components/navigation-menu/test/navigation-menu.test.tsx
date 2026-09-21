@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { createSignal, Show } from 'solid-js'
 import { NavigationMenu, navigationMenuAnatomy } from '..'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
 import { RootProvider } from '../examples/RootProvider'
@@ -19,7 +19,7 @@ describe('navigationMenu / Parts & Exports', () => {
   })
 
   it.each(getExports(navigationMenuAnatomy))('should export %s', (part) => {
-    expect(NavigationMenu[part]).toBeDefined()
+    expectExport(NavigationMenu, part)
   })
 })
 

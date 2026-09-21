@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Breadcrumbs, breadcrumbsAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 import { Context } from '../examples/Context'
 import { RootProvider } from '../examples/RootProvider'
@@ -13,7 +13,7 @@ describe('breadcrumbs', () => {
   })
 
   it.each(getExports(breadcrumbsAnatomy))('should export %s', (part) => {
-    expect(Breadcrumbs[part]).toBeDefined()
+    expectExport(Breadcrumbs, part)
   })
 
   it('should render items, links, and separators', () => {

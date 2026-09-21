@@ -2,7 +2,7 @@ import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { CheckIcon, ClipboardCopyIcon } from 'lucide-solid'
 import { Clipboard, clipboardAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 
 function ComponentUnderTest() {
   return (
@@ -28,7 +28,7 @@ describe('clipboard', () => {
   })
 
   it.each(getExports(clipboardAnatomy))('should export %s', async (part) => {
-    expect(Clipboard[part]).toBeDefined()
+    expectExport(Clipboard, part)
   })
 
   it('should copy the value into the clipboard', async () => {

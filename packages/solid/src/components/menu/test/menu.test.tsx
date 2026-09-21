@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { createSignal, Index, splitProps } from 'solid-js'
 import { Menu, menuAnatomy, useMenu } from '..'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 
 interface ComponentUnderTestProps extends Menu.RootProps {
   onValueChange?: (e: { value: string }) => void
@@ -67,7 +67,7 @@ describe('menu / Parts & Exports', () => {
   })
 
   it.each(getExports(menuAnatomy))('should export %s', async (part) => {
-    expect(Menu[part]).toBeDefined()
+    expectExport(Menu, part)
   })
 })
 

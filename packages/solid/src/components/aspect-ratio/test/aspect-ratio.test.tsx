@@ -1,6 +1,6 @@
 import { render, screen } from '@solidjs/testing-library'
 import { AspectRatio, aspectRatioAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 import { Portrait } from '../examples/Portrait'
 import { RootProvider } from '../examples/RootProvider'
@@ -13,7 +13,7 @@ describe('aspectRatio', () => {
   })
 
   it.each(getExports(aspectRatioAnatomy))('should export %s', (part) => {
-    expect(AspectRatio[part]).toBeDefined()
+    expectExport(AspectRatio, part)
   })
 
   it('should render a 16:9 aspect ratio', () => {
