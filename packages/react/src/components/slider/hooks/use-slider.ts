@@ -24,7 +24,6 @@ export function useSlider(props: UseSliderProps = {}): UseSliderReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

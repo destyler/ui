@@ -41,7 +41,6 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    checked: props.defaultChecked,
     ...props,
   }
 

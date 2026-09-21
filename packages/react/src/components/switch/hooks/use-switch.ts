@@ -34,7 +34,6 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    checked: props.defaultChecked,
     ...props,
   }
 

@@ -24,7 +24,6 @@ export function usePagination(props: UsePaginationProps): UsePaginationReturn {
     id: useId(),
     dir,
     getRootNode,
-    page: props.defaultPage,
     ...props,
   }
 

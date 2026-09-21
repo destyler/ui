@@ -24,7 +24,6 @@ export function useTabs(props: UseTabsProps = {}): UseTabsReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

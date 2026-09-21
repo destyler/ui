@@ -24,7 +24,6 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

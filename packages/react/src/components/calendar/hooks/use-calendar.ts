@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseCalendarProps
-  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the calendar when it is first rendered.
    */
@@ -29,13 +29,10 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
   const { dir } = useLocaleContext()
 
   const initialContext: calendar.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'value': props.defaultValue,
-    'view': props.defaultView,
+    view: props.defaultView,
     ...props,
   }
 

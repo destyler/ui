@@ -36,8 +36,6 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     id: useId(),
     dir: locale.dir,
     getRootNode: environment.getRootNode,
-    selectedValue: props.defaultSelectedValue,
-    expandedValue: props.defaultExpandedValue,
     collection,
     ...treeProps,
   }

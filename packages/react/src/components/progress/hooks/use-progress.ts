@@ -24,7 +24,6 @@ export function useProgress(props: UseProgressProps = {}): UseProgressReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

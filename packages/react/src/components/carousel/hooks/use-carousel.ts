@@ -24,7 +24,6 @@ export function useCarousel(props: UseCarouselProps = {}): UseCarouselReturn {
     id: useId(),
     dir,
     getRootNode,
-    page: props.defaultPage,
     ...props,
   }
 

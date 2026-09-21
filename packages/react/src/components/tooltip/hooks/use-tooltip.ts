@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseTooltipProps
-  extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the tooltip when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,11 +22,9 @@ export function useTooltip(props: UseTooltipProps = {}): UseTooltipReturn {
   const { dir } = useLocaleContext()
 
   const initialContext: tooltip.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
     ...props,
   }
 

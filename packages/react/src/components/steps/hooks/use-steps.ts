@@ -23,7 +23,6 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     id: useId(),
     dir,
     getRootNode,
-    step: props.defaultStep,
     ...props,
   }
 

@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseFloatingPanelProps
-  extends Optional<Omit<floatingPanel.Context, 'open.controlled' | 'dir' | 'getRootNode'>, 'id'> {
+  extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the floating panel when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,8 +22,6 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
   const { dir } = useLocaleContext()
 
   const {
-    defaultOpen,
-    open,
     onOpenChange,
     onPositionChange,
     onPositionChangeEnd,
@@ -34,17 +32,14 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
   } = props
 
   const initialContext: floatingPanel.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': defaultOpen ?? open,
-    'open.controlled': open !== undefined,
     ...restProps,
   }
 
   const context: floatingPanel.Context = {
     ...initialContext,
-    open,
     onOpenChange: useEvent(onOpenChange),
     onPositionChange: useEvent(onPositionChange),
     onPositionChangeEnd: useEvent(onPositionChangeEnd),

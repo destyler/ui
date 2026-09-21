@@ -24,7 +24,6 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

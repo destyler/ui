@@ -24,7 +24,6 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

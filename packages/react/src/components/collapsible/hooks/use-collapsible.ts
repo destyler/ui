@@ -8,7 +8,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseCollapsibleProps
-  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'>,
+  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'>,
   RenderStrategyProps {
   /**
    * The initial open state of the collapsible when it is first rendered.
@@ -31,11 +31,9 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
   const { getRootNode } = useEnvironmentContext()
 
   const initialContext: collapsible.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
     ...collapsibleProps,
   }
 

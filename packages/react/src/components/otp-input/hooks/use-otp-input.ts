@@ -34,7 +34,6 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
     invalid: field?.invalid,
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 

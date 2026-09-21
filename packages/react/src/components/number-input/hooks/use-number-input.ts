@@ -34,7 +34,6 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
     dir,
     locale,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 
