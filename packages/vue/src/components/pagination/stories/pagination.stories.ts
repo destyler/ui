@@ -1,4 +1,5 @@
 import Basic from '../examples/Basic.vue'
+import Controlled from '../examples/Controlled.vue'
 import Customized from '../examples/Customized.vue'
 import RootProvider from '../examples/RootProvider.vue'
 
@@ -13,6 +14,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function controlled() {
+  return {
+    components: { Controlled },
+    template: '<Controlled />',
   }
 }
 

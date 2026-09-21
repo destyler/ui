@@ -8,5 +8,6 @@ export default meta
 
 export { Advanced } from '../examples/Advanced'
 export { Basic } from '../examples/Basic'
+export { Controlled } from '../examples/Controlled'
 export { RootProvider } from '../examples/RootProvider'
 export { WithField } from '../examples/WithField'

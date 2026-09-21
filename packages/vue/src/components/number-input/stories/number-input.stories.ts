@@ -1,4 +1,5 @@
 import Basic from '../examples/Basic.vue'
+import Controlled from '../examples/Controlled.vue'
 import Formatted from '../examples/Formatted.vue'
 import FormUsage from '../examples/FormUsage.vue'
 import FractionDigits from '../examples/FractionDigits.vue'
@@ -21,6 +22,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function controlled() {
+  return {
+    components: { Controlled },
+    template: '<Controlled />',
   }
 }
 

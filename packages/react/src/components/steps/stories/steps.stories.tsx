@@ -8,4 +8,5 @@ const meta = {
 export default meta
 
 export { Basic } from '../examples/Basic'
+export { Controlled } from '../examples/Controlled'
 export { RootProvider } from '../examples/RootProvider'

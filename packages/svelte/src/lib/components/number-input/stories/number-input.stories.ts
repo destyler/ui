@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import FormattedExample from '../examples/Formatted.svelte'
 import FormUsageExample from '../examples/FormUsage.svelte'
 import FractionDigitsExample from '../examples/FractionDigits.svelte'
@@ -21,6 +22,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = { render: () => ({ Component: BasicExample }) }
+export const Controlled = { render: () => ({ Component: ControlledExample }) }
 export const Formatted = { render: () => ({ Component: FormattedExample }) }
 export const FormUsage = { render: () => ({ Component: FormUsageExample }) }
 export const FractionDigits = { render: () => ({ Component: FractionDigitsExample }) }
