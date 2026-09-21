@@ -3,7 +3,7 @@ import { Slider } from '../index'
 </script>
 
 <template>
-  <Slider.Root :model-value="[42]">
+  <Slider.Root :default-value="[42]">
     <Slider.Label>Label</Slider.Label>
     <Slider.ValueText />
     <Slider.Control>

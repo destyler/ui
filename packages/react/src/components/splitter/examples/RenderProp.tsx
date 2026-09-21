@@ -1,14 +1,13 @@
-import { useState } from 'react'
 import { Splitter } from '../index'
 
 export function RenderProp() {
-  const [size] = useState([
-    { id: 'a', size: 50 },
-    { id: 'b', size: 50 },
-  ])
-
   return (
-    <Splitter.Root size={size}>
+    <Splitter.Root
+      defaultSize={[
+        { id: 'a', size: 50 },
+        { id: 'b', size: 50 },
+      ]}
+    >
       <Splitter.Context>
         {splitter => (
           <>

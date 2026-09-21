@@ -4,7 +4,7 @@ export function Vertical() {
   return (
     <Splitter.Root
       orientation="vertical"
-      size={[
+      defaultSize={[
         { id: 'a', size: 50 },
         { id: 'b', size: 50 },
       ]}

@@ -1,10 +1,8 @@
 <script lang="ts">
   import { Slider } from '../index'
-
-  let value = $state([42])
 </script>
 
-<Slider.Root bind:value>
+<Slider.Root defaultValue={[42]}>
   <Slider.Label>Slider with Initial Value</Slider.Label>
   <Slider.ValueText />
   <Slider.Control>

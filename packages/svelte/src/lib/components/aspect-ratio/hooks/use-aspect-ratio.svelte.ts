@@ -11,7 +11,6 @@ import { runIfFn } from '@destyler/utils'
 export interface UseAspectRatioProps
   extends Omit<aspectRatio.Context, 'getRootNode' | 'id'> {
   id: string
-  defaultRatio?: aspectRatio.Context['ratio']
 }
 
 export interface UseAspectRatioReturn extends Accessor<aspectRatio.Api<PropTypes>> {}
@@ -26,7 +25,7 @@ export function useAspectRatio(
     return createMachineProps({
       getRootNode: env().getRootNode,
       ...resolved,
-    }, { ratio: 'defaultRatio' })
+    })
   })
 
   const [state, send] = useMachine(() => aspectRatio.machine(machineProps.initial as aspectRatio.Context), {
