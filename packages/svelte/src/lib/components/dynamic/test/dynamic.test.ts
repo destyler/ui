@@ -7,7 +7,7 @@ import { Dynamic, dynamicAnatomy } from '../index'
 const componentExports = Dynamic as unknown as Record<string, unknown>
 
 describe('[dynamic] component', () => {
-  it.each(dynamicAnatomy.keys())('renders and exports the %s anatomy part', async (part: string) => {
+  it.each<[string]>(dynamicAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="dynamic"][data-part="${dataPart}"]`)).toBeInTheDocument()

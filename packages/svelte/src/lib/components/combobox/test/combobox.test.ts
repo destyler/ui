@@ -7,7 +7,7 @@ import { Combobox, comboboxAnatomy } from '../index'
 const componentExports = Combobox as unknown as Record<string, unknown>
 
 describe('[combobox] component', () => {
-  it.each(comboboxAnatomy.keys())('renders and exports the %s anatomy part', async (part: string) => {
+  it.each<[string]>(comboboxAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="combobox"][data-part="${dataPart}"]`)).toBeInTheDocument()

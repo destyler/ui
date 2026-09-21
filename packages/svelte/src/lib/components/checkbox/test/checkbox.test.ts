@@ -15,7 +15,7 @@ import GroupPrecedence from './GroupPrecedence.svelte'
 const componentExports = Checkbox as unknown as Record<string, unknown>
 
 describe('[checkbox] component', () => {
-  it.each(checkboxAnatomy.keys().filter(part => part !== 'group'))('renders part %s', async (part) => {
+  it.each<[string]>(checkboxAnatomy.keys().filter((part: string) => part !== 'group').map((part: string) => [part] as [string]))('renders part %s', async ([part]) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="checkbox"][data-part="${dataPart}"]`)).not.toBeNull()
@@ -33,7 +33,7 @@ describe('[checkbox] component', () => {
     expect(screen.container.querySelectorAll('[data-part="indicator"] svg')).toHaveLength(3)
   })
 
-  it.each(checkboxAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(checkboxAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', ([part]) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Checkbox.${exportName}`).toBeDefined()
   })

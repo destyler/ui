@@ -10,14 +10,14 @@ import HiddenSelectFixture from './HiddenSelectFixture.svelte'
 const componentExports = Select as unknown as Record<string, unknown>
 
 describe('[select] component', () => {
-  it.each(selectAnatomy.keys())('renders part %s', async (part) => {
+  it.each<[string]>(selectAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async ([part]) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="select"][data-part="${dataPart}"]`)).not.toBeNull()
     expect(screen.container).toBeDefined()
   })
 
-  it.each(selectAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(selectAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', ([part]) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Select.${exportName}`).toBeDefined()
   })

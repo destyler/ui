@@ -8,7 +8,7 @@ import { Clipboard, clipboardAnatomy } from '../index'
 const componentExports = Clipboard as unknown as Record<string, unknown>
 
 describe('[clipboard] component', () => {
-  it.each(clipboardAnatomy.keys())('renders and exports the %s anatomy part', async (part: string) => {
+  it.each<[string]>(clipboardAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="clipboard"][data-part="${part}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`

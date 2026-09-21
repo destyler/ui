@@ -14,7 +14,7 @@ const componentExports = Menu as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[menu] component', () => {
-  it.each(menuAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(menuAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
     const screen = await render(Basic)
     if (partName(part) === 'trigger-item')
       await userEvent.click(screen.getByRole('button', { name: 'Open menu' }))

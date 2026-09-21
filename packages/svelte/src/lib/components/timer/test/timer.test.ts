@@ -9,7 +9,7 @@ const skippedParts = ['itemValue', 'itemLabel']
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[timer] component', () => {
-  it.each(timerAnatomy.keys().filter(part => !skippedParts.includes(part)))('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(timerAnatomy.keys().filter((part: string) => !skippedParts.includes(part)).map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async ([part]) => {
     const screen = await render(Basic)
     await vi.waitFor(() => expect(screen.container.querySelector(`[data-scope="timer"][data-part="${partName(part)}"]`)).toBeInTheDocument())
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
