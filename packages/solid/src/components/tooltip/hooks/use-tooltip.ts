@@ -30,7 +30,7 @@ export function useTooltip(props: UseTooltipProps = {}): UseTooltipReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send] = useMachine(tooltip.machine(initialContext()), { context })

@@ -13,7 +13,6 @@ export interface AspectRatioRootProps extends HTMLProps<'div'>, AspectRatioRootB
 
 export function AspectRatioRoot(props: AspectRatioRootProps) {
   const [useAspectRatioProps, localProps] = createSplitProps<UseAspectRatioProps>()(props, [
-    'defaultRatio',
     'id',
     'ids',
     'ratio',

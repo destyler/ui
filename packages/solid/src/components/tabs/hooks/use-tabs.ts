@@ -29,7 +29,7 @@ export function useTabs(props: UseTabsProps = {}): UseTabsReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(tabs.machine(initialContext()), { context })

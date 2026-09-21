@@ -57,8 +57,8 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
     const [, restProps] = splitProps(initialContext(), ['collection'])
     return {
       ...restProps,
-      open: props.open,
-      value: props.value,
+      ...(props.open !== undefined ? { open: props.open } : {}),
+      ...(props.value !== undefined ? { value: props.value } : {}),
     }
   })
 

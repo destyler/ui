@@ -29,7 +29,7 @@ export function useSlider(props: UseSliderProps = {}): UseSliderReturn {
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(slider.machine(initialContext()), { context })
 

@@ -44,8 +44,8 @@ export function useColorPicker(props: UseColorPickerProps = {}): UseColorPickerR
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
-    value: props.value,
+    ...(props.open !== undefined ? { open: props.open } : {}),
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(colorPicker.machine(initialContext()), { context })
 

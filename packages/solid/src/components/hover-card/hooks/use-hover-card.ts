@@ -30,7 +30,7 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send] = useMachine(hoverCard.machine(initialContext()), { context })

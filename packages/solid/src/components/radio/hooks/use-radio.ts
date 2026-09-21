@@ -30,7 +30,7 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(radio.machine(initialContext()), {

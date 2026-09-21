@@ -29,7 +29,7 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    step: props.step,
+    ...(props.step !== undefined ? { step: props.step } : {}),
   }))
 
   const [state, send] = useMachine(steps.machine(initialContext()), { context })

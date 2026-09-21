@@ -34,7 +34,7 @@ export function useMenu(props: UseMenuProps = {}): UseMenuReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send, machine] = useMachine(menu.machine(initialContext()), { context })

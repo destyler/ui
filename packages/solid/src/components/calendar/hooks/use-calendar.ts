@@ -32,15 +32,14 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    view: props.defaultView,
     ...props,
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
-    value: props.value,
-    view: props.view,
+    ...(props.open !== undefined ? { open: props.open } : {}),
+    ...(props.value !== undefined ? { value: props.value } : {}),
+    ...(props.view !== undefined ? { view: props.view } : {}),
   }))
 
   const [state, send] = useMachine(calendar.machine(initialContext()), { context })

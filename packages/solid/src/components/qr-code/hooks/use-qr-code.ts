@@ -31,7 +31,7 @@ export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(qrCode.machine(initialContext()), {

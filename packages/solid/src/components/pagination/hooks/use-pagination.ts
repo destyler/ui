@@ -30,7 +30,7 @@ export function usePagination(props: UsePaginationProps): UsePaginationReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
   }))
 
   const [state, send] = useMachine(pagination.machine(initialContext()), { context })

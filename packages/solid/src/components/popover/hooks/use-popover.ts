@@ -31,7 +31,7 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send, service] = useMachine(popover.machine(initialContext()), { context })

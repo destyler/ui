@@ -30,7 +30,7 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(collapse.machine(initialContext()), {

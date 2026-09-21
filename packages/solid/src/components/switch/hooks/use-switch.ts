@@ -40,7 +40,7 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
 
   const context = createMemo(() => ({
     ...initialContext(),
-    checked: props.checked,
+    ...(props.checked !== undefined ? { checked: props.checked } : {}),
   }))
 
   const [state, send] = useMachine(zagSwitch.machine(initialContext()), { context })

@@ -39,7 +39,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send] = useMachine(floatingPanel.machine(initialContext()), { context })

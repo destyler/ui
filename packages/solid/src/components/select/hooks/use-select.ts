@@ -57,8 +57,8 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
     const [, restProps] = splitProps(initialContext(), ['collection'])
     return {
       ...restProps,
-      open: props.open,
-      value: props.value,
+      ...(props.open !== undefined ? { open: props.open } : {}),
+      ...(props.value !== undefined ? { value: props.value } : {}),
     }
   })
 

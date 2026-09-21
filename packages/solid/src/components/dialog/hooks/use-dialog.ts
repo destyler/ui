@@ -29,7 +29,7 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
   const [state, send] = useMachine(dialog.machine(initialContext()), { context })
 

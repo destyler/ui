@@ -42,7 +42,7 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
   const [state, send] = useMachine(collapsible.machine(initialContext()), { context })
   const [wasVisible, setWasVisible] = createSignal(false)
