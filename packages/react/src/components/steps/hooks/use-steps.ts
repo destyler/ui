@@ -28,7 +28,7 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
 
   const context: steps.Context = {
     ...initialContext,
-    step: props.step,
+    ...(props.step !== undefined ? { step: props.step } : {}),
     onStepChange: useEvent(props.onStepChange),
     onStepComplete: useEvent(props.onStepComplete),
   }

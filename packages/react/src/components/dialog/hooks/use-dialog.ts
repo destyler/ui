@@ -30,7 +30,7 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
 
   const context: dialog.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
     onEscapeKeyDown: useEvent(props.onEscapeKeyDown),
     onInteractOutside: useEvent(props.onInteractOutside),

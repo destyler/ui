@@ -39,7 +39,7 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
 
   const context: dynamic.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueInvalid: useEvent(props.onValueInvalid),
     onHighlightChange: useEvent(props.onHighlightChange),

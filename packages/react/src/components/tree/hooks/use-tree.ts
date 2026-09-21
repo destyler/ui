@@ -44,8 +44,8 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     const { collection: _, ...restProps } = initialContext
     return {
       ...restProps,
-      selectedValue: props.selectedValue,
-      expandedValue: props.expandedValue,
+      ...(props.selectedValue !== undefined ? { selectedValue: props.selectedValue } : {}),
+      ...(props.expandedValue !== undefined ? { expandedValue: props.expandedValue } : {}),
       onFocusChange: useEvent(props.onFocusChange),
       onExpandedChange: useEvent(props.onExpandedChange, { sync: true }),
       onSelectionChange: useEvent(props.onSelectionChange, { sync: true }),

@@ -29,7 +29,7 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
 
   const context: toggleGroup.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
   }
 

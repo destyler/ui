@@ -30,7 +30,7 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
 
   const context: hoverCard.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
   }
 

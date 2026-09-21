@@ -29,7 +29,7 @@ export function usePagination(props: UsePaginationProps): UsePaginationReturn {
 
   const context: pagination.Context = {
     ...initialContext,
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
     onPageChange: useEvent(props.onPageChange, { sync: true }),
   }
 

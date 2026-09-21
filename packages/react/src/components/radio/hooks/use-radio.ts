@@ -29,7 +29,7 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
 
   const context: radio.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
   }
 

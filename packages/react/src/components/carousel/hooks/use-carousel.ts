@@ -29,7 +29,7 @@ export function useCarousel(props: UseCarouselProps = {}): UseCarouselReturn {
 
   const context: carousel.Context = {
     ...initialContext,
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
     onPageChange: useEvent(props.onPageChange, { sync: true }),
   }
 

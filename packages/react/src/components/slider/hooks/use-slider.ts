@@ -29,7 +29,7 @@ export function useSlider(props: UseSliderProps = {}): UseSliderReturn {
 
   const context: slider.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueChangeEnd: useEvent(props.onValueChangeEnd),
     onFocusChange: useEvent(props.onFocusChange),

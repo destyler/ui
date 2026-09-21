@@ -39,7 +39,7 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
 
   const context: collapsible.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
   }
 

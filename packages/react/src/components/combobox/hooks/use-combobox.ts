@@ -55,7 +55,7 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
     const { collection: _, ...restProps } = initialContext
     return {
       ...restProps,
-      value: props.value,
+      ...(props.value !== undefined ? { value: props.value } : {}),
       onValueChange: useEvent(props.onValueChange),
       onInputValueChange: useEvent(props.onInputValueChange, { sync: true }),
       onHighlightChange: useEvent(props.onHighlightChange),

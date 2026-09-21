@@ -39,7 +39,7 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
 
   const context: otpInput.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueComplete: useEvent(props.onValueComplete),
     onValueInvalid: useEvent(props.onValueInvalid),

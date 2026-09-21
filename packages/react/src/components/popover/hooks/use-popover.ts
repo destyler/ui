@@ -30,7 +30,7 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
 
   const context: popover.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
   }
 

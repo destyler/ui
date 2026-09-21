@@ -29,7 +29,7 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
 
   const context: collapse.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onFocusChange: useEvent(props.onFocusChange),
     onValueChange: useEvent(props.onValueChange),
   }

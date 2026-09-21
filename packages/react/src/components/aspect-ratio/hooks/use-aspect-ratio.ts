@@ -6,13 +6,7 @@ import { useId } from 'react'
 import { useEnvironmentContext } from '~/providers'
 
 export interface UseAspectRatioProps
-  extends Optional<Omit<aspectRatio.Context, 'dir' | 'getRootNode'>, 'id'> {
-  /**
-   * The initial ratio of the aspect ratio component when it is first rendered.
-   * Use when you do not need to control its ratio state.
-   */
-  defaultRatio?: aspectRatio.Context['ratio']
-}
+  extends Optional<Omit<aspectRatio.Context, 'dir' | 'getRootNode'>, 'id'> {}
 
 export interface UseAspectRatioReturn extends aspectRatio.Api<PropTypes> {}
 
@@ -23,13 +17,12 @@ export function useAspectRatio(props: UseAspectRatioProps = {}): UseAspectRatioR
   const initialContext: aspectRatio.Context = {
     id,
     getRootNode,
-    ratio: props.defaultRatio ?? props.ratio,
     ...props,
   }
 
   const context: aspectRatio.Context = {
     ...initialContext,
-    ratio: props.ratio ?? props.defaultRatio,
+    ...(props.ratio !== undefined ? { ratio: props.ratio } : {}),
   }
 
   const [state, send] = useMachine(aspectRatio.machine(initialContext), { context })

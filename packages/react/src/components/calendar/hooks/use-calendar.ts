@@ -32,14 +32,13 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
     id: useId(),
     dir,
     getRootNode,
-    view: props.defaultView,
     ...props,
   }
 
   const context: calendar.Context = {
     ...initialContext,
-    value: props.value,
-    view: props.view,
+    ...(props.value !== undefined ? { value: props.value } : {}),
+    ...(props.view !== undefined ? { view: props.view } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onFocusChange: useEvent(props.onFocusChange),
     onViewChange: useEvent(props.onViewChange),

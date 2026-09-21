@@ -54,7 +54,7 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
     const { collection: _, ...restProps } = initialContext
     return {
       ...restProps,
-      value: props.value,
+      ...(props.value !== undefined ? { value: props.value } : {}),
       onValueChange: useEvent(props.onValueChange, { sync: true }),
       onHighlightChange: useEvent(props.onHighlightChange),
       onOpenChange: useEvent(props.onOpenChange),

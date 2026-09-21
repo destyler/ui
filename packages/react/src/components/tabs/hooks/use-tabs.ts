@@ -29,7 +29,7 @@ export function useTabs(props: UseTabsProps = {}): UseTabsReturn {
 
   const context: tabs.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onFocusChange: useEvent(props.onFocusChange),
   }
