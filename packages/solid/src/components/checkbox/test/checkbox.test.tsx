@@ -50,6 +50,22 @@ describe('checkbox', () => {
     await waitFor(() => expect(screen.getByRole('checkbox')).toBeChecked())
   })
 
+  it('omits undefined checked so defaultChecked stays uncontrolled', async () => {
+    render(() => (
+      <Checkbox.Root defaultChecked checked={undefined}>
+        <Checkbox.Label>Undefined live checkbox</Checkbox.Label>
+        <Checkbox.Control />
+        <Checkbox.HiddenInput />
+      </Checkbox.Root>
+    ))
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Undefined live checkbox' })
+    expect(checkbox).toBeChecked()
+
+    await user.click(checkbox)
+    expect(checkbox).not.toBeChecked()
+  })
+
   it('should preserve an uncontrolled value when reactive props change', async () => {
     const [disabled, setDisabled] = createSignal(false)
     render(() => (

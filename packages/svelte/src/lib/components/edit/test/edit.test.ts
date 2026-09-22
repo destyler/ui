@@ -18,7 +18,7 @@ describe('[edit] component', () => {
   })
 
   it('focuses the placeholder and accepts a value', async () => {
-    const screen = await render(Controlled)
+    const screen = await render(Basic)
     await screen.getByText('Placeholder').click()
     const input = screen.getByLabelText('editable input')
     await expect.element(input).toBeVisible()
@@ -27,12 +27,24 @@ describe('[edit] component', () => {
   })
 
   it('supports double-click activation', async () => {
-    const screen = await render(Controlled, { props: { activationMode: 'dblclick' } })
+    const screen = await render(Basic)
     await userEvent.dblClick(screen.getByText('Placeholder'))
     const input = screen.getByRole('textbox')
     await userEvent.clear(input)
     await userEvent.type(input, 'React')
     await expect.element(screen.getByText('React')).toBeInTheDocument()
+  })
+
+  it('supports controlled bind:value usage', async () => {
+    const screen = await render(Controlled)
+    await expect.element(screen.getByText('Placeholder')).toBeInTheDocument()
+    await screen.getByText('Edit').click()
+    const input = screen.getByLabelText('editable input')
+    await expect.element(input).toBeVisible()
+    await expect.element(input).not.toHaveAttribute('hidden')
+    await userEvent.clear(input)
+    await userEvent.type(input, 'Svelte')
+    await expect.element(input).toHaveValue('Svelte')
   })
 
   it('hides the input when cancel is clicked', async () => {

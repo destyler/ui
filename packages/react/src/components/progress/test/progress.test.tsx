@@ -6,6 +6,7 @@ import { Basic } from '../examples/Basic'
 import { Basic as CircularBasic } from '../examples/circular/Basic'
 import { Controlled as CircularControlled } from '../examples/circular/Controlled'
 import { MinMax as CircularMinMax } from '../examples/circular/MinMax'
+import { InitialValue } from '../examples/InitialValue'
 import { Basic as LinearBasic } from '../examples/linear/Basic'
 import { Controlled as LinearControlled } from '../examples/linear/Controlled'
 import { MinMax as LinearMinMax } from '../examples/linear/MinMax'
@@ -19,6 +20,11 @@ describe('[progress] component', () => {
 
   it.each(getExports(progressAnatomy))('should export %s', (part) => {
     expect(Progress[part]).toBeDefined()
+  })
+
+  it('seeds defaultValue when live value is omitted', async () => {
+    render(<InitialValue />)
+    await expect.element(page.getByText('70%')).toBeInTheDocument()
   })
 
   describe('circular progress', () => {

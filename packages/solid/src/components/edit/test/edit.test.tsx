@@ -1,4 +1,4 @@
-import { render, screen } from '@solidjs/testing-library'
+import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Edit, editAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
@@ -17,8 +17,12 @@ describe('edit', () => {
     expectExport(Edit, part)
   })
 
-  it('should render controlled component', async () => {
+  it('should allow controlled usage', async () => {
     render(() => <ControlledComponentUnderTest />)
+
+    expect(screen.getByText('Placeholder')).toBeInTheDocument()
+    await user.click(screen.getByText('set value'))
+    await waitFor(() => expect(screen.getByText('Solid')).toBeInTheDocument())
   })
 
   it('prefers falsy custom preview children over the machine value', () => {
@@ -33,7 +37,7 @@ describe('edit', () => {
   })
 
   it('should be possible to focus the placeholder and enter a value', async () => {
-    render(() => <ControlledComponentUnderTest />)
+    render(() => <ComponentUnderTest />)
     screen.getByText('Placeholder').focus()
     await user.type(screen.getByLabelText('editable input'), 'Solid')
 
@@ -41,7 +45,7 @@ describe('edit', () => {
   })
 
   it('should be possible to dbl click the placeholder to enter a value', async () => {
-    render(() => <ControlledComponentUnderTest activationMode="dblclick" />)
+    render(() => <ComponentUnderTest activationMode="dblclick" />)
     await user.dblClick(screen.getByText('Placeholder'))
 
     await user.clear(screen.getByRole('textbox'))
@@ -51,7 +55,7 @@ describe('edit', () => {
   })
 
   it('should be possible to edit an existing value', async () => {
-    render(() => <ControlledComponentUnderTest activationMode="dblclick" defaultValue="React" />)
+    render(() => <ComponentUnderTest activationMode="dblclick" defaultValue="React" />)
 
     await user.dblClick(screen.getByText('React'))
 

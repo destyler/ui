@@ -5,7 +5,7 @@ export function ComponentUnderTest(props: Edit.RootProps) {
     <Edit.Root placeholder="Placeholder" {...props}>
       <Edit.Label>Label</Edit.Label>
       <Edit.Area>
-        <Edit.Input />
+        <Edit.Input aria-label="editable input" />
         <Edit.Preview />
       </Edit.Area>
       <Edit.Control>

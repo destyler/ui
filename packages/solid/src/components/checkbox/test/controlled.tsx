@@ -8,7 +8,7 @@ export function ControlledComponentUnderTest() {
       <button type="button" onClick={() => setChecked(true)}>
         set checked
       </button>
-      <ComponentUnderTest checked={checked()} />
+      <ComponentUnderTest checked={checked()} onCheckedChange={e => setChecked(e.checked)} />
     </>
   )
 }

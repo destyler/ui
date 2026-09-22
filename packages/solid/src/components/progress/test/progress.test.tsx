@@ -20,6 +20,18 @@ describe('progress', () => {
     screen.getByText('7%')
   })
 
+  it('seeds defaultValue when live value is omitted', async () => {
+    render(() => <ComponentUnderTest defaultValue={70} />)
+
+    screen.getByText('70%')
+  })
+
+  it('omits undefined live value so defaultValue seeds the machine', async () => {
+    render(() => <ComponentUnderTest defaultValue={55} value={undefined} />)
+
+    screen.getByText('55%')
+  })
+
   it('should handle custom max range', async () => {
     render(() => <ComponentUnderTest value={30} max={30} />)
 
