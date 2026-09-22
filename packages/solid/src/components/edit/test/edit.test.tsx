@@ -38,8 +38,11 @@ describe('edit', () => {
 
   it('should be possible to focus the placeholder and enter a value', async () => {
     render(() => <ComponentUnderTest />)
-    screen.getByText('Placeholder').focus()
-    await user.type(screen.getByLabelText('editable input'), 'Solid')
+    await user.click(screen.getByText('Placeholder'))
+    const input = screen.getByLabelText('editable input')
+    await user.clear(input)
+    await user.type(input, 'Solid', { delay: 20 })
+    await user.click(screen.getByText('Save'))
 
     expect(await screen.findByText('Solid')).toBeInTheDocument()
   })

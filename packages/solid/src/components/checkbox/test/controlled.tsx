@@ -1,5 +1,5 @@
-import { createSignal } from 'solid-js'
 import type { Checkbox } from '../'
+import { createSignal } from 'solid-js'
 import { ComponentUnderTest } from './basic'
 
 export function ControlledComponentUnderTest() {
