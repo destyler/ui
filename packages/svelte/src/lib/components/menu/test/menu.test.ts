@@ -6,6 +6,7 @@ import Checkbox from '../examples/Checkbox.svelte'
 import Context from '../examples/Context.svelte'
 import Controlled from '../examples/Controlled.svelte'
 import Group from '../examples/Group.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import Nested from '../examples/Nested.svelte'
 import RadioGroup from '../examples/RadioGroup.svelte'
 import { Menu, menuAnatomy } from '../index'
@@ -107,5 +108,10 @@ describe('[menu] component', () => {
       const item = document.querySelector('[data-part="item"][data-highlighted]')
       expect(item).toHaveTextContent('React')
     })
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Check me')).toBeVisible()
   })
 })

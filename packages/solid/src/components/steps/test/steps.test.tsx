@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { Steps, stepsAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
+import { InitialStep } from '../examples/InitialStep'
 
 describe('steps', () => {
   it.each(getParts(stepsAnatomy).filter(part => !part.includes('progress')))('renders part %s', (part) => {
@@ -28,5 +29,10 @@ describe('steps', () => {
     for (const item of document.querySelectorAll('[data-part="item"]')) {
       expect(item.tagName).toBe('DIV')
     }
+  })
+
+  it('seeds default* via InitialStep example', async () => {
+    render(() => <InitialStep />)
+    expect(screen.getByText('Second - Date & Time')).toBeVisible()
   })
 })

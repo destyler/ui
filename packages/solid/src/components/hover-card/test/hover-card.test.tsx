@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import { page, userEvent } from 'vitest/browser'
 import { HoverCard, hoverCardAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialOpen } from '../examples/InitialOpen'
 import { ComponentUnderTest } from './basic'
 
 const transitionTimeout = 5_000
@@ -100,4 +101,9 @@ describe('hoverCard', () => {
       { timeout: transitionTimeout },
     )
   }, interactionTestTimeout)
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(() => <InitialOpen />)
+    expect(screen.getByText('Content')).toBeVisible()
+  })
 })

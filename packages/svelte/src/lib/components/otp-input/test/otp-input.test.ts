@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
 import { OtpInput, otpInputAnatomy } from '../index'
@@ -69,6 +70,15 @@ describe('[otp-input] component', () => {
     const screen = await render(RootProvider)
     await screen.getByRole('button', { name: 'Focus' }).click()
     await expect.element(screen.getByLabelText('pin code 1 of 3')).toHaveFocus()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    const inputs = document.querySelectorAll('[data-scope="pin-input"][data-part="input"], [data-scope="otp-input"][data-part="input"]')
+    expect(inputs.length).toBeGreaterThanOrEqual(3)
+    expect((inputs[0] as HTMLInputElement).value).toBe('1')
+    expect((inputs[1] as HTMLInputElement).value).toBe('2')
+    expect((inputs[2] as HTMLInputElement).value).toBe('3')
   })
 })
 

@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
+import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import { ToggleGroup, toggleGroupAnatomy } from '../index'
 
 describe('[toggle-group] component', () => {
@@ -12,5 +14,11 @@ describe('[toggle-group] component', () => {
 
   it.each(getExports(toggleGroupAnatomy))('should export %s', async (part) => {
     expect(ToggleGroup[part]).toBeDefined()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(InitialValue)
+    const item = page.getByText('A', { exact: true })
+    await expect.element(item).toHaveAttribute('data-state', 'on')
   })
 })

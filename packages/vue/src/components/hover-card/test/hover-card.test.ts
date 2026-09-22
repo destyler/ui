@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import { HoverCard, hoverCardAnatomy } from '../index'
 
 describe('[hover-card] component', () => {
@@ -57,5 +58,10 @@ describe('[hover-card] component', () => {
 
     await userEvent.unhover(page.getByText('Hover me'))
     await vi.waitFor(async () => await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(InitialOpen)
+    await expect.element(page.getByText('Content')).toBeVisible()
   })
 })

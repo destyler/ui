@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Customized from '../examples/Customized.svelte'
+import InitialPage from '../examples/InitialPage.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { Pagination, paginationAnatomy } from '../index'
 
@@ -48,5 +49,10 @@ describe('[pagination] component', () => {
     expect(suffixes).toHaveLength(2)
     for (const suffix of suffixes)
       expect(suffix).toHaveTextContent('Page')
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    const screen = await render(InitialPage)
+    await expect.element(screen.getByLabelText('page 5')).toHaveAttribute('aria-current', 'page')
   })
 })

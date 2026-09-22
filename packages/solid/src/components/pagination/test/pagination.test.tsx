@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Pagination, paginationAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialPage } from '../examples/InitialPage'
 import { ComponentUnderTest } from './basic'
 
 describe('pagination', () => {
@@ -67,5 +68,10 @@ describe('pagination', () => {
     expect(item).toHaveAttribute('type', 'button')
     expect(next).toHaveAttribute('type', 'button')
     expect(next).toBeDisabled()
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    render(() => <InitialPage />)
+    expect(screen.getByLabelText('page 5')).toHaveAttribute('aria-current', 'page')
   })
 })

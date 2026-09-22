@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { HoverCard, hoverCardAnatomy } from '../index'
 
@@ -53,5 +54,10 @@ describe('[hover-card] component', () => {
     await expect.element(positioner).toBeInTheDocument()
     await userEvent.unhover(page.getByText('Hover me'))
     await vi.waitFor(async () => expect.element(positioner).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Content')).toBeVisible()
   })
 })

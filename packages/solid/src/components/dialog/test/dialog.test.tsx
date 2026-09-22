@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Dialog, dialogAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialOpen } from '../examples/InitialOpen'
 import { ComponentUnderTest } from './basic'
 
 describe('dialog', () => {
@@ -58,5 +59,10 @@ describe('dialog', () => {
 
     const content = screen.getByRole('dialog')
     expect(trigger).toHaveAttribute('aria-controls', content.id)
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(() => <InitialOpen />)
+    expect(screen.getByText('Dialog Title')).toBeVisible()
   })
 })

@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Edit, editAnatomy } from '../index'
 
@@ -54,6 +55,11 @@ describe('[edit] component', () => {
 
     await expect.element(input).toHaveAttribute('hidden', '')
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(<InitialValue />)
+  await expect.element(page.getByText('Hello')).toBeInTheDocument()
 })
 
 describe('edit / Field', () => {

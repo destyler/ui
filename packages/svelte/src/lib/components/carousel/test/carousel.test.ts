@@ -5,6 +5,7 @@ import { userEvent } from 'vitest/browser'
 import AutoPlay from '../examples/AutoPlay.svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialPage from '../examples/InitialPage.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { Carousel, carouselAnatomy } from '../index'
 
@@ -60,5 +61,10 @@ describe('[carousel] component', () => {
       expect(image.style.width).toBe('100%')
       expect(image.style.objectFit).toBe('cover')
     }
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    const screen = await render(InitialPage)
+    await expect.element(screen.getByRole('button', { name: 'Previous slide' })).toBeEnabled()
   })
 })

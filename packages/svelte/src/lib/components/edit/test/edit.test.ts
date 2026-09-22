@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Edit, editAnatomy } from '../index'
 
@@ -55,6 +56,11 @@ describe('[edit] component', () => {
     await screen.getByRole('button', { name: 'cancel' }).click()
     await expect.element(input).toHaveAttribute('hidden')
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  const screen = await render(InitialValue)
+  await expect.element(screen.getByText('Hello')).toBeInTheDocument()
 })
 
 describe('edit / Field', () => {

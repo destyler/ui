@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Calendar, calendarAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { ComponentUnderTest } from './basic'
 
 describe('date Picker', () => {
@@ -101,5 +102,12 @@ describe('date Picker', () => {
 
     setReadOnly(true)
     await waitFor(() => expect(input).toHaveAttribute('readonly'))
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(() => <InitialValue />)
+    const input = document.querySelector('[data-scope="date-picker"][data-part="input"], [data-scope="calendar"][data-part="input"], input') as HTMLInputElement | null
+    expect(input).toBeTruthy()
+    expect(input!.value.length).toBeGreaterThan(0)
   })
 })

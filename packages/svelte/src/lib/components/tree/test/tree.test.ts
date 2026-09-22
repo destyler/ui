@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import { Tree, treeAnatomy } from '../index'
 
 const componentExports = Tree as unknown as Record<string, unknown>
@@ -39,5 +40,10 @@ describe('[tree] component', () => {
     await userEvent.keyboard('{ArrowDown}')
     const renovateItem = screen.getByText('renovate.json').element().closest('[data-part="item"]')
     await vi.waitFor(() => expect(renovateItem).toHaveAttribute('data-focus'))
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    expect(document.body.textContent?.includes('src')).toBeTruthy()
   })
 })

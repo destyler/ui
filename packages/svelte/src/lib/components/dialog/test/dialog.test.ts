@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import { Dialog, dialogAnatomy } from '../index'
 
 const componentExports = Dialog as unknown as Record<string, unknown>
@@ -30,5 +31,10 @@ describe('[dialog] component', () => {
     await expect.element(page.getByTestId('positioner')).toBeInTheDocument()
     await userEvent.click(page.getByText('Close'))
     await vi.waitFor(async () => expect.element(page.getByTestId('positioner')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Dialog Title')).toBeVisible()
   })
 })

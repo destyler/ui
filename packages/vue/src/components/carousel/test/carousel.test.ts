@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialPage from '../examples/InitialPage.vue'
 import { Carousel, carouselAnatomy } from '../index'
 
 describe('[carousel] component', () => {
@@ -22,5 +23,10 @@ describe('[carousel] component', () => {
 
     await vi.waitFor(async () => await expect.element(prevButton).toBeDisabled())
     await vi.waitFor(async () => await expect.element(nextButton).toBeEnabled())
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    render(InitialPage)
+    await expect.element(page.getByRole('button', { name: 'Previous slide' })).toBeEnabled()
   })
 })

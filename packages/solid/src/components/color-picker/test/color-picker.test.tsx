@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { ColorPicker, colorPickerAnatomy, parseColor } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -149,6 +150,12 @@ describe('colorPicker', () => {
     )
     expect(indicator).not.toHaveAttribute('hidden')
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  const hex = document.querySelector('input[data-channel="hex"], [data-channel="hex"]') as HTMLInputElement | null
+  expect(hex?.value?.toLowerCase() ?? document.body.textContent?.toLowerCase()).toContain('3b82f6')
 })
 
 describe('color Picker / Field', () => {

@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import ReactiveCollection from '../examples/ReactiveCollection.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Select, selectAnatomy } from '../index'
@@ -127,5 +128,12 @@ describe('[select] field integration', () => {
   it('hides field error text when valid', async () => {
     const screen = await render(WithField)
     await expect.element(screen.getByText('Error Info')).not.toBeInTheDocument()
+  })
+})
+
+describe('[select] default*', () => {
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
   })
 })

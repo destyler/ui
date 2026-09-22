@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Collapsible, collapsibleAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialOpen } from '../examples/InitialOpen'
 
 function ComponentUnderTest(props: Collapsible.RootProps) {
   return (
@@ -21,6 +22,11 @@ describe('collapsible / Parts & Exports', () => {
 
   it.each(getExports(collapsibleAnatomy))('should export %s', async (part) => {
     expectExport(Collapsible, part)
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(() => <InitialOpen />)
+    expect(screen.getByText('Content')).toBeVisible()
   })
 })
 

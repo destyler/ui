@@ -3,7 +3,7 @@
   const images = Array.from({ length: 5 }, (_, index) => `https://picsum.photos/seed/${index + 1}/500/300`)
 </script>
 
-<Carousel.Root defaultPage={2}>
+<Carousel.Root defaultPage={2} slideCount={images.length}>
   <Carousel.Control>
     <Carousel.PrevTrigger>Previous</Carousel.PrevTrigger>
     <Carousel.NextTrigger>Next</Carousel.NextTrigger>

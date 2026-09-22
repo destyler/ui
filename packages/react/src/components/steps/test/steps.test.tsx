@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialStep } from '../examples/InitialStep'
 import { RootProvider } from '../examples/RootProvider'
 import { Steps, stepsAnatomy } from '../index'
 
@@ -62,5 +63,10 @@ describe('[steps] component', () => {
       await page.getByText('Reset').click()
       await expect.element(page.getByText('First - Contact Info')).toBeVisible()
     })
+  })
+
+  it('seeds default* via InitialStep example', async () => {
+    render(<InitialStep />)
+    await expect.element(page.getByText('Second - Date & Time')).toBeVisible()
   })
 })

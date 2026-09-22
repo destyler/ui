@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Combobox, comboboxAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -102,6 +103,12 @@ describe('combobox', () => {
     fireEvent.click(screen.getByTestId('trigger'))
     await waitFor(() => expect(screen.queryByTestId('positioner')).not.toBeInTheDocument())
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  const input = document.querySelector('[data-scope="combobox"][data-part="input"]') as HTMLInputElement
+  expect(input?.value?.toLowerCase()).toContain('vue')
 })
 
 describe('combobox / Field', () => {

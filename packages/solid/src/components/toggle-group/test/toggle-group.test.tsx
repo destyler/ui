@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { ToggleGroup, toggleGroupAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { ComponentUnderTest } from './basic'
 
 describe('toggleGroup', () => {
@@ -65,5 +66,10 @@ describe('toggleGroup', () => {
     await user.keyboard('[ArrowRight]')
     await waitFor(() => expect(firstToggle).not.toHaveFocus())
     expect(lastToggle).toHaveFocus()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(() => <InitialValue />)
+    expect(screen.getByText('A')).toHaveAttribute('data-state', 'on')
   })
 })

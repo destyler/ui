@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import { Collapsible, collapsibleAnatomy } from '../index'
 
 const componentExports = Collapsible as unknown as Record<string, unknown>
@@ -55,5 +56,10 @@ describe('[collapsible] component', () => {
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
     await vi.waitFor(() => expect(onExitComplete).toHaveBeenCalledOnce())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Content')).toBeVisible()
   })
 })

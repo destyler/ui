@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Toggle, toggleAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 
 function ComponentUnderTest() {
   return (
@@ -129,5 +130,11 @@ describe('toggle', () => {
 
     await user.click(screen.getByRole('button', { name: 'Bold' }))
     expect(indicator).toHaveTextContent('Active')
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(() => <InitialValue />)
+    const root = document.querySelector('[data-scope="toggle"][data-part="root"]')
+    expect(root).toHaveAttribute('data-state', 'on')
   })
 })

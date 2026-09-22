@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
@@ -54,6 +55,11 @@ describe('[switch] component', () => {
     const input = screen.getByRole('checkbox')
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(input).toBeChecked()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('checkbox')).toBeChecked()
   })
 })
 

@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { OtpInput, otpInputAnatomy } from '../index'
 
@@ -153,6 +154,15 @@ describe('[otp-input] component', () => {
         valueAsString: '123',
       }),
     )
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(<InitialValue />)
+    const inputs = document.querySelectorAll('[data-scope="pin-input"][data-part="input"], [data-scope="otp-input"][data-part="input"]')
+    expect(inputs.length).toBeGreaterThanOrEqual(3)
+    expect((inputs[0] as HTMLInputElement).value).toBe('1')
+    expect((inputs[1] as HTMLInputElement).value).toBe('2')
+    expect((inputs[2] as HTMLInputElement).value).toBe('3')
   })
 })
 

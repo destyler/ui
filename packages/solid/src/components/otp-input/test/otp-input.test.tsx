@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { OtpInput, otpInputAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -130,6 +131,15 @@ describe('otpInput', () => {
     await waitFor(() => expect(visibleInput).toHaveAttribute('readonly'))
     expect(hiddenInput).toHaveAttribute('readonly')
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  const inputs = document.querySelectorAll('[data-scope="pin-input"][data-part="input"], [data-scope="otp-input"][data-part="input"]')
+  expect(inputs.length).toBeGreaterThanOrEqual(3)
+  expect((inputs[0] as HTMLInputElement).value).toBe('1')
+  expect((inputs[1] as HTMLInputElement).value).toBe('2')
+  expect((inputs[2] as HTMLInputElement).value).toBe('3')
 })
 
 describe('otpInput / Field', () => {

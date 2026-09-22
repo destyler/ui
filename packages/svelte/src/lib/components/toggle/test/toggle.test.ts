@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import { Toggle, toggleAnatomy } from '../index'
 
 const componentExports = Toggle as unknown as Record<string, unknown>
@@ -24,5 +25,11 @@ describe('[toggle] component', () => {
     await userEvent.click(toggle)
     await expect.element(toggle).toHaveAttribute('aria-pressed', 'true')
     expect(indicator).toHaveTextContent('✓')
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    const root = document.querySelector('[data-scope="toggle"][data-part="root"]')
+    expect(root).toHaveAttribute('data-state', 'on')
   })
 })

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Dynamic, dynamicAnatomy } from '../index'
 
@@ -28,6 +29,12 @@ describe('[dynamic] component', () => {
     await expect.element(screen.getByText('solid')).not.toBeInTheDocument()
     await expect.element(screen.getByText('vue')).not.toBeInTheDocument()
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  const screen = await render(InitialValue)
+  await expect.element(screen.getByText('React')).toBeInTheDocument()
+  await expect.element(screen.getByText('Solid')).toBeInTheDocument()
 })
 
 describe('dynamic / Field', () => {

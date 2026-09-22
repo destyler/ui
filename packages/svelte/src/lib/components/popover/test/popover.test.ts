@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import { Popover, popoverAnatomy } from '../index'
 
 const componentExports = Popover as unknown as Record<string, unknown>
@@ -61,5 +62,10 @@ describe('[popover] component', () => {
     await expect.element(positioner).toBeInTheDocument()
     await userEvent.click(page.getByRole('button', { name: 'close' }))
     await vi.waitFor(async () => expect.element(positioner).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('title')).toBeVisible()
   })
 })

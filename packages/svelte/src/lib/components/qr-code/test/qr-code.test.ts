@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import WithOverlay from '../examples/WithOverlay.svelte'
 import { QrCode, qrCodeAnatomy } from '../index'
 
@@ -32,5 +33,11 @@ describe('[qr-code] component', () => {
     const pattern = screen.container.querySelector('[data-part="pattern"]')
     expect(pattern).toHaveAttribute('d')
     expect(screen.container.querySelector('input')).toBeNull()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    const pattern = document.querySelector('[data-part="pattern"], [data-testid="pattern"]')
+    expect(pattern).toBeTruthy()
   })
 })

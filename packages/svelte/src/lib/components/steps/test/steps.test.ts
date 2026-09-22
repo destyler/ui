@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialStep from '../examples/InitialStep.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { Steps, stepsAnatomy } from '../index'
 
@@ -40,5 +41,10 @@ describe('[steps] component', () => {
     await expect.element(page.getByText('Second - Date & Time')).toBeVisible()
     await userEvent.click(page.getByText('Reset'))
     await expect.element(page.getByText('First - Contact Info')).toBeVisible()
+  })
+
+  it('seeds default* via InitialStep example', async () => {
+    const screen = await render(InitialStep)
+    await expect.element(screen.getByText('Second - Date & Time')).toBeVisible()
   })
 })

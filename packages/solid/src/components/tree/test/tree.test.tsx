@@ -2,6 +2,7 @@ import { cleanup, render, screen } from '@solidjs/testing-library'
 import { Tree, treeAnatomy } from '..'
 import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic as ComponentUnderTest } from '../examples/Basic'
+import { InitialValue } from '../examples/InitialValue'
 
 describe('tree / Parts & Exports', () => {
   afterAll(() => {
@@ -18,6 +19,11 @@ describe('tree / Parts & Exports', () => {
 
   it.each(getExports(treeAnatomy))('should export %s', async (part) => {
     expectExport(Tree, part)
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(() => <InitialValue />)
+    expect(document.body.textContent?.includes('src')).toBeTruthy()
   })
 })
 

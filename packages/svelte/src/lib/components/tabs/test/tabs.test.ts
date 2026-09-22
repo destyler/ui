@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import { Tabs, tabsAnatomy } from '../index'
+import ReactiveUncontrolled from './ReactiveUncontrolled.svelte'
 
 const componentExports = Tabs as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
@@ -76,5 +77,14 @@ describe('[tabs] component', () => {
     await expect.element(content).toBeVisible()
     await userEvent.click(page.getByText('Solid Trigger'))
     await vi.waitFor(async () => expect.element(content).not.toBeInTheDocument())
+  })
+  it('preserves an uncontrolled value when reactive props change', async () => {
+    const screen = await render(ReactiveUncontrolled)
+    const solidTab = screen.getByText('Solid Trigger')
+    await userEvent.click(solidTab)
+    await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')
+    await userEvent.click(screen.getByRole('button', { name: 'vertical' }))
+    await vi.waitFor(async () => await expect.element(solidTab).toHaveAttribute('data-orientation', 'vertical'))
+    await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')
   })
 })

@@ -6,11 +6,13 @@ import Group from '../examples/Group.svelte'
 import GroupControlled from '../examples/GroupControlled.svelte'
 import GroupWithSelectAll from '../examples/GroupWithSelectAll.svelte'
 import Indeterminate from '../examples/Indeterminate.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Checkbox, checkboxAnatomy } from '../index'
 import GroupPrecedence from './GroupPrecedence.svelte'
+import ReactiveUncontrolled from './ReactiveUncontrolled.svelte'
 
 const componentExports = Checkbox as unknown as Record<string, unknown>
 
@@ -105,6 +107,21 @@ describe('[checkbox] component', () => {
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(screen.getByText('Checked')).toBeVisible()
   })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('checkbox')).toBeChecked()
+  })
+})
+
+it('preserves an uncontrolled value when reactive props change', async () => {
+  const screen = await render(ReactiveUncontrolled)
+  const checkbox = screen.getByRole('checkbox', { name: 'Standalone checkbox' })
+  await expect.element(checkbox).toBeChecked()
+  await userEvent.click(screen.getByText('Standalone checkbox'))
+  await expect.element(checkbox).not.toBeChecked()
+  await userEvent.click(screen.getByRole('button', { name: 'disable' }))
+  await expect.element(checkbox).not.toBeChecked()
 })
 
 describe('[checkbox] field integration', () => {

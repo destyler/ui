@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialPage } from '../examples/InitialPage'
 import { Pagination, paginationAnatomy } from '../index'
 
 describe('[pagination] component', () => {
@@ -47,5 +48,10 @@ describe('[pagination] component', () => {
     const prevPageLink = page.getByText(/prev/i)
     await userEvent.click(prevPageLink)
     await expect.element(page.getByLabelText('page 1', { exact: true })).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    render(<InitialPage />)
+    await expect.element(page.getByLabelText('page 5')).toHaveAttribute('aria-current', 'page')
   })
 })

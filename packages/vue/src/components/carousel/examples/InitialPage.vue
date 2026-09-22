@@ -5,7 +5,7 @@ const images = Array.from({ length: 5 }, (_, i) => `https://picsum.photos/seed/$
 </script>
 
 <template>
- <Carousel.Root :default-page="2">
+ <Carousel.Root :default-page="2" :slide-count="images.length">
     <Carousel.Control>
       <Carousel.PrevTrigger>Previous</Carousel.PrevTrigger>
       <Carousel.NextTrigger>Next</Carousel.NextTrigger>

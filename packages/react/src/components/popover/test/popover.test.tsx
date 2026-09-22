@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialOpen } from '../examples/InitialOpen'
 import { Popover, popoverAnatomy } from '../index'
 
 describe('[popover] component', () => {
@@ -32,5 +33,10 @@ describe('[popover] component', () => {
 
     await userEvent.click(page.getByRole('button', { name: 'close' }))
     await expect.element(page.getByTestId('positioner')).toBeInTheDocument()
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(<InitialOpen />)
+    await expect.element(page.getByText('title')).toBeVisible()
   })
 })

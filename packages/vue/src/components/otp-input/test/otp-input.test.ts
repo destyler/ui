@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { nextTick } from 'vue'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { OtpInput, otpInputAnatomy } from '../index'
 
@@ -115,6 +116,15 @@ describe('[otp-input] component', () => {
         valueAsString: '123',
       }),
     )
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(InitialValue)
+    const inputs = document.querySelectorAll('[data-scope="pin-input"][data-part="input"], [data-scope="otp-input"][data-part="input"]')
+    expect(inputs.length).toBeGreaterThanOrEqual(3)
+    expect((inputs[0] as HTMLInputElement).value).toBe('1')
+    expect((inputs[1] as HTMLInputElement).value).toBe('2')
+    expect((inputs[2] as HTMLInputElement).value).toBe('3')
   })
 })
 

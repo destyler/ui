@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import Multiple from '../examples/Multiple.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { ToggleGroup, toggleGroupAnatomy } from '../index'
@@ -45,5 +46,11 @@ describe('[toggle-group] component', () => {
   it('keeps the RootProvider value in the styled span used by React and Vue', async () => {
     const screen = await render(RootProvider)
     expect(screen.container.querySelector(':scope > span')).toBeInTheDocument()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    const item = screen.getByText('A', { exact: true })
+    await expect.element(item).toHaveAttribute('data-state', 'on')
   })
 })

@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Dynamic, dynamicAnatomy } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -86,6 +87,12 @@ describe('dynamic', () => {
     setReadOnly(true)
     await waitFor(() => expect(input).toHaveAttribute('readonly'))
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  expect(screen.getByText('React')).toBeInTheDocument()
+  expect(screen.getByText('Solid')).toBeInTheDocument()
 })
 
 describe('dynamic / Field', () => {

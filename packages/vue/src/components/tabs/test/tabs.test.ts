@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import { Tabs, tabsAnatomy } from '../index'
+import ReactiveUncontrolled from './ReactiveUncontrolled.vue'
 
 describe('[tabs] component', () => {
   it.each(getParts(tabsAnatomy))('should render part %s', async (part) => {
@@ -118,5 +119,14 @@ describe('[tabs] component', () => {
 
     await userEvent.click(page.getByText('Solid Trigger'))
     await vi.waitFor(async () => await expect.element(page.getByText('React Content')).not.toBeInTheDocument())
+  })
+  it('preserves an uncontrolled value when reactive props change', async () => {
+    render(ReactiveUncontrolled)
+    const solidTab = page.getByText('Solid Trigger')
+    await userEvent.click(solidTab)
+    await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')
+    await userEvent.click(page.getByRole('button', { name: 'vertical' }))
+    await vi.waitFor(async () => await expect.element(solidTab).toHaveAttribute('data-orientation', 'vertical'))
+    await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')
   })
 })

@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Events from '../examples/Events.svelte'
+import InitialSize from '../examples/InitialSize.svelte'
 import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import Vertical from '../examples/Vertical.svelte'
@@ -54,5 +55,13 @@ describe('[splitter] component', () => {
 
     await render(Vertical)
     await expect.element(page.getByRole('separator')).toHaveAttribute('aria-orientation', 'vertical')
+  })
+
+  it('seeds default* via InitialSize example', async () => {
+    await render(InitialSize)
+    const panels = document.querySelectorAll('[data-scope="splitter"][data-part="panel"]')
+    expect(panels.length).toBeGreaterThanOrEqual(2)
+    const sizes = Array.from(panels).map(p => p.getAttribute('data-size') || (p as HTMLElement).style.flex || (p as HTMLElement).style.width)
+    expect(sizes.join(' ')).toMatch(/30|70/)
   })
 })

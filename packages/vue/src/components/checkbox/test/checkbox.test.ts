@@ -6,8 +6,10 @@ import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
 import Group from '../examples/Group.vue'
 import Indeterminate from '../examples/Indeterminate.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { Checkbox, checkboxAnatomy } from '../index'
+import ReactiveUncontrolled from './ReactiveUncontrolled.vue'
 
 describe('[checkbox] component', () => {
   it.each(getParts(checkboxAnatomy).filter(p => !p.includes('group')))('should render part %s', async (part) => {
@@ -47,6 +49,20 @@ describe('[checkbox] component', () => {
   it('should handle indeterminate state from example', async () => {
     render(Indeterminate)
     await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
+  })
+  it('seeds default* via InitialValue example', async () => {
+    render(InitialValue)
+    await expect.element(page.getByRole('checkbox')).toBeChecked()
+  })
+
+  it('preserves an uncontrolled value when reactive props change', async () => {
+    render(ReactiveUncontrolled)
+    const checkbox = page.getByRole('checkbox', { name: 'Standalone checkbox' })
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Standalone checkbox'))
+    await expect.element(checkbox).not.toBeChecked()
+    await userEvent.click(page.getByRole('button', { name: 'disable' }))
+    await expect.element(checkbox).not.toBeChecked()
   })
 })
 

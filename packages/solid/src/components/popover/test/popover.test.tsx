@@ -3,6 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Popover, popoverAnatomy, usePopover } from '../'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialOpen } from '../examples/InitialOpen'
 import { ComponentUnderTest } from './basic'
 import { ControlledComponentUnderTest } from './controlled'
 
@@ -156,5 +157,10 @@ describe('popover', () => {
 
     await user.click(screen.getByRole('button', { name: 'close' }))
     await waitFor(() => expect(screen.queryByTestId('positioner')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(() => <InitialOpen />)
+    expect(screen.getByText('title')).toBeVisible()
   })
 })
