@@ -19,6 +19,8 @@ export { MinMax as CircularMinMax } from '../examples/circular/MinMax'
 export { RootProvider as CircularRootProvider } from '../examples/circular/RootProvider'
 export { ValueText as CircularValueText } from '../examples/circular/ValueText'
 
+export { InitialValue } from '../examples/InitialValue'
+
 export { Basic as LinearBasic } from '../examples/linear/Basic'
 export { Controlled as LinearControlled } from '../examples/linear/Controlled'
 export { Indeterminate as LinearIndeterminate } from '../examples/linear/Indeterminate'

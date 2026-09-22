@@ -3,7 +3,7 @@ import { Portal } from 'solid-js/web'
 
 export function InitialOpen() {
   return (
-    <Dialog.Root open defaultOpen>
+    <Dialog.Root defaultOpen>
       <Dialog.Trigger>Open Dialog</Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
