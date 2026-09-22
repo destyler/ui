@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialStep from '../examples/InitialStep.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { Steps, stepsAnatomy } from '../index'
 
@@ -9,7 +10,7 @@ const componentExports = Steps as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[steps] component', () => {
-  it.each(stepsAnatomy.keys().filter(part => part !== 'progress'))('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(stepsAnatomy.keys().filter((part: string) => part !== 'progress').map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     expect(document.querySelector(`[data-scope="steps"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -40,5 +41,10 @@ describe('[steps] component', () => {
     await expect.element(page.getByText('Second - Date & Time')).toBeVisible()
     await userEvent.click(page.getByText('Reset'))
     await expect.element(page.getByText('First - Contact Info')).toBeVisible()
+  })
+
+  it('seeds default* via InitialStep example', async () => {
+    const screen = await render(InitialStep)
+    await expect.element(screen.getByText('Second - Date & Time')).toBeVisible()
   })
 })

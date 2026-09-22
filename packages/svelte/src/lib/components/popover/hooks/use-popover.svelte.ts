@@ -10,7 +10,7 @@ import * as popover from '@destyler/popover'
 import { runIfFn } from '@destyler/utils'
 
 export interface UsePopoverProps
-  extends Omit<popover.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<popover.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: popover.Context['open']
 }

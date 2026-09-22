@@ -3,7 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Slider, sliderAnatomy } from '../'
 import { LocaleProvider } from '../../../providers'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('slider', () => {
@@ -14,7 +14,7 @@ describe('slider', () => {
   })
 
   it.each(getExports(sliderAnatomy))('should export %s', async (part) => {
-    expect(Slider[part]).toBeDefined()
+    expectExport(Slider, part)
   })
 
   it('should be possible to control it with the arrow keys', async () => {

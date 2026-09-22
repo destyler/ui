@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/svelte-vite'
 import type { Component } from 'svelte'
 import BasicExample from '../examples/Basic.svelte'
 import BlurBehaviorExample from '../examples/BlurBehavior.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import DisabledEditingExample from '../examples/DisabledEditing.svelte'
 import InitialValueExample from '../examples/InitialValue.svelte'
 import MaxWithOverflowExample from '../examples/MaxWithOverflow.svelte'
@@ -23,6 +24,7 @@ export default meta
 const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 
 export const Basic = story(BasicExample)
+export const Controlled = story(ControlledExample)
 export const BlurBehavior = story(BlurBehaviorExample)
 export const DisabledEditing = story(DisabledEditingExample)
 export const InitialValue = story(InitialValueExample)

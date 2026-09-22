@@ -41,7 +41,7 @@
   const machineProps = $derived<UseNavigationMenuProps>({
     ...useNavigationMenuProps,
     id: useNavigationMenuProps.id ?? providedId,
-    value,
+    ...(value !== undefined ? { value } : {}),
     onValueChange(details) {
       useNavigationMenuProps.onValueChange?.(details)
       if (value !== undefined) value = details.value

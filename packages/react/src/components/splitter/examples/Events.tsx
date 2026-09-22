@@ -1,15 +1,12 @@
-import { useState } from 'react'
 import { Splitter } from '../index'
 
 export function Events() {
-  const [size] = useState([
-    { id: 'a', size: 50 },
-    { id: 'b', size: 50 },
-  ])
-
   return (
     <Splitter.Root
-      size={size}
+      defaultSize={[
+        { id: 'a', size: 50 },
+        { id: 'b', size: 50 },
+      ]}
       // eslint-disable-next-line no-console
       onSizeChange={details => console.log('onSizeChange', details)}
       // eslint-disable-next-line no-console

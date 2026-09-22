@@ -55,13 +55,13 @@ async function drawSignature() {
 }
 
 describe('[signature] component', () => {
-  it.each(signatureAnatomy.keys().filter(part => part !== 'segmentPath'))('renders part %s', async (part) => {
+  it.each<[string]>(signatureAnatomy.keys().filter((part: string) => part !== 'segmentPath').map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="signature"][data-part="${dataPart}"]`)).not.toBeNull()
   })
 
-  it.each(signatureAnatomy.keys().filter(part => part !== 'segmentPath'))('exports %s', (part) => {
+  it.each<[string]>(signatureAnatomy.keys().filter((part: string) => part !== 'segmentPath').map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Signature.${exportName}`).toBeDefined()
   })

@@ -8,6 +8,7 @@ import CircularInitialValueExample from '../examples/circular/InitialValue.svelt
 import CircularMinMaxExample from '../examples/circular/MinMax.svelte'
 import CircularRootProviderExample from '../examples/circular/RootProvider.svelte'
 import CircularValueTextExample from '../examples/circular/ValueText.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import LinearBasicExample from '../examples/linear/Basic.svelte'
 import LinearControlledExample from '../examples/linear/Controlled.svelte'
 import LinearIndeterminateExample from '../examples/linear/Indeterminate.svelte'
@@ -34,6 +35,8 @@ export const CircularInitialValue = story(CircularInitialValueExample)
 export const CircularMinMax = story(CircularMinMaxExample)
 export const CircularRootProvider = story(CircularRootProviderExample)
 export const CircularValueText = story(CircularValueTextExample)
+
+export const InitialValue = story(InitialValueExample)
 
 export const LinearBasic = story(LinearBasicExample)
 export const LinearControlled = story(LinearControlledExample)

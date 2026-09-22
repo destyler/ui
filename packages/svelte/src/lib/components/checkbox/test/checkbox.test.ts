@@ -6,16 +6,18 @@ import Group from '../examples/Group.svelte'
 import GroupControlled from '../examples/GroupControlled.svelte'
 import GroupWithSelectAll from '../examples/GroupWithSelectAll.svelte'
 import Indeterminate from '../examples/Indeterminate.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Checkbox, checkboxAnatomy } from '../index'
 import GroupPrecedence from './GroupPrecedence.svelte'
+import ReactiveUncontrolled from './ReactiveUncontrolled.svelte'
 
 const componentExports = Checkbox as unknown as Record<string, unknown>
 
 describe('[checkbox] component', () => {
-  it.each(checkboxAnatomy.keys().filter(part => part !== 'group'))('renders part %s', async (part) => {
+  it.each<[string]>(checkboxAnatomy.keys().filter((part: string) => part !== 'group').map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="checkbox"][data-part="${dataPart}"]`)).not.toBeNull()
@@ -33,7 +35,7 @@ describe('[checkbox] component', () => {
     expect(screen.container.querySelectorAll('[data-part="indicator"] svg')).toHaveLength(3)
   })
 
-  it.each(checkboxAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(checkboxAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Checkbox.${exportName}`).toBeDefined()
   })
@@ -105,6 +107,21 @@ describe('[checkbox] component', () => {
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(screen.getByText('Checked')).toBeVisible()
   })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('checkbox')).toBeChecked()
+  })
+})
+
+it('preserves an uncontrolled value when reactive props change', async () => {
+  const screen = await render(ReactiveUncontrolled)
+  const checkbox = screen.getByRole('checkbox', { name: 'Standalone checkbox' })
+  await expect.element(checkbox).toBeChecked()
+  await userEvent.click(screen.getByText('Standalone checkbox'))
+  await expect.element(checkbox).not.toBeChecked()
+  await userEvent.click(screen.getByRole('button', { name: 'disable' }))
+  await expect.element(checkbox).not.toBeChecked()
 })
 
 describe('[checkbox] field integration', () => {

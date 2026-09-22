@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseNavigationMenuProps
-  extends Optional<Omit<navigationMenu.Context, 'dir' | 'getRootNode' | 'defaultValue' | 'value.controlled'>, 'id'> {
+  extends Optional<Omit<navigationMenu.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial value of the navigation menu when it is first rendered.
    * Use when you do not need to control its state.
@@ -21,26 +21,17 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
   const { getRootNode } = useEnvironmentContext()
   const { dir } = useLocaleContext()
 
-  // Extract only the valid context properties from props
-  const {
-    defaultValue,
-    onValueChange,
-    ...contextProps
-  } = props
+  const { onValueChange, ...contextProps } = props
 
   const initialContext: navigationMenu.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    defaultValue,
-    'value': props.value ?? defaultValue ?? null,
-    'value.controlled': props.value !== undefined,
     ...contextProps,
   }
 
   const context: navigationMenu.Context = {
     ...initialContext,
-    value: props.value,
     onValueChange: useEvent(onValueChange, { sync: true }),
   }
 

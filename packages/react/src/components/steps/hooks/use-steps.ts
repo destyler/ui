@@ -23,13 +23,12 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     id: useId(),
     dir,
     getRootNode,
-    step: props.defaultStep,
     ...props,
   }
 
   const context: steps.Context = {
     ...initialContext,
-    step: props.step,
+    ...(props.step !== undefined ? { step: props.step } : {}),
     onStepChange: useEvent(props.onStepChange),
     onStepComplete: useEvent(props.onStepComplete),
   }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialValue } from '../examples/InitialValue'
 import { Toggle, toggleAnatomy } from '../index'
 
 describe('[toggle] component', () => {
@@ -12,5 +13,11 @@ describe('[toggle] component', () => {
 
   it.each(getExports(toggleAnatomy))('should export %s', async (part) => {
     expect(Toggle[part]).toBeDefined()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(<InitialValue />)
+    const root = document.querySelector('[data-scope="toggle"][data-part="root"]')
+    expect(root).toHaveAttribute('data-state', 'on')
   })
 })

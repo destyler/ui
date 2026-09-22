@@ -10,5 +10,6 @@ export default meta
 export { Basic } from '../examples/Basic'
 export { Controlled } from '../examples/Controlled'
 export { DefaultOpen } from '../examples/DefaultOpen'
+export { InitialOpen } from '../examples/InitialOpen'
 export { RootProvider } from '../examples/RootProvider'
 export { WithContext } from '../examples/WithContext'

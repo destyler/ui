@@ -7,6 +7,7 @@ const meta: Meta = {
 export default meta
 
 export { Basic } from '../examples/Basic'
+export { Controlled } from '../examples/Controlled'
 export { InitialOpen } from '../examples/InitialOpen'
 export { LazyMount } from '../examples/LazyMount'
 export { LazyMountAndUnmountOnExit } from '../examples/LazyMountAndUnmountOnExit'

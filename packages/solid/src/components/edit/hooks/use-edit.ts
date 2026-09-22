@@ -8,7 +8,7 @@ import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseEditProps
-  extends Optional<Omit<edit.Context, 'dir' | 'getRootNode' | 'edit.controlled'>, 'id'> {
+  extends Optional<Omit<edit.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial edit state of the edit when it is first rendered.
    * Use when you do not need to control its edit state.
@@ -30,25 +30,22 @@ export function useEdit(props: UseEditProps = {}) {
 
   const initialContext = createMemo(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.().ids.label,
       input: field?.().ids.control,
     },
-    'dir': locale().dir,
-    'disabled': field?.().disabled,
-    'invalid': field?.().invalid,
-    'readOnly': field?.().readOnly,
-    'required': field?.().required,
-    'getRootNode': environment().getRootNode,
-    'edit': props.defaultEdit,
-    'value': props.defaultValue,
-    'edit.controlled': props.edit !== undefined,
+    dir: locale().dir,
+    disabled: field?.().disabled,
+    invalid: field?.().invalid,
+    readOnly: field?.().readOnly,
+    required: field?.().required,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    edit: props.edit,
-    value: props.value,
+    ...(props.edit !== undefined ? { edit: props.edit } : {}),
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(edit.machine(initialContext()), { context })
 

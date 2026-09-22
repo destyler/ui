@@ -1,13 +1,14 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Combobox, comboboxAnatomy } from '../index'
 
 const componentExports = Combobox as unknown as Record<string, unknown>
 
 describe('[combobox] component', () => {
-  it.each(comboboxAnatomy.keys())('renders and exports the %s anatomy part', async (part: string) => {
+  it.each<[string]>(comboboxAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="combobox"][data-part="${dataPart}"]`)).toBeInTheDocument()
@@ -59,6 +60,12 @@ describe('[combobox] component', () => {
     await screen.getByText('Open').click()
     await vi.waitFor(async () => expect.element(screen.getByTestId('positioner')).not.toBeInTheDocument())
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  await render(InitialValue)
+  const input = document.querySelector('[data-scope="combobox"][data-part="input"]') as HTMLInputElement
+  expect(input?.value?.toLowerCase()).toContain('vue')
 })
 
 describe('combobox / Field', () => {

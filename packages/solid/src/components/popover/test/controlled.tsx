@@ -9,7 +9,11 @@ export function ControlledComponentUnderTest(props: Popover.RootProps) {
       <button type="button" onClick={() => setOpen(prev => !prev)}>
         toggle
       </button>
-      <ComponentUnderTest {...props} open={open()} />
+      <ComponentUnderTest
+        {...props}
+        open={open()}
+        onOpenChange={({ open: next }) => setOpen(next)}
+      />
     </>
   )
 }

@@ -9,6 +9,7 @@ import ContextValueExample from '../examples/ContextValue.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
 import DisabledExample from '../examples/Disabled.svelte'
 import HorizontalExample from '../examples/Horizontal.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import MultipleExample from '../examples/Multiple.svelte'
 import RenderPropExample from '../examples/RenderProp.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
@@ -25,6 +26,7 @@ export const ContextGetItemState = story(ContextGetItemStateExample)
 export const ContextSetValue = story(ContextSetValueExample)
 export const ContextValue = story(ContextValueExample)
 export const Controlled = story(ControlledExample)
+export const InitialValue = story(InitialValueExample)
 export const Disabled = story(DisabledExample)
 export const Horizontal = story(HorizontalExample)
 export const Multiple = story(MultipleExample)

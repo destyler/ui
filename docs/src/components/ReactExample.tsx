@@ -10,7 +10,7 @@ interface Props {
 }
 
 const modules: Record<string, () => Promise<any>> = import.meta.glob(
-  '../../../packages/react/src/components/*/examples/*.tsx',
+  '../../../packages/react/src/components/*/examples/**/*.{tsx,ts}',
 )
 const framework = getFramework('react')
 
@@ -48,7 +48,8 @@ export default function ReactExample({ component, example }: Props) {
     loader().then((mod) => {
       if (cancelled)
         return
-      const LoadedComponent = mod[example] || mod.default
+      const exportName = example.includes('/') ? example.split('/').pop()! : example
+      const LoadedComponent = mod[exportName] || mod.default
       setComponent(() => LoadedComponent ?? null)
       setStatus(LoadedComponent ? 'ready' : 'error')
     }).catch(() => {

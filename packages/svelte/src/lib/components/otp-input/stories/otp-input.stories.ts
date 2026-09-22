@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
 import BlurredExample from '../examples/Blurred.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import CustomizedExample from '../examples/Customized.svelte'
 import InitialValueExample from '../examples/InitialValue.svelte'
 import OtpModeExample from '../examples/OtpMode.svelte'
@@ -16,6 +17,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = { render: () => ({ Component: BasicExample }) }
+export const Controlled = { render: () => ({ Component: ControlledExample }) }
 export const Blurred = { render: () => ({ Component: BlurredExample }) }
 export const Customized = { render: () => ({ Component: CustomizedExample }) }
 export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

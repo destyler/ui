@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Dynamic, dynamicAnatomy } from '../index'
 
@@ -29,6 +30,12 @@ describe('[dynamic] component', () => {
     await expect.element(page.getByText('solid')).not.toBeInTheDocument()
     await expect.element(page.getByText('vue')).not.toBeInTheDocument()
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(<InitialValue />)
+  await expect.element(page.getByText('React')).toBeInTheDocument()
+  await expect.element(page.getByText('Solid')).toBeInTheDocument()
 })
 
 describe('tagsInput / Field', () => {

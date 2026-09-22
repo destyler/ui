@@ -23,7 +23,6 @@ export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
   const initialContext: qrcode.Context = {
     id: useId(),
     dir,
-    value: props.defaultValue,
     getRootNode,
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     ...props,
@@ -31,7 +30,7 @@ export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
 
   const context: qrcode.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
   }
 

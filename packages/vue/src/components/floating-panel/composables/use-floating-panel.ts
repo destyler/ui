@@ -9,7 +9,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseFloatingPanelProps
-  extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the floating panel when it is first rendered.
    * Use when you do not need to control its open state.
@@ -27,7 +27,6 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}, emit?: EmitF
   const context = computed<floatingPanel.Context>(() => ({
     id,
     dir: locale.value.dir,
-    open: props.open ?? props.defaultOpen,
     getRootNode: env?.value.getRootNode,
     onOpenChange: (details) => {
       emit?.('openChange', details)

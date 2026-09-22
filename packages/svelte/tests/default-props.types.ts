@@ -1,6 +1,5 @@
 import type {
   CollectionItem,
-  UseAspectRatioProps,
   UseCalendarProps,
   UseCarouselProps,
   UseCheckboxGroupProps,
@@ -40,7 +39,6 @@ type Has<T, Key extends PropertyKey> = Key extends keyof T ? true : false
 type Assert<Value extends true> = Value
 
 export type DefaultPropContract = [
-  Assert<Has<UseAspectRatioProps, 'defaultRatio'>>,
   Assert<Has<UseCalendarProps, 'defaultOpen' | 'defaultValue' | 'defaultView'>>,
   Assert<Has<UseCarouselProps, 'defaultPage'>>,
   Assert<Has<UseCheckboxProps, 'defaultChecked'>>,

@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { Combobox, comboboxAnatomy } from '../index'
 
@@ -77,6 +78,12 @@ describe('[combobox] component', () => {
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(async () => await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument())
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(InitialValue)
+  const input = document.querySelector('[data-scope="combobox"][data-part="input"]') as HTMLInputElement
+  expect(input?.value?.toLowerCase()).toContain('vue')
 })
 
 describe('combobox / Field', () => {

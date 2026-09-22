@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UsePopoverProps
-  extends Optional<Omit<popover.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<popover.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the popover when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,17 +22,15 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
   const { dir } = useLocaleContext()
 
   const initialContext: popover.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
     ...props,
   }
 
   const context: popover.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
   }
 

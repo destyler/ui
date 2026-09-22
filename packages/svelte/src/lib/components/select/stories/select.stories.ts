@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/svelte-vite'
 import AdvancedExample from '../examples/Advanced.svelte'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import MultipleExample from '../examples/Multiple.svelte'
 import ReactiveCollectionExample from '../examples/ReactiveCollection.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
@@ -21,3 +22,4 @@ export const Multiple = { render: () => ({ Component: MultipleExample }) }
 export const ReactiveCollection = { render: () => ({ Component: ReactiveCollectionExample }) }
 export const RootProvider = { render: () => ({ Component: RootProviderExample }) }
 export const WithField = { render: () => ({ Component: WithFieldExample }) }
+export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

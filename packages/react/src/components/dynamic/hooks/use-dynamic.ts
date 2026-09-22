@@ -34,13 +34,12 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
     readOnly: field?.readOnly,
     required: field?.required,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 
   const context: dynamic.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueInvalid: useEvent(props.onValueInvalid),
     onHighlightChange: useEvent(props.onHighlightChange),

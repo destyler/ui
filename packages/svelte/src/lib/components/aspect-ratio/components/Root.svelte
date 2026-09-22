@@ -13,14 +13,13 @@
   import { AspectRatioProvider } from '../hooks/use-aspect-ratio-context'
   import { useAspectRatio } from '../hooks/use-aspect-ratio.svelte'
 
-  let { defaultRatio, ...props }: AspectRatioRootProps = $props()
+  let { ...props }: AspectRatioRootProps = $props()
   const providedId = $props.id()
 
   const [machineProps, localProps] = $derived(aspectRatioMachine.splitProps(props))
   const resolvedProps = $derived<UseAspectRatioProps>({
     ...machineProps,
     id: machineProps.id ?? providedId,
-    defaultRatio,
   })
   const aspectRatio = useAspectRatio(() => resolvedProps)
   const mergedProps = $derived(mergeProps(aspectRatio().getRootProps(), localProps))

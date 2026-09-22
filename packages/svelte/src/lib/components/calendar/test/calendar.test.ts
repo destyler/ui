@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import Range from '../examples/Range.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import Standalone from '../examples/Standalone.svelte'
@@ -73,5 +74,12 @@ describe('[calendar] component', () => {
 
     const standalone = await render(Standalone)
     await expect.element(standalone.getByRole('grid')).toBeVisible()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    const input = document.querySelector('[data-scope="date-picker"][data-part="input"], [data-scope="calendar"][data-part="input"], input') as HTMLInputElement | null
+    expect(input).toBeTruthy()
+    expect(input!.value.length).toBeGreaterThan(0)
   })
 })

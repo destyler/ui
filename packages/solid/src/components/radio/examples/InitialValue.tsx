@@ -5,7 +5,7 @@ export function InitialValue() {
   const frameworks = ['React', 'Solid', 'Vue']
 
   return (
-    <Radio.Root value="Solid">
+    <Radio.Root defaultValue="Solid">
       <Radio.Label>Framework</Radio.Label>
       <Index each={frameworks}>
         {framework => (

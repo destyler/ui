@@ -10,7 +10,7 @@ import * as collapsible from '@destyler/collapsible'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseCollapsibleProps
-  extends Omit<collapsible.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<collapsible.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: collapsible.Context['open']
   /**

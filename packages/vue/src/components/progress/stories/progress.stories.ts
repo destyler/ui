@@ -6,6 +6,7 @@ import CircularInitialValue from '../examples/circular/InitialValue.vue'
 import CircularMinMax from '../examples/circular/MinMax.vue'
 import CircularRootProvider from '../examples/circular/RootProvider.vue'
 import CircularValueText from '../examples/circular/ValueText.vue'
+import InitialValue from '../examples/InitialValue.vue'
 
 import LinearBasic from '../examples/linear/Basic.vue'
 import LinearControlled from '../examples/linear/Controlled.vue'
@@ -69,6 +70,13 @@ export function circularValueText() {
   return {
     components: { CircularValueText },
     template: '<CircularValueText />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

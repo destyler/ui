@@ -34,13 +34,12 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    checked: props.defaultChecked,
     ...props,
   }
 
   const context: zagSwitch.Context = {
     ...initialContext,
-    checked: props.checked,
+    ...(props.checked !== undefined ? { checked: props.checked } : {}),
     onCheckedChange: useEvent(props.onCheckedChange, { sync: true }),
   }
 

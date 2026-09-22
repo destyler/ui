@@ -7,7 +7,7 @@ import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseDialogProps
-  extends Optional<Omit<dialog.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<dialog.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the dialog when it is first rendered.
    * Use when you do not need to control its open state.
@@ -23,15 +23,13 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
   const [state, send] = useMachine(dialog.machine(initialContext()), { context })
 

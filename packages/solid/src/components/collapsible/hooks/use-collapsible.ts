@@ -9,7 +9,7 @@ import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { splitRenderStrategyProps } from '~/utils/render-strategy'
 
 export interface UseCollapsibleProps
-  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'>,
+  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'>,
   RenderStrategyProps {
   /**
    * The initial open state of the collapsible when it is first rendered.
@@ -36,15 +36,13 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...collapsibleProps,
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
   const [state, send] = useMachine(collapsible.machine(initialContext()), { context })
   const [wasVisible, setWasVisible] = createSignal(false)

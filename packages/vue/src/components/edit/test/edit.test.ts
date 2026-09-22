@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { Edit, editAnatomy } from '../index'
 
@@ -18,7 +19,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to focus the placeholder and enter a value', async () => {
-    render(Controlled)
+    render(Basic)
     await page.getByText('Placeholder').click()
 
     const input = page.getByLabelText('editable input')
@@ -29,7 +30,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to dbl click the placeholder to enter a value', async () => {
-    render(Controlled, { props: { activationMode: 'dblclick' } })
+    render(Basic)
     await userEvent.dblClick(page.getByText('Placeholder'))
 
     await userEvent.clear(page.getByRole('textbox'))
@@ -54,6 +55,11 @@ describe('[edit] component', () => {
 
     await expect.element(input).toHaveAttribute('hidden', '')
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(InitialValue)
+  await expect.element(page.getByText('Hello')).toBeInTheDocument()
 })
 
 describe('editable / Field', () => {

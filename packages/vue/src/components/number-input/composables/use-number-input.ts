@@ -38,7 +38,7 @@ export function useNumberInput(props: UseNumberInputProps = {}, emit?: EmitFn<Ro
     invalid: field?.value.invalid,
     dir: locale.value.dir,
     locale: locale.value.locale,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onValueChange: (details) => {
       emit?.('valueChange', details)

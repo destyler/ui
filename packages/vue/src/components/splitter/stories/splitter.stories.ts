@@ -1,5 +1,7 @@
 import Basic from '../examples/Basic.vue'
+import Controlled from '../examples/Controlled.vue'
 import Event from '../examples/Events.vue'
+import InitialSize from '../examples/InitialSize.vue'
 import RenderProp from '../examples/RenderProp.vue'
 import RootProvider from '../examples/RootProvider.vue'
 import Vertical from '../examples/Vertical.vue'
@@ -15,6 +17,20 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function controlled() {
+  return {
+    components: { Controlled },
+    template: '<Controlled />',
+  }
+}
+
+export function initialSize() {
+  return {
+    components: { InitialSize },
+    template: '<InitialSize />',
   }
 }
 

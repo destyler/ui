@@ -1,8 +1,10 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import FormattedExample from '../examples/Formatted.svelte'
 import FormUsageExample from '../examples/FormUsage.svelte'
 import FractionDigitsExample from '../examples/FractionDigits.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import MinMaxExample from '../examples/MinMax.svelte'
 import MouseWheelExample from '../examples/MouseWheel.svelte'
 import NoClampExample from '../examples/NoClamp.svelte'
@@ -21,6 +23,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = { render: () => ({ Component: BasicExample }) }
+export const Controlled = { render: () => ({ Component: ControlledExample }) }
 export const Formatted = { render: () => ({ Component: FormattedExample }) }
 export const FormUsage = { render: () => ({ Component: FormUsageExample }) }
 export const FractionDigits = { render: () => ({ Component: FractionDigitsExample }) }
@@ -31,3 +34,4 @@ export const RenderFn = { render: () => ({ Component: RenderFnExample }) }
 export const RootProvider = { render: () => ({ Component: RootProviderExample }) }
 export const Scrubber = { render: () => ({ Component: ScrubberExample }) }
 export const WithField = { render: () => ({ Component: WithFieldExample }) }
+export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

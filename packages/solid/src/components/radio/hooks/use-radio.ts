@@ -25,13 +25,12 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(radio.machine(initialContext()), {

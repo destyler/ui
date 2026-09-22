@@ -35,12 +35,11 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
     readOnly: field?.().readOnly,
     required: field?.().required,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
     ...props,
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(dynamic.machine(initialContext()), { context })
 

@@ -26,11 +26,10 @@ export function useSplitter(props: UseSplitterProps = {}): UseSplitterReturn {
     dir: locale().dir,
     getRootNode: environment().getRootNode,
     ...props,
-    size: props.size ?? props.defaultSize,
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    size: props.size,
+    ...(props.size !== undefined ? { size: props.size } : {}),
   }))
   const [state, send] = useMachine(splitter.machine(initialContext()), { context })
 

@@ -2,13 +2,14 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import { Toggle, toggleAnatomy } from '../index'
 
 const componentExports = Toggle as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[toggle] component', () => {
-  it.each(toggleAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(toggleAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="toggle"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -24,5 +25,11 @@ describe('[toggle] component', () => {
     await userEvent.click(toggle)
     await expect.element(toggle).toHaveAttribute('aria-pressed', 'true')
     expect(indicator).toHaveTextContent('✓')
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    const root = document.querySelector('[data-scope="toggle"][data-part="root"]')
+    expect(root).toHaveAttribute('data-state', 'on')
   })
 })

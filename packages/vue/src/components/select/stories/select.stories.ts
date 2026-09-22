@@ -1,6 +1,7 @@
 import Advanced from '../examples/Advanced.vue'
 import Basic from '../examples/Basic.vue'
 import Controlled from '../examples/Controlled.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import Multiple from '../examples/Multiple.vue'
 import ReactiveCollection from '../examples/ReactiveCollection.vue'
 import RootProvider from '../examples/RootProvider.vue'
@@ -24,6 +25,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

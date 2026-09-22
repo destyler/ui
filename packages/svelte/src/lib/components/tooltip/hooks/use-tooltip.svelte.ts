@@ -10,7 +10,7 @@ import * as tooltip from '@destyler/tooltip'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseTooltipProps
-  extends Omit<tooltip.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<tooltip.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: tooltip.Context['open']
 }

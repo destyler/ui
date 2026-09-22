@@ -3,7 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Fieldset } from '../'
 import { Field } from '../..'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { fieldsetAnatomy } from '../anatomy'
 
 function ComponentUnderTest(props: Fieldset.RootProps) {
@@ -34,7 +34,7 @@ describe('fieldset / Parts & Exports', () => {
   })
 
   it.each(getExports(fieldsetAnatomy))('should export %s', async (part) => {
-    expect(Fieldset[part]).toBeDefined()
+    expectExport(Fieldset, part)
   })
 })
 

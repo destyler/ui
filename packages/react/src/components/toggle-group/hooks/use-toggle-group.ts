@@ -24,13 +24,12 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
     ...props,
   }
 
   const context: toggleGroup.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
   }
 

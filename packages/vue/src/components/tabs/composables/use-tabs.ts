@@ -26,7 +26,7 @@ export function useTabs(props: UseTabsProps = {}, emit?: EmitFn<RootEmits>): Use
   const context = computed<tabs.Context>(() => ({
     id,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onFocusChange: details => emit?.('focusChange', details),
     onValueChange: (details) => {

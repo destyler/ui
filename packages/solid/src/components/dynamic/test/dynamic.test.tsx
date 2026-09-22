@@ -2,7 +2,8 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Dynamic, dynamicAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -14,7 +15,7 @@ describe('dynamic', () => {
   })
 
   it.each(getExports(dynamicAnatomy))('should export %s', async (part) => {
-    expect(Dynamic[part]).toBeDefined()
+    expectExport(Dynamic, part)
   })
 
   it('should allow to add a new item', async () => {
@@ -86,6 +87,12 @@ describe('dynamic', () => {
     setReadOnly(true)
     await waitFor(() => expect(input).toHaveAttribute('readonly'))
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  expect(screen.getByText('React')).toBeInTheDocument()
+  expect(screen.getByText('Solid')).toBeInTheDocument()
 })
 
 describe('dynamic / Field', () => {

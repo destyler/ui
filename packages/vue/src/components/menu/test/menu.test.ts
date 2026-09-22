@@ -7,6 +7,7 @@ import Checkbox from '../examples/Checkbox.vue'
 import Context from '../examples/Context.vue'
 import Controlled from '../examples/Controlled.vue'
 import Group from '../examples/Group.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import Nested from '../examples/Nested.vue'
 import RadioGroup from '../examples/RadioGroup.vue'
 import { Menu, menuAnatomy } from '../index'
@@ -234,5 +235,10 @@ describe('[menu] component', () => {
     await vi.waitFor(() => {
       expect(page.getByText('React')).not.toBeVisible()
     })
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(InitialOpen)
+    await expect.element(page.getByText('Check me')).toBeVisible()
   })
 })

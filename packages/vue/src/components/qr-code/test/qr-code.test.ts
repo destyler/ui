@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithOverlay from '../examples/WithOverlay.vue'
 import { QrCode, qrCodeAnatomy } from '../index'
 
@@ -28,5 +29,11 @@ describe('[qr-code] component', () => {
     render(WithOverlay)
 
     await expect.element(page.getByAltText('Logo')).toBeInTheDocument()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(InitialValue)
+    const pattern = document.querySelector('[data-part="pattern"], [data-testid="pattern"]')
+    expect(pattern).toBeTruthy()
   })
 })

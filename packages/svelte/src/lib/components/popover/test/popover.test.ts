@@ -2,13 +2,14 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import { Popover, popoverAnatomy } from '../index'
 
 const componentExports = Popover as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[popover] component', () => {
-  it.each(popoverAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(popoverAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     expect(document.querySelector(`[data-scope="popover"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -61,5 +62,10 @@ describe('[popover] component', () => {
     await expect.element(positioner).toBeInTheDocument()
     await userEvent.click(page.getByRole('button', { name: 'close' }))
     await vi.waitFor(async () => expect.element(positioner).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('title')).toBeVisible()
   })
 })

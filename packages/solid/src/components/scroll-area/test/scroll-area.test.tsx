@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { ScrollArea, scrollAreaAnatomy } from '..'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
 import { RootProvider } from '../examples/RootProvider'
@@ -13,7 +13,7 @@ describe('scrollArea / Parts & Exports', () => {
   })
 
   it.each(getExports(scrollAreaAnatomy))('should export %s', (part) => {
-    expect(ScrollArea[part]).toBeDefined()
+    expectExport(ScrollArea, part)
   })
 })
 

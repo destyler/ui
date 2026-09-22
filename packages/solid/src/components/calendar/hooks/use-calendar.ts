@@ -7,7 +7,7 @@ import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseCalendarProps
-  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the date picker when it is first rendered.
    */
@@ -30,20 +30,16 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'value': props.defaultValue,
-    'view': props.defaultView,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
     ...props,
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
-    value: props.value,
-    view: props.view,
+    ...(props.open !== undefined ? { open: props.open } : {}),
+    ...(props.value !== undefined ? { value: props.value } : {}),
+    ...(props.view !== undefined ? { view: props.view } : {}),
   }))
 
   const [state, send] = useMachine(calendar.machine(initialContext()), { context })

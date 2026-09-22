@@ -24,13 +24,12 @@ export function useCarousel(props: UseCarouselProps = {}): UseCarouselReturn {
     id: useId(),
     dir,
     getRootNode,
-    page: props.defaultPage,
     ...props,
   }
 
   const context: carousel.Context = {
     ...initialContext,
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
     onPageChange: useEvent(props.onPageChange, { sync: true }),
   }
 

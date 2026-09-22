@@ -30,7 +30,7 @@ export function useSteps(props: UseStepsProps = {}, emit?: EmitFn<RootEmits>): U
     id,
     dir: locale.value.dir,
     getRootNode: env?.value?.getRootNode,
-    step: props.modelValue ?? props.defaultStep,
+    ...(props.modelValue !== undefined ? { step: props.modelValue } : {}),
     onStepChange: (details) => {
       emit?.('stepChange', details)
       emit?.('update:modelValue', details.step)

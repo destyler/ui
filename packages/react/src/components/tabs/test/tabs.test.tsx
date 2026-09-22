@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
@@ -118,5 +119,23 @@ describe('[tabs] component', () => {
 
     await userEvent.click(page.getByText('Solid Trigger'))
     await vi.waitFor(async () => await expect.element(page.getByText('React Content')).not.toBeInTheDocument())
+  })
+  it('preserves an uncontrolled value when reactive props change', async () => {
+    function Harness() {
+      const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
+      return (
+        <>
+          <Basic defaultValue="React" orientation={orientation} />
+          <button type="button" onClick={() => setOrientation('vertical')}>vertical</button>
+        </>
+      )
+    }
+    render(<Harness />)
+    const solidTab = page.getByText('Solid Trigger')
+    await userEvent.click(solidTab)
+    await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')
+    await userEvent.click(page.getByRole('button', { name: 'vertical' }))
+    await vi.waitFor(async () => await expect.element(solidTab).toHaveAttribute('data-orientation', 'vertical'))
+    await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')
   })
 })

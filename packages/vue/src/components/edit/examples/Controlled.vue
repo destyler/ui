@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { Edit } from '../index'
+import { ref } from 'vue'
+
+const value = ref('')
 </script>
 
 <template>
-  <Edit.Root placeholder="Placeholder">
+  <Edit.Root v-model="value" placeholder="Placeholder">
     <Edit.Label>Label</Edit.Label>
     <Edit.Area>
-      <Edit.Input />
+      <Edit.Input aria-label="editable input" />
       <Edit.Preview />
     </Edit.Area>
     <Edit.Context v-slot="{ editing }">

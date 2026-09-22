@@ -36,15 +36,13 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    selectedValue: props.defaultSelectedValue,
-    expandedValue: props.defaultExpandedValue,
     ...props,
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    selectedValue: props.selectedValue,
-    expandedValue: props.expandedValue,
+    ...(props.selectedValue !== undefined ? { selectedValue: props.selectedValue } : {}),
+    ...(props.expandedValue !== undefined ? { expandedValue: props.expandedValue } : {}),
   }))
 
   const [state, send] = useMachine(tree.machine(initialContext()), { context })

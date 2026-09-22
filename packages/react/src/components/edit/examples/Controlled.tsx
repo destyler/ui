@@ -14,11 +14,11 @@ export function Controlled({ activationMode = 'click', placeholder = 'Placeholde
       placeholder={placeholder}
       activationMode={activationMode}
       value={value}
-      onValueChange={e => setValue(e.value)}
+      onValueChange={details => setValue(details.value)}
     >
       <Edit.Label>Label</Edit.Label>
       <Edit.Area>
-        <Edit.Input />
+        <Edit.Input aria-label="editable input" />
         <Edit.Preview />
       </Edit.Area>
       <Edit.Context>

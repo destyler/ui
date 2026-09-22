@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
 import CenterOriginExample from '../examples/CenterOrigin.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import DraggingIndicatorExample from '../examples/DraggingIndicator.svelte'
 import InitialValueExample from '../examples/InitialValue.svelte'
 import MinMaxExample from '../examples/MinMax.svelte'
@@ -21,6 +22,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = { render: () => ({ Component: BasicExample }) }
+export const Controlled = { render: () => ({ Component: ControlledExample }) }
 export const CenterOrigin = { render: () => ({ Component: CenterOriginExample }) }
 export const DraggingIndicator = { render: () => ({ Component: DraggingIndicatorExample }) }
 export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

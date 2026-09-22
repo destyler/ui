@@ -2,38 +2,38 @@ import { describe, expect, it } from 'vitest'
 import { createMachineProps } from '../create-machine-props'
 
 describe('createMachineProps', () => {
-  it('maps default values only into initial machine props', () => {
+  it('passes default* through and omits undefined live props', () => {
     const props = { value: undefined, defaultValue: 'draft', disabled: false }
     const result = createMachineProps(props, { value: 'defaultValue' })
 
-    expect(result.initial).toStrictEqual({ value: 'draft', disabled: false })
-    expect(result.context).toStrictEqual({ value: undefined, disabled: false })
+    expect(result.initial).toStrictEqual({ defaultValue: 'draft', disabled: false })
+    expect(result.context).toStrictEqual({ defaultValue: 'draft', disabled: false })
     expect(props).toStrictEqual({ value: undefined, defaultValue: 'draft', disabled: false })
   })
 
-  it('prefers an explicit controlled value over its default', () => {
+  it('keeps an explicit controlled value without *.controlled stamps', () => {
     const result = createMachineProps(
       { value: 'controlled', defaultValue: 'fallback' },
       { value: 'defaultValue' },
       ['value'],
     )
 
-    expect(result.initial).toStrictEqual({ 'value': 'controlled', 'value.controlled': true })
-    expect(result.context).toStrictEqual({ 'value': 'controlled', 'value.controlled': true })
+    expect(result.initial).toStrictEqual({ value: 'controlled', defaultValue: 'fallback' })
+    expect(result.context).toStrictEqual({ value: 'controlled', defaultValue: 'fallback' })
   })
 
-  it('marks omitted values as uncontrolled while preserving their initial default', () => {
+  it('omits undefined live props while preserving default*', () => {
     const result = createMachineProps(
       { value: undefined, defaultValue: 'initial' },
       { value: 'defaultValue' },
       ['value'],
     )
 
-    expect(result.initial).toStrictEqual({ 'value': 'initial', 'value.controlled': false })
-    expect(result.context).toStrictEqual({ 'value': undefined, 'value.controlled': false })
+    expect(result.initial).toStrictEqual({ defaultValue: 'initial' })
+    expect(result.context).toStrictEqual({ defaultValue: 'initial' })
   })
 
-  it('supports multiple defaults and controlled flags independently', () => {
+  it('supports multiple controllable pairs via pass-through', () => {
     const result = createMachineProps(
       {
         open: true,
@@ -46,16 +46,14 @@ describe('createMachineProps', () => {
     )
 
     expect(result.initial).toStrictEqual({
-      'open': true,
-      'value': 'initial',
-      'open.controlled': true,
-      'value.controlled': false,
+      open: true,
+      defaultOpen: false,
+      defaultValue: 'initial',
     })
     expect(result.context).toStrictEqual({
-      'open': true,
-      'value': undefined,
-      'open.controlled': true,
-      'value.controlled': false,
+      open: true,
+      defaultOpen: false,
+      defaultValue: 'initial',
     })
   })
 })

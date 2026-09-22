@@ -8,7 +8,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseEditProps
-  extends Optional<Omit<edit.Context, 'dir' | 'getRootNode' | 'edit.controlled'>, 'id'> {
+  extends Optional<Omit<edit.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial edit state of the editable when it is first rendered.
    * Use when you do not need to control its edit state.
@@ -29,26 +29,24 @@ export function useEdit(props: UseEditProps = {}): UseEditReturn {
   const field = useFieldContext()
 
   const initialContext: edit.Context = {
-    'id': useId(),
-    'ids': {
+    id: useId(),
+    ids: {
       label: field?.ids.label,
       input: field?.ids.control,
     },
     dir,
-    'disabled': field?.disabled,
-    'invalid': field?.invalid,
-    'readOnly': field?.readOnly,
-    'required': field?.required,
+    disabled: field?.disabled,
+    invalid: field?.invalid,
+    readOnly: field?.readOnly,
+    required: field?.required,
     getRootNode,
-    'edit': props.defaultEdit,
-    'value': props.defaultValue,
-    'edit.controlled': props.edit !== undefined,
     ...props,
   }
 
   const context: edit.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
+    ...(props.edit !== undefined ? { edit: props.edit } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onEditChange: useEvent(props.onEditChange),
     onValueCommit: useEvent(props.onValueCommit),

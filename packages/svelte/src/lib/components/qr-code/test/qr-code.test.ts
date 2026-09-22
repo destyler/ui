@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import WithOverlay from '../examples/WithOverlay.svelte'
 import { QrCode, qrCodeAnatomy } from '../index'
 
@@ -9,7 +10,7 @@ const componentExports = QrCode as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[qr-code] component', () => {
-  it.each(qrCodeAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(qrCodeAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="qr-code"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -32,5 +33,11 @@ describe('[qr-code] component', () => {
     const pattern = screen.container.querySelector('[data-part="pattern"]')
     expect(pattern).toHaveAttribute('d')
     expect(screen.container.querySelector('input')).toBeNull()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    const pattern = document.querySelector('[data-part="pattern"], [data-testid="pattern"]')
+    expect(pattern).toBeTruthy()
   })
 })

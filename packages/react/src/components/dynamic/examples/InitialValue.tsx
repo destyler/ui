@@ -1,11 +1,8 @@
-import { useState } from 'react'
 import { Dynamic } from '../index'
 
 export function InitialValue() {
-  const [frameworks, setFrameworks] = useState<string[]>(['React', 'Solid', 'Vue'])
-
   return (
-    <Dynamic.Root value={frameworks} onValueChange={details => setFrameworks(details.value)}>
+    <Dynamic.Root defaultValue={['React', 'Solid', 'Vue']}>
       <Dynamic.Context>
         {tagsInput => (
           <>

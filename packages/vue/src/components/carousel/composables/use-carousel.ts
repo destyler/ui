@@ -24,7 +24,6 @@ export function useCarousel(props: UseCarouselProps = {}, emit?: EmitFn<RootEmit
   const context = computed<carousel.Context>(() => ({
     id,
     dir: locale.value.dir,
-    index: props.defaultPage,
     getRootNode: env?.value.getRootNode,
     onAutoplayStatusChange: details => emit?.('autoplayStatusChange', details),
     onDragStatusChange: details => emit?.('dragStatusChange', details),

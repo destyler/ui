@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialStep from '../examples/InitialStep.vue'
 import RootProvider from '../examples/RootProvider.vue'
 import { Steps, stepsAnatomy } from '../index'
 
@@ -61,5 +62,10 @@ describe('[steps] component', () => {
       await screen.getByText('Reset').click()
       await expect.element(screen.getByText('First - Contact Info')).toBeVisible()
     })
+  })
+
+  it('seeds default* via InitialStep example', async () => {
+    render(InitialStep)
+    await expect.element(page.getByText('Second - Date & Time')).toBeVisible()
   })
 })

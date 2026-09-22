@@ -27,7 +27,6 @@ export function usePagination(props: UsePaginationProps, emit?: EmitFn<RootEmits
     dir: locale.value.dir,
     getRootNode: env?.value.getRootNode,
     onPageChange: details => emit?.('pageChange', details),
-    value: props.defaultPage,
     ...cleanProps(props),
   }))
 

@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Switch, switchAnatomy } from '../index'
 
@@ -29,6 +30,11 @@ describe('[switch] component', () => {
 
     await expect.element(switchControl).toBeRequired()
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(<InitialValue />)
+  await expect.element(page.getByRole('checkbox')).toBeChecked()
 })
 
 describe('switch / Field', () => {

@@ -1,7 +1,8 @@
 import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Switch, switchAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -13,7 +14,7 @@ describe('switch', () => {
   })
 
   it.each(getExports(switchAnatomy))('should export %s', async (part) => {
-    expect(Switch[part]).toBeDefined()
+    expectExport(Switch, part)
   })
 
   it('should toggle state when clicked', async () => {
@@ -50,6 +51,11 @@ describe('switch', () => {
 
     expect(switchControl).toBeRequired()
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  expect(screen.getByRole('checkbox')).toBeChecked()
 })
 
 describe('switch / Field', () => {

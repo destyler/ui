@@ -7,6 +7,7 @@ import { Checkbox } from '../examples/Checkbox'
 import { Context } from '../examples/Context'
 import { Controlled } from '../examples/Controlled'
 import { Group } from '../examples/Group'
+import { InitialOpen } from '../examples/InitialOpen'
 import { Nested } from '../examples/Nested'
 import { RadioGroup } from '../examples/RadioGroup'
 import { Menu, menuAnatomy } from '../index'
@@ -222,5 +223,10 @@ describe('[menu] component', () => {
     await vi.waitFor(() => {
       expect(page.getByText('React')).not.toBeVisible()
     })
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(<InitialOpen />)
+    await expect.element(page.getByText('Check me')).toBeVisible()
   })
 })

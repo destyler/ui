@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialOpen } from '../examples/InitialOpen'
 import { Collapsible, collapsibleAnatomy } from '../index'
 
 describe('[collapsible] parts & exports', () => {
@@ -14,6 +15,11 @@ describe('[collapsible] parts & exports', () => {
   it.each(getExports(collapsibleAnatomy))('should export %s', async (part) => {
     render(<Basic />)
     expect(Collapsible[part]).toBeDefined()
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(<InitialOpen />)
+    await expect.element(page.getByText('Content')).toBeVisible()
   })
 })
 

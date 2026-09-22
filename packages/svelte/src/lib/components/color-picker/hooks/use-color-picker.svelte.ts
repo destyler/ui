@@ -11,7 +11,7 @@ import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 
 export interface UseColorPickerProps
-  extends Omit<colorPicker.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<colorPicker.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: colorPicker.Context['open']
   defaultValue?: colorPicker.Context['value']

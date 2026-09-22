@@ -24,13 +24,12 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    step: props.defaultStep,
     ...props,
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    step: props.step,
+    ...(props.step !== undefined ? { step: props.step } : {}),
   }))
 
   const [state, send] = useMachine(steps.machine(initialContext()), { context })

@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
+import { InitialOpen } from '../examples/InitialOpen'
 import { RootProvider } from '../examples/RootProvider'
 import { HoverCard, hoverCardAnatomy } from '../index'
 
@@ -15,6 +16,11 @@ describe('[hover-card] parts & exports', () => {
 
   it.each(getExports(hoverCardAnatomy))('should export %s', async (part) => {
     expect(HoverCard[part]).toBeDefined()
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(<InitialOpen />)
+    await expect.element(page.getByText('Content')).toBeVisible()
   })
 })
 

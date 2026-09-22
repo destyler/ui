@@ -24,13 +24,12 @@ export function usePagination(props: UsePaginationProps): UsePaginationReturn {
     id: useId(),
     dir,
     getRootNode,
-    page: props.defaultPage,
     ...props,
   }
 
   const context: pagination.Context = {
     ...initialContext,
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
     onPageChange: useEvent(props.onPageChange, { sync: true }),
   }
 

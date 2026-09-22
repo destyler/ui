@@ -42,7 +42,6 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}, emit?: EmitFn<RootE
     invalid: field?.value.invalid,
     required: field?.value.required,
     dir: locale.value.dir,
-    checked: props.value.defaultChecked,
     getRootNode: env?.value.getRootNode,
     onCheckedChange(details) {
       emit?.('checkedChange', details)

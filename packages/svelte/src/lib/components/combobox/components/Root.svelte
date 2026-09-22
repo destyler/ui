@@ -37,6 +37,7 @@
       'composite',
       'defaultOpen',
       'defaultValue',
+    'defaultInputValue',
       'disabled',
       'disableLayer',
       'form',

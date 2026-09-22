@@ -3,13 +3,14 @@ import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Edit, editAnatomy } from '../index'
 
 const componentExports = Edit as unknown as Record<string, unknown>
 
 describe('[edit] component', () => {
-  it.each(editAnatomy.keys())('renders and exports the %s anatomy part', async (part: string) => {
+  it.each<[string]>(editAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(screen.container.querySelector(`[data-scope="edit"][data-part="${dataPart}"]`)).toBeInTheDocument()
@@ -18,7 +19,7 @@ describe('[edit] component', () => {
   })
 
   it('focuses the placeholder and accepts a value', async () => {
-    const screen = await render(Controlled)
+    const screen = await render(Basic)
     await screen.getByText('Placeholder').click()
     const input = screen.getByLabelText('editable input')
     await expect.element(input).toBeVisible()
@@ -27,12 +28,24 @@ describe('[edit] component', () => {
   })
 
   it('supports double-click activation', async () => {
-    const screen = await render(Controlled, { props: { activationMode: 'dblclick' } })
+    const screen = await render(Basic)
     await userEvent.dblClick(screen.getByText('Placeholder'))
     const input = screen.getByRole('textbox')
     await userEvent.clear(input)
     await userEvent.type(input, 'React')
     await expect.element(screen.getByText('React')).toBeInTheDocument()
+  })
+
+  it('supports controlled bind:value usage', async () => {
+    const screen = await render(Controlled)
+    await expect.element(screen.getByText('Placeholder')).toBeInTheDocument()
+    await screen.getByText('Edit').click()
+    const input = screen.getByLabelText('editable input')
+    await expect.element(input).toBeVisible()
+    await expect.element(input).not.toHaveAttribute('hidden')
+    await userEvent.clear(input)
+    await userEvent.type(input, 'Svelte')
+    await expect.element(input).toHaveValue('Svelte')
   })
 
   it('hides the input when cancel is clicked', async () => {
@@ -43,6 +56,11 @@ describe('[edit] component', () => {
     await screen.getByRole('button', { name: 'cancel' }).click()
     await expect.element(input).toHaveAttribute('hidden')
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  const screen = await render(InitialValue)
+  await expect.element(screen.getByText('Hello')).toBeInTheDocument()
 })
 
 describe('edit / Field', () => {

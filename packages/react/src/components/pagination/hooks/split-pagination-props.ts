@@ -11,6 +11,7 @@ export function splitPaginationProps<T extends UsePaginationProps>(props: T) {
     'onPageSizeChange',
     'page',
     'pageSize',
+    'defaultPageSize',
     'siblingCount',
     'translations',
     'type',

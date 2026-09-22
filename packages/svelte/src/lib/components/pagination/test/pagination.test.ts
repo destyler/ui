@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Customized from '../examples/Customized.svelte'
+import InitialPage from '../examples/InitialPage.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { Pagination, paginationAnatomy } from '../index'
 
@@ -10,7 +11,7 @@ const componentExports = Pagination as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[pagination] component', () => {
-  it.each(paginationAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(paginationAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="pagination"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -48,5 +49,10 @@ describe('[pagination] component', () => {
     expect(suffixes).toHaveLength(2)
     for (const suffix of suffixes)
       expect(suffix).toHaveTextContent('Page')
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    const screen = await render(InitialPage)
+    await expect.element(screen.getByLabelText('page 5')).toHaveAttribute('aria-current', 'page')
   })
 })

@@ -1,7 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createListCollection, Select, selectAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -13,7 +14,7 @@ describe('select', () => {
   })
 
   it.each(getExports(selectAnatomy))('should export %s', async (part) => {
-    expect(Select[part]).toBeDefined()
+    expectExport(Select, part)
   })
 
   it.skip('should handle item selection', async () => {
@@ -75,15 +76,15 @@ describe('select', () => {
     expect(valueText).not.toHaveAttribute('placeholder')
   })
 
-  it.skip('should call onValueChange when item is selected', async () => {
+  it('should call onValueChange when item is selected', async () => {
     const onValueChange = vi.fn()
     render(() => <ComponentUnderTest onValueChange={onValueChange} />)
 
     const trigger = screen.getByRole('combobox', { name: 'Framework' })
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     const item = screen.getByText('React', { ignore: 'option' })
-    await user.click(item)
+    fireEvent.click(item)
 
     await waitFor(() => {
       expect(onValueChange).toHaveBeenCalledTimes(1)
@@ -122,6 +123,11 @@ describe('select', () => {
 
     await user.click(screen.getByRole('combobox', { name: 'Framework' }))
     expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()
+
+    it('seeds default* via InitialValue example', async () => {
+      render(() => <InitialValue />)
+      expect(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
+    })
   })
 })
 

@@ -11,7 +11,7 @@ const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.t
 const installationText = 'How to install dependencies and structure your app.'
 
 describe('[navigation-menu] component', () => {
-  it.each(navigationMenuAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(navigationMenuAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic, { props: { openDelay: 0, closeDelay: 0 } })
     const dataPart = partName(part)
     if (['viewport', 'viewport-positioner', 'content', 'arrow'].includes(dataPart))

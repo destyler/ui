@@ -11,7 +11,7 @@ const componentExports = ScrollArea as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[scroll-area] component', () => {
-  it.each(scrollAreaAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(scrollAreaAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     expect(document.querySelector(`[data-scope="scroll-area"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`

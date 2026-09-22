@@ -21,11 +21,25 @@ export function useProgress(props: MaybeFunction<UseProgressProps>) {
 
   const machineProps = $derived.by(() => {
     const resolvedProps = runIfFn(props)
-    return createMachineProps({
+    const { defaultValue, value, ...rest } = resolvedProps
+    const base = {
       dir: locale().dir,
       getRootNode: env().getRootNode,
-      ...resolvedProps,
-    }, { value: 'defaultValue' })
+      ...rest,
+    }
+    // @destyler/progress@0.2.7 has no controllable defaultValue — seed initial only.
+    const initialValue = value !== undefined ? value : defaultValue
+    const reactive = createMachineProps({
+      ...base,
+      ...(value !== undefined ? { value } : {}),
+    })
+    return {
+      initial: {
+        ...reactive.initial,
+        ...(initialValue !== undefined ? { value: initialValue } : {}),
+      },
+      context: reactive.context,
+    }
   })
 
   const [state, send] = useMachine(() => progress.machine(machineProps.initial as progress.Context), {

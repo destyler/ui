@@ -9,7 +9,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseTooltipProps
-  extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the tooltip when it is first rendered.
    * Use when you do not need to control its open state.
@@ -26,11 +26,9 @@ export function useTooltip(props: UseTooltipProps = {}, emit?: EmitFn<RootEmits>
 
   const context = computed<tooltip.Context>(() => ({
     id,
-    'dir': locale.value.dir,
-    'getRootNode': env?.value.getRootNode,
-    'open': props.open ?? props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'onOpenChange': (details) => {
+    dir: locale.value.dir,
+    getRootNode: env?.value.getRootNode,
+    onOpenChange: (details) => {
       emit?.('openChange', details)
       emit?.('update:open', details.open)
     },

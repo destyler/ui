@@ -9,7 +9,7 @@ import { useEnvironmentContext, useLocaleContext } from '../../../providers/inde
 import { createMachineProps } from '../../../utils/create-machine-props.js'
 
 export interface UseFloatingPanelProps
-  extends Omit<floatingPanel.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<floatingPanel.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: floatingPanel.Context['open']
 }

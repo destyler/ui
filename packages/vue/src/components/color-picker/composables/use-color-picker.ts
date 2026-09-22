@@ -10,7 +10,7 @@ import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/provi
 import { cleanProps } from '~/utils'
 
 export interface UseColorPickerProps
-  extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'value'>, 'id'> {
+  extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode' | 'value'>, 'id'> {
   /**
    * The v-model value of the color picker
    */
@@ -35,19 +35,17 @@ export function useColorPicker(props: UseColorPickerProps = {}, emit?: EmitFn<Ro
 
   const context = computed<colorPicker.Context>(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.value.ids.label,
       input: field?.value.ids.control,
     },
-    'disabled': field?.value.disabled,
-    'invalid': field?.value.invalid,
-    'readOnly': field?.value.readOnly,
-    'required': field?.value.required,
-    'dir': locale.value.dir,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'value': props.defaultValue ?? props.modelValue,
-    'getRootNode': env?.value.getRootNode,
+    disabled: field?.value.disabled,
+    invalid: field?.value.invalid,
+    readOnly: field?.value.readOnly,
+    required: field?.value.required,
+    dir: locale.value.dir,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
+    getRootNode: env?.value.getRootNode,
     onOpenChange(details) {
       emit?.('openChange', details)
       emit?.('update:open', details.open)
@@ -56,11 +54,11 @@ export function useColorPicker(props: UseColorPickerProps = {}, emit?: EmitFn<Ro
       emit?.('valueChange', details)
       emit?.('update:modelValue', details.value)
     },
-    'onFocusOutside': details => emit?.('focusOutside', details),
-    'onFormatChange': details => emit?.('formatChange', details),
-    'onInteractOutside': details => emit?.('interactOutside', details),
-    'onPointerDownOutside': details => emit?.('pointerDownOutside', details),
-    'onValueChangeEnd': details => emit?.('valueChangeEnd', details),
+    onFocusOutside: details => emit?.('focusOutside', details),
+    onFormatChange: details => emit?.('formatChange', details),
+    onInteractOutside: details => emit?.('interactOutside', details),
+    onPointerDownOutside: details => emit?.('pointerDownOutside', details),
+    onValueChangeEnd: details => emit?.('valueChangeEnd', details),
     ...cleanProps(props),
   }))
   const [state, send] = useMachine(colorPicker.machine(context.value), { context })

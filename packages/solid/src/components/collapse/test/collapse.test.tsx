@@ -3,7 +3,7 @@ import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Collapse, collapseAnatomy } from '../'
 import { LocaleProvider } from '../../../providers'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('collapse', () => {
@@ -14,7 +14,7 @@ describe('collapse', () => {
   })
 
   it.each(getExports(collapseAnatomy))('should export %s', async (part) => {
-    expect(Collapse[part]).toBeDefined()
+    expectExport(Collapse, part)
   })
 
   it('should not have an expanded item by default', async () => {

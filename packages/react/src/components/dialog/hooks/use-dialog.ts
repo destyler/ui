@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseDialogProps
-  extends Optional<Omit<dialog.Context, 'getRootNode' | 'dir' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<dialog.Context, 'getRootNode' | 'dir'>, 'id'> {
   /**
    * The initial open state of the dialog when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,17 +22,15 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
   const { dir } = useLocaleContext()
 
   const initialContext: dialog.Context = {
-    'id': useId(),
+    id: useId(),
     getRootNode,
     dir,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
     ...props,
   }
 
   const context: dialog.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
     onEscapeKeyDown: useEvent(props.onEscapeKeyDown),
     onInteractOutside: useEvent(props.onInteractOutside),

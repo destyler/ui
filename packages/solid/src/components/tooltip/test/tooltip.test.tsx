@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Tooltip, tooltipAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialOpen } from '../examples/InitialOpen'
 import { ComponentUnderTest } from './basic'
 
 describe('tooltip', () => {
@@ -12,7 +13,7 @@ describe('tooltip', () => {
   })
 
   it.each(getExports(tooltipAnatomy))('should export %s', async (part) => {
-    expect(Tooltip[part]).toBeDefined()
+    expectExport(Tooltip, part)
   })
 
   it('should show the tooltip on pointerover and close on pointer leave', async () => {
@@ -96,5 +97,10 @@ describe('tooltip', () => {
 
     await user.keyboard('[Escape]')
     await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(() => <InitialOpen />)
+    expect(screen.getByText('content')).toBeVisible()
   })
 })

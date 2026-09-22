@@ -7,7 +7,9 @@ const meta: Meta = {
 export default meta
 
 export { Basic } from '../examples/Basic'
+export { Controlled } from '../examples/Controlled'
 export { Events } from '../examples/Events'
+export { InitialSize } from '../examples/InitialSize'
 export { RenderProp } from '../examples/RenderProp'
 export { RootProvider } from '../examples/RootProvider'
 export { Vertical } from '../examples/Vertical'

@@ -1,6 +1,6 @@
 import { render } from '@solidjs/testing-library'
 import { Avatar, avatarAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { ComponentUnderTest } from './basic'
 
 describe('avatar', () => {
@@ -11,6 +11,6 @@ describe('avatar', () => {
   })
 
   it.each(getExports(avatarAnatomy))('should export %s', async (part) => {
-    expect(Avatar[part]).toBeDefined()
+    expectExport(Avatar, part)
   })
 })

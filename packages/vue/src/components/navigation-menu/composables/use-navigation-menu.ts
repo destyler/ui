@@ -22,18 +22,14 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}, emit?: Emi
   const locale = useLocaleContext(DEFAULT_LOCALE)
 
   const context = computed(() => {
-    const controlled = props.modelValue !== undefined
-    const value = controlled ? props.modelValue : props.defaultValue
-
+    const { modelValue, ...rest } = props
     return {
-      ...cleanProps(props),
-      'id': props.id ?? id,
-      'dir': locale.value.dir,
-      'value': value ?? null,
-      'defaultValue': controlled ? props.modelValue ?? undefined : props.defaultValue,
-      'value.controlled': controlled,
-      'getRootNode': env?.value.getRootNode,
-      'onValueChange': (details: navigationMenu.ValueChangeDetails) => {
+      ...cleanProps(rest),
+      id: props.id ?? id,
+      dir: locale.value.dir,
+      ...(modelValue !== undefined ? { value: modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onValueChange: (details: navigationMenu.ValueChangeDetails) => {
         emit?.('valueChange', details)
         emit?.('update:modelValue', details.value)
       },

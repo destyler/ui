@@ -1,5 +1,7 @@
 import Basic from '../examples/Basic.vue'
+import Controlled from '../examples/Controlled.vue'
 import Customized from '../examples/Customized.vue'
+import InitialPage from '../examples/InitialPage.vue'
 import RootProvider from '../examples/RootProvider.vue'
 
 export default {
@@ -13,6 +15,20 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function controlled() {
+  return {
+    components: { Controlled },
+    template: '<Controlled />',
+  }
+}
+
+export function initialPage() {
+  return {
+    components: { InitialPage },
+    template: '<InitialPage />',
   }
 }
 

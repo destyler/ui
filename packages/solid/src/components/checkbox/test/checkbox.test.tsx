@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Checkbox, checkboxAnatomy, useCheckbox } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 import { ControlledComponentUnderTest } from './controlled'
@@ -15,7 +15,7 @@ describe('checkbox', () => {
   })
 
   it.each(getExports(checkboxAnatomy))('should export %s', async (part) => {
-    expect(Checkbox[part]).toBeDefined()
+    expectExport(Checkbox, part)
   })
 
   it('should handle check and unchecked', async () => {
@@ -48,6 +48,22 @@ describe('checkbox', () => {
     expect(screen.getByRole('checkbox')).not.toBeChecked()
     await user.click(screen.getByText('set checked'))
     await waitFor(() => expect(screen.getByRole('checkbox')).toBeChecked())
+  })
+
+  it('omits undefined checked so defaultChecked stays uncontrolled', async () => {
+    render(() => (
+      <Checkbox.Root defaultChecked checked={undefined}>
+        <Checkbox.Label>Undefined live checkbox</Checkbox.Label>
+        <Checkbox.Control />
+        <Checkbox.HiddenInput />
+      </Checkbox.Root>
+    ))
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Undefined live checkbox' })
+    expect(checkbox).toBeChecked()
+
+    await user.click(checkbox)
+    expect(checkbox).not.toBeChecked()
   })
 
   it('should preserve an uncontrolled value when reactive props change', async () => {

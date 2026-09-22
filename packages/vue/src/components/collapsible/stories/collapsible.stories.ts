@@ -1,4 +1,5 @@
 import Basic from '../examples/Basic.vue'
+import Controlled from '../examples/Controlled.vue'
 import InitialOpen from '../examples/InitialOpen.vue'
 import LazyMount from '../examples/LazyMount.vue'
 import LazyMountAndUnmountOnExit from '../examples/LazyMountAndUnmountOnExit.vue'
@@ -18,6 +19,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function controlled() {
+  return {
+    components: { Controlled },
+    template: '<Controlled />',
   }
 }
 

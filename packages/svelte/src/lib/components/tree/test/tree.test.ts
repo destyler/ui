@@ -2,13 +2,14 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import { Tree, treeAnatomy } from '../index'
 
 const componentExports = Tree as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[tree] component', () => {
-  it.each(treeAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(treeAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="tree-view"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -39,5 +40,10 @@ describe('[tree] component', () => {
     await userEvent.keyboard('{ArrowDown}')
     const renovateItem = screen.getByText('renovate.json').element().closest('[data-part="item"]')
     await vi.waitFor(() => expect(renovateItem).toHaveAttribute('data-focus'))
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    await render(InitialValue)
+    expect(document.body.textContent?.includes('src')).toBeTruthy()
   })
 })

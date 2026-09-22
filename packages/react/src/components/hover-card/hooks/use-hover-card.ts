@@ -7,7 +7,7 @@ import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
 export interface UseHoverCardProps
-  extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the hover card when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,17 +22,15 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
   const { dir } = useLocaleContext()
 
   const initialContext: hoverCard.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
     ...props,
   }
 
   const context: hoverCard.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
   }
 

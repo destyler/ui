@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
@@ -6,6 +7,7 @@ import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
 import { Group } from '../examples/Group'
 import { Indeterminate } from '../examples/Indeterminate'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Checkbox, checkboxAnatomy } from '../index'
 
@@ -47,6 +49,47 @@ describe('[checkbox] component', () => {
   it('should handle indeterminate state from example', async () => {
     render(<Indeterminate />)
     await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
+  })
+  it('seeds default* via InitialValue example', async () => {
+    render(<InitialValue />)
+    await expect.element(page.getByRole('checkbox')).toBeChecked()
+  })
+
+  it('preserves an uncontrolled value when reactive props change', async () => {
+    function Harness() {
+      const [disabled, setDisabled] = useState(false)
+      return (
+        <>
+          <Checkbox.Root defaultChecked disabled={disabled}>
+            <Checkbox.Label>Standalone checkbox</Checkbox.Label>
+            <Checkbox.Control />
+            <Checkbox.HiddenInput />
+          </Checkbox.Root>
+          <button type="button" onClick={() => setDisabled(true)}>disable</button>
+        </>
+      )
+    }
+    render(<Harness />)
+    const checkbox = page.getByRole('checkbox', { name: 'Standalone checkbox' })
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Standalone checkbox'))
+    await expect.element(checkbox).not.toBeChecked()
+    await userEvent.click(page.getByRole('button', { name: 'disable' }))
+    await expect.element(checkbox).not.toBeChecked()
+  })
+
+  it('omits undefined checked so defaultChecked stays uncontrolled', async () => {
+    render(
+      <Checkbox.Root defaultChecked checked={undefined}>
+        <Checkbox.Label>Undefined live checkbox</Checkbox.Label>
+        <Checkbox.Control />
+        <Checkbox.HiddenInput />
+      </Checkbox.Root>,
+    )
+    const checkbox = page.getByRole('checkbox', { name: 'Undefined live checkbox' })
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Undefined live checkbox'))
+    await expect.element(checkbox).not.toBeChecked()
   })
 })
 

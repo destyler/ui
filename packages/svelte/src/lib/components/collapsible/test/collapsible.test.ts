@@ -2,13 +2,14 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import { Collapsible, collapsibleAnatomy } from '../index'
 
 const componentExports = Collapsible as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[collapsible] component', () => {
-  it.each(collapsibleAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(collapsibleAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     expect(document.querySelector(`[data-scope="collapsible"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -55,5 +56,10 @@ describe('[collapsible] component', () => {
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
     await vi.waitFor(() => expect(onExitComplete).toHaveBeenCalledOnce())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Content')).toBeVisible()
   })
 })

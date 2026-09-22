@@ -9,7 +9,7 @@ export function Controlled() {
       <button type="button" onClick={() => setIsOpen(!isOpen())}>
         Toggle
       </button>
-      <Tooltip.Root open={isOpen()}>
+      <Tooltip.Root open={isOpen()} onOpenChange={({ open }) => setIsOpen(open)}>
         <Tooltip.Trigger>Hover Me</Tooltip.Trigger>
         <Portal>
           <Tooltip.Positioner>
