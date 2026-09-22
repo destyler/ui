@@ -2,8 +2,8 @@ import type * as progress from '@destyler/progress'
 
 export interface RootProps {
   /**
-   * The initial value of the tabs when it is first rendered.
-   * Use when you do not need to control the state of the tabs.
+   * The initial value of the progress when it is first rendered.
+   * Use when you do not need to control the state of the progress.
    */
   defaultValue?: number | null
   /**
