@@ -73,6 +73,9 @@ export function browserSmoke(fixtures: Fixtures) {
         const dialog = page.getByRole('dialog', { name: 'Dialog Title', exact: true })
         const close = page.getByRole('button', { name: 'Close', exact: true })
         await expect.element(dialog).toBeVisible()
+        // Role locators exclude hidden elements. Retain this mounted example's
+        // content so the close assertion tests visibility after Escape.
+        const dialogElement = dialog.element()
         await expect.element(dialog).toHaveAccessibleDescription('Dialog Description')
         await expect.element(dialog).toHaveAttribute('aria-modal', 'true')
         await expect.element(close).toHaveFocus()
@@ -84,7 +87,9 @@ export function browserSmoke(fixtures: Fixtures) {
         await expect.element(close).toHaveFocus()
         await scanBody(true)
         await userEvent.keyboard('[Escape]')
-        await expect.element(dialog).not.toBeVisible()
+        await expect.element(dialogElement).toHaveAttribute('data-state', 'closed')
+        await expect.element(dialogElement).not.toBeVisible()
+        await expect.element(trigger).toHaveAttribute('aria-expanded', 'false')
         await expect.element(trigger).toHaveFocus()
       }
       await scanBody()
