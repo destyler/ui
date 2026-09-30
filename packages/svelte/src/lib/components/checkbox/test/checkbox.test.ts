@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
+import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
 import Group from '../examples/Group.svelte'

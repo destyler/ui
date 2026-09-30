@@ -18,11 +18,15 @@ export interface UseDynamicProps extends Optional<Omit<dynamic.Context, 'dir' | 
 export interface UseDynamicReturn extends dynamic.Api<PropTypes> {}
 
 export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
+  'use no memo'
+  // Compiler memoization can retain stale machine snapshots after live prop updates.
+
   const { getRootNode } = useEnvironmentContext()
   const { dir } = useLocaleContext()
   const field = useFieldContext()
 
-  const initialContext: dynamic.Context = {
+  const { defaultValue, value, ...rest } = props
+  const context: dynamic.Context = {
     id: useId(),
     ids: {
       label: field?.ids.label,
@@ -34,15 +38,17 @@ export function useDynamic(props: UseDynamicProps = {}): UseDynamicReturn {
     readOnly: field?.readOnly,
     required: field?.required,
     getRootNode,
-    ...props,
-  }
-
-  const context: dynamic.Context = {
-    ...initialContext,
-    ...(props.value !== undefined ? { value: props.value } : {}),
+    ...rest,
+    ...(value !== undefined ? { value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueInvalid: useEvent(props.onValueInvalid),
     onHighlightChange: useEvent(props.onHighlightChange),
+  }
+
+  // This machine still uses value directly; defaultValue only seeds its initial state.
+  const initialContext: dynamic.Context = {
+    ...context,
+    ...(value === undefined && defaultValue !== undefined ? { value: defaultValue } : {}),
   }
 
   const [state, send] = useMachine(dynamic.machine(initialContext), { context })

@@ -32,19 +32,32 @@ export function useDynamic(inProps: MaybeFunction<UseDynamicProps>): UseDynamicR
   const locale = useLocaleContext()
   const field = useFieldContext()
 
-  const machineProps = $derived.by(() => createMachineProps({
-    ids: {
-      label: field?.().ids.label,
-      hiddenInput: field?.().ids.control,
-    },
-    dir: locale().dir,
-    disabled: field?.().disabled,
-    invalid: field?.().invalid,
-    readOnly: field?.().readOnly,
-    required: field?.().required,
-    getRootNode: env().getRootNode,
-    ...props,
-  }, { value: 'defaultValue' }))
+  const machineProps = $derived.by(() => {
+    const { defaultValue, value, ...rest } = props
+    const reactive = createMachineProps({
+      ids: {
+        label: field?.().ids.label,
+        hiddenInput: field?.().ids.control,
+      },
+      dir: locale().dir,
+      disabled: field?.().disabled,
+      invalid: field?.().invalid,
+      readOnly: field?.().readOnly,
+      required: field?.().required,
+      getRootNode: env().getRootNode,
+      ...rest,
+      ...(value !== undefined ? { value } : {}),
+    })
+    // @destyler/dynamic@0.2.7 stores value directly — seed defaults only once.
+    const initialValue = value !== undefined ? value : defaultValue
+    return {
+      initial: {
+        ...reactive.initial,
+        ...(initialValue !== undefined ? { value: initialValue } : {}),
+      },
+      context: reactive.context,
+    }
+  })
 
   const [state, send] = useMachine(() => dynamic.machine(machineProps.initial as dynamic.Context), {
     get context() {

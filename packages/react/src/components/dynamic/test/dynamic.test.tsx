@@ -1,3 +1,4 @@
+import type { UseDynamicProps } from '../hooks/use-dynamic'
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
@@ -58,5 +59,45 @@ describe('tagsInput / Field', () => {
   it('should not display error text when no error is present', async () => {
     render(<WithField />)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
+  })
+})
+
+function ValueState(props: UseDynamicProps) {
+  return (
+    <Dynamic.Root {...props}>
+      <Dynamic.Context>
+        {api => (
+          <>
+            <output data-testid="value">{JSON.stringify(api.value)}</output>
+            <button type="button" onClick={() => api.setValue(['Edited'])}>Set value</button>
+          </>
+        )}
+      </Dynamic.Context>
+      <Dynamic.Input aria-label="Tag" />
+      <Dynamic.HiddenInput />
+    </Dynamic.Root>
+  )
+}
+
+describe('dynamic value state', () => {
+  it('keeps internal edits when unrelated props and defaultValue change', async () => {
+    const screen = await render(<ValueState defaultValue={['Initial']} />)
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Initial"]')
+    await userEvent.click(page.getByRole('button', { name: 'Set value' }))
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+
+    await screen.rerender(<ValueState defaultValue={['Initial']} readOnly />)
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await screen.rerender(<ValueState defaultValue={['Replacement']} />)
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+  })
+
+  it('prefers an explicit empty value and follows live value updates', async () => {
+    const screen = await render(<ValueState defaultValue={['Initial']} value={[]} />)
+    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
+    await screen.rerender(<ValueState defaultValue={['Initial']} value={['Updated']} />)
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Updated"]')
+    await screen.rerender(<ValueState defaultValue={['Initial']} value={[]} />)
+    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
   })
 })

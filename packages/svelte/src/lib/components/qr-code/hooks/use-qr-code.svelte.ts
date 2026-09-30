@@ -20,12 +20,22 @@ export function useQrCode(props: MaybeFunction<UseQrCodeProps>) {
   const locale = useLocaleContext()
 
   const machineProps = $derived.by(() => {
-    const resolvedProps = runIfFn(props)
-    return createMachineProps({
+    const { defaultValue, value, ...rest } = runIfFn(props)
+    const reactive = createMachineProps({
       dir: locale().dir,
       getRootNode: env().getRootNode,
-      ...resolvedProps,
-    }, { value: 'defaultValue' })
+      ...rest,
+      ...(value !== undefined ? { value } : {}),
+    })
+    // @destyler/qr-code@0.2.7 stores value directly — seed defaults only once.
+    const initialValue = value !== undefined ? value : defaultValue
+    return {
+      initial: {
+        ...reactive.initial,
+        ...(initialValue !== undefined ? { value: initialValue } : {}),
+      },
+      context: reactive.context,
+    }
   })
 
   const [state, send] = useMachine(() => qrcode.machine(machineProps.initial as qrcode.Context), {

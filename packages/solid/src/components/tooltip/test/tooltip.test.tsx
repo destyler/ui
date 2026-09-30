@@ -101,6 +101,7 @@ describe('tooltip', () => {
 
   it('seeds default* via InitialOpen example', async () => {
     render(() => <InitialOpen />)
-    expect(screen.getByText('content')).toBeVisible()
+    expect(screen.getByRole('tooltip')).toBeVisible()
+    expect(screen.getByRole('tooltip')).toHaveTextContent(/^I am a tooltip!$/)
   })
 })

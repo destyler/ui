@@ -5,6 +5,7 @@ import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
 import DefaultOpen from '../examples/DefaultOpen.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithContext from '../examples/WithContext.svelte'
 import { FloatingPanel, floatingPanelAnatomy } from '../index'
@@ -49,6 +50,23 @@ describe('[floating-panel] component', () => {
   it('renders with the default open state', async () => {
     await render(DefaultOpen)
     await expect.element(page.getByText('Default Open Panel')).toBeVisible()
+  })
+
+  it('seeds defaultOpen via InitialOpen and allows closing and reopening', async () => {
+    const screen = await render(InitialOpen)
+    const title = screen.getByText('Initial Open Panel')
+    const trigger = screen.getByRole('button', { name: 'Toggle Panel' })
+
+    await expect.element(title).toBeVisible()
+    await expect.element(trigger).toHaveAttribute('data-state', 'open')
+
+    await screen.getByRole('button', { name: 'Close', exact: true }).click()
+    await expect.element(title).not.toBeVisible()
+    await expect.element(trigger).toHaveAttribute('data-state', 'closed')
+
+    await trigger.click()
+    await expect.element(title).toBeVisible()
+    await expect.element(trigger).toHaveAttribute('data-state', 'open')
   })
 
   it('renders a button trigger', async () => {

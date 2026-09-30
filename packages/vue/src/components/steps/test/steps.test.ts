@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
+import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import InitialStep from '../examples/InitialStep.vue'

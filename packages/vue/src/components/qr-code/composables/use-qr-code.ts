@@ -27,18 +27,30 @@ export function useQrCode(props: UseQrCodeProps = {}, emit?: EmitFn<RootEmits>):
   const env = useEnvironmentContext()
   const locale = useLocaleContext(DEFAULT_LOCALE)
 
-  const context = computed<qrCode.Context>(() => ({
-    id,
-    dir: locale.value.dir,
-    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
-    getRootNode: env?.value.getRootNode,
-    onValueChange: (details) => {
-      emit?.('valueChange', details)
-      emit?.('update:modelValue', details.value)
-    },
-    ...cleanProps(props),
-  }))
+  // This machine still uses value directly; defaultValue only seeds its initial state.
+  const initialValue = props.modelValue !== undefined ? props.modelValue : props.defaultValue
 
-  const [state, send] = useMachine(qrCode.machine(context.value), { context })
+  const context = computed<qrCode.Context>(() => {
+    const { defaultValue: _defaultValue, modelValue, ...rest } = props
+    return {
+      id,
+      dir: locale.value.dir,
+      ...(modelValue !== undefined ? { value: modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onValueChange: (details) => {
+        emit?.('valueChange', details)
+        emit?.('update:modelValue', details.value)
+      },
+      ...cleanProps(rest),
+    }
+  })
+
+  const [state, send] = useMachine(
+    qrCode.machine({
+      ...context.value,
+      ...(initialValue !== undefined ? { value: initialValue } : {}),
+    }),
+    { context },
+  )
   return computed(() => qrCode.connect(state.value, send, normalizeProps))
 }

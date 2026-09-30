@@ -161,6 +161,7 @@ describe('popover', () => {
 
   it('seeds default* via InitialOpen example', async () => {
     render(() => <InitialOpen />)
-    expect(screen.getByText('title')).toBeVisible()
+    expect(screen.getByRole('dialog', { name: 'Title' })).toBeVisible()
+    expect(screen.getByRole('dialog', { name: 'Title' })).toHaveAccessibleDescription('Description')
   })
 })

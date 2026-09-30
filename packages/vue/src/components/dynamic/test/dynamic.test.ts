@@ -1,3 +1,4 @@
+import type { UseDynamicProps } from '../composables/use-dynamic'
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
@@ -6,6 +7,7 @@ import Basic from '../examples/Basic.vue'
 import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { Dynamic, dynamicAnatomy } from '../index'
+import ValueState from './ValueState.vue'
 
 describe('[dynamic] component', () => {
   it.each(getParts(dynamicAnatomy))('should render part %s', async (part) => {
@@ -58,5 +60,28 @@ describe('tagsInput / Field', () => {
   it('should not display error text when no error is present', async () => {
     render(WithField)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
+  })
+})
+
+describe('dynamic value state', () => {
+  it('keeps internal edits when unrelated props and defaultValue change', async () => {
+    const screen = await render(ValueState, { props: { defaultValue: ['Initial'] } as UseDynamicProps })
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Initial"]')
+    await userEvent.click(page.getByRole('button', { name: 'Set value' }))
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+
+    await screen.rerender({ defaultValue: ['Initial'], readOnly: true })
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await screen.rerender({ defaultValue: ['Replacement'], readOnly: false })
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+  })
+
+  it('prefers an explicit empty value and follows live value updates', async () => {
+    const screen = await render(ValueState, { props: { defaultValue: ['Initial'], modelValue: [] } as UseDynamicProps })
+    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
+    await screen.rerender({ modelValue: ['Updated'] })
+    await expect.element(page.getByTestId('value')).toHaveTextContent('["Updated"]')
+    await screen.rerender({ modelValue: [] })
+    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
   })
 })

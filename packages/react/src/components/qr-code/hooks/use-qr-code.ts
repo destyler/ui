@@ -17,21 +17,26 @@ export interface UseQrCodeProps extends Optional<Omit<qrcode.Context, 'dir' | 'g
 export interface UseQrCodeReturn extends qrcode.Api<PropTypes> {}
 
 export function useQrCode(props: UseQrCodeProps = {}): UseQrCodeReturn {
+  'use no memo'
+  // Compiler memoization can retain stale machine snapshots after live prop updates.
+
   const { getRootNode } = useEnvironmentContext()
   const { dir } = useLocaleContext()
 
-  const initialContext: qrcode.Context = {
+  const { defaultValue, value, ...rest } = props
+  const context: qrcode.Context = {
     id: useId(),
     dir,
     getRootNode,
+    ...rest,
+    ...(value !== undefined ? { value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
-    ...props,
   }
 
-  const context: qrcode.Context = {
-    ...initialContext,
-    ...(props.value !== undefined ? { value: props.value } : {}),
-    onValueChange: useEvent(props.onValueChange, { sync: true }),
+  // This machine still uses value directly; defaultValue only seeds its initial state.
+  const initialContext: qrcode.Context = {
+    ...context,
+    ...(value === undefined && defaultValue !== undefined ? { value: defaultValue } : {}),
   }
 
   const [state, send] = useMachine(qrcode.machine(initialContext), { context })
