@@ -7,19 +7,22 @@ import { createServer } from 'vite'
 // CI-only real-browser coverage. The default local suite does not need a
 // browser installation or a listening socket.
 const html = await readFile('ssr.html', 'utf8')
-const vite = await createServer({ configFile: false, define: { __VUE_OPTIONS_API__: true, __VUE_PROD_DEVTOOLS__: false, __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: true }, server: { middlewareMode: true } })
-const server = http.createServer((request, response) => {
+const vite = await createServer({ configFile: false, define: { __VUE_OPTIONS_API__: true, __VUE_PROD_DEVTOOLS__: false, __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: true }, server: { middlewareMode: true, hmr: false }, appType: 'custom' })
+const server = http.createServer(async (request, response) => {
   if (request.url !== '/')
     return vite.middlewares(request, response)
   response.setHeader('Content-Type', 'text/html')
-  response.end(`<!doctype html><html><head><link rel="icon" href="data:,"></head><body><div id="consumer">${html}</div><script type="module">
+  // Apply the standard Vite SSR HTML transform so /@vite/client loads the
+  // configured define globals before Vue executes. Keep warnings asserted.
+  const template = `<!doctype html><html><head><link rel="icon" href="data:,"></head><body><div id="consumer">${html}</div><script type="module">
     import { mount } from '/browser-client.mjs'
     const container = document.querySelector('#consumer')
     window.__packedOriginal = container.querySelector('#packed-toggle')
     window.__packedChanges = { pressed: [], open: [] }
     window.__packedDispose = mount(container, window.__packedChanges)
     window.__packedHydrated = true
-  </script></body></html>`)
+  </script></body></html>`
+  response.end(await vite.transformIndexHtml(request.url, template))
 })
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
 let browser

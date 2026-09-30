@@ -19,7 +19,8 @@ types must fail compilation. Runtime checks load the published root entry direct
 
 `PACKED_BROWSER=1` additionally runs the hydration and interaction flow in real
 Chromium through Playwright. The dedicated CI workflow installs the browser and
-sets this flag. HappyDOM results do not establish real-browser behavior.
+sets this flag. Its custom middleware uses Vite's standard SSR HTML transform
+to install configured Vue feature flags; warnings remain assertion failures. HappyDOM results do not establish real-browser behavior.
 
 Strict TypeScript is checked in both Bundler and NodeNext modes. The declaration
 transform unit tests run with `pnpm exec node --import tsx --test scripts/test-vue-declarations.ts`.

@@ -11,6 +11,11 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v6
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v6
         with:
