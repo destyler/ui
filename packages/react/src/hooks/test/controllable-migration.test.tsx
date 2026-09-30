@@ -36,6 +36,7 @@ import { Tooltip, useTooltip } from '~/components/tooltip'
 import { useTree } from '~/components/tree'
 import { InitialValue as TreeInitialValue } from '~/components/tree/examples/InitialValue'
 import { createFileTreeCollection, createListCollection } from '~/utils/collection'
+import { createOpenStateTrace } from './open-state-trace'
 
 // These tests run in the browser suite, and can also run in happy-dom with the
 // production React Compiler enabled. The hook implementations are never mocked.
@@ -81,7 +82,7 @@ function parts(api: any): ReactNode {
   )
 }
 
-async function mountHook(hook: Hook, initialProps: any, children = parts) {
+async function mountHook(hook: Hook, initialProps: any, children = parts, onRender?: (api: any) => void) {
   const container = document.createElement('div')
   document.body.append(container)
   const root = createRoot(container)
@@ -91,6 +92,7 @@ async function mountHook(hook: Hook, initialProps: any, children = parts) {
     'use no memo'
     // Exposing the latest API to the test is intentionally outside compilation.
     api = unwrap(hook(props))
+    onRender?.(api)
     return children(api)
   }
   const render = async (props: any) => {
@@ -134,15 +136,37 @@ describe('live open wins over defaultOpen at the first render', () => {
 describe('undefined live open preserves uncontrolled ownership', () => {
   for (const [name, hook, required] of openCases) {
     it(`${name}: opens and closes twice, including API and DOM state`, async () => {
-      const onOpenChange = vi.fn()
-      const harness = await mountHook(hook, { ...required, open: undefined, defaultOpen: false, onOpenChange })
-      for (const open of [true, false, true, false]) {
-        await harness.change(api => api.setOpen(open))
-        await vi.waitFor(() => {
-          expect(harness.api.open).toBe(open)
-          expect(harness.container.querySelector('[data-state]')?.getAttribute('data-state')).toBe(open ? 'open' : 'closed')
-        })
-        await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open })))
+      // Only log on failure. Preserve the actual browser events and scheduling
+      // so a close/reopen race can be distinguished from a stale React API.
+      const trace = name === 'hover-card' ? createOpenStateTrace() : undefined
+      const onOpenChange = vi.fn(details => trace?.record('onOpenChange', details))
+      try {
+        const harness = await mountHook(
+          hook,
+          { ...required, open: undefined, defaultOpen: false, onOpenChange },
+          parts,
+          trace && (api => trace.record('render', { open: api.open })),
+        )
+        trace?.attach(harness.container, () => harness.api)
+        for (const [iteration, open] of [true, false, true, false].entries()) {
+          trace?.record('request', { iteration, open, apiOpen: harness.api.open })
+          await harness.change(api => api.setOpen(open))
+          trace?.record('after act', { iteration, open, apiOpen: harness.api.open })
+          await vi.waitFor(() => {
+            expect(harness.api.open).toBe(open)
+            expect(harness.container.querySelector('[data-state]')?.getAttribute('data-state')).toBe(open ? 'open' : 'closed')
+          })
+          await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open })))
+          trace?.record('settled', { iteration, open })
+        }
+      }
+      catch (error) {
+        if (trace)
+          console.error('[hover-card open-state trace]', trace.report())
+        throw error
+      }
+      finally {
+        trace?.dispose()
       }
     })
   }
