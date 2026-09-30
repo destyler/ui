@@ -30,6 +30,7 @@ jobs:
         run: |
           pnpm run lint
           pnpm run test:ci
+          PACKED_BROWSER=1 pnpm exec node scripts/test-vue-package.mjs
           pnpm --filter @destyler-ui/svelte check:ci
           pnpm --filter @destyler-ui/solid check
           pnpm --filter @destyler-ui/svelte build-storybook

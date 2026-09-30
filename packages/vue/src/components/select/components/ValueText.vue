@@ -7,6 +7,7 @@ export interface SelectValueTextProps extends PolymorphicProps {
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { ui } from '~/factory'
 import { useSelectContext } from '../composables/use-select-context'
 import { useForwardExpose } from '~/composables'
@@ -17,7 +18,7 @@ defineOptions({
 
 const props = defineProps<SelectValueTextProps>()
 const select = useSelectContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>

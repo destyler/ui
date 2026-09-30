@@ -5,6 +5,7 @@ export interface ColorPickerChannelSliderValueTextProps extends PolymorphicProps
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { DEFAULT_LOCALE, useLocaleContext } from '~/providers'
 import { ui } from '~/factory'
 import { useColorPickerChannelPropsContext } from '../composables/use-color-picker-channel-props-context'
@@ -18,7 +19,7 @@ defineOptions({
 defineProps<ColorPickerChannelSliderValueTextProps>()
 const colorPicker = useColorPickerContext()
 const channelProps = useColorPickerChannelPropsContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 const localeContext = useLocaleContext(DEFAULT_LOCALE)
 
 useForwardExpose()

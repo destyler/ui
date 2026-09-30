@@ -5,6 +5,7 @@ export interface SliderDraggingIndicatorProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { ui } from '~/factory'
 import { useSliderContext } from '../composables/use-slider-context'
 import { useForwardExpose } from '~/composables'
@@ -17,7 +18,7 @@ defineOptions({
 defineProps<SliderDraggingIndicatorProps>()
 const slider = useSliderContext()
 const thumbProps = useSliderThumbPropsContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>

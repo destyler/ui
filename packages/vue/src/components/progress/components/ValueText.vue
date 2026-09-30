@@ -5,6 +5,7 @@ export interface ProgressValueTextProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { ui } from '~/factory'
 import { useProgressContext } from '../composables/use-progress-context'
 import { useForwardExpose } from '~/composables'
@@ -15,7 +16,7 @@ defineOptions({
 
 defineProps<ProgressValueTextProps>()
 const progress = useProgressContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>
