@@ -14,7 +14,9 @@ export default defineConfig({
   plugins: [
     React({
       babel: {
-        plugins: ['babel-plugin-react-compiler'],
+        // Compile for the minimum supported peer; React 18 has no built-in
+        // react/compiler-runtime. The compatibility runtime ships as a dependency.
+        plugins: [['babel-plugin-react-compiler', { target: '18' }]],
       },
     }),
   ],
