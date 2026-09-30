@@ -57,9 +57,18 @@ describe('[checkbox] component', () => {
     await expect.element(controlled.getByRole('checkbox')).toBeChecked()
   })
 
-  it('renders indeterminate state', async () => {
+  it('seeds an interactive indeterminate state in the actual example', async () => {
     const screen = await render(Indeterminate)
-    await expect.element(screen.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
+    const input = screen.getByRole('checkbox')
+    const control = screen.getByTestId('control')
+    await expect.element(control).toHaveAttribute('data-state', 'indeterminate')
+    await screen.getByText('Checkbox', { exact: true }).click()
+    await expect.element(control).toHaveAttribute('data-state', 'checked')
+    await expect.element(input).toBeChecked()
+    expect((input.element() as HTMLInputElement).indeterminate).toBe(false)
+    await screen.getByText('Checkbox', { exact: true }).click()
+    await expect.element(control).toHaveAttribute('data-state', 'unchecked')
+    await expect.element(input).not.toBeChecked()
   })
 
   it('updates group selection and select-all state', async () => {

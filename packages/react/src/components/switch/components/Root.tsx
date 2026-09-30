@@ -1,5 +1,6 @@
 import type { UseSwitchProps } from '../hooks/use-switch'
 import type { HTMLProps, PolymorphicProps } from '~/factory'
+import type { Assign } from '~/types'
 import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
 import { ui } from '~/factory'
@@ -8,7 +9,7 @@ import { useSwitch } from '../hooks/use-switch'
 import { SwitchProvider } from '../hooks/use-switch-context'
 
 export interface SwitchRootBaseProps extends UseSwitchProps, PolymorphicProps {}
-export interface SwitchRootProps extends HTMLProps<'label'>, SwitchRootBaseProps {}
+export interface SwitchRootProps extends Assign<HTMLProps<'label'>, SwitchRootBaseProps> {}
 
 export const SwitchRoot = forwardRef<HTMLLabelElement, SwitchRootProps>((props, ref) => {
   const [switchProps, localProps] = createSplitProps<UseSwitchProps>()(props, [

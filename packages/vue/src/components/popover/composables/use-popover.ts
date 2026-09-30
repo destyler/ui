@@ -6,7 +6,7 @@ import * as popover from '@destyler/popover'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UsePopoverProps
   extends Optional<Omit<popover.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -36,7 +36,7 @@ export function usePopover(props: UsePopoverProps = {}, emit?: EmitFn<RootEmits>
     onFocusOutside: details => emit?.('focusOutside', details),
     onInteractOutside: details => emit?.('interactOutside', details),
     onPointerDownOutside: details => emit?.('pointerDownOutside', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(popover.machine(context.value), { context })

@@ -74,6 +74,14 @@ jobs:
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/solid check
 
+      - name: Check public API documentation
+        if: matrix.node == 22
+        run: |
+          pnpm run build
+          pnpm run docs:generate:types
+          pnpm --dir docs run validate:types
+          pnpm run docs:check
+
       - name: Build Svelte Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte build-storybook

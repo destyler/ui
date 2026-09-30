@@ -8,6 +8,7 @@ import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
 import * as edit from '@destyler/edit'
 import { runIfFn } from '@destyler/utils'
+import { untrack } from 'svelte'
 import { useFieldContext } from '../../field'
 
 export interface UseEditProps
@@ -22,9 +23,12 @@ export function useEdit(props: MaybeFunction<UseEditProps>): UseEditReturn {
   const env = useEnvironmentContext()
   const locale = useLocaleContext()
   const field = useFieldContext()
+  // Core has no defaultEdit. The UI owns this state and writes edit requests back
+  // to core, while an explicit live edit prop remains owned by the caller.
+  let localEdit = $state(untrack(() => runIfFn(props).defaultEdit ?? false))
 
   const machineProps = $derived.by(() => {
-    const resolvedProps = runIfFn(props) || {}
+    const { defaultEdit: _defaultEdit, edit: liveEdit, onEditChange, ...resolvedProps } = runIfFn(props)
     return createMachineProps({
       getRootNode: env().getRootNode,
       dir: locale().dir,
@@ -37,7 +41,13 @@ export function useEdit(props: MaybeFunction<UseEditProps>): UseEditReturn {
       readOnly: field?.()?.readOnly,
       required: field?.()?.required,
       ...resolvedProps,
-    }, { edit: 'defaultEdit', value: 'defaultValue' }, ['edit'])
+      edit: liveEdit !== undefined ? liveEdit : localEdit,
+      onEditChange(details: edit.EditChangeDetails) {
+        if (liveEdit === undefined)
+          localEdit = details.edit
+        onEditChange?.(details)
+      },
+    }, { value: 'defaultValue' })
   })
 
   const [state, send] = useMachine(() => edit.machine(machineProps.initial as edit.Context), {

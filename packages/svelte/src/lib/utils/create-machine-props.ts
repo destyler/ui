@@ -7,8 +7,10 @@ type DefaultPropMap<T> = Partial<Record<StringKey<T>, StringKey<T>>>
  * Build machine initial + reactive context from UI props.
  *
  * Destyler 0.2.7 (Phase 3 HARD): controllable state is prop-presence based.
- * Pass `open` / `defaultOpen` (etc.) through as-is — do NOT remap `default*` into
- * the live prop, and do NOT stamp `*.controlled` flags.
+ * Preserve core defaults without turning them into live props. A defined UI
+ * `open` takes priority over `defaultOpen`, including an explicit false: core
+ * otherwise initializes its state from defaultOpen before applying live context.
+ * UI-only defaults (Calendar view, Edit edit) are adapted by their own hooks.
  *
  * Undefined values are omitted so presence detection treats omitted live props as
  * uncontrolled. The `_defaults` / `_controlled` parameters are retained for
@@ -27,6 +29,9 @@ export function createMachineProps<T extends MachineProps>(
       continue
     cleaned[key] = value
   }
+
+  if (cleaned.open !== undefined)
+    delete cleaned.defaultOpen
 
   return { initial: { ...cleaned }, context: { ...cleaned } }
 }

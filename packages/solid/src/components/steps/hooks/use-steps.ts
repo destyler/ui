@@ -5,6 +5,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import * as steps from '@destyler/steps'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseStepsProps extends Optional<Omit<steps.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,7 +25,7 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

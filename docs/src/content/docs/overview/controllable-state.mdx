@@ -37,7 +37,11 @@ import { Dialog, Checkbox, Tabs } from '@destyler-ui/vue'
 
 ## Controlled
 
-Pass the live prop (`open`, `checked`, `value`, `page`, `step`, `size`, `pressed`, …) so **prop presence** marks the field as controlled. Keep that prop in sync when the component requests a change.
+Pass a defined live prop (`open`, `checked`, `value`, `page`, `step`, `size`, `pressed`, …) so **prop presence** marks the field as controlled. Keep that prop in sync when the component requests a change. At the UI boundary, `undefined` is treated as omitted; `false`, `0`, an empty string, and an empty array are still explicit values.
+
+Choose controlled or uncontrolled ownership on the first render and keep that choice stable. Changing a live prop between `undefined` and a defined value is not a supported way to switch modes later.
+
+When both `open` and `defaultOpen` are supplied, the live `open` wins, including `open={false}` with `defaultOpen={true}`. Use defaults only for the initial seed: changing a default later does not reset the component's current state.
 
 ### Vue — `v-model` / `v-model:*`
 
@@ -102,7 +106,7 @@ Solid mirrors React (`open={open()}` + `onOpenChange`). Svelte uses `bind:open`,
 ## Important: no more `*.controlled` flags
 
 :::caution
-Passing `open`, `checked`, `value`, or other live keys into a root is treated as **controlled**. For demos and uncontrolled UIs, omit those keys and use `default*` instead. Explicit `*.controlled` flags are **removed** in Destyler core 0.2.7 (Destyler UI is aligned).
+Passing defined `open`, `checked`, `value`, or other live keys into a root is treated as **controlled**. For demos and uncontrolled UIs, omit those keys and use `default*` instead. Explicit `*.controlled` flags are **removed** in Destyler core 0.2.7 (Destyler UI is aligned).
 :::
 
 | Intent | Pass on the root |
@@ -110,9 +114,13 @@ Passing `open`, `checked`, `value`, or other live keys into a root is treated as
 | Uncontrolled seed | `defaultOpen` / `defaultChecked` / `defaultValue` / … (omit the live key) |
 | Controlled | Live `open` / `checked` / `value` / … + sync via `v-model` or `on*Change` |
 
-## Progress special case
+## UI-only defaults
 
-Core progress does **not** expose a controllable `defaultValue` machine API the same way interactive inputs do. In Destyler UI, prefer `defaultValue` only to **seed** an initial displayed value. Do not treat progress as a fully controlled form control unless you are driving a read-only display from your own state.
+Calendar's `defaultView` selects the initial day, month, or year view. Edit's `defaultEdit` selects its initial preview or editing state. The UI adapters implement these defaults because core 0.2.7 does not expose them. Explicit `view` / `edit` take priority, and changing either default after initialization does not reset the current state.
+
+## Dynamic, QR Code, and Progress
+
+These core machines do **not** expose a presence-controlled `defaultValue` API the same way interactive inputs do. Destyler UI maps `defaultValue` to an initial value once; an explicit live `value`, including an empty value, takes priority. Later live values synchronize into the machine, but withholding callback writeback does not veto internal API updates. For a read-only Progress or QR Code display, drive the value from your own state.
 
 ## Related
 

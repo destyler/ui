@@ -1,11 +1,13 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as colorPicker from '@destyler/color-picker'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId, useMemo } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseColorPickerProps
   extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -51,7 +53,7 @@ export function useColorPicker(props: UseColorPickerProps = {}): UseColorPickerR
     readOnly: field?.readOnly,
     required: field?.required,
     getRootNode,
-    ...restProps,
+    ...normalizeMachineProps(restProps),
   }
 
   const context: colorPicker.Context = {

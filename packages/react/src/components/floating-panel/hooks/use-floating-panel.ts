@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as floatingPanel from '@destyler/floating-panel'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId, useMemo } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseFloatingPanelProps
   extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -35,7 +37,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
     id: useId(),
     dir,
     getRootNode,
-    ...restProps,
+    ...normalizeMachineProps(restProps),
   }
 
   const context: floatingPanel.Context = {

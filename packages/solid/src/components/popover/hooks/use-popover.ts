@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { MachineStatus } from '@destyler/xstate'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UsePopoverProps
   extends Optional<Omit<popover.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -26,7 +27,7 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

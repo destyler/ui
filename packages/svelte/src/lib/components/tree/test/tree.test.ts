@@ -43,7 +43,21 @@ describe('[tree] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    await render(InitialValue)
-    expect(document.body.textContent?.includes('src')).toBeTruthy()
+    const screen = await render(InitialValue)
+    const src = screen.getByText('src', { exact: true }).element().closest<HTMLElement>('[data-part="branch"]')!
+    const modules = screen.getByText('node_modules', { exact: true }).element().closest<HTMLElement>('[data-part="branch"]')!
+    expect(src).toHaveAttribute('aria-selected', 'true')
+    expect(src).toHaveAttribute('aria-expanded', 'true')
+    expect(modules).toHaveAttribute('aria-expanded', 'true')
+    expect(modules).toHaveAttribute('aria-selected', 'false')
+    await expect.element(screen.getByText('app.tsx', { exact: true })).toBeVisible()
+    await expect.element(screen.getByText('destyler', { exact: true })).toBeVisible()
+    await userEvent.click(src.querySelector<HTMLElement>('[data-part="branch-trigger"]')!)
+    await vi.waitFor(() => expect(src).toHaveAttribute('aria-expanded', 'false'))
+    await expect.element(screen.getByText('app.tsx', { exact: true })).not.toBeVisible()
+    const leaf = screen.getByText('package.json', { exact: true }).element().closest<HTMLElement>('[data-part="item"]')!
+    await userEvent.click(leaf)
+    await vi.waitFor(() => expect(leaf).toHaveAttribute('aria-selected', 'true'))
+    expect(src).toHaveAttribute('aria-selected', 'false')
   })
 })

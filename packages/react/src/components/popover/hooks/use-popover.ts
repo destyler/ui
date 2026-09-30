@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as popover from '@destyler/popover'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UsePopoverProps
   extends Optional<Omit<popover.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +27,7 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
     id: useId(),
     dir,
     getRootNode,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: popover.Context = {

@@ -5,7 +5,9 @@ import * as edit from '@destyler/edit'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
+import { useControllableState } from '~/hooks/use-controllable-state'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseEditProps
   extends Optional<Omit<edit.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -27,6 +29,13 @@ export function useEdit(props: UseEditProps = {}) {
   const environment = useEnvironmentContext()
   const id = createUniqueId()
   const field = useFieldContext()
+  // Core has no defaultEdit. The UI owns this initial-only state and bridges
+  // requests back into core, while explicit edit still requires parent writeback.
+  const [editing, setEditing] = useControllableState<boolean>({
+    value: () => props.edit,
+    defaultValue: () => props.defaultEdit ?? false,
+    onChange: edit => props.onEditChange?.({ edit }),
+  })
 
   const initialContext = createMemo(() => ({
     id,
@@ -40,11 +49,12 @@ export function useEdit(props: UseEditProps = {}) {
     readOnly: field?.().readOnly,
     required: field?.().required,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props, ['defaultEdit']),
+    edit: editing(),
+    onEditChange: (details: edit.EditChangeDetails) => setEditing(details.edit),
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    ...(props.edit !== undefined ? { edit: props.edit } : {}),
     ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(edit.machine(initialContext()), { context })

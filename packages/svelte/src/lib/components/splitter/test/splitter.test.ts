@@ -57,6 +57,14 @@ describe('[splitter] component', () => {
     await expect.element(page.getByRole('separator')).toHaveAttribute('aria-orientation', 'vertical')
   })
 
+  it('lets the actual RootProvider example maximize its seeded panels', async () => {
+    const screen = await render(RootProvider)
+    const panels = screen.container.querySelectorAll<HTMLElement>('[data-part="panel"]')
+    expect(Array.from(panels, panel => panel.style.flexGrow)).toEqual(['50', '50'])
+    await screen.getByText('Maximize a').click()
+    await vi.waitFor(() => expect(Array.from(panels, panel => panel.style.flexGrow)).toEqual(['100', '0']))
+  })
+
   it('seeds default* via InitialSize example', async () => {
     await render(InitialSize)
     const panels = document.querySelectorAll('[data-scope="splitter"][data-part="panel"]')

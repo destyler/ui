@@ -5,6 +5,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import * as tooltip from '@destyler/tooltip'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseTooltipProps
   extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +26,7 @@ export function useTooltip(props: UseTooltipProps = {}): UseTooltipReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

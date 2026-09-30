@@ -2,10 +2,12 @@ import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { RenderStrategyProps } from '~/utils/render-strategy'
 import * as collapsible from '@destyler/collapsible'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId, useRef } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseCollapsibleProps
   extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'>,
@@ -34,7 +36,7 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
     id: useId(),
     dir,
     getRootNode,
-    ...collapsibleProps,
+    ...normalizeMachineProps(collapsibleProps),
   }
 
   const context: collapsible.Context = {

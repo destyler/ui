@@ -5,6 +5,7 @@ import * as slider from '@destyler/slider'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseSliderProps
   extends Optional<Omit<slider.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +26,7 @@ export function useSlider(props: UseSliderProps = {}): UseSliderReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),

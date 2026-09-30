@@ -5,6 +5,7 @@ import * as radio from '@destyler/radio'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseRadioProps
   extends Optional<Omit<radio.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +26,7 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

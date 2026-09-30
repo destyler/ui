@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseColorPickerProps
   extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -40,7 +41,7 @@ export function useColorPicker(props: UseColorPickerProps = {}): UseColorPickerR
     readOnly: field?.().readOnly,
     required: field?.().required,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),

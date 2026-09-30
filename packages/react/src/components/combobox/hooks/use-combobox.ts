@@ -2,11 +2,13 @@ import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { CollectionItem, ListCollection } from '~/utils/collection'
 import * as combobox from '@destyler/combobox'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useEffect, useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseComboboxProps<T extends CollectionItem>
   extends Optional<Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
@@ -48,7 +50,7 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
     dir,
     getRootNode,
     collection,
-    ...comboboxProps,
+    ...normalizeMachineProps(comboboxProps),
   }
 
   const context = (() => {

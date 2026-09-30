@@ -51,8 +51,10 @@ describe('checkbox', () => {
   })
 
   it('omits undefined checked so defaultChecked stays uncontrolled', async () => {
+    const onCheckedChange = vi.fn()
     render(() => (
-      <Checkbox.Root defaultChecked checked={undefined}>
+      <Checkbox.Root defaultChecked checked={undefined} onCheckedChange={onCheckedChange}>
+        <Checkbox.Context>{api => <output data-testid="undefined-api">{String(api().checked)}</output>}</Checkbox.Context>
         <Checkbox.Label>Undefined live checkbox</Checkbox.Label>
         <Checkbox.Control />
         <Checkbox.HiddenInput />
@@ -60,10 +62,22 @@ describe('checkbox', () => {
     ))
 
     const checkbox = screen.getByRole('checkbox', { name: 'Undefined live checkbox' })
+    const control = document.querySelector('[data-scope="checkbox"][data-part="control"]')!
     expect(checkbox).toBeChecked()
+    expect(control).toHaveAttribute('data-state', 'checked')
+    expect(screen.getByTestId('undefined-api')).toHaveTextContent('true')
 
     await user.click(checkbox)
     expect(checkbox).not.toBeChecked()
+    expect(control).toHaveAttribute('data-state', 'unchecked')
+    expect(screen.getByTestId('undefined-api')).toHaveTextContent('false')
+    expect(onCheckedChange).toHaveBeenLastCalledWith({ checked: false })
+
+    await user.click(checkbox)
+    expect(checkbox).toBeChecked()
+    expect(control).toHaveAttribute('data-state', 'checked')
+    expect(screen.getByTestId('undefined-api')).toHaveTextContent('true')
+    expect(onCheckedChange).toHaveBeenLastCalledWith({ checked: true })
   })
 
   it('should preserve an uncontrolled value when reactive props change', async () => {

@@ -2,7 +2,7 @@ import { Tabs } from '@destyler-ui/solid/tabs'
 
 export function Manual() {
   return (
-    <Tabs.Root activationMode="manual" value="react">
+    <Tabs.Root activationMode="manual" defaultValue="react">
       <Tabs.List>
         <Tabs.Trigger value="react">React</Tabs.Trigger>
         <Tabs.Trigger value="vue">Vue</Tabs.Trigger>

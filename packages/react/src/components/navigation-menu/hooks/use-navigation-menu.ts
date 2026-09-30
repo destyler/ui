@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as navigationMenu from '@destyler/navigation-menu'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseNavigationMenuProps
   extends Optional<Omit<navigationMenu.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -27,7 +29,7 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
     id: useId(),
     dir,
     getRootNode,
-    ...contextProps,
+    ...normalizeMachineProps(contextProps),
   }
 
   const context: navigationMenu.Context = {

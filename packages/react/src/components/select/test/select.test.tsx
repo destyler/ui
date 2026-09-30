@@ -154,3 +154,18 @@ describe('[select] Field', () => {
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })
+
+it('initialValue forwards detail-shaped callbacks while remaining interactive', async () => {
+  const onValueChange = vi.fn()
+  const onOpenChange = vi.fn()
+  render(<InitialValue onValueChange={onValueChange} onOpenChange={onOpenChange} />)
+  await userEvent.click(page.getByRole('button', { name: 'Clear' }))
+  expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value: [], items: [] }))
+  const trigger = page.getByRole('combobox', { name: 'Framework' })
+  await userEvent.click(trigger)
+  expect(onOpenChange).toHaveBeenLastCalledWith({ open: true })
+  await userEvent.click(page.getByTestId('positioner').getByText('React', { exact: true }))
+  expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value: ['react'] }))
+  await expect.element(trigger).toHaveTextContent('React')
+  expect(onOpenChange).toHaveBeenLastCalledWith({ open: false })
+})

@@ -4,7 +4,7 @@ import { Index } from 'solid-js'
 
 export function Multiple() {
   return (
-    <Collapse.Root value={['React']} multiple>
+    <Collapse.Root defaultValue={['React']} multiple>
       <Index each={['React', 'Solid', 'Vue']}>
         {item => (
           <Collapse.Item value={item()}>

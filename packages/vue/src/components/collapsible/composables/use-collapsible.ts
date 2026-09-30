@@ -7,7 +7,7 @@ import * as collapsible from '@destyler/collapsible'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, ref, useId, watch } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseCollapsibleProps
   extends RenderStrategyProps,
@@ -46,7 +46,7 @@ export function useCollapsible(props: UseCollapsibleProps = {}, emits?: EmitFn<R
       emits?.('openChange', details)
       emits?.('update:open', details.open)
     },
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(collapsible.machine(context.value), { context })

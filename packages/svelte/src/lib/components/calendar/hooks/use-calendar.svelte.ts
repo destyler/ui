@@ -23,13 +23,23 @@ export function useCalendar(props: MaybeFunction<UseCalendarProps>): UseCalendar
   const locale = useLocaleContext()
 
   const machineProps = $derived.by(() => {
-    const resolvedProps = runIfFn(props)
-    return createMachineProps({
+    const { defaultView, view, ...resolvedProps } = runIfFn(props)
+    const reactive = createMachineProps({
       dir: locale().dir,
       locale: locale().locale,
       getRootNode: env().getRootNode,
       ...resolvedProps,
-    }, { open: 'defaultOpen', value: 'defaultValue', view: 'defaultView' }, ['open'])
+      ...(view !== undefined ? { view } : {}),
+    }, { open: 'defaultOpen', value: 'defaultValue' }, ['open'])
+    // Core has no defaultView. Only the machine's initial context gets this seed.
+    const initialView = view !== undefined ? view : defaultView
+    return {
+      initial: {
+        ...reactive.initial,
+        ...(initialView !== undefined ? { view: initialView } : {}),
+      },
+      context: reactive.context,
+    }
   })
 
   const [state, send] = useMachine(() => calendar.machine(machineProps.initial as calendar.Context), {

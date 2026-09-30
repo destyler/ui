@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseOtpInputProps
   extends Optional<Omit<otpInput.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -35,7 +36,7 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
     invalid: field?.().invalid,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),

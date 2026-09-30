@@ -5,6 +5,7 @@ import * as hoverCard from '@destyler/hover-card'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseHoverCardProps
   extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +26,7 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

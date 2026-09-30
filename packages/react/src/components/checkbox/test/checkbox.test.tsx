@@ -49,6 +49,12 @@ describe('[checkbox] component', () => {
   it('should handle indeterminate state from example', async () => {
     render(<Indeterminate />)
     await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
+    await userEvent.click(page.getByText('Checkbox', { exact: true }))
+    await expect.element(page.getByRole('checkbox')).toBeChecked()
+    await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'checked')
+    await userEvent.click(page.getByText('Checkbox', { exact: true }))
+    await expect.element(page.getByRole('checkbox')).not.toBeChecked()
+    await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'unchecked')
   })
   it('seeds default* via InitialValue example', async () => {
     render(<InitialValue />)

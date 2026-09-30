@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { isServer } from 'solid-js/web'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 const serverRootNode = {
   getElementById: () => null,
@@ -36,7 +37,7 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
 
   const context = createMemo<navigationMenu.Context>(() => {
     return {
-      ...props,
+      ...resolveMachineProps(props),
       id: props.id ?? generatedId,
       dir: locale().dir,
       getRootNode: isServer ? () => serverRootNode : environment().getRootNode,

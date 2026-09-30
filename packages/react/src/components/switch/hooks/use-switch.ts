@@ -1,11 +1,13 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as zagSwitch from '@destyler/switch'
 import { useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseSwitchProps extends Optional<Omit<zagSwitch.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -34,7 +36,7 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: zagSwitch.Context = {

@@ -1,11 +1,13 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as otpInput from '@destyler/otp-input'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseOtpInputProps extends Optional<Omit<otpInput.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -34,7 +36,7 @@ export function useOtpInput(props: UseOtpInputProps = {}): UseOtpInputReturn {
     invalid: field?.invalid,
     dir,
     getRootNode,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: otpInput.Context = {

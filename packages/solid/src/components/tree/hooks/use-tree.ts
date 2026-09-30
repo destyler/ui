@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import * as tree from '@destyler/tree'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseTreeProps<T extends TreeNode>
   extends Optional<Omit<tree.Context, 'dir' | 'getRootNode' | 'colllection'>, 'id'> {
@@ -36,7 +37,7 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

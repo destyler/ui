@@ -5,6 +5,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import * as tabs from '@destyler/tabs'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseTabsProps extends Optional<Omit<tabs.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,7 +25,7 @@ export function useTabs(props: UseTabsProps = {}): UseTabsReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

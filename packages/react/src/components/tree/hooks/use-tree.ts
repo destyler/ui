@@ -1,11 +1,13 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { TreeCollection, TreeNode } from '~/utils/collection'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as tree from '@destyler/tree'
 import { useEffect, useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseTreeProps<T extends TreeNode>
   extends Optional<Omit<tree.Context, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
@@ -37,7 +39,7 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     dir: locale.dir,
     getRootNode: environment.getRootNode,
     collection,
-    ...treeProps,
+    ...normalizeMachineProps(treeProps),
   }
 
   const context = (() => {

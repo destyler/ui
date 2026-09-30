@@ -6,7 +6,7 @@ import * as menu from '@destyler/menu'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseMenuProps extends Optional<Omit<menu.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -40,7 +40,7 @@ export function useMenu(props: UseMenuProps = {}, emit?: EmitFn<RootEmits>): Use
     onInteractOutside: details => emit?.('interactOutside', details),
     onPointerDownOutside: details => emit?.('pointerDownOutside', details),
     onSelect: details => emit?.('select', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send, machine] = useMachine(menu.machine(context.value), { context })

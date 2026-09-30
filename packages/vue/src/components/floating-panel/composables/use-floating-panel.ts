@@ -6,7 +6,7 @@ import * as floatingPanel from '@destyler/floating-panel'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseFloatingPanelProps
   extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -37,7 +37,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}, emit?: EmitF
     onPositionChange: details => emit?.('positionChange', details),
     onPositionChangeEnd: details => emit?.('positionChangeEnd', details),
     onStageChange: details => emit?.('stageChange', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(floatingPanel.machine(context.value), { context })

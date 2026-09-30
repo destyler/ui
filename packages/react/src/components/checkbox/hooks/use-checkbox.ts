@@ -1,11 +1,13 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as checkbox from '@destyler/checkbox'
-import { mergeProps, normalizeProps, useMachine } from '@destyler/react'
+import { mergeProps, normalizeProps } from '@destyler/react'
 import { useId, useMemo } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
 
 export interface UseCheckboxProps extends Optional<Omit<checkbox.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -41,7 +43,7 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: checkbox.Context = {

@@ -5,6 +5,7 @@ import * as calendar from '@destyler/calendar'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseCalendarProps
   extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -32,7 +33,7 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props, ['defaultView']),
   }))
 
   const context = createMemo(() => ({
@@ -42,7 +43,11 @@ export function useCalendar(props: UseCalendarProps = {}): UseCalendarReturn {
     ...(props.view !== undefined ? { view: props.view } : {}),
   }))
 
-  const [state, send] = useMachine(calendar.machine(initialContext()), { context })
+  const [state, send] = useMachine(calendar.machine({
+    ...initialContext(),
+    // defaultView is a UI-only seed; it must never enter the reactive context.
+    view: props.view ?? props.defaultView,
+  }), { context })
 
   return createMemo(() => calendar.connect(state, send, normalizeProps))
 }

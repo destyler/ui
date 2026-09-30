@@ -9,7 +9,7 @@ import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId, watch } from 'vue'
 import { useFieldContext } from '~/components/field'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseSelectProps<T extends CollectionItem>
   extends Optional<Omit<select.Context<T>, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
@@ -63,7 +63,7 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>, em
     onFocusOutside: details => emit?.('focusOutside', details),
     onInteractOutside: details => emit?.('interactOutside', details),
     onPointerDownOutside: details => emit?.('pointerDownOutside', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send, service] = useMachine(select.machine(initialContext.value), {

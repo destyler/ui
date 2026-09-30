@@ -6,7 +6,7 @@ import * as calendar from '@destyler/calendar'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseCalendarProps
   extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'parse' | 'value'>, 'id'> {
@@ -34,7 +34,10 @@ export function useCalendar(props: UseCalendarProps = {}, emit?: EmitFn<RootEmit
   const id = useId()
   const env = useEnvironmentContext()
   const locale = useLocaleContext(DEFAULT_LOCALE)
+  // Core has no defaultView: seed view once and only synchronize a live view later.
+  const initialView = props.view !== undefined ? props.view : props.defaultView
   const context = computed<calendar.Context>(() => {
+    const { defaultView: _defaultView, ...rest } = props
     return {
       id,
       dir: locale.value.dir,
@@ -53,13 +56,17 @@ export function useCalendar(props: UseCalendarProps = {}, emit?: EmitFn<RootEmit
         emit?.('valueChange', details)
         emit?.('update:modelValue', details.value)
       },
-      ...cleanProps(props),
+      ...cleanOpenProps(rest),
     }
   })
 
-  const [state, send] = useMachine(calendar.machine(context.value), {
-    context,
-  })
+  const [state, send] = useMachine(
+    calendar.machine({
+      ...context.value,
+      ...(initialView !== undefined ? { view: initialView } : {}),
+    }),
+    { context },
+  )
 
   return computed(() => calendar.connect(state.value, send, normalizeProps))
 }

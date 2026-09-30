@@ -7,6 +7,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createUniqueId, splitProps } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseSelectProps<T extends CollectionItem>
   extends Optional<
@@ -50,7 +51,7 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
     required: field?.().required,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => {

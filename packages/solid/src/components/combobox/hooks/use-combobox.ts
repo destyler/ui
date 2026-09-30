@@ -7,6 +7,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createUniqueId, splitProps } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseComboboxProps<T extends CollectionItem>
   extends Optional<
@@ -50,7 +51,7 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
     invalid: field?.().invalid,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => {

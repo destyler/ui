@@ -9,7 +9,7 @@ import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId, watch } from 'vue'
 import { useFieldContext } from '~/components/field'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseComboboxProps<T extends CollectionItem>
   extends Optional<Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'value'>, 'id'> {
@@ -61,7 +61,7 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
         emit?.('valueChange', details)
         emit?.('update:modelValue', details.value)
       },
-      ...cleanProps(props),
+      ...cleanOpenProps(props),
     }
   })
 

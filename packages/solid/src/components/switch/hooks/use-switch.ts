@@ -6,6 +6,7 @@ import * as zagSwitch from '@destyler/switch'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseSwitchProps
   extends Optional<Omit<zagSwitch.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -35,7 +36,7 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     required: field?.().required,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({

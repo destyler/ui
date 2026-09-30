@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as dialog from '@destyler/dialog'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseDialogProps
   extends Optional<Omit<dialog.Context, 'getRootNode' | 'dir'>, 'id'> {
@@ -25,7 +27,7 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
     id: useId(),
     getRootNode,
     dir,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: dialog.Context = {

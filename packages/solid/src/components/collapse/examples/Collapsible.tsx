@@ -4,7 +4,7 @@ import { Index } from 'solid-js'
 
 export function Collapsible() {
   return (
-    <Collapse.Root value={['React']} collapsible>
+    <Collapse.Root defaultValue={['React']} collapsible>
       <Index each={['React', 'Solid', 'Vue']}>
         {item => (
           <Collapse.Item value={item()}>

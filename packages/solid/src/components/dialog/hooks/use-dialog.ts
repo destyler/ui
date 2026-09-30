@@ -5,6 +5,7 @@ import * as dialog from '@destyler/dialog'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseDialogProps
   extends Optional<Omit<dialog.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +26,7 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),

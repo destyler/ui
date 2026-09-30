@@ -1,11 +1,13 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as numberInput from '@destyler/number-input'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseNumberInputProps extends Optional<Omit<numberInput.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -34,7 +36,7 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
     dir,
     locale,
     getRootNode,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: numberInput.Context = {

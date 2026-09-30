@@ -7,7 +7,7 @@ import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { useFieldContext } from '~/components/field'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseColorPickerProps
   extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode' | 'value'>, 'id'> {
@@ -59,7 +59,7 @@ export function useColorPicker(props: UseColorPickerProps = {}, emit?: EmitFn<Ro
     onInteractOutside: details => emit?.('interactOutside', details),
     onPointerDownOutside: details => emit?.('pointerDownOutside', details),
     onValueChangeEnd: details => emit?.('valueChangeEnd', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
   const [state, send] = useMachine(colorPicker.machine(context.value), { context })
 

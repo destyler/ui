@@ -34,7 +34,8 @@
     "build-storybook": "storybook build",
     "test": "vitest run --browser.headless",
     "test:dev": "vitest dev --browser.headless",
-    "test:ui": "vitest --ui --open"
+    "test:ui": "vitest --ui --open",
+    "test:ssr": "vitest run --config vitest.ssr.config.ts"
   },
   "peerDependencies": {
     "vue": ">=3.5.0"

@@ -6,6 +6,7 @@ import { mergeProps, normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
 
 export interface UseCheckboxProps
@@ -42,7 +43,7 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
     required: field?.().required,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props(),
+    ...resolveMachineProps(props()),
   }))
 
   const context = createMemo(() => ({

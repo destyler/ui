@@ -17,6 +17,12 @@ describe('[tree] component', () => {
 
   it('seeds default* via InitialValue example', async () => {
     render(InitialValue)
-    expect(document.body.textContent?.includes('src')).toBeTruthy()
+    const src = document.querySelector('[data-part="branch"][data-value="src"]')!
+    const modules = document.querySelector('[data-part="branch"][data-value="node_modules"]')!
+    expect(src).toHaveAttribute('aria-selected', 'true')
+    expect(src).toHaveAttribute('aria-expanded', 'true')
+    expect(modules).toHaveAttribute('aria-selected', 'false')
+    expect(modules).toHaveAttribute('aria-expanded', 'true')
+    expect(document.querySelector('[data-part="item"][data-value="src/app.tsx"]')).toBeVisible()
   })
 })

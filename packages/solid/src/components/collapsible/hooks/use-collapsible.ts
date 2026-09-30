@@ -7,6 +7,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createSignal, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { splitRenderStrategyProps } from '~/utils/render-strategy'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseCollapsibleProps
   extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'>,
@@ -38,7 +39,7 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...collapsibleProps,
+    ...resolveMachineProps(collapsibleProps),
   }))
   const context = createMemo(() => ({
     ...initialContext(),

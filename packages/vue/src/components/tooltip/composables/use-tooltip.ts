@@ -6,7 +6,7 @@ import * as tooltip from '@destyler/tooltip'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseTooltipProps
   extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -32,7 +32,7 @@ export function useTooltip(props: UseTooltipProps = {}, emit?: EmitFn<RootEmits>
       emit?.('openChange', details)
       emit?.('update:open', details.open)
     },
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(tooltip.machine(context.value), { context })

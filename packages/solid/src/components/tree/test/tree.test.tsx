@@ -22,8 +22,15 @@ describe('tree / Parts & Exports', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(() => <InitialValue />)
-    expect(document.body.textContent?.includes('src')).toBeTruthy()
+    const { container } = render(() => <InitialValue />)
+    const selected = container.querySelector('[role="treeitem"][data-value="src"]')
+    const expanded = container.querySelector('[role="treeitem"][data-value="node_modules"]')
+    expect(selected).toHaveAttribute('aria-selected', 'true')
+    expect(selected).toHaveAttribute('aria-expanded', 'true')
+    expect(selected).toHaveAttribute('data-selected')
+    expect(expanded).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('treeitem', { name: 'app.tsx' })).toBeVisible()
+    expect(screen.getByRole('treeitem', { name: 'destyler' })).toBeVisible()
   })
 })
 

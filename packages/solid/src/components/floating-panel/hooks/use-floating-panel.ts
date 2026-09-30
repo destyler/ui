@@ -5,6 +5,7 @@ import * as floatingPanel from '@destyler/floating-panel'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseFloatingPanelProps
   extends Optional<
@@ -30,7 +31,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
+    ...resolveMachineProps(props),
     onOpenChange(details: floatingPanel.OpenChangeDetails) {
       if (!syncingControlledOpen)
         props.onOpenChange?.(details)

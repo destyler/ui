@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as hoverCard from '@destyler/hover-card'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseHoverCardProps
   extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,7 +27,7 @@ export function useHoverCard(props: UseHoverCardProps = {}): UseHoverCardReturn 
     id: useId(),
     dir,
     getRootNode,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: hoverCard.Context = {

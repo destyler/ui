@@ -1,12 +1,14 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { CollectionItem, ListCollection } from '~/utils/collection'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as select from '@destyler/select'
 import { useEffect, useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseSelectProps<T extends CollectionItem>
   extends Optional<Omit<select.Context<T>, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
@@ -47,7 +49,7 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
     dir: locale.dir,
     getRootNode: environment.getRootNode,
     collection,
-    ...selectProps,
+    ...normalizeMachineProps(selectProps),
   }
 
   const context = (() => {

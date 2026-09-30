@@ -6,7 +6,7 @@ import * as dialog from '@destyler/dialog'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseDialogProps
   extends Optional<Omit<dialog.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -35,7 +35,7 @@ export function useDialog(props: UseDialogProps = {}, emit?: EmitFn<RootEmits>) 
     onFocusOutside: details => emit?.('focusOutside', details),
     onInteractOutside: details => emit?.('interactOutside', details),
     onPointerDownOutside: details => emit?.('pointerDownOutside', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(dialog.machine(context.value), { context })
