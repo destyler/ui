@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import InitialOpen from '../examples/InitialOpen.svelte'
 import { Collapsible, collapsibleAnatomy } from '../index'
+import BoundOpen from './BoundOpen.svelte'
 
 const componentExports = Collapsible as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
@@ -43,11 +44,26 @@ describe('[collapsible] component', () => {
     },
   )
 
-  it('accepts an open value and keeps it bindable', async () => {
-    await render(Basic, { props: { open: true } })
-    await expect.element(page.getByText('Content')).toBeVisible()
-    await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
-    await expect.element(page.getByText('Content')).not.toBeVisible()
+  it('writes a bound open value back while toggling in both directions', async () => {
+    const screen = await render(BoundOpen)
+    await expect.element(screen.getByTestId('bound-open')).toHaveTextContent('true')
+    await expect.element(screen.getByText('Content')).toBeVisible()
+    await screen.getByRole('button', { name: 'Toggle' }).click()
+    await expect.element(screen.getByText('Content')).not.toBeVisible()
+    await expect.element(screen.getByTestId('bound-open')).toHaveTextContent('false')
+    await screen.getByRole('button', { name: 'Toggle' }).click()
+    await expect.element(screen.getByText('Content')).toBeVisible()
+    await expect.element(screen.getByTestId('bound-open')).toHaveTextContent('true')
+  })
+
+  it('keeps an ordinary open prop authoritative until the parent writes back', async () => {
+    const onOpenChange = vi.fn()
+    const screen = await render(Basic, { props: { open: true, onOpenChange } })
+    await screen.getByRole('button', { name: 'Toggle' }).click()
+    expect(onOpenChange).toHaveBeenLastCalledWith({ open: false })
+    await expect.element(screen.getByText('Content')).toBeVisible()
+    await screen.rerender({ open: false })
+    await expect.element(screen.getByText('Content')).not.toBeVisible()
   })
 
   it('forwards onExitComplete', async () => {

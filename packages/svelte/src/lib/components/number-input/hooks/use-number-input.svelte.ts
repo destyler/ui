@@ -10,6 +10,7 @@ import { createInputValueSync } from '$lib/utils/sync-input-value'
 import * as numberInput from '@destyler/number-input'
 import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
+import { onDestroy, tick, untrack } from 'svelte'
 import { useFieldContext } from '../../field'
 
 export interface UseNumberInputProps extends Omit<numberInput.Context, 'dir' | 'getRootNode' | 'id'> {
@@ -49,16 +50,37 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
     }, { value: 'defaultValue' })
   })
 
-  const [state, send] = useMachine(() => numberInput.machine(machineProps.initial as numberInput.Context), {
+  let isEditingInput = $state(false)
+  let editingInput: HTMLInputElement | undefined
+  let composingValue = $state<string>()
+  let composingInput: HTMLInputElement | undefined
+  let compositionVersion = 0
+  let disposed = false
+  const isComposing = () => composingValue !== undefined && !!composingInput?.isConnected
+  const machine = untrack(() => numberInput.machine(machineProps.initial as numberInput.Context))
+  const syncCoreInput = machine.options.actions?.syncInputElement
+  const [state, send] = useMachine(machine, {
     get context() {
       return machineProps.context as numberInput.Context
     },
+    actions: {
+      syncInputElement(context, event, meta) {
+        // Bound parent updates also ask core to write its formatted value.
+        // Defer that DOM write while the native IME owns this input.
+        if (!isComposing())
+          syncCoreInput?.(context, event, meta)
+      },
+    },
   })
-  let isEditingInput = $state(false)
-  const getInputValue = () => state.hasTag('focus') && isEditingInput ? state.context.value : state.context.formattedValue
+  onDestroy(() => {
+    disposed = true
+    compositionVersion++
+  })
+  const getInputValue = () => isComposing() ? composingValue : (state.hasTag('focus') && isEditingInput && editingInput?.isConnected ? state.context.value : state.context.formattedValue)
   const syncInputValue = createInputValueSync(
     () => ({ value: getInputValue() }),
     () => state.context.value,
+    () => !disposed && !isComposing(),
   )
   const api = $derived.by(() => {
     const connected = numberInput.connect(state, send, normalizeProps)
@@ -74,20 +96,64 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
           {
             value: getInputValue(),
             oninput(event: Event) {
-              if ((event as InputEvent).isComposing)
+              if ((event as InputEvent).isComposing) {
+                if (!isComposing())
+                  compositionVersion++
+                composingInput = event.currentTarget as HTMLInputElement
+                composingValue = composingInput.value
                 return
+              }
+              // A final input event can follow compositionend in the same turn.
+              // Its current value supersedes any pending end reconciliation.
+              compositionVersion++
+              composingValue = undefined
+              composingInput = undefined
+              editingInput = event.currentTarget as HTMLInputElement
               isEditingInput = true
               void syncInputValue(event)
             },
-            oncompositionend(event: Event) {
+            oncompositionstart(event: Event) {
+              compositionVersion++
+              composingInput = event.currentTarget as HTMLInputElement
+              composingValue = composingInput.value
+            },
+            async oncompositionend(event: Event) {
               const input = event.currentTarget as HTMLInputElement
-              if (input.value === state.context.value) {
-                isEditingInput = true
+              if (!isComposing()) {
+                if (input.value === state.context.value) {
+                  editingInput = input
+                  isEditingInput = true
+                }
+                else {
+                  void syncInputValue(event)
+                }
                 return
               }
-              void syncInputValue(event)
+              const version = compositionVersion
+              const value = input.value
+              const { selectionStart, selectionEnd, selectionDirection } = input
+              composingValue = value
+              // Keep native text through both core and bound-parent flushes.
+              await tick()
+              if (disposed || !input.isConnected || version !== compositionVersion)
+                return
+              if (value === state.context.value) {
+                editingInput = input
+                isEditingInput = true
+              }
+              composingValue = undefined
+              composingInput = undefined
+              await tick()
+              if (disposed || !input.isConnected || version !== compositionVersion)
+                return
+              if (selectionStart !== null && selectionEnd !== null)
+                input.setSelectionRange(selectionStart, selectionEnd, selectionDirection ?? undefined)
             },
             onfocusout() {
+              compositionVersion++
+              composingValue = undefined
+              composingInput = undefined
+              editingInput = undefined
               isEditingInput = false
             },
           },

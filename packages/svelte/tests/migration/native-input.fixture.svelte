@@ -3,11 +3,12 @@
   import { untrack } from 'svelte'
   import { ColorPicker, Combobox, Edit, NumberInput, OtpInput, createListCollection, parseColor } from '$lib'
 
-  let { family, mode, onChange, formatOptions }: {
+  let { family, mode, onChange, formatOptions, showInput = true }: {
     family: 'number-input' | 'combobox' | 'edit' | 'otp-input' | 'color-picker'
     mode: 'controlled' | 'bound' | 'uncontrolled'
     onChange?: (value: string) => void
     formatOptions?: Intl.NumberFormatOptions
+    showInput?: boolean
   } = $props()
   const components = untrack(() => ({ 'number-input': NumberInput, combobox: Combobox, edit: Edit, 'otp-input': OtpInput, 'color-picker': ColorPicker })[family])
   const Root = components.Root as Component<any>
@@ -45,7 +46,7 @@
     {/snippet}
   </Context>
   {#if family === 'number-input'}
-    <NumberInput.Input data-testid="input" />
+    {#if showInput}<NumberInput.Input data-testid="input" />{/if}
   {:else if family === 'edit'}
     <Edit.Input data-testid="input" />
     <Edit.Preview />

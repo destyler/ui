@@ -108,21 +108,21 @@ export function Frame(props: FrameProps) {
         title={frameProps.title || 'Embedded content'}
         {...localProps}
         ref={composeRefs(setFrameRef, frameProps.ref)}
-      >
-        <Show when={mountNode()} keyed>
-          {node => (
-            <Portal mount={node}>
-              <FrameContent onMount={frameProps.onMount} onUnmount={frameProps.onUnmount}>
-                {frameProps.children}
-              </FrameContent>
-            </Portal>
-          )}
-        </Show>
-        <Show when={mountNode()} keyed>
-          {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
-          <Portal mount={frameRef()!.contentDocument!.head}>{frameProps.head}</Portal>
-        </Show>
-      </iframe>
+      />
+      {/* iframe fallback markup is raw text, so hydration markers must stay outside it. */}
+      <Show when={mountNode()} keyed>
+        {node => (
+          <Portal mount={node}>
+            <FrameContent onMount={frameProps.onMount} onUnmount={frameProps.onUnmount}>
+              {frameProps.children}
+            </FrameContent>
+          </Portal>
+        )}
+      </Show>
+      <Show when={mountNode()} keyed>
+        {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+        <Portal mount={frameRef()!.contentDocument!.head}>{frameProps.head}</Portal>
+      </Show>
     </EnvironmentProvider>
   )
 }

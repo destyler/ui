@@ -51,6 +51,7 @@ export interface BindingCase {
   coalescesPendingRequest?: boolean
   requiresLayout?: boolean
   hasDefault?: boolean
+  uncontrolledInitial?: () => any
   callback?: string
   detail?: (details: any) => any
   format?: (value: any) => string
@@ -85,7 +86,7 @@ export const valueBindingCases: BindingCase[] = [
   { name: 'Combobox.value', family: 'combobox', components: Combobox, state: 'value', initial: arrayInitial, next: arrayNext, props: listProps },
   { name: 'Combobox.inputValue', family: 'combobox', components: Combobox, state: 'inputValue', initial: () => 'one', next: () => 'two', props: listProps },
   { name: 'Dynamic.value', controlledVeto: false, family: 'dynamic', components: Dynamic, state: 'value', initial: arrayInitial, next: arrayNext },
-  { name: 'Dynamic.inputValue', controlledVeto: false, family: 'dynamic', components: Dynamic, state: 'inputValue', initial: () => 'one', next: () => 'two' },
+  { name: 'Dynamic.inputValue', hasDefault: false, uncontrolledInitial: () => '', controlledVeto: false, family: 'dynamic', components: Dynamic, state: 'inputValue', initial: () => 'one', next: () => 'two' },
   { name: 'Edit.value', family: 'edit', components: Edit, state: 'value', initial: () => 'one', next: () => 'two' },
   { name: 'Edit.edit', family: 'edit', components: Edit, state: 'edit', initial: () => false, next: () => true, read: api => api.editing, request: (api, value) => value ? api.edit() : api.submit() },
   { name: 'NavigationMenu.value', family: 'navigation-menu', components: NavigationMenu, state: 'value', initial: () => null, next: () => 'one', props: () => ({ disableHoverTrigger: true, openDelay: 0, closeDelay: 0 }) },

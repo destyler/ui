@@ -4,18 +4,18 @@
   import { bindingCases, formatState, readState, requestState } from './binding-cases'
   import BindingParts from './binding-parts.fixture.svelte'
 
-  let { name, mode, onChange, onWrite }: {
+  let { name, mode, onChange, onWrite, unrelated = 0 }: {
     name: string
     mode: BindingMode
     onChange?: (value: unknown) => void
     onWrite?: (value: unknown) => void
+    unrelated?: number
   } = $props()
   const selected = untrack(() => bindingCases.find(testCase => testCase.name === name)!)
   const Root = selected.components.Root
   const Context = selected.components.Context
   const id = $props.id()
   let parent = $state<any>(untrack(() => mode === 'bound-undefined' ? undefined : selected.initial()))
-  let unrelated = $state(0)
   const baseProps = untrack(() => selected.props?.() ?? {})
   const callback = selected.callback ?? `on${selected.state[0].toUpperCase()}${selected.state.slice(1)}Change`
   const defaultProp = `default${selected.state[0].toUpperCase()}${selected.state.slice(1)}`
@@ -37,7 +37,6 @@
 <output data-testid="parent-state">{formatState(selected, parent)}</output>
 <button type="button" data-testid="parent-next" onclick={() => parent = selected.next()}>Parent sets next</button>
 <button type="button" data-testid="parent-initial" onclick={() => parent = selected.initial()}>Parent resets</button>
-<button type="button" data-testid="unrelated" onclick={() => unrelated += 1}>Unrelated update</button>
 <div data-unrelated={unrelated}>
   {#if mode === 'controlled'}
     <Root {...rootProps} {...{ [selected.state]: parent }} children={children} />

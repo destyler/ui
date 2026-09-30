@@ -47,8 +47,10 @@ it('preserves accepted partial-number editing text while the public value remain
 
 it('waits for IME composition to finish before restoring a rejected edit and preserves selection', async () => {
   const screen = await render(NativeInputFixture, { props: { family: 'edit', mode: 'controlled' } })
+  // defaultEdit schedules core autofocus/select-all. Let that mount action finish
+  // before starting the user's composition and choosing its caret position.
   const input = screen.getByTestId('input').element() as HTMLInputElement
-  input.focus()
+  await vi.waitFor(() => expect(document.activeElement).toBe(input))
   input.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }))
   input.value = '編集中'
   input.setSelectionRange(1, 1)
@@ -108,7 +110,7 @@ it('does not restore NumberInput composition into an input unmounted before reco
   expect(input.selectionEnd).toBe(1)
 })
 
-it('does not retain interrupted NumberInput composition after blur and refocus', async () => {
+it.each([false, true])('does not retain interrupted NumberInput composition after blur and refocus (ending=%s)', async (ending) => {
   const screen = await render(NativeInputFixture, { props: { family: 'number-input', mode: 'controlled', formatOptions: { minimumFractionDigits: 2 } } })
   const input = screen.getByTestId('input').element() as HTMLInputElement
   input.focus()
@@ -116,6 +118,8 @@ it('does not retain interrupted NumberInput composition after blur and refocus',
   input.value = '編集中'
   input.dispatchEvent(new InputEvent('input', { bubbles: true, data: '編集中', isComposing: true }))
   await new Promise(resolve => setTimeout(resolve, 0))
+  if (ending)
+    input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '編集中' }))
   input.blur()
   await new Promise(resolve => setTimeout(resolve, 0))
   input.focus()
@@ -125,4 +129,29 @@ it('does not retain interrupted NumberInput composition after blur and refocus',
   await vi.waitFor(() => expect(input.value).toBe('10'))
   await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('10')
   await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+})
+
+it.each([false, true])('drops composition from an Input replaced under the same Root (ending=%s)', async (ending) => {
+  const screen = await render(NativeInputFixture, { props: { family: 'number-input', mode: 'controlled', formatOptions: { minimumFractionDigits: 2 } } })
+  const input = screen.getByTestId('input').element() as HTMLInputElement
+  input.focus()
+  input.value = '12'
+  input.dispatchEvent(new InputEvent('input', { bubbles: true, data: '12' }))
+  await vi.waitFor(() => expect(input.value).toBe('10'))
+  input.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }))
+  input.value = '編集中'
+  input.dispatchEvent(new InputEvent('input', { bubbles: true, data: '編集中', isComposing: true }))
+  await new Promise(resolve => setTimeout(resolve, 0))
+  expect(input.value).toBe('編集中')
+  if (ending)
+    input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '編集中' }))
+  await screen.rerender({ showInput: false })
+  expect(input.isConnected).toBe(false)
+  await screen.rerender({ showInput: true })
+  const replacement = screen.getByTestId('input').element() as HTMLInputElement
+  expect(replacement).not.toBe(input)
+  expect(replacement.value).toBe('10.00')
+  await screen.getByTestId('input').fill('12')
+  await vi.waitFor(() => expect(replacement.value).toBe('10'))
+  await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('10')
 })

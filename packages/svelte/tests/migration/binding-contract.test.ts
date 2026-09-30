@@ -79,10 +79,17 @@ describe.each(bindingCases)('$name binding contract', (testCase) => {
     const onChange = vi.fn()
     const onWrite = vi.fn()
     const screen = await render(BindingFixture, { props: { name: testCase.name, mode, onChange, onWrite } })
-    if (mode !== 'bound-undefined' || testCase.hasDefault !== false)
+    if (mode !== 'bound-undefined' || testCase.hasDefault !== false) {
       await expectState(screen, testCase, testCase.initial(), mode === 'bound-undefined' ? undefined : testCase.initial())
-    else
+    }
+    else if (testCase.uncontrolledInitial) {
+      // Dynamic inputValue has no defaultInputValue contract. An undefined
+      // binding starts empty, then still writes both requested values back.
+      await expectState(screen, testCase, testCase.uncontrolledInitial(), undefined)
+    }
+    else {
       await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('undefined')
+    }
     for (let cycle = 0; cycle < 2; cycle++) {
       for (const [button, value] of [['request-next', testCase.next()], ['request-initial', testCase.initial()]] as const) {
         onChange.mockClear()
@@ -134,9 +141,14 @@ describe.each(bindingCases)('$name binding contract', (testCase) => {
   it('leaves an omitted state prop interactive across unrelated rerenders', async () => {
     const onChange = vi.fn()
     const screen = await render(BindingFixture, { props: { name: testCase.name, mode: 'uncontrolled', onChange } })
+    if (testCase.uncontrolledInitial)
+      await expectState(screen, testCase, testCase.uncontrolledInitial(), testCase.initial())
     await screen.getByTestId('request-next').click()
     await expectState(screen, testCase, testCase.next(), testCase.initial())
-    await screen.getByTestId('unrelated').click()
+    // A button click would also blur/dismiss Edit, Calendar, and HoverCard.
+    // Change only a parent prop so this assertion isolates unrelated rerenders.
+    await screen.rerender({ unrelated: 1 })
+    expect(screen.container.querySelector('[data-unrelated]')).toHaveAttribute('data-unrelated', '1')
     await expectState(screen, testCase, testCase.next(), testCase.initial())
     await screen.getByTestId('request-initial').click()
     await expectState(screen, testCase, testCase.initial())

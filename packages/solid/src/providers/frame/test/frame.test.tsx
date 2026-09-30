@@ -48,7 +48,11 @@ describe('frame', () => {
   it('requires and renders an accessible title', () => {
     render(() => <Frame title="Account preview" />)
 
-    expect(document.querySelector('iframe')).toHaveAttribute('title', 'Account preview')
+    const frame = document.querySelector('iframe')!
+    expect(frame).toHaveAttribute('title', 'Account preview')
+    // Dynamic portal markers inside iframe fallback content are parsed as text.
+    // Keeping that raw-text element empty also makes hydratable builds safe.
+    expect(frame.childNodes).toHaveLength(0)
   })
 
   it('rebinds portals and dimension tracking after srcdoc changes', async () => {
