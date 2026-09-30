@@ -33,27 +33,44 @@ describe('createMachineProps', () => {
     expect(result.context).toStrictEqual({ defaultValue: 'initial' })
   })
 
-  it('supports multiple controllable pairs via pass-through', () => {
-    const result = createMachineProps(
-      {
-        open: true,
-        defaultOpen: false,
-        value: undefined as string | undefined,
-        defaultValue: 'initial',
-      },
-      { open: 'defaultOpen', value: 'defaultValue' },
-      ['open', 'value'],
-    )
+  it.each([false, true])('prioritizes live open=%s over a conflicting default without changing other pairs', (open) => {
+    const props = Object.freeze({
+      open,
+      defaultOpen: !open,
+      value: undefined as string | undefined,
+      defaultValue: 'initial',
+    })
+    const result = createMachineProps(props, { open: 'defaultOpen', value: 'defaultValue' }, ['open', 'value'])
 
-    expect(result.initial).toStrictEqual({
-      open: true,
-      defaultOpen: false,
-      defaultValue: 'initial',
+    expect(result.initial).toStrictEqual({ open, defaultValue: 'initial' })
+    expect(result.context).toStrictEqual({ open, defaultValue: 'initial' })
+    expect(props).toStrictEqual({ open, defaultOpen: !open, value: undefined, defaultValue: 'initial' })
+  })
+
+  for (const defaultOpen of [false, true]) {
+    it.each([false, true])(`preserves defaultOpen=${defaultOpen} without acquiring live ownership (undefined key: %s)`, (includeUndefined) => {
+      const props = Object.freeze({
+        ...(includeUndefined ? { open: undefined } : {}),
+        defaultOpen,
+      })
+      const result = createMachineProps(props, { open: 'defaultOpen' }, ['open'])
+
+      expect(result.initial).toStrictEqual({ defaultOpen })
+      expect(result.context).toStrictEqual({ defaultOpen })
+      expect(Object.hasOwn(result.initial, 'open')).toBe(false)
+      expect(Object.hasOwn(result.context, 'open')).toBe(false)
+      expect(Object.hasOwn(props, 'open')).toBe(includeUndefined)
+      expect(props.defaultOpen).toBe(defaultOpen)
     })
-    expect(result.context).toStrictEqual({
-      open: true,
-      defaultOpen: false,
-      defaultValue: 'initial',
-    })
+  }
+
+  it('returns independent context copies while leaving the default seed input unchanged', () => {
+    const props = Object.freeze({ defaultOpen: true })
+    const result = createMachineProps(props)
+
+    expect(result.initial).not.toBe(result.context)
+    result.context.defaultOpen = false
+    expect(result.initial).toStrictEqual({ defaultOpen: true })
+    expect(props).toStrictEqual({ defaultOpen: true })
   })
 })

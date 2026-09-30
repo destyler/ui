@@ -1,41 +1,51 @@
+import type { OpenFamily } from './open-cases'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { entries, openFamilies } from './open-cases'
 import OpenFixture from './open.fixture.svelte'
 import UiDefaultsFixture from './ui-defaults.fixture.svelte'
 
-async function expectOpen(screen: Awaited<ReturnType<typeof render<typeof OpenFixture>>>, open: boolean) {
+async function expectOpen(screen: Awaited<ReturnType<typeof render<typeof OpenFixture>>>, open: boolean, family: OpenFamily) {
   await expect.element(screen.getByTestId('api-open')).toHaveTextContent(String(open))
   await expect.element(screen.getByTestId('trigger')).toHaveAttribute('data-state', open ? 'open' : 'closed')
   if (open)
     await expect.element(screen.getByTestId('content')).toBeVisible()
   else
     await expect.element(screen.getByTestId('content')).not.toBeVisible()
+  if (family === 'combobox') {
+    const option = screen.getByTestId('option-one')
+    await expect.element(option).toHaveAttribute('role', 'option')
+    await expect.element(option).toHaveTextContent('one')
+    if (open)
+      await expect.element(option).toBeVisible()
+    else
+      await expect.element(option).not.toBeVisible()
+  }
 }
 
 describe.each(entries)('migration: %s boundary', (entry) => {
   for (const family of openFamilies) {
     it.each([false, true])(`${family}: live open=%s wins over defaultOpen on mount`, async (open) => {
       const screen = await render(OpenFixture, { props: { family, entry, open, defaultOpen: !open } })
-      await expectOpen(screen, open)
+      await expectOpen(screen, open, family)
       await screen.rerender({ defaultOpen: open, unrelated: 1 })
-      await expectOpen(screen, open)
+      await expectOpen(screen, open, family)
       await screen.rerender({ open: !open })
-      await expectOpen(screen, !open)
+      await expectOpen(screen, !open, family)
     })
 
     it(`${family}: omitted/undefined open keeps its default seed interactive and initial-only`, async () => {
       const onOpenChange = vi.fn()
       const screen = await render(OpenFixture, { props: { family, entry, open: undefined, defaultOpen: true, onOpenChange } })
-      await expectOpen(screen, true)
+      await expectOpen(screen, true, family)
       await screen.getByTestId('request-close').click()
-      await expectOpen(screen, false)
+      await expectOpen(screen, false, family)
       expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: false }))
       await screen.rerender({ defaultOpen: false, unrelated: 1 })
       await screen.rerender({ defaultOpen: true, unrelated: 2 })
-      await expectOpen(screen, false)
+      await expectOpen(screen, false, family)
       await screen.getByTestId('request-open').click()
-      await expectOpen(screen, true)
+      await expectOpen(screen, true, family)
       expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: true }))
     })
 
@@ -45,14 +55,14 @@ describe.each(entries)('migration: %s boundary', (entry) => {
         const screen = await render(OpenFixture, { props: { family, entry, open: false, defaultOpen: true, onOpenChange } })
         await screen.getByTestId('request-open').click()
         await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: true })))
-        await expectOpen(screen, false)
+        await expectOpen(screen, false, family)
         await screen.rerender({ open: true })
-        await expectOpen(screen, true)
+        await expectOpen(screen, true, family)
         await screen.getByTestId('request-close').click()
         await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: false })))
-        await expectOpen(screen, true)
+        await expectOpen(screen, true, family)
         await screen.rerender({ open: false })
-        await expectOpen(screen, false)
+        await expectOpen(screen, false, family)
       })
     }
   }

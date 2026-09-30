@@ -58,7 +58,15 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should support default value', async () => {
-    const screen = await render(<Basic defaultValue="components" openDelay={0} closeDelay={0} />)
+    // Browser cleanup unmounts the preceding fixture, but its mouse can remain
+    // over "Getting started" and legitimately replace this default via hover.
+    // Move it away before mounting so this test observes initialization first.
+    const parking = await render(<button type="button" style={{ position: 'fixed', right: 0, bottom: 0 }}>Park pointer</button>)
+    await userEvent.hover(parking.getByRole('button', { name: 'Park pointer' }))
+    await parking.unmount()
+
+    const onValueChange = vi.fn()
+    const screen = await render(<Basic defaultValue="components" openDelay={0} closeDelay={0} onValueChange={onValueChange} />)
 
     await vi.waitFor(() => {
       const componentsTrigger = screen.container.querySelector('[data-scope="navigation-menu"][data-part="trigger"][data-value="components"]')
@@ -69,6 +77,18 @@ describe('[navigation-menu] component', () => {
       expect(componentsContent).not.toHaveAttribute('hidden')
       expect(componentsContent).toHaveTextContent('A modal dialog that interrupts the user with important content.')
     })
+    expect(onValueChange).not.toHaveBeenCalled()
+
+    // defaultValue only seeds the state: clicking the seeded trigger can close
+    // and reopen it without a parent value writeback.
+    const trigger = screen.getByRole('button', { name: /^Components/ })
+    await userEvent.click(trigger)
+    await expect.element(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(onValueChange).toHaveBeenLastCalledWith({ value: null })
+    await userEvent.click(trigger)
+    await expect.element(trigger).toHaveAttribute('aria-expanded', 'true')
+    expect(onValueChange).toHaveBeenLastCalledWith({ value: 'components' })
+    await expect.element(screen.getByText('A modal dialog that interrupts the user with important content.')).toBeVisible()
   })
 
   it('should render link item without dropdown', async () => {

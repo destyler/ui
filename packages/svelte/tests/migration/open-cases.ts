@@ -48,6 +48,10 @@ export interface OpenApi {
   getContentProps: () => Record<string, unknown>
   getPositionerProps?: () => Record<string, unknown>
   getInputProps?: () => Record<string, unknown>
+  getLabelProps?: () => Record<string, unknown>
+  getControlProps?: () => Record<string, unknown>
+  getListProps?: () => Record<string, unknown>
+  getItemProps?: (props: { item: unknown }) => Record<string, unknown>
 }
 
 interface OpenCase {

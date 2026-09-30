@@ -11,6 +11,7 @@ import { Edit, useEdit } from '~/components/edit'
 import { FloatingPanel, useFloatingPanel } from '~/components/floating-panel'
 import { HoverCard, useHoverCard } from '~/components/hover-card'
 import { Menu, useMenu } from '~/components/menu'
+import { NavigationMenu } from '~/components/navigation-menu'
 import { Popover, usePopover } from '~/components/popover'
 import { Select, useSelect } from '~/components/select'
 import { Tooltip, useTooltip } from '~/components/tooltip'
@@ -116,4 +117,19 @@ it('popover Root preserves an explicit wrapper id and uses it for machine part i
   expect(markup).toContain('id="popover:target:trigger"')
   expect(markup).toContain('id="popover:target:content"')
   expect(markup).not.toMatch(/(?:defaultOpen|defaultopen|positioning)=/)
+})
+
+it('navigation menu renders the seeded Root value before any browser pointer input', () => {
+  const onValueChange = vi.fn()
+  const markup = renderToString(
+    <NavigationMenu.Root defaultValue="components" openDelay={0} closeDelay={0} onValueChange={onValueChange}>
+      <NavigationMenu.Trigger value="getting-started">Getting started</NavigationMenu.Trigger>
+      <NavigationMenu.Trigger value="components">Components</NavigationMenu.Trigger>
+      <NavigationMenu.Context>{api => <output>{api.value}</output>}</NavigationMenu.Context>
+    </NavigationMenu.Root>,
+  )
+  expect(markup).toMatch(/data-value="components"[^>]*aria-expanded="true"/)
+  expect(markup).toMatch(/data-value="getting-started"[^>]*aria-expanded="false"/)
+  expect(markup).toContain('<output>components</output>')
+  expect(onValueChange).not.toHaveBeenCalled()
 })
