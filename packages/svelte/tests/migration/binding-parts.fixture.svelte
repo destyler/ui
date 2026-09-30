@@ -55,6 +55,7 @@
     {/each}
   </UI>
 {:else if selected.family === 'carousel'}
+  <output data-testid="page-snap-points">{JSON.stringify(api().pageSnapPoints)}</output>
   <UI as="div" {...api().getItemGroupProps()} style={`${api().getItemGroupProps().style}--slide-spacing:0px;--slide-item-size:300px;width:300px;height:80px;scroll-behavior:auto;`}>
     {#each [0, 1, 2] as index}
       <UI as="div" {...api().getItemProps({ index })}>Slide {index + 1}</UI>
