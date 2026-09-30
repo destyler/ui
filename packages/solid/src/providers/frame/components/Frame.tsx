@@ -9,7 +9,7 @@ import {
   Show,
   splitProps,
 } from 'solid-js'
-import { Portal } from 'solid-js/web'
+import { clearDelegatedEvents, DelegatedEvents, delegateEvents, Portal } from 'solid-js/web'
 import { EnvironmentProvider } from '~/providers'
 import { composeRefs } from '~/utils/compose-refs'
 import { FrameContent } from './Content'
@@ -34,8 +34,8 @@ const resetStyle
 const initialSrcDoc = `<html><head>${resetStyle}</head><body><div class="frame-root"></div></body></html>`
 
 function getMountNode(frame: HTMLIFrameElement) {
-  const doc = frame.contentWindow?.document
-  if (!doc)
+  const doc = frame.contentDocument
+  if (!doc?.body)
     return null
   return doc.body.querySelector<HTMLElement>('.frame-root') || doc.body
 }
@@ -61,29 +61,60 @@ export function Frame(props: FrameProps) {
     if (!frame)
       return
 
-    const doc = frame.contentWindow?.document
-    if (!doc)
-      return
+    const html = srcdoc()
+    let currentNode: HTMLElement | null = null
+    let currentDocument: Document | null = null
+    const clearDocument = () => {
+      // The frame owns this document. Solid installs delegated listeners on the
+      // outer document by default; discard the iframe's listeners on replacement.
+      if (currentDocument)
+        clearDelegatedEvents(currentDocument)
+      currentDocument = null
+      currentNode = null
+      setMountNode(null)
+    }
+    const syncDocument = () => {
+      const node = getMountNode(frame)
+      if (node === currentNode)
+        return
+      clearDocument()
+      if (!node)
+        return
+      currentNode = node
+      currentDocument = node.ownerDocument
+      // Register the entire delegated event set, including events from children
+      // loaded later. Native events do not bubble across document boundaries.
+      delegateEvents([...DelegatedEvents], currentDocument)
+      setMountNode(node)
+    }
 
-    doc.open()
-    doc.write(srcdoc())
-    doc.close()
+    frame.addEventListener('load', syncDocument)
+    onCleanup(() => {
+      frame.removeEventListener('load', syncDocument)
+      clearDocument()
+    })
 
-    setMountNode(getMountNode(frame))
+    const doc = frame.contentDocument
+    if (doc) {
+      doc.open()
+      doc.write(html)
+      doc.close()
+    }
+    syncDocument()
   })
 
   createEffect(() => {
     const frame = frameRef()
     const node = mountNode()
-    if (!frame || !frame.contentDocument || !node)
+    if (!frame || !node)
       return
 
-    const win = frame.contentWindow as Window & typeof globalThis
+    const win = node.ownerDocument.defaultView as Window & typeof globalThis
     if (!win)
       return
 
     const exec = () => {
-      const rootEl = frame.contentDocument?.documentElement
+      const rootEl = node.ownerDocument.documentElement
       if (!rootEl)
         return
       frame.style.setProperty('--width', `${node.scrollWidth}px`)
@@ -93,9 +124,7 @@ export function Frame(props: FrameProps) {
     const resizeObserver = new win.ResizeObserver(exec)
     exec()
 
-    if (frame.contentDocument) {
-      resizeObserver.observe(node)
-    }
+    resizeObserver.observe(node)
 
     onCleanup(() => {
       resizeObserver.disconnect()
@@ -103,7 +132,7 @@ export function Frame(props: FrameProps) {
   })
 
   return (
-    <EnvironmentProvider value={() => frameRef()?.contentDocument ?? document}>
+    <EnvironmentProvider value={() => mountNode()?.ownerDocument ?? frameRef()?.contentDocument ?? document}>
       <iframe
         title={frameProps.title || 'Embedded content'}
         {...localProps}
@@ -120,8 +149,7 @@ export function Frame(props: FrameProps) {
         )}
       </Show>
       <Show when={mountNode()} keyed>
-        {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
-        <Portal mount={frameRef()!.contentDocument!.head}>{frameProps.head}</Portal>
+        {node => <Portal mount={node.ownerDocument.head}>{frameProps.head}</Portal>}
       </Show>
     </EnvironmentProvider>
   )

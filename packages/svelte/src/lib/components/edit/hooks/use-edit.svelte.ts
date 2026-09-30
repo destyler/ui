@@ -6,7 +6,9 @@ import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
+import { createInputValueSync } from '$lib/utils/sync-input-value'
 import * as edit from '@destyler/edit'
+import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 import { untrack } from 'svelte'
 import { useFieldContext } from '../../field'
@@ -55,7 +57,17 @@ export function useEdit(props: MaybeFunction<UseEditProps>): UseEditReturn {
       return machineProps.context as edit.Context
     },
   })
-  const api = $derived(edit.connect(state, send, normalizeProps))
+  const connected = $derived(edit.connect(state, send, normalizeProps))
+  const syncInputValue = createInputValueSync(() => connected.getInputProps(), () => connected.value)
+  const api = $derived({
+    ...connected,
+    getInputProps() {
+      return mergeProps(connected.getInputProps(), {
+        oninput: syncInputValue,
+        oncompositionend: syncInputValue,
+      })
+    },
+  })
 
   return () => api
 }

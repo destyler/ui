@@ -3,7 +3,9 @@ import type { MaybeFunction } from '@destyler/utils'
 import type { Accessor } from '../../../types'
 import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { normalizeProps } from '$lib/utils/normalize-props'
+import { createRadioCheckedSync } from '$lib/utils/sync-checked'
 import * as radio from '@destyler/radio'
+import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 import { useEnvironmentContext, useLocaleContext } from '../../../providers'
 import { createMachineProps } from '../../../utils/create-machine-props'
@@ -32,6 +34,13 @@ export function useRadio(props: MaybeFunction<UseRadioProps>): UseRadioReturn {
       return resolvedProps.context as radio.Context
     },
   })
-  const api = $derived(radio.connect(state, send, normalizeProps))
+  const connected = $derived(radio.connect(state, send, normalizeProps))
+  const syncChecked = createRadioCheckedSync(value => connected.getItemState({ value }).checked)
+  const api = $derived({
+    ...connected,
+    getItemHiddenInputProps(itemProps: radio.ItemProps) {
+      return mergeProps(connected.getItemHiddenInputProps(itemProps), { onclick: syncChecked })
+    },
+  })
   return () => api
 }

@@ -15,6 +15,7 @@ const cases = [
   { name: 'default', props: { defaultValue: 'components' }, value: 'components' },
   { name: 'live', props: { value: 'getting-started' }, value: 'getting-started' },
   { name: 'live over default', props: { value: 'getting-started', defaultValue: 'components' }, value: 'getting-started' },
+  { name: 'live over empty default', props: { value: 'components', defaultValue: '' }, value: 'components' },
   { name: 'null live over default', props: { value: null, defaultValue: 'components' }, value: null },
   { name: 'undefined live with default', props: { value: undefined, defaultValue: 'components' }, value: 'components' },
 ]
@@ -49,7 +50,10 @@ function ProviderFixture(props: NavigationMenu.RootProps) {
         <NavigationMenu.Item value="components"><NavigationMenu.Trigger value="components">Components</NavigationMenu.Trigger></NavigationMenu.Item>
       </NavigationMenu.List>
       <NavigationMenu.Content value="components">Provider content</NavigationMenu.Content>
-      <output data-value={String(api().value)} data-open={String(api().getContentState({ value: 'components' }).open)} />
+      <NavigationMenu.ViewportPositioner data-testid="positioner">
+        <NavigationMenu.Viewport data-testid="viewport" />
+      </NavigationMenu.ViewportPositioner>
+      <output data-value={String(api().value)} data-api-open={String(api().open)} data-open={String(api().getContentState({ value: 'components' }).open)} />
     </NavigationMenu.RootProvider>
   )
 }
@@ -60,6 +64,9 @@ describe('navigationMenu public hook and RootProvider SSR', () => {
     expect(html).toContain('Provider content')
     expect(html).toContain(`data-value="${String(value)}"`)
     expect(html).toContain(`data-open="${value === 'components'}"`)
+    expect(html).toContain(`data-api-open="${value !== null}"`)
+    const positioner = html.match(/<div[^>]*data-part="viewport-positioner"[^>]*>/)?.[0]
+    expect(positioner).toContain(`data-state="${value !== null ? 'open' : 'closed'}"`)
     expect(html).not.toContain('data-motion')
   })
 })
@@ -99,4 +106,20 @@ it('keeps custom content IDs, vertical orientation, RTL and public content state
     })
   }
   expect(getRootNode).not.toHaveBeenCalled()
+})
+
+it.each(cases)('keeps Root API and viewport-positioner consistent for $name during SSR', ({ props, value }) => {
+  const onValueChange = vi.fn()
+  const html = renderToString(() => (
+    <EnvironmentProvider value={rejectDocument}>
+      <NavigationMenu.Root id="root-state" {...props} onValueChange={onValueChange}>
+        <NavigationMenu.Context>{api => <output data-value={String(api().value)} data-api-open={String(api().open)} />}</NavigationMenu.Context>
+        <NavigationMenu.ViewportPositioner />
+      </NavigationMenu.Root>
+    </EnvironmentProvider>
+  ))
+  expect(html).toContain(`data-value="${String(value)}"`)
+  expect(html).toContain(`data-api-open="${value !== null}"`)
+  expect(html.match(/<div[^>]*data-part="viewport-positioner"[^>]*>/)?.[0]).toContain(`data-state="${value !== null ? 'open' : 'closed'}"`)
+  expect(onValueChange).not.toHaveBeenCalled()
 })

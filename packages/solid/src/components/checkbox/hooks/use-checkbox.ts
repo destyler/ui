@@ -7,6 +7,7 @@ import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { resolveMachineProps } from '~/utils/resolve-machine-props'
+import { restoreControlledInput } from '~/utils/restore-controlled-input'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
 
 export interface UseCheckboxProps
@@ -53,5 +54,20 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
 
   const [state, send] = useMachine(checkbox.machine(initialContext()), { context })
 
-  return createMemo(() => checkbox.connect(state, send, normalizeProps))
+  const controlled = props().checked !== undefined
+  return createMemo(() => {
+    const api = checkbox.connect(state, send, normalizeProps)
+    if (!controlled)
+      return api
+    return {
+      ...api,
+      getHiddenInputProps() {
+        return restoreControlledInput(api.getHiddenInputProps(), (input) => {
+          const checked = props().checked === undefined ? state.context.checked : props().checked
+          input.checked = checked === true
+          input.indeterminate = checked === 'indeterminate'
+        })
+      },
+    }
+  })
 }

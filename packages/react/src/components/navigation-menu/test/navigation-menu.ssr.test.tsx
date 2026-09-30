@@ -36,6 +36,8 @@ describe('navigationMenu full content SSR', () => {
       expect(content).toContain(`data-state="${value === itemValue ? 'open' : 'closed'}"`)
       expect(/\shidden[=\s>]/.test(content!)).toBe(value !== itemValue)
     }
+    const positioner = html.match(/<div[^>]*data-part="viewport-positioner"[^>]*>/)?.[0]
+    expect(positioner).toContain(`data-state="${value !== null ? 'open' : 'closed'}"`)
     expect(typeof window).toBe('undefined')
     expect(typeof document).toBe('undefined')
   })
@@ -49,7 +51,8 @@ function ProviderFixture(props: NavigationMenu.RootProps) {
         <NavigationMenu.Item value="components"><NavigationMenu.Trigger value="components">Components</NavigationMenu.Trigger></NavigationMenu.Item>
       </NavigationMenu.List>
       <NavigationMenu.Content value="components">Provider content</NavigationMenu.Content>
-      <output data-value={String(api.value)} data-open={String(api.getContentState({ value: 'components' }).open)} />
+      <NavigationMenu.ViewportPositioner />
+      <output data-value={String(api.value)} data-open={String(api.open)} data-content-open={String(api.getContentState({ value: 'components' }).open)} />
     </NavigationMenu.RootProvider>
   )
 }
@@ -59,7 +62,10 @@ describe('navigationMenu public hook and RootProvider SSR', () => {
     const html = renderToString(<EnvironmentProvider value={rejectDocument}><ProviderFixture id="ssr-provider" {...props} /></EnvironmentProvider>)
     expect(html).toContain('Provider content')
     expect(html).toContain(`data-value="${String(value)}"`)
-    expect(html).toContain(`data-open="${value === 'components'}"`)
+    expect(html).toContain(`data-open="${value !== null}"`)
+    expect(html).toContain(`data-content-open="${value === 'components'}"`)
+    const positioner = html.match(/<div[^>]*data-part="viewport-positioner"[^>]*>/)?.[0]
+    expect(positioner).toContain(`data-state="${value !== null ? 'open' : 'closed'}"`)
     expect(html).not.toContain('data-motion')
   })
 })

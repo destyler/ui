@@ -2,11 +2,12 @@ import type { PropTypes } from '@destyler/types'
 import type { Optional } from '~/types'
 import * as edit from '@destyler/edit'
 import { normalizeProps } from '@destyler/react'
-import { useId } from 'react'
+import { useId, useRef } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useControllableState } from '~/hooks/use-controllable-state'
 import { useEvent } from '~/hooks/use-event'
 import { useMachine } from '~/hooks/use-machine'
+import { useNativeInputValueSync } from '~/hooks/use-native-input-sync'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
@@ -65,6 +66,25 @@ export function useEdit(props: UseEditProps = {}): UseEditReturn {
     onValueRevert: useEvent(props.onValueRevert),
   }
 
-  const [state, send] = useMachine(edit.machine(initialContext), { context })
-  return edit.connect(state, send, normalizeProps)
+  const composing = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null)
+  const machine = edit.machine(initialContext)
+  const syncCoreInput = machine.options.actions?.syncInputValue
+  const [state, send, service] = useMachine(machine, {
+    context,
+    actions: {
+      syncInputValue(context, event, meta) {
+        // Parent writeback must not replace text while the IME owns this input.
+        if (!composing.current?.isConnected)
+          syncCoreInput?.(context, event, meta)
+      },
+    },
+  })
+  const syncInputProps = useNativeInputValueSync(() => service.state.context.value, composing)
+  const api = edit.connect(state, send, normalizeProps)
+  return {
+    ...api,
+    getInputProps() {
+      return syncInputProps(api.getInputProps(), 'onChange')
+    },
+  }
 }

@@ -7,7 +7,6 @@
 
 <script lang="ts">
   import { mergeProps } from '@destyler/svelte'
-  import { createInputValueSync } from '$lib/utils/sync-input-value'
   import { UI } from '../../factory'
   import { useFieldContext } from '../../field'
   import { useEditContext } from '../hooks/use-edit-context'
@@ -16,11 +15,7 @@
 
   const edit = useEditContext()
   const field = useFieldContext()
-  const syncInputValue = createInputValueSync(() => edit().getInputProps(), () => edit().value)
-  const mergedProps = $derived(mergeProps(edit().getInputProps(), props, {
-    oninput: syncInputValue,
-    oncompositionend: syncInputValue,
-  }))
+  const mergedProps = $derived(mergeProps(edit().getInputProps(), props))
 </script>
 
 <UI as="input" aria-describedby={field?.()?.ariaDescribedby} {...mergedProps} />

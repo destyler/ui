@@ -36,7 +36,9 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
 
   const context = createMemo<navigationMenu.Context>(() => {
     return {
-      ...resolveMachineProps(props),
+      // A live null explicitly closes the menu. Remove the default before core
+      // derives its initial state tag, not only when applying its context.
+      ...resolveMachineProps(props, props.value !== undefined ? ['defaultValue'] : []),
       id: props.id ?? generatedId,
       dir: locale().dir,
       getRootNode: environment().getRootNode,

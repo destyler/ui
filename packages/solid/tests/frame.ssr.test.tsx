@@ -1,6 +1,7 @@
 import { renderToString } from 'solid-js/web'
 import { describe, expect, it, vi } from 'vitest'
 import { Frame } from '../src/providers/frame'
+import { FrameFixture } from './fixtures/frame'
 
 const customSrcDoc = '<html><head></head><body><main class="frame-root"></main></body></html>'
 
@@ -27,4 +28,12 @@ describe('frame SSR', () => {
     expect(html).not.toContain('frame-head-style')
     expect(onMount).not.toHaveBeenCalled()
   })
+})
+
+it('keeps the independently rendered interactive hydration fixture in sync', async () => {
+  expect(typeof document).toBe('undefined')
+  const html = renderToString(() => <FrameFixture />)
+  expect(html).toMatch(/<iframe\b[^>]*><\/iframe>/)
+  expect(html).not.toContain('Count:')
+  await expect(html).toMatchFileSnapshot('./frame.ssr.html')
 })

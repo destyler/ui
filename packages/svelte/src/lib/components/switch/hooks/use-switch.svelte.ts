@@ -6,6 +6,8 @@ import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
+import { createCheckedSync } from '$lib/utils/sync-checked'
+import { mergeProps } from '@destyler/svelte'
 import * as zagSwitch from '@destyler/switch'
 import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
@@ -43,7 +45,14 @@ export function useSwitch(props: MaybeFunction<UseSwitchProps>) {
       return machineProps.context as zagSwitch.Context
     },
   })
-  const api = $derived(zagSwitch.connect(state, send, normalizeProps))
+  const connected = $derived(zagSwitch.connect(state, send, normalizeProps))
+  const syncChecked = createCheckedSync(() => connected)
+  const api = $derived({
+    ...connected,
+    getHiddenInputProps() {
+      return mergeProps(connected.getHiddenInputProps(), { onclick: syncChecked })
+    },
+  })
 
   return () => api
 }

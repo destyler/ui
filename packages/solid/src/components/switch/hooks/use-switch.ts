@@ -7,6 +7,7 @@ import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { resolveMachineProps } from '~/utils/resolve-machine-props'
+import { restoreControlledInput } from '~/utils/restore-controlled-input'
 
 export interface UseSwitchProps
   extends Optional<Omit<zagSwitch.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -46,5 +47,19 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
 
   const [state, send] = useMachine(zagSwitch.machine(initialContext()), { context })
 
-  return createMemo(() => zagSwitch.connect(state, send, normalizeProps))
+  const controlled = props.checked !== undefined
+  return createMemo(() => {
+    const api = zagSwitch.connect(state, send, normalizeProps)
+    if (!controlled)
+      return api
+    return {
+      ...api,
+      getHiddenInputProps() {
+        return restoreControlledInput(api.getHiddenInputProps(), (input) => {
+          const checked = props.checked === undefined ? state.context.checked : props.checked
+          input.checked = checked === true
+        })
+      },
+    }
+  })
 }

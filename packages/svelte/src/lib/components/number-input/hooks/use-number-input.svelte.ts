@@ -7,10 +7,12 @@ import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
 import { createInputValueSync } from '$lib/utils/sync-input-value'
+import { syncNumberInputElement } from '$lib/utils/sync-number-input'
+import { createScope } from '@destyler/dom'
 import * as numberInput from '@destyler/number-input'
 import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
-import { onDestroy, tick, untrack } from 'svelte'
+import { onDestroy, onMount, tick, untrack } from 'svelte'
 import { useFieldContext } from '../../field'
 
 export interface UseNumberInputProps extends Omit<numberInput.Context, 'dir' | 'getRootNode' | 'id'> {
@@ -55,25 +57,65 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
   let composingValue = $state<string>()
   let composingInput: HTMLInputElement | undefined
   let compositionVersion = 0
+  let compositionEpoch = 0
   let disposed = false
+  let cancelInputSync: (() => void) | undefined
   const isComposing = () => composingValue !== undefined && !!composingInput?.isConnected
   const machine = untrack(() => numberInput.machine(machineProps.initial as numberInput.Context))
-  const syncCoreInput = machine.options.actions?.syncInputElement
+  const scope = createScope({})
+  const trackCoreFormControl = machine.options.activities?.trackFormControl
+  let refreshFormControl: (() => void) | undefined
+  machine.setOptions({
+    activities: {
+      trackFormControl(context, event, meta) {
+        let trackedInput: HTMLInputElement | null | undefined
+        let trackedForm: HTMLFormElement | null | undefined
+        let cleanup: (() => void) | undefined
+        const refresh = () => {
+          const inputId = context.ids?.input ?? `number-input:${context.id}:input`
+          const input = scope.getById<HTMLInputElement>(context, inputId)
+          const form = input?.form
+          if (input === trackedInput && form === trackedForm)
+            return
+          cleanup?.()
+          trackedInput = input
+          trackedForm = form
+          cleanup = trackCoreFormControl?.(context, event, meta) ?? undefined
+        }
+        refreshFormControl = refresh
+        refresh()
+        return () => {
+          refreshFormControl = undefined
+          cleanup?.()
+        }
+      },
+    },
+  })
   const [state, send] = useMachine(machine, {
     get context() {
       return machineProps.context as numberInput.Context
     },
     actions: {
-      syncInputElement(context, event, meta) {
-        // Bound parent updates also ask core to write its formatted value.
-        // Defer that DOM write while the native IME owns this input.
-        if (!isComposing())
-          syncCoreInput?.(context, event, meta)
+      syncInputElement(context, event) {
+        cancelInputSync?.()
+        if (isComposing())
+          return
+        const inputId = context.ids?.input ?? `number-input:${context.id}:input`
+        const input = scope.getById<HTMLInputElement>(context, inputId)
+        if (!input)
+          return
+        const epoch = compositionEpoch
+        const value = event.type.endsWith('CHANGE') ? context.value : context.formattedValue
+        // Core queues its write in RAF. Composition can start after this action
+        // ran, so check ownership again at execution time, including end/blur.
+        cancelInputSync = syncNumberInputElement(input, value ?? '', () => !disposed && !isComposing()
+          && epoch === compositionEpoch && scope.getById(context, inputId) === input)
       },
     },
   })
   onDestroy(() => {
     disposed = true
+    cancelInputSync?.()
     compositionVersion++
   })
   const getInputValue = () => isComposing() ? composingValue : (state.hasTag('focus') && isEditingInput && editingInput?.isConnected ? state.context.value : state.context.formattedValue)
@@ -97,8 +139,10 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
             value: getInputValue(),
             oninput(event: Event) {
               if ((event as InputEvent).isComposing) {
-                if (!isComposing())
+                if (!isComposing()) {
                   compositionVersion++
+                  compositionEpoch++
+                }
                 composingInput = event.currentTarget as HTMLInputElement
                 composingValue = composingInput.value
                 return
@@ -113,11 +157,13 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
               void syncInputValue(event)
             },
             oncompositionstart(event: Event) {
+              compositionEpoch++
               compositionVersion++
               composingInput = event.currentTarget as HTMLInputElement
               composingValue = composingInput.value
             },
             async oncompositionend(event: Event) {
+              compositionEpoch++
               const input = event.currentTarget as HTMLInputElement
               if (!isComposing()) {
                 if (input.value === state.context.value) {
@@ -150,6 +196,7 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
                 input.setSelectionRange(selectionStart, selectionEnd, selectionDirection ?? undefined)
             },
             onfocusout() {
+              compositionEpoch++
               compositionVersion++
               composingValue = undefined
               composingInput = undefined
@@ -160,6 +207,38 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
         )
       },
     }
+  })
+
+  onMount(() => {
+    const root = env().getRootNode()
+    const getInput = () => scope.getById<HTMLInputElement>(state.context, String(api.getInputProps().id))
+    const onReset = async (event: Event) => {
+      // Refresh even for a different form: a moved or removed input must stop
+      // listening to its old form before that form's reset reaches target phase.
+      // Core keeps the original seed and controlled ownership callback rules.
+      refreshFormControl?.()
+      const input = getInput()
+      if (!input || input.form !== event.target)
+        return
+      // The browser resets the property even when core's initial value equals
+      // its current value (and thus triggers no watcher). Reconcile after the
+      // default action and parent writeback, also ending any interrupted edit.
+      await tick()
+      if (event.defaultPrevented || disposed || !input.isConnected || input !== getInput())
+        return
+      const version = ++compositionVersion
+      compositionEpoch++
+      composingValue = undefined
+      composingInput = undefined
+      editingInput = undefined
+      isEditingInput = false
+      await tick()
+      if (disposed || !input.isConnected || version !== compositionVersion || input !== getInput())
+        return
+      input.value = String(getInputValue() ?? '')
+    }
+    root.addEventListener('reset', onReset, true)
+    return () => root.removeEventListener('reset', onReset, true)
   })
 
   return () => api

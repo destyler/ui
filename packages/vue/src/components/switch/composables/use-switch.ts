@@ -8,6 +8,7 @@ import { computed, useId } from 'vue'
 import { useFieldContext } from '~/components/field'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
 import { cleanProps } from '~/utils'
+import { reconcileNativeInput } from '~/utils/reconcile-native-input'
 
 export interface UseSwitchProps extends Optional<Omit<switches.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -46,5 +47,18 @@ export function useSwitch(props: UseSwitchProps = {}, emit?: EmitFn<RootEmits>):
 
   const [state, send] = useMachine(switches.machine(context.value), { context })
 
-  return computed(() => switches.connect(state.value, send, normalizeProps))
+  return computed(() => {
+    const api = switches.connect(state.value, send, normalizeProps)
+    return {
+      ...api,
+      getHiddenInputProps() {
+        return reconcileNativeInput(api.getHiddenInputProps(), (input) => {
+          // Core retains its initial ownership when a live prop becomes
+          // undefined. Reconcile against the current accepted machine value.
+          const checked = state.value.context.checked
+          input.checked = checked === true
+        })
+      },
+    }
+  })
 }

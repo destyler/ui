@@ -32,6 +32,9 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
     dir,
     getRootNode,
     ...normalizeMachineProps(contextProps),
+    // null is an explicit closed value. Suppress the default seed before core
+    // chooses its initial state tag, not only when setting the live context.
+    ...(contextProps.value !== undefined ? { defaultValue: undefined } : {}),
   }
 
   const context: navigationMenu.Context = {

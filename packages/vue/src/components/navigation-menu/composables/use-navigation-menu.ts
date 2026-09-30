@@ -27,12 +27,14 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}, emit?: Emi
   const locale = useLocaleContext(DEFAULT_LOCALE)
 
   const context = computed(() => {
-    const { modelValue, ...rest } = props
+    const { modelValue, defaultValue, ...rest } = props
     return {
       ...cleanProps(rest),
       id: props.id ?? id,
       dir: locale.value.dir,
-      ...(modelValue !== undefined ? { value: modelValue } : {}),
+      // A live null explicitly closes the menu; it must suppress the seed
+      // before core derives its initial open/closed state.
+      ...(modelValue !== undefined ? { value: modelValue } : { defaultValue }),
       getRootNode: env?.value.getRootNode,
       onValueChange: (details: navigationMenu.ValueChangeDetails) => {
         emit?.('valueChange', details)

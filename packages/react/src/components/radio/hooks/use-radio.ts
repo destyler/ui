@@ -5,6 +5,7 @@ import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
 import { useMachine } from '~/hooks/use-machine'
+import { useNativeInputSync } from '~/hooks/use-native-input-sync'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
@@ -35,9 +36,33 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
     onValueChange: useEvent(props.onValueChange, { sync: true }),
   }
 
-  const [state, send] = useMachine(radio.machine(initialContext), {
+  const [state, send, service] = useMachine(radio.machine(initialContext), {
     context,
   })
 
-  return radio.connect(state, send, normalizeProps)
+  const syncInput = useNativeInputSync()
+  const api = radio.connect(state, send, normalizeProps)
+  return {
+    ...api,
+    getItemHiddenInputProps(props) {
+      const inputProps = api.getItemHiddenInputProps(props)
+      return {
+        ...inputProps,
+        onClick(event) {
+          inputProps.onClick?.(event)
+          const input = event.currentTarget
+          syncInput(input, () => {
+            // Selecting a radio also unchecks its sibling. Restore the entire
+            // owned group, including inputs outside the root through a portal.
+            const owner = input.getAttribute('data-ownedby')
+            const root = input.getRootNode() as Document | ShadowRoot
+            for (const sibling of Array.from(root.querySelectorAll<HTMLInputElement>('input[type="radio"][data-ownedby]'))) {
+              if (sibling.getAttribute('data-ownedby') === owner)
+                sibling.checked = sibling.value === service.state.context.value
+            }
+          })
+        },
+      }
+    },
+  }
 }

@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { resolveMachineProps } from '~/utils/resolve-machine-props'
+import { restoreControlledInput, restoreRadioGroup } from '~/utils/restore-controlled-input'
 
 export interface UseRadioProps
   extends Optional<Omit<radio.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -38,5 +39,18 @@ export function useRadio(props: UseRadioProps = {}): UseRadioReturn {
     context,
   })
 
-  return createMemo(() => radio.connect(state, send, normalizeProps))
+  const controlled = props.value !== undefined
+  return createMemo(() => {
+    const api = radio.connect(state, send, normalizeProps)
+    if (!controlled)
+      return api
+    return {
+      ...api,
+      getItemHiddenInputProps(itemProps) {
+        return restoreControlledInput(api.getItemHiddenInputProps(itemProps), (input) => {
+          restoreRadioGroup(input, props.value === undefined ? state.context.value : props.value)
+        })
+      },
+    }
+  })
 }

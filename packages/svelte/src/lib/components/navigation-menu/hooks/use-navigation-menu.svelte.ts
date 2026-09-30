@@ -29,6 +29,8 @@ export function useNavigationMenu(props: MaybeFunction<UseNavigationMenuProps>):
       dir: locale().dir,
       getRootNode: env().getRootNode,
       ...resolvedProps,
+      // null explicitly closes the menu; only undefined permits the default seed.
+      defaultValue: resolvedProps.value !== undefined ? undefined : resolvedProps.defaultValue,
     })
   })
 

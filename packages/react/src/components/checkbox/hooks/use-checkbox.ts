@@ -6,6 +6,7 @@ import { useId, useMemo } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
 import { useMachine } from '~/hooks/use-machine'
+import { useNativeInputSync } from '~/hooks/use-native-input-sync'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
@@ -52,7 +53,26 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
     onCheckedChange: useEvent(props.onCheckedChange, { sync: true }),
   }
 
-  const [state, send] = useMachine(checkbox.machine(initialContext), { context })
+  const [state, send, service] = useMachine(checkbox.machine(initialContext), { context })
 
-  return checkbox.connect(state, send, normalizeProps)
+  const syncInput = useNativeInputSync()
+  const api = checkbox.connect(state, send, normalizeProps)
+  return {
+    ...api,
+    getHiddenInputProps() {
+      const inputProps = api.getHiddenInputProps()
+      return {
+        ...inputProps,
+        onClick(event) {
+          inputProps.onClick?.(event)
+          const input = event.currentTarget
+          syncInput(input, () => {
+            const context = service.state.context
+            input.checked = context.isChecked
+            input.indeterminate = context.isIndeterminate
+          })
+        },
+      }
+    },
+  }
 }
