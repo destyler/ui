@@ -5,6 +5,7 @@ import type { UseSwitchProps } from '../src/components/switch'
 import { cleanup, render, waitFor } from '@solidjs/testing-library'
 import { createSignal, mergeProps } from 'solid-js'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { assertCheckboxForm } from '../../../utils/test/behavior-contracts'
 import { Checkbox, useCheckbox } from '../src/components/checkbox'
 import { Radio, useRadio } from '../src/components/radio'
 import { Switch, useSwitch } from '../src/components/switch'
@@ -285,5 +286,25 @@ for (const boundary of boundaries) {
     inputs[0].click()
     await waitFor(() => assertState('one'))
     expect(seen).toHaveBeenCalledTimes(2)
+  })
+}
+
+for (const boundary of boundaries) {
+  it(`shared native reset: Checkbox ${boundary} restores its original seed after later defaults`, async () => {
+    const [defaultChecked, setDefaultChecked] = createSignal(true)
+    const { input, assertState } = renderToggle('checkbox', boundary, {
+      checked: undefined,
+      get defaultChecked() { return defaultChecked() },
+    })
+    for (let cycle = 0; cycle < 2; cycle++) {
+      input.click()
+      await waitFor(() => assertState(false))
+      setDefaultChecked(false)
+      input.form!.reset()
+      await waitFor(() => {
+        assertState(true)
+        assertCheckboxForm(input, true)
+      })
+    }
   })
 }

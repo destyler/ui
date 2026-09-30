@@ -1,7 +1,9 @@
 import type { App, Component, VNodeChild } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createApp, defineComponent, h, nextTick, reactive } from 'vue'
-import { Calendar, useCalendar } from '../components/calendar'
+import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, assertTextSelection, ownershipScenarios } from '../../../../utils/test/behavior-contracts'
+import { Calendar, parseDate, useCalendar } from '../components/calendar'
+import { Checkbox, useCheckbox } from '../components/checkbox'
 import CheckboxIndeterminate from '../components/checkbox/examples/Indeterminate.vue'
 import { Collapsible, useCollapsible } from '../components/collapsible'
 import { ColorPicker, useColorPicker } from '../components/color-picker'
@@ -12,6 +14,7 @@ import { Edit, useEdit } from '../components/edit'
 import { FloatingPanel, useFloatingPanel } from '../components/floating-panel'
 import { HoverCard, useHoverCard } from '../components/hover-card'
 import { Menu, useMenu } from '../components/menu'
+import { NumberInput, useNumberInput } from '../components/number-input'
 import FractionDigits from '../components/number-input/examples/FractionDigits.vue'
 import { Pagination, usePagination } from '../components/pagination'
 import { Popover, usePopover } from '../components/popover'
@@ -19,7 +22,9 @@ import { QrCode, useQrCode } from '../components/qr-code'
 import { Select, useSelect } from '../components/select'
 import SplitterRootProvider from '../components/splitter/examples/RootProvider.vue'
 import { Tooltip, useTooltip } from '../components/tooltip'
+import { Tree, useTree } from '../components/tree'
 import TreeInitialValue from '../components/tree/examples/InitialValue.vue'
+import { createFileTreeCollection } from '../utils/collection'
 
 type Entry = 'Root' | 'hook' | 'RootProvider'
 const entries: Entry[] = ['Root', 'hook', 'RootProvider']
@@ -95,7 +100,12 @@ async function fixture(namespace: any, hook: any, entry: Entry, initial: any, re
     },
   })
   const container = await mount(component)
+  const app = apps.at(-1)!
   return {
+    unmount() {
+      app.unmount()
+      apps.splice(apps.indexOf(app), 1)
+    },
     props,
     container,
     get api() { return api },
@@ -371,5 +381,102 @@ describe('existing initial-only value adapters', () => {
         expect(instance.container.querySelector('output')?.textContent).toBe(JSON.stringify(empty))
       })
     }
+  }
+})
+
+const sharedOwnershipCases = [
+  { name: 'Checkbox.checked', namespace: Checkbox, hook: useCheckbox, field: 'checked', prop: 'checked', initial: false, next: true },
+  { name: 'NumberInput.value', namespace: NumberInput, hook: useNumberInput, field: 'value', prop: 'modelValue', initial: '1', next: '2' },
+  { name: 'Combobox.value', namespace: Combobox, hook: useCombobox, field: 'value', prop: 'modelValue', initial: ['one'], next: ['two'], props: { collection } },
+  { name: 'Combobox.inputValue', namespace: Combobox, hook: useCombobox, field: 'inputValue', prop: 'inputValue', initial: 'one', next: 'two', props: { collection } },
+  { name: 'Dialog.open', namespace: Dialog, hook: useDialog, field: 'open', prop: 'open', initial: false, next: true, props: { modal: false, closeOnInteractOutside: false } },
+  { name: 'Calendar.value', namespace: Calendar, hook: useCalendar, field: 'value', prop: 'modelValue', initial: [parseDate('2026-01-01')], next: [parseDate('2026-02-02')] },
+  { name: 'Tree.selectedValue', namespace: Tree, hook: useTree, field: 'selectedValue', prop: 'selectedValue', initial: ['src'], next: ['lib'], props: { collection: createFileTreeCollection(['src/app.ts', 'lib/index.ts']) } },
+  { name: 'Tree.expandedValue', namespace: Tree, hook: useTree, field: 'expandedValue', prop: 'expandedValue', initial: ['src'], next: ['lib'], props: { collection: createFileTreeCollection(['src/app.ts', 'lib/index.ts']) } },
+]
+it('shared contract coverage includes every target field', () => assertOwnershipCoverage(sharedOwnershipCases.map(row => row.name)))
+for (const row of sharedOwnershipCases) {
+  for (const entry of entries) {
+    for (const scenario of ownershipScenarios) {
+      it(`shared contract: ${row.name} ${entry}: ${scenario.name}`, async () => {
+        const suffix = row.field[0].toUpperCase() + row.field.slice(1)
+        const callback = row.field === 'selectedValue' ? 'onSelectionChange' : row.field === 'expandedValue' ? 'onExpandedChange' : `on${suffix}Change`
+        const onChange = vi.fn()
+        const values = { initial: row.initial, next: row.next }
+        const format = (value: any) => JSON.stringify(row.name === 'Calendar.value' ? value.map(String) : value)
+        const instance = await fixture(row.namespace, row.hook, entry, {
+          ...row.props,
+          [row.prop]: scenario.controlled ? row.initial : undefined,
+          [`default${suffix}`]: values[scenario.defaultValue],
+          [callback]: onChange,
+        }, api => h('output', { 'data-contract': '' }, format(api[row.field])))
+        if (scenario.accept)
+          onChange.mockImplementation(details => instance.props[row.prop] = details[row.field])
+        const check = (value: unknown, requests: unknown[]) => vi.waitFor(() => assertOwnershipSnapshot({
+          api: format(instance.api[row.field]),
+          rendered: instance.container.querySelector('[data-contract]')?.textContent,
+          requests: onChange.mock.calls.map(([details]) => format(details[row.field])),
+        }, format(value), requests.map(format)))
+        await check(row.initial, [])
+        for (const step of scenario.steps) {
+          if (step.action === 'request')
+            instance.api[`set${suffix}`](values[step.value])
+          if (step.action === 'parent')
+            instance.props[row.prop] = values[step.value]
+          if (step.action === 'default')
+            instance.props[`default${suffix}`] = values[step.value]
+          if (step.action === 'rerender')
+            instance.props[row.field === 'open' ? 'closeOnEscape' : 'disabled'] = step.value === 'next'
+          await flush()
+          await check(values[step.expected], step.requests.map(value => values[value]))
+        }
+      })
+    }
+  }
+}
+
+it('shared dialog lifecycle: restores focus twice and disposes document listeners on unmount', async () => {
+  const onOpenChange = vi.fn()
+  const instance = await fixture(Dialog, useDialog, 'Root', { 'defaultOpen': false, 'preventScroll': false, 'aria-label': 'Contract dialog', onOpenChange }, api => [
+    h('button', { ...api.getTriggerProps(), 'data-contract-trigger': '' }, 'Open'),
+    h('div', api.getPositionerProps(), [h('div', api.getContentProps(), [h('button', api.getCloseTriggerProps(), 'Close')])]),
+  ])
+  const trigger = instance.container.querySelector<HTMLButtonElement>('[data-contract-trigger]')!
+  for (const close of ['api', 'escape']) {
+    trigger.focus()
+    trigger.click()
+    await vi.waitFor(() => expect(instance.api.open).toBe(true))
+    await vi.waitFor(() => expect(instance.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+    if (close === 'api')
+      instance.api.setOpen(false)
+    else
+      document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await vi.waitFor(() => {
+      expect(instance.api.open).toBe(false)
+      assertFocusRestored(trigger)
+    })
+  }
+  trigger.click()
+  await vi.waitFor(() => expect(instance.api.open).toBe(true))
+  await vi.waitFor(() => expect(instance.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+  instance.unmount()
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+  await new Promise(resolve => setTimeout(resolve, 35))
+  expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+})
+
+it('shared text editing: NumberInput preserves accepted partial text and caret', async () => {
+  const onValueChange = vi.fn()
+  const instance = await fixture(NumberInput, useNumberInput, 'Root', { defaultValue: '10', onValueChange }, api => h('input', api.getInputProps()))
+  const input = instance.container.querySelector('input')!
+  input.focus()
+  for (const value of ['1.', '1.2']) {
+    input.value = value
+    input.setSelectionRange(1, 1)
+    input.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }))
+    await flush()
+    await new Promise(resolve => setTimeout(resolve, 35))
+    assertTextSelection(input, value, 1)
+    expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value }))
   }
 })
