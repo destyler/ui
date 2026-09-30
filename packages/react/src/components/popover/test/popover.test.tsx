@@ -44,7 +44,7 @@ describe('[popover] component', () => {
   it('honors disabled Escape and outside dismissal while allowing explicit close', async () => {
     await render(<><button type="button">Outside</button><CloseBehavior /></>)
     await userEvent.click(page.getByRole('button', { name: 'Click Me' }))
-    const content = page.getByRole('dialog')
+    const content = page.getByRole('dialog', { includeHidden: true })
     await expect.element(content).toBeVisible()
     await userEvent.keyboard('{Escape}')
     await expect.element(content).toBeVisible()
@@ -53,6 +53,7 @@ describe('[popover] component', () => {
     const closeTrigger = page.getByRole('button', { name: 'close', exact: true })
     await expect.element(closeTrigger).toHaveTextContent('Close')
     await userEvent.click(closeTrigger)
+    await expect.element(content).toHaveAttribute('data-state', 'closed')
     await expect.element(content).not.toBeVisible()
   })
 })
