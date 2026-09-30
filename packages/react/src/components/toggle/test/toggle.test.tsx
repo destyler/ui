@@ -12,7 +12,7 @@ describe('[toggle] component', () => {
   })
 
   it.each(getExports(toggleAnatomy))('should export %s', async (part) => {
-    expect(Toggle[part]).toBeDefined()
+    expect(Toggle).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialValue example', async () => {

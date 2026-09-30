@@ -49,22 +49,20 @@ describe.each(entries)('migration: %s boundary', (entry) => {
       expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: true }))
     })
 
-    if (entry !== 'root') {
-      it(`${family}: controlled hook requests changes and waits for parent writeback`, async () => {
-        const onOpenChange = vi.fn()
-        const screen = await render(OpenFixture, { props: { family, entry, open: false, defaultOpen: true, onOpenChange } })
-        await screen.getByTestId('request-open').click()
-        await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: true })))
-        await expectOpen(screen, false, family)
-        await screen.rerender({ open: true })
-        await expectOpen(screen, true, family)
-        await screen.getByTestId('request-close').click()
-        await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: false })))
-        await expectOpen(screen, true, family)
-        await screen.rerender({ open: false })
-        await expectOpen(screen, false, family)
-      })
-    }
+    it(`${family}: controlled state requests changes and waits for parent writeback`, async () => {
+      const onOpenChange = vi.fn()
+      const screen = await render(OpenFixture, { props: { family, entry, open: false, defaultOpen: true, onOpenChange } })
+      await screen.getByTestId('request-open').click()
+      await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: true })))
+      await expectOpen(screen, false, family)
+      await screen.rerender({ open: true })
+      await expectOpen(screen, true, family)
+      await screen.getByTestId('request-close').click()
+      await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: false })))
+      await expectOpen(screen, true, family)
+      await screen.rerender({ open: false })
+      await expectOpen(screen, false, family)
+    })
   }
 
   it('keeps Calendar.defaultView initial-only after interaction and unrelated updates', async () => {
@@ -133,20 +131,18 @@ describe.each(entries)('migration: %s boundary', (entry) => {
     await expect.element(screen.getByTestId('api-editing')).toHaveTextContent(String(!edit))
   })
 
-  if (entry !== 'root') {
-    it('keeps controlled edit until its parent writes back', async () => {
-      const onEditChange = vi.fn()
-      const screen = await render(UiDefaultsFixture, { props: { family: 'edit', entry, defaultEdit: true, edit: false, onEditChange } })
-      await screen.getByTestId('request-edit').click()
-      expect(onEditChange).toHaveBeenLastCalledWith({ edit: true })
-      await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
-      await screen.rerender({ edit: true })
-      await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
-      await screen.getByTestId('request-submit').click()
-      expect(onEditChange).toHaveBeenLastCalledWith({ edit: false })
-      await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
-      await screen.rerender({ edit: false })
-      await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
-    })
-  }
+  it('keeps controlled edit until its parent writes back', async () => {
+    const onEditChange = vi.fn()
+    const screen = await render(UiDefaultsFixture, { props: { family: 'edit', entry, defaultEdit: true, edit: false, onEditChange } })
+    await screen.getByTestId('request-edit').click()
+    expect(onEditChange).toHaveBeenLastCalledWith({ edit: true })
+    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+    await screen.rerender({ edit: true })
+    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
+    await screen.getByTestId('request-submit').click()
+    expect(onEditChange).toHaveBeenLastCalledWith({ edit: false })
+    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
+    await screen.rerender({ edit: false })
+    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+  })
 })

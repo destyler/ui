@@ -5,6 +5,7 @@ import { getExports, getParts } from '../../../../../../utils/test'
 import AllParts from '../examples/AllParts.vue'
 import Basic from '../examples/Basic.vue'
 import Disabled from '../examples/Disabled.vue'
+import TextareaAutoresize from '../examples/TextareaAutoresize.vue'
 import { Field, fieldAnatomy } from '../index'
 
 describe('[field] component', () => {
@@ -16,7 +17,7 @@ describe('[field] component', () => {
   })
 
   it.each(getExports(fieldAnatomy))('should export %s', async (part) => {
-    expect(Field[part]).toBeDefined()
+    expect(Field).toHaveProperty(part, expect.anything())
   })
 
   it('should set textbox as required', async () => {
@@ -63,5 +64,24 @@ describe('[field] component', () => {
     render(Basic, { props: { modelValue: 'Input is controlled' } })
 
     await expect.element(page.getByRole('textbox', { name: /label/i })).toHaveValue('Input is controlled')
+  })
+
+  it('resizes the textarea as content grows and shrinks', async () => {
+    render(TextareaAutoresize)
+    const input = page.getByRole('textbox', { name: /label/i })
+    const textarea = document.querySelector('textarea')!
+    const initialHeight = textarea.getBoundingClientRect().height
+
+    await userEvent.type(input, Array.from({ length: 10 }, (_, index) => `Line ${index}`).join('\n'))
+    await vi.waitFor(() => {
+      expect(textarea.getBoundingClientRect().height).toBeGreaterThan(initialHeight)
+    })
+    const expandedHeight = textarea.getBoundingClientRect().height
+
+    await userEvent.clear(input)
+    await userEvent.type(input, 'Short')
+    await vi.waitFor(() => {
+      expect(textarea.getBoundingClientRect().height).toBeLessThan(expandedHeight)
+    })
   })
 })

@@ -18,7 +18,17 @@
   import { FloatingPanelProvider } from '../hooks/use-floating-panel-context.js'
   import { useFloatingPanel } from '../hooks/use-floating-panel.svelte.js'
 
-  let { open = $bindable(), position = $bindable(), size = $bindable(), ...props }: FloatingPanelRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable(),
+    open: openProp,
+    position = $bindable(),
+    position: positionProp,
+    size = $bindable(),
+    size: sizeProp,
+    ...props
+  }: FloatingPanelRootProps = $props()
   const providedId = $props.id()
 
   const [presenceProps, otherProps] = $derived(splitPresenceProps(props))
@@ -53,20 +63,20 @@
   const resolvedProps = $derived<UseFloatingPanelProps>({
     ...floatingPanelProps,
     id: floatingPanelProps.id ?? providedId,
-    open,
+    open: openProp,
     onOpenChange(details) {
       floatingPanelProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
-    position,
+    position: positionProp,
     onPositionChange(details) {
       floatingPanelProps.onPositionChange?.(details)
-      if (position !== undefined) position = details.position
+      position = details.position
     },
-    size,
+    size: sizeProp,
     onSizeChange(details) {
       floatingPanelProps.onSizeChange?.(details)
-      if (size !== undefined) size = details.size
+      size = details.size
     },
   })
 

@@ -16,7 +16,7 @@ describe('[tooltip] parts & exports', () => {
   })
 
   it.each(getExports(tooltipAnatomy))('should export %s', async (part) => {
-    expect(Tooltip[part]).toBeDefined()
+    expect(Tooltip).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialOpen example', async () => {

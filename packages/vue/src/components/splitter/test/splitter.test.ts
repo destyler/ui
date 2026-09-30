@@ -15,7 +15,7 @@ describe('[splitter] component', () => {
   })
 
   it.each(getExports(splitterAnatomy))('should export %s', async (part) => {
-    expect(Splitter[part]).toBeDefined()
+    expect(Splitter).toHaveProperty(part, expect.anything())
   })
 
   describe('basic example', () => {

@@ -1,12 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as navigationMenu from '@destyler/navigation-menu'
-import { normalizeProps } from '@destyler/react'
-import { useId } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { useEvent } from '~/hooks/use-event'
 import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { normalizeMachineProps } from '~/utils/normalize-machine-props'
+import { connectNavigationMenu } from './connect-navigation-menu'
 
 export interface UseNavigationMenuProps
   extends Optional<Omit<navigationMenu.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -20,6 +20,8 @@ export interface UseNavigationMenuProps
 export interface UseNavigationMenuReturn extends navigationMenu.Api<PropTypes> {}
 
 export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNavigationMenuReturn {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const { getRootNode } = useEnvironmentContext()
   const { dir } = useLocaleContext()
 
@@ -40,5 +42,5 @@ export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNaviga
   const [state, send] = useMachine(navigationMenu.machine(initialContext), {
     context,
   })
-  return navigationMenu.connect(state, send, normalizeProps)
+  return connectNavigationMenu(state, send, mounted)
 }

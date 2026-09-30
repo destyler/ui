@@ -14,7 +14,7 @@ describe('[collapsible] parts & exports', () => {
 
   it.each(getExports(collapsibleAnatomy))('should export %s', async (part) => {
     render(<Basic />)
-    expect(Collapsible[part]).toBeDefined()
+    expect(Collapsible).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialOpen example', async () => {

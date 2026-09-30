@@ -25,6 +25,6 @@ describe('[timer] component', () => {
   )
 
   it.each(exports)('should export %s', async (part) => {
-    expect(Timer[part]).toBeDefined()
+    expect(Timer).toHaveProperty(part, expect.anything())
   })
 })

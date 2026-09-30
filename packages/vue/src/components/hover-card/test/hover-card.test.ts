@@ -13,7 +13,7 @@ describe('[hover-card] component', () => {
   })
 
   it.each(getExports(hoverCardAnatomy))('should export %s', async (part) => {
-    expect(HoverCard[part]).toBeDefined()
+    expect(HoverCard).toHaveProperty(part, expect.anything())
   })
 
   it('should open on hover', async () => {

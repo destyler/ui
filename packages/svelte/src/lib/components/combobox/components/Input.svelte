@@ -7,6 +7,7 @@
 
 <script lang="ts">
   import { mergeProps } from '@destyler/svelte'
+  import { createInputValueSync } from '$lib/utils/sync-input-value'
   import { UI } from '../../factory'
   import { useFieldContext } from '../../field'
   import { useComboboxContext } from '../hooks/use-combobox-context'
@@ -15,7 +16,11 @@
 
   const combobox = useComboboxContext()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(combobox().getInputProps(), props))
+  const syncInputValue = createInputValueSync(() => combobox().getInputProps(), () => combobox().inputValue)
+  const mergedProps = $derived(mergeProps(combobox().getInputProps(), props, {
+    oninput: syncInputValue,
+    oncompositionend: syncInputValue,
+  }))
 </script>
 
 <UI as="input" aria-describedby={field?.()?.ariaDescribedby} {...mergedProps} />

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ToggleGroup } from '../index'
 
 export function Controlled() {
-  const [value, setValue] = useState('a')
+  const [value, setValue] = useState<string[]>(['a'])
 
   return (
     <ToggleGroup.Root value={value} onValueChange={({ value }) => setValue(value)}>

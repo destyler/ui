@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { RenderStrategyPropsProvider, useRenderStrategyProps } from '~/composables/use-render-strategy'
+import { computed } from 'vue'
+import { RenderStrategyPropsProvider } from '~/composables/use-render-strategy'
 import UseRenderStrategyConsumer from './UseRenderStrategyConsumer.vue'
 
 const props = withDefaults(defineProps<{

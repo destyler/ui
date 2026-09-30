@@ -1,9 +1,8 @@
 import type { ComponentPublicInstance } from 'vue'
 import { computed, getCurrentInstance, ref } from 'vue'
-import { unrefElement } from '../utils/unref-element'
 
-function isElement(el: any): el is Element {
-  return Object.prototype.hasOwnProperty.call(el, 'nodeName') && typeof el.nodeName === 'string'
+function isElement(el: unknown): el is Element {
+  return typeof el === 'object' && el !== null && 'nodeType' in el && el.nodeType === 1
 }
 
 export function useForwardExpose() {
@@ -11,14 +10,19 @@ export function useForwardExpose() {
 
   const currentRef = ref<Element | ComponentPublicInstance | null>()
 
-  const currentElement = computed<HTMLElement>(() => {
+  const currentElement = computed<Element | undefined>(() => {
+    const value = currentRef.value
+    const element: unknown = isElement(value) ? value : value?.$el
+    if (isElement(element))
+      return element
+
     // $el could be text/comment for non-single root normal or text root, thus we retrieve the nextElementSibling
-    // @ts-expect-error ignore ts error
-    return ['#text', '#comment'].includes(currentRef.value?.$el.nodeName)
-      // @ts-expect-error ignore ts error
-      ? currentRef.value?.$el.nextElementSibling
-      // @ts-expect-error ignore ts error
-      : unrefElement(currentRef)
+    if (element && typeof element === 'object' && 'nodeType' in element
+      && (element.nodeType === 3 || element.nodeType === 8)
+      && 'nextElementSibling' in element && isElement(element.nextElementSibling)) {
+      return element.nextElementSibling
+    }
+    return undefined
   })
 
   // localExpose should only be assigned once else will create infinite loop
@@ -49,25 +53,13 @@ export function useForwardExpose() {
   Object.defineProperty(ret, '$el', {
     enumerable: true,
     configurable: true,
-    get: () => instance.vnode.el,
+    get: () => currentElement.value ?? instance.vnode.el,
   })
 
   instance.exposed = ret
 
   function forwardRef(ref: Element | ComponentPublicInstance | null) {
     currentRef.value = ref
-
-    if (isElement(ref) || !ref)
-      return
-
-    // retrieve the forwarded element
-    Object.defineProperty(ret, '$el', {
-      enumerable: true,
-      configurable: true,
-      get: () => ref.$el,
-    })
-
-    instance.exposed = ret
   }
 
   return { forwardRef, currentRef, currentElement }

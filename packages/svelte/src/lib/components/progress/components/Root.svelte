@@ -13,7 +13,13 @@
   import { ProgressProvider } from '../hooks/use-progress-context'
   import { useProgress } from '../hooks/use-progress.svelte'
 
-  let { value = $bindable(), ...props }: ProgressRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: ProgressRootProps = $props()
   const providedId = $props.id()
 
   const [useProgressProps, localProps] = $derived(
@@ -32,7 +38,7 @@
   const resolvedProps = $derived<UseProgressProps>({
     ...useProgressProps,
     id: useProgressProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       value = details.value
       useProgressProps.onValueChange?.(details)

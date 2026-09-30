@@ -13,7 +13,7 @@ describe('[dialog] component', () => {
   })
 
   it.each(getExports(dialogAnatomy))('should export %s', async (part) => {
-    expect(Dialog[part]).toBeDefined()
+    expect(Dialog).toHaveProperty(part, expect.anything())
   })
 
   it('should show dialog content when opened', async () => {

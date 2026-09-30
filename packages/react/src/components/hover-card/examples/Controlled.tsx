@@ -7,7 +7,7 @@ export function Controlled() {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open HoverCard</button>
-      <HoverCard.Root open={open} onOpenChange={setOpen}>
+      <HoverCard.Root open={open} onOpenChange={({ open }) => setOpen(open)}>
         <HoverCard.Trigger>Hover me</HoverCard.Trigger>
         <HoverCard.Positioner>
           <HoverCard.Content>

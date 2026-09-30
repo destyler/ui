@@ -18,11 +18,17 @@
   import { useCalendar } from '../hooks/use-calendar.svelte.js'
   import { CalendarProvider } from '../hooks/use-calendar-context.js'
 
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
   let {
     value = $bindable(),
+    value: valueProp,
     focusedValue = $bindable(),
+    focusedValue: focusedValueProp,
     open = $bindable(),
+    open: openProp,
     view = $bindable(),
+    view: viewProp,
     ...props
   }: CalendarRootProps = $props()
   const providedId = $props.id()
@@ -69,25 +75,25 @@
   const resolvedProps = $derived<UseCalendarProps>({
     ...useCalendarProps,
     id: useCalendarProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useCalendarProps.onValueChange?.(details)
-      if (value !== undefined) value = details.value
+      value = details.value
     },
-    focusedValue,
+    focusedValue: focusedValueProp,
     onFocusChange(details) {
       useCalendarProps.onFocusChange?.(details)
-      if (focusedValue !== undefined) focusedValue = details.focusedValue
+      focusedValue = details.focusedValue
     },
-    open,
+    open: openProp,
     onOpenChange(details) {
       useCalendarProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
-    view,
+    view: viewProp,
     onViewChange(details) {
       useCalendarProps.onViewChange?.(details)
-      if (view !== undefined) view = details.view
+      view = details.view
     },
   })
 

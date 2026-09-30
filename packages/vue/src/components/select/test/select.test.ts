@@ -14,7 +14,7 @@ describe('[select] component', () => {
   })
 
   it.each(getExports(selectAnatomy))('should export %s', async (part) => {
-    expect(Select[part]).toBeDefined()
+    expect(Select).toHaveProperty(part, expect.anything())
   })
 
   it('should handle item selection', async () => {

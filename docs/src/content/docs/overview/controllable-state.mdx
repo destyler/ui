@@ -103,6 +103,10 @@ export function ControlledExamples() {
 
 Solid mirrors React (`open={open()}` + `onOpenChange`). Svelte uses `bind:open`, `bind:checked`, `bind:value`, and similar bindable props on the root.
 
+In Svelte, a plain presence-controlled live prop is one-way: the component keeps the parent's value until the parent accepts a change request and writes it back. With `bind:*`, change requests update the bound parent state; a function binding can reject a request by leaving that state unchanged. This veto applies to presence-controlled fields, not the mutable-core fields described below.
+
+Initialize bound state when you need controlled ownership. A binding whose initial value is `undefined` still receives interaction updates, but starts uncontrolled. Binding updates do not change the initial ownership mode.
+
 ## Important: no more `*.controlled` flags
 
 :::caution
@@ -121,6 +125,12 @@ Calendar's `defaultView` selects the initial day, month, or year view. Edit's `d
 ## Dynamic, QR Code, and Progress
 
 These core machines do **not** expose a presence-controlled `defaultValue` API the same way interactive inputs do. Destyler UI maps `defaultValue` to an initial value once; an explicit live `value`, including an empty value, takes priority. Later live values synchronize into the machine, but withholding callback writeback does not veto internal API updates. For a read-only Progress or QR Code display, drive the value from your own state.
+
+Dynamic's `inputValue` follows the same mutable synchronization contract.
+
+### Other synchronized fields
+
+Calendar's `view` and `focusedValue`, FloatingPanel's `position` and `size`, and Tree's `focusedValue` also synchronize incoming values without presence-controlled ownership in core 0.2.7. Their callbacks report internal changes; withholding writeback does not veto those changes. This does not affect the controlled contract for Calendar's `open`/`value`, FloatingPanel's `open`, or Tree's `expandedValue`/`selectedValue`.
 
 ## Related
 

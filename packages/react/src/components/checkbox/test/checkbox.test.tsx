@@ -26,7 +26,7 @@ describe('[checkbox] component', () => {
 
   it.each(getExports(checkboxAnatomy))('should export %s', async (part) => {
     render(<Basic />)
-    expect(Checkbox[part]).toBeDefined()
+    expect(Checkbox).toHaveProperty(part, expect.anything())
   })
 
   it('should handle check and unchecked', async () => {
@@ -96,6 +96,46 @@ describe('[checkbox] component', () => {
     await expect.element(checkbox).toBeChecked()
     await userEvent.click(page.getByText('Undefined live checkbox'))
     await expect.element(checkbox).not.toBeChecked()
+  })
+
+  it('native form reset restores the original default across later default prop changes', async () => {
+    function ResetExample({ defaultChecked }: { defaultChecked: boolean }) {
+      return (
+        <form>
+          <Checkbox.Root defaultChecked={defaultChecked}>
+            <Checkbox.Label>Reset checkbox</Checkbox.Label>
+            <Checkbox.Control data-testid="reset-control" />
+            <Checkbox.HiddenInput />
+            <Checkbox.Context>{api => <output data-testid="reset-state">{String(api.checked)}</output>}</Checkbox.Context>
+          </Checkbox.Root>
+          <button type="reset">Reset form</button>
+        </form>
+      )
+    }
+
+    const screen = await render(<ResetExample defaultChecked />)
+    const checkbox = page.getByRole('checkbox', { name: 'Reset checkbox' })
+    const control = page.getByTestId('reset-control')
+    const state = page.getByTestId('reset-state')
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Reset checkbox', { exact: true }))
+    await expect.element(checkbox).not.toBeChecked()
+    await expect.element(control).toHaveAttribute('data-state', 'unchecked')
+    await expect.element(state).toHaveTextContent('false')
+
+    await screen.rerender(<ResetExample defaultChecked={false} />)
+    await expect.element(checkbox).not.toBeChecked()
+    await userEvent.click(page.getByRole('button', { name: 'Reset form' }))
+    await expect.element(checkbox).toBeChecked()
+    await expect.element(control).toHaveAttribute('data-state', 'checked')
+    await expect.element(state).toHaveTextContent('true')
+
+    await userEvent.click(page.getByText('Reset checkbox', { exact: true }))
+    await expect.element(state).toHaveTextContent('false')
+    await userEvent.click(page.getByRole('button', { name: 'Reset form' }))
+    await expect.element(checkbox).toBeChecked()
+    await expect.element(control).toHaveAttribute('data-state', 'checked')
+    await expect.element(state).toHaveTextContent('true')
   })
 })
 

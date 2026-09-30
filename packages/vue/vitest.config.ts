@@ -7,7 +7,7 @@ export default mergeConfig(
   defineConfig({
     test: {
       name: 'vue',
-      exclude: [...configDefaults.exclude, '**/*.ssr.test.ts'],
+      exclude: [...configDefaults.exclude, '**/*.ssr.test.ts', '**/*.unit.test.ts'],
       environment: 'happy-dom',
       browser: {
         enabled: true,

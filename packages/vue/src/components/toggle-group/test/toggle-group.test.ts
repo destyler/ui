@@ -13,7 +13,7 @@ describe('[toggle-group] component', () => {
   })
 
   it.each(getExports(toggleGroupAnatomy))('should export %s', async (part) => {
-    expect(ToggleGroup[part]).toBeDefined()
+    expect(ToggleGroup).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialValue example', async () => {

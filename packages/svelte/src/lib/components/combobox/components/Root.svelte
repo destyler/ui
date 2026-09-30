@@ -20,10 +20,15 @@
   import { ComboboxProvider } from '../hooks/use-combobox-context'
   import { useCombobox } from '../hooks/use-combobox.svelte'
 
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
   let {
     open = $bindable<boolean>(),
+    open: openProp,
     value = $bindable<string[]>(),
+    value: valueProp,
     inputValue = $bindable<string>(),
+    inputValue: inputValueProp,
     ...props
   }: ComboboxRootProps<T> = $props()
 
@@ -78,20 +83,20 @@
   const machineProps = $derived.by<UseComboboxProps<T>>(() => ({
     ...useComboboxProps,
     id: useComboboxProps.id ?? id,
-    open,
-    value,
-    inputValue,
+    open: openProp,
+    value: valueProp,
+    inputValue: inputValueProp,
     onOpenChange(details) {
       useComboboxProps.onOpenChange?.(details)
-      if (open != null) open = details.open
+      open = details.open
     },
     onValueChange(details) {
       useComboboxProps.onValueChange?.(details)
-      if (value != null) value = details.value
+      value = details.value
     },
     onInputValueChange(details) {
       useComboboxProps.onInputValueChange?.(details)
-      if (inputValue != null) inputValue = details.inputValue
+      inputValue = details.inputValue
     },
   }))
 

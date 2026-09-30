@@ -13,7 +13,7 @@ describe('[pagination] component', () => {
   })
 
   it.each(getExports(paginationAnatomy))('should export %s', async (part) => {
-    expect(Pagination[part]).toBeDefined()
+    expect(Pagination).toHaveProperty(part, expect.anything())
   })
 
   it('should update page when item is clicked', async () => {

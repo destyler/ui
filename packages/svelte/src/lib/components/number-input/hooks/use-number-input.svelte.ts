@@ -6,7 +6,9 @@ import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
+import { createInputValueSync } from '$lib/utils/sync-input-value'
 import * as numberInput from '@destyler/number-input'
+import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 
@@ -52,7 +54,47 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
       return machineProps.context as numberInput.Context
     },
   })
-  const api = $derived(numberInput.connect(state, send, normalizeProps))
+  let isEditingInput = $state(false)
+  const getInputValue = () => state.hasTag('focus') && isEditingInput ? state.context.value : state.context.formattedValue
+  const syncInputValue = createInputValueSync(
+    () => ({ value: getInputValue() }),
+    () => state.context.value,
+  )
+  const api = $derived.by(() => {
+    const connected = numberInput.connect(state, send, normalizeProps)
+    return {
+      ...connected,
+      getInputProps() {
+        const inputProps = connected.getInputProps()
+        // Core exposes a formatted defaultValue, but Svelte applies it as a
+        // live value. Keep the core's raw text during native editing so partial
+        // numbers such as "1." are not reformatted during accepted input.
+        return mergeProps(
+          inputProps,
+          {
+            value: getInputValue(),
+            oninput(event: Event) {
+              if ((event as InputEvent).isComposing)
+                return
+              isEditingInput = true
+              void syncInputValue(event)
+            },
+            oncompositionend(event: Event) {
+              const input = event.currentTarget as HTMLInputElement
+              if (input.value === state.context.value) {
+                isEditingInput = true
+                return
+              }
+              void syncInputValue(event)
+            },
+            onfocusout() {
+              isEditingInput = false
+            },
+          },
+        )
+      },
+    }
+  })
 
   return () => api
 }

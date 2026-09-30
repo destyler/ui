@@ -13,7 +13,7 @@ describe('[popover] component', () => {
   })
 
   it.each(getExports(popoverAnatomy))('should export %s', async (part) => {
-    expect(Popover[part]).toBeDefined()
+    expect(Popover).toHaveProperty(part, expect.anything())
   })
 
   it('should open and close the popover', async () => {

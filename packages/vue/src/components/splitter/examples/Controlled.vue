@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { PanelSizeData } from '@destyler/splitter'
 import { Splitter } from '../index'
 import { ref } from 'vue'
 
-const size = ref([
+const size = ref<PanelSizeData[]>([
   { id: 'a', size: 50 },
   { id: 'b', size: 50 },
 ])

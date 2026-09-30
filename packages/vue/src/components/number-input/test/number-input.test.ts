@@ -13,7 +13,7 @@ describe('[number-input] component', () => {
   })
 
   it.each(getExports(numberInputAnatomy))('should export %s', async (part) => {
-    expect(NumberInput[part]).toBeDefined()
+    expect(NumberInput).toHaveProperty(part, expect.anything())
   })
 
   it('should handle wheel event when allowMouseWheel is true', async () => {

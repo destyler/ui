@@ -12,7 +12,7 @@ describe('[fieldset] component', () => {
   })
 
   it.each(getExports(fieldsetAnatomy))('should export %s', async (part) => {
-    expect(Fieldset[part]).toBeDefined()
+    expect(Fieldset).toHaveProperty(part, expect.anything())
   })
 
   it('should set textbox as disabled', async () => {

@@ -26,7 +26,7 @@ describe('[checkbox] component', () => {
 
   it.each(getExports(checkboxAnatomy))('should export %s', async (part) => {
     render(Basic)
-    expect(Checkbox[part]).toBeDefined()
+    expect(Checkbox).toHaveProperty(part, expect.anything())
   })
 
   it('should handle check and unchecked', async () => {

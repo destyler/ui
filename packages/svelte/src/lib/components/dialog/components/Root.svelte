@@ -17,7 +17,14 @@
   import { DialogProvider } from '../hooks/use-dialog-context'
   import { useDialog } from '../hooks/use-dialog.svelte'
 
-  let { open = $bindable(), children, ...props }: DialogRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable(),
+    open: openProp,
+    children,
+    ...props
+  }: DialogRootProps = $props()
 
   const providedId = $props.id()
 
@@ -28,10 +35,10 @@
     return {
       ...localProps,
       id: localProps.id ?? providedId,
-      open,
+      open: openProp,
       onOpenChange(details) {
         localProps.onOpenChange?.(details)
-        if (open !== undefined) open = details.open
+        open = details.open
       },
     }
   })

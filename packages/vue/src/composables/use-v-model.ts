@@ -33,24 +33,25 @@ export interface UseVModelOptions<T, Passive extends boolean = false> {
   defaultValue?: T
 }
 
-export function useVModel<P extends object, K extends keyof P, Name extends string>(
+// Optional initial props may read as undefined while writes and emitted values have a narrower type.
+export function useVModel<P extends object, K extends keyof P, Name extends string, Value extends P[K] = P[K]>(
   props: P,
   key?: K,
-  emit?: (name: Name, ...args: any[]) => void,
+  emit?: (name: Name, value: Value) => void,
   options?: UseVModelOptions<P[K], false>,
-): WritableComputedRef<NonNullable<P[K]>>
+): WritableComputedRef<NonNullable<P[K]>, Value>
 
-export function useVModel<P extends object, K extends keyof P, Name extends string>(
+export function useVModel<P extends object, K extends keyof P, Name extends string, Value extends P[K] = P[K]>(
   props: P,
   key?: K,
-  emit?: (name: Name, ...args: undefined[]) => void,
+  emit?: (name: Name, value: Value) => void,
   options?: UseVModelOptions<P[K], true>,
-): Ref<UnwrapRef<P[K]>>
+): Ref<UnwrapRef<P[K]>, Value>
 
-export function useVModel<P extends object, K extends keyof P, Name extends string, Passive extends boolean>(
+export function useVModel<P extends object, K extends keyof P, Name extends string, Passive extends boolean, Value extends P[K] = P[K]>(
   props: P,
   key?: K,
-  emit?: (name: Name, ...args: undefined[]) => void,
+  emit?: (name: Name, value: Value) => void,
   options: UseVModelOptions<P[K], Passive> = {},
 ) {
   const { passive = false, eventName, defaultValue } = options
@@ -62,7 +63,7 @@ export function useVModel<P extends object, K extends keyof P, Name extends stri
   const prop = key || ('modelValue' as K)
   const getValue = () => props[prop] ?? defaultValue
 
-  const triggerEmit = (value: P[K]) => {
+  const triggerEmit = (value: Value) => {
     if (!eventName) {
       _emit(eventName || `update:${prop.toString()}`, value)
       //
@@ -95,14 +96,14 @@ export function useVModel<P extends object, K extends keyof P, Name extends stri
 
     watch(proxy, (v) => {
       if (!isUpdating && v !== props[prop]) {
-        triggerEmit(v as P[K])
+        triggerEmit(v as Value)
       }
     })
 
     return proxy
   }
 
-  return computed<P[K]>({
+  return computed<P[K], Value>({
     get() {
       return getValue() as P[K]
     },

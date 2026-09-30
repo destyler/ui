@@ -14,7 +14,7 @@ describe('[switch] component', () => {
   })
 
   it.each(getExports(switchAnatomy))('should export %s', async (part) => {
-    expect(Switch[part]).toBeDefined()
+    expect(Switch).toHaveProperty(part, expect.anything())
   })
 
   it('should show invalid attribute when invalid', async () => {

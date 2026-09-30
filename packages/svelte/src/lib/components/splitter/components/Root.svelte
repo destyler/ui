@@ -14,7 +14,13 @@
   import { SplitterProvider } from '../hooks/use-splitter-context'
   import { useSplitter } from '../hooks/use-splitter.svelte'
 
-  let { size = $bindable<PanelSizeData[]>(), ...props }: SplitterRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    size = $bindable<PanelSizeData[]>(),
+    size: sizeProp,
+    ...props
+  }: SplitterRootProps = $props()
 
   const [useSplitterProps, localProps] = $derived(splitSplitterProps(props))
 
@@ -23,10 +29,10 @@
   const machineProps = $derived.by(() => ({
     ...useSplitterProps,
     id: useSplitterProps.id ?? id,
-    size,
+    size: sizeProp,
     onSizeChange: (details: SizeChangeDetails) => {
       useSplitterProps.onSizeChange?.(details)
-      if (size !== undefined) size = details.size
+      size = details.size
     },
   }))
 

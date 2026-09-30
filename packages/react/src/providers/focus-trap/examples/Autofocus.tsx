@@ -11,7 +11,7 @@ export function Autofocus() {
         {trapped ? 'End Trap' : 'Start Trap'}
       </button>
       {trapped && (
-        <FocusTrap disabled={!trapped} setReturnFocus={buttonRef.current}>
+        <FocusTrap disabled={!trapped} setReturnFocus={() => buttonRef.current ?? false}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingBlock: '1rem' }}>
             <input type="text" placeholder="Regular input" />
             <input type="text" placeholder="Autofocused input" autoFocus />

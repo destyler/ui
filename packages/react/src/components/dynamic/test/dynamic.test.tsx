@@ -15,7 +15,7 @@ describe('[dynamic] component', () => {
   })
 
   it.each(getExports(dynamicAnatomy))('should export %s', async (part) => {
-    expect(Dynamic[part]).toBeDefined()
+    expect(Dynamic).toHaveProperty(part, expect.anything())
   })
 
   it('should clear all item when clear all button is clicked', async () => {

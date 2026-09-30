@@ -12,6 +12,6 @@ describe('[clipboard] component', () => {
 
   it.each(getExports(clipboardAnatomy))('should export %s', async (part) => {
     render(Basic)
-    expect(Clipboard[part]).toBeDefined()
+    expect(Clipboard).toHaveProperty(part, expect.anything())
   })
 })

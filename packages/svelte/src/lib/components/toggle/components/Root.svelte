@@ -13,7 +13,13 @@
   import { useToggle } from '../hooks/use-toggle.svelte'
   import { ToggleProvider } from '../hooks/use-toggle-context'
 
-  let { pressed = $bindable<boolean>(), ...props }: ToggleRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    pressed = $bindable<boolean>(),
+    pressed: pressedProp,
+    ...props
+  }: ToggleRootProps = $props()
 
   const [useToggleProps, localProps] = $derived(
     createSplitProps<UseToggleProps>()(props, ['pressed', 'defaultPressed', 'disabled', 'onPressedChange']),
@@ -21,7 +27,7 @@
 
   const machineProps = $derived.by<UseToggleProps>(() => ({
     ...useToggleProps,
-    pressed,
+    pressed: pressedProp,
     onPressedChange(nextPressed) {
       useToggleProps.onPressedChange?.(nextPressed)
       pressed = nextPressed

@@ -23,7 +23,7 @@ describe('[otp-input] component', () => {
   })
 
   it.each(getExports(otpInputAnatomy))('should export %s', async (part) => {
-    expect(OtpInput[part]).toBeDefined()
+    expect(OtpInput).toHaveProperty(part, expect.anything())
   })
 
   it('should have the proper aria labels', async () => {

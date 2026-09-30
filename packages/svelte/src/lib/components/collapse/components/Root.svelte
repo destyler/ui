@@ -21,7 +21,13 @@
   import { CollapseProvider } from '../hooks/use-collapse-context'
   import { useCollapse } from '../hooks/use-collapse.svelte'
 
-  let { value = $bindable(), ...props }: CollapseRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: CollapseRootProps = $props()
   const providedId = $props.id()
 
   const [renderStrategyProps, collapseProps] = $derived(splitRenderStrategyProps(props))
@@ -43,10 +49,10 @@
   const resolvedProps = $derived<UseCollapseProps>({
     ...useCollapseProps,
     id: useCollapseProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useCollapseProps.onValueChange?.(details)
-      if (value !== undefined) value = details.value
+      value = details.value
     },
   })
 

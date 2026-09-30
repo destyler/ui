@@ -14,7 +14,7 @@ export const NavigationMenuContent = forwardRef<HTMLDivElement, NavigationMenuCo
   const { value, ...restProps } = props
   const navigationMenu = useNavigationMenuContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(navigationMenu.getContentProps({ value }), presence.getPresenceProps(), restProps)
+  const mergedProps = mergeProps<HTMLProps<'div'>>(presence.getPresenceProps(), navigationMenu.getContentProps({ value }), restProps)
 
   if (presence.unmounted) {
     return null

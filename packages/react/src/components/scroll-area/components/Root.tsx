@@ -13,13 +13,13 @@ export interface ScrollAreaRootProps extends Assign<HTMLProps<'div'>, ScrollArea
 
 export const ScrollAreaRoot = forwardRef<HTMLDivElement, ScrollAreaRootProps>((props, ref) => {
   const [useScrollAreaProps, localProps] = createSplitProps<UseScrollAreaProps>()(props, [
+    'defaultScrollTop',
+    'defaultScrollLeft',
     'id',
     'ids',
     'scrollHideDelay',
     'type',
-    'dir',
     'virtual',
-    'getRootNode',
     'onScroll',
   ])
   const scrollArea = useScrollArea(useScrollAreaProps)

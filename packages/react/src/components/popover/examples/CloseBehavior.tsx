@@ -2,7 +2,7 @@ import { Popover } from '../index'
 
 export function CloseBehavior() {
   return (
-    <Popover.Root closeOnEsc={false} closeOnInteractOutside={false}>
+    <Popover.Root closeOnEscape={false} closeOnInteractOutside={false}>
       <Popover.Trigger>Click Me</Popover.Trigger>
       <Popover.Positioner>
         <Popover.Content>

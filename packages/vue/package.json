@@ -27,6 +27,8 @@
   },
   "scripts": {
     "build": "tsdown",
+    "check": "vue-tsc --noEmit",
+    "test:unit": "vitest run --config vitest.unit.config.ts",
     "dev": "tsdown --watch",
     "debug": "tsdown --debug",
     "prepublishOnly": "pnpm run build",

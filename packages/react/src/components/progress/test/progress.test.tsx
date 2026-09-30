@@ -20,7 +20,7 @@ describe('[progress] component', () => {
   })
 
   it.each(getExports(progressAnatomy))('should export %s', (part) => {
-    expect(Progress[part]).toBeDefined()
+    expect(Progress).toHaveProperty(part, expect.anything())
   })
 
   it('seeds defaultValue when live value is omitted', async () => {

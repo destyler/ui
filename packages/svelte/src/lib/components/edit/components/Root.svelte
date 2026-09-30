@@ -13,7 +13,15 @@
   import { EditProvider } from '../hooks/use-edit-context'
   import { useEdit } from '../hooks/use-edit.svelte'
 
-  let { value = $bindable(), edit = $bindable(), ...props }: EditRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    edit = $bindable(),
+    edit: editProp,
+    ...props
+  }: EditRootProps = $props()
 
   const providedId = $props.id()
 
@@ -23,16 +31,15 @@
     return {
       ...useEditProps,
       id: useEditProps.id ?? providedId,
-      value,
-      edit,
+      value: valueProp,
+      edit: editProp,
       onValueChange(details) {
         useEditProps.onValueChange?.(details)
         value = details.value
       },
       onEditChange(details) {
         useEditProps.onEditChange?.(details)
-        if (edit !== undefined)
-          edit = details.edit
+        edit = details.edit
       },
     }
   })

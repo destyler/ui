@@ -16,7 +16,7 @@ describe('[radio] component', () => {
   })
 
   it.each(getExports(radioAnatomy))('should export %s', async (part) => {
-    expect(Radio[part]).toBeDefined()
+    expect(Radio).toHaveProperty(part, expect.anything())
   })
 
   it('should render radio items with correct labels', async () => {

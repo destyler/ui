@@ -14,9 +14,12 @@
   import { useRequiredMenuContext } from '../hooks/use-menu-context'
   import { MenuItemGroupProvider, type ValueChangeDetails } from '../hooks/use-menu-item-group-context'
 
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
   let {
     id: providedId,
     value = $bindable<string>(),
+    value: valueProp,
     onValueChange,
     ...localProps
   }: MenuRadioItemGroupProps = $props()
@@ -25,9 +28,9 @@
   const menu = useRequiredMenuContext()
   const itemGroupProps = $derived({
     id: providedId ?? generatedId,
-    value,
+    value: valueProp,
     onValueChange(details: ValueChangeDetails) {
-      if (value !== undefined) value = details.value
+      value = details.value
       onValueChange?.(details)
     },
   })

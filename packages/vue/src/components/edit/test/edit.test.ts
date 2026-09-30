@@ -15,7 +15,7 @@ describe('[edit] component', () => {
   })
 
   it.each(getExports(editAnatomy))('should export %s', async (part) => {
-    expect(Edit[part]).toBeDefined()
+    expect(Edit).toHaveProperty(part, expect.anything())
   })
 
   it('should be possible to focus the placeholder and enter a value', async () => {

@@ -3,7 +3,6 @@
     "target": "esnext",
     "lib": ["es2023", "DOM"],
     "moduleDetection": "force",
-    "baseUrl": ".",
     "module": "preserve",
     "moduleResolution": "bundler",
     "paths": {

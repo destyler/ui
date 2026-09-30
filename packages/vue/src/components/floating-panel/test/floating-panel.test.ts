@@ -14,7 +14,7 @@ describe('[floating-panel] component', () => {
   })
 
   it.each(getExports(floatingPanelAnatomy))('should export %s', async (part) => {
-    expect(FloatingPanel[part]).toBeDefined()
+    expect(FloatingPanel).toHaveProperty(part, expect.anything())
   })
 
   it('should open panel when trigger is clicked', async () => {

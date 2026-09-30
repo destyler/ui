@@ -17,7 +17,7 @@ describe('[qr-code] component', () => {
   })
 
   it.each(getExports(qrCodeAnatomy))('should export %s', async (part) => {
-    expect(QrCode[part]).toBeDefined()
+    expect(QrCode).toHaveProperty(part, expect.anything())
   })
 
   it('should render the pattern path for the provided value', async () => {

@@ -8,6 +8,7 @@
 
 <script lang="ts">
   import { mergeProps } from '@destyler/svelte'
+  import { createInputValueSync } from '$lib/utils/sync-input-value'
   import { createSplitProps } from '../../../utils/create-split-props'
   import { UI } from '../../factory'
   import { useOtpInputContext } from '../hooks/use-otp-input-context'
@@ -17,7 +18,11 @@
 
   const [inputProps, localProps] = $derived(createSplitProps<InputProps>()(props, ['index']))
 
-  const mergedProps = $derived(mergeProps(otpInput().getInputProps(inputProps), localProps))
+  const syncInputValue = createInputValueSync(() => otpInput().getInputProps(inputProps), () => otpInput().value)
+  const mergedProps = $derived(mergeProps(otpInput().getInputProps(inputProps), localProps, {
+    oninput: syncInputValue,
+    oncompositionend: syncInputValue,
+  }))
 </script>
 
 <UI as="input" {...mergedProps} />

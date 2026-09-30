@@ -13,7 +13,7 @@ describe('[calendar] component', () => {
   })
 
   it.each(getExports(calendarAnatomy))('should export %s', async (part) => {
-    expect(Calendar[part]).toBeDefined()
+    expect(Calendar).toHaveProperty(part, expect.anything())
   })
 
   it('should be able to lazy mount', async () => {

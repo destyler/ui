@@ -15,7 +15,7 @@ describe('[hover-card] parts & exports', () => {
   })
 
   it.each(getExports(hoverCardAnatomy))('should export %s', async (part) => {
-    expect(HoverCard[part]).toBeDefined()
+    expect(HoverCard).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialOpen example', async () => {
@@ -47,6 +47,20 @@ describe('[hover-card] functionality', () => {
 
     await userEvent.click(toggleButton)
     await expect.element(page.getByText('Content')).toBeVisible()
+
+    await userEvent.keyboard('{Escape}')
+    await expect.element(page.getByText('Content')).not.toBeVisible()
+
+    const trigger = page.getByText('Hover me')
+    await userEvent.hover(trigger)
+    await expect.element(page.getByText('Content')).toBeVisible()
+    await userEvent.unhover(trigger)
+    await expect.element(page.getByText('Content')).not.toBeVisible()
+
+    await userEvent.click(toggleButton)
+    await expect.element(page.getByText('Content')).toBeVisible()
+    await userEvent.keyboard('{Escape}')
+    await expect.element(page.getByText('Content')).not.toBeVisible()
   })
 
   it('should open via api', async () => {

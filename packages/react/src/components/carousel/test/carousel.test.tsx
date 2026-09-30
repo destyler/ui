@@ -13,7 +13,7 @@ describe('[carousel] component', () => {
   })
 
   it.each(getExports(carouselAnatomy))('should export %s', async (part) => {
-    expect(Carousel[part]).toBeDefined()
+    expect(Carousel).toHaveProperty(part, expect.anything())
   })
 
   it('should have the correct disabled / enabled states for control buttons', async () => {

@@ -11,6 +11,6 @@ describe('[file-upload] component', () => {
   })
 
   it.each(getExports(fileUploadAnatomy))('should export %s', (part) => {
-    expect(FileUpload[part]).toBeDefined()
+    expect(FileUpload).toHaveProperty(part, expect.anything())
   })
 })

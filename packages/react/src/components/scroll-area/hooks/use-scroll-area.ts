@@ -3,6 +3,7 @@ import type { Optional } from '~/types'
 import { normalizeProps, useMachine } from '@destyler/react'
 import * as scrollArea from '@destyler/scroll-area'
 import { useId } from 'react'
+import { useEffectOnce } from '~/hooks/use-effect-once'
 import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 
@@ -24,16 +25,13 @@ export interface UseScrollAreaReturn extends scrollArea.Api<PropTypes> {}
 export function useScrollArea(props: UseScrollAreaProps = {}): UseScrollAreaReturn {
   const { getRootNode } = useEnvironmentContext()
   const { dir } = useLocaleContext()
+  const { defaultScrollTop, defaultScrollLeft, ...machineProps } = props
 
   const initialContext: scrollArea.Context = {
     id: useId(),
     dir,
     getRootNode,
-    scrollHideDelay: props.scrollHideDelay,
-    type: props.type,
-    virtual: props.virtual,
-    ids: props.ids,
-    ...props,
+    ...machineProps,
   }
 
   const context: scrollArea.Context = {
@@ -45,5 +43,13 @@ export function useScrollArea(props: UseScrollAreaProps = {}): UseScrollAreaRetu
     context,
   })
 
-  return scrollArea.connect(state, send, normalizeProps)
+  const api = scrollArea.connect(state, send, normalizeProps)
+
+  useEffectOnce(() => {
+    if (defaultScrollTop !== undefined || defaultScrollLeft !== undefined) {
+      api.scrollTo({ top: defaultScrollTop, left: defaultScrollLeft })
+    }
+  })
+
+  return api
 }

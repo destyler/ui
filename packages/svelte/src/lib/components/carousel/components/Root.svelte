@@ -13,7 +13,13 @@
   import { CarouselProvider } from '../hooks/use-carousel-context'
   import { createSplitProps } from '$lib/utils/create-split-props'
 
-  let { page = $bindable(), ...props }: CarouselRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    page = $bindable(),
+    page: pageProp,
+    ...props
+  }: CarouselRootProps = $props()
   const providedId = $props.id()
 
   const [useCarouselProps, localProps] = $derived(
@@ -43,10 +49,10 @@
   const resolvedProps = $derived<UseCarouselProps>({
     ...useCarouselProps,
     id: useCarouselProps.id ?? providedId,
-    page,
+    page: pageProp,
     onPageChange(details) {
       useCarouselProps.onPageChange?.(details)
-      if (page !== undefined) page = details.page
+      page = details.page
     },
   })
 

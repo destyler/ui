@@ -26,7 +26,7 @@ describe('[menu] component', () => {
   })
 
   it.each(getExports(menuAnatomy))('should export %s', async (part) => {
-    expect(Menu[part]).toBeDefined()
+    expect(Menu).toHaveProperty(part, expect.anything())
   })
 
   it('should not show menu content by default', async () => {

@@ -13,7 +13,7 @@ describe('[tree] component', () => {
   })
 
   it.each(getExports(treeAnatomy))('should export %s', (part) => {
-    expect(Tree[part]).toBeDefined()
+    expect(Tree).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialValue example', async () => {

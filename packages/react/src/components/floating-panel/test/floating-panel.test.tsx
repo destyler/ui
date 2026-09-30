@@ -13,7 +13,7 @@ describe('[floating-panel] component', () => {
   })
 
   it.each(getExports(floatingPanelAnatomy))('should export %s', (part) => {
-    expect(FloatingPanel[part]).toBeDefined()
+    expect(FloatingPanel).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialOpen example', async () => {

@@ -19,7 +19,7 @@ describe('[slider] component', () => {
   })
 
   it.each(getExports(sliderAnatomy))('should export %s', (part) => {
-    expect(Slider[part]).toBeDefined()
+    expect(Slider).toHaveProperty(part, expect.anything())
   })
 })
 

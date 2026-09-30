@@ -1,3 +1,4 @@
+import type { OpenChangeDetails, ValueChangeDetails } from '@destyler/select'
 import { createListCollection } from '~/utils/collection'
 import { Select } from '../index'
 
@@ -13,8 +14,8 @@ const collection = createListCollection({
 interface BasicProps {
   disabled?: boolean
   multiple?: boolean
-  onValueChange?: (value: string[]) => void
-  onOpenChange?: (open: boolean) => void
+  onValueChange?: (details: ValueChangeDetails) => void
+  onOpenChange?: (details: OpenChangeDetails) => void
   readOnly?: boolean
   lazyMount?: boolean
   unmountOnExit?: boolean

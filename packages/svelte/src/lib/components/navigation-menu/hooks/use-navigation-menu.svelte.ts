@@ -5,9 +5,9 @@ import { useMachine } from '$lib/hooks/use-destyler-machine.svelte.js'
 import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
-import { normalizeProps } from '$lib/utils/normalize-props'
 import * as navigationMenu from '@destyler/navigation-menu'
 import { runIfFn } from '@destyler/utils'
+import { connectNavigationMenu } from './connect-navigation-menu'
 
 export interface UseNavigationMenuProps
   extends Omit<navigationMenu.Context, 'dir' | 'getRootNode' | 'id'> {
@@ -16,6 +16,10 @@ export interface UseNavigationMenuProps
 export interface UseNavigationMenuReturn extends Accessor<navigationMenu.Api<PropTypes>> {}
 
 export function useNavigationMenu(props: MaybeFunction<UseNavigationMenuProps>): UseNavigationMenuReturn {
+  let mounted = $state(false)
+  $effect(() => {
+    mounted = true
+  })
   const env = useEnvironmentContext()
   const locale = useLocaleContext()
 
@@ -33,6 +37,6 @@ export function useNavigationMenu(props: MaybeFunction<UseNavigationMenuProps>):
       return machineProps.context as navigationMenu.Context
     },
   })
-  const api = $derived(navigationMenu.connect(state, send, normalizeProps))
+  const api = $derived(connectNavigationMenu(state, send, mounted))
   return () => api
 }

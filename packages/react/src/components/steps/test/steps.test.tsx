@@ -14,7 +14,7 @@ describe('[steps] component', () => {
   })
 
   it.each(getExports(stepsAnatomy))('should export %s', async (part) => {
-    expect(Steps[part]).toBeDefined()
+    expect(Steps).toHaveProperty(part, expect.anything())
   })
 
   describe('basic example', () => {

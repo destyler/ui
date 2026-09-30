@@ -8,7 +8,7 @@ const emits = defineEmits<NavigationMenuRootEmits>()
 
 <template>
   <main>
-    <NavigationMenu.Root default-value="getting-started" v-bind="props" @value-change="emits('valueChange', $event)" @update:model-value="emits('update:modelValue', $event)">
+    <NavigationMenu.Root v-bind="{ ...props, defaultValue: props.defaultValue ?? 'getting-started' }" @value-change="emits('valueChange', $event)" @update:model-value="emits('update:modelValue', $event)">
       <NavigationMenu.List>
         <NavigationMenu.Item value="getting-started">
           <NavigationMenu.Trigger value="getting-started">

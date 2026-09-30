@@ -14,7 +14,7 @@ describe('[combobox] component', () => {
   })
 
   it.each(getExports(comboboxAnatomy))('should export %s', async (part) => {
-    expect(Combobox[part]).toBeDefined()
+    expect(Combobox).toHaveProperty(part, expect.anything())
   })
 
   it('should show options on click', async () => {

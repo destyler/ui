@@ -13,7 +13,7 @@ describe('[tabs] component', () => {
   })
 
   it.each(getExports(tabsAnatomy))('should export %s', async (part) => {
-    expect(Tabs[part]).toBeDefined()
+    expect(Tabs).toHaveProperty(part, expect.anything())
   })
 
   it('should render the content of tab when active', async () => {

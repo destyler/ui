@@ -13,7 +13,7 @@ describe('[breadcrumbs] component', () => {
   })
 
   it.each(getExports(breadcrumbsAnatomy))('should export %s', async (part) => {
-    expect(Breadcrumbs[part]).toBeDefined()
+    expect(Breadcrumbs).toHaveProperty(part, expect.anything())
   })
 
   describe('basic example', () => {

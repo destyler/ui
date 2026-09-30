@@ -9,6 +9,7 @@
 <script lang="ts">
   import { createSplitProps } from '$lib/utils/create-split-props'
   import { mergeProps } from '@destyler/svelte'
+  import { createInputValueSync } from '$lib/utils/sync-input-value'
   import { UI } from '../../factory'
   import { useColorPickerContext } from '../hooks/use-color-picker-context'
 
@@ -17,7 +18,14 @@
   const [channelProps, localProps] = $derived(createSplitProps<ChannelInputProps>()(props, ['channel', 'orientation']))
 
   const colorPicker = useColorPickerContext()
-  const mergedProps = $derived(mergeProps(colorPicker().getChannelInputProps(channelProps), localProps))
+  const syncInputValue = createInputValueSync(() => colorPicker().getChannelInputProps(channelProps), () => colorPicker().value)
+  const mergedProps = $derived(mergeProps(colorPicker().getChannelInputProps(channelProps), localProps, {
+    onfocusout: syncInputValue,
+    onkeydown(event: KeyboardEvent) {
+      if (event.key === 'Enter' && !event.isComposing)
+        void syncInputValue(event)
+    },
+  }))
 </script>
 
 <UI as="input" {...mergedProps} />
