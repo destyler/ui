@@ -32,7 +32,9 @@
     "generate:vue": "plop vue",
     "generate:react": "plop react",
     "generate:svelte": "plop svelte",
-    "generate:solid": "plop solid"
+    "generate:solid": "plop solid",
+    "test:browser-smoke": "pnpm run svelte:sync && vitest run --config vitest.smoke.config.ts",
+    "test:smoke-policy": "vitest run --config vitest.smoke.config.ts --project smoke-policy"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
@@ -52,6 +54,7 @@
     "@vitest/coverage-v8": "catalog:test",
     "@vitest/ui": "catalog:test",
     "archiver": "catalog:node",
+    "axe-core": "4.11.0",
     "bumpp": "catalog:node",
     "eslint": "catalog:lint",
     "eslint-plugin-astro": "catalog:lint",
