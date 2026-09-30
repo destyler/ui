@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import type { UseDynamicProps } from '../composables/use-dynamic'
 import { Dynamic } from '../index'
 
-const props = defineProps<UseDynamicProps>()
+const props = defineProps<{
+  defaultValue?: string[]
+  modelValue?: string[]
+  readOnly?: boolean
+}>()
 </script>
 
 <template>

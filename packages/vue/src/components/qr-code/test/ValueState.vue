@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import type { UseQrCodeProps } from '../composables/use-qr-code'
 import { QrCode } from '../index'
 
-const props = defineProps<UseQrCodeProps>()
+const props = defineProps<{
+  defaultValue?: string
+  modelValue?: string
+  ids?: { root?: string }
+}>()
 </script>
 
 <template>
