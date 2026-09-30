@@ -62,6 +62,7 @@ try {
         'react': consumer.react,
         'react-dom': consumer.react,
         'typescript': '5.9.3',
+        ...(process.env.PACKED_BROWSER === '1' ? { playwright: '1.57.0', vite: '7.2.7' } : {}),
       },
     }, null, 2))
 
@@ -85,6 +86,8 @@ try {
     for (const mode of ['development', 'production']) {
       run(process.execPath, ['ssr.mjs'], consumerDir, { NODE_ENV: mode })
       run(process.execPath, ['hydrate.mjs'], consumerDir, { NODE_ENV: mode })
+      if (process.env.PACKED_BROWSER === '1')
+        run(process.execPath, ['browser.mjs'], consumerDir, { NODE_ENV: mode })
     }
     console.log(`Packed React ${consumer.react} consumer passed import, types, SSR, hydration and interaction checks`)
   }

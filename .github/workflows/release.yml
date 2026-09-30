@@ -30,7 +30,7 @@ jobs:
         run: |
           pnpm run lint
           pnpm run test:ci
-          pnpm --filter @destyler-ui/react check:package
+          PACKED_BROWSER=1 pnpm --filter @destyler-ui/react check:package
           pnpm --filter @destyler-ui/svelte check:ci
           pnpm --filter @destyler-ui/solid check
           pnpm --filter @destyler-ui/svelte build-storybook

@@ -29,5 +29,9 @@ For each consumer the check verifies:
 
 Hydration uses Happy DOM in a separate process from SSR. It is a packaging and
 compatibility regression check, not a substitute for the existing real-browser
-component tests. The command requires registry access for isolated npm installs
+component tests. `PACKED_BROWSER=1` also runs the same consumer flow in real Chromium. Its dedicated
+CI workflow runs independently of the aggregate component suite, and release
+verification enables it. The ready marker waits for a React effect after hydration
+commits. Chromium uses a Vite development server under each NODE_ENV; this does not
+claim production-bundled-asset coverage. The command requires registry access for isolated npm installs
 and removes its temporary consumers when it exits.

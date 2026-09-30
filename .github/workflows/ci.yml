@@ -70,10 +70,6 @@ jobs:
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/react check
 
-      - name: Check packed React consumers
-        if: matrix.node == 22
-        run: pnpm --filter @destyler-ui/react check:package
-
       - name: Check Vue package
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/vue check
