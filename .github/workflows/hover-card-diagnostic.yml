@@ -1,0 +1,56 @@
+name: HoverCard predecessor diagnostic
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/hover-card-diagnostic.yml
+      - packages/react/vitest.hover-card-diagnostic.config.ts
+      - packages/react/src/hooks/test/diagnostics/**
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Observe four predecessor conditions once
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm exec vitest run --config packages/react/vitest.hover-card-diagnostic.config.ts --browser.headless --reporter=verbose 2>&1 | tee hover-card-diagnostic.log
+
+      - name: Preserve diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hover-card-predecessor-observation
+          if-no-files-found: ignore
+          retention-days: 7
+          path: |
+            hover-card-diagnostic.log
+            packages/react/src/hooks/test/diagnostics/__screenshots__/**
