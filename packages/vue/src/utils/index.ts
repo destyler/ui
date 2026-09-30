@@ -1,3 +1,4 @@
+export { cleanOpenProps } from './clean-open-props'
 export { cleanProps } from './clean-props'
 export { createFileTreeCollection, createListCollection, createTreeCollection } from './collection'
 export type { CollectionItem, ListCollection, TreeCollection, TreeNode } from './collection'

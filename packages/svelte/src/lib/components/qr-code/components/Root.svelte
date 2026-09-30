@@ -13,7 +13,13 @@
   import { QrCodeProvider } from '../hooks/use-qr-code-context'
   import { useQrCode } from '../hooks/use-qr-code.svelte'
 
-  let { value = $bindable(), ...props }: QrCodeRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: QrCodeRootProps = $props()
   const providedId = $props.id()
 
   const [useQrCodeProps, localProps] = $derived(
@@ -30,7 +36,7 @@
   const resolvedProps = $derived<UseQrCodeProps>({
     ...useQrCodeProps,
     id: useQrCodeProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       value = details.value
       useQrCodeProps.onValueChange?.(details)

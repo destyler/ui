@@ -15,7 +15,7 @@ describe('[signature] component', () => {
   })
 
   it.each(getExports(signatureAnatomy).filter(p => p !== 'SegmentPath'))('should export %s', async (part) => {
-    expect(Signature[part]).toBeDefined()
+    expect(Signature).toHaveProperty(part, expect.anything())
   })
 
   it('should render signature label', async () => {

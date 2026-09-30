@@ -18,7 +18,7 @@ describe('[collapse] component', () => {
 
   it.each(getExports(collapseAnatomy))('should export %s', async (part) => {
     render(Basic)
-    expect(Collapse[part]).toBeDefined()
+    expect(Collapse).toHaveProperty(part, expect.anything())
   })
 
   it('should not have an expanded item by default', async () => {

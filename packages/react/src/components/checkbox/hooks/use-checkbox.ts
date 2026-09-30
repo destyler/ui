@@ -1,11 +1,14 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as checkbox from '@destyler/checkbox'
-import { mergeProps, normalizeProps, useMachine } from '@destyler/react'
+import { mergeProps, normalizeProps } from '@destyler/react'
 import { useId, useMemo } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
+import { useNativeInputSync } from '~/hooks/use-native-input-sync'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
 
 export interface UseCheckboxProps extends Optional<Omit<checkbox.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -41,17 +44,35 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    checked: props.defaultChecked,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: checkbox.Context = {
     ...initialContext,
-    checked: props.checked,
+    ...(props.checked !== undefined ? { checked: props.checked } : {}),
     onCheckedChange: useEvent(props.onCheckedChange, { sync: true }),
   }
 
-  const [state, send] = useMachine(checkbox.machine(initialContext), { context })
+  const [state, send, service] = useMachine(checkbox.machine(initialContext), { context })
 
-  return checkbox.connect(state, send, normalizeProps)
+  const syncInput = useNativeInputSync()
+  const api = checkbox.connect(state, send, normalizeProps)
+  return {
+    ...api,
+    getHiddenInputProps() {
+      const inputProps = api.getHiddenInputProps()
+      return {
+        ...inputProps,
+        onClick(event) {
+          inputProps.onClick?.(event)
+          const input = event.currentTarget
+          syncInput(input, () => {
+            const context = service.state.context
+            input.checked = context.isChecked
+            input.indeterminate = context.isIndeterminate
+          })
+        },
+      }
+    },
+  }
 }

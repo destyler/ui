@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Combobox, comboboxAnatomy } from '../index'
 
@@ -13,7 +14,7 @@ describe('[combobox] component', () => {
   })
 
   it.each(getExports(comboboxAnatomy))('should export %s', async (part) => {
-    expect(Combobox[part]).toBeDefined()
+    expect(Combobox).toHaveProperty(part, expect.anything())
   })
 
   it('should show options on click', async () => {
@@ -66,6 +67,12 @@ describe('[combobox] component', () => {
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(async () => await expect.element(page.getByTestId('positioner')).toBeVisible())
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(<InitialValue />)
+  const input = document.querySelector('[data-scope="combobox"][data-part="input"]') as HTMLInputElement
+  expect(input?.value?.toLowerCase()).toContain('vue')
 })
 
 describe('combobox / Field', () => {

@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-react'
 import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { InitialPage } from '../examples/InitialPage'
 import { Carousel, carouselAnatomy } from '../index'
 
 describe('[carousel] component', () => {
@@ -12,7 +13,7 @@ describe('[carousel] component', () => {
   })
 
   it.each(getExports(carouselAnatomy))('should export %s', async (part) => {
-    expect(Carousel[part]).toBeDefined()
+    expect(Carousel).toHaveProperty(part, expect.anything())
   })
 
   it('should have the correct disabled / enabled states for control buttons', async () => {
@@ -22,5 +23,11 @@ describe('[carousel] component', () => {
 
     await vi.waitFor(async () => await expect.element(prevButton).toBeDisabled())
     await vi.waitFor(async () => await expect.element(nextButton).toBeEnabled())
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    render(<InitialPage />)
+    await vi.waitFor(async () => await expect.element(page.getByRole('button', { name: 'Previous slide' })).toBeEnabled())
+    await expect.element(page.getByRole('button', { name: 'Go to slide 3' })).toHaveAttribute('data-current')
   })
 })

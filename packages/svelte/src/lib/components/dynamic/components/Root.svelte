@@ -13,7 +13,15 @@
   import { DynamicProvider } from '../hooks/use-dynamic-context'
   import { useDynamic } from '../hooks/use-dynamic.svelte'
 
-  let { value = $bindable<string[]>(), inputValue = $bindable<string>(), ...props }: DynamicRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable<string[]>(),
+    value: valueProp,
+    inputValue = $bindable<string>(),
+    inputValue: inputValueProp,
+    ...props
+  }: DynamicRootProps = $props()
 
   const [useDynamicProps, localProps] = $derived(
     createSplitProps<Optional<UseDynamicProps, 'id'>>()(props, [
@@ -54,8 +62,8 @@
     return {
       ...useDynamicProps,
       id: useDynamicProps.id ?? providedId,
-      value,
-      inputValue,
+      value: valueProp,
+      inputValue: inputValueProp,
       onValueChange: (details) => {
         useDynamicProps.onValueChange?.(details)
         value = details.value

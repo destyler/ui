@@ -2,7 +2,7 @@ import { Tabs } from '@destyler-ui/solid/tabs'
 
 export function DisabledTab() {
   return (
-    <Tabs.Root value="react">
+    <Tabs.Root defaultValue="react">
       <Tabs.List>
         <Tabs.Trigger value="react">React</Tabs.Trigger>
         <Tabs.Trigger value="vue" disabled>

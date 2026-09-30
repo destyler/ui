@@ -13,7 +13,7 @@ describe('[color-picker] component', () => {
   })
 
   it.each(getExports(colorPickerAnatomy))('should export %s', async (part) => {
-    expect(ColorPicker[part]).toBeDefined()
+    expect(ColorPicker).toHaveProperty(part, expect.anything())
   })
 
   it('should be able to lazy mount', async () => {

@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import ReactiveCollection from '../examples/ReactiveCollection.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Select, selectAnatomy } from '../index'
@@ -10,14 +11,14 @@ import HiddenSelectFixture from './HiddenSelectFixture.svelte'
 const componentExports = Select as unknown as Record<string, unknown>
 
 describe('[select] component', () => {
-  it.each(selectAnatomy.keys())('renders part %s', async (part) => {
+  it.each<[string]>(selectAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     const screen = await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="select"][data-part="${dataPart}"]`)).not.toBeNull()
     expect(screen.container).toBeDefined()
   })
 
-  it.each(selectAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(selectAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Select.${exportName}`).toBeDefined()
   })
@@ -127,5 +128,12 @@ describe('[select] field integration', () => {
   it('hides field error text when valid', async () => {
     const screen = await render(WithField)
     await expect.element(screen.getByText('Error Info')).not.toBeInTheDocument()
+  })
+})
+
+describe('[select] default*', () => {
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
   })
 })

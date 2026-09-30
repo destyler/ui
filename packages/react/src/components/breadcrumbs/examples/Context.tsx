@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Breadcrumbs } from '../index'
 
 const initialItems = [
@@ -8,9 +7,6 @@ const initialItems = [
 ]
 
 export function Context() {
-  const [hoveredId, _setHoveredId] = useState<string | null>(null)
-  const [focusedId, _setFocusedId] = useState<string | null>(null)
-
   return (
     <main>
       <Breadcrumbs.Root items={initialItems}>
@@ -40,8 +36,8 @@ export function Context() {
                     )}
                   </Breadcrumbs.Item>
                 ))}
-                <p>Hovered: {hoveredId || 'none'}</p>
-                <p>Focused: {focusedId || 'none'}</p>
+                <p>Hovered: {breadcrumbs.hoveredId || 'none'}</p>
+                <p>Focused: {breadcrumbs.focusedId || 'none'}</p>
               </>
             )}
           </Breadcrumbs.Context>

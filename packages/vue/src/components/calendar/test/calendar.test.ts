@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import { Calendar, calendarAnatomy } from '../index'
 
 describe('[calendar] component', () => {
@@ -12,7 +13,7 @@ describe('[calendar] component', () => {
   })
 
   it.each(getExports(calendarAnatomy))('should export %s', async (part) => {
-    expect(Calendar[part]).toBeDefined()
+    expect(Calendar).toHaveProperty(part, expect.anything())
   })
 
   it('should be able to lazy mount', async () => {
@@ -46,5 +47,12 @@ describe('[calendar] component', () => {
 
     await userEvent.click(page.getByRole('button', { name: 'Close calendar' }))
     await vi.waitFor(async () => await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(InitialValue)
+    const input = document.querySelector('[data-scope="date-picker"][data-part="input"], [data-scope="calendar"][data-part="input"], input') as HTMLInputElement | null
+    expect(input).toBeTruthy()
+    expect(input!.value.length).toBeGreaterThan(0)
   })
 })

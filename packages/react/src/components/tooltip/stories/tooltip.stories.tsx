@@ -10,6 +10,7 @@ export default meta
 export { Arrow } from '../examples/Arrow'
 export { Basic } from '../examples/Basic'
 export { Controlled } from '../examples/Controlled'
+export { InitialOpen } from '../examples/InitialOpen'
 export { Positioning } from '../examples/Positioning'
 export { RenderFn } from '../examples/RenderFn'
 export { RootProvider } from '../examples/RootProvider'

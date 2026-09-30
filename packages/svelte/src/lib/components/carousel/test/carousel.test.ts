@@ -5,6 +5,7 @@ import { userEvent } from 'vitest/browser'
 import AutoPlay from '../examples/AutoPlay.svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialPage from '../examples/InitialPage.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { Carousel, carouselAnatomy } from '../index'
 
@@ -12,7 +13,7 @@ const componentExports = Carousel as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[carousel] component', () => {
-  it.each(carouselAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(carouselAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="carousel"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -60,5 +61,10 @@ describe('[carousel] component', () => {
       expect(image.style.width).toBe('100%')
       expect(image.style.objectFit).toBe('cover')
     }
+  })
+
+  it('seeds default* via InitialPage example', async () => {
+    const screen = await render(InitialPage)
+    await expect.element(screen.getByRole('button', { name: 'Previous slide' })).toBeEnabled()
   })
 })

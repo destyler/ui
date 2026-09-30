@@ -3,6 +3,7 @@ import AsChild from '../examples/AsChild.vue'
 import Basic from '../examples/Basic.vue'
 import CloseBehavior from '../examples/CloseBehavior.vue'
 import Controlled from '../examples/Controlled.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import Modal from '../examples/Modal.vue'
 import OnOpenChange from '../examples/OnOpenChange.vue'
 import Portalled from '../examples/Portalled.vue'
@@ -28,6 +29,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialOpen() {
+  return {
+    components: { InitialOpen },
+    template: '<InitialOpen />',
   }
 }
 

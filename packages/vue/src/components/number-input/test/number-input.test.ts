@@ -13,7 +13,7 @@ describe('[number-input] component', () => {
   })
 
   it.each(getExports(numberInputAnatomy))('should export %s', async (part) => {
-    expect(NumberInput[part]).toBeDefined()
+    expect(NumberInput).toHaveProperty(part, expect.anything())
   })
 
   it('should handle wheel event when allowMouseWheel is true', async () => {
@@ -30,7 +30,7 @@ describe('[number-input] component', () => {
 
   it('should clamp value on blur when clampValueOnBlur is true', async () => {
     render(Basic, {
-      props: { clampValueOnBlur: true, min: 0, max: 10, modelValue: '15' },
+      props: { clampValueOnBlur: true, min: 0, max: 10, defaultValue: '15' },
     })
     const input = page.getByRole('spinbutton')
     await input.click()
@@ -40,20 +40,20 @@ describe('[number-input] component', () => {
   })
 
   it('should allow value to exceed max when allowOverflow is true', async () => {
-    render(Basic, { props: { allowOverflow: true, max: 10, modelValue: '15' } })
+    render(Basic, { props: { allowOverflow: true, max: 10, defaultValue: '15' } })
     const input = page.getByRole('spinbutton')
     expect(input).toHaveValue('15')
   })
 
   it('should handle custom format and parse functions', async () => {
-    render(Basic, { props: { formatOptions: { currency: 'USD' }, modelValue: '5' } })
+    render(Basic, { props: { formatOptions: { currency: 'USD' }, defaultValue: '5' } })
     const input = page.getByRole('spinbutton')
 
     await vi.waitFor(async () => await expect.element(input).toHaveValue('5'))
   })
 
   it('should increment value by step when using increment button', async () => {
-    render(Basic, { props: { step: 5, modelValue: '0' } })
+    render(Basic, { props: { step: 5, defaultValue: '0' } })
     const incrementBtn = page.getByText('+1')
     await userEvent.click(incrementBtn)
 

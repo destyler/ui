@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { Splitter } from '../index'
-import { ref } from 'vue'
-
-const size = ref([
-  { id: 'a', size: 50 },
-  { id: 'b', size: 50 },
-])
 </script>
 
 <template>
-  <Splitter.Root :size="size">
+  <Splitter.Root :default-size="[{ id: 'a', size: 50 }, { id: 'b', size: 50 }]">
     <Splitter.Context v-slot="splitter">
       <Splitter.Panel id="a">
         <button @click="splitter.setSize('a', 10)">Set A to 10%</button>

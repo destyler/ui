@@ -3,7 +3,7 @@ import { Show } from 'solid-js'
 
 export function CustomControls() {
   return (
-    <Edit.Root placeholder="enter a value" value="Chakra">
+    <Edit.Root placeholder="enter a value" defaultValue="Chakra">
       <Edit.Label>Label</Edit.Label>
       <Edit.Area>
         <Edit.Input />

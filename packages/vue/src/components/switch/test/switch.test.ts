@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { Switch, switchAnatomy } from '../index'
 
@@ -13,7 +14,7 @@ describe('[switch] component', () => {
   })
 
   it.each(getExports(switchAnatomy))('should export %s', async (part) => {
-    expect(Switch[part]).toBeDefined()
+    expect(Switch).toHaveProperty(part, expect.anything())
   })
 
   it('should show invalid attribute when invalid', async () => {
@@ -29,6 +30,11 @@ describe('[switch] component', () => {
 
     await expect.element(switchControl).toBeRequired()
   })
+})
+
+it('seeds default* via InitialValue example', async () => {
+  render(InitialValue)
+  await expect.element(page.getByRole('checkbox')).toBeChecked()
 })
 
 describe('switch / Field', () => {

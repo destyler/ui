@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "check": "tsc --noEmit",
     "dev": "tsdown --watch",
     "debug": "tsdown --debug",
     "prepublishOnly": "pnpm run build",

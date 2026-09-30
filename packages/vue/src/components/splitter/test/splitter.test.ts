@@ -4,6 +4,7 @@ import { page } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
 import Events from '../examples/Events.vue'
+import InitialSize from '../examples/InitialSize.vue'
 import RenderProp from '../examples/RenderProp.vue'
 import { Splitter, splitterAnatomy } from '../index'
 
@@ -14,7 +15,7 @@ describe('[splitter] component', () => {
   })
 
   it.each(getExports(splitterAnatomy))('should export %s', async (part) => {
-    expect(Splitter[part]).toBeDefined()
+    expect(Splitter).toHaveProperty(part, expect.anything())
   })
 
   describe('basic example', () => {
@@ -46,5 +47,13 @@ describe('[splitter] component', () => {
       // Check panels
       expect(document.querySelectorAll('[data-part="panel"]')).toHaveLength(2)
     })
+  })
+
+  it('seeds default* via InitialSize example', async () => {
+    render(InitialSize)
+    const panels = document.querySelectorAll('[data-scope="splitter"][data-part="panel"]')
+    expect(panels.length).toBeGreaterThanOrEqual(2)
+    const sizes = Array.from(panels).map(p => p.getAttribute('data-size') || (p as HTMLElement).style.flex || (p as HTMLElement).style.width)
+    expect(sizes.join(' ')).toMatch(/30|70/)
   })
 })

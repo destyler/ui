@@ -25,33 +25,45 @@ export function useDynamic(props: UseDynamicProps = {}, emit?: EmitFn<RootEmits>
   const locale = useLocaleContext(DEFAULT_LOCALE)
   const field = useFieldContext()
 
-  const context = computed<dynamic.Context>(() => ({
-    id,
-    ids: {
-      label: field?.value.ids.label,
-      hiddenInput: field?.value.ids.control,
-    },
-    disabled: field?.value.disabled,
-    invalid: field?.value.invalid,
-    readOnly: field?.value.readOnly,
-    required: field?.value.required,
-    dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
-    getRootNode: env?.value.getRootNode,
-    onValueChange(details) {
-      emit?.('valueChange', details)
-      emit?.('update:modelValue', details.value)
-    },
-    onFocusOutside: details => emit?.('focusOutside', details),
-    onHighlightChange: details => emit?.('highlightChange', details),
-    onInputValueChange: details => emit?.('inputValueChange', details),
-    onInteractOutside: details => emit?.('interactOutside', details),
-    onPointerDownOutside: details => emit?.('pointerDownOutside', details),
-    onValueInvalid: details => emit?.('valueInvalid', details),
-    ...cleanProps(props),
-  }))
+  // This machine still uses value directly; defaultValue only seeds its initial state.
+  const initialValue = props.modelValue !== undefined ? props.modelValue : props.defaultValue
 
-  const [state, send] = useMachine(dynamic.machine(context.value), { context })
+  const context = computed<dynamic.Context>(() => {
+    const { defaultValue: _defaultValue, modelValue, ...rest } = props
+    return {
+      id,
+      ids: {
+        label: field?.value.ids.label,
+        hiddenInput: field?.value.ids.control,
+      },
+      disabled: field?.value.disabled,
+      invalid: field?.value.invalid,
+      readOnly: field?.value.readOnly,
+      required: field?.value.required,
+      dir: locale.value.dir,
+      ...(modelValue !== undefined ? { value: modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onValueChange(details) {
+        emit?.('valueChange', details)
+        emit?.('update:modelValue', details.value)
+      },
+      onFocusOutside: details => emit?.('focusOutside', details),
+      onHighlightChange: details => emit?.('highlightChange', details),
+      onInputValueChange: details => emit?.('inputValueChange', details),
+      onInteractOutside: details => emit?.('interactOutside', details),
+      onPointerDownOutside: details => emit?.('pointerDownOutside', details),
+      onValueInvalid: details => emit?.('valueInvalid', details),
+      ...cleanProps(rest),
+    }
+  })
+
+  const [state, send] = useMachine(
+    dynamic.machine({
+      ...context.value,
+      ...(initialValue !== undefined ? { value: initialValue } : {}),
+    }),
+    { context },
+  )
 
   return computed(() => dynamic.connect(state.value, send, normalizeProps))
 }

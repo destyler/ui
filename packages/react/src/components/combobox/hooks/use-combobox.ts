@@ -2,14 +2,16 @@ import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { CollectionItem, ListCollection } from '~/utils/collection'
 import * as combobox from '@destyler/combobox'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useEffect, useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseComboboxProps<T extends CollectionItem>
-  extends Optional<Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
   /**
    * The initial open state of the combobox when it is first rendered.
    * Use when you do not need to control its open state.
@@ -36,29 +38,26 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
   const field = useFieldContext()
 
   const initialContext: combobox.Context<T> = {
-    'id': useId(),
-    'ids': {
+    id: useId(),
+    ids: {
       label: field?.ids.label,
       input: field?.ids.control,
     },
-    'disabled': field?.disabled,
-    'readOnly': field?.readOnly,
-    'required': field?.required,
-    'invalid': field?.invalid,
+    disabled: field?.disabled,
+    readOnly: field?.readOnly,
+    required: field?.required,
+    invalid: field?.invalid,
     dir,
     getRootNode,
     collection,
-    'open': props.defaultOpen,
-    'value': props.defaultValue,
-    'open.controlled': props.open !== undefined,
-    ...comboboxProps,
+    ...normalizeMachineProps(comboboxProps),
   }
 
   const context = (() => {
     const { collection: _, ...restProps } = initialContext
     return {
       ...restProps,
-      value: props.value,
+      ...(props.value !== undefined ? { value: props.value } : {}),
       onValueChange: useEvent(props.onValueChange),
       onInputValueChange: useEvent(props.onInputValueChange, { sync: true }),
       onHighlightChange: useEvent(props.onHighlightChange),

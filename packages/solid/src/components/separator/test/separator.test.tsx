@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { createSignal } from 'solid-js'
 import { Separator, separatorAnatomy, useSeparator } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 import { RootProvider } from '../examples/RootProvider'
 import { Vertical } from '../examples/Vertical'
@@ -13,7 +13,7 @@ describe('separator', () => {
   })
 
   it.each(getExports(separatorAnatomy))('should export %s', (part) => {
-    expect(Separator[part]).toBeDefined()
+    expectExport(Separator, part)
   })
 
   it('should render a horizontal separator by default', () => {

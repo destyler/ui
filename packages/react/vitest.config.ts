@@ -1,5 +1,5 @@
 import { playwright } from '@vitest/browser-playwright'
-import { defineConfig, mergeConfig } from 'vitest/config'
+import { configDefaults, defineConfig, mergeConfig } from 'vitest/config'
 import viteConfig from './vite.config'
 
 export default mergeConfig(
@@ -8,6 +8,7 @@ export default mergeConfig(
     test: {
       name: 'react',
       environment: 'happy-dom',
+      exclude: [...configDefaults.exclude, '**/*.ssr.test.tsx'],
       browser: {
         enabled: true,
         provider: playwright(),

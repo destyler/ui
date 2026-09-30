@@ -6,10 +6,10 @@ import * as floatingPanel from '@destyler/floating-panel'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseFloatingPanelProps
-  extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<floatingPanel.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the floating panel when it is first rendered.
    * Use when you do not need to control its open state.
@@ -27,7 +27,6 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}, emit?: EmitF
   const context = computed<floatingPanel.Context>(() => ({
     id,
     dir: locale.value.dir,
-    open: props.open ?? props.defaultOpen,
     getRootNode: env?.value.getRootNode,
     onOpenChange: (details) => {
       emit?.('openChange', details)
@@ -38,7 +37,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}, emit?: EmitF
     onPositionChange: details => emit?.('positionChange', details),
     onPositionChangeEnd: details => emit?.('positionChangeEnd', details),
     onStageChange: details => emit?.('stageChange', details),
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(floatingPanel.machine(context.value), { context })

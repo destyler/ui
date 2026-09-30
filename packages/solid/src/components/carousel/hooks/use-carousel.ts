@@ -5,6 +5,7 @@ import * as carousel from '@destyler/carousel'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseCarouselProps
   extends Optional<Omit<carousel.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,13 +26,12 @@ export function useCarousel(props: UseCarouselProps = {}): UseCarouselReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    page: props.defaultPage,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
   }))
 
   const [state, send] = useMachine(carousel.machine(initialContext()), { context })

@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { Splitter } from '../index'
-import { ref } from 'vue'
-
-const size = ref([
-  { id: 'a', size: 50 },
-  { id: 'b', size: 50 },
-])
 </script>
 
 <template>
-  <Splitter.Root :size="size" orientation="vertical">
+  <Splitter.Root :default-size="[{ id: 'a', size: 50 }, { id: 'b', size: 50 }]" orientation="vertical">
     <Splitter.Panel id="a">A</Splitter.Panel>
     <Splitter.ResizeTrigger id="a:b" />
     <Splitter.Panel id="b">B</Splitter.Panel>

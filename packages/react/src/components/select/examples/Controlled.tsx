@@ -18,7 +18,7 @@ export function Controlled() {
     <Select.Root
       collection={collection}
       value={value}
-      onValueChange={setValue}
+      onValueChange={({ value }) => setValue(value)}
     >
       <Select.Label>Framework</Select.Label>
       <Select.Control>

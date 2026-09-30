@@ -1,15 +1,17 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { CollectionItem, ListCollection } from '~/utils/collection'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as select from '@destyler/select'
 import { useEffect, useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseSelectProps<T extends CollectionItem>
-  extends Optional<Omit<select.Context<T>, 'dir' | 'getRootNode' | 'open.controlled' | 'collection'>, 'id'> {
+  extends Optional<Omit<select.Context<T>, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
   /**
    * The initial open state of the select when it is first rendered.
    * Use when you do not need to control its open state.
@@ -35,29 +37,26 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
   const field = useFieldContext()
 
   const initialContext: select.Context<T> = {
-    'id': useId(),
-    'ids': {
+    id: useId(),
+    ids: {
       label: field?.ids.label,
       hiddenSelect: field?.ids.control,
     },
-    'disabled': field?.disabled,
-    'readOnly': field?.readOnly,
-    'invalid': field?.invalid,
-    'required': field?.required,
-    'dir': locale.dir,
-    'getRootNode': environment.getRootNode,
+    disabled: field?.disabled,
+    readOnly: field?.readOnly,
+    invalid: field?.invalid,
+    required: field?.required,
+    dir: locale.dir,
+    getRootNode: environment.getRootNode,
     collection,
-    'open': props.defaultOpen,
-    'value': props.defaultValue,
-    'open.controlled': props.open !== undefined,
-    ...selectProps,
+    ...normalizeMachineProps(selectProps),
   }
 
   const context = (() => {
     const { collection: _, ...restProps } = initialContext
     return {
       ...restProps,
-      value: props.value,
+      ...(props.value !== undefined ? { value: props.value } : {}),
       onValueChange: useEvent(props.onValueChange, { sync: true }),
       onHighlightChange: useEvent(props.onHighlightChange),
       onOpenChange: useEvent(props.onOpenChange),

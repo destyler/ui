@@ -13,6 +13,18 @@ describe('[tour] component', () => {
   })
 
   it.each(getExports(tourAnatomy))('should export %s', async (part) => {
-    expect(Tour[part]).toBeDefined()
+    expect(Tour).toHaveProperty(part, expect.anything())
+  })
+
+  it('uses standard previous and next actions at the one-step boundaries', async () => {
+    render(<Basic />)
+    await vi.waitFor(() => {
+      const previous = document.querySelector('[data-part="action-trigger"][data-type="prev"]')
+      const next = document.querySelector('[data-part="action-trigger"][data-type="next"]')
+      expect(previous).toHaveTextContent('Prev')
+      expect(previous).toBeDisabled()
+      expect(next).toHaveTextContent('Next')
+      expect(next).toBeDisabled()
+    })
   })
 })

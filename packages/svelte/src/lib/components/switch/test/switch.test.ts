@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
@@ -10,13 +11,13 @@ import { Switch, switchAnatomy } from '../index'
 const componentExports = Switch as unknown as Record<string, unknown>
 
 describe('[switch] component', () => {
-  it.each(switchAnatomy.keys())('renders part %s', async (part) => {
+  it.each<[string]>(switchAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="switch"][data-part="${dataPart}"]`)).not.toBeNull()
   })
 
-  it.each(switchAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(switchAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Switch.${exportName}`).toBeDefined()
   })
@@ -54,6 +55,11 @@ describe('[switch] component', () => {
     const input = screen.getByRole('checkbox')
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(input).toBeChecked()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('checkbox')).toBeChecked()
   })
 })
 

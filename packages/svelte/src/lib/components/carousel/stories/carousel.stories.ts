@@ -3,6 +3,7 @@ import type { Component } from 'svelte'
 import AutoPlayExample from '../examples/AutoPlay.svelte'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
+import InitialPageExample from '../examples/InitialPage.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 
 const meta: Meta = {
@@ -17,4 +18,5 @@ const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 export const AutoPlay = story(AutoPlayExample)
 export const Basic = story(BasicExample)
 export const Controlled = story(ControlledExample)
+export const InitialPage = story(InitialPageExample)
 export const RootProvider = story(RootProviderExample)

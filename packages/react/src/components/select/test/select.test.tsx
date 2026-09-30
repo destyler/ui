@@ -3,6 +3,8 @@ import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
+import { Controlled } from '../examples/Controlled'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Select, selectAnatomy } from '../index'
 
@@ -13,7 +15,7 @@ describe('[select] component', () => {
   })
 
   it.each(getExports(selectAnatomy))('should export %s', async (part) => {
-    expect(Select[part]).toBeDefined()
+    expect(Select).toHaveProperty(part, expect.anything())
   })
 
   it('should handle item selection', async () => {
@@ -76,6 +78,10 @@ describe('[select] component', () => {
 
     await userEvent.click(item)
     await vi.waitFor(() => expect(onValueChange).toHaveBeenCalledTimes(1))
+    expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({
+      value: ['react'],
+      items: [expect.objectContaining({ value: 'react', label: 'React' })],
+    }))
   })
 
   it('should open menu when onOpenChange is called', async () => {
@@ -86,6 +92,34 @@ describe('[select] component', () => {
 
     await userEvent.click(trigger)
     await vi.waitFor(() => expect(onOpenChange).toHaveBeenCalledTimes(1))
+    expect(onOpenChange).toHaveBeenLastCalledWith({ open: true })
+    await userEvent.keyboard('{Escape}')
+    await expect.element(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(onOpenChange).toHaveBeenLastCalledWith({ open: false })
+  })
+
+  it('updates controlled selection, clears it, and selects again', async () => {
+    await render(<Controlled />)
+    const trigger = page.getByRole('combobox', { name: 'Framework' })
+    const hiddenSelect = document.querySelector('select')
+    await expect.element(trigger).toHaveTextContent('Vue')
+    expect(hiddenSelect?.value).toBe('vue')
+
+    for (const label of ['React', 'Solid']) {
+      await userEvent.click(trigger)
+      await userEvent.click(page.getByRole('option', { name: label }))
+      await expect.element(trigger).toHaveTextContent(label)
+      expect(hiddenSelect?.value).toBe(label.toLowerCase())
+      await expect.element(trigger).toHaveAttribute('aria-expanded', 'false')
+    }
+
+    await userEvent.click(page.getByRole('button', { name: 'Clear' }))
+    await expect.element(trigger).toHaveTextContent('Select a Framework')
+    expect(hiddenSelect?.value).toBe('')
+    await userEvent.click(trigger)
+    await userEvent.click(page.getByRole('option', { name: 'Vue' }))
+    await expect.element(trigger).toHaveTextContent('Vue')
+    expect(hiddenSelect?.value).toBe('vue')
   })
 
   it('should be read-only when readOnly is true', async () => {
@@ -113,6 +147,11 @@ describe('[select] component', () => {
 
     await userEvent.click(page.getByRole('combobox', { name: 'Framework' }))
     await vi.waitFor(async () => await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(<InitialValue />)
+    await expect.element(page.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
   })
 })
 
@@ -147,4 +186,19 @@ describe('[select] Field', () => {
     render(<WithField />)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
+})
+
+it('initialValue forwards detail-shaped callbacks while remaining interactive', async () => {
+  const onValueChange = vi.fn()
+  const onOpenChange = vi.fn()
+  render(<InitialValue onValueChange={onValueChange} onOpenChange={onOpenChange} />)
+  await userEvent.click(page.getByRole('button', { name: 'Clear' }))
+  expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value: [], items: [] }))
+  const trigger = page.getByRole('combobox', { name: 'Framework' })
+  await userEvent.click(trigger)
+  expect(onOpenChange).toHaveBeenLastCalledWith({ open: true })
+  await userEvent.click(page.getByTestId('positioner').getByText('React', { exact: true }))
+  expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value: ['react'] }))
+  await expect.element(trigger).toHaveTextContent('React')
+  expect(onOpenChange).toHaveBeenLastCalledWith({ open: false })
 })

@@ -12,7 +12,7 @@
   const { component, example }: Props = $props()
 
   const modules: Record<string, () => Promise<any>> = import.meta.glob(
-    '../../../packages/svelte/src/lib/components/*/examples/*.svelte',
+    '../../../packages/svelte/src/lib/components/*/examples/**/*.svelte',
   )
 
   const framework = getFramework('svelte')

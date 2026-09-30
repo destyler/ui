@@ -14,7 +14,7 @@ describe('[collapse] parts & exports', () => {
 
   it.each(getExports(collapseAnatomy))('should export %s', (part) => {
     render(<Basic />)
-    expect(Collapse[part]).toBeDefined()
+    expect(Collapse).toHaveProperty(part, expect.anything())
   })
 })
 

@@ -7,6 +7,7 @@ import ContextValue from '../examples/ContextValue.vue'
 import Controlled from '../examples/Controlled.vue'
 import Disabled from '../examples/Disabled.vue'
 import Horizontal from '../examples/Horizontal.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import Multiple from '../examples/Multiple.vue'
 import RenderProp from '../examples/RenderProp.vue'
 import RootProvider from '../examples/RootProvider.vue'
@@ -38,6 +39,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

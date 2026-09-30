@@ -5,6 +5,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import * as splitter from '@destyler/splitter'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseSplitterProps
   extends Optional<Omit<splitter.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,12 +26,11 @@ export function useSplitter(props: UseSplitterProps = {}): UseSplitterReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    ...props,
-    size: props.size ?? props.defaultSize,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    size: props.size,
+    ...(props.size !== undefined ? { size: props.size } : {}),
   }))
   const [state, send] = useMachine(splitter.machine(initialContext()), { context })
 

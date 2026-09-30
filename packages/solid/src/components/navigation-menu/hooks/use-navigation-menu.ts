@@ -2,20 +2,18 @@ import type { PropTypes } from '@destyler/solid'
 import type { Accessor } from 'solid-js'
 import type { Optional } from '~/types'
 import * as navigationMenu from '@destyler/navigation-menu'
-import { normalizeProps, useMachine } from '@destyler/solid'
-import { createMemo, createUniqueId } from 'solid-js'
-import { isServer } from 'solid-js/web'
+import { useMachine } from '@destyler/solid'
+import { createMemo, createSignal, createUniqueId, onMount } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
-const serverRootNode = {
-  getElementById: () => null,
-} as unknown as Document
+import { connectNavigationMenu } from './connect-navigation-menu'
 
 export interface UseNavigationMenuProps
   extends Optional<
     Omit<
       navigationMenu.Context,
-      'defaultValue' | 'dir' | 'getRootNode' | 'value.controlled'
+      'dir' | 'getRootNode'
     >,
     'id'
   > {
@@ -30,28 +28,27 @@ export interface UseNavigationMenuReturn
   extends Accessor<navigationMenu.Api<PropTypes>> {}
 
 export function useNavigationMenu(props: UseNavigationMenuProps = {}): UseNavigationMenuReturn {
+  const [mounted, setMounted] = createSignal(false)
+  onMount(() => setMounted(true))
   const environment = useEnvironmentContext()
   const locale = useLocaleContext()
   const generatedId = createUniqueId()
 
   const context = createMemo<navigationMenu.Context>(() => {
-    const controlled = props.value !== undefined
     return {
-      ...props,
-      'id': props.id ?? generatedId,
-      'dir': locale().dir,
-      'getRootNode': isServer ? () => serverRootNode : environment().getRootNode,
-      'defaultValue': controlled ? (props.value ?? undefined) : props.defaultValue,
-      'value': props.value,
-      'value.controlled': controlled,
+      // A live null explicitly closes the menu. Remove the default before core
+      // derives its initial state tag, not only when applying its context.
+      ...resolveMachineProps(props, props.value !== undefined ? ['defaultValue'] : []),
+      id: props.id ?? generatedId,
+      dir: locale().dir,
+      getRootNode: environment().getRootNode,
     } as navigationMenu.Context
   })
 
   const initialContext = {
     ...context(),
-    value: props.value ?? props.defaultValue ?? null,
   }
   const [state, send] = useMachine(navigationMenu.machine(initialContext), { context })
 
-  return createMemo(() => navigationMenu.connect(state, send, normalizeProps))
+  return createMemo(() => connectNavigationMenu(state, send, mounted()))
 }

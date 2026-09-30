@@ -5,10 +5,11 @@ import * as floatingPanel from '@destyler/floating-panel'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseFloatingPanelProps
   extends Optional<
-    Omit<floatingPanel.Context, 'dir' | 'getRootNode' | 'open.controlled'>,
+    Omit<floatingPanel.Context, 'dir' | 'getRootNode'>,
     'id'
   > {
   /**
@@ -28,11 +29,9 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    ...props,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
+    ...resolveMachineProps(props),
     onOpenChange(details: floatingPanel.OpenChangeDetails) {
       if (!syncingControlledOpen)
         props.onOpenChange?.(details)
@@ -41,7 +40,7 @@ export function useFloatingPanel(props: UseFloatingPanelProps = {}): UseFloating
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send] = useMachine(floatingPanel.machine(initialContext()), { context })

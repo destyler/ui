@@ -6,9 +6,10 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseColorPickerProps
-  extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<colorPicker.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the color picker when it is first rendered.
    * Use when you do not need to control its open state.
@@ -30,25 +31,22 @@ export function useColorPicker(props: UseColorPickerProps = {}): UseColorPickerR
 
   const initialContext = createMemo(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.().ids.label,
       input: field?.().ids.control,
     },
-    'dir': locale().dir,
-    'disabled': field?.().disabled,
-    'invalid': field?.().invalid,
-    'readOnly': field?.().readOnly,
-    'required': field?.().required,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'value': props.defaultValue,
-    ...props,
+    dir: locale().dir,
+    disabled: field?.().disabled,
+    invalid: field?.().invalid,
+    readOnly: field?.().readOnly,
+    required: field?.().required,
+    getRootNode: environment().getRootNode,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
-    value: props.value,
+    ...(props.open !== undefined ? { open: props.open } : {}),
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(colorPicker.machine(initialContext()), { context })
 

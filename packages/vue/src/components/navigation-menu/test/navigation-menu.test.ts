@@ -21,7 +21,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it.each(getExports(navigationMenuAnatomy))('should export %s', async (part) => {
-    expect(NavigationMenu[part]).toBeDefined()
+    expect(NavigationMenu).toHaveProperty(part)
   })
 
   it('should render navigation menu triggers', async () => {

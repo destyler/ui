@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Tour, tourAnatomy, useTour } from '../'
-import { getExports } from '../../../setup-test'
+import { expectExport, getExports } from '../../../setup-test'
 
 function emitAnimationEnd(element: Element, animationName: string) {
   element.dispatchEvent(new AnimationEvent('animationend', { animationName, bubbles: true }))
@@ -38,7 +38,7 @@ function ComponentUnderTest() {
 
 describe('tour', () => {
   it.each(getExports(tourAnatomy))('exports %s', (part) => {
-    expect(Tour[part]).toBeDefined()
+    expectExport(Tour, part)
   })
 
   it('starts through the context API', async () => {

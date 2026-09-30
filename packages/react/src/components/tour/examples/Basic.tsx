@@ -41,8 +41,8 @@ export function Basic() {
             <Tour.Description />
             <Tour.ProgressText />
             <Tour.Control>
-              <Tour.ActionTrigger action="prev">Prev</Tour.ActionTrigger>
-              <Tour.ActionTrigger action="next">Next</Tour.ActionTrigger>
+              <Tour.ActionTrigger action={{ action: 'prev', label: 'Prev' }}>Prev</Tour.ActionTrigger>
+              <Tour.ActionTrigger action={{ action: 'next', label: 'Next' }}>Next</Tour.ActionTrigger>
             </Tour.Control>
             <Tour.CloseTrigger>X</Tour.CloseTrigger>
           </Tour.Content>

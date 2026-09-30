@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { Splitter } from '../index'
-import { ref } from 'vue'
-
-const size = ref([
-  { id: 'a', size: 50 },
-  { id: 'b', size: 50 },
-])
 </script>
 
 <template>
   <Splitter.Root
-    :size="size"
+    :default-size="[{ id: 'a', size: 50 }, { id: 'b', size: 50 }]"
     @size-change="(details) => console.log('onSizeChange', details)"
     @size-change-end="(details) => console.log('onSizeChangeEnd', details)"
   >

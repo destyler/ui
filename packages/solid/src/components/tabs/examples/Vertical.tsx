@@ -2,7 +2,7 @@ import { Tabs } from '@destyler-ui/solid/tabs'
 
 export function Vertical() {
   return (
-    <Tabs.Root orientation="vertical" value="react">
+    <Tabs.Root orientation="vertical" defaultValue="react">
       <Tabs.List>
         <Tabs.Trigger value="react">React</Tabs.Trigger>
         <Tabs.Trigger value="vue">Vue</Tabs.Trigger>

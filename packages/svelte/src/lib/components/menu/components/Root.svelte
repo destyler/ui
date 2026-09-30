@@ -19,7 +19,13 @@
   import { MenuTriggerItemProvider } from '../hooks/use-menu-trigger-item-context'
   import { useMenu } from '../hooks/use-menu.svelte'
 
-  let { open = $bindable<boolean>(), ...props }: MenuRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable<boolean>(),
+    open: openProp,
+    ...props
+  }: MenuRootProps = $props()
   const providedId = $props.id()
 
   const [presenceProps, menuProps] = $derived(splitPresenceProps(props))
@@ -54,10 +60,10 @@
   const resolvedProps = $derived<UseMenuProps>({
     ...useMenuProps,
     id: useMenuProps.id ?? providedId,
-    open,
+    open: openProp,
     onOpenChange(details) {
       useMenuProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
   })
 

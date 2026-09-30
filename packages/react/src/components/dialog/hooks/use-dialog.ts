@@ -1,13 +1,15 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as dialog from '@destyler/dialog'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseDialogProps
-  extends Optional<Omit<dialog.Context, 'getRootNode' | 'dir' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<dialog.Context, 'getRootNode' | 'dir'>, 'id'> {
   /**
    * The initial open state of the dialog when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,17 +24,15 @@ export function useDialog(props: UseDialogProps = {}): UseDialogReturn {
   const { dir } = useLocaleContext()
 
   const initialContext: dialog.Context = {
-    'id': useId(),
+    id: useId(),
     getRootNode,
     dir,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: dialog.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
     onEscapeKeyDown: useEvent(props.onEscapeKeyDown),
     onInteractOutside: useEvent(props.onInteractOutside),

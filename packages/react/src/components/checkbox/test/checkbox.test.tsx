@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
@@ -6,6 +7,7 @@ import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
 import { Group } from '../examples/Group'
 import { Indeterminate } from '../examples/Indeterminate'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
 import { Checkbox, checkboxAnatomy } from '../index'
 
@@ -24,7 +26,7 @@ describe('[checkbox] component', () => {
 
   it.each(getExports(checkboxAnatomy))('should export %s', async (part) => {
     render(<Basic />)
-    expect(Checkbox[part]).toBeDefined()
+    expect(Checkbox).toHaveProperty(part, expect.anything())
   })
 
   it('should handle check and unchecked', async () => {
@@ -47,6 +49,93 @@ describe('[checkbox] component', () => {
   it('should handle indeterminate state from example', async () => {
     render(<Indeterminate />)
     await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
+    await userEvent.click(page.getByText('Checkbox', { exact: true }))
+    await expect.element(page.getByRole('checkbox')).toBeChecked()
+    await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'checked')
+    await userEvent.click(page.getByText('Checkbox', { exact: true }))
+    await expect.element(page.getByRole('checkbox')).not.toBeChecked()
+    await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'unchecked')
+  })
+  it('seeds default* via InitialValue example', async () => {
+    render(<InitialValue />)
+    await expect.element(page.getByRole('checkbox')).toBeChecked()
+  })
+
+  it('preserves an uncontrolled value when reactive props change', async () => {
+    function Harness() {
+      const [disabled, setDisabled] = useState(false)
+      return (
+        <>
+          <Checkbox.Root defaultChecked disabled={disabled}>
+            <Checkbox.Label>Standalone checkbox</Checkbox.Label>
+            <Checkbox.Control />
+            <Checkbox.HiddenInput />
+          </Checkbox.Root>
+          <button type="button" onClick={() => setDisabled(true)}>disable</button>
+        </>
+      )
+    }
+    render(<Harness />)
+    const checkbox = page.getByRole('checkbox', { name: 'Standalone checkbox' })
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Standalone checkbox'))
+    await expect.element(checkbox).not.toBeChecked()
+    await userEvent.click(page.getByRole('button', { name: 'disable' }))
+    await expect.element(checkbox).not.toBeChecked()
+  })
+
+  it('omits undefined checked so defaultChecked stays uncontrolled', async () => {
+    render(
+      <Checkbox.Root defaultChecked checked={undefined}>
+        <Checkbox.Label>Undefined live checkbox</Checkbox.Label>
+        <Checkbox.Control />
+        <Checkbox.HiddenInput />
+      </Checkbox.Root>,
+    )
+    const checkbox = page.getByRole('checkbox', { name: 'Undefined live checkbox' })
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Undefined live checkbox'))
+    await expect.element(checkbox).not.toBeChecked()
+  })
+
+  it('native form reset restores the original default across later default prop changes', async () => {
+    function ResetExample({ defaultChecked }: { defaultChecked: boolean }) {
+      return (
+        <form>
+          <Checkbox.Root defaultChecked={defaultChecked}>
+            <Checkbox.Label>Reset checkbox</Checkbox.Label>
+            <Checkbox.Control data-testid="reset-control" />
+            <Checkbox.HiddenInput />
+            <Checkbox.Context>{api => <output data-testid="reset-state">{String(api.checked)}</output>}</Checkbox.Context>
+          </Checkbox.Root>
+          <button type="reset">Reset form</button>
+        </form>
+      )
+    }
+
+    const screen = await render(<ResetExample defaultChecked />)
+    const checkbox = page.getByRole('checkbox', { name: 'Reset checkbox' })
+    const control = page.getByTestId('reset-control')
+    const state = page.getByTestId('reset-state')
+    await expect.element(checkbox).toBeChecked()
+    await userEvent.click(page.getByText('Reset checkbox', { exact: true }))
+    await expect.element(checkbox).not.toBeChecked()
+    await expect.element(control).toHaveAttribute('data-state', 'unchecked')
+    await expect.element(state).toHaveTextContent('false')
+
+    await screen.rerender(<ResetExample defaultChecked={false} />)
+    await expect.element(checkbox).not.toBeChecked()
+    await userEvent.click(page.getByRole('button', { name: 'Reset form' }))
+    await expect.element(checkbox).toBeChecked()
+    await expect.element(control).toHaveAttribute('data-state', 'checked')
+    await expect.element(state).toHaveTextContent('true')
+
+    await userEvent.click(page.getByText('Reset checkbox', { exact: true }))
+    await expect.element(state).toHaveTextContent('false')
+    await userEvent.click(page.getByRole('button', { name: 'Reset form' }))
+    await expect.element(checkbox).toBeChecked()
+    await expect.element(control).toHaveAttribute('data-state', 'checked')
+    await expect.element(state).toHaveTextContent('true')
   })
 })
 

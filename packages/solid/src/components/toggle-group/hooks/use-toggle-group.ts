@@ -5,6 +5,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import * as toggleGroup from '@destyler/toggle'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseToggleGroupProps
   extends Optional<Omit<toggleGroup.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,12 +26,11 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
-    ...props,
+    ...resolveMachineProps(props),
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
   const [state, send] = useMachine(toggleGroup.machine(initialContext()), {
     context,

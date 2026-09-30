@@ -21,7 +21,13 @@
   import { TabsProvider } from '../hooks/use-tabs-context'
   import { useTabs } from '../hooks/use-tabs.svelte'
 
-  let { value = $bindable(), ...props }: TabsRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: TabsRootProps = $props()
 
   const [renderStrategyProps, tabsProps] = $derived(splitRenderStrategyProps(props))
 
@@ -49,10 +55,10 @@
   const machineProps = $derived.by<UseTabsProps>(() => ({
     ...useTabsProps,
     id: useTabsProps.id ?? id,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useTabsProps.onValueChange?.(details)
-      if (value !== undefined) value = details.value
+      value = details.value
     },
   }))
 

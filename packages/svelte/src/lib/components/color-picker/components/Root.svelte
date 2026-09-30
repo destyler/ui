@@ -19,7 +19,15 @@
   import { ColorPickerProvider } from '../hooks/use-color-picker-context'
   import { useColorPicker } from '../hooks/use-color-picker.svelte'
 
-  let { value = $bindable<Color>(), open = $bindable<boolean>(), ...props }: ColorPickerRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable<Color>(),
+    value: valueProp,
+    open = $bindable<boolean>(),
+    open: openProp,
+    ...props
+  }: ColorPickerRootProps = $props()
   const providedId = $props.id()
 
   const [presenceProps, colorPickerProps] = $derived(splitPresenceProps(props))
@@ -28,15 +36,15 @@
   const machineProps = $derived<UseColorPickerProps>({
     ...useColorPickerProps,
     id: useColorPickerProps.id ?? providedId,
-    value,
-    open,
+    value: valueProp,
+    open: openProp,
     onValueChange(details) {
       useColorPickerProps.onValueChange?.(details)
       value = details.value
     },
     onOpenChange(details) {
       useColorPickerProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
   })
 

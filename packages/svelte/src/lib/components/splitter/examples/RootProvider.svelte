@@ -4,14 +4,17 @@
   const id = $props.id()
   const splitter = useSplitter({
     id,
-    size: [
+    defaultSize: [
       { id: 'a', size: 50 },
       { id: 'b', size: 50 },
     ],
   })
 </script>
 
-<button onclick={() => splitter().setToMaxSize('a')}>Maximize a</button>
+<button onclick={() => {
+  splitter().setToMinSize('b')
+  splitter().setToMaxSize('a')
+}}>Maximize a</button>
 <Splitter.RootProvider value={splitter}>
   <Splitter.Panel id="a">A</Splitter.Panel>
   <Splitter.ResizeTrigger id="a:b" />

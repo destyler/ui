@@ -1,0 +1,138 @@
+---
+title: Controllable State
+description: Use uncontrolled default* seeds or controlled live props and Vue v-model with Destyler UI compound components.
+---
+
+
+> Most Destyler UI roots can be **uncontrolled** (the component owns state after an optional seed) or **controlled** (your app owns state and syncs it back). This page covers the compound UI API (`Dialog.Root`, `Checkbox.Root`, and friends).
+
+For the lower-level machine contract (`machine()`, `context`, adapters), see the [primitives Controllable State guide](https://destyler.org/guide/controllable-state).
+
+## Uncontrolled (default)
+
+Prefer `defaultOpen`, `defaultChecked`, `defaultValue`, `defaultPage`, `defaultStep`, `defaultSize`, or `defaultPressed` for the initial seed. The component keeps the value afterward and still fires change callbacks (`onOpenChange`, `onValueChange`, and so on) if you only need to observe updates.
+
+```vue
+<script setup lang="ts">
+import { Dialog, Checkbox, Tabs } from '@destyler-ui/vue'
+</script>
+
+<template>
+  <!-- Dialog — start open once, component owns open afterward -->
+  <Dialog.Root default-open>
+    <!-- … -->
+  </Dialog.Root>
+
+  <!-- Checkbox — start checked, component owns checked afterward -->
+  <Checkbox.Root default-checked>
+    <!-- … -->
+  </Checkbox.Root>
+
+  <!-- Tabs — seed the first tab without taking ownership -->
+  <Tabs.Root default-value="react">
+    <!-- … -->
+  </Tabs.Root>
+</template>
+```
+
+## Controlled
+
+Pass a defined live prop (`open`, `checked`, `value`, `page`, `step`, `size`, `pressed`, …) so **prop presence** marks the field as controlled. Keep that prop in sync when the component requests a change. At the UI boundary, `undefined` is treated as omitted; `false`, `0`, an empty string, and an empty array are still explicit values.
+
+Choose controlled or uncontrolled ownership on the first render and keep that choice stable. Changing a live prop between `undefined` and a defined value is not a supported way to switch modes later.
+
+When both `open` and `defaultOpen` are supplied, the live `open` wins, including `open={false}` with `defaultOpen={true}`. Use defaults only for the initial seed: changing a default later does not reset the component's current state.
+
+### Vue — `v-model` / `v-model:*`
+
+```vue
+<script setup lang="ts">
+import { Dialog, Checkbox, Tabs } from '@destyler-ui/vue'
+import { ref } from 'vue'
+
+const open = ref(false)
+const checked = ref(false)
+const tab = ref('react')
+</script>
+
+<template>
+  <Dialog.Root v-model:open="open">
+    <!-- … -->
+  </Dialog.Root>
+
+  <Checkbox.Root v-model:checked="checked">
+    <!-- … -->
+  </Checkbox.Root>
+
+  <Tabs.Root v-model="tab">
+    <!-- … -->
+  </Tabs.Root>
+</template>
+```
+
+### React — live prop + `on*Change`
+
+```tsx
+import { useState } from 'react'
+import { Dialog, Checkbox, Tabs } from '@destyler-ui/react'
+
+export function ControlledExamples() {
+  const [open, setOpen] = useState(false)
+  const [checked, setChecked] = useState(false)
+  const [tab, setTab] = useState('react')
+
+  return (
+    <>
+      <Dialog.Root open={open} onOpenChange={({ open }) => setOpen(open)}>
+        {/* … */}
+      </Dialog.Root>
+
+      <Checkbox.Root checked={checked} onCheckedChange={e => setChecked(e.checked)}>
+        {/* … */}
+      </Checkbox.Root>
+
+      <Tabs.Root value={tab} onValueChange={({ value }) => setTab(value)}>
+        {/* … */}
+      </Tabs.Root>
+    </>
+  )
+}
+```
+
+### Solid / Svelte
+
+Solid mirrors React (`open={open()}` + `onOpenChange`). Svelte uses `bind:open`, `bind:checked`, `bind:value`, and similar bindable props on the root.
+
+In Svelte, a plain presence-controlled live prop is one-way: the component keeps the parent's value until the parent accepts a change request and writes it back. With `bind:*`, change requests update the bound parent state; a function binding can reject a request by leaving that state unchanged. This veto applies to presence-controlled fields, not the mutable-core fields described below.
+
+Initialize bound state when you need controlled ownership. A binding whose initial value is `undefined` still receives interaction updates, but starts uncontrolled. Binding updates do not change the initial ownership mode.
+
+## Important: no more `*.controlled` flags
+
+:::caution
+Passing defined `open`, `checked`, `value`, or other live keys into a root is treated as **controlled**. For demos and uncontrolled UIs, omit those keys and use `default*` instead. Explicit `*.controlled` flags are **removed** in Destyler core 0.2.7 (Destyler UI is aligned).
+:::
+
+| Intent | Pass on the root |
+|--------|------------------|
+| Uncontrolled seed | `defaultOpen` / `defaultChecked` / `defaultValue` / … (omit the live key) |
+| Controlled | Live `open` / `checked` / `value` / … + sync via `v-model` or `on*Change` |
+
+## UI-only defaults
+
+Calendar's `defaultView` selects the initial day, month, or year view. Edit's `defaultEdit` selects its initial preview or editing state. The UI adapters implement these defaults because core 0.2.7 does not expose them. Explicit `view` / `edit` take priority, and changing either default after initialization does not reset the current state.
+
+## Dynamic, QR Code, and Progress
+
+These core machines do **not** expose a presence-controlled `defaultValue` API the same way interactive inputs do. Destyler UI maps `defaultValue` to an initial value once; an explicit live `value`, including an empty value, takes priority. Later live values synchronize into the machine, but withholding callback writeback does not veto internal API updates. For a read-only Progress or QR Code display, drive the value from your own state.
+
+Dynamic's `inputValue` follows the same mutable synchronization contract.
+
+### Other synchronized fields
+
+Calendar's `view` and `focusedValue`, FloatingPanel's `position` and `size`, and Tree's `focusedValue` also synchronize incoming values without presence-controlled ownership in core 0.2.7. Their callbacks report internal changes; withholding writeback does not veto those changes. This does not affect the controlled contract for Calendar's `open`/`value`, FloatingPanel's `open`, or Tree's `expandedValue`/`selectedValue`.
+
+## Related
+
+- [Getting Started](/docs/overview/getting-started)
+- Component pages under **Examples → Controlled** / **Initial Value**

@@ -7,7 +7,7 @@ export function Controlled() {
   return (
     <>
       <button onClick={() => setIsOpen(!isOpen)}>Trigger from the outside</button>
-      <Menu.Root open={isOpen}>
+      <Menu.Root open={isOpen} onOpenChange={({ open }) => setIsOpen(open)}>
         <Menu.Trigger>Open menu</Menu.Trigger>
         <Menu.Positioner>
           <Menu.Content>

@@ -1,5 +1,6 @@
 import Basic from '../examples/Basic.vue'
 import Blurred from '../examples/Blurred.vue'
+import Controlled from '../examples/Controlled.vue'
 import Customized from '../examples/Customized.vue'
 import InitialValue from '../examples/InitialValue.vue'
 import OtpMode from '../examples/OtpMode.vue'
@@ -18,6 +19,13 @@ export function basic() {
   return {
     components: { Basic },
     template: '<Basic />',
+  }
+}
+
+export function controlled() {
+  return {
+    components: { Controlled },
+    template: '<Controlled />',
   }
 }
 

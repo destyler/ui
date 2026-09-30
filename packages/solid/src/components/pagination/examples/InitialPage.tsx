@@ -1,17 +1,9 @@
 import { Pagination } from '@destyler-ui/solid/pagination'
-import { createSignal, For } from 'solid-js'
+import { For } from 'solid-js'
 
-export function Controlled() {
-  const [currentPage, setCurrentPage] = createSignal(1)
-
+export function InitialPage() {
   return (
-    <Pagination.Root
-      count={5000}
-      pageSize={10}
-      siblingCount={2}
-      page={currentPage()}
-      onPageChange={details => setCurrentPage(details.page)}
-    >
+    <Pagination.Root count={5000} pageSize={10} siblingCount={2} defaultPage={5}>
       <Pagination.PrevTrigger>Previous Page</Pagination.PrevTrigger>
       <Pagination.Context>
         {api => (

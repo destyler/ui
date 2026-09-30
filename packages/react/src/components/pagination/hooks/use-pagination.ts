@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as pagination from '@destyler/pagination'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UsePaginationProps extends Optional<Omit<pagination.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,13 +26,12 @@ export function usePagination(props: UsePaginationProps): UsePaginationReturn {
     id: useId(),
     dir,
     getRootNode,
-    page: props.defaultPage,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: pagination.Context = {
     ...initialContext,
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
     onPageChange: useEvent(props.onPageChange, { sync: true }),
   }
 

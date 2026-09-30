@@ -2,7 +2,7 @@
   import { Checkbox } from '../index'
 </script>
 
-<Checkbox.Root checked="indeterminate">
+<Checkbox.Root defaultChecked="indeterminate">
   <Checkbox.Label>Checkbox</Checkbox.Label>
   <Checkbox.Control data-testid="control">
     <Checkbox.Indicator>+</Checkbox.Indicator>

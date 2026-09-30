@@ -37,7 +37,7 @@ export function useOtpInput(props: UseOtpInputProps = {}, emit?: EmitFn<RootEmit
     required: field?.value.required,
     invalid: field?.value.invalid,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onValueChange: (details) => {
       emit?.('valueChange', details)

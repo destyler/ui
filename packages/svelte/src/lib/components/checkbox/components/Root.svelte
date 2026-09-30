@@ -13,7 +13,13 @@
   import { splitCheckboxProps } from '../hooks/split-checkbox-props.svelte'
   import { useCheckbox } from '../hooks/use-checkbox.svelte'
 
-  let { checked = $bindable(), ...props }: CheckboxRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    checked = $bindable(),
+    checked: checkedProp,
+    ...props
+  }: CheckboxRootProps = $props()
   const providedId = $props.id()
 
   const [useCheckboxProps, localProps] = $derived(splitCheckboxProps(props))
@@ -21,7 +27,7 @@
   const resolvedProps = $derived<UseCheckboxProps>({
     ...useCheckboxProps,
     id: useCheckboxProps.id ?? providedId,
-    checked,
+    checked: checkedProp,
     onCheckedChange(details) {
       useCheckboxProps.onCheckedChange?.(details)
       checked = details.checked

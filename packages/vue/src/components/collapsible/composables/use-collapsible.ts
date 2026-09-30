@@ -7,11 +7,11 @@ import * as collapsible from '@destyler/collapsible'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, ref, useId, watch } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseCollapsibleProps
   extends RenderStrategyProps,
-  Optional<Omit<collapsible.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the collapsible when it is first rendered.
    * Use when you do not need to control its open state.
@@ -39,16 +39,14 @@ export function useCollapsible(props: UseCollapsibleProps = {}, emits?: EmitFn<R
 
   const context = computed<collapsible.Context>(() => ({
     id,
-    'dir': locale.value.dir,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'getRootNode': env?.value.getRootNode,
-    'onExitComplete': () => emits?.('exitComplete'),
-    'onOpenChange': (details) => {
+    dir: locale.value.dir,
+    getRootNode: env?.value.getRootNode,
+    onExitComplete: () => emits?.('exitComplete'),
+    onOpenChange: (details) => {
       emits?.('openChange', details)
       emits?.('update:open', details.open)
     },
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(collapsible.machine(context.value), { context })

@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Field, fieldAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 
 function ComponentUnderTest(props: Field.RootProps) {
   return (
@@ -28,7 +28,7 @@ describe('field / Parts & Exports', () => {
   })
 
   it.each(getExports(fieldAnatomy))('should export %s', async (part) => {
-    expect(Field[part]).toBeDefined()
+    expectExport(Field, part)
   })
 })
 

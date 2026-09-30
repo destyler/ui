@@ -6,7 +6,7 @@ import { Edit } from '../index'
   <Edit.Root placeholder="Placeholder">
     <Edit.Label>Label</Edit.Label>
     <Edit.Area>
-      <Edit.Input />
+      <Edit.Input aria-label="editable input" />
       <Edit.Preview />
     </Edit.Area>
     <Edit.Control>

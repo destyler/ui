@@ -5,9 +5,6 @@ export function splitHoverCardProps<T extends UseHoverCardProps>(props: T) {
   return createSplitProps<UseHoverCardProps>()(props, [
     'closeDelay',
     'defaultOpen',
-    'dir',
-    'disabled',
-    'getRootNode',
     'id',
     'ids',
     'onOpenChange',

@@ -6,10 +6,10 @@ import * as calendar from '@destyler/calendar'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseCalendarProps
-  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'parse' | 'open.controlled' | 'value'>, 'id'> {
+  extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'parse' | 'value'>, 'id'> {
   /**
    * The v-model value of the calendar
    */
@@ -34,35 +34,39 @@ export function useCalendar(props: UseCalendarProps = {}, emit?: EmitFn<RootEmit
   const id = useId()
   const env = useEnvironmentContext()
   const locale = useLocaleContext(DEFAULT_LOCALE)
+  // Core has no defaultView: seed view once and only synchronize a live view later.
+  const initialView = props.view !== undefined ? props.view : props.defaultView
   const context = computed<calendar.Context>(() => {
+    const { defaultView: _defaultView, ...rest } = props
     return {
       id,
-      'dir': locale.value.dir,
-      'open': props.open ?? props.defaultOpen,
-      'open.controlled': props.open !== undefined,
-      'value': props.defaultValue ?? props.modelValue,
-      'view': props.defaultView ?? props.view,
-      'getRootNode': env?.value.getRootNode,
-      'onFocusChange': details => emit?.('focusChange', details),
-      'onViewChange': (details) => {
+      dir: locale.value.dir,
+      ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
+      getRootNode: env?.value.getRootNode,
+      onFocusChange: details => emit?.('focusChange', details),
+      onViewChange: (details) => {
         emit?.('viewChange', details)
         emit?.('update:view', details.view)
       },
-      'onOpenChange': (details) => {
+      onOpenChange: (details) => {
         emit?.('openChange', details)
         emit?.('update:open', details.open)
       },
-      'onValueChange': (details) => {
+      onValueChange: (details) => {
         emit?.('valueChange', details)
         emit?.('update:modelValue', details.value)
       },
-      ...cleanProps(props),
+      ...cleanOpenProps(rest),
     }
   })
 
-  const [state, send] = useMachine(calendar.machine(context.value), {
-    context,
-  })
+  const [state, send] = useMachine(
+    calendar.machine({
+      ...context.value,
+      ...(initialView !== undefined ? { view: initialView } : {}),
+    }),
+    { context },
+  )
 
   return computed(() => calendar.connect(state.value, send, normalizeProps))
 }

@@ -1,11 +1,14 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as zagSwitch from '@destyler/switch'
 import { useId } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
+import { useNativeInputSync } from '~/hooks/use-native-input-sync'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseSwitchProps extends Optional<Omit<zagSwitch.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -34,17 +37,34 @@ export function useSwitch(props: UseSwitchProps = {}): UseSwitchReturn {
     invalid: field?.invalid,
     required: field?.required,
     getRootNode,
-    checked: props.defaultChecked,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: zagSwitch.Context = {
     ...initialContext,
-    checked: props.checked,
+    ...(props.checked !== undefined ? { checked: props.checked } : {}),
     onCheckedChange: useEvent(props.onCheckedChange, { sync: true }),
   }
 
-  const [state, send] = useMachine(zagSwitch.machine(initialContext), { context })
+  const [state, send, service] = useMachine(zagSwitch.machine(initialContext), { context })
 
-  return zagSwitch.connect(state, send, normalizeProps)
+  const syncInput = useNativeInputSync()
+  const api = zagSwitch.connect(state, send, normalizeProps)
+  return {
+    ...api,
+    getHiddenInputProps() {
+      const inputProps = api.getHiddenInputProps()
+      return {
+        ...inputProps,
+        onClick(event) {
+          inputProps.onClick?.(event)
+          const input = event.currentTarget
+          syncInput(input, () => {
+            const context = service.state.context
+            input.checked = !!context.checked
+          })
+        },
+      }
+    },
+  }
 }

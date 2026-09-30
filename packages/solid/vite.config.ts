@@ -62,7 +62,7 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [solid()],
+  plugins: [solid({ solid: { hydratable: true } })],
   optimizeDeps: {
     include: [
       '@destyler/collapsible',

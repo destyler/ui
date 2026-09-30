@@ -5,6 +5,7 @@ import ControlledExample from '../examples/Controlled.svelte'
 import CustomDelayExample from '../examples/CustomDelay.svelte'
 import DisableClickExample from '../examples/DisableClick.svelte'
 import DisableHoverExample from '../examples/DisableHover.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import VerticalExample from '../examples/Vertical.svelte'
 
@@ -19,6 +20,7 @@ const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 
 export const Basic = story(BasicExample)
 export const Controlled = story(ControlledExample)
+export const InitialValue = story(InitialValueExample)
 export const CustomDelay = story(CustomDelayExample)
 export const DisableClick = story(DisableClickExample)
 export const DisableHover = story(DisableHoverExample)

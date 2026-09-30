@@ -1,5 +1,5 @@
 import { playwright } from '@vitest/browser-playwright'
-import { defineConfig, mergeConfig } from 'vitest/config'
+import { configDefaults, defineConfig, mergeConfig } from 'vitest/config'
 import viteConfig from './vite.config'
 
 export default mergeConfig(
@@ -7,6 +7,7 @@ export default mergeConfig(
   defineConfig({
     test: {
       name: 'vue',
+      exclude: [...configDefaults.exclude, '**/*.ssr.test.ts', '**/*.unit.test.ts'],
       environment: 'happy-dom',
       browser: {
         enabled: true,

@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { HoverCard, hoverCardAnatomy } from '../index'
 
@@ -10,7 +11,7 @@ const componentExports = HoverCard as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[hover-card] component', () => {
-  it.each(hoverCardAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(hoverCardAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     await render(Basic)
     expect(document.querySelector(`[data-scope="hover-card"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -53,5 +54,10 @@ describe('[hover-card] component', () => {
     await expect.element(positioner).toBeInTheDocument()
     await userEvent.unhover(page.getByText('Hover me'))
     await vi.waitFor(async () => expect.element(positioner).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Content')).toBeVisible()
   })
 })

@@ -6,10 +6,10 @@ import * as hoverCard from '@destyler/hover-card'
 import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId } from 'vue'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseHoverCardProps
-  extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<hoverCard.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the hover card when it is first rendered.
    * Use when you do not need to control its open state.
@@ -24,15 +24,13 @@ export function useHoverCard(props: UseHoverCardProps = {}, emit?: EmitFn<RootEm
   const locale = useLocaleContext(DEFAULT_LOCALE)
   const context = computed<hoverCard.Context>(() => ({
     id,
-    'dir': locale.value.dir,
-    'open': props.open ?? props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'getRootNode': env?.value.getRootNode,
-    'onOpenChange': (details) => {
+    dir: locale.value.dir,
+    getRootNode: env?.value.getRootNode,
+    onOpenChange: (details) => {
       emit?.('openChange', details)
       emit?.('update:open', details.open)
     },
-    ...cleanProps(props),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send] = useMachine(hoverCard.machine(context.value), { context })

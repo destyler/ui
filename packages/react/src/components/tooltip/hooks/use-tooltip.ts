@@ -1,13 +1,15 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as tooltip from '@destyler/tooltip'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseTooltipProps
-  extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<tooltip.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the tooltip when it is first rendered.
    * Use when you do not need to control its open state.
@@ -22,12 +24,10 @@ export function useTooltip(props: UseTooltipProps = {}): UseTooltipReturn {
   const { dir } = useLocaleContext()
 
   const initialContext: tooltip.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: tooltip.Context = {

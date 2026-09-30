@@ -16,7 +16,14 @@
   import { PopoverProvider } from '../hooks/use-popover-context'
   import { usePopover } from '../hooks/use-popover.svelte'
 
-  let { open = $bindable(), children, ...props }: PopoverRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable(),
+    open: openProp,
+    children,
+    ...props
+  }: PopoverRootProps = $props()
 
   const providedId = $props.id()
 
@@ -26,10 +33,10 @@
     return {
       ...localProps,
       id: localProps.id ?? providedId,
-      open,
+      open: openProp,
       onOpenChange(details) {
         localProps.onOpenChange?.(details)
-        if (open !== undefined) open = details.open
+        open = details.open
       },
     }
   })

@@ -30,3 +30,15 @@ export function ComponentUnderTest(props: Dynamic.RootProps) {
     </Dynamic.Root>
   )
 }
+
+export function ValueUnderTest(props: Dynamic.RootProps) {
+  return (
+    <Dynamic.Root {...props}>
+      <Dynamic.Context>
+        {api => <output data-testid="value">{JSON.stringify(api().value)}</output>}
+      </Dynamic.Context>
+      <Dynamic.Input placeholder="Add tag" />
+      <Dynamic.ClearTrigger>Clear all</Dynamic.ClearTrigger>
+    </Dynamic.Root>
+  )
+}

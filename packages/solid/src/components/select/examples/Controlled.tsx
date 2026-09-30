@@ -9,7 +9,7 @@ interface Item {
 }
 
 export function Controlled() {
-  const [, setSelectedItems] = createSignal<Item[]>([])
+  const [selectedItems, setSelectedItems] = createSignal<string[]>(['vue'])
 
   const collection = createListCollection<Item>({
     items: [
@@ -21,7 +21,11 @@ export function Controlled() {
   })
 
   return (
-    <Select.Root collection={collection} onValueChange={e => setSelectedItems(e.items)}>
+    <Select.Root
+      collection={collection}
+      value={selectedItems()}
+      onValueChange={e => setSelectedItems(e.value)}
+    >
       <Select.Label>Framework</Select.Label>
       <Select.Control>
         <Select.Trigger>

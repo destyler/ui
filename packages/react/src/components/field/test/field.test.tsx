@@ -15,7 +15,7 @@ describe('[field] component', () => {
 
   it.each(getExports(fieldAnatomy))('should export %s', (part) => {
     render(<Basic />)
-    expect(Field[part]).toBeDefined()
+    expect(Field).toHaveProperty(part, expect.anything())
   })
 
   it('should set textbox as required', async () => {

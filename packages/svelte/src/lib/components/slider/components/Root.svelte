@@ -13,7 +13,13 @@
   import { SliderProvider } from '../hooks/use-slider-context'
   import { useSlider } from '../hooks/use-slider.svelte'
 
-  let { value = $bindable(), ...props }: SliderRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: SliderRootProps = $props()
   const providedId = $props.id()
 
   const [useSliderProps, localProps] = $derived(
@@ -47,7 +53,7 @@
   const resolvedProps = $derived<UseSliderProps>({
     ...useSliderProps,
     id: useSliderProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       value = details.value
       useSliderProps.onValueChange?.(details)

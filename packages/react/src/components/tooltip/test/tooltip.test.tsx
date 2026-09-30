@@ -4,6 +4,7 @@ import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
 import { Controlled } from '../examples/Controlled'
+import { InitialOpen } from '../examples/InitialOpen'
 import { RootProvider } from '../examples/RootProvider'
 import { Timings } from '../examples/Timings'
 import { Tooltip, tooltipAnatomy } from '../index'
@@ -15,7 +16,12 @@ describe('[tooltip] parts & exports', () => {
   })
 
   it.each(getExports(tooltipAnatomy))('should export %s', async (part) => {
-    expect(Tooltip[part]).toBeDefined()
+    expect(Tooltip).toHaveProperty(part, expect.anything())
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(<InitialOpen />)
+    await expect.element(page.getByText('content')).toBeVisible()
   })
 })
 

@@ -21,9 +21,13 @@
   import { SelectProvider } from '../hooks/use-select-context'
   import { useSelect } from '../hooks/use-select.svelte'
 
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
   let {
     value = $bindable<string[] | undefined>(),
+    value: valueProp,
     open = $bindable<boolean | undefined>(),
+    open: openProp,
     ...props
   }: SelectRootProps<T> = $props()
 
@@ -63,15 +67,15 @@
   const machineProps = $derived.by<UseSelectProps<T>>(() => ({
     ...useSelectProps,
     id: useSelectProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       value = details.value
       useSelectProps.onValueChange?.(details)
     },
-    open,
+    open: openProp,
     onOpenChange(details) {
       useSelectProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
   }))
 

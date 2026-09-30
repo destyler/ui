@@ -6,11 +6,7 @@ function createMockImageFile(): File {
   // Create a small 1x1 transparent PNG as a base64 data URL
   const base64Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
   const byteCharacters = atob(base64Data)
-  const byteNumbers = Array.from({ length: byteCharacters.length })
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i)
-  }
-  const byteArray = new Uint8Array(byteNumbers)
+  const byteArray = Uint8Array.from(byteCharacters, character => character.charCodeAt(0))
   const blob = new Blob([byteArray], { type: 'image/png' })
   return new File([blob], 'test-image.png', { type: 'image/png' })
 }

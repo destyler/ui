@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { FileUpload, fileUploadAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -14,7 +14,7 @@ describe('fileUpload', () => {
   })
 
   it.each(getExports(fileUploadAnatomy))('should export %s', async (part) => {
-    expect(FileUpload[part]).toBeDefined()
+    expectExport(FileUpload, part)
   })
 
   it('updates item preview when type and file change', async () => {

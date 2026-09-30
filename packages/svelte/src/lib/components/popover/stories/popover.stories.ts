@@ -5,6 +5,7 @@ import AsChildExample from '../examples/AsChild.svelte'
 import BasicExample from '../examples/Basic.svelte'
 import CloseBehaviorExample from '../examples/CloseBehavior.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
+import InitialOpenExample from '../examples/InitialOpen.svelte'
 import ModalExample from '../examples/Modal.svelte'
 import OnOpenChangeExample from '../examples/OnOpenChange.svelte'
 import PortalledExample from '../examples/Portalled.svelte'
@@ -21,6 +22,7 @@ export const AsChild = story(AsChildExample)
 export const Basic = story(BasicExample)
 export const CloseBehavior = story(CloseBehaviorExample)
 export const Controlled = story(ControlledExample)
+export const InitialOpen = story(InitialOpenExample)
 export const Modal = story(ModalExample)
 export const OnOpenChange = story(OnOpenChangeExample)
 export const Portalled = story(PortalledExample)

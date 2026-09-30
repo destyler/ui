@@ -10,7 +10,7 @@ import * as menu from '@destyler/menu'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseMenuProps
-  extends Omit<menu.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<menu.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: menu.Context['open']
 }

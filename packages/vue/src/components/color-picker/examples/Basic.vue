@@ -2,11 +2,16 @@
 import { ref } from 'vue'
 import { parseColor, ColorPicker } from '../index'
 
-const value = ref(parseColor('#eb5e41'))
+const props = defineProps<{
+  defaultValue?: ReturnType<typeof parseColor>
+  lazyMount?: boolean
+  unmountOnExit?: boolean
+}>()
+const value = ref(props.defaultValue ?? parseColor('#eb5e41'))
 </script>
 
 <template>
-  <ColorPicker.Root v-model="value">
+  <ColorPicker.Root v-model="value" :lazy-mount="lazyMount" :unmount-on-exit="unmountOnExit">
     <ColorPicker.Label>Color</ColorPicker.Label>
     <ColorPicker.Control>
       <ColorPicker.ChannelInput channel="hex" />

@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as toggleGroup from '@destyler/toggle'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseToggleGroupProps extends Optional<Omit<toggleGroup.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,13 +26,12 @@ export function useToggleGroup(props: UseToggleGroupProps = {}): UseToggleGroupR
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: toggleGroup.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
   }
 

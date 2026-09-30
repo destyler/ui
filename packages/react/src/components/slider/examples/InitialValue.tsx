@@ -2,7 +2,7 @@ import { Slider } from '../index'
 
 export function InitialValue() {
   return (
-    <Slider.Root value={[42]}>
+    <Slider.Root defaultValue={[42]}>
       <Slider.Label>Slider with Initial Value</Slider.Label>
       <Slider.ValueText />
       <Slider.Control>

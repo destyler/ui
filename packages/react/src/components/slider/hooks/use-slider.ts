@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as slider from '@destyler/slider'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseSliderProps extends Optional<Omit<slider.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,13 +26,12 @@ export function useSlider(props: UseSliderProps = {}): UseSliderReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: slider.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onValueChange: useEvent(props.onValueChange, { sync: true }),
     onValueChangeEnd: useEvent(props.onValueChangeEnd),
     onFocusChange: useEvent(props.onFocusChange),

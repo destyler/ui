@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import WithFieldExample from '../examples/WithField.svelte'
 
@@ -15,3 +16,4 @@ export const Basic = { render: () => ({ Component: BasicExample }) }
 export const Controlled = { render: () => ({ Component: ControlledExample }) }
 export const RootProvider = { render: () => ({ Component: RootProviderExample }) }
 export const WithField = { render: () => ({ Component: WithFieldExample }) }
+export const InitialValue = { render: () => ({ Component: InitialValueExample }) }

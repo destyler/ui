@@ -12,6 +12,6 @@ describe('[avatar] parts & exports', () => {
 
   it.each(getExports(avatarAnatomy))('should export %s', (part) => {
     render(<Basic />)
-    expect(Avatar[part]).toBeDefined()
+    expect(Avatar).toHaveProperty(part, expect.anything())
   })
 })

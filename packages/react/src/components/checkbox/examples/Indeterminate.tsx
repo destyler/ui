@@ -2,7 +2,7 @@ import { Checkbox } from '../index'
 
 export function Indeterminate() {
   return (
-    <Checkbox.Root checked="indeterminate">
+    <Checkbox.Root defaultChecked="indeterminate">
       <Checkbox.Label>Checkbox</Checkbox.Label>
       <Checkbox.Control data-testid="control">
         <Checkbox.Indicator>

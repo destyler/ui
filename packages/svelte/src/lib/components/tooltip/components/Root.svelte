@@ -16,7 +16,13 @@
   import { TooltipProvider } from '../hooks/use-tooltip-context'
   import { useTooltip } from '../hooks/use-tooltip.svelte'
 
-  let { open = $bindable(), ...props }: TooltipRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable(),
+    open: openProp,
+    ...props
+  }: TooltipRootProps = $props()
   const providedId = $props.id()
 
   const [presenceProps, localProps] = $derived(splitPresenceProps(props))
@@ -25,10 +31,10 @@
   const resolvedProps = $derived<UseTooltipProps>({
     ...useTooltipProps,
     id: useTooltipProps.id ?? providedId,
-    open,
+    open: openProp,
     onOpenChange(details) {
       useTooltipProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
   })
 

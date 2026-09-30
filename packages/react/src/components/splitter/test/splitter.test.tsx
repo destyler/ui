@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { render } from 'vitest-browser-react'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
 import { Events } from '../examples/Events'
+import { InitialSize } from '../examples/InitialSize'
 import { RenderProp } from '../examples/RenderProp'
+import { RootProvider } from '../examples/RootProvider'
 import { Splitter, splitterAnatomy } from '../index'
 
 describe('[splitter] component', () => {
@@ -14,7 +16,7 @@ describe('[splitter] component', () => {
   })
 
   it.each(getExports(splitterAnatomy))('should export %s', async (part) => {
-    expect(Splitter[part]).toBeDefined()
+    expect(Splitter).toHaveProperty(part, expect.anything())
   })
 
   describe('basic example', () => {
@@ -47,4 +49,22 @@ describe('[splitter] component', () => {
       expect(document.querySelectorAll('[data-part="panel"]')).toHaveLength(2)
     })
   })
+
+  it('seeds default* via InitialSize example', async () => {
+    render(<InitialSize />)
+    const panels = document.querySelectorAll('[data-scope="splitter"][data-part="panel"]')
+    expect(panels.length).toBeGreaterThanOrEqual(2)
+    const sizes = Array.from(panels).map(p => p.getAttribute('data-size') || (p as HTMLElement).style.flex || (p as HTMLElement).style.width)
+    expect(sizes.join(' ')).toMatch(/30|70/)
+  })
+})
+
+it('rootProvider example maximizes using its uncontrolled initial sizes', async () => {
+  render(<RootProvider />)
+  const panels = document.querySelectorAll<HTMLElement>('[data-scope="splitter"][data-part="panel"]')
+  expect(Array.from(panels).map(panel => panel.style.flexGrow)).toEqual(['50', '50'])
+  await userEvent.click(page.getByRole('button', { name: 'Maximize a' }))
+  expect(Array.from(panels).map(panel => panel.style.flexGrow)).toEqual(['100', '0'])
+  await userEvent.click(page.getByRole('button', { name: 'Maximize a' }))
+  expect(Array.from(panels).map(panel => panel.style.flexGrow)).toEqual(['100', '0'])
 })

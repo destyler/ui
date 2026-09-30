@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { Splitter, useSplitter } from '../index'
-import { ref } from 'vue'
 
-const size = ref([
+const defaultSize = [
   { id: 'a', size: 50 },
   { id: 'b', size: 50 },
-])
+]
 
-const splitter = useSplitter({ size: size.value })
+const splitter = useSplitter({ defaultSize })
+
+function maximizeA() {
+  splitter.value.setToMinSize('b')
+  splitter.value.setToMaxSize('a')
+}
 </script>
 
 <template>
-  <button @click="splitter.setToMaxSize('a')">Maximize a</button>
+  <button @click="maximizeA">Maximize a</button>
 
   <Splitter.RootProvider :value="splitter">
     <Splitter.Panel id="a">A</Splitter.Panel>

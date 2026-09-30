@@ -10,7 +10,7 @@ import * as hoverCard from '@destyler/hover-card'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseHoverCardProps
-  extends Omit<hoverCard.Context, 'dir' | 'getRootNode' | 'open.controlled' | 'id'> {
+  extends Omit<hoverCard.Context, 'dir' | 'getRootNode' | 'id'> {
   id: string
   defaultOpen?: hoverCard.Context['open']
 }

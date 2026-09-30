@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { Dynamic } from '../index'
-import { ref } from 'vue'
-
-const frameworks = ref(['React', 'Solid', 'Vue'])
 </script>
 
 <template>
-  <Dynamic.Root v-model="frameworks">
+  <Dynamic.Root :default-value="['React', 'Solid', 'Vue']">
     <Dynamic.Context v-slot="tagsInput">
       <Dynamic.Label>Frameworks</Dynamic.Label>
       <Dynamic.Control>

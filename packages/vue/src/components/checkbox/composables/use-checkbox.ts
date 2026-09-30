@@ -8,6 +8,7 @@ import { computed, useId } from 'vue'
 import { useFieldContext } from '~/components/field'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
 import { cleanProps } from '~/utils'
+import { reconcileNativeInput } from '~/utils/reconcile-native-input'
 import { useCheckboxGroupContext } from './use-checkbox-group-context'
 
 export interface UseCheckboxProps extends Optional<Omit<checkbox.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -20,7 +21,7 @@ export interface UseCheckboxProps extends Optional<Omit<checkbox.Context, 'dir' 
 
 export interface UseCheckboxReturn extends ComputedRef<checkbox.Api<PropTypes>> {}
 
-export function useCheckbox(ownProps: UseCheckboxProps = {}, emit?: EmitFn<RootEmits>) {
+export function useCheckbox(ownProps: UseCheckboxProps = {}, emit?: EmitFn<RootEmits>): UseCheckboxReturn {
   const id = useId()
   const env = useEnvironmentContext()
   const locale = useLocaleContext(DEFAULT_LOCALE)
@@ -42,7 +43,6 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}, emit?: EmitFn<RootE
     invalid: field?.value.invalid,
     required: field?.value.required,
     dir: locale.value.dir,
-    checked: props.value.defaultChecked,
     getRootNode: env?.value.getRootNode,
     onCheckedChange(details) {
       emit?.('checkedChange', details)
@@ -53,5 +53,19 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}, emit?: EmitFn<RootE
 
   const [state, send] = useMachine(checkbox.machine(context.value), { context })
 
-  return computed(() => checkbox.connect(state.value, send, normalizeProps))
+  return computed(() => {
+    const api = checkbox.connect(state.value, send, normalizeProps)
+    return {
+      ...api,
+      getHiddenInputProps() {
+        return reconcileNativeInput({ ...api.getHiddenInputProps(), indeterminate: api.indeterminate }, (input) => {
+          // Core retains its initial ownership when a live prop becomes
+          // undefined. Reconcile against the current accepted machine value.
+          const checked = state.value.context.checked
+          input.checked = checked === true
+          input.indeterminate = checked === 'indeterminate'
+        })
+      },
+    }
+  })
 }

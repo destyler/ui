@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import Multiple from '../examples/Multiple.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import { ToggleGroup, toggleGroupAnatomy } from '../index'
@@ -11,7 +12,7 @@ const componentExports = ToggleGroup as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[toggle-group] component', () => {
-  it.each(toggleGroupAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(toggleGroupAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="toggle-group"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -45,5 +46,11 @@ describe('[toggle-group] component', () => {
   it('keeps the RootProvider value in the styled span used by React and Vue', async () => {
     const screen = await render(RootProvider)
     expect(screen.container.querySelector(':scope > span')).toBeInTheDocument()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    const item = screen.getByText('A', { exact: true })
+    await expect.element(item).toHaveAttribute('data-state', 'on')
   })
 })

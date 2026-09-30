@@ -5,6 +5,7 @@ import * as pagination from '@destyler/pagination'
 import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UsePaginationProps
   extends Optional<Omit<pagination.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -25,13 +26,12 @@ export function usePagination(props: UsePaginationProps): UsePaginationReturn {
     id,
     dir: locale().dir,
     getRootNode: environment().getRootNode,
-    page: props.defaultPage,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    page: props.page,
+    ...(props.page !== undefined ? { page: props.page } : {}),
   }))
 
   const [state, send] = useMachine(pagination.machine(initialContext()), { context })

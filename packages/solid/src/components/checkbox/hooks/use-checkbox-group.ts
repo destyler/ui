@@ -78,7 +78,9 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps = {}) {
 
     const getItemProps = (itemProps: CheckboxGroupItemProps) => {
       return {
-        checked: itemProps.value != null ? isChecked(itemProps.value) : undefined,
+        // Omit `checked` when the item has no value — presence of the key (even
+        // undefined) makes Destyler 0.2.7 treat the checkbox as controlled.
+        ...(itemProps.value != null ? { checked: isChecked(itemProps.value) } : {}),
         onCheckedChange() {
           if (itemProps.value != null) {
             toggleValue(itemProps.value)

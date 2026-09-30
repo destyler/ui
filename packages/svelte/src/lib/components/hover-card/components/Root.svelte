@@ -16,7 +16,13 @@
   import { HoverCardProvider } from '../hooks/use-hover-card-context'
   import { useHoverCard } from '../hooks/use-hover-card.svelte'
 
-  let { open = $bindable<boolean>(), ...props }: HoverCardRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable<boolean>(),
+    open: openProp,
+    ...props
+  }: HoverCardRootProps = $props()
   const providedId = $props.id()
 
   const [presenceProps, localProps] = $derived(splitPresenceProps(props))
@@ -24,10 +30,10 @@
   const resolvedProps = $derived<UseHoverCardProps>({
     ...localProps,
     id: localProps.id ?? providedId,
-    open,
+    open: openProp,
     onOpenChange(details) {
       localProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
   })
 

@@ -30,7 +30,7 @@ export function useCollapse(props: UseCollapseProps = {}, emit?: EmitFn<RootEmit
   const context = computed<collapse.Context>(() => ({
     id,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onFocusChange: details => emit?.('focusChange', details),
     onValueChange: (details) => {

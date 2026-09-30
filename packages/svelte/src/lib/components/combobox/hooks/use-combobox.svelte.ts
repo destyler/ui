@@ -7,12 +7,14 @@ import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
+import { createInputValueSync } from '$lib/utils/sync-input-value'
 import * as combobox from '@destyler/combobox'
+import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
 import { useFieldContext } from '../../field'
 
 export interface UseComboboxProps<T extends CollectionItem>
-  extends Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'open.controlled' | 'id'> {
+  extends Omit<combobox.Context<T>, 'dir' | 'getRootNode' | 'collection' | 'id'> {
   id: string
   defaultOpen?: combobox.Context<T>['open']
   defaultValue?: combobox.Context<T>['value']
@@ -53,7 +55,17 @@ export function useCombobox<T extends CollectionItem>(props: MaybeFunction<UseCo
       return machineProps.context as combobox.Context<T>
     },
   })
-  const api = $derived(combobox.connect<PropTypes, T>(state, send, normalizeProps))
+  const connected = $derived(combobox.connect<PropTypes, T>(state, send, normalizeProps))
+  const syncInputValue = createInputValueSync(() => connected.getInputProps(), () => connected.inputValue)
+  const api = $derived({
+    ...connected,
+    getInputProps() {
+      return mergeProps(connected.getInputProps(), {
+        oninput: syncInputValue,
+        oncompositionend: syncInputValue,
+      })
+    },
+  })
 
   return () => api
 }

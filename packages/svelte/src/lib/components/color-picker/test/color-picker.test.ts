@@ -8,13 +8,13 @@ import { ColorPicker, colorPickerAnatomy, parseColor } from '../index'
 const componentExports = ColorPicker as unknown as Record<string, unknown>
 
 describe('[color-picker] component', () => {
-  it.each(colorPickerAnatomy.keys())('renders part %s', async (part) => {
+  it.each<[string]>(colorPickerAnatomy.keys().map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="color-picker"][data-part="${dataPart}"]`)).not.toBeNull()
   })
 
-  it.each(colorPickerAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(colorPickerAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `ColorPicker.${exportName}`).toBeDefined()
   })

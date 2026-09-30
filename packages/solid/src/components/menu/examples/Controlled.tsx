@@ -9,7 +9,11 @@ export function Controlled() {
       <button type="button" onClick={() => setIsOpen(!isOpen())}>
         Trigger from the outside
       </button>
-      <Menu.Root open={isOpen()} onSelect={id => console.warn(id)}>
+      <Menu.Root
+        open={isOpen()}
+        onOpenChange={({ open }) => setIsOpen(open)}
+        onSelect={id => console.warn(id)}
+      >
         <Menu.Trigger>
           Open menu <Menu.Indicator>➡️</Menu.Indicator>
         </Menu.Trigger>

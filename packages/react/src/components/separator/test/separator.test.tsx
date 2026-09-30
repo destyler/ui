@@ -13,7 +13,7 @@ describe('[separator] component', () => {
   })
 
   it.each(getExports(separatorAnatomy))('should export %s', async (part) => {
-    expect(Separator[part]).toBeDefined()
+    expect(Separator).toHaveProperty(part, expect.anything())
   })
 
   it('should render horizontal separator by default', async () => {

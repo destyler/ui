@@ -10,7 +10,7 @@ import * as dialog from '@destyler/dialog'
 import { runIfFn } from '@destyler/utils'
 
 export interface UseDialogProps
-  extends Omit<dialog.Context, 'getRootNode' | 'dir' | 'open.controlled' | 'id'> {
+  extends Omit<dialog.Context, 'getRootNode' | 'dir' | 'id'> {
   id: string
   defaultOpen?: dialog.Context['open']
 }

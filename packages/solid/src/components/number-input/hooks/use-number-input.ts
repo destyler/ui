@@ -6,6 +6,7 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseNumberInputProps
   extends Optional<Omit<numberInput.Context, 'dir' | 'getRootNode'>, 'id'> {
@@ -36,13 +37,12 @@ export function useNumberInput(props: UseNumberInputProps = {}): UseNumberInputR
     dir: locale().dir,
     locale: locale().locale,
     getRootNode: environment().getRootNode,
-    value: props.defaultValue,
-    ...props,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
   }))
 
   const [state, send] = useMachine(numberInput.machine(initialContext()), { context })

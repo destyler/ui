@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/svelte-vite'
 import BasicExample from '../examples/Basic.svelte'
+import ControlledExample from '../examples/Controlled.svelte'
 import DisabledExample from '../examples/Disabled.svelte'
 import InitialValueExample from '../examples/InitialValue.svelte'
 import OnEventExample from '../examples/OnEvent.svelte'
@@ -13,6 +14,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = { render: () => ({ Component: BasicExample }) }
+export const Controlled = { render: () => ({ Component: ControlledExample }) }
 export const Disabled = { render: () => ({ Component: DisabledExample }) }
 export const InitialValue = { render: () => ({ Component: InitialValueExample }) }
 export const OnEvent = { render: () => ({ Component: OnEventExample }) }

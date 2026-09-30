@@ -6,6 +6,7 @@ import Checkbox from '../examples/Checkbox.svelte'
 import Context from '../examples/Context.svelte'
 import Controlled from '../examples/Controlled.svelte'
 import Group from '../examples/Group.svelte'
+import InitialOpen from '../examples/InitialOpen.svelte'
 import Nested from '../examples/Nested.svelte'
 import RadioGroup from '../examples/RadioGroup.svelte'
 import { Menu, menuAnatomy } from '../index'
@@ -14,7 +15,7 @@ const componentExports = Menu as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[menu] component', () => {
-  it.each(menuAnatomy.keys())('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(menuAnatomy.keys().map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     if (partName(part) === 'trigger-item')
       await userEvent.click(screen.getByRole('button', { name: 'Open menu' }))
@@ -107,5 +108,10 @@ describe('[menu] component', () => {
       const item = document.querySelector('[data-part="item"][data-highlighted]')
       expect(item).toHaveTextContent('React')
     })
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    const screen = await render(InitialOpen)
+    await expect.element(screen.getByText('Check me')).toBeVisible()
   })
 })

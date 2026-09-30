@@ -28,7 +28,7 @@ export function useToggleGroup(props: UseToggleGroupProps = {}, emit?: EmitFn<Ro
   const context = computed<toggleGroup.Context>(() => ({
     id,
     dir: locale.value.dir,
-    value: props.modelValue ?? props.defaultValue,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
     getRootNode: env?.value.getRootNode,
     onValueChange: (details) => {
       emit?.('valueChange', details)

@@ -6,6 +6,7 @@ import { useEnvironmentContext } from '$lib/providers/environment'
 import { useLocaleContext } from '$lib/providers/locale'
 import { createMachineProps } from '$lib/utils/create-machine-props'
 import { normalizeProps } from '$lib/utils/normalize-props'
+import { createCheckedSync } from '$lib/utils/sync-checked'
 import * as checkbox from '@destyler/checkbox'
 import { mergeProps } from '@destyler/svelte'
 import { runIfFn } from '@destyler/utils'
@@ -51,7 +52,14 @@ export function useCheckbox(props: MaybeFunction<UseCheckboxProps>): UseCheckbox
       return machineProps.context as checkbox.Context
     },
   })
-  const api = $derived(checkbox.connect(state, send, normalizeProps))
+  const connected = $derived(checkbox.connect(state, send, normalizeProps))
+  const syncChecked = createCheckedSync(() => connected)
+  const api = $derived({
+    ...connected,
+    getHiddenInputProps() {
+      return mergeProps(connected.getHiddenInputProps(), { onclick: syncChecked })
+    },
+  })
 
   return () => api
 }

@@ -16,7 +16,13 @@
   import { OtpInputProvider } from '../hooks/use-otp-input-context'
   import { useOtpInput } from '../hooks/use-otp-input.svelte'
 
-  let { value = $bindable(), ...props }: OtpInputRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: OtpInputRootProps = $props()
   const providedId = $props.id()
 
   const [useOtpInputProps, localProps] = $derived(
@@ -49,7 +55,7 @@
   const resolvedProps = $derived<UseOtpInputProps>({
     ...useOtpInputProps,
     id: useOtpInputProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useOtpInputProps.onValueChange?.(details)
       value = details.value

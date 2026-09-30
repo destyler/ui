@@ -6,9 +6,10 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { MachineStatus } from '@destyler/xstate'
 import { createMemo, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UsePopoverProps
-  extends Optional<Omit<popover.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'> {
+  extends Optional<Omit<popover.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the popover when it is first rendered.
    * Use when you do not need to control its open state.
@@ -24,16 +25,14 @@ export function usePopover(props: UsePopoverProps = {}): UsePopoverReturn {
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    ...props,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
 
   const [state, send, service] = useMachine(popover.machine(initialContext()), { context })

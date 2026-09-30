@@ -2,7 +2,8 @@ import { render, screen } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Toggle, toggleAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 
 function ComponentUnderTest() {
   return (
@@ -20,7 +21,7 @@ describe('toggle', () => {
   })
 
   it.each(getExports(toggleAnatomy))('exports %s', (part) => {
-    expect(Toggle[part]).toBeDefined()
+    expectExport(Toggle, part)
   })
 
   it('changes pressed state when clicked', async () => {
@@ -129,5 +130,11 @@ describe('toggle', () => {
 
     await user.click(screen.getByRole('button', { name: 'Bold' }))
     expect(indicator).toHaveTextContent('Active')
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(() => <InitialValue />)
+    const root = document.querySelector('[data-scope="toggle"][data-part="root"]')
+    expect(root).toHaveAttribute('data-state', 'on')
   })
 })

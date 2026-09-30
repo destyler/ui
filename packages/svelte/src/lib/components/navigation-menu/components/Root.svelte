@@ -16,7 +16,7 @@
   import { PresenceProvider, splitPresenceProps, usePresence } from '../../presence'
   import { createSplitProps } from '$lib/utils/create-split-props'
 
-  let { ref = $bindable(null), value = $bindable(), ...props }: NavigationMenuRootProps = $props()
+  let { ref = $bindable(null), value: valueProp, value = $bindable(), ...props }: NavigationMenuRootProps = $props()
 
   const providedId = $props.id()
   const splitRootProps = createSplitProps<Optional<UseNavigationMenuProps, 'id'>>()
@@ -41,10 +41,10 @@
   const machineProps = $derived<UseNavigationMenuProps>({
     ...useNavigationMenuProps,
     id: useNavigationMenuProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useNavigationMenuProps.onValueChange?.(details)
-      if (value !== undefined) value = details.value
+      value = details.value
     },
   })
 

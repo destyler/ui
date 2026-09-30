@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/svelte-vite'
 import type { Component } from 'svelte'
 import BasicExample from '../examples/Basic.svelte'
 import ControlledExample from '../examples/Controlled.svelte'
+import InitialValueExample from '../examples/InitialValue.svelte'
 import RangeExample from '../examples/Range.svelte'
 import RootProviderExample from '../examples/RootProvider.svelte'
 import StandaloneExample from '../examples/Standalone.svelte'
@@ -17,6 +18,7 @@ const story = (Component: Component<any>) => ({ render: () => ({ Component }) })
 
 export const Basic = story(BasicExample)
 export const Controlled = story(ControlledExample)
+export const InitialValue = story(InitialValueExample)
 export const Range = story(RangeExample)
 export const RootProvider = story(RootProviderExample)
 export const Standalone = story(StandaloneExample)

@@ -35,4 +35,20 @@ describe('createSplitProps', () => {
     expect(firstGroup).toStrictEqual({ name: 'react' })
     expect(rest).toEqual({ b: 2, c: 3 })
   })
+
+  it('omits undefined live props while preserving default*', () => {
+    interface Controllable {
+      checked?: boolean
+      defaultChecked?: boolean
+    }
+
+    const [target, rest] = createSplitProps<Controllable>()(
+      { checked: undefined, defaultChecked: true, className: 'x' },
+      ['checked', 'defaultChecked'],
+    )
+
+    expect(target).toStrictEqual({ defaultChecked: true })
+    expect('checked' in target).toBe(false)
+    expect(rest).toEqual({ className: 'x' })
+  })
 })

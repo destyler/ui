@@ -30,6 +30,7 @@ function ComboboxImpl<T extends CollectionItem>(props: ComboboxRootProps<T>, ref
     'collection',
     'defaultOpen',
     'defaultValue',
+    'defaultInputValue',
     'disabled',
     'disableLayer',
     'form',

@@ -2,7 +2,7 @@ import { Slider } from '@destyler-ui/solid/slider'
 
 export function InitialValue() {
   return (
-    <Slider.Root value={[42]}>
+    <Slider.Root defaultValue={[42]}>
       <Slider.Label>Label</Slider.Label>
       <Slider.ValueText />
       <Slider.Control>

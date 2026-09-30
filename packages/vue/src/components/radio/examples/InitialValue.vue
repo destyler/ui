@@ -6,7 +6,7 @@ const frameworks = ref(['React', 'Solid', 'Vue'])
 </script>
 
 <template>
-  <Radio.Root model-value="Solid">
+  <Radio.Root default-value="Solid">
     <Radio.Label>Framework</Radio.Label>
     <Radio.Indicator />
     <Radio.Item v-for="framework in frameworks" :key="framework" :value="framework">

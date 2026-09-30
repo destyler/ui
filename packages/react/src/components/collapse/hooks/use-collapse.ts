@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as collapse from '@destyler/collapse'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseCollapseProps extends Optional<Omit<collapse.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,13 +26,12 @@ export function useCollapse(props: UseCollapseProps = {}): UseCollapseReturn {
     id: useId(),
     dir,
     getRootNode,
-    value: props.defaultValue,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: collapse.Context = {
     ...initialContext,
-    value: props.value,
+    ...(props.value !== undefined ? { value: props.value } : {}),
     onFocusChange: useEvent(props.onFocusChange),
     onValueChange: useEvent(props.onValueChange),
   }

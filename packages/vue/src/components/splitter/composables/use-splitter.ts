@@ -26,7 +26,6 @@ export function useSplitter(props: UseSplitterProps = {}, emit?: EmitFn<RootEmit
   const context = computed<splitter.Context>(() => ({
     id,
     dir: locale.value.dir,
-    size: props.size ?? props.defaultSize,
     getRootNode: env?.value.getRootNode,
     onSizeChange: details => emit?.('sizeChange', details),
     onSizeChangeEnd: details => emit?.('sizeChangeEnd', details),

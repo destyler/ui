@@ -15,7 +15,7 @@ describe('[aspect-ratio] component', () => {
   })
 
   it.each(getExports(aspectRatioAnatomy))('should export %s', async (part) => {
-    expect(AspectRatio[part]).toBeDefined()
+    expect(AspectRatio).toHaveProperty(part, expect.anything())
   })
 
   it('should render 16:9 aspect ratio', async () => {

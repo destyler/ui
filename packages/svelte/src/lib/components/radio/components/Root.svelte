@@ -13,7 +13,13 @@
   import { RadioProvider } from '../hooks/use-radio-context'
   import { useRadio } from '../hooks/use-radio.svelte'
 
-  let { value = $bindable(), ...props }: RadioRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: RadioRootProps = $props()
   const providedId = $props.id()
 
   const [radioGroupProps, localProps] = $derived(
@@ -34,10 +40,10 @@
   const resolvedProps = $derived<UseRadioProps>({
     ...radioGroupProps,
     id: radioGroupProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       radioGroupProps.onValueChange?.(details)
-      if (value !== undefined) value = details.value
+      value = details.value
     },
   })
 

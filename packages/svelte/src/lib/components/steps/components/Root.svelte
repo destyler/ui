@@ -13,7 +13,13 @@
   import { useSteps } from '../hooks/use-steps.svelte'
   import { StepsProvider } from '../hooks/use-steps-context'
 
-  let { step = $bindable(), ...props }: StepsRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    step = $bindable(),
+    step: stepProp,
+    ...props
+  }: StepsRootProps = $props()
   const providedId = $props.id()
 
   const [useStepsProps, localProps] = $derived(splitStepsProps(props))
@@ -21,10 +27,10 @@
   const resolvedProps = $derived<UseStepsProps>({
     ...useStepsProps,
     id: useStepsProps.id ?? providedId,
-    step,
+    step: stepProp,
     onStepChange(details) {
       useStepsProps.onStepChange?.(details)
-      if (step !== undefined) step = details.step
+      step = details.step
     },
   })
 

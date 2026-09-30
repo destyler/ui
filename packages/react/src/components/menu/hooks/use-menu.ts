@@ -1,12 +1,14 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import * as menu from '@destyler/menu'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
-export interface UseMenuProps extends Optional<Omit<menu.Context, 'open.controlled' | 'dir' | 'getRootNode'>, 'id'> {
+export interface UseMenuProps extends Optional<Omit<menu.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
    * The initial open state of the menu when it is first rendered.
    * Use when you do not need to control its open state.
@@ -32,16 +34,14 @@ export function useMenu(props: UseMenuProps = {}): UseMenuReturn {
   const onPointerDownOutside = useEvent(props.onPointerDownOutside)
 
   const initialContext: menu.Context = {
-    'id': id,
+    id,
     dir,
     getRootNode,
-    'open': props.defaultOpen ?? props.open,
-    'open.controlled': props.open !== undefined,
+    ...normalizeMachineProps(props),
   }
 
   const context: menu.Context = {
     ...initialContext,
-    open: props.open ?? props.defaultOpen,
     onOpenChange,
     onSelect,
     onEscapeKeyDown,

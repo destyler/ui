@@ -32,6 +32,7 @@ export function ComboboxRoot<T extends CollectionItem>(props: ComboboxRootProps<
     'composite',
     'defaultOpen',
     'defaultValue',
+    'defaultInputValue',
     'disabled',
     'disableLayer',
     'form',

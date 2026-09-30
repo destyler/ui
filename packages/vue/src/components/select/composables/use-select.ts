@@ -9,10 +9,10 @@ import { normalizeProps, useMachine } from '@destyler/vue'
 import { computed, useId, watch } from 'vue'
 import { useFieldContext } from '~/components/field'
 import { DEFAULT_LOCALE, useEnvironmentContext, useLocaleContext } from '~/providers'
-import { cleanProps } from '~/utils'
+import { cleanOpenProps } from '~/utils'
 
 export interface UseSelectProps<T extends CollectionItem>
-  extends Optional<Omit<select.Context<T>, 'dir' | 'getRootNode' | 'open.controlled' | 'collection'>, 'id'> {
+  extends Optional<Omit<select.Context<T>, 'dir' | 'getRootNode' | 'collection'>, 'id'> {
   modelValue?: select.Context<T>['value']
   /**
    * The initial open state of the select when it is first rendered.
@@ -40,32 +40,30 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>, em
 
   const initialContext = computed<select.Context<T>>(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.value.ids.label,
       hiddenSelect: field?.value.ids.control,
     },
-    'disabled': field?.value.disabled,
-    'readOnly': field?.value.readOnly,
-    'invalid': field?.value.invalid,
-    'required': field?.value.required,
-    'dir': locale.value.dir,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    'value': props.modelValue ?? props.defaultValue,
-    'getRootNode': env?.value.getRootNode,
-    'onValueChange': (details) => {
+    disabled: field?.value.disabled,
+    readOnly: field?.value.readOnly,
+    invalid: field?.value.invalid,
+    required: field?.value.required,
+    dir: locale.value.dir,
+    ...(props.modelValue !== undefined ? { value: props.modelValue } : {}),
+    getRootNode: env?.value.getRootNode,
+    onValueChange: (details) => {
       emit?.('valueChange', details)
       emit?.('update:modelValue', details.value)
     },
-    'onHighlightChange': details => emit?.('highlightChange', details),
-    'onOpenChange': (details) => {
+    onHighlightChange: details => emit?.('highlightChange', details),
+    onOpenChange: (details) => {
       emit?.('openChange', details)
       emit?.('update:open', details.open)
     },
-    'onFocusOutside': details => emit?.('focusOutside', details),
-    'onInteractOutside': details => emit?.('interactOutside', details),
-    'onPointerDownOutside': details => emit?.('pointerDownOutside', details),
-    ...cleanProps(props),
+    onFocusOutside: details => emit?.('focusOutside', details),
+    onInteractOutside: details => emit?.('interactOutside', details),
+    onPointerDownOutside: details => emit?.('pointerDownOutside', details),
+    ...cleanOpenProps(props),
   }))
 
   const [state, send, service] = useMachine(select.machine(initialContext.value), {

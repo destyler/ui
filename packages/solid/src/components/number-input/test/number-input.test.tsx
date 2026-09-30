@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { NumberInput, numberInputAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { WithField } from '../examples/WithField'
 import { ComponentUnderTest } from './basic'
 
@@ -14,7 +14,7 @@ describe('numberInput', () => {
   })
 
   it.each(getExports(numberInputAnatomy))('should export %s', async (part) => {
-    expect(NumberInput[part]).toBeDefined()
+    expectExport(NumberInput, part)
   })
 
   it('should handle wheel event when allowMouseWheel is true', async () => {
@@ -29,7 +29,7 @@ describe('numberInput', () => {
   })
 
   it('should clamp value on blur when clampValueOnBlur is true', async () => {
-    render(() => <ComponentUnderTest clampValueOnBlur min={0} max={10} value="15" />)
+    render(() => <ComponentUnderTest clampValueOnBlur min={0} max={10} defaultValue="15" />)
     const input = screen.getByRole('spinbutton')
     input.focus()
     input.blur()
@@ -40,7 +40,7 @@ describe('numberInput', () => {
   })
 
   it('should allow value to exceed max when allowOverflow is true', async () => {
-    render(() => <ComponentUnderTest allowOverflow max={10} value="15" />)
+    render(() => <ComponentUnderTest allowOverflow max={10} defaultValue="15" />)
     const input = screen.getByRole('spinbutton')
     expect(input).toHaveValue('15')
   })
@@ -51,7 +51,7 @@ describe('numberInput', () => {
         formatOptions={{
           currency: 'USD',
         }}
-        value="5"
+        defaultValue="5"
       />
     ))
     const input = screen.getByRole('spinbutton')
@@ -62,7 +62,7 @@ describe('numberInput', () => {
   })
 
   it('should increment value by step when using increment button', async () => {
-    render(() => <ComponentUnderTest step={5} value="0" />)
+    render(() => <ComponentUnderTest step={5} defaultValue="0" />)
     const incrementBtn = screen.getByText('+1')
     await user.click(incrementBtn)
 

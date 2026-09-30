@@ -13,7 +13,7 @@ describe('[label] component', () => {
   })
 
   it.each(getExports(labelAnatomy))('should export %s', async (part) => {
-    expect(Label[part]).toBeDefined()
+    expect(Label).toHaveProperty(part, expect.anything())
   })
 
   it('should render label text', async () => {

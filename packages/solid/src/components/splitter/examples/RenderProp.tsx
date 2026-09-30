@@ -3,7 +3,7 @@ import { Splitter } from '@destyler-ui/solid/splitter'
 export function RenderProp() {
   return (
     <Splitter.Root
-      size={[
+      defaultSize={[
         { id: 'a', size: 50 },
         { id: 'b', size: 50 },
       ]}

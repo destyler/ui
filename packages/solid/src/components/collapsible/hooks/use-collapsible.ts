@@ -7,9 +7,10 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createSignal, createUniqueId } from 'solid-js'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
 import { splitRenderStrategyProps } from '~/utils/render-strategy'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseCollapsibleProps
-  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'>,
+  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'>,
   RenderStrategyProps {
   /**
    * The initial open state of the collapsible when it is first rendered.
@@ -36,15 +37,13 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
 
   const initialContext = createMemo(() => ({
     id,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    ...collapsibleProps,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
+    ...resolveMachineProps(collapsibleProps),
   }))
   const context = createMemo(() => ({
     ...initialContext(),
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
   }))
   const [state, send] = useMachine(collapsible.machine(initialContext()), { context })
   const [wasVisible, setWasVisible] = createSignal(false)

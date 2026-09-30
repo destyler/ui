@@ -4,7 +4,7 @@ export function FractionDigits() {
   return (
     <NumberInput.Root
       formatOptions={{ minimumFractionDigits: 2, maximumFractionDigits: 4 }}
-      value="1.00"
+      defaultValue="1.00"
     >
       <NumberInput.Scrubber />
       <NumberInput.Label>Label</NumberInput.Label>

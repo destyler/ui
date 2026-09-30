@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { FloatingPanel, floatingPanelAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Controlled } from '../examples/Controlled'
 import { DefaultOpen } from '../examples/DefaultOpen'
 import { RootProvider } from '../examples/RootProvider'
@@ -16,7 +16,7 @@ describe('floating panel', () => {
   })
 
   it.each(getExports(floatingPanelAnatomy))('should export %s', (part) => {
-    expect(FloatingPanel[part]).toBeDefined()
+    expectExport(FloatingPanel, part)
   })
 
   it('should open and close the panel', async () => {

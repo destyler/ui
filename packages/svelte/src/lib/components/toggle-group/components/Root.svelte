@@ -13,7 +13,13 @@
   import { ToggleGroupProvider } from '../hooks/use-toggle-group-context'
   import { useToggleGroup } from '../hooks/use-toggle-group.svelte'
 
-  let { value = $bindable<string[]>(), ...props }: ToggleGroupRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable<string[]>(),
+    value: valueProp,
+    ...props
+  }: ToggleGroupRootProps = $props()
 
   const [useToggleGroupProps, localProps] = $derived(
     createSplitProps<Optional<UseToggleGroupProps, 'id'>>()(props, [
@@ -35,10 +41,10 @@
   const machineProps = $derived.by<UseToggleGroupProps>(() => ({
     ...useToggleGroupProps,
     id: useToggleGroupProps.id ?? id,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useToggleGroupProps.onValueChange?.(details)
-      if (value != null) value = details.value
+      value = details.value
     },
   }))
 

@@ -13,7 +13,13 @@
   import { useSwitch } from '../hooks/use-switch.svelte'
   import { SwitchProvider } from '../hooks/use-switch-context'
 
-  let { checked = $bindable(), ...props }: SwitchRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    checked = $bindable(),
+    checked: checkedProp,
+    ...props
+  }: SwitchRootProps = $props()
   const providedId = $props.id()
 
   const [useSwitchProps, localProps] = $derived(
@@ -37,10 +43,10 @@
   const resolvedProps = $derived<UseSwitchProps>({
     ...useSwitchProps,
     id: useSwitchProps.id ?? providedId,
-    checked,
+    checked: checkedProp,
     onCheckedChange(details) {
       useSwitchProps.onCheckedChange?.(details)
-      if (checked !== undefined) checked = details.checked
+      checked = details.checked
     },
   })
 

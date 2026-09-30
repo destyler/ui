@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as splitter from '@destyler/splitter'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseSplitterProps extends Optional<Omit<splitter.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -24,8 +26,7 @@ export function useSplitter(props: UseSplitterProps = {}): UseSplitterReturn {
     id: useId(),
     dir,
     getRootNode,
-    ...props,
-    size: props.size ?? props.defaultSize,
+    ...normalizeMachineProps(props),
   }
 
   const context: splitter.Context = {

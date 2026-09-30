@@ -97,6 +97,7 @@ export default defineConfig({
             { label: 'Introduction', slug: 'overview/introduction' },
             { label: 'Installation', slug: 'overview/installation' },
             { label: 'Getting Started', slug: 'overview/getting-started' },
+            { label: 'Controllable State', slug: 'overview/controllable-state' },
           ],
         },
         {

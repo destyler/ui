@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
 import Basic from '../examples/Basic.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import WithField from '../examples/WithField.vue'
 import { Select, selectAnatomy } from '../index'
 
@@ -13,7 +14,7 @@ describe('[select] component', () => {
   })
 
   it.each(getExports(selectAnatomy))('should export %s', async (part) => {
-    expect(Select[part]).toBeDefined()
+    expect(Select).toHaveProperty(part, expect.anything())
   })
 
   it('should handle item selection', async () => {
@@ -113,6 +114,11 @@ describe('[select] component', () => {
 
     await userEvent.click(page.getByRole('combobox', { name: 'Framework' }))
     await vi.waitFor(async () => await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument())
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(InitialValue)
+    await expect.element(page.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
   })
 })
 

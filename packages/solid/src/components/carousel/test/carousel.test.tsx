@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import { Carousel, carouselAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic as ComponentUnderTest } from '../examples/Basic'
 
 describe('carousel', () => {
@@ -14,7 +14,7 @@ describe('carousel', () => {
   })
 
   it.each(getExports(carouselAnatomy))('should export %s', async (part) => {
-    expect(Carousel[part]).toBeDefined()
+    expectExport(Carousel, part)
   })
 
   it('should have the correct disabled / enabled states for control buttons', async () => {

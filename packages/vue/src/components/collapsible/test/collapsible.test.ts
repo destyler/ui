@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.vue'
+import InitialOpen from '../examples/InitialOpen.vue'
 import LazyMount from '../examples/LazyMount.vue'
 import LazyMountAndUnmountOnExit from '../examples/LazyMountAndUnmountOnExit.vue'
 import UnmountOnExit from '../examples/UnmountOnExit.vue'
@@ -69,5 +70,10 @@ describe('[collapsible] components test', () => {
     await vi.waitFor(() => {
       expect(page.getByText('Content')).not.toBeInTheDocument()
     })
+  })
+
+  it('seeds default* via InitialOpen example', async () => {
+    render(InitialOpen)
+    await expect.element(page.getByText('Content')).toBeVisible()
   })
 })

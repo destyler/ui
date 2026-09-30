@@ -20,6 +20,11 @@ export interface RootProps<T extends CollectionItem> {
    */
   composite?: boolean
   /**
+   * The initial text of the combobox input when it is first rendered.
+   * Use when you do not need to control the input value.
+   */
+  defaultInputValue?: string
+  /**
    * The initial open state of the combobox when it is first rendered.
    * Use when you do not need to control its open state.
    */

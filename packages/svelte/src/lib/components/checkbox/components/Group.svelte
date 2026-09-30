@@ -13,13 +13,19 @@
   import { splitCheckboxGroupProps } from '../hooks/split-checkbox-group-props.svelte'
   import { useCheckboxGroup } from '../hooks/use-checkbox-group.svelte'
 
-  let { value = $bindable(), ...props }: CheckboxGroupProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: CheckboxGroupProps = $props()
 
   const [checkboxGroupProps, localProps] = $derived(splitCheckboxGroupProps(props))
 
   const resolvedProps = $derived<UseCheckboxGroupProps>({
     ...checkboxGroupProps,
-    value,
+    value: valueProp,
     onValueChange(newValue) {
       checkboxGroupProps.onValueChange?.(newValue)
       value = newValue

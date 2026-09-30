@@ -11,6 +11,11 @@ export interface RootProps {
    */
   defaultPage?: number
   /**
+   * The initial number of data items per page when it is first rendered.
+   * Use when you do not need to control the page size.
+   */
+  defaultPageSize?: number
+  /**
    * The unique identifier of the machine.
    */
   id?: string

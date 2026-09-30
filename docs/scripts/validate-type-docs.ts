@@ -180,6 +180,96 @@ function getPublicParts(framework: FrameworkDefinition, component: string): Set<
   return parts
 }
 
+// Compare the public Root API with the installed core declarations. Keeping this
+// contract at the generated API boundary catches hand-written RootProps omissions
+// even when the corresponding useX hook already accepts the new default prop.
+const controllableComponents = [
+  'calendar',
+  'carousel',
+  'checkbox',
+  'collapse',
+  'collapsible',
+  'color-picker',
+  'combobox',
+  'dialog',
+  'edit',
+  'floating-panel',
+  'hover-card',
+  'menu',
+  'navigation-menu',
+  'number-input',
+  'otp-input',
+  'pagination',
+  'popover',
+  'radio',
+  'select',
+  'slider',
+  'splitter',
+  'steps',
+  'switch',
+  'tabs',
+  'toggle-group',
+  'tooltip',
+  'tree',
+] as const
+
+function validateDefaultProps(framework: FrameworkDefinition): void {
+  const file = path.join(rootDir, framework.packageDirectory, '__default_props_contract__.ts')
+  const source = controllableComponents.map((component, index) => {
+    const core = component === 'toggle-group' ? 'toggle' : component
+    return `import type { Context as Core${index} } from '@destyler/${core}';\ntype Props${index} = Core${index};`
+  }).join('\n')
+  const options: ts.CompilerOptions = {
+    module: ts.ModuleKind.ESNext,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+    skipLibCheck: true,
+    target: ts.ScriptTarget.ESNext,
+  }
+  const host = ts.createCompilerHost(options)
+  const getSourceFile = host.getSourceFile.bind(host)
+  host.getSourceFile = (name, languageVersion, onError, shouldCreateNewSourceFile) => name === file
+    ? ts.createSourceFile(name, source, languageVersion, true)
+    : getSourceFile(name, languageVersion, onError, shouldCreateNewSourceFile)
+  const program = ts.createProgram([file], options, host)
+  const sourceFile = program.getSourceFile(file)
+  check(!!sourceFile, `${framework.id}: unable to inspect core default props`)
+  if (!sourceFile)
+    return
+
+  const diagnostics = program.getSemanticDiagnostics(sourceFile)
+  for (const diagnostic of diagnostics) {
+    check(false, `${framework.id}: core default contract: ${ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')}`)
+  }
+  const checker = program.getTypeChecker()
+  for (const statement of sourceFile.statements) {
+    if (!ts.isTypeAliasDeclaration(statement))
+      continue
+    const component = controllableComponents[Number(statement.name.text.slice('Props'.length))]
+    const defaults = checker.getPropertiesOfType(checker.getTypeFromTypeNode(statement.type))
+      .map(property => property.name)
+      .filter(name => /^default[A-Z]/.test(name))
+    check(defaults.length > 0, `${framework.id}/${component}: unable to resolve core default props`)
+    const rootProps = readTypes(framework, component)?.Root?.props ?? {}
+    for (const prop of defaults) {
+      check(prop in rootProps, `${framework.id}/${component}.Root: missing core default prop ${prop}`)
+    }
+  }
+
+  const uiDefaults: Record<string, string[]> = {
+    'calendar': ['defaultView'],
+    'dynamic': ['defaultValue'],
+    'edit': ['defaultEdit'],
+    'progress': ['defaultValue'],
+    'qr-code': ['defaultValue'],
+    'toggle': ['defaultPressed'],
+  }
+  for (const [component, props] of Object.entries(uiDefaults)) {
+    const rootProps = readTypes(framework, component)?.Root?.props ?? {}
+    for (const prop of props)
+      check(prop in rootProps, `${framework.id}/${component}.Root: missing UI default prop ${prop}`)
+  }
+}
+
 function validateGeneratedResults(): void {
   const documented = getDocumentedComponents()
   check(
@@ -242,6 +332,7 @@ function validateGeneratedResults(): void {
     const toast = readTypes(framework, 'toast')
     check(!!toast?.Toaster, `${framework.id}/toast: public Toaster API is missing`)
     check(!toast?.er && !toast?.erItem, `${framework.id}/toast: truncated er/erItem names must not be generated`)
+    validateDefaultProps(framework)
   }
 
   if (failures.length > 0) {

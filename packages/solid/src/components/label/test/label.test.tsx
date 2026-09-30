@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { Label, labelAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
 import { Basic } from '../examples/Basic'
 import { RootProvider } from '../examples/RootProvider'
 
@@ -12,7 +12,7 @@ describe('label', () => {
   })
 
   it.each(getExports(labelAnatomy))('should export %s', (part) => {
-    expect(Label[part]).toBeDefined()
+    expectExport(Label, part)
   })
 
   it('should render label text', () => {

@@ -82,7 +82,6 @@ export type {
   OpenChangeDetails,
   PositionChangeDetails,
   ResizeTriggerAxis,
-  ResizeTriggerProps,
   SizeChangeDetails,
   StageChangeDetails,
 } from '@destyler/floating-panel'

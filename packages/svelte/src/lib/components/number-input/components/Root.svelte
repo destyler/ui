@@ -15,7 +15,13 @@
   import { splitNumberInputProps } from '../hooks/split-number-input-props.svelte'
   import { useNumberInput } from '../hooks/use-number-input.svelte'
 
-  let { value = $bindable(), ...props }: NumberInputRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    value = $bindable(),
+    value: valueProp,
+    ...props
+  }: NumberInputRootProps = $props()
   const providedId = $props.id()
 
   const [useNumberInputProps, localProps] = $derived(splitNumberInputProps(props))
@@ -23,7 +29,7 @@
   const resolvedProps = $derived<UseNumberInputProps>({
     ...useNumberInputProps,
     id: useNumberInputProps.id ?? providedId,
-    value,
+    value: valueProp,
     onValueChange(details) {
       useNumberInputProps.onValueChange?.(details)
       value = details.value

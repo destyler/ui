@@ -14,7 +14,6 @@ const scrollArea = useScrollArea({
 })
 
 const virtualItems = computed(() => scrollArea.value.getVirtualItems())
-const totalSize = computed(() => scrollArea.value.getTotalSize())
 
 const scrollToStart = () => {
   scrollArea.value.scrollToIndex(0)

@@ -13,7 +13,15 @@
   import { PaginationProvider } from '../hooks/use-pagination-context'
   import { usePagination } from '../hooks/use-pagination.svelte'
 
-  let { page = $bindable(), pageSize = $bindable(), ...props }: PaginationRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    page = $bindable(),
+    page: pageProp,
+    pageSize = $bindable(),
+    pageSize: pageSizeProp,
+    ...props
+  }: PaginationRootProps = $props()
   const providedId = $props.id()
 
   const [paginationProps, localProps] = $derived(
@@ -26,6 +34,7 @@
       'onPageSizeChange',
       'page',
       'pageSize',
+    'defaultPageSize',
       'siblingCount',
       'translations',
       'type',
@@ -35,15 +44,15 @@
   const resolvedProps = $derived<UsePaginationProps>({
     ...paginationProps,
     id: paginationProps.id ?? providedId,
-    page,
-    pageSize,
+    page: pageProp,
+    pageSize: pageSizeProp,
     onPageChange(details) {
       paginationProps.onPageChange?.(details)
-      if (page !== undefined) page = details.page
+      page = details.page
     },
     onPageSizeChange(details) {
       paginationProps.onPageSizeChange?.(details)
-      if (pageSize !== undefined) pageSize = details.pageSize
+      pageSize = details.pageSize
     },
   })
 

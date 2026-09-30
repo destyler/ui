@@ -23,10 +23,15 @@
   import { TreeProvider } from '../hooks/use-tree-context'
   import { useTree } from '../hooks/use-tree.svelte'
 
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
   let {
     expandedValue = $bindable<string[]>(),
+    expandedValue: expandedValueProp,
     selectedValue = $bindable<string[]>(),
+    selectedValue: selectedValueProp,
     focusedValue = $bindable<string | null>(),
+    focusedValue: focusedValueProp,
     ...props
   }: TreeRootProps<T> = $props()
 
@@ -38,9 +43,9 @@
   const machineProps = $derived.by<UseTreeProps<T>>(() => ({
     ...useTreeProps,
     id: useTreeProps.id ?? id,
-    selectedValue,
-    expandedValue,
-    focusedValue,
+    selectedValue: selectedValueProp,
+    expandedValue: expandedValueProp,
+    focusedValue: focusedValueProp,
     onExpandedChange: (details) => {
       useTreeProps.onExpandedChange?.(details)
       expandedValue = details.expandedValue

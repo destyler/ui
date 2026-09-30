@@ -1,21 +1,24 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
+import { userEvent } from 'vitest/browser'
 import Basic from '../examples/Basic.svelte'
 import Controlled from '../examples/Controlled.svelte'
 import Group from '../examples/Group.svelte'
 import GroupControlled from '../examples/GroupControlled.svelte'
 import GroupWithSelectAll from '../examples/GroupWithSelectAll.svelte'
 import Indeterminate from '../examples/Indeterminate.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import RenderProp from '../examples/RenderProp.svelte'
 import RootProvider from '../examples/RootProvider.svelte'
 import WithField from '../examples/WithField.svelte'
 import { Checkbox, checkboxAnatomy } from '../index'
 import GroupPrecedence from './GroupPrecedence.svelte'
+import ReactiveUncontrolled from './ReactiveUncontrolled.svelte'
 
 const componentExports = Checkbox as unknown as Record<string, unknown>
 
 describe('[checkbox] component', () => {
-  it.each(checkboxAnatomy.keys().filter(part => part !== 'group'))('renders part %s', async (part) => {
+  it.each<[string]>(checkboxAnatomy.keys().filter((part: string) => part !== 'group').map((part: string) => [part] as [string]))('renders part %s', async (part) => {
     await render(Basic)
     const dataPart = part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
     expect(document.querySelector(`[data-scope="checkbox"][data-part="${dataPart}"]`)).not.toBeNull()
@@ -33,7 +36,7 @@ describe('[checkbox] component', () => {
     expect(screen.container.querySelectorAll('[data-part="indicator"] svg')).toHaveLength(3)
   })
 
-  it.each(checkboxAnatomy.keys())('exports %s', (part) => {
+  it.each<[string]>(checkboxAnatomy.keys().map((part: string) => [part] as [string]))('exports %s', (part) => {
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
     expect(componentExports[exportName], `Checkbox.${exportName}`).toBeDefined()
   })
@@ -54,9 +57,18 @@ describe('[checkbox] component', () => {
     await expect.element(controlled.getByRole('checkbox')).toBeChecked()
   })
 
-  it('renders indeterminate state', async () => {
+  it('seeds an interactive indeterminate state in the actual example', async () => {
     const screen = await render(Indeterminate)
-    await expect.element(screen.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
+    const input = screen.getByRole('checkbox')
+    const control = screen.getByTestId('control')
+    await expect.element(control).toHaveAttribute('data-state', 'indeterminate')
+    await screen.getByText('Checkbox', { exact: true }).click()
+    await expect.element(control).toHaveAttribute('data-state', 'checked')
+    await expect.element(input).toBeChecked()
+    expect((input.element() as HTMLInputElement).indeterminate).toBe(false)
+    await screen.getByText('Checkbox', { exact: true }).click()
+    await expect.element(control).toHaveAttribute('data-state', 'unchecked')
+    await expect.element(input).not.toBeChecked()
   })
 
   it('updates group selection and select-all state', async () => {
@@ -105,6 +117,21 @@ describe('[checkbox] component', () => {
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(screen.getByText('Checked')).toBeVisible()
   })
+
+  it('seeds default* via InitialValue example', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByRole('checkbox')).toBeChecked()
+  })
+})
+
+it('preserves an uncontrolled value when reactive props change', async () => {
+  const screen = await render(ReactiveUncontrolled)
+  const checkbox = screen.getByRole('checkbox', { name: 'Standalone checkbox' })
+  await expect.element(checkbox).toBeChecked()
+  await userEvent.click(screen.getByText('Standalone checkbox'))
+  await expect.element(checkbox).not.toBeChecked()
+  await userEvent.click(screen.getByRole('button', { name: 'disable' }))
+  await expect.element(checkbox).not.toBeChecked()
 })
 
 describe('[checkbox] field integration', () => {

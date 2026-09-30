@@ -17,7 +17,13 @@
   import { MenuItemProvider } from '../hooks/use-menu-item-context'
   import { MenuItemPropsProvider } from '../hooks/use-menu-option-item-props-context'
 
-  let { checked = $bindable<boolean>(), ...props }: MenuCheckboxItemProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    checked = $bindable<boolean>(),
+    checked: checkedProp,
+    ...props
+  }: MenuCheckboxItemProps = $props()
 
   const [partialOptionItemProps, localProps] = $derived(
     createSplitProps<CheckboxMachineProps>()(props, [
@@ -32,9 +38,9 @@
   const optionItemProps = $derived<OptionItemProps>({
     ...partialOptionItemProps,
     type: 'checkbox',
-    checked,
+    checked: checkedProp,
     onCheckedChange(nextChecked) {
-      if (checked !== undefined) checked = nextChecked
+      checked = nextChecked
       partialOptionItemProps.onCheckedChange?.(nextChecked)
     },
   })

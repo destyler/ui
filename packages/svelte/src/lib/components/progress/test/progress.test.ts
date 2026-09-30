@@ -7,18 +7,20 @@ import CircularControlled from '../examples/circular/Controlled.svelte'
 import CircularIndeterminate from '../examples/circular/Indeterminate.svelte'
 import CircularMinMax from '../examples/circular/MinMax.svelte'
 import CircularRootProvider from '../examples/circular/RootProvider.svelte'
+import InitialValue from '../examples/InitialValue.svelte'
 import LinearBasic from '../examples/linear/Basic.svelte'
 import LinearControlled from '../examples/linear/Controlled.svelte'
 import LinearIndeterminate from '../examples/linear/Indeterminate.svelte'
 import LinearMinMax from '../examples/linear/MinMax.svelte'
 import LinearRootProvider from '../examples/linear/RootProvider.svelte'
 import { Progress, progressAnatomy } from '../index'
+import ControlledWriteback from './ControlledWriteback.svelte'
 
 const componentExports = Progress as unknown as Record<string, unknown>
 const partName = (part: string) => part.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 describe('[progress] component', () => {
-  it.each(progressAnatomy.keys().filter(part => part !== 'view'))('renders and exports the %s anatomy part', async (part) => {
+  it.each<[string]>(progressAnatomy.keys().filter((part: string) => part !== 'view').map((part: string) => [part] as [string]))('renders and exports the %s anatomy part', async (part) => {
     const screen = await render(Basic)
     expect(screen.container.querySelector(`[data-scope="progress"][data-part="${partName(part)}"]`)).toBeInTheDocument()
     const exportName = `${part.charAt(0).toUpperCase()}${part.slice(1)}`
@@ -27,6 +29,25 @@ describe('[progress] component', () => {
 
   it('exports View', () => {
     expect(componentExports.View).toBeDefined()
+  })
+
+  it('seeds defaultValue when live value is omitted', async () => {
+    const screen = await render(InitialValue)
+    await expect.element(screen.getByText('70%')).toBeVisible()
+  })
+
+  it('updates UI when parent controlled value changes', async () => {
+    const screen = await render(ControlledWriteback)
+    await expect.element(screen.getByText('42%')).toBeVisible()
+    await userEvent.click(screen.getByRole('button', { name: 'parent-set-80' }))
+    await expect.element(screen.getByText('80%')).toBeVisible()
+  })
+
+  it('writes parent state back when api.setValue runs under bind:value', async () => {
+    const screen = await render(ControlledWriteback)
+    await expect.element(screen.getByText('42%')).toBeVisible()
+    await userEvent.click(screen.getByRole('button', { name: 'api-set-65' }))
+    await expect.element(screen.getByText('65%')).toBeVisible()
   })
 
   it.each([

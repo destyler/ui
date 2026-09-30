@@ -2,9 +2,10 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Dynamic, dynamicAnatomy } from '../'
-import { getExports, getParts } from '../../../setup-test'
+import { expectExport, getExports, getParts } from '../../../setup-test'
+import { InitialValue } from '../examples/InitialValue'
 import { WithField } from '../examples/WithField'
-import { ComponentUnderTest } from './basic'
+import { ComponentUnderTest, ValueUnderTest } from './basic'
 
 describe('dynamic', () => {
   it.each(getParts(dynamicAnatomy))('should render part! %s', async (part) => {
@@ -14,7 +15,7 @@ describe('dynamic', () => {
   })
 
   it.each(getExports(dynamicAnatomy))('should export %s', async (part) => {
-    expect(Dynamic[part]).toBeDefined()
+    expectExport(Dynamic, part)
   })
 
   it('should allow to add a new item', async () => {
@@ -88,6 +89,12 @@ describe('dynamic', () => {
   })
 })
 
+it('seeds default* via InitialValue example', async () => {
+  render(() => <InitialValue />)
+  expect(screen.getByText('React')).toBeInTheDocument()
+  expect(screen.getByText('Solid')).toBeInTheDocument()
+})
+
 describe('dynamic / Field', () => {
   it('should set combobox as required', async () => {
     render(() => <WithField required />)
@@ -123,5 +130,49 @@ describe('dynamic / Field', () => {
   it('should not display error text when no error is present', async () => {
     render(() => <WithField />)
     expect(screen.queryByText('Error Info')).not.toBeInTheDocument()
+  })
+})
+
+describe('dynamic / initial value', () => {
+  it.each([
+    { value: undefined, expected: ['Default'] },
+    { value: ['Live'], expected: ['Live'] },
+    { value: [], expected: [] },
+  ])('prefers the supplied live value, including $value', ({ value, expected }) => {
+    render(() => <ValueUnderTest defaultValue={['Default']} value={value} />)
+    expect(screen.getByTestId('value')).toHaveTextContent(JSON.stringify(expected))
+  })
+
+  it('updates live values, including an empty array', async () => {
+    const [value, setValue] = createSignal(['First'])
+    render(() => <ValueUnderTest defaultValue={['Default']} value={value()} />)
+
+    setValue(['Second'])
+    await waitFor(() => expect(screen.getByTestId('value')).toHaveTextContent('["Second"]'))
+    setValue([])
+    await waitFor(() => expect(screen.getByTestId('value')).toHaveTextContent('[]'))
+  })
+
+  it('keeps internal edits when unrelated props and defaultValue change', async () => {
+    const [defaultValue, setDefaultValue] = createSignal(['Default'])
+    const [readOnly, setReadOnly] = createSignal(false)
+    render(() => <ValueUnderTest defaultValue={defaultValue()} readOnly={readOnly()} />)
+
+    await user.type(screen.getByPlaceholderText('Add tag'), 'Added[Enter]')
+    expect(screen.getByTestId('value')).toHaveTextContent('["Default","Added"]')
+
+    setReadOnly(true)
+    await waitFor(() => expect(screen.getByPlaceholderText('Add tag')).toBeDisabled())
+    expect(screen.getByTestId('value')).toHaveTextContent('["Default","Added"]')
+    setDefaultValue(['Replacement'])
+    await waitFor(() => expect(screen.getByTestId('value')).toHaveTextContent('["Default","Added"]'))
+
+    setReadOnly(false)
+    await user.click(screen.getByText('Clear all'))
+    expect(screen.getByTestId('value')).toHaveTextContent('[]')
+    setDefaultValue(['Another default'])
+    setReadOnly(true)
+    await waitFor(() => expect(screen.getByPlaceholderText('Add tag')).toBeDisabled())
+    expect(screen.getByTestId('value')).toHaveTextContent('[]')
   })
 })

@@ -7,7 +7,7 @@ import { ScrollArea, scrollAreaAnatomy } from '../index'
 
 describe('[scroll-area] component', () => {
   it.each(getExports(scrollAreaAnatomy))('should export %s', async (part) => {
-    expect(ScrollArea[part]).toBeDefined()
+    expect(ScrollArea).toHaveProperty(part, expect.anything())
   })
 
   describe('basic functionality', () => {

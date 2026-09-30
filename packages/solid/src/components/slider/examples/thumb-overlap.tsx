@@ -2,7 +2,7 @@ import { Slider } from '@destyler-ui/solid/slider'
 
 export function ThumbOverlap() {
   return (
-    <Slider.Root minStepsBetweenThumbs={1} value={[5, 60]}>
+    <Slider.Root minStepsBetweenThumbs={1} defaultValue={[5, 60]}>
       <Slider.Label>Label</Slider.Label>
       <Slider.ValueText />
       <Slider.Control>

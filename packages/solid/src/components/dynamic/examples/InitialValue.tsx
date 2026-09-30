@@ -3,7 +3,7 @@ import { Index } from 'solid-js'
 
 export function InitialValue() {
   return (
-    <Dynamic.Root value={['React', 'Solid', 'Vue']}>
+    <Dynamic.Root defaultValue={['React', 'Solid', 'Vue']}>
       <Dynamic.Context>
         {api => (
           <>

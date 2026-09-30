@@ -2,13 +2,15 @@ import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
 import type { RenderStrategyProps } from '~/utils/render-strategy'
 import * as collapsible from '@destyler/collapsible'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import { useId, useRef } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseCollapsibleProps
-  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode' | 'open.controlled'>, 'id'>,
+  extends Optional<Omit<collapsible.Context, 'dir' | 'getRootNode'>, 'id'>,
   RenderStrategyProps {
   /**
    * The initial open state of the collapsible when it is first rendered.
@@ -31,17 +33,15 @@ export function useCollapsible(props: UseCollapsibleProps = {}): UseCollapsibleR
   const { getRootNode } = useEnvironmentContext()
 
   const initialContext: collapsible.Context = {
-    'id': useId(),
+    id: useId(),
     dir,
     getRootNode,
-    'open': props.defaultOpen,
-    'open.controlled': props.open !== undefined,
-    ...collapsibleProps,
+    ...normalizeMachineProps(collapsibleProps),
   }
 
   const context: collapsible.Context = {
     ...initialContext,
-    open: props.open,
+    ...(props.open !== undefined ? { open: props.open } : {}),
     onOpenChange: useEvent(props.onOpenChange, { sync: true }),
   }
 

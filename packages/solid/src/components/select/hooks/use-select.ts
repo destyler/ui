@@ -7,10 +7,11 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createUniqueId, splitProps } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseSelectProps<T extends CollectionItem>
   extends Optional<
-    Omit<select.Context<T>, 'collection' | 'dir' | 'getRootNode' | 'open.controlled'>,
+    Omit<select.Context<T>, 'collection' | 'dir' | 'getRootNode'>,
     'id'
   > {
   /**
@@ -40,28 +41,25 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
 
   const initialContext = createMemo(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.().ids.label,
       hiddenSelect: field?.().ids.control,
     },
-    'disabled': field?.().disabled,
-    'readOnly': field?.().readOnly,
-    'invalid': field?.().invalid,
-    'required': field?.().required,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'value': props.defaultValue,
-    'open.controlled': props.open !== undefined,
-    ...props,
+    disabled: field?.().disabled,
+    readOnly: field?.().readOnly,
+    invalid: field?.().invalid,
+    required: field?.().required,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => {
     const [, restProps] = splitProps(initialContext(), ['collection'])
     return {
       ...restProps,
-      open: props.open,
-      value: props.value,
+      ...(props.open !== undefined ? { open: props.open } : {}),
+      ...(props.value !== undefined ? { value: props.value } : {}),
     }
   })
 

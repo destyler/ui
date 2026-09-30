@@ -7,10 +7,11 @@ import { normalizeProps, useMachine } from '@destyler/solid'
 import { createEffect, createMemo, createUniqueId, splitProps } from 'solid-js'
 import { useFieldContext } from '~/components/field'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { resolveMachineProps } from '~/utils/resolve-machine-props'
 
 export interface UseComboboxProps<T extends CollectionItem>
   extends Optional<
-    Omit<combobox.Context<T>, 'collection' | 'dir' | 'getRootNode' | 'open.controlled'>,
+    Omit<combobox.Context<T>, 'collection' | 'dir' | 'getRootNode'>,
     'id'
   > {
   /**
@@ -40,28 +41,25 @@ export function useCombobox<T extends CollectionItem>(props: UseComboboxProps<T>
 
   const initialContext = createMemo(() => ({
     id,
-    'ids': {
+    ids: {
       label: field?.().ids.label,
       input: field?.().ids.control,
     },
-    'disabled': field?.().disabled,
-    'readOnly': field?.().readOnly,
-    'required': field?.().required,
-    'invalid': field?.().invalid,
-    'dir': locale().dir,
-    'getRootNode': environment().getRootNode,
-    'open': props.defaultOpen,
-    'value': props.defaultValue,
-    'open.controlled': props.open !== undefined,
-    ...props,
+    disabled: field?.().disabled,
+    readOnly: field?.().readOnly,
+    required: field?.().required,
+    invalid: field?.().invalid,
+    dir: locale().dir,
+    getRootNode: environment().getRootNode,
+    ...resolveMachineProps(props),
   }))
 
   const context = createMemo(() => {
     const [, restProps] = splitProps(initialContext(), ['collection'])
     return {
       ...restProps,
-      open: props.open,
-      value: props.value,
+      ...(props.open !== undefined ? { open: props.open } : {}),
+      ...(props.value !== undefined ? { value: props.value } : {}),
     }
   })
 

@@ -1,10 +1,12 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
-import { normalizeProps, useMachine } from '@destyler/react'
+import { normalizeProps } from '@destyler/react'
 import * as steps from '@destyler/steps'
 import { useId } from 'react'
 import { useEvent } from '~/hooks/use-event'
+import { useMachine } from '~/hooks/use-machine'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
+import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 
 export interface UseStepsProps extends Optional<Omit<steps.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
@@ -23,13 +25,12 @@ export function useSteps(props: UseStepsProps = {}): UseStepsReturn {
     id: useId(),
     dir,
     getRootNode,
-    step: props.defaultStep,
-    ...props,
+    ...normalizeMachineProps(props),
   }
 
   const context: steps.Context = {
     ...initialContext,
-    step: props.step,
+    ...(props.step !== undefined ? { step: props.step } : {}),
     onStepChange: useEvent(props.onStepChange),
     onStepComplete: useEvent(props.onStepComplete),
   }

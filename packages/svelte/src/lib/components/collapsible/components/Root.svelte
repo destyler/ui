@@ -13,7 +13,13 @@
   import { splitCollapsibleProps } from '../hooks/split-collapsible-props.svelte'
   import { useCollapsible } from '../hooks/use-collapsible.svelte'
 
-  let { open = $bindable(), ...props }: CollapsibleRootProps = $props()
+  // Read the parent prop independently from the writable binding. Local writes
+  // notify bind: consumers without overriding ordinary controlled props.
+  let {
+    open = $bindable(),
+    open: openProp,
+    ...props
+  }: CollapsibleRootProps = $props()
   const providedId = $props.id()
 
   const [useCollapsibleProps, localProps] = $derived(splitCollapsibleProps(props))
@@ -21,10 +27,10 @@
   const resolvedProps = $derived<UseCollapsibleProps>({
     ...useCollapsibleProps,
     id: useCollapsibleProps.id ?? providedId,
-    open,
+    open: openProp,
     onOpenChange(details) {
       useCollapsibleProps.onOpenChange?.(details)
-      if (open !== undefined) open = details.open
+      open = details.open
     },
   })
 

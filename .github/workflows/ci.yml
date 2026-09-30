@@ -66,6 +66,14 @@ jobs:
       - name: Test
         run: pnpm run test:ci
 
+      - name: Check React package
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/react check
+
+      - name: Check Vue package
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/vue check
+
       - name: Check Svelte package
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte check:ci
@@ -74,6 +82,14 @@ jobs:
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/solid check
 
+      - name: Check public API documentation
+        if: matrix.node == 22
+        run: |
+          pnpm run build
+          pnpm run docs:generate:types
+          pnpm --dir docs run validate:types
+          pnpm run docs:check
+
       - name: Build Svelte Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte build-storybook
@@ -81,3 +97,11 @@ jobs:
       - name: Build Solid Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/solid build-storybook
+
+      - name: Build React Storybook
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/react build-storybook
+
+      - name: Build Vue Storybook
+        if: matrix.node == 22
+        run: pnpm --filter @destyler-ui/vue build-storybook

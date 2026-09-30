@@ -6,6 +6,7 @@ import GroupWithForm from '../examples/GroupWithForm.vue'
 import GroupWithInvalid from '../examples/GroupWithInvalid.vue'
 import GroupWithSelectAll from '../examples/GroupWithSelectAll.vue'
 import Indeterminate from '../examples/Indeterminate.vue'
+import InitialValue from '../examples/InitialValue.vue'
 import RenderProp from '../examples/RenderProp.vue'
 import RootProvider from '../examples/RootProvider.vue'
 import WithField from '../examples/WithField.vue'
@@ -28,6 +29,13 @@ export function controlled() {
   return {
     components: { Controlled },
     template: '<Controlled />',
+  }
+}
+
+export function initialValue() {
+  return {
+    components: { InitialValue },
+    template: '<InitialValue />',
   }
 }
 

@@ -3,7 +3,7 @@ import { NumberInput } from '../index'
 </script>
 
 <template>
-  <NumberInput.Root :formatOptions="{ minimumFractionDigits: 2, maximumFractionDigits: 3 }" model-value="1.00">
+  <NumberInput.Root :formatOptions="{ minimumFractionDigits: 2, maximumFractionDigits: 3 }" default-value="1.00">
     <NumberInput.Scrubber />
     <NumberInput.Label>Label</NumberInput.Label>
     <NumberInput.Input />

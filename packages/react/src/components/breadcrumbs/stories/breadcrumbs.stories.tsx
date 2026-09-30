@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Basic } from '../examples/Basic'
 import { Context } from '../examples/Context'
 import { RootProvider } from '../examples/RootProvider'
