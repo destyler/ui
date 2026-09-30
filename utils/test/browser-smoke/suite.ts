@@ -1,3 +1,4 @@
+import type { ClosedDialogRelation, ReviewContext } from './axe-policy'
 import axe from 'axe-core'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { page, userEvent } from 'vitest/browser'
@@ -9,15 +10,15 @@ interface Fixtures {
   tree: () => unknown
 }
 
-async function scanBody(modalKeyboardTrapVerified = false) {
+async function scanBody(context: ReviewContext = {}) {
   // Scan the whole body, including portals; no severity or subtree filters.
   const results = await axe.run(document.body, {
     runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
     rules: { 'color-contrast': { enabled: false } },
   })
-  const manualReview = assertAxeResults(results, modalKeyboardTrapVerified)
+  const manualReview = assertAxeResults(results, context)
   for (const result of manualReview) {
-    console.warn('[browser-smoke] NOT a clean axe scan: aria-hidden-focus / focusable-modal-open needs human assistive-technology review. Native keyboard trap assertions passed.', result.nodes.map(node => node.target))
+    console.warn(`[browser-smoke] NOT a clean axe scan: ${result.id} / ${result.nodes[0].all[0].id} needs human assistive-technology review. The matching keyboard and DOM relationship assertions passed.`, result.nodes.map(node => node.target))
   }
 }
 
@@ -68,6 +69,7 @@ export function browserSmoke(fixtures: Fixtures) {
       const trigger = page.getByRole('button', { name: 'Open Dialog', exact: true })
       await userEvent.tab()
       await expect.element(trigger).toHaveFocus()
+      let closedDialog: ClosedDialogRelation | undefined
       for (let repeat = 0; repeat < 2; repeat++) {
         await userEvent.keyboard('[Enter]')
         const dialog = page.getByRole('dialog', { name: 'Dialog Title', exact: true })
@@ -85,14 +87,19 @@ export function browserSmoke(fixtures: Fixtures) {
         await expect.element(close).toHaveFocus()
         await userEvent.tab({ shift: true })
         await expect.element(close).toHaveFocus()
-        await scanBody(true)
+        await scanBody({ modalKeyboardTrapVerified: true })
         await userEvent.keyboard('[Escape]')
         await expect.element(dialogElement).toHaveAttribute('data-state', 'closed')
         await expect.element(dialogElement).not.toBeVisible()
         await expect.element(trigger).toHaveAttribute('aria-expanded', 'false')
         await expect.element(trigger).toHaveFocus()
+        await expect.element(trigger).toBeVisible()
+        await expect.element(trigger).toHaveAttribute('aria-controls', dialogElement.id)
+        expect(document.getElementById(dialogElement.id)).toBe(dialogElement)
+        await expect.element(dialogElement).toHaveAttribute('hidden')
+        closedDialog = { trigger: trigger.element(), content: dialogElement }
       }
-      await scanBody()
+      await scanBody({ closedDialog })
     })
 
     it('Tree: accessible name, roving focus, arrows, selection and repeated expansion', async () => {

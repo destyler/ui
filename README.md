@@ -43,13 +43,31 @@ axe-core 4.11.0 scans the entire body, including portals, for WCAG 2.0 and 2.1 A
 tagged rules. Only color contrast is disabled because these primitives are
 unstyled; styled applications must test contrast separately. No severity or
 subtree exclusions are used. Every violation fails. Every incomplete result also
-fails, with one narrow exception after the modal keyboard assertions pass:
-`aria-hidden-focus`, with nonempty nodes each containing exactly one `all` check,
-`focusable-modal-open`, empty `any`/`none`, and no rule, node or check error.
-Root scan errors also fail. This axe review result is explicitly logged; it is
-**not a clean automated scan** and still requires human assistive-technology
-review. Browser-free negative policy tests protect the exception's exact shape;
-run them alone with `pnpm run test:smoke-policy`.
+fails, except for two narrowly validated Dialog review results:
+
+- After the modal keyboard assertions, `aria-hidden-focus` must have nonempty
+  nodes each containing exactly one `all` check, `focusable-modal-open`, and empty
+  `any`/`none`
+- After two close/reopen cycles and restored focus, `aria-valid-attr-value` may
+  contain exactly one node and one `all` check of the same name, empty `any`/`none`
+  and related nodes, and exactly the data keys `messageKey: controlsWithinPopup`
+  and the matching `needsReview: aria-controls="<dialog ID>"`. The actual tested
+  trigger and content must remain connected with unique matching IDs, the
+  collapsed Dialog trigger must retain focus, and its referenced modal dialog
+  must be closed and hidden. The axe target must resolve only to that trigger,
+  whose only ARIA attributes are `aria-controls`, `aria-expanded` and
+  `aria-haspopup` (preventing axe's single review message from masking another
+  unresolved attribute)
+
+This second review is specific to axe-core 4.11.0: its
+`ariaValidAttrValueEvaluate` marks popup `aria-controls` for review even when the
+referenced ID exists. The suite verifies that relationship rather than removing
+runtime ARIA or skipping the closed-state scan. Rule/node/check errors, root scan
+errors, extra checks and all other incomplete results still fail. Both review
+results are explicitly logged as **not a clean automated scan** and still require
+human assistive-technology review. Browser-free negative policy tests protect the
+exact shapes and DOM relationships; run them alone with
+`pnpm run test:smoke-policy`.
 
 This first gate deliberately covers only these three fixtures. Combobox and other
 components, disabled/invalid variants, multiple modal controls, styled contrast,
