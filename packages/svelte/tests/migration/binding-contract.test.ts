@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { bindingCases, formatState } from './binding-cases'
 import BindingFixture from './binding.fixture.svelte'
+import { createCarouselBindingTrace } from './carousel-binding-trace'
 import CheckedFixture from './checked-binding.fixture.svelte'
 
 type BindingScreen = Awaited<ReturnType<typeof render<typeof BindingFixture>>>
@@ -76,32 +77,45 @@ describe.each(bindingCases)('$name binding contract', (testCase) => {
   })
 
   it.each(['bound', 'bound-undefined'] as const)('%s writes requests to its parent in both directions repeatedly', async (mode) => {
-    const onChange = vi.fn()
-    const onWrite = vi.fn()
+    const trace = testCase.family === 'carousel' ? createCarouselBindingTrace(mode) : undefined
+    const onChange = vi.fn(trace?.onChange)
+    const onWrite = vi.fn(trace?.onWrite)
     const screen = await render(BindingFixture, { props: { name: testCase.name, mode, onChange, onWrite } })
-    if (mode !== 'bound-undefined' || testCase.hasDefault !== false) {
-      await expectState(screen, testCase, testCase.initial(), mode === 'bound-undefined' ? undefined : testCase.initial())
-    }
-    else if (testCase.uncontrolledInitial) {
-      // Dynamic inputValue has no defaultInputValue contract. An undefined
-      // binding starts empty, then still writes both requested values back.
-      await expectState(screen, testCase, testCase.uncontrolledInitial(), undefined)
-    }
-    else {
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('undefined')
-    }
-    for (let cycle = 0; cycle < 2; cycle++) {
-      for (const [button, value] of [['request-next', testCase.next()], ['request-initial', testCase.initial()]] as const) {
-        onChange.mockClear()
-        onWrite.mockClear()
-        await screen.getByTestId(button).click()
-        await expectState(screen, testCase, value)
-        expect(formatState(testCase, onChange.mock.lastCall?.[0])).toBe(formatState(testCase, value))
-        expect(formatState(testCase, onWrite.mock.lastCall?.[0])).toBe(formatState(testCase, value))
+    trace?.attach(screen.container)
+    try {
+      if (mode !== 'bound-undefined' || testCase.hasDefault !== false) {
+        await expectState(screen, testCase, testCase.initial(), mode === 'bound-undefined' ? undefined : testCase.initial())
       }
+      else if (testCase.uncontrolledInitial) {
+        // Dynamic inputValue has no defaultInputValue contract. An undefined
+        // binding starts empty, then still writes both requested values back.
+        await expectState(screen, testCase, testCase.uncontrolledInitial(), undefined)
+      }
+      else {
+        await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('undefined')
+      }
+      for (let cycle = 0; cycle < 2; cycle++) {
+        for (const [button, value] of [['request-next', testCase.next()], ['request-initial', testCase.initial()]] as const) {
+          onChange.mockClear()
+          onWrite.mockClear()
+          trace?.record(button, { cycle })
+          await screen.getByTestId(button).click()
+          await expectState(screen, testCase, value)
+          expect(formatState(testCase, onChange.mock.lastCall?.[0])).toBe(formatState(testCase, value))
+          expect(formatState(testCase, onWrite.mock.lastCall?.[0])).toBe(formatState(testCase, value))
+        }
+      }
+      trace?.record('parent-next')
+      await screen.getByTestId('parent-next').click()
+      await expectState(screen, testCase, testCase.next())
     }
-    await screen.getByTestId('parent-next').click()
-    await expectState(screen, testCase, testCase.next())
+    catch (error) {
+      trace?.report()
+      throw error
+    }
+    finally {
+      trace?.restore()
+    }
   })
 
   it.runIf(testCase.controlledVeto !== false)('honors a bound parent setter that rejects a change', async () => {
