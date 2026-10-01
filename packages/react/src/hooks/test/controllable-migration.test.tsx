@@ -36,8 +36,6 @@ import { Tooltip, useTooltip } from '~/components/tooltip'
 import { useTree } from '~/components/tree'
 import { InitialValue as TreeInitialValue } from '~/components/tree/examples/InitialValue'
 import { createFileTreeCollection, createListCollection } from '~/utils/collection'
-import { rawMachineTraceEnabled, startRawMachineCapture } from './diagnostics/raw-machine-capture'
-import { createOpenStateTrace } from './open-state-trace'
 
 // These tests run in the browser suite, and can also run in happy-dom with the
 // production React Compiler enabled. The hook implementations are never mocked.
@@ -83,7 +81,7 @@ function parts(api: any): ReactNode {
   )
 }
 
-async function mountHook(hook: Hook, initialProps: any, children = parts, onRender?: (api: any) => void) {
+async function mountHook(hook: Hook, initialProps: any, children = parts) {
   const container = document.createElement('div')
   document.body.append(container)
   const root = createRoot(container)
@@ -93,7 +91,6 @@ async function mountHook(hook: Hook, initialProps: any, children = parts, onRend
     'use no memo'
     // Exposing the latest API to the test is intentionally outside compilation.
     api = unwrap(hook(props))
-    onRender?.(api)
     return children(api)
   }
   const render = async (props: any) => {
@@ -134,82 +131,45 @@ describe('live open wins over defaultOpen at the first render', () => {
   }
 })
 
+// This is an API ownership contract, not a pointer-interaction test. Chromium
+// can deliver a trusted pointerenter at (0, 0) when the previous fixture is
+// replaced underneath its cursor. Park outside before mounting HoverCard so
+// that newer native input cannot legitimately supersede the API close request.
+// The ordinary HoverCard browser suite separately verifies that reopening path.
+async function parkNativePointer() {
+  // Happy DOM has no native pointer. Import the browser-only module exclusively
+  // inside Vitest's browser runtime (the repository pins Vitest 4.0.17).
+  if (!('__vitest_browser_runner__' in globalThis))
+    return
+  const { userEvent } = await import('vitest/browser')
+  const parking = document.createElement('div')
+  parking.setAttribute('aria-hidden', 'true')
+  Object.assign(parking.style, {
+    position: 'fixed',
+    right: '0px',
+    bottom: '0px',
+    width: '8px',
+    height: '8px',
+  })
+  document.body.append(parking)
+  await userEvent.hover(parking)
+  // Keep the target until the existing afterEach cleans up the document.
+}
+
 describe('undefined live open preserves uncontrolled ownership', () => {
   for (const [name, hook, required] of openCases) {
-    it(`${name}: opens and closes twice, including API and DOM state`, async ({ task }) => {
-      // Only log on failure. Preserve the actual browser events and scheduling
-      // so a close/reopen race can be distinguished from a stale React API.
-      const capture = name === 'hover-card' && rawMachineTraceEnabled ? startRawMachineCapture() : undefined
-      const trace = name === 'hover-card' ? createOpenStateTrace({ rawTraceEnabled: !!capture }) : undefined
-      const onOpenChange = vi.fn(details => trace?.record('onOpenChange', details))
-      let activeRequest: { iteration: number, open: boolean } | undefined
-      let phase = 'mount'
-      try {
-        const harness = await mountHook(
-          hook,
-          { ...required, open: undefined, defaultOpen: false, onOpenChange },
-          parts,
-          trace && (api => trace.record('render', { open: api.open })),
-        )
-        trace?.attach(harness.container, () => harness.api, capture?.read)
-        if (capture)
-          expect(capture.read(), 'The opt-in alias must capture the actual mounted HoverCard machine').toMatchObject({ id: 'hover-card' })
-        for (const [iteration, open] of [true, false, true, false].entries()) {
-          activeRequest = { iteration, open }
-          trace?.record('request', { iteration, open, apiOpen: harness.api.open })
-          phase = 'action'
-          await harness.change((api) => {
-            if (capture)
-              trace?.record('before action', { iteration, open, apiOpen: api.open, machine: capture.read() })
-            api.setOpen(open)
-            if (capture)
-              trace?.record('after action', { iteration, open, apiOpen: api.open, machine: capture.read() })
-          })
-          trace?.record('after act', { iteration, open, apiOpen: harness.api.open, machine: capture?.read() })
-          phase = 'state assertion'
-          let recordedMismatch = false
-          await vi.waitFor(() => {
-            if (capture && !recordedMismatch
-              && (harness.api.open !== open || harness.container.querySelector('[data-state]')?.getAttribute('data-state') !== (open ? 'open' : 'closed'))) {
-              recordedMismatch = true
-              trace?.record('first mismatch', {
-                iteration,
-                open,
-                apiOpen: harness.api.open,
-                domState: harness.container.querySelector('[data-state]')?.getAttribute('data-state'),
-                machine: capture.read(),
-              })
-            }
-            expect(harness.api.open).toBe(open)
-            expect(harness.container.querySelector('[data-state]')?.getAttribute('data-state')).toBe(open ? 'open' : 'closed')
-          })
-          phase = 'callback assertion'
-          await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open })))
-          trace?.record('settled', { iteration, open })
-        }
-        if (capture) {
-          // JSON reporter coverage marker only after the original contract passes.
-          // No successful trace logging or new waits inside the API sequence.
-          const machine = capture.read()
-          Object.assign(task.meta, {
-            hoverCardRawTrace: {
-              enabled: true,
-              machine: machine && { id: machine.id, instance: machine.instance, contextId: machine.context.id },
-              iterations: 4,
-            },
-          })
-        }
-      }
-      catch (error) {
-        if (capture)
-          trace?.record('failure', { ...activeRequest, phase, error: String(error), machine: capture.read() })
-        if (trace)
-          console.error('[hover-card open-state trace]', trace.report())
-        throw error
-      }
-      finally {
-        trace?.dispose()
-        capture?.stop()
+    it(`${name}: opens and closes twice, including API and DOM state`, async () => {
+      if (name === 'hover-card')
+        await parkNativePointer()
+      const onOpenChange = vi.fn()
+      const harness = await mountHook(hook, { ...required, open: undefined, defaultOpen: false, onOpenChange })
+      for (const open of [true, false, true, false]) {
+        await harness.change(api => api.setOpen(open))
+        await vi.waitFor(() => {
+          expect(harness.api.open).toBe(open)
+          expect(harness.container.querySelector('[data-state]')?.getAttribute('data-state')).toBe(open ? 'open' : 'closed')
+        })
+        await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open })))
       }
     })
   }
