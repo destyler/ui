@@ -1,3 +1,4 @@
+import { tick } from 'svelte'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
@@ -71,6 +72,11 @@ it('keeps core number formatting on focus until the user actually edits', async 
   input.focus()
   await new Promise(resolve => setTimeout(resolve, 0))
   expect(input.value).toBe('10.00')
+  input.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }))
+  input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true }))
+  await tick()
+  await tick()
+  expect(input.value).toBe('10.00')
 })
 
 it.each(['controlled', 'bound', 'uncontrolled'] as const)('preserves NumberInput composition text until the %s owner decision settles', async (mode) => {
@@ -84,12 +90,51 @@ it.each(['controlled', 'bound', 'uncontrolled'] as const)('preserves NumberInput
   await new Promise(resolve => setTimeout(resolve, 0))
   expect(input.value).toBe('編集中')
   input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '編集中' }))
+  // Core 0.2.9 uses raw text after any INPUT.CHANGE, including a rejected IME
+  // edit. Svelte must agree before core's deferred veto runs, without briefly
+  // restoring formatted text and letting the second writer change it again.
+  await tick()
+  await tick()
+  expect(input.value).toBe(mode === 'controlled' ? '10' : '編集中')
+  await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
   await vi.waitFor(() => {
-    expect(input.value).toBe(mode === 'controlled' ? '10.00' : '編集中')
+    expect(input.value).toBe(mode === 'controlled' ? '10' : '編集中')
     expect(input.selectionStart).toBe(1)
     expect(input.selectionEnd).toBe(1)
   })
   await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(mode === 'bound' ? '編集中' : '10')
+  if (mode === 'controlled') {
+    await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+    input.blur()
+    await vi.waitFor(() => expect(input.value).toBe('10.00'))
+    input.focus()
+    await tick()
+    expect(input.value).toBe('10.00')
+  }
+})
+
+it.each(['controlled', 'bound', 'uncontrolled'] as const)('settles the final NumberInput composition input once for a %s owner', async (mode) => {
+  const onChange = vi.fn()
+  const screen = await render(NativeInputFixture, { props: { family: 'number-input', mode, onChange, formatOptions: { minimumFractionDigits: 2 } } })
+  const input = screen.getByTestId('input').element() as HTMLInputElement
+  input.focus()
+  input.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }))
+  input.value = '1.'
+  input.dispatchEvent(new InputEvent('input', { bubbles: true, data: '1.', isComposing: true }))
+  await tick()
+  expect(input.value).toBe('1.')
+  input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '1.2' }))
+  // Browsers can deliver the final input before compositionend's async work
+  // settles. It must supersede that work without duplicate change requests.
+  input.value = '1.2'
+  input.setSelectionRange(1, 1)
+  input.dispatchEvent(new InputEvent('input', { bubbles: true, data: '1.2' }))
+  await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
+  expect(input.value).toBe(mode === 'controlled' ? '10' : '1.2')
+  expect(input.selectionStart).toBe(1)
+  expect(input.selectionEnd).toBe(1)
+  expect(onChange.mock.calls).toEqual([['1.'], ['1.2']])
+  await expect.element(screen.getByTestId('api-state')).toHaveTextContent(mode === 'controlled' ? '10.00' : '1.20')
 })
 
 it('does not restore NumberInput composition into an input unmounted before reconciliation', async () => {

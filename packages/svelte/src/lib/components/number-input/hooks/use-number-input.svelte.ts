@@ -138,6 +138,10 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
           {
             value: getInputValue(),
             oninput(event: Event) {
+              // Composition is an edit too. Core 0.2.9 reconciles a rejected
+              // INPUT.CHANGE to raw text until blur, including IME input.
+              editingInput = event.currentTarget as HTMLInputElement
+              isEditingInput = true
               if ((event as InputEvent).isComposing) {
                 if (!isComposing()) {
                   compositionVersion++
@@ -152,8 +156,6 @@ export function useNumberInput(props: MaybeFunction<UseNumberInputProps>): UseNu
               compositionVersion++
               composingValue = undefined
               composingInput = undefined
-              editingInput = event.currentTarget as HTMLInputElement
-              isEditingInput = true
               void syncInputValue(event)
             },
             oncompositionstart(event: Event) {
