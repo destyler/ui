@@ -1,6 +1,7 @@
 import { mount, tick, unmount } from 'svelte'
 import { afterEach, expect, it, vi } from 'vitest'
 import { assertCheckboxForm, assertFocusRestored, assertOwnershipSnapshot, ownershipFields, ownershipScenarios } from '../../../../utils/test/behavior-contracts'
+import { trackDocumentListeners } from '../../../../utils/test/document-listeners'
 import { bindingCases, formatState } from './binding-cases'
 import BindingFixture from './binding.fixture.svelte'
 import DialogLifecycleFixture from './dialog-lifecycle.fixture.svelte'
@@ -57,7 +58,7 @@ for (const name of ownershipFields) {
   }
 }
 
-it('shared dialog lifecycle: restores focus twice and disposes document listeners on unmount', async () => {
+it('shared dialog lifecycle: restores focus twice and disposes document keydown listeners on unmount', async () => {
   const onOpenChange = vi.fn()
   const container = document.createElement('div')
   document.body.append(container)
@@ -65,28 +66,38 @@ it('shared dialog lifecycle: restores focus twice and disposes document listener
   instances.push(instance)
   await tick()
   const trigger = container.querySelector<HTMLButtonElement>('[data-contract-trigger]')!
-  for (const close of ['button', 'escape']) {
-    trigger.focus()
+  const listeners = trackDocumentListeners(trigger.ownerDocument, 'keydown')
+  try {
+    for (const close of ['button', 'escape']) {
+      trigger.focus()
+      trigger.click()
+      await vi.waitFor(() => expect(trigger.getAttribute('data-state')).toBe('open'))
+      await vi.waitFor(() => expect(container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+      await vi.waitFor(() => listeners.expectActive())
+      if (close === 'button')
+        container.querySelector<HTMLButtonElement>('[data-part="close-trigger"]')!.click()
+      else
+        document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+      await vi.waitFor(() => {
+        expect(trigger.getAttribute('data-state')).toBe('closed')
+        assertFocusRestored(trigger)
+        listeners.expectEmpty()
+      })
+    }
     trigger.click()
     await vi.waitFor(() => expect(trigger.getAttribute('data-state')).toBe('open'))
     await vi.waitFor(() => expect(container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-    if (close === 'button')
-      container.querySelector<HTMLButtonElement>('[data-part="close-trigger"]')!.click()
-    else
-      document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-    await vi.waitFor(() => {
-      expect(trigger.getAttribute('data-state')).toBe('closed')
-      assertFocusRestored(trigger)
-    })
+    await vi.waitFor(() => listeners.expectActive())
+    await unmount(instance)
+    instances.splice(instances.indexOf(instance), 1)
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await new Promise(resolve => setTimeout(resolve, 35))
+    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await vi.waitFor(() => listeners.expectEmpty())
   }
-  trigger.click()
-  await vi.waitFor(() => expect(trigger.getAttribute('data-state')).toBe('open'))
-  await vi.waitFor(() => expect(container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-  await unmount(instance)
-  instances.splice(instances.indexOf(instance), 1)
-  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-  await new Promise(resolve => setTimeout(resolve, 35))
-  expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+  finally {
+    listeners.restore()
+  }
 })
 
 it('shared native reset: Checkbox restores its original seed after later defaults twice', async () => {

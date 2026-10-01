@@ -37,6 +37,7 @@ import { useTree } from '~/components/tree'
 import { InitialValue as TreeInitialValue } from '~/components/tree/examples/InitialValue'
 import { createFileTreeCollection, createListCollection } from '~/utils/collection'
 import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, ownershipScenarios } from '../../../../../utils/test/behavior-contracts'
+import { trackDocumentListeners } from '../../../../../utils/test/document-listeners'
 
 // These tests run in the browser suite, and can also run in happy-dom with the
 // production React Compiler enabled. The hook implementations are never mocked.
@@ -696,7 +697,7 @@ for (const row of sharedValueCases) {
   }
 }
 
-it('shared dialog lifecycle: restores focus twice and disposes document listeners on unmount', async () => {
+it('shared dialog lifecycle: restores focus twice and disposes document keydown listeners on unmount', async () => {
   const onOpenChange = vi.fn()
   const harness = await mountHook(useDialog, { 'defaultOpen': false, 'preventScroll': false, 'aria-label': 'Contract dialog', onOpenChange }, api => (
     <>
@@ -705,25 +706,35 @@ it('shared dialog lifecycle: restores focus twice and disposes document listener
     </>
   ))
   const trigger = harness.container.querySelector<HTMLButtonElement>('[data-contract-trigger]')!
-  for (const close of ['api', 'escape']) {
-    await harness.change(() => {
-      trigger.focus()
-      trigger.click()
-    })
+  const listeners = trackDocumentListeners(trigger.ownerDocument, 'keydown')
+  try {
+    for (const close of ['api', 'escape']) {
+      await harness.change(() => {
+        trigger.focus()
+        trigger.click()
+      })
+      await vi.waitFor(() => expect(harness.api.open).toBe(true))
+      await vi.waitFor(() => expect(harness.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+      await vi.waitFor(() => listeners.expectActive())
+      await harness.change(api => close === 'api' ? api.setOpen(false) : document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })))
+      await vi.waitFor(() => {
+        expect(harness.api.open).toBe(false)
+        assertFocusRestored(trigger)
+        listeners.expectEmpty()
+      })
+    }
+    await harness.change(() => trigger.click())
     await vi.waitFor(() => expect(harness.api.open).toBe(true))
     await vi.waitFor(() => expect(harness.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-    await harness.change(api => close === 'api' ? api.setOpen(false) : document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })))
-    await vi.waitFor(() => {
-      expect(harness.api.open).toBe(false)
-      assertFocusRestored(trigger)
-    })
+    await vi.waitFor(() => listeners.expectActive())
+    await act(async () => harness.root.unmount())
+    roots.splice(roots.indexOf(harness.root), 1)
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await new Promise(resolve => setTimeout(resolve, 35))
+    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await vi.waitFor(() => listeners.expectEmpty())
   }
-  await harness.change(() => trigger.click())
-  await vi.waitFor(() => expect(harness.api.open).toBe(true))
-  await vi.waitFor(() => expect(harness.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-  await act(async () => harness.root.unmount())
-  roots.splice(roots.indexOf(harness.root), 1)
-  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-  await new Promise(resolve => setTimeout(resolve, 35))
-  expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+  finally {
+    listeners.restore()
+  }
 })

@@ -2,6 +2,7 @@ import type { App, Component, VNodeChild } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createApp, defineComponent, h, nextTick, reactive } from 'vue'
 import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, assertTextSelection, ownershipScenarios } from '../../../../utils/test/behavior-contracts'
+import { trackDocumentListeners } from '../../../../utils/test/document-listeners'
 import { Calendar, parseDate, useCalendar } from '../components/calendar'
 import { Checkbox, useCheckbox } from '../components/checkbox'
 import CheckboxIndeterminate from '../components/checkbox/examples/Indeterminate.vue'
@@ -435,34 +436,44 @@ for (const row of sharedOwnershipCases) {
   }
 }
 
-it('shared dialog lifecycle: restores focus twice and disposes document listeners on unmount', async () => {
+it('shared dialog lifecycle: restores focus twice and disposes document keydown listeners on unmount', async () => {
   const onOpenChange = vi.fn()
   const instance = await fixture(Dialog, useDialog, 'Root', { 'defaultOpen': false, 'preventScroll': false, 'aria-label': 'Contract dialog', onOpenChange }, api => [
     h('button', { ...api.getTriggerProps(), 'data-contract-trigger': '' }, 'Open'),
     h('div', api.getPositionerProps(), [h('div', api.getContentProps(), [h('button', api.getCloseTriggerProps(), 'Close')])]),
   ])
   const trigger = instance.container.querySelector<HTMLButtonElement>('[data-contract-trigger]')!
-  for (const close of ['api', 'escape']) {
-    trigger.focus()
+  const listeners = trackDocumentListeners(trigger.ownerDocument, 'keydown')
+  try {
+    for (const close of ['api', 'escape']) {
+      trigger.focus()
+      trigger.click()
+      await vi.waitFor(() => expect(instance.api.open).toBe(true))
+      await vi.waitFor(() => expect(instance.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+      await vi.waitFor(() => listeners.expectActive())
+      if (close === 'api')
+        instance.api.setOpen(false)
+      else
+        document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+      await vi.waitFor(() => {
+        expect(instance.api.open).toBe(false)
+        assertFocusRestored(trigger)
+        listeners.expectEmpty()
+      })
+    }
     trigger.click()
     await vi.waitFor(() => expect(instance.api.open).toBe(true))
     await vi.waitFor(() => expect(instance.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-    if (close === 'api')
-      instance.api.setOpen(false)
-    else
-      document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-    await vi.waitFor(() => {
-      expect(instance.api.open).toBe(false)
-      assertFocusRestored(trigger)
-    })
+    await vi.waitFor(() => listeners.expectActive())
+    instance.unmount()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await new Promise(resolve => setTimeout(resolve, 35))
+    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await vi.waitFor(() => listeners.expectEmpty())
   }
-  trigger.click()
-  await vi.waitFor(() => expect(instance.api.open).toBe(true))
-  await vi.waitFor(() => expect(instance.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-  instance.unmount()
-  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-  await new Promise(resolve => setTimeout(resolve, 35))
-  expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+  finally {
+    listeners.restore()
+  }
 })
 
 it('shared text editing: NumberInput preserves accepted partial text and caret', async () => {

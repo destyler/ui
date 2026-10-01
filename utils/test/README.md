@@ -35,7 +35,15 @@ Runtime entry points:
 
 The Dialog lifecycle cases open and dismiss twice (including Escape), verify
 focus returns to the same mounted trigger, then unmount while open and verify a
-later document Escape does not emit another request. Checkbox reset checks the
+later document Escape does not emit another request. Each case also scopes a
+`keydown` listener tracker to its own document after the closed fixture mounts.
+It requires live registrations on every open and matching listener-identity and
+capture removals after both closes and open-state unmount. Callback silence
+alone is insufficient: a leaked listener can become inert when the machine stops.
+The tracker restores its spies and any remaining registrations in `finally`, so
+it does not depend on global cross-test listener counts. It observes explicit
+add/remove pairs; it is not a general census of once/AbortSignal listeners.
+Checkbox reset checks the
 native property, API state and successful form values through two reset cycles.
 Vue, Solid and Svelte additionally change a later default before resetting;
 React already tests that boundary in its Checkbox component suite.

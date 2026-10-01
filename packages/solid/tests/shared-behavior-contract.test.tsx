@@ -4,6 +4,7 @@ import { cleanup, render, waitFor } from '@solidjs/testing-library'
 import { createSignal } from 'solid-js'
 import { afterEach, expect, it, vi } from 'vitest'
 import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, ownershipScenarios } from '../../../utils/test/behavior-contracts'
+import { trackDocumentListeners } from '../../../utils/test/document-listeners'
 import { useCalendar } from '../src/components/calendar'
 import { useCheckbox } from '../src/components/checkbox'
 import { useCombobox } from '../src/components/combobox'
@@ -74,7 +75,7 @@ for (const row of cases) {
   }
 }
 
-it('shared dialog lifecycle: restores focus twice and disposes document listeners on unmount', async () => {
+it('shared dialog lifecycle: restores focus twice and disposes document keydown listeners on unmount', async () => {
   const onOpenChange = vi.fn()
   let api!: ReturnType<typeof useDialog>
   const view = render(() => {
@@ -87,25 +88,35 @@ it('shared dialog lifecycle: restores focus twice and disposes document listener
     )
   })
   const trigger = view.container.querySelector<HTMLButtonElement>('[data-contract-trigger]')!
-  for (const close of ['api', 'escape']) {
-    trigger.focus()
+  const listeners = trackDocumentListeners(trigger.ownerDocument, 'keydown')
+  try {
+    for (const close of ['api', 'escape']) {
+      trigger.focus()
+      trigger.click()
+      await waitFor(() => expect(api().open).toBe(true))
+      await waitFor(() => expect(view.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+      await waitFor(() => listeners.expectActive())
+      if (close === 'api')
+        api().setOpen(false)
+      else
+        document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+      await waitFor(() => {
+        expect(api().open).toBe(false)
+        assertFocusRestored(trigger)
+        listeners.expectEmpty()
+      })
+    }
     trigger.click()
     await waitFor(() => expect(api().open).toBe(true))
     await waitFor(() => expect(view.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-    if (close === 'api')
-      api().setOpen(false)
-    else
-      document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-    await waitFor(() => {
-      expect(api().open).toBe(false)
-      assertFocusRestored(trigger)
-    })
+    await waitFor(() => listeners.expectActive())
+    view.unmount()
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await new Promise(resolve => setTimeout(resolve, 35))
+    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await waitFor(() => listeners.expectEmpty())
   }
-  trigger.click()
-  await waitFor(() => expect(api().open).toBe(true))
-  await waitFor(() => expect(view.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
-  view.unmount()
-  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-  await new Promise(resolve => setTimeout(resolve, 35))
-  expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+  finally {
+    listeners.restore()
+  }
 })
