@@ -78,16 +78,20 @@ describe('[menu] component', () => {
     render(Controlled)
 
     const externalTrigger = page.getByRole('button', { name: 'Trigger from the outside' })
-
-    await userEvent.click(externalTrigger)
-
-    await expect.element(page.getByText('React')).toBeVisible()
-
-    await userEvent.click(externalTrigger)
-
-    await vi.waitFor(() => {
+    for (let cycle = 0; cycle < 2; cycle++) {
+      await userEvent.click(externalTrigger)
+      await expect.element(page.getByText('React')).toBeVisible()
+      // The outside-interaction listener is deferred. Exercise an established
+      // open menu, so pointerdown cannot race listener installation.
+      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
+      await userEvent.click(externalTrigger)
+      await vi.waitFor(() => {
+        expect(page.getByText('React')).not.toBeVisible()
+      })
+      // A transient outside-dismiss must not hide a later click-driven reopen.
+      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
       expect(page.getByText('React')).not.toBeVisible()
-    })
+    }
   })
 
   it('should render disabled menu item', async () => {
