@@ -25,6 +25,10 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -68,6 +72,10 @@ jobs:
           ref: 691bcbd43030ba4db4980a8d910e032a947ce01e
           path: .temp/presence-core
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
 
       - name: Install frozen core dependencies
         working-directory: .temp/presence-core
@@ -82,6 +90,10 @@ jobs:
           ref: ${{ github.sha }}
           path: .temp/presence-consumer
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
 
       - name: Install and verify only the packed candidate in the isolated consumer
         run: node scripts/presence-artifact/prepare.mjs consumer "$GITHUB_WORKSPACE" "$RUNNER_TEMP/presence-evidence" "$GITHUB_WORKSPACE/.temp/presence-consumer"
