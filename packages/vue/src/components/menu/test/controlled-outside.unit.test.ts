@@ -7,6 +7,7 @@ let app: App | undefined
 
 afterEach(() => {
   app?.unmount()
+  vi.restoreAllMocks()
   document.body.replaceChildren()
 })
 
@@ -28,10 +29,13 @@ function mount() {
 
 describe('controlled Menu external toggle', () => {
   it('does not dismiss between the external pointerdown/focus and click', async () => {
+    const listeners = vi.spyOn(document, 'addEventListener')
     const { trigger, state } = mount()
     for (let cycle = 0; cycle < 2; cycle++) {
+      listeners.mockClear()
       trigger.click()
       await vi.waitFor(() => expect(state()).toBe('open'))
+      await vi.waitFor(() => expect(listeners.mock.calls.some(([type, , options]) => type === 'pointerdown' && options === true)).toBe(true))
       // Allow the deferred outside-interaction listener to attach. A fast
       // synthetic click alone misses the browser pointerdown-before-click race.
       await settleFrames()
@@ -52,9 +56,13 @@ describe('controlled Menu external toggle', () => {
   })
 
   it('still dismisses when the pointer is outside both menu and external toggle', async () => {
+    const listeners = vi.spyOn(document, 'addEventListener')
     const { trigger, state } = mount()
     trigger.click()
     await vi.waitFor(() => expect(state()).toBe('open'))
+    // Core installs pointerdown after a deferred frame and a zero-delay timer.
+    // In happy-dom, two animation frames alone do not guarantee that timer ran.
+    await vi.waitFor(() => expect(listeners.mock.calls.some(([type, , options]) => type === 'pointerdown' && options === true)).toBe(true))
     await settleFrames()
     document.body.dispatchEvent(new PointerEvent('pointerdown', {
       bubbles: true,
