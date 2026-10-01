@@ -143,14 +143,13 @@ jobs:
 
       - name: Open the next observation gate only after evidence is saved
         id: gate
-        if: always()
+        if: ${{ always() && !cancelled() }}
         shell: bash
         env:
           MAY_CONTINUE: ${{ steps.classify.outputs.continue }}
           ARTIFACT_OUTCOME: ${{ steps.artifacts.outcome }}
-          CANCELLED: ${{ cancelled() }}
         run: |
-          if test "$MAY_CONTINUE" = true && test "$ARTIFACT_OUTCOME" = success && test "$CANCELLED" = false; then
+          if test "$MAY_CONTINUE" = true && test "$ARTIFACT_OUTCOME" = success; then
             printf 'continue=true\n' >> "$GITHUB_OUTPUT"
           else
             printf 'continue=false\n' >> "$GITHUB_OUTPUT"

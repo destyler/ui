@@ -281,22 +281,26 @@ test('actual workflow suite shell retains the pnpm exit code through tee and rec
   assert.match(readFileSync(output, 'utf8'), /exit-code=17\nlog-exit-code=0\n/)
 })
 
-test('the final workflow gate requires saved artifacts, eligible classification, and no cancellation', (context) => {
+test('the final gate checks cancellation in the allowed if context and requires saved eligible evidence', (context) => {
   const directory = mkdtempSync(join(tmpdir(), 'hover-gate-'))
   context.after(() => rmSync(directory, { recursive: true, force: true }))
   const workflow = readFileSync(new URL('../.github/workflows/hover-card-observation.yml', import.meta.url), 'utf8')
-  const script = workflow.match(/ {6}- name: Open the next observation gate[\s\S]*? {8}run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '')
-  for (const [mayContinue, artifactOutcome, cancelled, expected] of [
-    ['true', 'success', 'false', true],
-    ['true', 'failure', 'false', false],
-    ['true', 'success', 'true', false],
-    ['false', 'success', 'false', false],
-    ['', 'success', 'false', false],
+  const gate = workflow.match(/ {6}- name: Open the next observation gate[\s\S]*$/)[0]
+  // GitHub permits status functions in step `if`, but rejects them in `env`.
+  // A cancelled run skips this step and therefore cannot emit continue=true.
+  assert.match(gate, /^ {8}if: \$\{\{ always\(\) && !cancelled\(\) \}\}$/m)
+  assert.doesNotMatch(gate, /^ {10}[A-Z_]+:.*cancelled\(\)/m)
+  const script = gate.match(/ {8}run: \|\n([\s\S]*)$/)[1].replace(/^ {10}/gm, '')
+  for (const [mayContinue, artifactOutcome, expected] of [
+    ['true', 'success', true],
+    ['true', 'failure', false],
+    ['false', 'success', false],
+    ['', 'success', false],
   ]) {
     const output = join(directory, 'outputs.txt')
     writeFileSync(output, '')
     const child = spawnSync('bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', script], {
-      env: { ...process.env, GITHUB_OUTPUT: output, MAY_CONTINUE: mayContinue, ARTIFACT_OUTCOME: artifactOutcome, CANCELLED: cancelled },
+      env: { ...process.env, GITHUB_OUTPUT: output, MAY_CONTINUE: mayContinue, ARTIFACT_OUTCOME: artifactOutcome },
       encoding: 'utf8',
     })
     assert.equal(child.status, 0, child.stderr)
