@@ -37,6 +37,16 @@ reporter retains this marker, which is required before another observation can
 start. A disabled flag or missing alias is never treated as a negative finding.
 The infrastructure `.probe.tsx` file is excluded from normal test discovery.
 
+## Current diagnostic branch
+
+The ordinary Node 20/22/24 aggregate CI enables `HOVER_CARD_RAW_TRACE=1` for
+this diagnostic PR, after the original close failure recurred on core 0.2.10.
+It retains the normal complete suite, sequencing and assertions. This is one
+fresh three-node observation, not a retry-until-green policy. Stop after
+inspecting its results; passes are inconclusive. The dedicated manual workflow
+below remains separate. Remove diagnostic CI activation when this investigation
+is retired rather than presenting it as a production fix.
+
 ## Budget and stopping rule
 
 The diagnostic workflow is manual-only (`workflow_dispatch`); normal PR

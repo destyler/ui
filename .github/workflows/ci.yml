@@ -65,6 +65,10 @@ jobs:
 
       - name: Test
         run: pnpm run test:ci
+        env:
+          # Diagnostic branch: capture the actual failing HoverCard machine in
+          # this normal three-node run, without adding another observation job.
+          HOVER_CARD_RAW_TRACE: '1'
 
       - name: Check React package
         if: matrix.node == 22
