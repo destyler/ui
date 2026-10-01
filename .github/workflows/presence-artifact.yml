@@ -1,0 +1,111 @@
+name: Presence artifact Chromium
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/presence-artifact.yml
+      - scripts/presence-artifact/**
+      - packages/solid/test-artifact/**
+      - packages/solid/vitest.presence-artifact.config.ts
+      - packages/solid/tsconfig.presence-artifact.json
+
+permissions:
+  contents: read
+
+jobs:
+  presence-artifact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      TZ: UTC
+    steps:
+      - name: Checkout UI probe
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable pinned package managers
+        run: corepack enable
+
+      - name: Install frozen published UI dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check probe verifier fixtures
+        run: |
+          pnpm --dir packages/solid exec tsc --noEmit --project tsconfig.presence-artifact.json
+          node --test scripts/presence-artifact/contracts.test.mjs
+          node scripts/presence-artifact/reporter-fixtures.mjs
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Record published negative-control identity
+        run: node scripts/presence-artifact/prepare.mjs baseline "$GITHUB_WORKSPACE" "$RUNNER_TEMP/presence-evidence"
+
+      - name: Require the published 0.2.9 regression in Chromium
+        working-directory: packages/solid
+        shell: bash
+        run: |
+          export PRESENCE_RUNNER_REPORT="$RUNNER_TEMP/presence-evidence/negative.json.runner.json"
+          set +e
+          pnpm exec vitest run --config vitest.presence-artifact.config.ts test-artifact/tour-presence.probe.tsx --reporter=default --reporter=json --reporter=../../scripts/presence-artifact/runner-reporter.mjs --outputFile.json="$RUNNER_TEMP/presence-evidence/negative.json" > "$RUNNER_TEMP/presence-evidence/negative.log" 2>&1
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/presence-evidence/negative.log"
+          node ../../scripts/presence-artifact/report.mjs negative "$RUNNER_TEMP/presence-evidence/negative.json" "$status"
+
+      - name: Checkout reviewed core candidate
+        uses: actions/checkout@v6
+        with:
+          repository: destyler/destyler
+          ref: 691bcbd43030ba4db4980a8d910e032a947ce01e
+          path: .temp/presence-core
+          persist-credentials: false
+
+      - name: Install frozen core dependencies
+        working-directory: .temp/presence-core
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and pack the exact reviewed Presence
+        run: node scripts/presence-artifact/prepare.mjs pack "$GITHUB_WORKSPACE/.temp/presence-core" "$RUNNER_TEMP/presence-evidence"
+
+      - name: Checkout isolated candidate consumer
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          path: .temp/presence-consumer
+          persist-credentials: false
+
+      - name: Install and verify only the packed candidate in the isolated consumer
+        run: node scripts/presence-artifact/prepare.mjs consumer "$GITHUB_WORKSPACE" "$RUNNER_TEMP/presence-evidence" "$GITHUB_WORKSPACE/.temp/presence-consumer"
+
+      - name: Require candidate regressions and original Tour assertions in Chromium
+        working-directory: .temp/presence-consumer/packages/solid
+        shell: bash
+        run: |
+          export PRESENCE_RUNNER_REPORT="$RUNNER_TEMP/presence-evidence/positive.json.runner.json"
+          set +e
+          pnpm exec vitest run --config vitest.presence-artifact.config.ts --reporter=default --reporter=json --reporter=../../scripts/presence-artifact/runner-reporter.mjs --outputFile.json="$RUNNER_TEMP/presence-evidence/positive.json" > "$RUNNER_TEMP/presence-evidence/positive.log" 2>&1
+          status=$?
+          set -e
+          cat "$RUNNER_TEMP/presence-evidence/positive.log"
+          node ../../scripts/presence-artifact/report.mjs positive "$RUNNER_TEMP/presence-evidence/positive.json" "$status"
+
+      - name: Verify production dependency files are unchanged
+        if: always()
+        run: git diff --exit-code HEAD -- package.json pnpm-workspace.yaml pnpm-lock.yaml packages/solid/package.json
+
+      - name: Upload identity, frozen consumer lock, and browser results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: presence-artifact-chromium-${{ github.sha }}
+          path: ${{ runner.temp }}/presence-evidence
+          if-no-files-found: error

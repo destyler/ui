@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "test-artifact/**/*.tsx",
+    "vitest.presence-artifact.config.ts"
+  ]
+}
