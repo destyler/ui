@@ -1,56 +1,40 @@
-name: HoverCard predecessor diagnostic
+name: HoverCard original full-suite diagnostic
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - .github/workflows/hover-card-diagnostic.yml
-      - packages/react/vitest.hover-card-diagnostic.config.ts
+      - .github/workflows/hover-card-observation.yml
+      - scripts/hover-card-diagnostic*.mjs
+      - packages/react/vitest.config.ts
+      - packages/react/src/hooks/test/open-state-trace*
+      - packages/react/src/hooks/test/controllable-migration.test.tsx
       - packages/react/src/hooks/test/diagnostics/**
 
 permissions:
   contents: read
 
+# Each call gets a fresh runner, checkout, and Vitest result cache. These are
+# bounded full-suite observations, never retries of a target/capture failure.
 jobs:
-  observe:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /*
-            !/.specstory/
+  observe-1:
+    uses: ./.github/workflows/hover-card-observation.yml
+    with:
+      observation: 1
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
+  observe-2:
+    needs: observe-1
+    if: ${{ !cancelled() && needs.observe-1.outputs.continue == 'true' }}
+    uses: ./.github/workflows/hover-card-observation.yml
+    with:
+      observation: 2
+      prior-suites-passed: ${{ needs.observe-1.outputs.all-suites-passed == 'true' }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
-
-      - name: Install Chromium
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Observe four predecessor conditions once
-        shell: bash
-        run: |
-          set -o pipefail
-          pnpm exec vitest run --config packages/react/vitest.hover-card-diagnostic.config.ts --browser.headless --reporter=verbose 2>&1 | tee hover-card-diagnostic.log
-
-      - name: Preserve diagnostic evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: hover-card-predecessor-observation
-          if-no-files-found: ignore
-          retention-days: 7
-          path: |
-            hover-card-diagnostic.log
-            packages/react/src/hooks/test/diagnostics/__screenshots__/**
+  observe-3:
+    needs: observe-2
+    if: ${{ !cancelled() && needs.observe-2.outputs.continue == 'true' }}
+    uses: ./.github/workflows/hover-card-observation.yml
+    with:
+      observation: 3
+      prior-suites-passed: ${{ needs.observe-2.outputs.all-suites-passed == 'true' }}

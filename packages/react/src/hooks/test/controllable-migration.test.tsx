@@ -36,6 +36,7 @@ import { Tooltip, useTooltip } from '~/components/tooltip'
 import { useTree } from '~/components/tree'
 import { InitialValue as TreeInitialValue } from '~/components/tree/examples/InitialValue'
 import { createFileTreeCollection, createListCollection } from '~/utils/collection'
+import { rawMachineTraceEnabled, startRawMachineCapture } from './diagnostics/raw-machine-capture'
 import { createOpenStateTrace } from './open-state-trace'
 
 // These tests run in the browser suite, and can also run in happy-dom with the
@@ -135,11 +136,14 @@ describe('live open wins over defaultOpen at the first render', () => {
 
 describe('undefined live open preserves uncontrolled ownership', () => {
   for (const [name, hook, required] of openCases) {
-    it(`${name}: opens and closes twice, including API and DOM state`, async () => {
+    it(`${name}: opens and closes twice, including API and DOM state`, async ({ task }) => {
       // Only log on failure. Preserve the actual browser events and scheduling
       // so a close/reopen race can be distinguished from a stale React API.
-      const trace = name === 'hover-card' ? createOpenStateTrace() : undefined
+      const capture = name === 'hover-card' && rawMachineTraceEnabled ? startRawMachineCapture() : undefined
+      const trace = name === 'hover-card' ? createOpenStateTrace({ rawTraceEnabled: !!capture }) : undefined
       const onOpenChange = vi.fn(details => trace?.record('onOpenChange', details))
+      let activeRequest: { iteration: number, open: boolean } | undefined
+      let phase = 'mount'
       try {
         const harness = await mountHook(
           hook,
@@ -147,26 +151,65 @@ describe('undefined live open preserves uncontrolled ownership', () => {
           parts,
           trace && (api => trace.record('render', { open: api.open })),
         )
-        trace?.attach(harness.container, () => harness.api)
+        trace?.attach(harness.container, () => harness.api, capture?.read)
+        if (capture)
+          expect(capture.read(), 'The opt-in alias must capture the actual mounted HoverCard machine').toMatchObject({ id: 'hover-card' })
         for (const [iteration, open] of [true, false, true, false].entries()) {
+          activeRequest = { iteration, open }
           trace?.record('request', { iteration, open, apiOpen: harness.api.open })
-          await harness.change(api => api.setOpen(open))
-          trace?.record('after act', { iteration, open, apiOpen: harness.api.open })
+          phase = 'action'
+          await harness.change((api) => {
+            if (capture)
+              trace?.record('before action', { iteration, open, apiOpen: api.open, machine: capture.read() })
+            api.setOpen(open)
+            if (capture)
+              trace?.record('after action', { iteration, open, apiOpen: api.open, machine: capture.read() })
+          })
+          trace?.record('after act', { iteration, open, apiOpen: harness.api.open, machine: capture?.read() })
+          phase = 'state assertion'
+          let recordedMismatch = false
           await vi.waitFor(() => {
+            if (capture && !recordedMismatch
+              && (harness.api.open !== open || harness.container.querySelector('[data-state]')?.getAttribute('data-state') !== (open ? 'open' : 'closed'))) {
+              recordedMismatch = true
+              trace?.record('first mismatch', {
+                iteration,
+                open,
+                apiOpen: harness.api.open,
+                domState: harness.container.querySelector('[data-state]')?.getAttribute('data-state'),
+                machine: capture.read(),
+              })
+            }
             expect(harness.api.open).toBe(open)
             expect(harness.container.querySelector('[data-state]')?.getAttribute('data-state')).toBe(open ? 'open' : 'closed')
           })
+          phase = 'callback assertion'
           await vi.waitFor(() => expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open })))
           trace?.record('settled', { iteration, open })
         }
+        if (capture) {
+          // JSON reporter coverage marker only after the original contract passes.
+          // No successful trace logging or new waits inside the API sequence.
+          const machine = capture.read()
+          Object.assign(task.meta, {
+            hoverCardRawTrace: {
+              enabled: true,
+              machine: machine && { id: machine.id, instance: machine.instance, contextId: machine.context.id },
+              iterations: 4,
+            },
+          })
+        }
       }
       catch (error) {
+        if (capture)
+          trace?.record('failure', { ...activeRequest, phase, error: String(error), machine: capture.read() })
         if (trace)
           console.error('[hover-card open-state trace]', trace.report())
         throw error
       }
       finally {
         trace?.dispose()
+        capture?.stop()
       }
     })
   }

@@ -1,5 +1,14 @@
 # Bounded HoverCard observation
 
+The four-case experiment below has finished. Its one run on
+`9fd668d35c57311c053cae6300d7729f5b7f6c06` passed all four cases:
+https://github.com/destyler/ui/actions/runs/36750799600/job/110008608597
+The plain/trigger case observed a trusted pointer-enter before the API loop;
+FloatingPanel/trigger observed none before its roughly 4 ms loop ended. Neither
+case captured the original failure. Retain this probe as evidence, not a rerun
+target. The next bounded observation is described in
+[original-suite.md](./original-suite.md).
+
 This is an opt-in diagnostic, not a fix for the intermittent uncontrolled-close
 assertion in `controllable-migration.test.tsx`.
 

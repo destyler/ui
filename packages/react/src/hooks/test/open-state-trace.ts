@@ -21,12 +21,13 @@ function describeTarget(target: EventTarget | null) {
 }
 
 /** Observe the failing contract without moving the pointer or changing timers. */
-export function createOpenStateTrace() {
+export function createOpenStateTrace(options: { rawTraceEnabled?: boolean } = {}) {
   const startedAt = performance.now()
   const entries: TraceEntry[] = []
   let droppedEntries = 0
   let container: HTMLElement | undefined
   let readApi: (() => OpenState) | undefined
+  let readMachine: (() => unknown) | undefined
   const record = (type: string, details: unknown) => {
     if (entries.length === 200) {
       entries.shift()
@@ -64,9 +65,10 @@ export function createOpenStateTrace() {
 
   return {
     record,
-    attach(element: HTMLElement, getApi: () => OpenState) {
+    attach(element: HTMLElement, getApi: () => OpenState, getMachine?: () => unknown) {
       container = element
       readApi = getApi
+      readMachine = getMachine
       observer.observe(element, {
         attributes: true,
         attributeOldValue: true,
@@ -77,10 +79,12 @@ export function createOpenStateTrace() {
     },
     report() {
       return JSON.stringify({
+        rawTraceEnabled: options.rawTraceEnabled ?? false,
         entries,
         droppedEntries,
         final: {
           apiOpen: readApi?.().open,
+          machine: readMachine?.(),
           activeElement: describeTarget(document.activeElement),
           hovered: Array.from(document.querySelectorAll(':hover'), describeTarget),
           html: container?.innerHTML,

@@ -1,0 +1,157 @@
+name: Observe original HoverCard full suite once
+
+on:
+  workflow_call:
+    inputs:
+      observation:
+        required: true
+        type: number
+      prior-suites-passed:
+        type: boolean
+        default: true
+    outputs:
+      continue:
+        description: A verified target pass with saved evidence permits the next bounded observation
+        value: ${{ jobs.observe.outputs.continue }}
+      classification:
+        value: ${{ jobs.observe.outputs.classification }}
+      suite-exit-code:
+        value: ${{ jobs.observe.outputs.suite-exit-code }}
+      all-suites-passed:
+        value: ${{ jobs.observe.outputs.all-suites-passed }}
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    name: Original suite, observation ${{ inputs.observation }}/3 (Node 22)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    outputs:
+      continue: ${{ steps.gate.outputs.continue }}
+      classification: ${{ steps.classify.outputs.classification }}
+      suite-exit-code: ${{ steps.suite.outputs.exit-code }}
+      all-suites-passed: ${{ steps.classify.outputs.all-suites-passed }}
+    steps:
+      - name: Initialize evidence even if setup fails
+        shell: bash
+        run: |
+          EVIDENCE_DIR="$RUNNER_TEMP/hover-card-evidence"
+          printf 'EVIDENCE_DIR=%s\n' "$EVIDENCE_DIR" >> "$GITHUB_ENV"
+          mkdir -p "$EVIDENCE_DIR"
+          printf 'The suite has not started. See setup.log and classification.json for setup failures.\n' > "$EVIDENCE_DIR/suite.log"
+          printf 'Setup started.\n' > "$EVIDENCE_DIR/setup.log"
+
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
+
+      - name: Record exact reviewed inputs
+        id: provenance
+        shell: bash
+        run: |
+          git rev-parse HEAD > "$EVIDENCE_DIR/commit.txt"
+          sha256sum pnpm-lock.yaml > "$EVIDENCE_DIR/lockfile-sha256.txt"
+
+      - name: Setup Node
+        id: node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        id: pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        id: install
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm install --frozen-lockfile 2>&1 | tee -a "$EVIDENCE_DIR/setup.log"
+
+      - name: Install Playwright browsers
+        id: browsers
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm playwright install --with-deps 2>&1 | tee -a "$EVIDENCE_DIR/setup.log"
+
+      - name: Observe original full suite once, without retries
+        id: suite
+        timeout-minutes: 25
+        shell: bash
+        env:
+          HOVER_CARD_RAW_TRACE: '1'
+        run: |
+          set +e
+          # Keep the original root test:ci command, default sequence, compiler,
+          # and --no-file-parallelism. Only add retry/reporting flags.
+          pnpm run test:ci --retry=0 --reporter=default --reporter=json --outputFile.json="$EVIDENCE_DIR/test-results.json" 2>&1 | tee "$EVIDENCE_DIR/suite.log"
+          pipeline_status=("${PIPESTATUS[@]}")
+          suite_status="${pipeline_status[0]}"
+          printf '%s\n' "$suite_status" > "$EVIDENCE_DIR/suite-exit-code.txt"
+          printf 'exit-code=%s\n' "$suite_status" >> "$GITHUB_OUTPUT"
+          printf 'log-exit-code=%s\n' "${pipeline_status[1]}" >> "$GITHUB_OUTPUT"
+          # Do not turn a captured test failure into a successful workflow.
+          exit "$suite_status"
+
+      - name: Classify and preserve gate outputs after any outcome
+        id: classify
+        if: always()
+        shell: bash
+        env:
+          OBSERVATION: ${{ inputs.observation }}
+          PRIOR_SUITES_PASSED: ${{ inputs.prior-suites-passed }}
+          SUITE_EXIT_CODE: ${{ steps.suite.outputs.exit-code }}
+          LOG_EXIT_CODE: ${{ steps.suite.outputs.log-exit-code }}
+          STEP_OUTCOMES: ${{ toJSON(steps) }}
+        run: |
+          mkdir -p "$EVIDENCE_DIR"
+          printf '%s\n' "$STEP_OUTCOMES" > "$EVIDENCE_DIR/step-outcomes.json"
+          if test -f scripts/hover-card-diagnostic.mjs; then
+            node scripts/hover-card-diagnostic.mjs
+          else
+            # A checkout failure still gets a classification artifact and a
+            # closed gate. There is no test report or screenshot to fabricate.
+            printf '{"classification":"infrastructure-failure","continue":false,"reason":"Classifier unavailable after checkout failure","suiteExitCode":null}\n' > "$EVIDENCE_DIR/classification.json"
+            printf 'continue=false\nclassification=infrastructure-failure\n' >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+      - name: Preserve every observation, including pass and setup failure
+        id: artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hover-card-original-observation-${{ inputs.observation }}
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            ${{ env.EVIDENCE_DIR }}/
+            packages/**/__screenshots__/**
+
+      - name: Open the next observation gate only after evidence is saved
+        id: gate
+        if: always()
+        shell: bash
+        env:
+          MAY_CONTINUE: ${{ steps.classify.outputs.continue }}
+          ARTIFACT_OUTCOME: ${{ steps.artifacts.outcome }}
+          CANCELLED: ${{ cancelled() }}
+        run: |
+          if test "$MAY_CONTINUE" = true && test "$ARTIFACT_OUTCOME" = success && test "$CANCELLED" = false; then
+            printf 'continue=true\n' >> "$GITHUB_OUTPUT"
+          else
+            printf 'continue=false\n' >> "$GITHUB_OUTPUT"
+          fi
