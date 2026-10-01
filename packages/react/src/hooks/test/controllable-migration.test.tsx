@@ -131,9 +131,36 @@ describe('live open wins over defaultOpen at the first render', () => {
   }
 })
 
+// This is an API ownership contract, not a pointer-interaction test. Chromium
+// can deliver a trusted pointerenter at (0, 0) when the previous fixture is
+// replaced underneath its cursor. Park outside before mounting HoverCard so
+// that newer native input cannot legitimately supersede the API close request.
+// The ordinary HoverCard browser suite separately verifies that reopening path.
+async function parkNativePointer() {
+  // Happy DOM has no native pointer. Import the browser-only module exclusively
+  // inside Vitest's browser runtime (the repository pins Vitest 4.0.17).
+  if (!('__vitest_browser_runner__' in globalThis))
+    return
+  const { userEvent } = await import('vitest/browser')
+  const parking = document.createElement('div')
+  parking.setAttribute('aria-hidden', 'true')
+  Object.assign(parking.style, {
+    position: 'fixed',
+    right: '0px',
+    bottom: '0px',
+    width: '8px',
+    height: '8px',
+  })
+  document.body.append(parking)
+  await userEvent.hover(parking)
+  // Keep the target until the existing afterEach cleans up the document.
+}
+
 describe('undefined live open preserves uncontrolled ownership', () => {
   for (const [name, hook, required] of openCases) {
     it(`${name}: opens and closes twice, including API and DOM state`, async () => {
+      if (name === 'hover-card')
+        await parkNativePointer()
       const onOpenChange = vi.fn()
       const harness = await mountHook(hook, { ...required, open: undefined, defaultOpen: false, onOpenChange })
       for (const open of [true, false, true, false]) {
