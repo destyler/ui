@@ -21,8 +21,7 @@ types must fail compilation. SSR/client compiler builds import every public subp
 Chromium through Playwright. The dedicated CI workflow installs the browser and
 sets this flag. HappyDOM results do not establish real-browser behavior.
 
-Strict TypeScript uses Bundler resolution and the Svelte fixture also passes
-`svelte-check` without warnings. Published `@destyler/svelte@0.2.7` has extensionless
-and incorrect rune declaration imports, so NodeNext remains blocked upstream.
-A separate core adapter fix adds real `.js` specifiers; once a release containing
-that fix is adopted, add NodeNext to this runner. Do not add the old adapter shim.
+Strict TypeScript checks every public entry with both Bundler and NodeNext
+resolution, with `skipLibCheck: false`. The Svelte fixture also passes
+`svelte-check` without warnings. Core 0.2.9 supplies the real Svelte adapter
+declarations required by NodeNext; neither check replaces them with a shim.

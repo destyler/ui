@@ -95,7 +95,7 @@ try {
     const entries = await advertisedEntries(installedDir, manifest)
     await writeFile(path.join(consumerDir, 'entries.ts'), entries.map((entry, index) => `export * as entry${index} from '${entry}'`).join('\n'))
     const tsc = path.join(consumerDir, 'node_modules/typescript/bin/tsc')
-    for (const resolution of ['Bundler']) {
+    for (const resolution of ['Bundler', 'NodeNext']) {
       run(process.execPath, [tsc, '-p', 'tsconfig.json', '--moduleResolution', resolution, '--module', resolution === 'Bundler' ? 'ESNext' : 'NodeNext'], consumerDir)
     }
     run(process.execPath, ['node_modules/svelte-check/bin/svelte-check', '--tsconfig', './tsconfig.json', '--fail-on-warnings'], consumerDir)
@@ -106,7 +106,7 @@ try {
       if (process.env.PACKED_BROWSER === '1')
         run(process.execPath, ['browser.mjs'], consumerDir, { NODE_ENV: mode })
     }
-    console.log(`Packed ${framework} ${version}: ${entries.length} public entries, strict types, SSR, hydration and repeated interactions passed`)
+    console.log(`Packed ${framework} ${version}: ${entries.length} public entries, strict Bundler/NodeNext types, SSR, hydration and repeated interactions passed`)
   }
 }
 finally {

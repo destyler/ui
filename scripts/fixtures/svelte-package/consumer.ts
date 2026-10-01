@@ -7,3 +7,6 @@ export const context = () => useToggleContext()().pressed satisfies boolean
 
 // @ts-expect-error The public props must not collapse to any.
 export const invalid: ToggleRootProps = { defaultPressed: 'yes' }
+
+// @ts-expect-error Context values must retain the published adapter's boolean type.
+export const invalidContext: string = context()
