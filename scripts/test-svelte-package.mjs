@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { ensureRollupNative } from './ensure-rollup-native.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 // Exact pins exercise the advertised lower bound and the workspace's current release.
@@ -82,6 +83,12 @@ try {
       },
     }, null, 2))
     run(npm, ['install', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false'], consumerDir)
+    const consumerRequire = createRequire(path.join(consumerDir, 'package.json'))
+    const viteRequire = createRequire(consumerRequire.resolve('vite/package.json'))
+    ensureRollupNative(viteRequire, (dependency) => {
+      console.log(`Repairing missing fixture-toolchain optional dependency: ${dependency}`)
+      run(npm, ['install', '--no-save', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false', dependency], consumerDir)
+    })
     const installedDir = path.join(consumerDir, 'node_modules', packageName)
     assert.equal((await lstat(installedDir)).isSymbolicLink(), false, 'Install the tarball, never the worktree')
     assert.ok((await realpath(installedDir)).startsWith(consumerDir))

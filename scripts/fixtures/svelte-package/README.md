@@ -4,7 +4,11 @@ Run `pnpm exec node scripts/test-svelte-package.mjs` from the workspace root.
 The script cleans and builds the package, packs it with pnpm (resolving catalog
 dependencies), and installs that tarball into an independent temporary npm project.
 Neither a worktree link, source alias, declaration shim nor `skipLibCheck` is used.
-Install scripts are disabled. The test verifies the exact framework version resolved
+Install scripts are disabled. After installation, the runner checks Vite's Rollup
+runtime. If npm omitted its native optional dependency, the runner logs a
+fixture-toolchain repair and installs that exact Rollup-declared package/version
+once. Other errors and unsuccessful repairs fail the gate. No platform is hardcoded.
+The test verifies the exact framework version resolved
 from the installed library, every advertised export target, and public entry imports.
 
 The minimum and current framework versions are exact pins in the runner; update the
