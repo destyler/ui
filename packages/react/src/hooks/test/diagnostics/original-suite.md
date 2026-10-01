@@ -2,8 +2,9 @@
 
 This is a diagnostic follow-up to the completed predecessor observation. It
 does not change production code or claim to fix the intermittent uncontrolled
-HoverCard close assertion. The installed `@destyler/hover-card` remains 0.2.7;
-the separate core API-interruption fix is not included.
+HoverCard close assertion. The pinned `@destyler/hover-card` is now 0.2.10, including the separate
+core API-interruption fix. That fix has not been linked to the original CI
+failure by a complete failing trace; its root cause remains unproven.
 
 ## What changes when enabled
 
@@ -38,7 +39,12 @@ The infrastructure `.probe.tsx` file is excluded from normal test discovery.
 
 ## Budget and stopping rule
 
-The diagnostic workflow performs at most three sequential, fresh Node 22 CI
+The diagnostic workflow is manual-only (`workflow_dispatch`); normal PR
+updates run the ordinary aggregate CI without automatically spending another
+three full-suite observation budget. Once the workflow is on the default
+branch, dispatch it explicitly for the branch under investigation.
+
+Each manual run performs at most three sequential, fresh Node 22 CI
 observations. Each uses a new checkout with the pinned dependency installation,
 the full normal test suite and its default sequencing, no file parallelism and
 zero retries. It does not select only this file or impose a new file order.
@@ -90,7 +96,7 @@ divergence requires interpretation in that context.
 From the repository root, using the installed pinned project executables:
 
 ```sh
-HOVER_CARD_RAW_TRACE=1 node_modules/.bin/vitest run --config packages/react/vitest.hover-card-trace-unit.config.ts
+pnpm --filter @destyler-ui/react exec env HOVER_CARD_RAW_TRACE=1 vitest run --config vitest.hover-card-trace-unit.config.ts
 node_modules/.bin/tsc -p packages/react/tsconfig.json --noEmit
 node --test scripts/hover-card-diagnostic.test.mjs
 ```

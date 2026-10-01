@@ -2,15 +2,6 @@ name: HoverCard original full-suite diagnostic
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - .github/workflows/hover-card-diagnostic.yml
-      - .github/workflows/hover-card-observation.yml
-      - scripts/hover-card-diagnostic*.mjs
-      - packages/react/vitest.config.ts
-      - packages/react/src/hooks/test/open-state-trace*
-      - packages/react/src/hooks/test/controllable-migration.test.tsx
-      - packages/react/src/hooks/test/diagnostics/**
 
 permissions:
   contents: read
