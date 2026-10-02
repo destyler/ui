@@ -5,8 +5,8 @@ export interface CarouselNextTriggerProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
-import { mergeProps } from '@destyler/vue'
-import { ui } from '~/factory'
+import { mergeCarouselProps } from '../utils/merge-carousel-props'
+import { CarouselButton } from '../utils/carousel-element'
 import { useCarouselContext } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
@@ -22,7 +22,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="mergeProps(carousel.getNextTriggerProps(), $attrs)" :as-child="asChild">
+  <CarouselButton v-bind="mergeCarouselProps(carousel.getNextTriggerProps(), $attrs)" :as-child="asChild">
     <slot />
-  </ui.button>
+  </CarouselButton>
 </template>

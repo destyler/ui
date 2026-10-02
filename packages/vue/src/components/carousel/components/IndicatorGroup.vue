@@ -5,8 +5,8 @@ export interface CarouselIndicatorGroupProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
-import { mergeProps } from '@destyler/vue'
-import { ui } from '~/factory'
+import { mergeCarouselProps } from '../utils/merge-carousel-props'
+import { CarouselDiv } from '../utils/carousel-element'
 import { useCarouselContext } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
@@ -22,7 +22,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-bind="mergeProps(carousel.getIndicatorGroupProps(), $attrs)" :as-child="asChild">
+  <CarouselDiv v-bind="mergeCarouselProps(carousel.getIndicatorGroupProps(), $attrs)" :as-child="asChild">
     <slot />
-  </ui.div>
+  </CarouselDiv>
 </template>
