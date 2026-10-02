@@ -36,7 +36,7 @@ describe('slider thumb ownership and controlled arrays', () => {
   })
 
   it('keeps indicator placement and dragging state on the current thumb index', async () => {
-    const screen = await render(Fixture)
+    const screen = await render(Fixture, { props: { id: 'stage2-indicator' } })
     const first = screen.getByTestId('first-thumb').element()
     const second = screen.getByTestId('second-thumb').element()
     const firstIndicator = first.querySelector<HTMLElement>('[data-part="dragging-indicator"]')!
@@ -64,11 +64,13 @@ describe('slider thumb ownership and controlled arrays', () => {
     document.dispatchEvent(new PointerEvent('pointerup', { pointerType: 'touch', pointerId: 1 }))
     await expect.element(firstIndicator).toHaveAttribute('data-state', 'closed')
     expect(firstIndicator.hidden).toBe(true)
+    // Complete the existing core focus RAF inside this fixture's lifetime.
+    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
   })
 
   it.each(['accept', 'veto', 'delay'] as const)('preserves exact arrays when the parent chooses %s', async (mode) => {
     const onValueChange = vi.fn()
-    const screen = await render(Fixture, { props: { mode, onValueChange } })
+    const screen = await render(Fixture, { props: { id: `stage2-controlled-${mode}`, mode, onValueChange } })
     screen.getByTestId('second-thumb').element().focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(onValueChange).toHaveBeenLastCalledWith({ value: [20, 81] })
@@ -82,7 +84,7 @@ describe('slider thumb ownership and controlled arrays', () => {
 
   it.each(['disabled', 'readOnly'] as const)('does not request changes while %s', async (prop) => {
     const onValueChange = vi.fn()
-    const screen = await render(Fixture, { props: { [prop]: true, onValueChange } })
+    const screen = await render(Fixture, { props: { id: `stage2-${prop}`, [prop]: true, onValueChange } })
     screen.getByTestId('first-thumb').element().focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(onValueChange).not.toHaveBeenCalled()

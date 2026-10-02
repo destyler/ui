@@ -2,7 +2,8 @@
   import type { ValueChangeDetails } from '@destyler/slider'
   import { Slider } from '../index'
 
-  const { mode = 'accept', disabled = false, readOnly = false, onValueChange }: {
+  const { id = 'stage2-slider', mode = 'accept', disabled = false, readOnly = false, onValueChange }: {
+    id?: string
     mode?: 'accept' | 'veto' | 'delay'
     disabled?: boolean
     readOnly?: boolean
@@ -21,7 +22,7 @@
 </script>
 
 <form data-testid="slider-form">
-  <Slider.Root id="stage2-slider" {value} {disabled} {readOnly} thumbAlignment="center" onValueChange={change}>
+  <Slider.Root {id} {value} {disabled} {readOnly} thumbAlignment="center" onValueChange={change}>
     <Slider.Label>Range</Slider.Label>
     <Slider.ValueText data-testid="values" />
     <Slider.Control style="width:200px;height:20px">
