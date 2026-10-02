@@ -1,8 +1,8 @@
 <script module lang="ts">
   import type { Assign, HTMLProps, PolymorphicProps } from '$lib/types'
 
-  export interface TreeBranchTriggerBaseProps extends PolymorphicProps<'button'> {}
-  export interface TreeBranchTriggerProps extends Assign<HTMLProps<'button'>, TreeBranchTriggerBaseProps> {}
+  export interface TreeBranchTriggerBaseProps extends PolymorphicProps<'div'> {}
+  export interface TreeBranchTriggerProps extends Assign<HTMLProps<'div'>, TreeBranchTriggerBaseProps> {}
 </script>
 
 <script lang="ts">
@@ -19,4 +19,4 @@
   const mergedProps = $derived(mergeProps(tree().getBranchTriggerProps(nodeProps()), props))
 </script>
 
-<UI as="button" {...mergedProps} />
+<UI as="div" {...mergedProps} />

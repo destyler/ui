@@ -4,12 +4,15 @@
   import { bindingCases, formatState, readState, requestState } from './binding-cases'
   import BindingParts from './binding-parts.fixture.svelte'
 
-  let { name, mode, onChange, onWrite, unrelated = 0 }: {
+  let { name, mode, onChange, onWrite, unrelated = 0, defaultState = 'initial', explicitUndefined = false, fieldName }: {
     name: string
     mode: BindingMode
     onChange?: (value: unknown) => void
     onWrite?: (value: unknown) => void
     unrelated?: number
+    defaultState?: 'initial' | 'next'
+    explicitUndefined?: boolean
+    fieldName?: string
   } = $props()
   const selected = untrack(() => bindingCases.find(testCase => testCase.name === name)!)
   const Root = selected.components.Root
@@ -21,11 +24,22 @@
   const defaultProp = `default${selected.state[0].toUpperCase()}${selected.state.slice(1)}`
   const rootProps = $derived({
     ...baseProps,
+    ...(fieldName === undefined ? {} : { name: fieldName }),
     ...(selected.family === 'toggle' ? { asChild: toggleContainer } : {}),
     id,
-    ...(selected.hasDefault === false ? {} : { [defaultProp]: selected.initial() }),
+    ...(selected.hasDefault === false ? {} : { [defaultProp]: selected[defaultState]() }),
     [callback]: (details: any) => onChange?.(selected.detail ? selected.detail(details) : details[selected.state]),
   })
+  let currentApi: (() => BindingApi) | undefined
+  function captureState(api: () => BindingApi) {
+    currentApi = api
+    return formatState(selected, readState(selected, api()))
+  }
+  export function requestContractState(value: 'initial' | 'next') { requestState(selected, currentApi!(), selected[value]()) }
+  export function writeContractParent(value: 'initial' | 'next') { parent = selected[value]() }
+  export function readContractState() { return readState(selected, currentApi!()) }
+  export function updateContractDefault(value: 'initial' | 'next') { defaultState = value }
+  export function rerenderContract() { unrelated += 1 }
   const get = () => parent
   const set = (value: unknown) => {
     onWrite?.(value)
@@ -41,7 +55,7 @@
   {#if mode === 'controlled'}
     <Root {...rootProps} {...{ [selected.state]: parent }} children={children} />
   {:else if mode === 'uncontrolled'}
-    <Root {...rootProps} children={children} />
+    <Root {...rootProps} {...(explicitUndefined ? { [selected.state]: undefined } : {})} children={children} />
   {:else if selected.state === 'checked'}
     <Root {...rootProps} bind:checked={get, set} children={children} />
   {:else if selected.state === 'pressed'}
@@ -78,7 +92,7 @@
 {/snippet}
 
 {#snippet parts(api: () => BindingApi)}
-  <output data-testid="api-state">{formatState(selected, readState(selected, api()))}</output>
+  <output data-testid="api-state">{captureState(api)}</output>
   <button type="button" data-testid="request-next" onclick={event => { event.stopPropagation(); requestState(selected, api(), selected.next()) }}>Request next</button>
   <button type="button" data-testid="request-initial" onclick={event => { event.stopPropagation(); requestState(selected, api(), selected.initial()) }}>Request initial</button>
   <BindingParts {api} selected={selected} />
