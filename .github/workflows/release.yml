@@ -37,6 +37,7 @@ jobs:
           pnpm --filter @destyler-ui/react check
           PACKED_BROWSER=1 pnpm --filter @destyler-ui/react check:package
           pnpm --filter @destyler-ui/vue check
+          PACKED_BROWSER=1 pnpm exec node scripts/test-vue-package.mjs
           pnpm --filter @destyler-ui/svelte check:ci
           pnpm --filter @destyler-ui/solid check
           pnpm --filter @destyler-ui/react build-storybook

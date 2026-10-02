@@ -5,6 +5,7 @@ export interface SliderValueTextProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { useForwardExpose } from '~/composables'
 import { ui } from '~/factory'
 import { useSliderContext } from '../composables/use-slider-context'
@@ -15,7 +16,7 @@ defineOptions({
 
 defineProps<SliderValueTextProps>()
 const slider = useSliderContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>

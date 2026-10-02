@@ -7,6 +7,7 @@ export interface TourActionTriggerProps extends StepActionTriggerProps, Polymorp
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { ui } from '~/factory'
 import { useTourContext } from '../composables/use-tour-context'
 import { useForwardExpose } from '~/composables'
@@ -17,7 +18,7 @@ defineOptions({
 
 const props = defineProps<TourActionTriggerProps>()
 const tour = useTourContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>

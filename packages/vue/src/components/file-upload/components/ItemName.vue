@@ -5,6 +5,7 @@ export interface FileUploadItemNameProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { ui } from '~/factory'
 import { useFileUploadContext } from '../composables/use-file-upload-context'
 import { useFileUploadItemPropsContext } from '../composables/use-file-upload-item-props-context'
@@ -17,7 +18,7 @@ defineOptions({
 defineProps<FileUploadItemNameProps>()
 const fileUpload = useFileUploadContext()
 const itemProps = useFileUploadItemPropsContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>

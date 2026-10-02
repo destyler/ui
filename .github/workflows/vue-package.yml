@@ -1,0 +1,29 @@
+name: Packed vue consumer
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  packed-consumer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec node --import tsx --test scripts/test-vue-declarations.ts
+      - run: pnpm exec node scripts/test-vue-package.mjs
+        env:
+          PACKED_BROWSER: '1'

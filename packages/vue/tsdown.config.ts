@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsdown'
+import { compatibleDts } from './build/compatible-dts.ts'
 
 export default defineConfig({
   entry: {
@@ -9,6 +10,7 @@ export default defineConfig({
   format: [
     'esm',
   ],
+  plugins: [compatibleDts],
   dts: {
     vue: true,
   },

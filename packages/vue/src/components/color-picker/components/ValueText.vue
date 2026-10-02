@@ -5,6 +5,7 @@ export interface ColorPickerValueTextProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
+import type { Slot } from 'vue'
 import { ui } from '~/factory'
 import { useColorPickerContext } from '../composables/use-color-picker-context'
 import { useForwardExpose } from '~/composables'
@@ -15,7 +16,7 @@ defineOptions({
 
 defineProps<ColorPickerValueTextProps>()
 const colorPicker = useColorPickerContext()
-const slots = defineSlots()
+const slots = defineSlots<{ default?: Slot }>()
 
 useForwardExpose()
 </script>
