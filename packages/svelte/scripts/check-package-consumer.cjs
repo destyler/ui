@@ -52,23 +52,15 @@ import type { PaginationRootProps } from '@destyler-ui/svelte/pagination'
 
 export type ConsumerProps = PaginationRootProps
 `)
-  fs.writeFileSync(path.join(fixtureRoot, 'destyler-svelte-shim.d.ts'), `
-export type PropTypes = Record<
-  'button' | 'label' | 'input' | 'textarea' | 'img' | 'output' | 'element' | 'select' | 'rect' | 'style' | 'circle' | 'svg' | 'path',
-  Record<string, unknown>
->
-`)
   fs.writeFileSync(path.join(fixtureRoot, 'tsconfig.json'), JSON.stringify({
     compilerOptions: {
       allowArbitraryExtensions: true,
-      baseUrl: '.',
       customConditions: ['svelte'],
       module: 'NodeNext',
       moduleResolution: 'NodeNext',
       noEmit: true,
-      paths: {
-        '@destyler/svelte': ['./destyler-svelte-shim.d.ts'],
-      },
+      lib: ['DOM', 'DOM.Iterable', 'ES2023'],
+      types: [],
       skipLibCheck: false,
       strict: true,
       target: 'ES2022',
