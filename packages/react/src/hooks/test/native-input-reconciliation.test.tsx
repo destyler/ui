@@ -8,6 +8,7 @@ import { Edit, useEdit } from '~/components/edit'
 import { NumberInput, useNumberInput } from '~/components/number-input'
 import { Radio, useRadio } from '~/components/radio'
 import { Switch, useSwitch } from '~/components/switch'
+import { assertCheckboxForm, assertTextSelection } from '../../../../../utils/test/behavior-contracts'
 
 // Runs in the committed Chromium suite, and in supplemental Node DOM probes
 // with the production React Compiler. Click the native inputs, not API setters.
@@ -252,11 +253,9 @@ for (const entry of entries) {
         input.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true }))
         inputText(input, composingText, true, 1)
       })
-      expect(input.value).toBe(composingText)
-      expect(input.selectionStart).toBe(1)
+      assertTextSelection(input, composingText, 1)
       await change(() => harness.setValue(control.next))
-      expect(input.value).toBe(composingText)
-      expect(input.selectionStart).toBe(1)
+      assertTextSelection(input, composingText, 1)
       await change(() => input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: composingText })))
       harness.assertValue(control.next)
     })
@@ -305,8 +304,7 @@ for (const entry of entries) {
     await change(() => input.focus())
     for (const value of ['1.', '1.2']) {
       await change(() => inputText(input, value))
-      expect(input.value).toBe(value)
-      expect(input.selectionStart).toBe(value.length)
+      assertTextSelection(input, value, value.length)
       expect(harness.requests).toHaveBeenLastCalledWith(value)
     }
   })
@@ -382,4 +380,17 @@ for (const entry of entries) {
       expect(harness.api.value).toBe(format.committed)
     })
   }
+}
+
+for (const entry of entries) {
+  it(`shared native reset: Checkbox ${entry} restores native input, API and FormData twice`, async () => {
+    const harness = await mountControl(controls[0], entry, { uncontrolled: true })
+    for (let cycle = 0; cycle < 2; cycle++) {
+      await harness.request(false)
+      harness.assertValue(false)
+      await change(() => harness.inputs[0].form!.reset())
+      harness.assertValue(true)
+      assertCheckboxForm(harness.inputs[0], true)
+    }
+  })
 }
