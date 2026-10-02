@@ -40,6 +40,7 @@ jobs:
           PACKED_BROWSER=1 pnpm exec node scripts/test-vue-package.mjs
           pnpm --filter @destyler-ui/svelte check:ci
           pnpm --filter @destyler-ui/solid check
+          PACKED_BROWSER=1 pnpm exec node scripts/test-solid-package.mjs
           pnpm --filter @destyler-ui/react build-storybook
           pnpm --filter @destyler-ui/vue build-storybook
           pnpm --filter @destyler-ui/svelte build-storybook

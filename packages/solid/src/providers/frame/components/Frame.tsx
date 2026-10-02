@@ -9,10 +9,16 @@ import {
   Show,
   splitProps,
 } from 'solid-js'
-import { clearDelegatedEvents, DelegatedEvents, delegateEvents, Portal } from 'solid-js/web'
+import { Portal } from 'solid-js/web'
+import * as solidWeb from 'solid-js/web'
+
 import { EnvironmentProvider } from '~/providers'
 import { composeRefs } from '~/utils/compose-refs'
 import { FrameContent } from './Content'
+
+// Solid 1.8 only exports these DOM helpers from its browser entry. Keep a
+// namespace lookup for client-only lifecycle helpers so the server entry can load.
+const { clearDelegatedEvents, DelegatedEvents, delegateEvents } = solidWeb
 
 export interface FrameBaseProps {
   /** Accessible name that describes the embedded frame content */
