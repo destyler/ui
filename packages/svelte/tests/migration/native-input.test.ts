@@ -2,6 +2,7 @@ import { tick } from 'svelte'
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { userEvent } from 'vitest/browser'
+import { assertTextSelection } from '../../../../utils/test/behavior-contracts'
 import NativeInputFixture from './native-input.fixture.svelte'
 
 const cases = [
@@ -60,8 +61,7 @@ it('waits for IME composition to finish before restoring a rejected edit and pre
   expect(input.value).toBe('編集中')
   input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '編集中' }))
   await vi.waitFor(() => expect(input.value).toBe('one'))
-  expect(input.selectionStart).toBe(1)
-  expect(input.selectionEnd).toBe(1)
+  assertTextSelection(input, 'one', 1)
   await expect.element(screen.getByTestId('api-state')).toHaveTextContent('one')
 })
 

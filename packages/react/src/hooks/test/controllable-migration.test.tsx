@@ -36,6 +36,8 @@ import { Tooltip, useTooltip } from '~/components/tooltip'
 import { useTree } from '~/components/tree'
 import { InitialValue as TreeInitialValue } from '~/components/tree/examples/InitialValue'
 import { createFileTreeCollection, createListCollection } from '~/utils/collection'
+import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, ownershipScenarios } from '../../../../../utils/test/behavior-contracts'
+import { trackDocumentListeners } from '../../../../../utils/test/document-listeners'
 
 // These tests run in the browser suite, and can also run in happy-dom with the
 // production React Compiler enabled. The hook implementations are never mocked.
@@ -100,6 +102,7 @@ async function mountHook(hook: Hook, initialProps: any, children = parts) {
   return {
     get api() { return api },
     container,
+    root,
     render,
     async change(action: (api: any) => void) {
       await act(async () => {
@@ -648,4 +651,90 @@ it('popover Root preserves wrapper identity, local attributes and click handlers
   expect(harness.container.querySelector('[data-part="content"]')?.id).toBe('popover:target:content')
   await act(async () => wrapper.click())
   expect(onClick).toHaveBeenCalledTimes(1)
+})
+
+// The same scenario descriptions are consumed by all four runtime suites.
+// Keep hook mounting, React act(), and compiler integration local to React.
+const sharedValueCases: ValueCase[] = [
+  ...valueCases.filter(row => /^(?:checkbox|number-input|combobox|calendar|tree) /.test(row.name)),
+  { name: 'dialog open', hook: useDialog, field: 'open', initial: false, next: true, props: { modal: false, closeOnInteractOutside: false } },
+]
+it('shared contract coverage includes every target field', () => assertOwnershipCoverage(sharedValueCases.map(row => row.name)))
+for (const row of sharedValueCases) {
+  for (const scenario of ownershipScenarios) {
+    it(`shared contract: ${row.name}: ${scenario.name}`, async () => {
+      const suffix = row.field[0].toUpperCase() + row.field.slice(1)
+      const callback = row.field === 'selectedValue' ? 'onSelectionChange' : row.field === 'expandedValue' ? 'onExpandedChange' : `on${suffix}Change`
+      const onChange = vi.fn()
+      const values = { initial: row.initial, next: row.next }
+      const format = (value: any) => JSON.stringify(row.field === 'value' && row.name.startsWith('calendar') ? value.map(String) : value)
+      const props = { ...row.props, [row.field]: scenario.controlled ? row.initial : undefined, [`default${suffix}`]: values[scenario.defaultValue], [callback]: onChange }
+      const harness = await mountHook(row.hook, props, api => <>{parts(api)}<output data-contract>{format(api[row.field])}</output></>)
+      const check = (value: unknown, requests: unknown[]) => vi.waitFor(() => assertOwnershipSnapshot({
+        api: format(harness.api[row.field]),
+        rendered: harness.container.querySelector('[data-contract]')?.textContent,
+        requests: onChange.mock.calls.map(([details]) => format(details[row.field])),
+      }, format(value), requests.map(format)))
+      await check(row.initial, [])
+      for (const step of scenario.steps) {
+        if (step.action === 'request') {
+          await harness.change(api => api[`set${suffix}`](values[step.value]))
+          if (scenario.accept) {
+            props[row.field] = values[step.value]
+            await harness.render({ ...props })
+          }
+        }
+        else {
+          if (step.action === 'parent')
+            props[row.field] = values[step.value]
+          if (step.action === 'default')
+            props[`default${suffix}`] = values[step.value]
+          await harness.render({ ...props })
+        }
+        await check(values[step.expected], step.requests.map(value => values[value]))
+      }
+    })
+  }
+}
+
+it('shared dialog lifecycle: restores focus twice and disposes document keydown listeners on unmount', async () => {
+  const onOpenChange = vi.fn()
+  const harness = await mountHook(useDialog, { 'defaultOpen': false, 'preventScroll': false, 'aria-label': 'Contract dialog', onOpenChange }, api => (
+    <>
+      <button data-contract-trigger {...api.getTriggerProps()}>Open</button>
+      <div {...api.getPositionerProps()}><div {...api.getContentProps()}><button {...api.getCloseTriggerProps()}>Close</button></div></div>
+    </>
+  ))
+  const trigger = harness.container.querySelector<HTMLButtonElement>('[data-contract-trigger]')!
+  const listeners = trackDocumentListeners(trigger.ownerDocument, 'keydown')
+  try {
+    for (const close of ['api', 'escape']) {
+      await harness.change(() => {
+        trigger.focus()
+        trigger.click()
+      })
+      await vi.waitFor(() => expect(harness.api.open).toBe(true))
+      await vi.waitFor(() => expect(harness.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+      await vi.waitFor(() => listeners.expectActive())
+      await harness.change(api => close === 'api' ? api.setOpen(false) : document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })))
+      await vi.waitFor(() => {
+        expect(harness.api.open).toBe(false)
+        assertFocusRestored(trigger)
+        listeners.expectEmpty()
+      })
+    }
+    await harness.change(() => trigger.click())
+    await vi.waitFor(() => expect(harness.api.open).toBe(true))
+    await vi.waitFor(() => expect(harness.container.querySelector('[data-part="content"]')?.contains(document.activeElement)).toBe(true))
+    await vi.waitFor(() => listeners.expectActive())
+    await act(async () => harness.root.unmount())
+    roots.splice(roots.indexOf(harness.root), 1)
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await new Promise(resolve => setTimeout(resolve, 35))
+    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await vi.waitFor(() => listeners.expectEmpty())
+  }
+  finally {
+    listeners.restore()
+  }
 })
