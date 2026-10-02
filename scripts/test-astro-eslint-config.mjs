@@ -88,7 +88,7 @@ function assertAggregateProjects(projects) {
     'packages/vue/vitest.unit.config.ts',
     'packages/solid/vitest.ssr.config.ts',
     'packages/svelte/vitest.ssr.config.ts',
-    'docs/vitest.config.ts',
+    'docs/vitest.config.mts',
   ]) assert.ok(projects.includes(required), `Missing aggregate test project: ${required}`)
 }
 
@@ -96,7 +96,7 @@ test('aggregate CI keeps every existing project and the native Astro client gate
   const source = await fs.readFile(path.join(root, 'vitest.config.ts'), 'utf8')
   const projects = projectNames(source)
   assertAggregateProjects(projects)
-  assert.throws(() => assertAggregateProjects(projects.filter(name => name !== 'docs/vitest.config.ts')), /Missing aggregate test project: docs/)
+  assert.throws(() => assertAggregateProjects(projects.filter(name => name !== 'docs/vitest.config.mts')), /Missing aggregate test project: docs/)
   const manifest = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'))
   assert.equal(manifest.scripts['test:ci'], 'pnpm run svelte:sync && vitest run --browser.headless --no-file-parallelism')
 })
