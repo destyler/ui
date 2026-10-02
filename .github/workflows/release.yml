@@ -35,6 +35,7 @@ jobs:
           pnpm run lint
           pnpm run test:ci
           pnpm --filter @destyler-ui/react check
+          PACKED_BROWSER=1 pnpm --filter @destyler-ui/react check:package
           pnpm --filter @destyler-ui/vue check
           pnpm --filter @destyler-ui/svelte check:ci
           pnpm --filter @destyler-ui/solid check

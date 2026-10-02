@@ -17,8 +17,8 @@
     "base",
     "destyler"
   ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -29,6 +29,7 @@
   "scripts": {
     "build": "tsdown",
     "check": "tsc --noEmit",
+    "check:package": "node --import tsx --test ../../scripts/test-react-declarations.ts && node ../../scripts/test-react-package.mjs",
     "dev": "tsdown --watch",
     "debug": "tsdown --debug",
     "prepublishOnly": "pnpm run build",
@@ -95,7 +96,8 @@
     "@destyler/tour": "catalog:prod",
     "@destyler/tree": "catalog:prod",
     "@destyler/utils": "catalog:prod",
-    "@destyler/xstate": "catalog:prod"
+    "@destyler/xstate": "catalog:prod",
+    "react-compiler-runtime": "catalog:runtime"
   },
   "devDependencies": {
     "@destyler/types": "catalog:prod",

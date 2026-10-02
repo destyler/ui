@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsdown'
+import { splitDtsVariableDeclarations } from './build/split-dts-variable-declarations.ts'
 
 export default defineConfig({
   entry: {
@@ -9,7 +10,6 @@ export default defineConfig({
   format: [
     'esm',
   ],
-  dts: {
-    vue: true,
-  },
+  dts: true,
+  plugins: [splitDtsVariableDeclarations],
 })
