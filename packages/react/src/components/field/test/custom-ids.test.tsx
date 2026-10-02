@@ -27,6 +27,7 @@ function Fixture({ control = 'input', ...props }: Props) {
           : <Field.Select defaultValue="initial"><option value="initial">Initial</option><option value="edited">Edited</option></Field.Select>}
       <Field.HelperText>Help</Field.HelperText>
       <Field.ErrorText>Error</Field.ErrorText>
+      <Field.Context>{field => <output data-testid="context-ids">{JSON.stringify(field.ids)}</output>}</Field.Context>
     </Field.Root>
   )
 }
@@ -82,6 +83,13 @@ function assertIds(container: HTMLElement, base: string, ids: Props['ids'] = {})
   expect(label.id).toBe(ids.label ?? `field::${base}::label`)
   expect(container.querySelector('[data-part="helper-text"]')!.id).toBe(ids.helperText ?? `field::${base}::helper-text`)
   expect(container.querySelector('[data-part="error-text"]')!.id).toBe(ids.errorText ?? `field::${base}::error-text`)
+  expect(JSON.parse(container.querySelector('[data-testid="context-ids"]')!.textContent!)).toEqual({
+    root: ids.root ?? `field::${base}`,
+    control: ids.control ?? base,
+    label: ids.label ?? `field::${base}::label`,
+    helperText: ids.helperText ?? `field::${base}::helper-text`,
+    errorText: ids.errorText ?? `field::${base}::error-text`,
+  })
   const assigned = Array.from(container.querySelectorAll('[id]'), element => element.id)
   expect(new Set(assigned).size).toBe(assigned.length)
 }
