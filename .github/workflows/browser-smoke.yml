@@ -1,0 +1,44 @@
+name: Browser accessibility smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, fix/svelte-tree-branch-trigger]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    name: Browser accessibility smoke (Node 22)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/.specstory/
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install all smoke engines
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Test browser and accessibility smoke
+        run: pnpm run test:browser-smoke
+      - name: Upload JUnit and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-accessibility-smoke
+          path: |
+            test/junit.xml
+            packages/**/__screenshots__/**
+          if-no-files-found: warn
+          retention-days: 14

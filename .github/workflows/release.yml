@@ -27,13 +27,14 @@ jobs:
       - uses: pnpm/action-setup@v4
       - run: pnpm install --frozen-lockfile
 
-      - name: Install Chromium
-        run: pnpm playwright install --with-deps chromium
+      - name: Install smoke browsers
+        run: pnpm playwright install --with-deps chromium firefox webkit
 
       - name: Verify release
         run: |
           pnpm run lint
           pnpm run test:ci
+          pnpm run test:browser-smoke
           pnpm --filter @destyler-ui/react check
           PACKED_BROWSER=1 pnpm --filter @destyler-ui/react check:package
           pnpm --filter @destyler-ui/vue check
