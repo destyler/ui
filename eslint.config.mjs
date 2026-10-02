@@ -41,9 +41,7 @@ export default antfu(
       'jsonc/sort-array-values': 'off',
     },
   },
-  {
-    ...astro({
-      files: ['docs/**/*.{js,ts,jsx,tsx,astro}'],
-    }),
-  },
+  astro({
+    files: ['docs/**/*.astro'],
+  }),
 )
