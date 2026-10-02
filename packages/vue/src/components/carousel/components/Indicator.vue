@@ -6,12 +6,14 @@ export interface CarouselIndicatorProps extends IndicatorProps, PolymorphicProps
 </script>
 
 <script setup lang="ts">
+import { mergeProps } from '@destyler/vue'
 import { ui } from '~/factory'
 import { useCarouselContext } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
 defineOptions({
-  name: 'CarouselIndicator'
+  name: 'CarouselIndicator',
+  inheritAttrs: false
 })
 
 const props = defineProps<CarouselIndicatorProps>()
@@ -21,7 +23,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="carousel.getIndicatorProps(props)" :as-child="asChild">
+  <ui.button v-bind="mergeProps(carousel.getIndicatorProps(props), $attrs)" :as-child="asChild">
     <slot />
   </ui.button>
 </template>

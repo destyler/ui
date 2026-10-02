@@ -1,9 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { page, userEvent } from 'vitest/browser'
 
-type Mount = (onRequest: (page: number) => void) => Promise<() => unknown> | (() => unknown)
+type Mount = (onRequest: (page: number) => void, onConsumerEvent: (type: string) => void) => Promise<() => unknown> | (() => unknown)
 
 export function carouselControlContracts(mount: Mount) {
+  let consumerEvents = vi.fn<(type: string) => void>()
   let unmount: (() => unknown) | undefined
   afterEach(async () => {
     await unmount?.()
@@ -11,7 +12,8 @@ export function carouselControlContracts(mount: Mount) {
 
   async function setup() {
     const onRequest = vi.fn<(page: number) => void>()
-    unmount = await mount(onRequest)
+    consumerEvents = vi.fn<(type: string) => void>()
+    unmount = await mount(onRequest, consumerEvents)
     await expect.element(page.getByTestId('snap-count')).toHaveTextContent('3')
     await expect.element(page.getByTestId('api-page')).toHaveTextContent('0')
     onRequest.mockClear()
@@ -67,6 +69,7 @@ export function carouselControlContracts(mount: Mount) {
       await page.getByTestId('indicator-zero').click()
       await userEvent.keyboard('{ArrowRight}')
       await expectPage(0)
+      expect(consumerEvents.mock.calls.map(([type]) => type)).toEqual(['click', 'click', 'click', 'keydown'])
       expect(onRequest).not.toHaveBeenCalled()
       await click('toggle-cancel')
       await click('readonly-indicator')
@@ -75,10 +78,36 @@ export function carouselControlContracts(mount: Mount) {
       await vi.waitFor(() => expect(onRequest).toHaveBeenCalledExactlyOnceWith(2))
       await click('accept-pending')
       await expectPage(2)
+      await click('toggle-cancel')
+      onRequest.mockClear()
+      consumerEvents.mockClear()
+      await click('previous')
+      expect(consumerEvents).toHaveBeenCalledExactlyOnceWith('click')
+      expect(onRequest).not.toHaveBeenCalled()
+      await click('toggle-cancel')
       await click('indicator-two')
       await userEvent.keyboard('{Home}')
       await vi.waitFor(() => expect(onRequest.mock.lastCall).toEqual([0]))
       await expectPage(2)
+    })
+
+    it('honors cancellation before autoplay or mouse dragging starts', async () => {
+      await setup()
+      await click('toggle-cancel')
+      await click('autoplay')
+      await expect.element(page.getByTestId('playing')).toHaveTextContent('false')
+      await click('item-group')
+      await expect.element(page.getByTestId('drag-start-count')).toHaveTextContent('0')
+      expect(consumerEvents.mock.calls.map(([type]) => type)).toEqual(['click', 'mousedown'])
+      consumerEvents.mockClear()
+      await click('toggle-cancel')
+      await click('autoplay')
+      await expect.element(page.getByTestId('playing')).toHaveTextContent('true')
+      await click('autoplay')
+      await expect.element(page.getByTestId('playing')).toHaveTextContent('false')
+      await click('item-group')
+      await expect.element(page.getByTestId('drag-start-count')).toHaveTextContent('1')
+      expect(consumerEvents.mock.calls.map(([type]) => type)).toEqual(['click', 'click', 'mousedown'])
     })
 
     it('does not notify after unmounting during a scroll and can mount again', async () => {

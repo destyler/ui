@@ -5,12 +5,14 @@ export interface CarouselPrevTriggerProps extends PolymorphicProps{}
 </script>
 
 <script setup lang="ts">
+import { mergeProps } from '@destyler/vue'
 import { ui } from '~/factory'
 import { useCarouselContext } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
 defineOptions({
-  name: 'CarouselPrevTrigger'
+  name: 'CarouselPrevTrigger',
+  inheritAttrs: false
 })
 
 defineProps<CarouselPrevTriggerProps>()
@@ -20,7 +22,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="carousel.getPrevTriggerProps()" :as-child="asChild">
+  <ui.button v-bind="mergeProps(carousel.getPrevTriggerProps(), $attrs)" :as-child="asChild">
     <slot />
   </ui.button>
 </template>
