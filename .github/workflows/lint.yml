@@ -34,5 +34,8 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Verify Astro lint and client contracts
+        run: node --test scripts/test-astro-eslint-config.mjs scripts/test-astro-docs-behavior.mjs
+
       - name: Lint
         run: pnpm run lint
