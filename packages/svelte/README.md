@@ -53,3 +53,9 @@ import { Checkbox as CheckboxFromSubpath } from '@destyler-ui/svelte/checkbox'
 Runtime helpers are exported from the root package and dedicated subpaths, including `ClientOnly`, `EnvironmentProvider`, `FocusTrap`, `Format`, `Frame`, `Highlight`, and `LocaleProvider`.
 
 See the [Destyler UI documentation](https://ui.destyler.dev/overview/getting-started/) for component examples, API tables, and provider guides.
+
+## Tree branch triggers
+
+`Tree.BranchTrigger` now renders a `div` with `role="button"`, matching the other frameworks. Inside `Tree.BranchControl`, it handles pointer expansion while the branch control owns keyboard navigation and the tree's roving tab stop.
+
+Its public props and event `currentTarget` types now describe `HTMLDivElement`. Consumers that previously relied on the native button default or button-only attributes must use explicit `asChild` composition and adapt the snippet props to their chosen element's types. Caller overrides are preserved; adding a focusable child or `tabindex` remains the caller's accessibility responsibility and can introduce extra tab stops or nested interactive controls.
