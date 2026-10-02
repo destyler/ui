@@ -2,7 +2,7 @@ import { Tabs } from '../index'
 
 interface BasicProps {
   defaultValue?: string
-  onValueChange?: (details: { value: string }) => void
+  onValueChange?: (details: { value: string | null }) => void
   loopFocus?: boolean
   orientation?: 'horizontal' | 'vertical'
   lazyMount?: boolean

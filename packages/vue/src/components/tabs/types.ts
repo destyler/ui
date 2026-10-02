@@ -17,7 +17,7 @@ export interface RootProps {
    * The initial value of the tabs when it is first rendered.
    * Use when you do not need to control the state of the tabs.
    */
-  defaultValue?: string
+  defaultValue?: string | null
   /**
    * Whether the active tab can be deselected when clicking on it.
    */
@@ -35,7 +35,7 @@ export interface RootProps {
    * @default true
    */
   loopFocus?: boolean
-  modelValue?: string
+  modelValue?: string | null
   /**
    * The orientation of the tabs. Can be `horizontal` or `vertical`
    * - `horizontal`: only left and right arrow key navigation will work.
@@ -58,9 +58,9 @@ export interface RootEmits {
   /**
    * Callback to be called when the selected/active tab changes
    */
-  'valueChange': [details: tabs.ValueChangeDetails]
+  'valueChange': [details: Omit<tabs.ValueChangeDetails, 'value'> & { value: string | null }]
   /**
    * The callback fired when the model value changes.
    */
-  'update:modelValue': [value: string]
+  'update:modelValue': [value: string | null]
 }

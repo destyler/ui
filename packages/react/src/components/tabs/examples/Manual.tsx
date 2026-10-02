@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Tabs } from '../index'
 
 export function Manual() {
-  const [value, setValue] = useState('react')
+  const [value, setValue] = useState<string | null>('react')
 
   return (
     <Tabs.Root value={value} onValueChange={({ value }) => setValue(value)} activationMode="manual">
