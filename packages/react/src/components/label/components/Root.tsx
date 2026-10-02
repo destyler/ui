@@ -25,6 +25,6 @@ export const LabelRoot = forwardRef<HTMLLabelElement, LabelRootProps>((props, re
 LabelRoot.displayName = 'LabelRoot'
 
 function splitProps(props: LabelRootProps): [UseLabelProps, Omit<LabelRootProps, keyof UseLabelProps>] {
-  const { id, ...rest } = props
-  return [{ id }, rest]
+  const { id, ids, ...rest } = props
+  return [{ id, ids }, rest]
 }
