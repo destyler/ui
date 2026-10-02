@@ -1,0 +1,43 @@
+---
+title: Tabs nullable selection migration
+description: Keep controlled Tabs state and callbacks compatible with an empty selection.
+---
+
+Tabs selection is `string | null`: a string selects a tab, and `null` represents no selected tab. Keep parent state and change handlers wide enough to represent both.
+
+## Update controlled state
+
+```tsx
+// React
+const [value, setValue] = useState<string | null>('react')
+<Tabs.Root value={value} onValueChange={({ value }) => setValue(value)} />
+```
+
+```ts
+// Vue
+const value = ref<string | null>('react')
+// Use value with <Tabs.Root v-model="value">.
+
+// Solid
+const [value, setValue] = createSignal<string | null>('react')
+
+// Svelte
+let value = $state<string | null>('react')
+// Use value with <Tabs.Root bind:value>.
+```
+
+A callback that only accepts `{ value: string }` cannot handle a clear request. Accept `{ value: string | null }` and explicitly decide whether to accept or veto an empty selection. Do not use a non-null assertion to hide that decision.
+
+```ts
+function onValueChange(details: { value: string | null }) {
+  setValue(details.value)
+}
+```
+
+Vue's public `modelValue`, `defaultValue`, `valueChange` and `update:modelValue` types also accept `null`. `undefined` continues to mean that no controlled value was supplied; use `null` for a controlled empty selection.
+
+## Core dependency boundary
+
+The currently pinned `@destyler/tabs@0.2.11` can receive a parent-controlled `null`, but suppresses null change notifications initiated by `clearValue()` or `deselectable`. The [core correction](https://github.com/destyler/destyler/pull/208) (reviewed head `a462bf8fe4c1df518f2ecc00cf9fb0a4a181ca4f`) reports those requests and widens `ValueChangeDetails.value` to `string | null`.
+
+This UI migration prepares types, examples and consumer tests while retaining the published dependency. It does not make the core notification correction available in version `0.2.11`, invent a dependency version, or change controlled ownership. Adopt a released core version containing that correction through the normal release process before relying on null notifications. A controlled parent still decides whether to accept a requested value.
