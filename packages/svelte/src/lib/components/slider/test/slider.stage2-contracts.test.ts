@@ -35,6 +35,37 @@ describe('slider thumb ownership and controlled arrays', () => {
     expect(indicator.textContent?.trim()).toBe('20')
   })
 
+  it('keeps indicator placement and dragging state on the current thumb index', async () => {
+    const screen = await render(Fixture)
+    const first = screen.getByTestId('first-thumb').element()
+    const second = screen.getByTestId('second-thumb').element()
+    const firstIndicator = first.querySelector<HTMLElement>('[data-part="dragging-indicator"]')!
+    const secondIndicator = second.querySelector<HTMLElement>('[data-part="dragging-indicator"]')!
+    first.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerType: 'touch', pointerId: 1 }))
+    await expect.element(firstIndicator).toHaveAttribute('data-state', 'open')
+    expect(firstIndicator.hidden).toBe(false)
+    expect(firstIndicator.style.insetInlineStart).toBe('var(--slider-thumb-offset-0)')
+    expect(secondIndicator.hidden).toBe(true)
+    // Change props without pointerup: native click() models an application update mid-drag.
+    const swapButton = screen.getByRole('button', { name: 'Swap indices' }).element() as HTMLButtonElement
+    swapButton.click()
+    await expect.element(first).toHaveAttribute('data-index', '1')
+    expect(firstIndicator.style.insetInlineStart).toBe('var(--slider-thumb-offset-1)')
+    expect(firstIndicator.hidden).toBe(true)
+    expect(firstIndicator.getAttribute('data-state')).toBe('closed')
+    expect(secondIndicator.style.insetInlineStart).toBe('var(--slider-thumb-offset-0)')
+    expect(secondIndicator.hidden).toBe(false)
+    expect(secondIndicator.getAttribute('data-state')).toBe('open')
+    swapButton.click()
+    await expect.element(first).toHaveAttribute('data-index', '0')
+    expect(firstIndicator.style.insetInlineStart).toBe('var(--slider-thumb-offset-0)')
+    expect(firstIndicator.hidden).toBe(false)
+    expect(secondIndicator.hidden).toBe(true)
+    document.dispatchEvent(new PointerEvent('pointerup', { pointerType: 'touch', pointerId: 1 }))
+    await expect.element(firstIndicator).toHaveAttribute('data-state', 'closed')
+    expect(firstIndicator.hidden).toBe(true)
+  })
+
   it.each(['accept', 'veto', 'delay'] as const)('preserves exact arrays when the parent chooses %s', async (mode) => {
     const onValueChange = vi.fn()
     const screen = await render(Fixture, { props: { mode, onValueChange } })
@@ -46,6 +77,7 @@ describe('slider thumb ownership and controlled arrays', () => {
       await screen.getByRole('button', { name: 'Accept pending' }).click()
       await expect.element(screen.getByTestId('values')).toHaveTextContent('20, 81')
     }
+    expect(formEntries(screen.getByTestId('slider-form').element() as HTMLFormElement)).toEqual([['low', '20'], ['high', mode === 'veto' ? '80' : '81']])
   })
 
   it.each(['disabled', 'readOnly'] as const)('does not request changes while %s', async (prop) => {
