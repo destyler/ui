@@ -28,11 +28,11 @@ export default antfu(
       files: ['packages/svelte/**/*.{svelte,js,ts}'],
     }),
   },
-  {
-    ...solid({
-      files: ['packages/solid/**/*.{js,ts,jsx,tsx}'],
-    }),
-  },
+  // Resolve the async preset through the composer; spreading it drops its rules.
+  // Other inactive framework presets remain separately tracked work.
+  solid({
+    files: ['packages/solid/**/*.{js,ts,jsx,tsx}'],
+  }),
   {
     files: ['packages/svelte/package.json'],
     rules: {
