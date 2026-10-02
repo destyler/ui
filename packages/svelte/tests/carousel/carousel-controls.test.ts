@@ -1,5 +1,5 @@
 import { render } from 'vitest-browser-svelte'
-import { carouselControlContracts } from '../../../../../../../utils/test/carousel-control-contracts'
+import { carouselControlContracts } from '../../../../utils/test/carousel-control-contracts'
 import ControlledAudit from './ControlledAudit.fixture.svelte'
 
 carouselControlContracts(async (onRequest) => {

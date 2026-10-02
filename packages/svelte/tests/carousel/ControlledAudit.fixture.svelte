@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Carousel } from '../index'
+  import { Carousel } from '../../src/lib/components/carousel'
 
   let { onRequest }: { onRequest: (page: number) => void } = $props()
   let page = $state(0)
