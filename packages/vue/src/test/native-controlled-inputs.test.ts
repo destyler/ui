@@ -1,6 +1,7 @@
 import type { App, Component, ComputedRef } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createApp, defineComponent, h, nextTick, reactive } from 'vue'
+import { assertCheckboxForm } from '../../../../utils/test/behavior-contracts'
 import { Checkbox, useCheckbox } from '../components/checkbox'
 import { Radio, useRadio } from '../components/radio'
 import { Switch, useSwitch } from '../components/switch'
@@ -245,3 +246,21 @@ describe('native controlled input reconciliation through every public entry', ()
     })
   }
 })
+
+for (const entry of entries) {
+  it(`shared native reset: Checkbox ${entry} restores its original seed after later defaults`, async () => {
+    const instance = await fixture(Checkbox, useCheckbox, entry, { checked: undefined, defaultChecked: true, value: 'yes' })
+    for (let cycle = 0; cycle < 2; cycle++) {
+      instance.input.click()
+      await flush()
+      assertChecked(instance, false)
+      instance.props.defaultChecked = false
+      await flush()
+      instance.input.form!.reset()
+      await vi.waitFor(() => {
+        assertChecked(instance, true)
+        assertCheckboxForm(instance.input, true)
+      })
+    }
+  })
+}
