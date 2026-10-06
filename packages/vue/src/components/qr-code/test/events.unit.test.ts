@@ -1,15 +1,24 @@
 import type { App } from 'vue'
 import type { UseQrCodeContext } from '../composables/use-qr-code-context'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { createApp, h, nextTick, ref } from 'vue'
+import { createApp, h, nextTick, onUnmounted, ref } from 'vue'
 import { QrCode, useQrCode } from '../index'
 
 let app: App | undefined
+let mountedHost: HTMLElement | undefined
 
-afterEach(() => {
-  app?.unmount()
-  document.body.replaceChildren()
-})
+function cleanup() {
+  try {
+    app?.unmount()
+  }
+  finally {
+    app = undefined
+    mountedHost?.remove()
+    mountedHost = undefined
+  }
+}
+
+afterEach(cleanup)
 
 function mount(controlled: boolean) {
   const value = ref('initial')
@@ -22,6 +31,7 @@ function mount(controlled: boolean) {
     value.value = next
   })
   const host = document.createElement('div')
+  mountedHost = host
   document.body.appendChild(host)
   app = createApp({
     setup() {
@@ -68,6 +78,7 @@ describe('qr-code root events', () => {
   it('preserves the existing composable emitter order as a control', async () => {
     const emit = vi.fn()
     const host = document.createElement('div')
+    mountedHost = host
     document.body.appendChild(host)
     app = createApp({
       setup() {
@@ -89,4 +100,51 @@ describe('qr-code root events', () => {
     expect(onValueChange).not.toHaveBeenCalled()
     expect(onUpdate).not.toHaveBeenCalled()
   })
+})
+
+it('keeps unrelated owners alive and disposes only its own host across repeated mounts', async () => {
+  vi.useFakeTimers()
+  const sentinel = document.createElement('aside')
+  document.body.appendChild(sentinel)
+  const clicks = ref(0)
+  const onDispose = vi.fn()
+  const owner = createApp({
+    setup() {
+      onUnmounted(onDispose)
+      return () => h('button', { onClick: () => clicks.value++ }, String(clicks.value))
+    },
+  })
+  try {
+    owner.mount(sentinel)
+    for (let iteration = 0; iteration < 3; iteration++) {
+      const { host, value, onValueChange, onUpdate, events } = mount(true)
+      await nextTick()
+      host.querySelector('button')!.click()
+      await nextTick()
+      expect(events).toEqual(['valueChange', 'update:modelValue'])
+      expect(onValueChange.mock.calls).toEqual([[{ value: 'edited' }]])
+      expect(onUpdate.mock.calls).toEqual([['edited']])
+      expect(value.value).toBe('edited')
+      cleanup()
+      await nextTick()
+      expect(host.isConnected).toBe(false)
+      expect(host.childElementCount).toBe(0)
+      expect(vi.getTimerCount()).toBe(0)
+      value.value = 'after-disposal'
+      await nextTick()
+      expect(events).toEqual(['valueChange', 'update:modelValue'])
+      expect(sentinel.isConnected).toBe(true)
+      expect(onDispose).not.toHaveBeenCalled()
+      sentinel.querySelector('button')!.click()
+      await nextTick()
+      expect(sentinel.textContent).toBe(String(iteration + 1))
+    }
+  }
+  finally {
+    cleanup()
+    owner.unmount()
+    sentinel.remove()
+    vi.useRealTimers()
+  }
+  expect(onDispose).toHaveBeenCalledTimes(1)
 })
