@@ -84,13 +84,14 @@ export function useVModel<P extends object, K extends keyof P, Name extends stri
     watch(
       () => props[prop],
       (v) => {
-        if (!isUpdating) {
-          isUpdating = true
-          ;(proxy as any).value = v as UnwrapRef<P[K]>
-          nextTick(() => {
-            isUpdating = false
-          })
-        }
+        // Parent writes can be queued again within the same flush (for example
+        // by a normalization watcher). Never drop the newer value; the guard
+        // suppresses only the proxy's echo back to the parent.
+        isUpdating = true
+        ;(proxy as any).value = v as UnwrapRef<P[K]>
+        nextTick(() => {
+          isUpdating = false
+        })
       },
     )
 
