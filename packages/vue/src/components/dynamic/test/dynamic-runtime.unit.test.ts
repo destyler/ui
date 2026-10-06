@@ -1,0 +1,1 @@
+import './dynamic-runtime.cases'
