@@ -111,6 +111,7 @@ it('delivers queued requests to the latest committed callback without changing p
   await act(async () => root.render(<Probe action="add" onValueChange={first} />))
   await act(async () => {
     container.querySelector('button')!.click()
+    // eslint-disable-next-line react-dom/no-flush-sync -- Commit the replacement callback before queued change delivery to verify latest committed callback ownership.
     flushSync(() => root.render(<Probe action="add" onValueChange={latest} />))
   })
   expect(first).not.toHaveBeenCalled()

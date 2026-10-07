@@ -23,7 +23,9 @@ describe('structural rendered contracts', () => {
       await act(async () => root.unmount())
       host.remove()
     })
+    // eslint-disable-next-line react/no-create-ref -- This imperative test harness owns an object ref outside React render and verifies its public lifecycle.
     const parentRef = createRef<HTMLLabelElement>()
+    // eslint-disable-next-line react/no-create-ref -- This imperative test harness owns an object ref outside React render and verifies its public lifecycle.
     const childRef = createRef<HTMLLabelElement>()
     const view = (ratio: number, vertical: boolean) => (
       <>

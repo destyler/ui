@@ -46,6 +46,7 @@ it('releases resources registered by the public Frame callbacks after StrictMode
     root.unmount()
     container.remove()
   })
+  // eslint-disable-next-line react/no-create-ref -- This imperative test harness owns an object ref outside React render and verifies its public lifecycle.
   const frame = createRef<HTMLIFrameElement>()
   const received = vi.fn()
   let remove: (() => void) | undefined

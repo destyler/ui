@@ -14,7 +14,9 @@ afterEach(async () => {
 
 async function setup(props: UseDynamicProps) {
   let api: UseDynamicReturn
+  // eslint-disable-next-line react/no-create-ref -- This imperative test harness owns an object ref outside React render and verifies its public lifecycle.
   const inputRef = createRef<HTMLInputElement>()
+  // eslint-disable-next-line react/no-create-ref -- This imperative test harness owns an object ref outside React render and verifies its public lifecycle.
   const hiddenRef = createRef<HTMLInputElement>()
   const container = document.createElement('div')
   document.body.append(container)

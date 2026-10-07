@@ -34,5 +34,8 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Verify React lint configuration
+        run: node scripts/test-eslint-react-config.mjs
+
       - name: Lint
         run: pnpm run lint
