@@ -7,7 +7,7 @@ import { Basic } from '../examples/Basic'
 const fixtures: { root: Root, container: HTMLDivElement }[] = []
 beforeEach(() => {
   vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
-  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'requestAnimationFrame', 'cancelAnimationFrame'] })
 })
 async function cleanupFixtures() {
   for (const { root, container } of fixtures.splice(0)) {
@@ -51,6 +51,9 @@ it.each([
     trigger.click()
     await vi.advanceTimersByTimeAsync(0)
   })
+  // Presence commits viewport exit on the next animation frame. Advance that
+  // frame after React commits the click, without changing hover/click order.
+  await act(async () => vi.advanceTimersToNextFrame())
   expect(trigger.getAttribute('aria-expanded')).toBe(String(expectedOpen))
   expect(content.dataset.state).toBe(expectedOpen ? 'open' : 'closed')
   expect(content.hidden).toBe(!expectedOpen)
