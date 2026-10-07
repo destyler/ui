@@ -12,6 +12,7 @@ let mountedHost: HTMLElement | undefined
 function cleanup() {
   try {
     if (root)
+      // eslint-disable-next-line react-dom/no-flush-sync -- The external renderer must finish owner disposal before asserting cleanup.
       flushSync(() => root?.unmount())
   }
   finally {
@@ -28,11 +29,13 @@ function setup() {
   document.body.appendChild(host)
   mountedHost = host
   root = createRoot(host)
+  // eslint-disable-next-line react/no-create-ref -- This external renderer harness owns the ref outside a React component.
   const ref = createRef<HTMLSpanElement>()
   return {
     host,
     ref,
     render(children: ReactNode) {
+      // eslint-disable-next-line react-dom/no-flush-sync -- The external renderer commits each child value before inspecting its DOM.
       flushSync(() => root!.render(
         <Progress.Root value={42}>
           <Progress.ValueText ref={ref} className="custom-value" data-testid="value">{children}</Progress.ValueText>
