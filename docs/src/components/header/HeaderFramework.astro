@@ -58,61 +58,62 @@ import { frameworks } from '../../config/frameworks'
 </style>
 
 <script>
-  import { isFramework } from '../../config/frameworks'
   import type { Framework } from '../../config/frameworks'
+  import { isFramework } from '../../config/frameworks'
   import { getStoredFramework, setActiveFramework } from '../../utils/framework'
 
-  const trigger = document.getElementById('ds-fw-trigger')!;
-  const dropdown = document.getElementById('ds-fw-dropdown')!;
-  const options = document.querySelectorAll<HTMLButtonElement>('.ds-fw-option');
+  const trigger = document.getElementById('ds-fw-trigger')!
+  const dropdown = document.getElementById('ds-fw-dropdown')!
+  const options = document.querySelectorAll<HTMLButtonElement>('.ds-fw-option')
 
   function setFramework(fw: Framework) {
-    setActiveFramework(fw);
+    setActiveFramework(fw)
     options.forEach((opt) => {
-      const isActive = opt.dataset.frameworkOption === fw;
-      opt.setAttribute('aria-selected', String(isActive));
-    });
+      const isActive = opt.dataset.frameworkOption === fw
+      opt.setAttribute('aria-selected', String(isActive))
+    })
   }
 
   function openDropdown() {
-    dropdown.classList.remove('hidden');
-    trigger.setAttribute('aria-expanded', 'true');
+    dropdown.classList.remove('hidden')
+    trigger.setAttribute('aria-expanded', 'true')
   }
 
   function closeDropdown() {
-    dropdown.classList.add('hidden');
-    trigger.setAttribute('aria-expanded', 'false');
+    dropdown.classList.add('hidden')
+    trigger.setAttribute('aria-expanded', 'false')
   }
 
   // Initialize
-  setFramework(getStoredFramework());
+  setFramework(getStoredFramework())
 
   trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = !dropdown.classList.contains('hidden');
-    isOpen ? closeDropdown() : openDropdown();
-  });
+    e.stopPropagation()
+    const isOpen = !dropdown.classList.contains('hidden')
+    isOpen ? closeDropdown() : openDropdown()
+  })
 
   options.forEach((opt) => {
     opt.addEventListener('click', () => {
-      const fw = opt.dataset.frameworkOption;
-      if (isFramework(fw)) setFramework(fw);
-      closeDropdown();
-    });
-  });
+      const fw = opt.dataset.frameworkOption
+      if (isFramework(fw))
+        setFramework(fw)
+      closeDropdown()
+    })
+  })
 
   // Close on outside click
   document.addEventListener('click', (e) => {
     if (!dropdown.classList.contains('hidden') && !(e.target as HTMLElement).closest('.ds-framework-switcher')) {
-      closeDropdown();
+      closeDropdown()
     }
-  });
+  })
 
   // Close on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
-      closeDropdown();
-      trigger.focus();
+      closeDropdown()
+      trigger.focus()
     }
-  });
+  })
 </script>

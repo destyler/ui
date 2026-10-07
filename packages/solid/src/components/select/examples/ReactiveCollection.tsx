@@ -1,7 +1,6 @@
 import { createListCollection, Select } from '@destyler-ui/solid/select'
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-solid'
-import { createMemo, createSignal } from 'solid-js'
-import { Index } from 'solid-js/web'
+import { createMemo, createSignal, Index } from 'solid-js'
 
 const items = [
   { label: 'React', value: 'react' },

@@ -9,7 +9,8 @@ import { Frame } from '../index'
       <p>This content is rendered within our custom frame component using a Portal.</p>
     </div>
     <template #head>
-      <component is="style">body { background-color: #f0f0f0; }</component>
+      <!-- eslint-disable-next-line vue/no-useless-v-bind -- require-component-is requires a binding even for this static tag. -->
+      <component :is="'style'">body { background-color: #f0f0f0; }</component>
     </template>
   </Frame>
 </template>

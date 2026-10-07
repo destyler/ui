@@ -198,9 +198,11 @@ const highlightedExamples = await Promise.all(frameworks.map(async (framework) =
     document.querySelectorAll('.ds-show-code-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const preview = btn.closest('.ds-component-preview')
-        if (!preview) return
+        if (!preview)
+          return
         const codeContainer = preview.querySelector<HTMLElement>('.ds-code-container')
-        if (!codeContainer) return
+        if (!codeContainer)
+          return
 
         const isCollapsed = codeContainer.style.gridTemplateRows === '0fr'
         codeContainer.style.gridTemplateRows = isCollapsed ? '1fr' : '0fr'
@@ -216,11 +218,13 @@ const highlightedExamples = await Promise.all(frameworks.map(async (framework) =
     document.querySelectorAll('.ds-copy-code-btn').forEach((btn) => {
       btn.addEventListener('click', async () => {
         const preview = btn.closest('.ds-component-preview')
-        if (!preview) return
+        if (!preview)
+          return
 
         const fw = getActiveFramework()
         const codeBlock = preview.querySelector(`.ds-code-block[data-fw="${fw}"]`)
-        if (!codeBlock) return
+        if (!codeBlock)
+          return
 
         const code = codeBlock.querySelector('.shiki')?.textContent || ''
         try {

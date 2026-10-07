@@ -17,7 +17,8 @@ interface TocItem {
 function flattenToc(items: TocItem[], out: TocItem[] = []): TocItem[] {
   for (const item of items) {
     out.push(item)
-    if (item.children?.length) flattenToc(item.children, out)
+    if (item.children?.length)
+      flattenToc(item.children, out)
   }
   return out
 }
@@ -40,7 +41,7 @@ const flatItems = toc ? flattenToc(toc.items) : []
 
       <nav aria-labelledby="starlight__on-this-page">
         <ul class="toc-list m-0 p-0 list-none relative">
-          {flatItems.map((heading) => (
+          {flatItems.map(heading => (
             <li
               class:list={[
                 'toc-item relative',
@@ -154,9 +155,11 @@ const flatItems = toc ? flattenToc(toc.items) : []
       onIdle(() => this.initObserver())
     }
 
-    private set current(link: HTMLAnchorElement) {
-      if (link === this._current) return
-      if (this._current) this._current.removeAttribute('aria-current')
+    private setCurrentLink(link: HTMLAnchorElement) {
+      if (link === this._current)
+        return
+      if (this._current)
+        this._current.removeAttribute('aria-current')
       link.setAttribute('aria-current', 'true')
       this._current = link
     }
@@ -172,31 +175,40 @@ const flatItems = toc ? flattenToc(toc.items) : []
       const isH = (el: Element): el is HTMLHeadingElement => el.matches(sel)
 
       const getH = (el: Element | null): HTMLHeadingElement | null => {
-        if (!el) return null
+        if (!el)
+          return null
         const origin = el
         while (el) {
           if (el.matches('.sl-markdown-content, main > *'))
             return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement
-          if (isH(el)) return el
+          if (isH(el))
+            return el
           const child = el.querySelector<HTMLHeadingElement>(sel)
-          if (child) return child
+          if (child)
+            return child
           el = el.previousElementSibling
           while (el?.lastElementChild) el = el.lastElementChild
           const h = getH(el)
-          if (h) return h
+          if (h)
+            return h
         }
         return getH(origin.parentElement)
       }
 
       const setCurrent: IntersectionObserverCallback = (entries) => {
         for (const { isIntersecting, target } of entries) {
-          if (!isIntersecting) continue
+          if (!isIntersecting)
+            continue
           const heading = getH(target)
-          if (!heading) continue
+          if (!heading)
+            continue
           const link = links.find(
             l => l.hash === `#${encodeURIComponent(heading.id)}`,
           )
-          if (link) { this.current = link; break }
+          if (link) {
+            this.setCurrentLink(link)
+            break
+          }
         }
       }
 
@@ -218,7 +230,8 @@ const flatItems = toc ? flattenToc(toc.items) : []
 
       let observer: IntersectionObserver | undefined
       const observe = () => {
-        if (observer) return
+        if (observer)
+          return
         observer = new IntersectionObserver(setCurrent, {
           rootMargin: computeMargin(),
         })
