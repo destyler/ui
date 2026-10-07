@@ -2,11 +2,10 @@ import type { FieldsetHTMLAttributes, HTMLAttributes } from 'vue'
 import { getWindow } from '@destyler/dom'
 import {
   computed,
-  onBeforeUnmount,
-  onMounted,
   reactive,
   ref,
   useId,
+  watchEffect,
 } from 'vue'
 import { parts } from '../anatomy'
 
@@ -28,19 +27,19 @@ export interface UseFieldsetProps {
 export type UseFieldsetReturn = ReturnType<typeof useFieldset>
 
 export function useFieldset(props: UseFieldsetProps) {
-  const { disabled, invalid } = props
   const state = reactive({
     hasErrorText: false,
     hasHelperText: false,
   })
 
-  const id = props.id ?? useId()
-  const rootRef = ref(null)
-  const errorTextId = `fieldset::${id}::error-text`
-  const helperTextId = `fieldset::${id}::helper-text`
-  const labelId = `fieldset::${id}::label`
+  const uid = useId()
+  const id = computed(() => props.id ?? uid)
+  const rootRef = ref<Element | null>(null)
+  const errorTextId = computed(() => `fieldset::${id.value}::error-text`)
+  const helperTextId = computed(() => `fieldset::${id.value}::helper-text`)
+  const labelId = computed(() => `fieldset::${id.value}::label`)
 
-  onMounted(() => {
+  watchEffect((onCleanup) => {
     const rootNode = rootRef.value
     if (!rootNode)
       return
@@ -49,8 +48,8 @@ export function useFieldset(props: UseFieldsetProps) {
     const doc = win.document
 
     const checkTextElements = () => {
-      state.hasErrorText = !!doc.getElementById(errorTextId)
-      state.hasHelperText = !!doc.getElementById(helperTextId)
+      state.hasErrorText = !!doc.getElementById(errorTextId.value)
+      state.hasHelperText = !!doc.getElementById(helperTextId.value)
     }
 
     checkTextElements()
@@ -58,41 +57,43 @@ export function useFieldset(props: UseFieldsetProps) {
 
     observer.observe(rootNode, { childList: true, subtree: true })
 
-    onBeforeUnmount(() => {
+    onCleanup(() => {
       observer.disconnect()
     })
+  }, { flush: 'post' })
+
+  const labelIds = computed(() => {
+    const ids: string[] = []
+    if (state.hasErrorText && props.invalid)
+      ids.push(errorTextId.value)
+    if (state.hasHelperText)
+      ids.push(helperTextId.value)
+    return ids
   })
-
-  const labelIds: string[] = []
-
-  if (state.hasErrorText && invalid)
-    labelIds.push(errorTextId)
-  if (state.hasHelperText)
-    labelIds.push(helperTextId)
 
   const getRootProps = () =>
     ({
       ...parts.root.attrs,
-      disabled,
-      'data-disabled': disabled ? 'true' : undefined,
-      'data-invalid': invalid ? 'true' : undefined,
-      'aria-describedby': labelIds.join(' '),
+      'disabled': props.disabled,
+      'data-disabled': props.disabled ? 'true' : undefined,
+      'data-invalid': props.invalid ? 'true' : undefined,
+      'aria-describedby': labelIds.value.join(' '),
     }) as FieldsetHTMLAttributes
 
   const getLegendProps = () => ({
-    'id': labelId,
+    'id': labelId.value,
     ...parts.legend.attrs,
-    'data-disabled': disabled ? 'true' : undefined,
-    'data-invalid': invalid ? 'true' : undefined,
+    'data-disabled': props.disabled ? 'true' : undefined,
+    'data-invalid': props.invalid ? 'true' : undefined,
   })
 
   const getHelperTextProps = () => ({
-    id: helperTextId,
+    id: helperTextId.value,
     ...parts.helperText.attrs,
   })
 
   const getErrorTextProps = (): HTMLAttributes => ({
-    'id': errorTextId,
+    'id': errorTextId.value,
     ...parts.errorText.attrs,
     'aria-live': 'polite',
   })
@@ -101,8 +102,8 @@ export function useFieldset(props: UseFieldsetProps) {
     refs: {
       rootRef,
     },
-    disabled,
-    invalid,
+    disabled: props.disabled,
+    invalid: props.invalid,
     getRootProps,
     getLegendProps,
     getHelperTextProps,
