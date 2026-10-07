@@ -21,6 +21,7 @@ for (const asChild of [false, true]) {
     document.body.append(container)
     const root = createRoot(container)
     roots.push(root)
+    // eslint-disable-next-line react/no-create-ref -- This external renderer harness owns the ref outside a React component.
     const ref = createRef<HTMLButtonElement>()
     const onFocus = vi.fn()
     const onClick = vi.fn()
