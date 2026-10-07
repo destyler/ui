@@ -49,6 +49,7 @@ export function ControlledAudit(props: { onRequest: (page: number) => void, onCo
             <Carousel.Indicator index={1} data-testid="readonly-indicator" readOnly>Readonly</Carousel.Indicator>
           </Carousel.IndicatorGroup>
           <Carousel.ItemGroup data-testid="item-group" onMouseDown={prevent} style={{ height: '80px' }}>
+            {/* eslint-disable-next-line solid/prefer-for -- This fixed three-slide fixture has no reactive list membership. */}
             {[0, 1, 2].map(index => <Carousel.Item index={index}>Slide {index}</Carousel.Item>)}
           </Carousel.ItemGroup>
         </Carousel.Root>
