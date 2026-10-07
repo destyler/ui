@@ -1,6 +1,6 @@
 import type { HTMLProps } from '~/factory'
 import { ariaAttr, dataAttr, getWindow } from '@destyler/dom'
-import { useId, useMemo, useRef } from 'react'
+import { useId, useMemo, useRef, useState } from 'react'
 import { useFieldsetContext } from '~/components/fieldset/hooks/use-fieldset-context'
 import { useSafeLayoutEffect } from '~/hooks/use-safe-layout-effect'
 import { parts } from '../anatomy'
@@ -46,13 +46,15 @@ export function useField(props: UseFieldProps) {
   const fieldset = useFieldsetContext()
   const { ids, disabled = Boolean(fieldset?.disabled), invalid = false, readOnly = false, required = false } = props
 
-  const hasErrorText = useRef(false)
-  const hasHelperText = useRef(false)
+  const [hasErrorText, setHasErrorText] = useState(false)
+  const [hasHelperText, setHasHelperText] = useState(false)
 
-  const id = props.id ?? useId()
+  const generatedId = useId()
+  const id = props.id ?? generatedId
   const rootRef = useRef<HTMLDivElement>(null)
 
-  const rootId = ids?.control ?? `field::${id}`
+  const rootId = ids?.root ?? `field::${id}`
+  const controlId = ids?.control ?? id
   const errorTextId = ids?.errorText ?? `field::${id}::error-text`
   const helperTextId = ids?.helperText ?? `field::${id}::helper-text`
   const labelId = ids?.label ?? `field::${id}::label`
@@ -66,8 +68,8 @@ export function useField(props: UseFieldProps) {
     const doc = win.document
 
     const checkTextElements = () => {
-      hasErrorText.current = !!doc.getElementById(errorTextId)
-      hasHelperText.current = !!doc.getElementById(helperTextId)
+      setHasErrorText(!!doc.getElementById(errorTextId))
+      setHasHelperText(!!doc.getElementById(helperTextId))
     }
 
     checkTextElements()
@@ -79,12 +81,12 @@ export function useField(props: UseFieldProps) {
 
   const labelIds = useMemo(() => {
     const ids: string[] = []
-    if (hasErrorText.current && invalid)
+    if (hasErrorText && invalid)
       ids.push(errorTextId)
-    if (hasHelperText.current)
+    if (hasHelperText)
       ids.push(helperTextId)
     return ids.join(' ') || undefined
-  }, [invalid, errorTextId, helperTextId])
+  }, [invalid, errorTextId, helperTextId, hasErrorText, hasHelperText])
 
   const getRootProps = useMemo(
     () => () =>
@@ -108,9 +110,9 @@ export function useField(props: UseFieldProps) {
         'data-disabled': dataAttr(disabled),
         'data-invalid': dataAttr(invalid),
         'data-readonly': dataAttr(readOnly),
-        'htmlFor': id,
+        'htmlFor': controlId,
       }) as HTMLProps<'label'>,
-    [disabled, invalid, readOnly, id, labelId],
+    [disabled, invalid, readOnly, controlId, labelId],
   )
 
   const getControlProps = useMemo(
@@ -121,12 +123,12 @@ export function useField(props: UseFieldProps) {
         'data-invalid': dataAttr(invalid),
         'data-required': dataAttr(required),
         'data-readonly': dataAttr(readOnly),
-        id,
+        'id': controlId,
         required,
         disabled,
         readOnly,
       }) as HTMLProps<'input'>,
-    [labelIds, invalid, required, readOnly, id, disabled],
+    [labelIds, invalid, required, readOnly, controlId, disabled],
   )
 
   const getInputProps = useMemo(
@@ -189,7 +191,7 @@ export function useField(props: UseFieldProps) {
     ariaDescribedby: labelIds,
     ids: {
       root: rootId,
-      control: id,
+      control: controlId,
       label: labelId,
       errorText: errorTextId,
       helperText: helperTextId,
