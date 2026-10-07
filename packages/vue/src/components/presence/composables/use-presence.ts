@@ -41,6 +41,8 @@ export function usePresence(props: MaybeRef<UsePresenceProps>, emit?: EmitFn<Roo
       if (isPresent)
         wasEverPresent.value = true
     },
+    // An initially visible node already counts as mounted before any change.
+    { immediate: true },
   )
 
   watch(nodeRef, () => {
