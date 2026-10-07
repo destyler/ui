@@ -17,7 +17,8 @@ defineOptions({
 })
 
 const props = defineProps<ProgressRootProps>()
-const progress = useProgress(props)
+const emit = defineEmits<ProgressRootEmits>()
+const progress = useProgress(props, emit)
 
 ProgressProvider(progress)
 useForwardExpose()

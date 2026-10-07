@@ -1,7 +1,7 @@
 import { createListCollection, Select } from '@destyler-ui/solid'
 import { createForm, getValue, setValue } from '@modular-forms/solid'
-import { createMemo } from 'solid-js'
-import { Index, Portal } from 'solid-js/web'
+import { createMemo, Index } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 export function WithFormLibrary() {
   const frameworks = createListCollection({
