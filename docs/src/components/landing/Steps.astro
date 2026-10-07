@@ -42,13 +42,13 @@ const steps = [
 
 // Pre-render highlighted HTML for each step
 const highlightedSteps = await Promise.all(
-  steps.map(async (step) => ({
+  steps.map(async step => ({
     ...step,
     snippets: await Promise.all(step.snippets.map(async snippet => ({
       ...snippet,
       html: await highlight(snippet.code, snippet.language),
     }))),
-  }))
+  })),
 )
 ---
 
@@ -65,7 +65,7 @@ const highlightedSteps = await Promise.all(
 
     <!-- Steps -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10">
-      {highlightedSteps.map((step) => (
+      {highlightedSteps.map(step => (
         <div class="group relative overflow-visible!">
           <span class="block font-display font-black text-[4rem] md:text-8xl tracking-[-0.06em] leading-[1.15] text-$sl-color-hairline mb-6 transition-colors duration-150 ease-out overflow-visible! group-hover:text-$sl-color-accent">{step.number}</span>
           <div>

@@ -77,7 +77,10 @@ export function useCheckboxGroup(props: MaybeFunction<UseCheckboxGroupProps> = {
     isChecked(val) ? removeValue(val) : addValue(val)
   }
 
-  const getItemProps = (itemProps: CheckboxGroupItemProps) => {
+  const getResolvedItemProps = (
+    itemProps: CheckboxGroupItemProps,
+    inheritedProps: Pick<UseCheckboxGroupProps, 'disabled' | 'readOnly' | 'invalid'> = {},
+  ) => {
     return {
       checked: itemProps.value != null ? isChecked(itemProps.value) : undefined,
       onCheckedChange() {
@@ -86,10 +89,24 @@ export function useCheckboxGroup(props: MaybeFunction<UseCheckboxGroupProps> = {
         }
       },
       name: resolvedProps.name,
-      disabled: !!resolvedProps.disabled,
-      readOnly: !!resolvedProps.readOnly,
-      invalid: !!resolvedProps.invalid,
+      disabled: !!(resolvedProps.disabled ?? inheritedProps.disabled ?? false),
+      readOnly: !!(resolvedProps.readOnly ?? inheritedProps.readOnly ?? false),
+      invalid: !!(resolvedProps.invalid ?? inheritedProps.invalid ?? false),
     }
+  }
+
+  // Keep the original one-argument callback contract (including Array.map),
+  // while compound checkboxes may supply the defaults of their own Field.
+  function getItemProps(
+    itemProps: CheckboxGroupItemProps,
+    inheritedProps: Pick<UseCheckboxGroupProps, 'disabled' | 'readOnly' | 'invalid'>,
+  ): ReturnType<typeof getResolvedItemProps>
+  function getItemProps(itemProps: CheckboxGroupItemProps): ReturnType<typeof getResolvedItemProps>
+  function getItemProps(
+    itemProps: CheckboxGroupItemProps,
+    inheritedProps: Pick<UseCheckboxGroupProps, 'disabled' | 'readOnly' | 'invalid'> = {},
+  ) {
+    return getResolvedItemProps(itemProps, typeof inheritedProps === 'object' && inheritedProps !== null ? inheritedProps : {})
   }
 
   const api = $derived({
