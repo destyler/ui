@@ -58,9 +58,9 @@ function withAsChild(component: ElementType) {
       },
     },
     setup(props, { attrs, slots }) {
-      if (!props.asChild)
-        return () => h(component, { ...attrs }, slots.default?.())
-      return () => h(Dynamic, attrs, { default: slots.default })
+      return () => props.asChild
+        ? h(Dynamic, attrs, { default: slots.default })
+        : h(component, { ...attrs }, slots.default?.())
     },
   })
 }

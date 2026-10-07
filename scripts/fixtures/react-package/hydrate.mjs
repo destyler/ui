@@ -56,6 +56,8 @@ try {
   trigger.click()
   await waitFor(() => trigger.getAttribute('aria-expanded') === 'false')
   assert.deepEqual(openChanges, [true, false])
+  const { verifyRefs } = await import('./refs.mjs')
+  verifyRefs()
   assert.deepEqual(errors, [], 'Hydration and interaction must not report React errors')
 }
 finally {
