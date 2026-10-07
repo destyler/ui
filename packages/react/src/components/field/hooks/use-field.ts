@@ -1,6 +1,6 @@
 import type { HTMLProps } from '~/factory'
 import { ariaAttr, dataAttr, getWindow } from '@destyler/dom'
-import { useId, useMemo, useRef } from 'react'
+import { useId, useMemo, useRef, useState } from 'react'
 import { useFieldsetContext } from '~/components/fieldset/hooks/use-fieldset-context'
 import { useSafeLayoutEffect } from '~/hooks/use-safe-layout-effect'
 import { parts } from '../anatomy'
@@ -46,10 +46,11 @@ export function useField(props: UseFieldProps) {
   const fieldset = useFieldsetContext()
   const { ids, disabled = Boolean(fieldset?.disabled), invalid = false, readOnly = false, required = false } = props
 
-  const hasErrorText = useRef(false)
-  const hasHelperText = useRef(false)
+  const [hasErrorText, setHasErrorText] = useState(false)
+  const [hasHelperText, setHasHelperText] = useState(false)
 
-  const id = props.id ?? useId()
+  const generatedId = useId()
+  const id = props.id ?? generatedId
   const rootRef = useRef<HTMLDivElement>(null)
 
   const rootId = ids?.root ?? `field::${id}`
@@ -67,8 +68,8 @@ export function useField(props: UseFieldProps) {
     const doc = win.document
 
     const checkTextElements = () => {
-      hasErrorText.current = !!doc.getElementById(errorTextId)
-      hasHelperText.current = !!doc.getElementById(helperTextId)
+      setHasErrorText(!!doc.getElementById(errorTextId))
+      setHasHelperText(!!doc.getElementById(helperTextId))
     }
 
     checkTextElements()
@@ -80,12 +81,12 @@ export function useField(props: UseFieldProps) {
 
   const labelIds = useMemo(() => {
     const ids: string[] = []
-    if (hasErrorText.current && invalid)
+    if (hasErrorText && invalid)
       ids.push(errorTextId)
-    if (hasHelperText.current)
+    if (hasHelperText)
       ids.push(helperTextId)
     return ids.join(' ') || undefined
-  }, [invalid, errorTextId, helperTextId])
+  }, [invalid, errorTextId, helperTextId, hasErrorText, hasHelperText])
 
   const getRootProps = useMemo(
     () => () =>
