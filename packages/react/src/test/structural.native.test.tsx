@@ -1,0 +1,32 @@
+import { act } from 'react'
+import { createRoot } from 'react-dom/client'
+import { describe, expect, it } from 'vitest'
+import { page, userEvent } from 'vitest/browser'
+import { AspectRatio } from '../components/aspect-ratio'
+import { Label } from '../components/label'
+
+// Native-browser only: an emulator cannot establish physical geometry or label activation.
+describe('structural native layout and activation', () => {
+  it.each([2, 0.5])('keeps actual aspect ratio %s and native label activation', async (ratio) => {
+    const host = document.createElement('main')
+    host.style.width = '320px'
+    document.body.append(host)
+    const view = <><AspectRatio.Root ratio={ratio}><AspectRatio.Content>Media</AspectRatio.Content></AspectRatio.Root><Label.Root htmlFor="native-field">Name</Label.Root><input id="native-field" /></>
+    const root = createRoot(host)
+    await act(() => root.render(view))
+    try {
+      const frame = host.querySelector<HTMLElement>('[data-scope="aspect-ratio"][data-part="root"]')!
+      const content = host.querySelector<HTMLElement>('[data-scope="aspect-ratio"][data-part="content"]')!
+      await expect.poll(() => frame.getBoundingClientRect().width).toBe(320)
+      expect(frame.getBoundingClientRect().height).toBeCloseTo(320 / ratio, 1)
+      expect(content.getBoundingClientRect().width).toBeCloseTo(320, 1)
+      expect(content.getBoundingClientRect().height).toBeCloseTo(320 / ratio, 1)
+      await userEvent.click(page.getByText('Name', { exact: true }))
+      expect(document.activeElement).toBe(host.querySelector('input'))
+    }
+    finally {
+      await act(() => root.unmount())
+      host.remove()
+    }
+  })
+})

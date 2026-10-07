@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { type VNode, ref, watch } from 'vue'
+import type { VNode } from 'vue'
+import { ref, watch } from 'vue'
 import { EnvironmentProvider } from '../../environment'
+// eslint-disable-next-line no-unused-vars, unused-imports/no-unused-imports -- Vue compiles iframe descendants, but vue-eslint-parser treats them as raw text.
 import FrameContent from './Content.vue'
 
 export interface FrameBaseProps {
@@ -16,15 +18,16 @@ export interface FrameEmits {
 export interface FrameProps extends FrameBaseProps {}
 
 defineOptions({
-  name: 'Frame'
+  name: 'Frame',
 })
-
-const emit = defineEmits<FrameEmits>()
 
 const props = withDefaults(defineProps<FrameProps>(), {
   srcDoc:
     '<html><head><style>*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }</style></head><body><div class="frame-root"></div></body></html>',
 })
+
+// eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars -- The iframe Teleport handlers use emit in the compiled render function.
+const emit = defineEmits<FrameEmits>()
 
 const frameRef = ref<HTMLIFrameElement | null>(null)
 const mountNode = ref<HTMLElement | null>(null)
@@ -33,15 +36,18 @@ defineExpose({ frameRef })
 
 function getMountNode(frame: HTMLIFrameElement) {
   const doc = frame.contentWindow?.document
-  if (!doc) return null
+  if (!doc)
+    return null
   return doc.body.querySelector<HTMLElement>('.frame-root') || doc.body
 }
 
 watch(frameRef, (node) => {
-  if (!node) return
+  if (!node)
+    return
 
   const doc = node.contentWindow?.document
-  if (!doc) return
+  if (!doc)
+    return
 
   doc.open()
   doc.write(props.srcDoc)
@@ -53,14 +59,17 @@ watch(frameRef, (node) => {
 watch(
   () => [frameRef.value, mountNode.value] as const,
   ([frameNode, mountNode], _oldValue, onCleanup) => {
-    if (!frameNode || !frameNode.contentDocument) return
+    if (!frameNode || !frameNode.contentDocument)
+      return
 
     const win = frameNode.contentWindow as Window & typeof globalThis
-    if (!win) return
+    if (!win)
+      return
 
     const exec = () => {
       const rootEl = frameNode.contentDocument?.documentElement
-      if (!rootEl || !mountNode) return
+      if (!rootEl || !mountNode)
+        return
       frameNode.style.setProperty('--width', `${mountNode.scrollWidth}px`)
       frameNode.style.setProperty('--height', `${mountNode.scrollHeight}px`)
     }

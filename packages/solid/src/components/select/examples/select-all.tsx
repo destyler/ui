@@ -1,6 +1,7 @@
 import { createListCollection, Select } from '@destyler-ui/solid/select'
 import { ChevronDown } from 'lucide-solid'
-import { For, Portal } from 'solid-js/web'
+import { For } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 function SelectAllButton() {
   return (
