@@ -14,7 +14,9 @@ const handleInputChange = (details: Combobox.InputValueChangeDetails) => {
 }
 
 const combobox = useCombobox({
-  collection: collection.value,
+  get collection() {
+    return collection.value
+  },
   onInputValueChange: handleInputChange,
 })
 </script>

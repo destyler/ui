@@ -1,3 +1,4 @@
+import { For } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Calendar } from '../'
 
@@ -30,21 +31,27 @@ export function ComponentUnderTest(props: Calendar.RootProps) {
                     <Calendar.Table>
                       <Calendar.TableHead>
                         <Calendar.TableRow>
-                          {context().weekDays.map(weekDay => (
-                            <Calendar.TableHeader>{weekDay.short}</Calendar.TableHeader>
-                          ))}
+                          <For each={context().weekDays}>
+                            {weekDay => (
+                              <Calendar.TableHeader>{weekDay.short}</Calendar.TableHeader>
+                            )}
+                          </For>
                         </Calendar.TableRow>
                       </Calendar.TableHead>
                       <Calendar.TableBody>
-                        {context().weeks.map(week => (
-                          <Calendar.TableRow>
-                            {week.map(day => (
-                              <Calendar.TableCell value={day}>
-                                <Calendar.TableCellTrigger>{day.day}</Calendar.TableCellTrigger>
-                              </Calendar.TableCell>
-                            ))}
-                          </Calendar.TableRow>
-                        ))}
+                        <For each={context().weeks}>
+                          {week => (
+                            <Calendar.TableRow>
+                              <For each={week}>
+                                {day => (
+                                  <Calendar.TableCell value={day}>
+                                    <Calendar.TableCellTrigger>{day.day}</Calendar.TableCellTrigger>
+                                  </Calendar.TableCell>
+                                )}
+                              </For>
+                            </Calendar.TableRow>
+                          )}
+                        </For>
                       </Calendar.TableBody>
                     </Calendar.Table>
                   </>
@@ -64,19 +71,21 @@ export function ComponentUnderTest(props: Calendar.RootProps) {
                     </Calendar.ViewControl>
                     <Calendar.Table>
                       <Calendar.TableBody>
-                        {context()
-                          .getMonthsGrid({ columns: 4, format: 'short' })
-                          .map(months => (
+                        <For each={context().getMonthsGrid({ columns: 4, format: 'short' })}>
+                          {months => (
                             <Calendar.TableRow>
-                              {months.map(month => (
-                                <Calendar.TableCell value={month.value}>
-                                  <Calendar.TableCellTrigger>
-                                    {month.label}
-                                  </Calendar.TableCellTrigger>
-                                </Calendar.TableCell>
-                              ))}
+                              <For each={months}>
+                                {month => (
+                                  <Calendar.TableCell value={month.value}>
+                                    <Calendar.TableCellTrigger>
+                                      {month.label}
+                                    </Calendar.TableCellTrigger>
+                                  </Calendar.TableCell>
+                                )}
+                              </For>
                             </Calendar.TableRow>
-                          ))}
+                          )}
+                        </For>
                       </Calendar.TableBody>
                     </Calendar.Table>
                   </>
@@ -96,19 +105,21 @@ export function ComponentUnderTest(props: Calendar.RootProps) {
                     </Calendar.ViewControl>
                     <Calendar.Table>
                       <Calendar.TableBody>
-                        {context()
-                          .getYearsGrid({ columns: 4 })
-                          .map(years => (
+                        <For each={context().getYearsGrid({ columns: 4 })}>
+                          {years => (
                             <Calendar.TableRow>
-                              {years.map(year => (
-                                <Calendar.TableCell value={year.value}>
-                                  <Calendar.TableCellTrigger>
-                                    {year.label}
-                                  </Calendar.TableCellTrigger>
-                                </Calendar.TableCell>
-                              ))}
+                              <For each={years}>
+                                {year => (
+                                  <Calendar.TableCell value={year.value}>
+                                    <Calendar.TableCellTrigger>
+                                      {year.label}
+                                    </Calendar.TableCellTrigger>
+                                  </Calendar.TableCell>
+                                )}
+                              </For>
                             </Calendar.TableRow>
-                          ))}
+                          )}
+                        </For>
                       </Calendar.TableBody>
                     </Calendar.Table>
                   </>
