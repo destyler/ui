@@ -1,6 +1,6 @@
 import { Calendar, parseDate } from '@destyler-ui/solid/calendar'
-import { createSignal } from 'solid-js'
-import { Index, Portal } from 'solid-js/web'
+import { createSignal, Index } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 export function Controlled() {
   const [value, setValue] = createSignal<Calendar.DateValue[]>([parseDate('2022-01-01')])

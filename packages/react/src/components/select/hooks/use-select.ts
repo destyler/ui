@@ -52,16 +52,14 @@ export function useSelect<T extends CollectionItem>(props: UseSelectProps<T>): U
     ...normalizeMachineProps(selectProps),
   }
 
-  const context = (() => {
-    const { collection: _, ...restProps } = initialContext
-    return {
-      ...restProps,
-      ...(props.value !== undefined ? { value: props.value } : {}),
-      onValueChange: useEvent(props.onValueChange, { sync: true }),
-      onHighlightChange: useEvent(props.onHighlightChange),
-      onOpenChange: useEvent(props.onOpenChange),
-    }
-  })()
+  const { collection: _, ...restProps } = initialContext
+  const context = {
+    ...restProps,
+    ...(props.value !== undefined ? { value: props.value } : {}),
+    onValueChange: useEvent(props.onValueChange, { sync: true }),
+    onHighlightChange: useEvent(props.onHighlightChange),
+    onOpenChange: useEvent(props.onOpenChange),
+  }
 
   const [state, send, service] = useMachine(select.machine(initialContext), {
     context,
