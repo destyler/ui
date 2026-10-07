@@ -23,11 +23,11 @@
 </style>
 
 <script>
-  const themeToggle = document.getElementById('ds-theme-toggle')!;
+  const themeToggle = document.getElementById('ds-theme-toggle')!
   themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.dataset.theme;
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem('starlight-theme', next);
-  });
+    const current = document.documentElement.dataset.theme
+    const next = current === 'dark' ? 'light' : 'dark'
+    document.documentElement.dataset.theme = next
+    localStorage.setItem('starlight-theme', next)
+  })
 </script>

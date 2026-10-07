@@ -1,6 +1,6 @@
 import { createListCollection, Select } from '@destyler-ui/solid/select'
-import { createMemo, createSignal } from 'solid-js'
-import { Index, Portal } from 'solid-js/web'
+import { createMemo, createSignal, Index } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 export function DynamicItems() {
   const [items, setItems] = createSignal(['React', 'Solid', 'Vue'])

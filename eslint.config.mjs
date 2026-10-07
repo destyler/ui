@@ -45,10 +45,12 @@ export default antfu(
       'vue/no-reserved-component-names': ['error', { htmlElementCaseSensitive: true }],
     },
   },
+  // Preset builders return Promise<FlatConfig[]>; the composer resolves them.
+  react({
+    files: ['packages/react/**/*.{js,ts,jsx,tsx}'],
+  }),
   {
-    ...react({
-      files: ['packages/react/**/*.{js,ts,jsx,tsx}'],
-    }),
+    // Preserve this existing global style override, including other JSX users.
     rules: {
       'style/jsx-one-expression-per-line': 'off',
     },
@@ -58,11 +60,11 @@ export default antfu(
       files: ['packages/svelte/**/*.{svelte,js,ts}'],
     }),
   },
-  {
-    ...solid({
-      files: ['packages/solid/**/*.{js,ts,jsx,tsx}'],
-    }),
-  },
+  // Resolve the async preset through the composer; spreading it drops its rules.
+  // Other inactive framework presets remain separately tracked work.
+  solid({
+    files: ['packages/solid/**/*.{js,ts,jsx,tsx}'],
+  }),
   {
     files: ['packages/svelte/package.json'],
     rules: {
@@ -71,9 +73,7 @@ export default antfu(
       'jsonc/sort-array-values': 'off',
     },
   },
-  {
-    ...astro({
-      files: ['docs/**/*.{js,ts,jsx,tsx,astro}'],
-    }),
-  },
+  astro({
+    files: ['docs/**/*.astro'],
+  }),
 )
