@@ -26,7 +26,8 @@ export function useFieldset(props: UseFieldsetProps) {
   const [hasErrorText, setHasErrorText] = useState(false)
   const [hasHelperText, setHasHelperText] = useState(false)
 
-  const id = props.id ?? useId()
+  const generatedId = useId()
+  const id = props.id ?? generatedId
   const rootRef = useRef<HTMLFieldSetElement>(null)
 
   const errorTextId = `fieldset::${id}::error-text`
