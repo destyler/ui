@@ -34,6 +34,12 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Verify React lint configuration
+        run: node scripts/test-eslint-react-config.mjs
+
+      - name: Verify Solid lint configuration
+        run: node scripts/test-eslint-solid-config.mjs
+
       - name: Verify Astro lint and client contracts
         run: node --test scripts/test-astro-eslint-config.mjs scripts/test-astro-docs-behavior.mjs
 

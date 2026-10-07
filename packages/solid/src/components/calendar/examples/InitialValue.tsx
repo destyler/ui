@@ -1,5 +1,6 @@
 import { Calendar, parseDate } from '@destyler-ui/solid/calendar'
-import { Index, Portal } from 'solid-js/web'
+import { Index } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 export function InitialValue() {
   return (

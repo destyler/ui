@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'vue'
 import type { ElementIds } from '../types'
 import { ariaAttr, dataAttr, getWindow } from '@destyler/dom'
-import { computed, onBeforeUnmount, onMounted, reactive, ref, useId } from 'vue'
+import { computed, reactive, ref, useId, watchEffect } from 'vue'
 import { parts } from '../anatomy'
 
 export interface UseFieldProps {
@@ -42,14 +42,15 @@ export function useField(props: UseFieldProps) {
   const uid = useId()
   const id = computed(() => props.id ?? `field::${uid}`)
 
-  const rootRef = ref(null)
+  const rootRef = ref<Element | null>(null)
 
-  const rootId = computed(() => props.ids?.control ?? `field::${id.value}`)
+  const rootId = computed(() => props.ids?.root ?? `field::${id.value}`)
+  const controlId = computed(() => props.ids?.control ?? id.value)
   const errorTextId = computed(() => props.ids?.errorText ?? `field::${id.value}::error-text`)
   const helperTextId = computed(() => props.ids?.helperText ?? `field::${id.value}::helper-text`)
   const labelId = computed(() => props.ids?.label ?? `field::${id.value}::label`)
 
-  onMounted(() => {
+  watchEffect((onCleanup) => {
     const rootNode = rootRef.value
     if (!rootNode)
       return
@@ -67,10 +68,10 @@ export function useField(props: UseFieldProps) {
 
     observer.observe(rootNode, { childList: true, subtree: true })
 
-    onBeforeUnmount(() => {
+    onCleanup(() => {
       observer.disconnect()
     })
-  })
+  }, { flush: 'post' })
 
   const getRootProps = () => ({
     ...parts.root.attrs,
@@ -87,7 +88,7 @@ export function useField(props: UseFieldProps) {
     'data-disabled': dataAttr(props.disabled),
     'data-invalid': dataAttr(props.invalid),
     'data-readonly': dataAttr(props.readOnly),
-    'htmlFor': id.value,
+    'htmlFor': controlId.value,
   })
 
   const labelIds = computed(() => {
@@ -105,7 +106,7 @@ export function useField(props: UseFieldProps) {
     'data-invalid': dataAttr(props.invalid),
     'data-required': dataAttr(props.required),
     'data-readonly': dataAttr(props.readOnly),
-    'id': id.value,
+    'id': controlId.value,
     'required': props.required,
     'disabled': props.disabled,
     'readOnly': props.readOnly,
@@ -146,7 +147,7 @@ export function useField(props: UseFieldProps) {
   return computed(() => ({
     ariaDescribedby: labelIds.value.join(' ') || undefined,
     ids: {
-      control: id.value,
+      control: controlId.value,
       label: labelId.value,
       errorText: errorTextId.value,
       helperText: helperTextId.value,

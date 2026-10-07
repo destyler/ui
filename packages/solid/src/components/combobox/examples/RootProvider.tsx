@@ -15,7 +15,12 @@ export function RootProvider() {
     )
   }
 
-  const combobox = useCombobox({ collection: collection(), onInputValueChange: handleInputChange })
+  const combobox = useCombobox({
+    get collection() {
+      return collection()
+    },
+    onInputValueChange: handleInputChange,
+  })
 
   return (
     <>

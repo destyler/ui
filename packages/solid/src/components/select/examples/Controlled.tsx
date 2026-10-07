@@ -1,6 +1,6 @@
 import { createListCollection, Select } from '@destyler-ui/solid/select'
-import { createSignal } from 'solid-js'
-import { Index, Portal } from 'solid-js/web'
+import { createSignal, Index } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 interface Item {
   label: string

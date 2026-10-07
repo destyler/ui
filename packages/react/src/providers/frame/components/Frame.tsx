@@ -51,15 +51,11 @@ export const Frame = forwardRef<HTMLIFrameElement, FrameProps>((props, ref) => {
   }, [frameRef, srcDoc])
 
   useEffect(() => {
-    if (!frameRef || !frameRef.contentDocument)
+    if (!frameRef || !frameRef.contentDocument || !mountNode)
       return
 
     const win = frameRef.contentWindow as Window & typeof globalThis
     if (!win)
-      return
-
-    const mountNode = getMountNode(frameRef)
-    if (!mountNode)
       return
 
     const exec = () => {
@@ -80,7 +76,7 @@ export const Frame = forwardRef<HTMLIFrameElement, FrameProps>((props, ref) => {
     return () => {
       resizeObserver.disconnect()
     }
-  }, [frameRef])
+  }, [frameRef, mountNode])
 
   return (
     <EnvironmentProvider value={() => frameRef?.contentDocument ?? document}>
