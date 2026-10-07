@@ -53,7 +53,8 @@ export function useField(props: UseFieldProps) {
   const id = props.id ?? generatedId
   const rootRef = useRef<HTMLDivElement>(null)
 
-  const rootId = ids?.control ?? `field::${id}`
+  const rootId = ids?.root ?? `field::${id}`
+  const controlId = ids?.control ?? id
   const errorTextId = ids?.errorText ?? `field::${id}::error-text`
   const helperTextId = ids?.helperText ?? `field::${id}::helper-text`
   const labelId = ids?.label ?? `field::${id}::label`
@@ -109,9 +110,9 @@ export function useField(props: UseFieldProps) {
         'data-disabled': dataAttr(disabled),
         'data-invalid': dataAttr(invalid),
         'data-readonly': dataAttr(readOnly),
-        'htmlFor': id,
+        'htmlFor': controlId,
       }) as HTMLProps<'label'>,
-    [disabled, invalid, readOnly, id, labelId],
+    [disabled, invalid, readOnly, controlId, labelId],
   )
 
   const getControlProps = useMemo(
@@ -122,12 +123,12 @@ export function useField(props: UseFieldProps) {
         'data-invalid': dataAttr(invalid),
         'data-required': dataAttr(required),
         'data-readonly': dataAttr(readOnly),
-        id,
+        'id': controlId,
         required,
         disabled,
         readOnly,
       }) as HTMLProps<'input'>,
-    [labelIds, invalid, required, readOnly, id, disabled],
+    [labelIds, invalid, required, readOnly, controlId, disabled],
   )
 
   const getInputProps = useMemo(
@@ -190,7 +191,7 @@ export function useField(props: UseFieldProps) {
     ariaDescribedby: labelIds,
     ids: {
       root: rootId,
-      control: id,
+      control: controlId,
       label: labelId,
       errorText: errorTextId,
       helperText: helperTextId,
