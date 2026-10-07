@@ -57,6 +57,7 @@ async function setup(
 describe('color-picker AreaThumb prop composition', () => {
   it('calls the consumer first while retaining keyboard editing, event options, styles, and ref', async () => {
     const calls: string[] = []
+    // eslint-disable-next-line react/no-create-ref -- This external renderer harness owns the ref outside a React component.
     const ref = createRef<HTMLDivElement>()
     let target: EventTarget | null = null
     const onKeyDown = vi.fn((event) => {
