@@ -7,6 +7,7 @@ export interface FieldsetRootProps extends RootProps, PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { ui } from '~/factory'
 import { useFieldset } from '../composables/use-fieldset'
 import { FieldsetProvider } from '../composables/use-fieldset-context'
@@ -24,11 +25,18 @@ const props = withDefaults(defineProps<FieldsetRootProps>(), {
 const fieldset = useFieldset(props)
 FieldsetProvider(fieldset)
 
-useForwardExpose()
+const { forwardRef, currentElement } = useForwardExpose()
+watch(currentElement, (element, _previous, onCleanup) => {
+  const rootRef = fieldset.value.refs.rootRef
+  rootRef.value = element ?? null
+  onCleanup(() => {
+    rootRef.value = null
+  })
+}, { flush: 'sync' })
 </script>
 
 <template>
-  <ui.fieldset v-bind="fieldset.getRootProps()" :as-child="asChild">
+  <ui.fieldset :ref="forwardRef" v-bind="fieldset.getRootProps()" :as-child="asChild">
     <slot />
   </ui.fieldset>
 </template>
