@@ -24,6 +24,8 @@ useForwardExpose()
 
 <template>
   <ui.input v-bind="radio.getItemHiddenInputProps(itemProps)" :as-child="asChild">
-    <slot />
+    <template v-if="$slots.default" #default>
+      <slot />
+    </template>
   </ui.input>
 </template>

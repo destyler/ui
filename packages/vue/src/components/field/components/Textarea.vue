@@ -56,6 +56,8 @@ watchEffect((onCleanup) => {
     @input="(event) => emit('update:modelValue', (event.target as HTMLTextAreaElement).value)"
     :style="props.autoresize ? { resize: 'none', overflow: 'hidden' } : undefined"
   >
-    <slot />
+    <template v-if="$slots.default" #default>
+      <slot />
+    </template>
   </ui.textarea>
 </template>

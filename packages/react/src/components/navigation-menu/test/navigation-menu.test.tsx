@@ -154,7 +154,9 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should render components content correctly', async () => {
-    const screen = await render(<Basic openDelay={0} closeDelay={0} />)
+    // Pointer movement before a click can otherwise hover-open this trigger,
+    // making that same click legitimately close it. This case checks click content.
+    const screen = await render(<Basic disableHoverTrigger openDelay={0} closeDelay={0} />)
 
     const trigger = screen.getByRole('button', { name: /^Components/ })
     await userEvent.click(trigger)

@@ -4,6 +4,7 @@ import { parse as parseDate } from '@destyler/calendar'
 import { parse as parseColor } from '@destyler/color-picker'
 import { cleanup, render, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
+import { For } from 'solid-js'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { useCalendar } from '../src/components/calendar'
 import { Carousel, useCarousel } from '../src/components/carousel'
@@ -84,14 +85,16 @@ describe('undefined live fields do not acquire core ownership', () => {
             }}
             style={{ 'scroll-padding-left': '0px', 'scroll-padding-right': '0px', 'scroll-padding-top': '0px', 'scroll-padding-bottom': '0px' }}
           >
-            {[0, 1, 2].map(index => (
-              <Carousel.Item
-                index={index}
-                ref={el => vi.spyOn(el, 'getBoundingClientRect').mockReturnValue(new DOMRect(index * 300, 0, 300, 100))}
-              >
-                Slide {index}
-              </Carousel.Item>
-            ))}
+            <For each={[0, 1, 2]}>
+              {index => (
+                <Carousel.Item
+                  index={index}
+                  ref={el => vi.spyOn(el, 'getBoundingClientRect').mockReturnValue(new DOMRect(index * 300, 0, 300, 100))}
+                >
+                  Slide {index}
+                </Carousel.Item>
+              )}
+            </For>
           </Carousel.ItemGroup>
           <output data-testid="page">{api().page}</output>
         </Carousel.RootProvider>
