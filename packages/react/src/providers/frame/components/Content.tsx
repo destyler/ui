@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 interface FrameContentProps {
   onMount?: () => void
@@ -8,23 +8,11 @@ interface FrameContentProps {
 
 export function FrameContent(props: FrameContentProps) {
   const { onMount, onUnmount, children } = props
-  const mountedRef = useRef(false)
-  const calledRef = useRef(false)
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if (!mountedRef.current && !calledRef.current) {
-      onMount?.()
-      mountedRef.current = true
-      calledRef.current = true
-    }
-
-    return () => {
-      if (mountedRef.current) {
-        onUnmount?.()
-        mountedRef.current = false
-      }
-    }
+    // StrictMode replays effects as setup → cleanup → setup. Every cleanup
+    // needs a matching setup while the frame content remains mounted.
+    onMount?.()
+    return () => onUnmount?.()
   }, [])
 
   return children
