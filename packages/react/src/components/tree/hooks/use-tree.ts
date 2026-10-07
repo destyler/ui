@@ -42,17 +42,15 @@ export function useTree<T extends TreeNode>(props: UseTreeProps<T>): UseTreeRetu
     ...normalizeMachineProps(treeProps),
   }
 
-  const context = (() => {
-    const { collection: _, ...restProps } = initialContext
-    return {
-      ...restProps,
-      ...(props.selectedValue !== undefined ? { selectedValue: props.selectedValue } : {}),
-      ...(props.expandedValue !== undefined ? { expandedValue: props.expandedValue } : {}),
-      onFocusChange: useEvent(props.onFocusChange),
-      onExpandedChange: useEvent(props.onExpandedChange, { sync: true }),
-      onSelectionChange: useEvent(props.onSelectionChange, { sync: true }),
-    }
-  })()
+  const { collection: _, ...restProps } = initialContext
+  const context = {
+    ...restProps,
+    ...(props.selectedValue !== undefined ? { selectedValue: props.selectedValue } : {}),
+    ...(props.expandedValue !== undefined ? { expandedValue: props.expandedValue } : {}),
+    onFocusChange: useEvent(props.onFocusChange),
+    onExpandedChange: useEvent(props.onExpandedChange, { sync: true }),
+    onSelectionChange: useEvent(props.onSelectionChange, { sync: true }),
+  }
 
   const [state, send, service] = useMachine(tree.machine(initialContext), {
     context,

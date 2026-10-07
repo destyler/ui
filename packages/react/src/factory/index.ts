@@ -1,4 +1,4 @@
-import type React from 'react'
+import type * as React from 'react'
 import type { ComponentPropsWithoutRef, JSX } from 'react'
 import { mergeProps } from '@destyler/xstate'
 import {
