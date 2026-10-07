@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
+  import { untrack } from 'svelte'
 
   interface FrameContentProps {
     onMount?(): void
@@ -10,7 +11,9 @@
   const { onMount, onUnmount, children }: FrameContentProps = $props()
 
   $effect(() => {
-    onMount?.()
+    // Track callback replacement, but not state read or written by user code.
+    const mount = onMount
+    untrack(() => mount?.())
 
     return onUnmount
   })
