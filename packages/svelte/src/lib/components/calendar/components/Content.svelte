@@ -12,7 +12,7 @@
   import { useCalendarContext } from '../hooks/use-calendar-context.js'
   import { usePresenceContext } from '../../presence/index.js'
 
-  let { ref, ...props }: CalendarContentProps = $props()
+  let { ref = $bindable(), ...props }: CalendarContentProps = $props()
 
   const calendar = useCalendarContext()
   const presence = usePresenceContext()
@@ -20,10 +20,9 @@
 
   function setNode(node: HTMLElement) {
     untrack(() => presence().setNode(node))
-    ref = node
   }
 </script>
 
 {#if !presence().unmounted}
-  <UI as="div" {...mergedProps} {@attach setNode} />
+  <UI as="div" {...mergedProps} bind:ref={() => ref ?? null, (node) => ref = node} {@attach setNode} />
 {/if}

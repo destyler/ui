@@ -1,7 +1,7 @@
 import { Field } from '@destyler-ui/solid/field'
 import { createListCollection, Select } from '@destyler-ui/solid/select'
 import { ChevronDownIcon } from 'lucide-solid'
-import { Index } from 'solid-js/web'
+import { Index } from 'solid-js'
 
 export function WithField(props: Field.RootProps) {
   const collection = createListCollection({ items: ['React', 'Solid', 'Vue'] })
