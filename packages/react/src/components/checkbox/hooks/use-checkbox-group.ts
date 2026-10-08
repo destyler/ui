@@ -1,5 +1,7 @@
+import { useRef } from 'react'
 import { useControllableState } from '~/hooks/use-controllable-state'
 import { useEvent } from '~/hooks/use-event'
+import { useSafeLayoutEffect } from '~/hooks/use-safe-layout-effect'
 
 export interface UseCheckboxGroupProps {
   /**
@@ -50,26 +52,40 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps = {}) {
     onChange: onChangeProp,
   })
 
-  const isChecked = (val: string | undefined) => {
-    return value.some(v => String(v) === String(val))
+  // React batches state updates, but multiple API operations in the same event
+  // must build on each other. Only uncontrolled requests own this pending value;
+  // controlled requests continue to derive from the parent's committed snapshot.
+  const pendingValue = useRef(value)
+  useSafeLayoutEffect(() => {
+    pendingValue.current = value
+  }, [value])
+
+  const getValue = () => controlledValue === undefined ? pendingValue.current : value
+  const setGroupValue = (next: string[]) => {
+    if (controlledValue === undefined)
+      pendingValue.current = next
+    setValue(next)
   }
+  const hasValue = (values: string[], val: string | undefined) => values.some(v => String(v) === String(val))
+  const isChecked = (val: string | undefined) => hasValue(value, val)
 
   const addValue = (val: string) => {
     if (!interactive)
       return
-    if (isChecked(val))
+    const currentValue = getValue()
+    if (hasValue(currentValue, val))
       return
-    setValue(value.concat(val))
+    setGroupValue(currentValue.concat(val))
   }
 
   const removeValue = (val: string) => {
     if (!interactive)
       return
-    setValue(value.filter(v => String(v) !== String(val)))
+    setGroupValue(getValue().filter(v => String(v) !== String(val)))
   }
 
   const toggleValue = (val: string) => {
-    isChecked(val) ? removeValue(val) : addValue(val)
+    hasValue(getValue(), val) ? removeValue(val) : addValue(val)
   }
 
   const getItemProps = (props: CheckboxGroupItemProps) => {
@@ -96,7 +112,7 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps = {}) {
     disabled: !!disabled,
     readOnly: !!readOnly,
     invalid: !!invalid,
-    setValue,
+    setValue: setGroupValue,
     addValue,
     toggleValue,
     getItemProps,

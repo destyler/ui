@@ -25,7 +25,7 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}): UseCheckboxReturn 
 
   const props = createMemo(() => {
     return mergeProps(ownProps, checkboxGroup?.().getItemProps({ value: ownProps.value }) ?? {})
-  }, [ownProps, checkboxGroup])
+  })
 
   const locale = useLocaleContext()
   const environment = useEnvironmentContext()
