@@ -7,6 +7,7 @@ export interface FieldRootProps extends RootProps, PolymorphicProps{}
 </script>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { ui } from '~/factory'
 import { useField } from '../composables/use-field'
 import { FieldProvider } from '../composables/use-field-context'
@@ -26,11 +27,18 @@ const props = withDefaults(defineProps<FieldRootProps>(), {
 const field = useField(props)
 FieldProvider(field)
 
-useForwardExpose()
+const { forwardRef, currentElement } = useForwardExpose()
+watch(currentElement, (element, _previous, onCleanup) => {
+  const rootRef = field.value.refs.rootRef
+  rootRef.value = element ?? null
+  onCleanup(() => {
+    rootRef.value = null
+  })
+}, { flush: 'sync' })
 </script>
 
 <template>
-  <ui.div v-bind="field.getRootProps()" :as-child="asChild">
+  <ui.div :ref="forwardRef" v-bind="field.getRootProps()" :as-child="asChild">
     <slot />
   </ui.div>
 </template>
