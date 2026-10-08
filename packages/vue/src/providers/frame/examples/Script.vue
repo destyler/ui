@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { Frame } from '../index'
 import { ref } from 'vue'
+import { Frame } from '../index'
 
 const frameRef = ref<InstanceType<typeof Frame> | null>(null)
 
-const onMount = () => {
+function onMount() {
   const doc = frameRef.value?.frameRef?.contentDocument
-  if (!doc) return
+  if (!doc)
+    return
   const script = doc.createElement('script')
   script.innerHTML = 'console.log("Hello from inside the frame!")'
   doc.body.appendChild(script)

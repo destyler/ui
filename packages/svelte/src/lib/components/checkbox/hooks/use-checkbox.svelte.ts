@@ -29,7 +29,11 @@ export function useCheckbox(props: MaybeFunction<UseCheckboxProps>): UseCheckbox
   const machineProps = $derived.by(() => {
     const resolvedProps = runIfFn(props)
     const localProps = mergeProps(
-      checkboxGroup?.()?.getItemProps({ value: resolvedProps.value }) ?? {},
+      checkboxGroup?.()?.getItemProps({ value: resolvedProps.value }, {
+        disabled: field?.()?.disabled,
+        readOnly: field?.()?.readOnly,
+        invalid: field?.()?.invalid,
+      }) ?? {},
       resolvedProps,
     ) as UseCheckboxProps
     return createMachineProps({

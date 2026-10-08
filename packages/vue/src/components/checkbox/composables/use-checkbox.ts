@@ -44,11 +44,12 @@ export function useCheckbox(ownProps: UseCheckboxProps = {}, emit?: EmitFn<RootE
     required: field?.value.required,
     dir: locale.value.dir,
     getRootNode: env?.value.getRootNode,
+    ...cleanProps(props.value),
     onCheckedChange(details) {
+      props.value.onCheckedChange?.(details)
       emit?.('checkedChange', details)
       emit?.('update:checked', details.checked)
     },
-    ...cleanProps(props.value),
   }))
 
   const [state, send] = useMachine(checkbox.machine(context.value), { context })

@@ -24,7 +24,7 @@ const componentGroups = Object.entries(componentCategories).map(([category, item
 
     <!-- Component list -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-      {componentGroups.map((group) => (
+      {componentGroups.map(group => (
         <div>
           <div class="flex items-baseline justify-between mb-3">
             <span class="font-display font-bold text-xs tracking-[0.15em] text-$sl-color-text">{group.category}</span>

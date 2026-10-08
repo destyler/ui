@@ -32,7 +32,8 @@
       super()
       this.btn.addEventListener('click', () => this.toggleExpanded())
       const nav = this.closest('nav')
-      if (nav) nav.addEventListener('keyup', (e) => this.closeOnEscape(e))
+      if (nav)
+        nav.addEventListener('keyup', e => this.closeOnEscape(e))
     }
 
     setExpanded(expanded: boolean) {

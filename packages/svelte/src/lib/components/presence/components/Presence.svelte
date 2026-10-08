@@ -28,6 +28,12 @@
       ref = node
       presence().setNode(node)
     })
+    return () => {
+      untrack(() => {
+        if (ref === node)
+          ref = null
+      })
+    }
   })
 </script>
 
