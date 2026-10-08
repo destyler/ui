@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted } from 'vue'
 
-defineOptions({
-  name: 'FrameContent'
-})
-
 interface FrameContentEmits {
   (event: 'mount'): void
   (event: 'unmount'): void
 }
+
+defineOptions({
+  name: 'FrameContent',
+})
 
 const emit = defineEmits<FrameContentEmits>()
 

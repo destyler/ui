@@ -9,11 +9,13 @@
 </script>
 
 <script lang="ts">
-  import { untrack } from 'svelte'
   import { SliderThumbPropsProvider } from '../hooks/use-slider-thumb-props-context'
 
   const { value, children }: SliderThumbPropsProviderProps = $props()
-  SliderThumbPropsProvider(untrack(() => value))
+  SliderThumbPropsProvider({
+    get index() { return value.index },
+    get name() { return value.name },
+  })
 </script>
 
 {@render children?.()}
