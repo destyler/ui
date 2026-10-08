@@ -35,11 +35,5 @@ export function useFloatingPanel(props: MaybeFunction<UseFloatingPanelProps>): U
   })
   const api = $derived(floatingPanel.connect(state, send, normalizeProps))
 
-  $effect(() => {
-    const open = runIfFn(props).open
-    if (open !== undefined && open !== api.open)
-      api.setOpen(open)
-  })
-
   return () => api
 }
