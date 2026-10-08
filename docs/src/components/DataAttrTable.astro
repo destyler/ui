@@ -31,7 +31,7 @@ const tdClass = 'px-3 py-2.5 border-b border-b-solid border-b-$sl-color-hairline
         </tr>
       </thead>
       <tbody>
-        {attrs.map((attr) => (
+        {attrs.map(attr => (
           <tr>
             <td class={tdClass}><code class="font-600 text-$sl-color-text whitespace-nowrap">{attr.name}</code></td>
             <td class={tdClass}><code class="text-$sl-color-gray-2 text-[0.8125rem] break-words">{attr.type}</code></td>

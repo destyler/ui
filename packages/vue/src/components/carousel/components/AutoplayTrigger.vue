@@ -5,12 +5,14 @@ export interface CarouselAutoplayTriggerProps extends PolymorphicProps {}
 </script>
 
 <script setup lang="ts">
-import { ui } from '~/factory'
+import { mergeCarouselProps } from '../utils/merge-carousel-props'
+import { CarouselButton } from '../utils/carousel-element'
 import { useCarouselContext } from '../composables/use-carousel-context'
 import { useForwardExpose } from '~/composables'
 
 defineOptions({
-  name: 'CarouselAutoplayTrigger'
+  name: 'CarouselAutoplayTrigger',
+  inheritAttrs: false
 })
 
 defineProps<CarouselAutoplayTriggerProps>()
@@ -20,7 +22,7 @@ useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="carousel.getAutoplayTriggerProps()" :as-child="asChild">
+  <CarouselButton v-bind="mergeCarouselProps(carousel.getAutoplayTriggerProps(), $attrs)" :as-child="asChild">
     <slot />
-  </ui.button>
+  </CarouselButton>
 </template>

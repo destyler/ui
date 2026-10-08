@@ -1,4 +1,5 @@
 import type { HTMLProps, PolymorphicProps } from '~/factory'
+import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
 import { ui } from '~/factory'
 import { useColorPickerAreaPropsContext } from '../hooks/use-color-picker-area-props-context'
@@ -10,9 +11,9 @@ export interface ColorPickerAreaThumbProps extends HTMLProps<'div'>, ColorPicker
 export const ColorPickerAreaThumb = forwardRef<HTMLDivElement, ColorPickerAreaThumbProps>((props, ref) => {
   const colorPicker = useColorPickerContext()
   const areaProps = useColorPickerAreaPropsContext()
-  const thumbProps = colorPicker.getAreaThumbProps(areaProps)
+  const mergedProps = mergeProps(colorPicker.getAreaThumbProps(areaProps), props)
 
-  return <ui.div {...thumbProps} {...props} ref={ref} />
+  return <ui.div {...mergedProps} ref={ref} />
 })
 
 ColorPickerAreaThumb.displayName = 'ColorPickerAreaThumb'

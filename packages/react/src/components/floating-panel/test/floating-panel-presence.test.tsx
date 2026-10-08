@@ -1,5 +1,5 @@
 import type { Root } from 'react-dom/client'
-import { act, createRef } from 'react'
+import { act } from 'react'
 import { createRoot } from 'react-dom/client'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { FloatingPanel, useFloatingPanel } from '../index'
@@ -83,7 +83,7 @@ describe('react FloatingPanel wrapper contracts', () => {
     expect(trigger.hasAttribute('aria-controls')).toBe(false)
   })
   it('unmountOnExit clears trigger target and external content ref', async () => {
-    const ref = createRef<HTMLDivElement>()
+    const ref: { current: HTMLDivElement | null } = { current: null }
     await mount({ defaultOpen: true, unmountOnExit: true }, { contentRef: ref })
     expect(ref.current?.isConnected).toBe(true)
     await click('close-trigger')

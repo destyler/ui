@@ -13,14 +13,14 @@
 
   const props: SliderDraggingIndicatorProps = $props()
   const slider = useSliderContext()
-  const { index } = useSliderThumbPropsContext()
-  const mergedProps = $derived(mergeProps(slider().getDraggingIndicatorProps({ index }), props))
+  const thumbProps = useSliderThumbPropsContext()
+  const mergedProps = $derived(mergeProps(slider().getDraggingIndicatorProps(thumbProps), props))
 </script>
 
 <UI as="span" {...mergedProps}>
   {#if props.children}
     {@render props.children()}
   {:else}
-    {slider().getThumbValue(index)}
+    {slider().getThumbValue(thumbProps.index)}
   {/if}
 </UI>

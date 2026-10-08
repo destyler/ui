@@ -1,5 +1,6 @@
 import { createListCollection, Select, useSelect } from '@destyler-ui/solid/select'
-import { Index, Portal } from 'solid-js/web'
+import { Index } from 'solid-js'
+import { Portal } from 'solid-js/web'
 
 export function RootProvider() {
   const collection = createListCollection({ items: ['React', 'Solid', 'Vue'] })
