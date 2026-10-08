@@ -17,7 +17,8 @@ defineOptions({
 })
 
 const props = defineProps<QrCodeRootProps>()
-const qrCode = useQrCode(props)
+const emits = defineEmits<QrCodeRootEmits>()
+const qrCode = useQrCode(props, emits)
 
 QrCodeProvider(qrCode)
 

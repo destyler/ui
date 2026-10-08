@@ -13,6 +13,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { frameworks } from '../config/frameworks'
 import EmitsTable from './EmitsTable.astro'
 import PropsTable from './PropsTable.astro'
@@ -42,7 +43,8 @@ const dataDir = path.join(process.cwd(), 'src', 'data', 'types')
 
 function loadTypes(framework: string): Record<string, PartTypes> | null {
   const filePath = path.join(dataDir, framework, `${id}.types.json`)
-  if (!fs.existsSync(filePath)) return null
+  if (!fs.existsSync(filePath))
+return null
   try {
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
   }
@@ -59,8 +61,10 @@ const frameworkTypes = frameworks.flatMap((framework) => {
 function sortedEntries(types: Record<string, PartTypes>): [string, PartTypes][] {
   return Object.entries(types).sort(([a], [b]) => {
     // Root always comes first
-    if (a === 'Root') return -1
-    if (b === 'Root') return 1
+    if (a === 'Root')
+return -1
+    if (b === 'Root')
+return 1
     return a.localeCompare(b)
   })
 }

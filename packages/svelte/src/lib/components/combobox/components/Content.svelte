@@ -12,20 +12,17 @@
   import { useComboboxContext } from '../hooks/use-combobox-context'
   import { usePresenceContext } from '../../presence'
 
-  let { ref = $bindable<Element | null>(), ...props }: ComboboxContentProps = $props()
+  let { ref = $bindable(), ...props }: ComboboxContentProps = $props()
 
   const combobox = useComboboxContext()
   const presence = usePresenceContext()
   const mergedProps = $derived(mergeProps(combobox().getContentProps(), presence().getPresenceProps(), props))
 
-  function setNode(node: HTMLDivElement) {
-    untrack(() => {
-      presence().setNode(node)
-      ref = node
-    })
+  function setNode(node: HTMLElement) {
+    untrack(() => presence().setNode(node))
   }
 </script>
 
 {#if !presence().unmounted}
-  <UI as="div" {...mergedProps} {@attach setNode} />
+  <UI as="div" {...mergedProps} bind:ref={() => ref ?? null, (node) => ref = node} {@attach setNode} />
 {/if}

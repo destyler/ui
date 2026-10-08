@@ -75,6 +75,14 @@ export interface RootProps {
    * Whether the panel size and position should be preserved when it is closed
    */
   persistRect?: boolean
+  /**
+   * Returns the initial anchor position when the panel opens.
+   */
+  getAnchorPosition?: floatingPanel.Context['getAnchorPosition']
+  /**
+   * Returns the element used to constrain panel movement and resizing.
+   */
+  getBoundaryEl?: floatingPanel.Context['getBoundaryEl']
 }
 
 export interface RootEmits {

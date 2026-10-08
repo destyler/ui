@@ -4,11 +4,11 @@
  * Brutalist editorial style with UnoCSS utilities + presetIcons.
  */
 
-const { dir, pagination } = Astro.locals.starlightRoute;
-const { prev, next } = pagination;
-const isRtl = dir === 'rtl';
+const { dir, pagination } = Astro.locals.starlightRoute
+const { prev, next } = pagination
+const isRtl = dir === 'rtl'
 
-const prevIcon = isRtl ? 'i-tabler-chevron-right' : 'i-tabler-chevron-left';
+const prevIcon = isRtl ? 'i-tabler-chevron-right' : 'i-tabler-chevron-left'
 const nextIcon = isRtl ? 'i-tabler-chevron-left' : 'i-tabler-chevron-right';
 ---
 
