@@ -2,7 +2,7 @@
 import { Tabs } from '../index'
 import { ref } from 'vue'
 
-const value = ref('react')
+const value = ref<string | null>('react')
 </script>
 
 <template>
