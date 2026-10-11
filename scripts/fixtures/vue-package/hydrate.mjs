@@ -8,6 +8,8 @@ const container = document.createElement('div')
 container.innerHTML = await readFile('ssr.html', 'utf8')
 document.body.append(container)
 const original = container.querySelector('#packed-toggle')
+const originalEditInput = container.querySelector('[data-scope="edit"][data-part="input"]')
+const originalEditPreview = container.querySelector('[data-scope="edit"][data-part="preview"]')
 const changes = { pressed: [], open: [] }
 const errors = []
 const originalError = console.error
@@ -16,6 +18,9 @@ const app = createSSRApp({ render: () => fixture(changes) })
 app.config.warnHandler = warning => errors.push(warning)
 try {
   app.mount(container)
+  assert.equal(container.querySelector('[data-scope="edit"][data-part="input"]'), originalEditInput)
+  assert.equal(container.querySelector('[data-scope="edit"][data-part="preview"]'), originalEditPreview)
+  assert.equal(originalEditInput.childNodes.length, 0, 'A native input must not hydrate synthetic slot children')
   await exercise(container, original, changes)
   assert.deepEqual(errors, [], 'Hydration and interaction must not warn or error')
 }

@@ -34,7 +34,7 @@ useForwardExpose()
   <ui.select
     v-bind="field.getSelectProps()"
     :value="modelValue"
-    @change="(event) => emit('update:modelValue', (event.target as HTMLSelectElement).value)"
+    @change="(event: Event) => emit('update:modelValue', (event.target as HTMLSelectElement).value)"
     :as-child
   >
     <slot />

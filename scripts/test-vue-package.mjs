@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url'
 const root = fileURLToPath(new URL('..', import.meta.url))
 // Exact pins exercise the advertised lower bound and the workspace's current release.
 const framework = 'vue'
-const config = { dependency: 'vue', minimum: '3.5.0', current: '3.5.26', tools: {} }
+const config = { dependency: 'vue', minimum: '3.5.0', current: '3.5.43', tools: {} }
 const temporaryDir = await mkdtemp(path.join(tmpdir(), `destyler-${framework}-packed-`))
 const packageDir = path.join(root, 'packages', framework)
 const packageName = `@destyler-ui/${framework}`
@@ -96,7 +96,12 @@ try {
     await writeFile(path.join(consumerDir, 'entries.ts'), entries.map((entry, index) => `export * as entry${index} from '${entry}'`).join('\n'))
     const tsc = path.join(consumerDir, 'node_modules/typescript/bin/tsc')
     for (const resolution of ['Bundler', 'NodeNext']) {
-      run(process.execPath, [tsc, '-p', 'tsconfig.json', '--moduleResolution', resolution, '--module', resolution === 'Bundler' ? 'ESNext' : 'NodeNext'], consumerDir)
+      for (const exactOptionalPropertyTypes of [false, true]) {
+        const compilerArgs = [tsc, '-p', 'tsconfig.json', '--moduleResolution', resolution, '--module', resolution === 'Bundler' ? 'ESNext' : 'NodeNext']
+        if (exactOptionalPropertyTypes)
+          compilerArgs.push('--exactOptionalPropertyTypes')
+        run(process.execPath, compilerArgs, consumerDir)
+      }
     }
     for (const mode of ['development', 'production']) {
       run(process.execPath, ['ssr.mjs'], consumerDir, { NODE_ENV: mode })

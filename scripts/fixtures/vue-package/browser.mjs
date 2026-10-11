@@ -18,6 +18,8 @@ const server = http.createServer(async (request, response) => {
     import { mount } from '/browser-client.mjs'
     const container = document.querySelector('#consumer')
     window.__packedOriginal = container.querySelector('#packed-toggle')
+    window.__packedEditInput = container.querySelector('[data-scope="edit"][data-part="input"]')
+    window.__packedEditPreview = container.querySelector('[data-scope="edit"][data-part="preview"]')
     window.__packedChanges = { pressed: [], open: [] }
     window.__packedDispose = mount(container, window.__packedChanges)
     window.__packedHydrated = true
@@ -38,6 +40,9 @@ try {
   await page.goto(`http://127.0.0.1:${server.address().port}`)
   await page.waitForFunction(() => window.__packedHydrated)
   assert.equal(await page.evaluate(() => window.__packedOriginal === document.querySelector('#packed-toggle')), true)
+  assert.equal(await page.evaluate(() => window.__packedEditInput === document.querySelector('[data-scope="edit"][data-part="input"]')), true)
+  assert.equal(await page.evaluate(() => window.__packedEditPreview === document.querySelector('[data-scope="edit"][data-part="preview"]')), true)
+  assert.equal(await page.evaluate(() => window.__packedEditInput.childNodes.length), 0)
   const toggle = page.locator('#packed-toggle')
   for (const pressed of ['true', 'false']) {
     await toggle.click()
@@ -49,6 +54,18 @@ try {
     await page.waitForFunction(value => document.querySelector('[data-scope="collapsible"][data-part="trigger"]').getAttribute('aria-expanded') === value, open)
   }
   assert.deepEqual(await page.evaluate(() => window.__packedChanges), { pressed: [true, false], open: [true, false] })
+  const editInput = page.locator('[data-scope="edit"][data-part="input"]')
+  const editPreview = page.locator('[data-scope="edit"][data-part="preview"]')
+  assert.equal(await editInput.inputValue(), 'Packed edit')
+  for (const value of ['First edit', 'Second edit']) {
+    await editPreview.click()
+    await editInput.fill(value)
+    await page.locator('[data-scope="edit"][data-part="submit-trigger"]').click()
+    await page.waitForFunction((expected) => {
+      const preview = document.querySelector('[data-scope="edit"][data-part="preview"]')
+      return !preview.hidden && preview.textContent === expected
+    }, value)
+  }
   await page.evaluate(() => window.__packedDispose())
   assert.deepEqual(errors, [], 'The real-browser consumer must hydrate and interact without warnings or errors')
 }

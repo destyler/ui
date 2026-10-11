@@ -53,7 +53,7 @@ watchEffect((onCleanup) => {
     v-bind="field.getTextareaProps()"
     :as-child="props.asChild"
     :value="modelValue"
-    @input="(event) => emit('update:modelValue', (event.target as HTMLTextAreaElement).value)"
+    @input="(event: Event) => emit('update:modelValue', (event.target as HTMLTextAreaElement).value)"
     :style="props.autoresize ? { resize: 'none', overflow: 'hidden' } : undefined"
   >
     <template v-if="$slots.default" #default>

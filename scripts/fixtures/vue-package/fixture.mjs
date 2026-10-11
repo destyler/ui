@@ -1,4 +1,4 @@
-import { Collapsible, Toggle, useToggleContext } from '@destyler-ui/vue'
+import { Collapsible, Edit, Toggle, useToggleContext } from '@destyler-ui/vue'
 import { defineComponent, h } from 'vue'
 
 const State = defineComponent({ setup() {
@@ -11,6 +11,11 @@ export function fixture(changes = { pressed: [], open: [] }) {
     h(Collapsible.Root, { id: 'packed-collapse', defaultOpen: false, onOpenChange: details => changes.open.push(details.open) }, () => [
       h(Collapsible.Trigger, null, () => 'Details'),
       h(Collapsible.Content, null, () => 'Packed content'),
+    ]),
+    h(Edit.Root, { id: 'packed-edit', defaultValue: 'Packed edit', activationMode: 'click' }, () => [
+      h(Edit.Input),
+      h(Edit.Preview),
+      h(Edit.SubmitTrigger, null, () => 'Save edit'),
     ]),
   ])
 }
