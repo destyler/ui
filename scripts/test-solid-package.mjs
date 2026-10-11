@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url'
 const root = fileURLToPath(new URL('..', import.meta.url))
 // Exact pins exercise the advertised lower bound and the workspace's current release.
 const framework = 'solid'
-const config = { dependency: 'solid-js', minimum: '1.8.0', current: '1.9.15', tools: { 'vite-plugin-solid': '2.11.14' } }
+const config = { dependency: 'solid-js', minimum: '1.8.0', current: '1.9.17', tools: { 'vite-plugin-solid': '2.11.14' } }
 const temporaryDir = await mkdtemp(path.join(tmpdir(), `destyler-${framework}-packed-`))
 const packageDir = path.join(root, 'packages', framework)
 const packageName = `@destyler-ui/${framework}`
