@@ -2,12 +2,19 @@
 import type { InputHTMLAttributes } from 'vue'
 import type { PolymorphicProps } from '~/factory'
 
+// Avoid expanding the native autocomplete union through Vue's slot constructor.
+// Required retains each supported Vue version's explicit-undefined contract.
+type NativeAutocomplete = Required<InputHTMLAttributes>['autocomplete']
+interface FieldInputHTMLAttributes extends Omit<InputHTMLAttributes, 'value' | 'autocomplete'> {
+  autocomplete?: NonNullable<NativeAutocomplete> | (undefined extends NativeAutocomplete ? undefined : never)
+}
+
 export interface FieldInputProps
   extends PolymorphicProps,
   /**
    * @vue-ignore
    */
-  Omit<InputHTMLAttributes, 'value'> {
+  FieldInputHTMLAttributes {
     modelValue?: InputHTMLAttributes['value']
   }
 </script>
@@ -34,7 +41,7 @@ useForwardExpose()
     v-bind="field.getInputProps()"
     :as-child
     :value="modelValue"
-    @input="(event) => emit('update:modelValue', (event.target as HTMLInputElement).value)"
+    @input="(event: Event) => emit('update:modelValue', (event.target as HTMLInputElement).value)"
   >
     <template v-if="$slots.default" #default>
       <slot />
