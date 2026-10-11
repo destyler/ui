@@ -25,7 +25,7 @@ catalogs:
     '@destyler/docs': ^0.2.11
     astro: ^5.17.3
     shiki: ^3.7.0
-    tsx: ^4.23.12
+    tsx: ^4.23.15
   framework:
     react: ^19.2.3
     react-dom: ^19.2.3
@@ -48,7 +48,7 @@ catalogs:
     '@types/archiver': ^7.0.0
     archiver: ^7.0.1
     bumpp: ^10.4.0
-    plop: ^4.0.4
+    plop: ^4.0.5
     taze: ^19.9.2
   prod:
     '@destyler/anatomy': ^0.2.11
