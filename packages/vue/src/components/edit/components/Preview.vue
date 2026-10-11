@@ -21,6 +21,8 @@ useForwardExpose()
 
 <template>
   <ui.span v-bind="edit.getPreviewProps()" :as-child="asChild">
-    <slot />
+    <template v-if="$slots.default" #default>
+      <slot />
+    </template>
   </ui.span>
 </template>

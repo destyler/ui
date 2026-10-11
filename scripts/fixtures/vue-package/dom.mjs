@@ -34,4 +34,17 @@ export async function exercise(container, original, changes) {
   trigger.click()
   await waitFor(() => trigger.getAttribute('aria-expanded') === 'false')
   assert.deepEqual(changes.open, [true, false])
+  const editInput = container.querySelector('[data-scope="edit"][data-part="input"]')
+  const editPreview = container.querySelector('[data-scope="edit"][data-part="preview"]')
+  const submit = container.querySelector('[data-scope="edit"][data-part="submit-trigger"]')
+  assert.equal(editInput.value, 'Packed edit')
+  assert.equal(editPreview.textContent, 'Packed edit')
+  for (const value of ['First edit', 'Second edit']) {
+    editPreview.click()
+    await waitFor(() => !editInput.hidden)
+    editInput.value = value
+    editInput.dispatchEvent(new Event('input', { bubbles: true }))
+    submit.click()
+    await waitFor(() => !editPreview.hidden && editPreview.textContent === value)
+  }
 }
