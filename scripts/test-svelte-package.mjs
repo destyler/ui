@@ -11,7 +11,7 @@ import { ensureRollupNative } from './ensure-rollup-native.mjs'
 const root = fileURLToPath(new URL('..', import.meta.url))
 // Exact pins exercise the advertised lower bound and the workspace's current release.
 const framework = 'svelte'
-const config = { dependency: 'svelte', minimum: '5.29.0', current: '5.56.10', tools: { '@sveltejs/vite-plugin-svelte': '6.2.4', 'svelte-check': '4.7.6' } }
+const config = { dependency: 'svelte', minimum: '5.29.0', current: '5.57.2', tools: { '@sveltejs/vite-plugin-svelte': '6.2.4', 'svelte-check': '4.7.6' } }
 const temporaryDir = await mkdtemp(path.join(tmpdir(), `destyler-${framework}-packed-`))
 const packageDir = path.join(root, 'packages', framework)
 const packageName = `@destyler-ui/${framework}`
