@@ -1,8 +1,13 @@
-import type { ChangeEvent, CompositionEvent, FocusEvent, FormEvent, InputHTMLAttributes, KeyboardEvent, RefObject } from 'react'
+import type { CompositionEvent, FocusEvent, InputHTMLAttributes, KeyboardEvent, RefObject } from 'react'
 import { raf, setElementValue } from '@destyler/dom'
 import { useEffect, useReducer, useRef } from 'react'
 
 type NativeInput = HTMLInputElement | HTMLTextAreaElement
+// Derive handler events so React 18 and 19 retain their own event contracts,
+// including the narrower input/change events introduced in React 19.3.
+type NativeInputProps = InputHTMLAttributes<HTMLInputElement>
+type InputEditEvent = Parameters<NonNullable<NativeInputProps['onInput']>>[0]
+type ChangeEditEvent = Parameters<NonNullable<NativeInputProps['onChange']>>[0]
 
 /**
  * Core's controlled setters can reject a native edit without changing its
@@ -59,18 +64,21 @@ export function useNativeInputValueSync(
       input.setSelectionRange(selectionStart, selectionEnd, selectionDirection ?? undefined)
   })
 
-  return (props: InputHTMLAttributes<HTMLInputElement>, eventName: 'onInput' | 'onChange') => {
-    const onEdit = (event: FormEvent<HTMLInputElement>) => {
+  return (props: NativeInputProps, eventName: 'onInput' | 'onChange') => {
+    const onEdit = (event: InputEditEvent | ChangeEditEvent) => {
       const input = event.currentTarget
       // Some browsers expose isComposing before React's composition callback.
       if ((event.nativeEvent as InputEvent).isComposing)
         composing.current = input
-      props[eventName]?.(event as ChangeEvent<HTMLInputElement>)
+      if (eventName === 'onInput')
+        props.onInput?.(event as InputEditEvent)
+      else
+        props.onChange?.(event as ChangeEditEvent)
       sync(input)
     }
     return {
       ...props,
-      onInput(event: FormEvent<HTMLInputElement>) {
+      onInput(event: InputEditEvent) {
         if (eventName === 'onChange')
           props.onInput?.(event)
         onEdit(event)
@@ -80,7 +88,7 @@ export function useNativeInputValueSync(
       // native input path, while retaining change-only events without doubling
       // the request when React dispatches both handlers for the same input.
       onChange: eventName === 'onChange'
-        ? (event: ChangeEvent<HTMLInputElement>) => {
+        ? (event: ChangeEditEvent) => {
             if (event.nativeEvent.type !== 'input')
               onEdit(event)
           }
