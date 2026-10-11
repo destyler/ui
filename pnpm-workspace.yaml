@@ -33,7 +33,7 @@ catalogs:
     svelte: ^5.56.10
     vue: ^3.5.26
   icons:
-    '@iconify-json/tabler': ^1.2.26
+    '@iconify-json/tabler': ^1.2.42
   lint:
     '@antfu/eslint-config': ^7.0.1
     '@eslint-react/eslint-plugin': ^2.7.2
