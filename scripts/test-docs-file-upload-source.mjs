@@ -24,8 +24,11 @@ try {
   const page = await browser.newPage({ javaScriptEnabled: false })
   await page.setContent(html, { waitUntil: 'domcontentloaded' })
   const code = page.locator('.ds-component-preview:has(.ds-preview-frame.file-upload-basic) .ds-code-block[data-fw="vue"] pre.shiki > code')
-  assert.equal(await code.count(), 1, 'locate the built Basic Vue file-upload snippet')
-  assert.equal(await code.textContent(), source, 'native DOM preserves the complete file-upload source')
+  // The route renders Basic in both the introduction and the Basic examples section.
+  assert.equal(await code.count(), 2, 'locate both built Basic Vue file-upload snippets')
+  for (const block of await code.all()) {
+    assert.equal(await block.textContent(), source, 'native DOM preserves the complete file-upload source')
+  }
   console.log(JSON.stringify({ route: '/components/file-upload/', example: 'Basic', framework: 'vue', exactText: true }))
 }
 finally {
