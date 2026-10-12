@@ -16,8 +16,8 @@ catalogs:
       specifier: ^1.0.0
       version: 1.0.0
     publint:
-      specifier: ^0.3.24
-      version: 0.3.24
+      specifier: ^0.3.25
+      version: 0.3.25
     svelte-check:
       specifier: ^4.7.6
       version: 4.7.6
@@ -534,7 +534,7 @@ importers:
         version: 19.9.2
       tsdown:
         specifier: catalog:build
-        version: 0.20.0-beta.3(@vitejs/devtools@0.0.0-alpha.21(@pnpm/logger@1001.0.1)(vite@8.0.0-beta.4(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(tsx@4.23.15)(yaml@2.8.2))(vue@3.5.43(typescript@5.9.3)))(oxc-resolver@11.21.2)(publint@0.3.24)(synckit@0.11.11)(typescript@5.9.3)(vue-tsc@3.2.2(typescript@5.9.3))
+        version: 0.20.0-beta.3(@vitejs/devtools@0.0.0-alpha.21(@pnpm/logger@1001.0.1)(vite@8.0.0-beta.4(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(tsx@4.23.15)(yaml@2.8.2))(vue@3.5.43(typescript@5.9.3)))(oxc-resolver@11.21.2)(publint@0.3.25)(synckit@0.11.11)(typescript@5.9.3)(vue-tsc@3.2.2(typescript@5.9.3))
       tslib:
         specifier: catalog:types
         version: 2.8.1
@@ -1008,7 +1008,7 @@ importers:
         version: 1.37.0(solid-js@1.9.17)
       publint:
         specifier: catalog:build
-        version: 0.3.24
+        version: 0.3.25
       resize-observer-polyfill:
         specifier: catalog:solid-test
         version: 1.5.1
@@ -1222,7 +1222,7 @@ importers:
         version: 4.0.17(vitest@4.0.17)
       publint:
         specifier: catalog:build
-        version: 0.3.24
+        version: 0.3.25
       svelte:
         specifier: catalog:framework
         version: 5.57.2(@typescript-eslint/types@8.68.0)
@@ -7574,6 +7574,11 @@ packages:
 
   publint@0.3.24:
     resolution: {integrity: sha512-9zS56KrKBoqi5Qt8h92uMP8TTM9AYZSgnmCo4u2priMqkOZvQnTsziZ2p5LJ2ywbYkAjoCDp2jda9u4cgFefIw==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  publint@0.3.25:
+    resolution: {integrity: sha512-WMMbn/d7JqRlfXQL/JUI4n5skC8cJ5WVr8/wT5mmiYWkUdENkZr1I5rgs2+dQPVRgoJd+JRYtB46MTsuDylw9g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -16682,6 +16687,13 @@ snapshots:
       picocolors: 1.1.1
       sade: 1.8.1
 
+  publint@0.3.25:
+    dependencies:
+      '@publint/pack': 0.1.7
+      package-manager-detector: 1.8.0
+      picocolors: 1.1.1
+      sade: 1.8.1
+
   pug-attrs@3.0.0:
     dependencies:
       constantinople: 4.0.1
@@ -17709,7 +17721,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.20.0-beta.3(@vitejs/devtools@0.0.0-alpha.21(@pnpm/logger@1001.0.1)(vite@8.0.0-beta.4(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(tsx@4.23.15)(yaml@2.8.2))(vue@3.5.43(typescript@5.9.3)))(oxc-resolver@11.21.2)(publint@0.3.24)(synckit@0.11.11)(typescript@5.9.3)(vue-tsc@3.2.2(typescript@5.9.3)):
+  tsdown@0.20.0-beta.3(@vitejs/devtools@0.0.0-alpha.21(@pnpm/logger@1001.0.1)(vite@8.0.0-beta.4(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(tsx@4.23.15)(yaml@2.8.2))(vue@3.5.43(typescript@5.9.3)))(oxc-resolver@11.21.2)(publint@0.3.25)(synckit@0.11.11)(typescript@5.9.3)(vue-tsc@3.2.2(typescript@5.9.3)):
     dependencies:
       ansis: 4.2.0
       cac: 6.7.14
@@ -17729,7 +17741,7 @@ snapshots:
       unrun: 0.2.25(synckit@0.11.11)
     optionalDependencies:
       '@vitejs/devtools': 0.0.0-alpha.21(@pnpm/logger@1001.0.1)(vite@8.0.0-beta.4(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(tsx@4.23.15)(yaml@2.8.2))(vue@3.5.43(typescript@5.9.3))
-      publint: 0.3.24
+      publint: 0.3.25
       typescript: 5.9.3
     transitivePeerDependencies:
       - '@ts-macro/tsc'
