@@ -44,5 +44,8 @@ export async function highlight(code: string, lang: string): Promise<string> {
       light: 'vitesse-light',
     },
     defaultColor: false,
+    // These static docs snippets come from reviewed repository examples. Finish
+    // every line; revisit this choice before accepting runtime or untrusted input.
+    tokenizeTimeLimit: 0,
   })
 }
