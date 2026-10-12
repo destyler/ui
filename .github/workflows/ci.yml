@@ -106,3 +106,23 @@ jobs:
       - name: Build Vue Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/vue build-storybook
+
+      - name: Compare B6 documentation CSS
+        if: matrix.node == 22
+        timeout-minutes: 30
+        env:
+          UI_CSS_BASELINE_COMMIT: 2a778ac50e98852649549712357f0be27d73ac99
+        run: >-
+          node scripts/compare-docs-css.mjs
+          --baseline "$UI_CSS_BASELINE_COMMIT"
+          --candidate "$(git rev-parse HEAD)"
+          --output "$RUNNER_TEMP/b6-docs-css-evidence"
+
+      - name: Retain B6 documentation CSS evidence
+        if: always() && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: b6-docs-css-node22
+          path: ${{ runner.temp }}/b6-docs-css-evidence
+          if-no-files-found: warn
+          retention-days: 14
