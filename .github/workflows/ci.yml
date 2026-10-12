@@ -98,6 +98,12 @@ jobs:
           pnpm --dir docs exec astro build
           node scripts/test-docs-solid-icons.mjs
 
+      - name: Test complete documentation highlighting
+        if: matrix.node == 22
+        run: |
+          node --import tsx --test docs/scripts/test-shiki.ts docs/scripts/test-shiki-complete.ts
+          node --import tsx scripts/test-docs-file-upload-source.mjs
+
       - name: Upload Solid docs icon evidence
         if: always() && matrix.node == 22
         uses: actions/upload-artifact@v4
