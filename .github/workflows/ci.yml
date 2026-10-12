@@ -91,6 +91,22 @@ jobs:
           pnpm --dir docs run validate:types
           pnpm run docs:check
 
+      - name: Test built Solid docs icons
+        if: matrix.node == 22
+        run: |
+          node --test scripts/test-docs-script-response.mjs
+          pnpm --dir docs exec astro build
+          node scripts/test-docs-solid-icons.mjs
+
+      - name: Upload Solid docs icon evidence
+        if: always() && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-solid-icons-node22
+          path: test/docs-solid-icons
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Build Svelte Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte build-storybook
@@ -111,7 +127,7 @@ jobs:
         if: matrix.node == 22
         timeout-minutes: 30
         env:
-          UI_CSS_BASELINE_COMMIT: 2a778ac50e98852649549712357f0be27d73ac99
+          UI_CSS_BASELINE_COMMIT: 221b47d60a3ff9b1e32c557e71b719b837e10b86
         run: >-
           node scripts/compare-docs-css.mjs
           --baseline "$UI_CSS_BASELINE_COMMIT"

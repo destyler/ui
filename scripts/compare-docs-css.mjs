@@ -16,8 +16,8 @@ const repo = process.cwd()
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, v, i, all) => i % 2 ? a : [...a, [v, all[i + 1]]], []))
 const out = path.resolve(args['--output'] || 'docs-css-evidence')
 // Temporary upgrade acceptance: retire this collector after actual-main evidence is accepted.
-const baselineCommit = '2a778ac50e98852649549712357f0be27d73ac99'
-const trees = { baseline: 'c61529de370cffd8f68b15096c93bc7b08cb4eda' }
+const baselineCommit = '221b47d60a3ff9b1e32c557e71b719b837e10b86'
+const trees = { baseline: 'e7df02c13d82f559b16c8ad8b9e6bf4672187938' }
 const dependencyBlobs = {
   'pnpm-lock.yaml': 'bea68669dd1d0248ea8d6b009e0d82d4376d88dc',
   'pnpm-workspace.yaml': '9444f66ce7848fc66fbbac2a8186300a7516e1a8',
