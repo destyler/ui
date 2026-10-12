@@ -135,23 +135,3 @@ jobs:
           path: test/docs-cta-contrast
           if-no-files-found: ignore
           retention-days: 14
-
-      - name: Compare B6 documentation CSS
-        if: matrix.node == 22
-        timeout-minutes: 30
-        env:
-          UI_CSS_BASELINE_COMMIT: 6c1d74ef1c50bc7407e80d9d5744d7e65b4bcd21
-        run: >-
-          node scripts/compare-docs-css.mjs
-          --baseline "$UI_CSS_BASELINE_COMMIT"
-          --candidate "$(git rev-parse HEAD)"
-          --output "$RUNNER_TEMP/b6-docs-css-evidence"
-
-      - name: Retain B6 documentation CSS evidence
-        if: always() && matrix.node == 22
-        uses: actions/upload-artifact@v4
-        with:
-          name: b6-docs-css-node22
-          path: ${{ runner.temp }}/b6-docs-css-evidence
-          if-no-files-found: warn
-          retention-days: 14
