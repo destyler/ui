@@ -94,6 +94,7 @@ jobs:
       - name: Test built Solid docs icons
         if: matrix.node == 22
         run: |
+          node --test scripts/test-docs-script-response.mjs
           pnpm --dir docs exec astro build
           node scripts/test-docs-solid-icons.mjs
 

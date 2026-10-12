@@ -6,6 +6,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 import { preview } from 'vite'
+import { captureDocsScriptResponse } from './docs-script-response.mjs'
 
 // Exercise the actual generated docs, including Astro's JSX renderer filters and
 // dependency export conditions. The package's broader Solid test config cannot
@@ -14,7 +15,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dist = process.env.DOCS_DIST || path.join(root, 'docs/dist')
 const output = process.env.DOCS_SOLID_ICON_ARTIFACT_DIR || path.join(root, 'test/docs-solid-icons')
 await mkdir(output, { recursive: true })
-const result = { states: [], pageErrors: [], assetErrors: [], bundles: [], cleanupErrors: [], evidenceErrors: [] }
+const result = { states: [], pageErrors: [], assetErrors: [], scriptResponses: [], bundles: [], cleanupErrors: [], evidenceErrors: [] }
 const captures = []
 const server = await preview({ configFile: false, build: { outDir: dist }, preview: { host: '127.0.0.1', port: 0, open: false } })
 let browser
@@ -93,18 +94,14 @@ try {
   page.on('pageerror', error => result.pageErrors.push(String(error)))
   page.on('requestfailed', request => result.assetErrors.push({ url: request.url(), error: request.failure()?.errorText }))
   page.on('response', (response) => {
-    if (response.status() >= 400)
-      result.assetErrors.push({ url: response.url(), status: response.status() })
-    if (response.url().endsWith('.js')) {
-      captures.push(response.body().then(async (bytes) => {
-        // Keep the actual generated Check/Minus chunks, not only source fixtures.
-        if (!bytes.includes('M20 6 9 17l-5-5') && !bytes.includes('M5 12h14'))
-          return
-        const name = path.basename(new URL(response.url()).pathname)
-        await writeFile(path.join(output, name), bytes)
-        result.bundles.push({ url: response.url(), name, sha256: createHash('sha256').update(bytes).digest('hex') })
-      }).catch(error => result.assetErrors.push({ url: response.url(), captureError: String(error) })))
-    }
+    captures.push(captureDocsScriptResponse(response, result, async (bytes) => {
+      // Keep the actual generated Check/Minus chunks, not only source fixtures.
+      if (!bytes.includes('M20 6 9 17l-5-5') && !bytes.includes('M5 12h14'))
+        return
+      const name = path.basename(new URL(response.url()).pathname)
+      await writeFile(path.join(output, name), bytes)
+      result.bundles.push({ url: response.url(), name, sha256: createHash('sha256').update(bytes).digest('hex') })
+    }))
   })
   const origin = `http://127.0.0.1:${server.httpServer.address().port}`
   for (const theme of ['light', 'dark']) {
