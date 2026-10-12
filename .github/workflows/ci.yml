@@ -91,6 +91,21 @@ jobs:
           pnpm --dir docs run validate:types
           pnpm run docs:check
 
+      - name: Test built Solid docs icons
+        if: matrix.node == 22
+        run: |
+          pnpm --dir docs exec astro build
+          node scripts/test-docs-solid-icons.mjs
+
+      - name: Upload Solid docs icon evidence
+        if: always() && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-solid-icons-node22
+          path: test/docs-solid-icons
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Build Svelte Storybook
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/svelte build-storybook

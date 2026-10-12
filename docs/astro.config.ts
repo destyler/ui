@@ -72,7 +72,8 @@ export default defineConfig({
       include: ['**/packages/react/**', '**/docs/src/components/ReactExample.tsx'],
     }),
     solid({
-      include: ['**/packages/solid/**', '**/docs/src/components/SolidExample.tsx'],
+      // lucide-solid's `solid` export contains JSX that also needs the Solid compiler.
+      include: ['**/packages/solid/**', '**/docs/src/components/SolidExample.tsx', '**/node_modules/lucide-solid/**'],
     }),
     svelte(),
     starlight({
