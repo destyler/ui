@@ -352,7 +352,7 @@ async function collect(side, origin) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1, locale: 'en-US', timezoneId: 'UTC', colorScheme: 'light', reducedMotion: 'no-preference' })
   const page = await context.newPage()
   page.setDefaultTimeout(10000)
-  const result = { origin, samples: {}, console: [], network: [], pageErrors: [], coverage: [], fonts: [], screenshots: [] }
+  const result = { origin, samples: {}, console: [], network: [], pageErrors: [], coverage: [], fonts: [], screenshots: [], contexts: [] }
   manifest.sides[side].origin = origin
   page.on('console', m => result.console.push({ type: m.type(), text: m.text() }))
   page.on('pageerror', e => result.pageErrors.push(String(e)))
@@ -484,6 +484,50 @@ async function collect(side, origin) {
     await write(`${side}.json`, result)
     await persist(`collected:${side}:${id}`)
   }
+  async function saveContext(box, theme, section) {
+    // Section-anchored crops retain the decorations and controls in context.
+    // Do not move the viewport or crop around the translated decoration.
+    const id = `/|${theme}|-|${section}|context`
+    const evidence = await box.evaluate((el) => {
+      const rect = (node) => {
+        const r = node.getBoundingClientRect()
+        return { x: r.x, y: r.y, width: r.width, height: r.height }
+      }
+      const decoration = el.querySelector('[class~="-translate-y-1/2"]')
+      const d = rect(decoration)
+      const controls = [...el.querySelectorAll('a[href="/overview/getting-started/"], a[href="https://github.com/destyler/ui"]')].map((control) => {
+        const r = rect(control)
+        const hitPoints = [0.1, 0.5, 0.9].map(fraction => ({ x: r.x + r.width * fraction, y: r.y + r.height / 2 }))
+        return { href: control.getAttribute('href'), rect: r, overlapsDecoration: r.x < d.x + d.width && r.x + r.width > d.x && r.y < d.y + d.height && r.y + r.height > d.y, hitPoints: hitPoints.map(point => ({ ...point, reachesControl: control.contains(document.elementFromPoint(point.x, point.y)) })) }
+      })
+      return { sectionRect: rect(el), decorationRect: d, pointerEvents: getComputedStyle(decoration).pointerEvents, ariaHidden: decoration.getAttribute('aria-hidden'), overflowX: getComputedStyle(el).overflowX, overflowY: getComputedStyle(el).overflowY, controls }
+    })
+    const record = { id, ...evidence, status: 'measured' }
+    result.contexts.push(record)
+    await write(`${side}.json`, result)
+    const r = evidence.sectionRect
+    const clip = { x: Math.max(0, r.x), y: Math.max(0, r.y), width: Math.min(1280, r.x + r.width) - Math.max(0, r.x), height: Math.min(900, r.y + r.height) - Math.max(0, r.y) }
+    record.clip = clip
+    assert(clip.width > 0 && clip.height > 0, `empty context crop: ${id}`)
+    const file = `${side}-${theme}-${section}-context.png`
+    await page.screenshot({ path: path.join(out, file), clip })
+    Object.assign(record, { file, sha256: sha256(await fs.readFile(path.join(out, file))), status: 'cropped' })
+    await write(`${side}.json`, result)
+    // Retain measured geometry and the crop before a usability failure can abort.
+    assert.equal(evidence.pointerEvents, 'none', `decoration intercepts controls: ${id}`)
+    assert.equal(evidence.ariaHidden, 'true', `decoration is not hidden from accessibility tree: ${id}`)
+    assert.equal(evidence.overflowX, 'hidden', `section clipping changed: ${id}`)
+    assert.equal(evidence.overflowY, 'hidden', `section clipping changed: ${id}`)
+    assert.equal(evidence.controls.length, 2, `missing context controls: ${id}`)
+    for (const control of evidence.controls) {
+      const c = control.rect
+      assert(c.width > 0 && c.height > 0 && c.x >= clip.x && c.y >= clip.y && c.x + c.width <= clip.x + clip.width && c.y + c.height <= clip.y + clip.height, `context control clipped: ${id}`)
+      assert(!control.overlapsDecoration, `decoration collides with control: ${id}`)
+      assert(control.hitPoints.every(point => point.reachesControl), `context control obscured: ${id}`)
+    }
+    record.status = 'verified'
+    await write(`${side}.json`, result)
+  }
   try {
     for (const theme of themes) {
       await go('/', theme)
@@ -500,6 +544,8 @@ async function collect(side, origin) {
           if (state === 'active')
             await page.mouse.down()
           for (const [target, locator] of [['primary', primary], ['arrow', primary.locator('[class~="group-hover:translate-x-1"]')], ['underline', primary.locator('[class~="scale-x-100"]')]]) await save('/', theme, '-', `${section}.${target}`, state, locator, primary, state)
+          if (state === 'idle')
+            await saveContext(box, theme, section)
           if (state === 'active') {
             await page.mouse.move(0, 0)
             await page.mouse.up()
@@ -581,6 +627,7 @@ async function collect(side, origin) {
     }
     assert.deepEqual(Object.keys(result.samples).sort(), inventory.map(x => x.id).sort(), 'incomplete expected inventory')
     assert.equal(result.screenshots.length, 8)
+    assert.deepEqual(result.contexts.map(record => record.id).sort(), themes.flatMap(theme => ['hero', 'cta'].map(section => `/|${theme}|-|${section}|context`)).sort())
     for (const record of result.coverage) {
       const n = record.nonHits
       assert.equal(n.translateXHalf + n.transform + Object.values(n.attributifyGroupHover).reduce((sum, entry) => sum + entry.count, 0) + n.openDelay.length, 0, `new non-hit selector match needs review: ${record.id}`)
@@ -626,7 +673,7 @@ function compare(a, b, assetsA, assetsB) {
   for (const { id } of inventory) {
     const x = a.samples[id]
     const y = b.samples[id]
-    for (const field of ['color', 'backgroundColor', 'borderColor', 'opacity', 'effectiveOpacity', 'display', 'visibility', 'visible', 'checked', 'hover', 'active', 'text', 'fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'transitionDuration', 'transitionDelay']) {
+    for (const field of ['tag', 'classes', 'theme', 'framework', 'color', 'backgroundColor', 'borderColor', 'opacity', 'effectiveOpacity', 'display', 'visibility', 'visible', 'checked', 'hover', 'active', 'text', 'fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'transitionDuration', 'transitionDelay']) {
       if (x[field] !== y[field])
         addDiff(id, field, x[field], y[field])
     }
@@ -680,9 +727,129 @@ function compare(a, b, assetsA, assetsB) {
   return differences
 }
 
+// The pinned UnoCSS upgrade removes invalid perspective(var(--un-perspective)).
+// Assert the existing source-authored transforms, not universal geometry equality.
+// Keep raw differences intact; only these exact target/state/field deltas can be explained.
+function reviewAuthoredTransforms(a, b, differences) {
+  const assertions = []
+  const explained = new Set()
+  const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+  const near = (actual, expected, label, tolerance = 0.05) => assert(Number.isFinite(actual) && Number.isFinite(expected) && Math.abs(actual - expected) <= tolerance, `${label}: ${actual} != ${expected}`)
+  const rectangle = (actual, expected, label) => {
+    for (const key of ['x', 'y', 'width', 'height']) near(actual[key], expected[key], `${label}.${key}`)
+  }
+  function check(id, classes, { tx = 0, ty = 0, sx = 1, customX = '0', customY = '0', parentId, parentY = 0, centered = false } = {}) {
+    const record = { id, classes, expected: { tx, ty, sx, parentY }, passed: false }
+    assertions.push(record)
+    try {
+      const x = a.samples[id]
+      const y = b.samples[id]
+      assert(x && y, `missing authored-transform sample: ${id}`)
+      const [, theme, framework, target, state] = id.split('|')
+      assert.equal(framework, '-')
+      assert.equal(x.classes, y.classes, `source classes changed: ${id}`)
+      const tokens = x.classes.split(/\s+/)
+      for (const token of classes) assert(tokens.includes(token), `missing source class ${token}: ${id}`)
+      const transformClasses = tokens.filter(token => /(?:^|:)(?:-?translate-|scale-|rotate-|skew-|perspective-|transform$)/.test(token)).sort()
+      assert.deepEqual(transformClasses, classes.filter(token => /(?:^|:)(?:-?translate-|scale-|rotate-|skew-|perspective-|transform$)/.test(token)).sort(), `unexpected source transform: ${id}`)
+      const expectedCustom = { '--un-perspective': '', '--un-translate-x': customX, '--un-translate-y': customY, '--un-translate-z': '0', '--un-scale-x': String(sx), '--un-scale-y': '1', '--un-scale-z': '1', '--un-rotate': '0', '--un-rotate-x': '0', '--un-rotate-y': '0', '--un-rotate-z': '0', '--un-skew-x': '0', '--un-skew-y': '0' }
+      for (const sample of [x, y]) {
+        assert.equal(sample.theme, theme)
+        assert(sample.visible && sample.rect.width > 0 && sample.rect.height > 0, `hidden authored target: ${id}`)
+        for (const [key, value] of Object.entries(expectedCustom)) assert.equal(sample.custom[key], value, `${id} ${key}`)
+      }
+      assert.equal(x.transform, 'none', `baseline must retain the invalid-transform observation: ${id}`)
+      const expectedMatrix = [...identity]
+      expectedMatrix[0] = sx
+      expectedMatrix[12] = tx
+      expectedMatrix[13] = ty
+      for (let i = 0; i < 16; i++) {
+        near(x.matrix[i], identity[i], `${id} baseline matrix[${i}]`, 1e-6)
+        near(y.matrix[i], expectedMatrix[i], `${id} candidate matrix[${i}]`, 1e-6)
+      }
+      const origin = x.transformOrigin.split(' ').map(Number.parseFloat)
+      assert(origin.length >= 2 && origin.every(Number.isFinite), `invalid transform origin: ${id}`)
+      if (sx !== 1 || target.endsWith('.underline')) {
+        near(origin[0], 0, `${id} origin-left`)
+        near(origin[1], x.rect.height / 2, `${id} origin center Y`)
+      }
+      const dx = tx + origin[0] * (1 - sx)
+      const dy = ty + parentY
+      for (const field of ['rect', 'documentRect']) rectangle(y[field], { ...x[field], x: x[field].x + dx, y: x[field].y + dy, width: x[field].width * sx }, `${id} ${field}`)
+      rectangle(y.parentRect, { ...x.parentRect, y: x.parentRect.y + parentY }, `${id} parentRect`)
+      if (parentId) {
+        for (const result of [a, b]) {
+          const parent = result.samples[parentId]
+          assert(parent?.classes.split(/\s+/).includes('group'), `missing source group: ${parentId}`)
+          assert.equal(parent.hover, state !== 'idle', `group hover state: ${parentId}`)
+          assert.equal(parent.active, state === 'active', `group active state: ${parentId}`)
+          rectangle(result.samples[id].parentRect, parent.rect, `${id} observed parent`)
+        }
+      }
+      if (target.endsWith('.primary') || target.endsWith('.secondary')) {
+        assert.equal(y.hover, state !== 'idle', `button hover state: ${id}`)
+        assert.equal(y.active, state === 'active', `button active state: ${id}`)
+      }
+      if (centered) {
+        // 0.5px is the original geometry tolerance; a containing-block border can
+        // put its padding-box center half a pixel from this recorded border box.
+        near(x.rect.y, x.parentRect.y + x.parentRect.height / 2, `${id} top-1/2 anchor`, 0.5)
+        near(y.rect.y + y.rect.height / 2, y.parentRect.y + y.parentRect.height / 2, `${id} vertical centering`, 0.5)
+      }
+      const fields = []
+      if (tx || ty || sx !== 1)
+        fields.push('transform')
+      for (const field of ['rect', 'documentRect']) {
+        if (dx)
+          fields.push(`${field}.x`)
+        if (dy)
+          fields.push(`${field}.y`)
+        if (sx !== 1)
+          fields.push(`${field}.width`)
+      }
+      if (parentY)
+        fields.push('parentRect.y')
+      for (const field of fields) explained.add(`${id}\n${field}`)
+      record.expected.matrix = expectedMatrix
+      record.explainedFields = fields
+      record.passed = true
+    }
+    catch (error) { record.error = String(error.message || error) }
+  }
+  for (const theme of themes) {
+    for (const section of ['hero', 'cta']) {
+      const id = `/|${theme}|-|${section}.decoration|idle`
+      check(id, ['absolute', 'top-1/2', '-translate-y-1/2', 'pointer-events-none', 'z-0'], { ty: -a.samples[id].rect.height / 2, customY: '-50%', centered: true })
+      for (const state of ['idle', 'hover', 'active']) {
+        const primary = `/|${theme}|-|${section}.primary|${state}`
+        const activeY = state === 'active' ? 1 : 0
+        const hovered = state !== 'idle'
+        check(primary, ['group', 'active:translate-y-px'], { ty: activeY, customY: activeY ? '1px' : '0' })
+        check(`/|${theme}|-|${section}.arrow|${state}`, ['group-hover:translate-x-1'], { tx: hovered ? 4 : 0, customX: hovered ? '.25rem' : '0', parentId: primary, parentY: activeY })
+        check(`/|${theme}|-|${section}.underline|${state}`, ['scale-x-100', 'origin-left', 'group-hover:scale-x-110'], { sx: hovered ? 1.1 : 1, parentId: primary, parentY: activeY })
+      }
+      for (const state of ['idle', 'active']) check(`/|${theme}|-|${section}.secondary|${state}`, ['active:translate-y-px'], { ty: state === 'active' ? 1 : 0, customY: state === 'active' ? '1px' : '0' })
+    }
+    for (const direction of ['prev', 'next']) {
+      for (const state of ['idle', 'hover']) {
+        const hovered = state === 'hover'
+        const sign = direction === 'prev' ? '-' : ''
+        check(`/components/checkbox/|${theme}|-|${direction}.arrow|${state}`, [`group-hover:${sign}translate-x-0.5`], { tx: hovered ? (direction === 'prev' ? -2 : 2) : 0, customX: hovered ? `${sign}.125rem` : '0', parentId: `/components/checkbox/|${theme}|-|${direction}.link|${state}` })
+      }
+    }
+  }
+  assert.equal(assertions.length, 56)
+  return {
+    reason: 'Existing source classes become effective after UnoCSS removes the invalid leading perspective(); upstream 738245603d22faaf6d1b03ba0ba55ca6015bdc79 (#5120).',
+    assertions,
+    explainedDifferences: differences.filter(diff => explained.has(`${diff.id}\n${diff.field}`)),
+    unexpectedDifferences: differences.filter(diff => !explained.has(`${diff.id}\n${diff.field}`)),
+  }
+}
+
 try {
   manifest.scriptSha256 = sha256(await fs.readFile(fileURLToPath(import.meta.url)))
-  await write('coverage.json', { inventory, screenshotIds, limits: 'Chromium; three routes; four absent transform selectors and two open-delay rules remain untested if no hits' })
+  await write('coverage.json', { inventory, screenshotIds, contextCrops: 'Hero and CTA section viewport intersections, light and dark, both sides; controls must remain separate from decoration and reachable at three points', limits: 'Chromium; three routes; four absent transform selectors and two open-delay rules remain untested if no hits' })
   await persist('validating-inputs')
   for (const side of sides) assert.match(args[`--${side}`] || '', /^[a-f0-9]{40}$/, `provide exact ${side} commit SHA`)
   assert.equal(args['--baseline'], baselineCommit, 'use the accepted baseline commit')
@@ -753,6 +920,16 @@ try {
     manifest.sides[side].trackedDiffAfterBuild = await command(['git', 'diff', '--binary'], checkout)
     const dist = path.join(checkout, 'docs/dist')
     manifest.sides[side].assets = await hashFiles(dist, await filesUnder(dist))
+    // Retain the exact emitted CSS, not just hashes, for review of the upgrade.
+    manifest.sides[side].cssEvidence = {}
+    for (const [file, hash] of Object.entries(manifest.sides[side].assets).filter(([file]) => file.endsWith('.css'))) {
+      const retained = `${side}-css/${file}`
+      const bytes = await fs.readFile(path.join(dist, file))
+      assert.equal(sha256(bytes), hash, `emitted CSS changed before retention: ${file}`)
+      await fs.mkdir(path.dirname(path.join(out, retained)), { recursive: true })
+      await fs.writeFile(path.join(out, retained), bytes)
+      manifest.sides[side].cssEvidence[file] = { file: retained, sha256: hash }
+    }
     manifest.sides[side].dist = dist
     await persist(`built:${side}`)
   }
@@ -765,8 +942,14 @@ try {
   for (const side of sides) results[side] = await collect(side, await serve(manifest.sides[side].dist))
   const differences = compare(results.baseline, results.candidate, manifest.sides.baseline.assets, manifest.sides.candidate.assets)
   await write('differences.json', differences)
-  manifest.result = differences.length ? 'collected-with-differences-review-required' : 'collected-no-material-difference'
-  if (differences.length)
+  const authored = reviewAuthoredTransforms(results.baseline, results.candidate, differences)
+  await write('authored-transforms.json', authored)
+  const requiresReview = authored.assertions.some(record => !record.passed) || authored.unexpectedDifferences.length > 0
+  manifest.rawDifferenceCount = differences.length
+  manifest.authoredTransformAssertions = authored.assertions.length
+  manifest.explainedDifferenceCount = authored.explainedDifferences.length
+  manifest.result = requiresReview ? 'collected-with-differences-review-required' : 'collected-with-authored-transforms-verified'
+  if (requiresReview)
     process.exitCode = 2
 }
 catch (error) {
