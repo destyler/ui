@@ -147,7 +147,7 @@ catalogs:
     '@solidjs/router': ^1.0.0
     '@solidjs/testing-library': ^0.8.10
     '@testing-library/jest-dom': ^6.6.3
-    '@testing-library/user-event': ^14.6.1
+    '@testing-library/user-event': ^14.6.7
     lucide-solid: ^1.37.0
     jsdom: ^30.0.1
     resize-observer-polyfill: ^1.5.1
