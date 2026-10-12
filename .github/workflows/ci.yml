@@ -102,6 +102,7 @@ jobs:
         if: matrix.node == 22
         run: |
           node --import tsx --test docs/scripts/test-shiki.ts docs/scripts/test-shiki-complete.ts
+          node scripts/test-docs-highlighting.mjs
           node --import tsx scripts/test-docs-file-upload-source.mjs
 
       - name: Upload Solid docs icon evidence
