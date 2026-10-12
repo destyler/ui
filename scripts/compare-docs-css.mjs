@@ -16,8 +16,8 @@ const repo = process.cwd()
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, v, i, all) => i % 2 ? a : [...a, [v, all[i + 1]]], []))
 const out = path.resolve(args['--output'] || 'docs-css-evidence')
 // Temporary upgrade acceptance: retire this collector after actual-main evidence is accepted.
-const baselineCommit = '221b47d60a3ff9b1e32c557e71b719b837e10b86'
-const trees = { baseline: 'e7df02c13d82f559b16c8ad8b9e6bf4672187938' }
+const baselineCommit = '6c1d74ef1c50bc7407e80d9d5744d7e65b4bcd21'
+const trees = { baseline: '05172f96d684e4085f1bc4e9a3bd7a809aa6edef' }
 const dependencyBlobs = {
   'pnpm-lock.yaml': 'bea68669dd1d0248ea8d6b009e0d82d4376d88dc',
   'pnpm-workspace.yaml': '9444f66ce7848fc66fbbac2a8186300a7516e1a8',
@@ -478,7 +478,38 @@ async function collect(side, origin) {
         })
         return [attribute, { count: elements.length, elements }]
       }))
-      return { translateXHalf: document.querySelectorAll('[class~="-translate-x-1/2"]').length, transform: document.querySelectorAll('.transform').length, attributifyGroupHover, openDelay: [...document.querySelectorAll('[open-delay]')].map(el => ({ value: el.getAttribute('open-delay'), open: el.matches('[open]'), popoverOpen: el.matches(':popover-open'), nativeOpen: CSS.supports('selector(:open)') ? el.matches(':open') : 'unsupported', html: el.outerHTML.slice(0, 500) })) }
+      const emptyMsElements = document.querySelectorAll('[ms=""]')
+      const emptyMs = {
+        count: emptyMsElements.length,
+        retainedLimit: 32,
+        elements: [...emptyMsElements].slice(0, 32).map((el, index) => {
+          const style = getComputedStyle(el)
+          const structuralPath = []
+          for (let node = el; node && structuralPath.length < 8; node = node.parentElement) {
+            structuralPath.unshift({
+              tag: node.tagName.slice(0, 64),
+              childIndex: node.parentElement ? Array.prototype.indexOf.call(node.parentElement.children, node) + 1 : 1,
+            })
+          }
+          return {
+            matchIndex: index,
+            tag: el.tagName.slice(0, 64),
+            structuralPath,
+            attributeNames: [...el.attributes].slice(0, 16).map(attribute => attribute.name.slice(0, 64)),
+            margin: style.margin,
+            marginInlineStart: style.marginInlineStart,
+            marginInlineEnd: style.marginInlineEnd,
+            marginLeft: style.marginLeft,
+            marginRight: style.marginRight,
+            marginTop: style.marginTop,
+            marginBottom: style.marginBottom,
+            direction: style.direction,
+            writingMode: style.writingMode,
+            display: style.display,
+          }
+        }),
+      }
+      return { translateXHalf: document.querySelectorAll('[class~="-translate-x-1/2"]').length, transform: document.querySelectorAll('.transform').length, attributifyGroupHover, openDelay: [...document.querySelectorAll('[open-delay]')].map(el => ({ value: el.getAttribute('open-delay'), open: el.matches('[open]'), popoverOpen: el.matches(':popover-open'), nativeOpen: CSS.supports('selector(:open)') ? el.matches(':open') : 'unsupported', html: el.outerHTML.slice(0, 500) })), emptyMs }
     }) })
     check()
     await write(`${side}.json`, result)
@@ -631,6 +662,7 @@ async function collect(side, origin) {
     for (const record of result.coverage) {
       const n = record.nonHits
       assert.equal(n.translateXHalf + n.transform + Object.values(n.attributifyGroupHover).reduce((sum, entry) => sum + entry.count, 0) + n.openDelay.length, 0, `new non-hit selector match needs review: ${record.id}`)
+      assert.equal(n.emptyMs.count, 0, `new [ms=""] match needs identity and margin review: ${record.id}`)
     }
     check()
     return result
@@ -940,6 +972,9 @@ try {
   manifest.chromium = browser.version()
   const results = {}
   for (const side of sides) results[side] = await collect(side, await serve(manifest.sides[side].dist))
+  const emptyMs = Object.fromEntries(sides.map(side => [side, results[side].coverage.map(record => ({ id: record.id, ...record.nonHits.emptyMs }))]))
+  await write('empty-ms.json', emptyMs)
+  assert.deepEqual(emptyMs.baseline, emptyMs.candidate, '[ms=""] DOM identity or computed-margin difference needs review')
   const differences = compare(results.baseline, results.candidate, manifest.sides.baseline.assets, manifest.sides.candidate.assets)
   await write('differences.json', differences)
   const authored = reviewAuthoredTransforms(results.baseline, results.candidate, differences)

@@ -123,11 +123,24 @@ jobs:
         if: matrix.node == 22
         run: pnpm --filter @destyler-ui/vue build-storybook
 
+      - name: Test built docs CTA contrast
+        if: matrix.node == 22
+        run: node scripts/test-docs-cta-contrast.mjs
+
+      - name: Upload docs CTA contrast evidence
+        if: always() && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-cta-contrast-node22
+          path: test/docs-cta-contrast
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Compare B6 documentation CSS
         if: matrix.node == 22
         timeout-minutes: 30
         env:
-          UI_CSS_BASELINE_COMMIT: 221b47d60a3ff9b1e32c557e71b719b837e10b86
+          UI_CSS_BASELINE_COMMIT: 6c1d74ef1c50bc7407e80d9d5744d7e65b4bcd21
         run: >-
           node scripts/compare-docs-css.mjs
           --baseline "$UI_CSS_BASELINE_COMMIT"
