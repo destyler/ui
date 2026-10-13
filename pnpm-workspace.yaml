@@ -127,7 +127,7 @@ catalogs:
     '@storybook/react-vite': ^10.6.2
     '@storybook/svelte-vite': 10.6.2
     '@storybook/vue3-vite': ^10.6.2
-    storybook-solidjs-vite: ^10.7.1
+    storybook-solidjs-vite: ^10.7.2
     storybook: ^10.6.2
   styles:
     '@unocss/astro': ^66.10.5
