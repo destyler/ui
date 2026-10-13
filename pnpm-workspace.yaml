@@ -49,9 +49,9 @@ catalogs:
   node:
     '@types/archiver': ^8.0.0
     archiver: ^8.0.0
-    bumpp: ^10.4.0
+    bumpp: ^12.3.0
     plop: ^4.0.5
-    taze: ^19.9.2
+    taze: ^21.3.0
   prod:
     '@destyler/anatomy': ^0.2.11
     '@destyler/aspect-ratio': ^0.2.11
