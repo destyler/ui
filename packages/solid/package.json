@@ -198,7 +198,6 @@
     "solid-js": "catalog:framework",
     "storybook-solidjs-vite": "catalog:stories",
     "typescript": "catalog:types",
-    "unplugin-solid": "catalog:solid-build",
     "vite": "catalog:runtime",
     "vite-plugin-solid": "catalog:solid-build",
     "vitest": "catalog:test"
