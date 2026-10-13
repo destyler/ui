@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url'
 const root = fileURLToPath(new URL('..', import.meta.url))
 // Exact pins exercise the advertised lower bound and the workspace's current release.
 const framework = 'vue'
-const config = { dependency: 'vue', minimum: '3.5.0', current: '3.5.43', tools: {} }
+const config = { dependency: 'vue', minimum: '3.5.0', current: '3.5.44', tools: {} }
 const temporaryDir = await mkdtemp(path.join(tmpdir(), `destyler-${framework}-packed-`))
 const packageDir = path.join(root, 'packages', framework)
 const packageName = `@destyler-ui/${framework}`
