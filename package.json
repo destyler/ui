@@ -54,7 +54,7 @@
     "@vitest/coverage-v8": "catalog:test",
     "@vitest/ui": "catalog:test",
     "archiver": "catalog:node",
-    "axe-core": "4.11.0",
+    "axe-core": "4.14.0",
     "bumpp": "catalog:node",
     "eslint": "catalog:lint",
     "eslint-plugin-astro": "catalog:lint",
