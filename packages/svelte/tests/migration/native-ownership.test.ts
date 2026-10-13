@@ -21,7 +21,7 @@ for (const entry of entries) {
           await target.fill('two')
         const next = isChecked ? 'false' : 'two'
         const expected = mode === 'controlled' ? initial : next
-        await expect.element(screen.getByTestId('api-state')).toHaveTextContent(expected)
+        await expect.element(screen.getByTestId('api-state')).toMatchTextContent(expected)
         await vi.waitFor(() => {
           if (isChecked) {
             expect(input.checked).toBe(mode === 'controlled')
@@ -51,7 +51,7 @@ for (const entry of entries) {
             (screen.getByTestId('input-one').element() as HTMLInputElement).click()
           else
             await target.fill('one')
-          await expect.element(screen.getByTestId('api-state')).toHaveTextContent(initial)
+          await expect.element(screen.getByTestId('api-state')).toMatchTextContent(initial)
         }
       }
     })
@@ -67,7 +67,7 @@ for (const entry of entries) {
         await target.fill('two')
       await vi.waitFor(() => expect(isChecked || family === 'radio' ? input.checked : input.value).toBe(isChecked ? true : family === 'radio' ? false : 'one'))
       await screen.rerender({ accepted: isChecked ? false : 'two' })
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent(isChecked ? 'false' : 'two')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent(isChecked ? 'false' : 'two')
       await vi.waitFor(() => expect(isChecked || family === 'radio' ? input.checked : input.value).toBe(isChecked ? false : family === 'radio' ? true : 'two'))
     })
   })

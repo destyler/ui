@@ -11,7 +11,7 @@ import { HoverCard, hoverCardAnatomy, useHoverCard } from '../index'
 
 describe('[hover-card] parts & exports', () => {
   it.each(getParts(hoverCardAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -20,14 +20,14 @@ describe('[hover-card] parts & exports', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(<InitialOpen />)
+    await render(<InitialOpen />)
     await expect.element(page.getByText('Content')).toBeVisible()
   })
 })
 
 describe('[hover-card] functionality', () => {
   it('should open on hover', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const target = page.getByText('Hover me')
     await userEvent.hover(target)
@@ -86,7 +86,7 @@ describe('[hover-card] functionality', () => {
   })
 
   it('should work in controlled mode', async () => {
-    render(<Controlled />)
+    await render(<Controlled />)
 
     const toggleButton = page.getByRole('button', { name: 'Open HoverCard' })
 
@@ -111,7 +111,7 @@ describe('[hover-card] functionality', () => {
   })
 
   it('should open via api', async () => {
-    render(<RootProvider />)
+    await render(<RootProvider />)
 
     const openButton = page.getByRole('button', { name: 'Open' })
     await userEvent.click(openButton)

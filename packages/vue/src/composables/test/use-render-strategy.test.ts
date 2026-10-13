@@ -10,8 +10,8 @@ describe('composable: useRenderStrategyProps', () => {
     const lazyMount = page.getByTestId('lazy-mount')
     const unmountOnExit = page.getByTestId('unmount-on-exit')
 
-    await expect.element(lazyMount).toHaveTextContent('false')
-    await expect.element(unmountOnExit).toHaveTextContent('false')
+    await expect.element(lazyMount).toMatchTextContent('false')
+    await expect.element(unmountOnExit).toMatchTextContent('false')
   })
 
   it('should provide and consume render strategy props', async () => {
@@ -26,8 +26,8 @@ describe('composable: useRenderStrategyProps', () => {
     const unmountOnExit = page.getByTestId('unmount-on-exit')
 
     await vi.waitFor(async () => {
-      await expect.element(lazyMount).toHaveTextContent('true')
+      await expect.element(lazyMount).toMatchTextContent('true')
     }, { timeout: 5000 })
-    await expect.element(unmountOnExit).toHaveTextContent('false')
+    await expect.element(unmountOnExit).toMatchTextContent('false')
   })
 })

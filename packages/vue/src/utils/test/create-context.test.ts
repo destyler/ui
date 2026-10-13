@@ -9,7 +9,7 @@ describe('util: createContext', () => {
     await render(CreateContextConsumerWithFallback)
 
     const element = page.getByTestId('consumer')
-    await expect.element(element).toHaveTextContent('fallback-value')
+    await expect.element(element).toMatchTextContent('fallback-value')
   })
 
   it('should provide and inject context value', async () => {
@@ -21,7 +21,7 @@ describe('util: createContext', () => {
 
     const element = page.getByTestId('consumer')
     await vi.waitFor(async () => {
-      await expect.element(element).toHaveTextContent('test-value')
+      await expect.element(element).toMatchTextContent('test-value')
     }, { timeout: 5000 })
   })
 
@@ -34,7 +34,7 @@ describe('util: createContext', () => {
 
     const element = page.getByTestId('consumer')
     await vi.waitFor(async () => {
-      await expect.element(element).toHaveTextContent('test - 42')
+      await expect.element(element).toMatchTextContent('test - 42')
     }, { timeout: 5000 })
   })
 
@@ -50,12 +50,12 @@ describe('util: createContext', () => {
     const consumers = page.getByTestId('consumer')
     // First consumer should have parent value
     await vi.waitFor(async () => {
-      await expect.element(consumers.first()).toHaveTextContent('parent-value')
+      await expect.element(consumers.first()).toMatchTextContent('parent-value')
     }, { timeout: 5000 })
 
     const nestedConsumer = page.getByTestId('nested-consumer')
     await vi.waitFor(async () => {
-      await expect.element(nestedConsumer).toHaveTextContent('nested-value')
+      await expect.element(nestedConsumer).toMatchTextContent('nested-value')
     }, { timeout: 5000 })
   })
 })

@@ -13,7 +13,7 @@ it('updates Vue Carousel consumer listener props without stale or duplicate call
   const onRequest = vi.fn()
   const onConsumerEvent = vi.fn()
   const screen = await render(ControlledAudit, { props: { onRequest, onConsumerEvent } })
-  await expect.element(page.getByTestId('snap-count')).toHaveTextContent('3')
+  await expect.element(page.getByTestId('snap-count')).toMatchTextContent('3')
   await page.getByTestId('next').click()
   expect(onConsumerEvent).toHaveBeenCalledExactlyOnceWith('click')
   expect(onRequest).toHaveBeenCalledExactlyOnceWith(1)

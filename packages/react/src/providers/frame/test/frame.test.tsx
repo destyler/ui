@@ -7,14 +7,14 @@ import { SrcDoc } from '../examples/SrcDoc'
 
 describe('[frame] provider', () => {
   it('should render content inside the iframe', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const iframe = page.getByTitle('Custom Frame')
     await expect.element(iframe).toBeVisible()
   })
 
   it('should render content with custom srcDoc', async () => {
-    render(<SrcDoc />)
+    await render(<SrcDoc />)
 
     const iframe = page.getByTitle('Custom Frame')
     await expect.element(iframe).toBeVisible()
@@ -30,7 +30,7 @@ describe('[frame] provider', () => {
   })
 
   it('should execute onMount callback', async () => {
-    render(<Script />)
+    await render(<Script />)
 
     const iframe = page.getByTitle('Custom Frame')
     await expect.element(iframe).toBeVisible()

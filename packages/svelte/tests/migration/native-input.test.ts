@@ -25,15 +25,15 @@ describe.each(cases)('$family native input binding', (testCase) => {
       if (testCase.family === 'color-picker')
         await userEvent.keyboard('{Enter}')
       await vi.waitFor(() => expect(nativeInput.value.toLowerCase()).toBe(mode === 'controlled' ? testCase.initial : testCase.next))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent(accepted)
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent(accepted)
       expect(onChange).toHaveBeenLastCalledWith(testCase.nextState)
       if (mode === 'bound')
-        await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(accepted)
+        await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(accepted)
       if (mode !== 'controlled') {
         await input.fill(testCase.initial)
         if (testCase.family === 'color-picker')
           await userEvent.keyboard('{Enter}')
-        await expect.element(screen.getByTestId('api-state')).toHaveTextContent(testCase.initialState)
+        await expect.element(screen.getByTestId('api-state')).toMatchTextContent(testCase.initialState)
       }
     }
   })
@@ -42,8 +42,8 @@ describe.each(cases)('$family native input binding', (testCase) => {
 it('preserves accepted partial-number editing text while the public value remains formatted', async () => {
   const screen = await render(NativeInputFixture, { props: { family: 'number-input', mode: 'bound' } })
   await screen.getByTestId('input').fill('1.')
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent('1')
-  await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('1.')
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent('1')
+  await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('1.')
   expect((screen.getByTestId('input').element() as HTMLInputElement).value).toBe('1.')
 })
 
@@ -62,7 +62,7 @@ it('waits for IME composition to finish before restoring a rejected edit and pre
   input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '編集中' }))
   await vi.waitFor(() => expect(input.value).toBe('one'))
   assertTextSelection(input, 'one', 1)
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent('one')
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent('one')
 })
 
 it('keeps core number formatting on focus until the user actually edits', async () => {
@@ -102,9 +102,9 @@ it.each(['controlled', 'bound', 'uncontrolled'] as const)('preserves NumberInput
     expect(input.selectionStart).toBe(1)
     expect(input.selectionEnd).toBe(1)
   })
-  await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(mode === 'bound' ? '編集中' : '10')
+  await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(mode === 'bound' ? '編集中' : '10')
   if (mode === 'controlled') {
-    await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+    await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
     input.blur()
     await vi.waitFor(() => expect(input.value).toBe('10.00'))
     input.focus()
@@ -134,7 +134,7 @@ it.each(['controlled', 'bound', 'uncontrolled'] as const)('settles the final Num
   expect(input.selectionStart).toBe(1)
   expect(input.selectionEnd).toBe(1)
   expect(onChange.mock.calls).toEqual([['1.'], ['1.2']])
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent(mode === 'controlled' ? '10.00' : '1.20')
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent(mode === 'controlled' ? '10.00' : '1.20')
 })
 
 it('does not restore NumberInput composition into an input unmounted before reconciliation', async () => {
@@ -172,8 +172,8 @@ it.each([false, true])('does not retain interrupted NumberInput composition afte
   input.value = '12'
   input.dispatchEvent(new InputEvent('input', { bubbles: true, data: '12', inputType: 'insertText' }))
   await vi.waitFor(() => expect(input.value).toBe('10'))
-  await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('10')
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+  await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('10')
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
 })
 
 it.each([false, true])('drops composition from an Input replaced under the same Root (ending=%s)', async (ending) => {
@@ -198,5 +198,5 @@ it.each([false, true])('drops composition from an Input replaced under the same 
   expect(replacement.value).toBe('10.00')
   await screen.getByTestId('input').fill('12')
   await vi.waitFor(() => expect(replacement.value).toBe('10'))
-  await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('10')
+  await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('10')
 })

@@ -11,7 +11,7 @@ import { Splitter, splitterAnatomy } from '../index'
 
 describe('[splitter] component', () => {
   it.each(getParts(splitterAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -21,7 +21,7 @@ describe('[splitter] component', () => {
 
   describe('basic example', () => {
     it('should render with two panels and a resize trigger', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       await expect.element(page.getByText('A')).toBeVisible()
       await expect.element(page.getByText('B')).toBeVisible()
       // Check panels
@@ -33,7 +33,7 @@ describe('[splitter] component', () => {
 
   describe('events example', () => {
     it('should render with event handlers', async () => {
-      render(<Events />)
+      await render(<Events />)
       await expect.element(page.getByText('A')).toBeVisible()
       await expect.element(page.getByText('B')).toBeVisible()
       // Just check that the component renders, event testing requires more setup
@@ -42,7 +42,7 @@ describe('[splitter] component', () => {
 
   describe('renderProp example', () => {
     it('should render with context and buttons', async () => {
-      render(<RenderProp />)
+      await render(<RenderProp />)
       await expect.element(page.getByText('Set A to 10%')).toBeVisible()
       await expect.element(page.getByText('Set B to 10%')).toBeVisible()
       // Check panels
@@ -51,7 +51,7 @@ describe('[splitter] component', () => {
   })
 
   it('seeds default* via InitialSize example', async () => {
-    render(<InitialSize />)
+    await render(<InitialSize />)
     const panels = document.querySelectorAll('[data-scope="splitter"][data-part="panel"]')
     expect(panels.length).toBeGreaterThanOrEqual(2)
     const sizes = Array.from(panels).map(p => p.getAttribute('data-size') || (p as HTMLElement).style.flex || (p as HTMLElement).style.width)
@@ -60,7 +60,7 @@ describe('[splitter] component', () => {
 })
 
 it('rootProvider example maximizes using its uncontrolled initial sizes', async () => {
-  render(<RootProvider />)
+  await render(<RootProvider />)
   const panels = document.querySelectorAll<HTMLElement>('[data-scope="splitter"][data-part="panel"]')
   expect(Array.from(panels).map(panel => panel.style.flexGrow)).toEqual(['50', '50'])
   await userEvent.click(page.getByRole('button', { name: 'Maximize a' }))

@@ -152,26 +152,26 @@ it('composed roots give an explicit presence value precedence over machine state
 it('machine adapter preserves class identity and installs actions before start', async () => {
   const screen = await render(MachineAdapterFixture)
 
-  await expect.element(screen.getByTestId('class-identity')).toHaveTextContent('preserved')
-  await expect.element(screen.getByTestId('initial-action')).toHaveTextContent('ran')
-  await expect.element(screen.getByTestId('machine-state')).toHaveTextContent('idle')
+  await expect.element(screen.getByTestId('class-identity')).toMatchTextContent('preserved')
+  await expect.element(screen.getByTestId('initial-action')).toMatchTextContent('ran')
+  await expect.element(screen.getByTestId('machine-state')).toMatchTextContent('idle')
   await screen.getByRole('button', { name: 'Advance machine' }).click()
-  await expect.element(screen.getByTestId('machine-state')).toHaveTextContent('done')
+  await expect.element(screen.getByTestId('machine-state')).toMatchTextContent('done')
 })
 
 it('distinguishes required component contexts from optional parent contexts', async () => {
   const screen = await render(ContextContractFixture)
 
-  await expect.element(screen.getByTestId('checkbox-context-error')).toHaveTextContent(
+  await expect.element(screen.getByTestId('checkbox-context-error')).toMatchTextContent(
     'ContextError:useCheckboxContext must be used within a CheckboxProvider',
   )
-  await expect.element(screen.getByTestId('channel-props-context-error')).toHaveTextContent(
+  await expect.element(screen.getByTestId('channel-props-context-error')).toMatchTextContent(
     'ContextError:useColorPickerChannelPropsContext returned `undefined`',
   )
-  await expect.element(screen.getByTestId('swatch-props-context-error')).toHaveTextContent(
+  await expect.element(screen.getByTestId('swatch-props-context-error')).toMatchTextContent(
     'ContextError:useColorPickerSwatchPropsContext returned `undefined`',
   )
-  await expect.element(screen.getByTestId('optional-contexts')).toHaveTextContent('all-absent')
+  await expect.element(screen.getByTestId('optional-contexts')).toMatchTextContent('all-absent')
 })
 
 it('associates composite form controls with their field descriptions', async () => {

@@ -15,7 +15,7 @@ const testPromiseDelay = 5_000
 
 describe('[toast] component', () => {
   it.each(getParts(toastAnatomy))('should render part %s', async (part) => {
-    render(<Basic duration={testToastDuration} />)
+    await render(<Basic duration={testToastDuration} />)
     await userEvent.click(page.getByText('Create Toast'))
     await vi.waitFor(async () => {
       const element = document.querySelector(part) as HTMLElement | null
@@ -29,7 +29,7 @@ describe('[toast] component', () => {
 
   describe('toast creation', () => {
     it('should show toast when create button is clicked', async () => {
-      render(<Basic duration={testToastDuration} />)
+      await render(<Basic duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Create Toast'))
 
@@ -38,7 +38,7 @@ describe('[toast] component', () => {
     })
 
     it('should create multiple toasts', async () => {
-      render(<Basic duration={testToastDuration} />)
+      await render(<Basic duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Create Toast'))
       await userEvent.click(page.getByText('Create Toast'))
@@ -53,7 +53,7 @@ describe('[toast] component', () => {
 
   describe('toast dismissal', () => {
     it('should close toast when close trigger is clicked', async () => {
-      render(<Basic duration={testToastDuration} />)
+      await render(<Basic duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Create Toast'))
       await vi.waitFor(async () => await expect.element(page.getByText('Title')).toBeVisible())
@@ -65,28 +65,28 @@ describe('[toast] component', () => {
 
   describe('toast types', () => {
     it('should create success toast', async () => {
-      render(<ToastTypes duration={testToastDuration} />)
+      await render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Success'))
       await vi.waitFor(async () => await expect.element(page.getByText('Success Toast')).toBeVisible())
     })
 
     it('should create error toast', async () => {
-      render(<ToastTypes duration={testToastDuration} />)
+      await render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Error'))
       await vi.waitFor(async () => await expect.element(page.getByText('Error Toast')).toBeVisible())
     })
 
     it('should create loading toast', async () => {
-      render(<ToastTypes duration={testToastDuration} />)
+      await render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Loading'))
       await vi.waitFor(async () => await expect.element(page.getByText('Loading Toast')).toBeVisible())
     })
 
     it('should create info toast', async () => {
-      render(<ToastTypes duration={testToastDuration} />)
+      await render(<ToastTypes duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Info'))
       await vi.waitFor(async () => await expect.element(page.getByText('Info Toast')).toBeVisible())
@@ -95,7 +95,7 @@ describe('[toast] component', () => {
 
   describe('toast action', () => {
     it('should trigger action callback when action button is clicked', async () => {
-      render(<ToastAction duration={testToastDuration} />)
+      await render(<ToastAction duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Create Toast'))
       await vi.waitFor(async () => await expect.element(page.getByText('Undo')).toBeVisible())
@@ -107,7 +107,7 @@ describe('[toast] component', () => {
 
   describe('toast promise', () => {
     it('should show loading then success toast for resolved promise', async () => {
-      render(<ToastPromise duration={testToastDuration} promiseDelay={testPromiseDelay} />)
+      await render(<ToastPromise duration={testToastDuration} promiseDelay={testPromiseDelay} />)
 
       await userEvent.click(page.getByText('Promise Success'))
       await vi.waitFor(async () => await expect.element(page.getByText('Loading...')).toBeVisible())
@@ -117,7 +117,7 @@ describe('[toast] component', () => {
     })
 
     it('should show loading then error toast for rejected promise', async () => {
-      render(<ToastPromise duration={testToastDuration} promiseDelay={testPromiseDelay} />)
+      await render(<ToastPromise duration={testToastDuration} promiseDelay={testPromiseDelay} />)
 
       await userEvent.click(page.getByText('Promise Error'))
       await vi.waitFor(async () => await expect.element(page.getByText('Loading...')).toBeVisible())
@@ -129,7 +129,7 @@ describe('[toast] component', () => {
 
   describe('toast update', () => {
     it('should update existing toast', async () => {
-      render(<ToastUpdate duration={testToastDuration} />)
+      await render(<ToastUpdate duration={testToastDuration} />)
 
       await userEvent.click(page.getByText('Create Toast'))
       await vi.waitFor(async () => await expect.element(page.getByText('Original Title')).toBeVisible())
@@ -142,7 +142,7 @@ describe('[toast] component', () => {
 
   describe('toast placement', () => {
     it('should render toast in top-start position', async () => {
-      render(<ToastPlacement />)
+      await render(<ToastPlacement />)
 
       await userEvent.click(page.getByText('Top Start'))
       await vi.waitFor(async () => {
@@ -152,7 +152,7 @@ describe('[toast] component', () => {
     })
 
     it('should render toast in bottom-end position', async () => {
-      render(<ToastPlacement />)
+      await render(<ToastPlacement />)
 
       await userEvent.click(page.getByText('Bottom End'))
       await vi.waitFor(async () => {

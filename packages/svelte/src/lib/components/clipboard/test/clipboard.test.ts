@@ -22,12 +22,12 @@ describe('[clipboard] component', () => {
   ] as const)('keeps the %s trigger text in the same span structure as React', async (_, component) => {
     const screen = await render(component)
     const trigger = screen.container.querySelector('[data-scope="clipboard"][data-part="trigger"]')
-    expect(trigger?.querySelector('span')).toHaveTextContent('Copy')
+    expect(trigger?.querySelector('span')).toMatchTextContent('Copy')
   })
 
   it('keeps the RootProvider API button label consistent', async () => {
     const screen = await render(RootProvider)
-    expect(screen.container.querySelector('button:not([data-scope])')).toHaveTextContent('Copy')
+    expect(screen.container.querySelector('button:not([data-scope])')).toMatchTextContent('Copy')
   })
 
   it('copies its value and exposes the copied state', async () => {

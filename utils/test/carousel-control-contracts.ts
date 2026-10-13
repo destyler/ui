@@ -14,8 +14,8 @@ export function carouselControlContracts(mount: Mount) {
     const onRequest = vi.fn<(page: number) => void>()
     consumerEvents = vi.fn<(type: string) => void>()
     unmount = await mount(onRequest, consumerEvents)
-    await expect.element(page.getByTestId('snap-count')).toHaveTextContent('3')
-    await expect.element(page.getByTestId('api-page')).toHaveTextContent('0')
+    await expect.element(page.getByTestId('snap-count')).toMatchTextContent('3')
+    await expect.element(page.getByTestId('api-page')).toMatchTextContent('0')
     onRequest.mockClear()
     return onRequest
   }
@@ -25,8 +25,8 @@ export function carouselControlContracts(mount: Mount) {
   }
 
   async function expectPage(value: number) {
-    await expect.element(page.getByTestId('api-page')).toHaveTextContent(String(value))
-    await expect.element(page.getByTestId('parent-page')).toHaveTextContent(String(value))
+    await expect.element(page.getByTestId('api-page')).toMatchTextContent(String(value))
+    await expect.element(page.getByTestId('parent-page')).toMatchTextContent(String(value))
   }
 
   describe('carousel controlled interaction contracts', () => {
@@ -95,18 +95,18 @@ export function carouselControlContracts(mount: Mount) {
       await setup()
       await click('toggle-cancel')
       await click('autoplay')
-      await expect.element(page.getByTestId('playing')).toHaveTextContent('false')
+      await expect.element(page.getByTestId('playing')).toMatchTextContent('false')
       await click('item-group')
-      await expect.element(page.getByTestId('drag-start-count')).toHaveTextContent('0')
+      await expect.element(page.getByTestId('drag-start-count')).toMatchTextContent('0')
       expect(consumerEvents.mock.calls.map(([type]) => type)).toEqual(['click', 'mousedown'])
       consumerEvents.mockClear()
       await click('toggle-cancel')
       await click('autoplay')
-      await expect.element(page.getByTestId('playing')).toHaveTextContent('true')
+      await expect.element(page.getByTestId('playing')).toMatchTextContent('true')
       await click('autoplay')
-      await expect.element(page.getByTestId('playing')).toHaveTextContent('false')
+      await expect.element(page.getByTestId('playing')).toMatchTextContent('false')
       await click('item-group')
-      await expect.element(page.getByTestId('drag-start-count')).toHaveTextContent('1')
+      await expect.element(page.getByTestId('drag-start-count')).toMatchTextContent('1')
       expect(consumerEvents.mock.calls.map(([type]) => type)).toEqual(['click', 'click', 'mousedown'])
     })
 
@@ -120,7 +120,7 @@ export function carouselControlContracts(mount: Mount) {
       await new Promise<void>(resolve => setTimeout(resolve, 250))
       expect(onRequest).not.toHaveBeenCalled()
       await click('toggle-mounted')
-      await expect.element(page.getByTestId('snap-count')).toHaveTextContent('3')
+      await expect.element(page.getByTestId('snap-count')).toMatchTextContent('3')
       await expectPage(1)
       await click('previous')
       await expectPage(0)

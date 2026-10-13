@@ -8,6 +8,8 @@ export default defineConfig({
     name: 'astro-docs',
     include: ['test/**/*.browser.test.ts'],
     browser: {
+      // Preserve the case-insensitive substring locators used before Vitest 5.
+      locators: { exact: false },
       enabled: true,
       provider: playwright(),
       instances: [{ browser: 'chromium' }],

@@ -9,7 +9,7 @@ const installationText = 'How to install dependencies and structure your app.'
 
 describe('[navigation-menu] component', () => {
   it.each(getParts(navigationMenuAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
 
     // viewport related parts only exist after opening menu
     if (part.includes('viewport') || part.includes('content') || part.includes('arrow')) {
@@ -47,7 +47,7 @@ describe('[navigation-menu] component', () => {
 
   it('should invoke onValueChange when value changes', async () => {
     const onValueChange = vi.fn()
-    render(<Basic onValueChange={onValueChange} openDelay={0} closeDelay={0} />)
+    await render(<Basic onValueChange={onValueChange} openDelay={0} closeDelay={0} />)
 
     const trigger = page.getByRole('button', { name: 'Getting started' })
     await userEvent.click(trigger)
@@ -75,7 +75,7 @@ describe('[navigation-menu] component', () => {
       expect(componentsTrigger).toHaveAttribute('aria-expanded', 'true')
       expect(componentsContent).toHaveAttribute('data-state', 'open')
       expect(componentsContent).not.toHaveAttribute('hidden')
-      expect(componentsContent).toHaveTextContent('A modal dialog that interrupts the user with important content.')
+      expect(componentsContent).toMatchTextContent('A modal dialog that interrupts the user with important content.')
     })
     expect(onValueChange).not.toHaveBeenCalled()
 

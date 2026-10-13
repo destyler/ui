@@ -69,11 +69,11 @@ describe('[number-input] component', () => {
     const input = screen.getByRole('spinbutton')
 
     await expect.element(input).toHaveValue('$5.00')
-    expect(document.querySelector('[data-part="value-text"]')).toHaveTextContent('$5.00')
+    expect(document.querySelector('[data-part="value-text"]')).toMatchTextContent('$5.00')
 
     await screen.getByText('+1').click()
     await expect.element(input).toHaveValue('$6.00')
-    expect(document.querySelector('[data-part="value-text"]')).toHaveTextContent('$6.00')
+    expect(document.querySelector('[data-part="value-text"]')).toMatchTextContent('$6.00')
   })
 
   it('renders the formatted variant', async () => {

@@ -46,14 +46,14 @@ describe('[collapsible] component', () => {
 
   it('writes a bound open value back while toggling in both directions', async () => {
     const screen = await render(BoundOpen)
-    await expect.element(screen.getByTestId('bound-open')).toHaveTextContent('true')
+    await expect.element(screen.getByTestId('bound-open')).toMatchTextContent('true')
     await expect.element(screen.getByText('Content')).toBeVisible()
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(screen.getByText('Content')).not.toBeVisible()
-    await expect.element(screen.getByTestId('bound-open')).toHaveTextContent('false')
+    await expect.element(screen.getByTestId('bound-open')).toMatchTextContent('false')
     await screen.getByRole('button', { name: 'Toggle' }).click()
     await expect.element(screen.getByText('Content')).toBeVisible()
-    await expect.element(screen.getByTestId('bound-open')).toHaveTextContent('true')
+    await expect.element(screen.getByTestId('bound-open')).toMatchTextContent('true')
   })
 
   it('keeps an ordinary open prop authoritative until the parent writes back', async () => {

@@ -66,22 +66,22 @@ describe('tagsInput / Field', () => {
 describe('dynamic value state', () => {
   it('keeps internal edits when unrelated props and defaultValue change', async () => {
     const screen = await render(ValueState, { props: { defaultValue: ['Initial'] } as UseDynamicProps })
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Initial"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Initial"]')
     await userEvent.click(page.getByRole('button', { name: 'Set value' }))
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Edited"]')
 
     await screen.rerender({ defaultValue: ['Initial'], readOnly: true })
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Edited"]')
     await screen.rerender({ defaultValue: ['Replacement'], readOnly: false })
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Edited"]')
   })
 
   it('prefers an explicit empty value and follows live value updates', async () => {
     const screen = await render(ValueState, { props: { defaultValue: ['Initial'], modelValue: [] } as UseDynamicProps })
-    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('[]')
     await screen.rerender({ modelValue: ['Updated'] })
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Updated"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Updated"]')
     await screen.rerender({ modelValue: [] })
-    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('[]')
   })
 })

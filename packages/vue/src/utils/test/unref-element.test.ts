@@ -9,14 +9,14 @@ describe('util: unrefElement', () => {
     await render(UnrefElementBasic)
 
     const element = page.getByTestId('result')
-    await expect.element(element).toHaveTextContent('DIV')
+    await expect.element(element).toMatchTextContent('DIV')
   })
 
   it('should get $el from Vue component instance', async () => {
     await render(UnrefElementWithComponent)
 
     const element = page.getByTestId('result')
-    await expect.element(element).toHaveTextContent('BUTTON')
+    await expect.element(element).toMatchTextContent('BUTTON')
   })
 
   it('should handle null ref', async () => {
@@ -27,6 +27,6 @@ describe('util: unrefElement', () => {
     })
 
     const element = page.getByTestId('result')
-    await expect.element(element).toHaveTextContent('null')
+    await expect.element(element).toMatchTextContent('null')
   })
 })

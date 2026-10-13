@@ -13,7 +13,7 @@ describe('[scroll-area] component', () => {
 
   describe('basic functionality', () => {
     it('should render content inside viewport', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       await expect.element(page.getByText('Tags')).toBeInTheDocument()
     })
 
@@ -46,24 +46,24 @@ describe('[scroll-area] component', () => {
         expect(viewport.scrollTop).toBe(24)
         expect(viewport.scrollLeft).toBe(8)
       })
-      await expect.element(state).toHaveTextContent('24,8')
+      await expect.element(state).toMatchTextContent('24,8')
       expect(onScroll).toHaveBeenLastCalledWith(expect.objectContaining({ scrollTop: 24, scrollLeft: 8 }))
 
       await screen.rerender(<InitialScroll top={48} left={16} />)
       expect(viewport.scrollTop).toBe(24)
       expect(viewport.scrollLeft).toBe(8)
       await userEvent.click(page.getByRole('button', { name: 'Scroll with API' }))
-      await expect.element(state).toHaveTextContent('80,40')
+      await expect.element(state).toMatchTextContent('80,40')
       expect(viewport.scrollTop).toBe(80)
       expect(viewport.scrollLeft).toBe(40)
 
       viewport.scrollTop = 120
       viewport.scrollLeft = 60
-      await expect.element(state).toHaveTextContent('120,60')
+      await expect.element(state).toMatchTextContent('120,60')
       await screen.rerender(<InitialScroll top={0} left={0} />)
       expect(viewport.scrollTop).toBe(120)
       expect(viewport.scrollLeft).toBe(60)
-      await expect.element(state).toHaveTextContent('120,60')
+      await expect.element(state).toMatchTextContent('120,60')
     })
   })
 })

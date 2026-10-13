@@ -10,7 +10,7 @@ import { AspectRatio, aspectRatioAnatomy } from '../index'
 
 describe('[aspect-ratio] component', () => {
   it.each(getParts(aspectRatioAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,22 +19,22 @@ describe('[aspect-ratio] component', () => {
   })
 
   it('should render 16:9 aspect ratio', async () => {
-    render(<Basic />)
+    await render(<Basic />)
     await expect.element(page.getByRole('img')).toBeVisible()
   })
 
   it('should render 1:1 square aspect ratio', async () => {
-    render(<Square />)
+    await render(<Square />)
     await expect.element(page.getByText('1:1')).toBeVisible()
   })
 
   it('should render 9:16 portrait aspect ratio', async () => {
-    render(<Portrait />)
+    await render(<Portrait />)
     await expect.element(page.getByRole('img')).toBeVisible()
   })
 
   it('should work with RootProvider', async () => {
-    render(<RootProvider />)
+    await render(<RootProvider />)
     await expect.element(page.getByRole('img')).toBeVisible()
   })
 })

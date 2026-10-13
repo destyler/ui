@@ -9,7 +9,7 @@ describe('composable: useForwardExpose', () => {
 
     const element = page.getByTestId('child-result')
     await vi.waitFor(async () => {
-      await expect.element(element).toHaveTextContent('BUTTON')
+      await expect.element(element).toMatchTextContent('BUTTON')
     }, { timeout: 5000 })
   })
 })

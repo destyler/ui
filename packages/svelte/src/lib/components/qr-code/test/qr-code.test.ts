@@ -59,7 +59,7 @@ describe('qrCode / initial value', () => {
     { value: '', expected: '' },
   ])('prefers the supplied live value, including "$value"', async ({ value, expected }) => {
     const screen = await render(ValueUnderTest, { props: { defaultValue: 'Default', value } })
-    await expect.element(screen.getByTestId('value')).toHaveTextContent(JSON.stringify(expected))
+    await expect.element(screen.getByTestId('value')).toMatchTextContent(JSON.stringify(expected))
     await expect.element(screen.getByTestId('pattern')).toHaveAttribute('d', expectedPattern(expected))
   })
 
@@ -70,7 +70,7 @@ describe('qrCode / initial value', () => {
     await expect.element(screen.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('Second'))
     await screen.rerender({ value: '' })
     await expect.element(screen.getByTestId('pattern')).toHaveAttribute('d', expectedPattern(''))
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('""')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('""')
   })
 
   it('keeps internal edits when encoding and defaultValue change', async () => {
@@ -82,11 +82,11 @@ describe('qrCode / initial value', () => {
     await screen.rerender({ encoding: { ecc: 'H' } })
     await expect.element(screen.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('Edited', { ecc: 'H' }))
     await screen.rerender({ defaultValue: 'Replacement' })
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('"Edited"')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('"Edited"')
 
     await screen.getByText('Clear value').click()
     await screen.rerender({ defaultValue: 'Another default', encoding: { ecc: 'L' } })
     await expect.element(screen.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('', { ecc: 'L' }))
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('""')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('""')
   })
 })

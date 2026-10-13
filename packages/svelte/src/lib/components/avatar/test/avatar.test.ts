@@ -29,7 +29,7 @@ describe('[avatar] component', () => {
     await render(Event, { props: { src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==' } })
     await vi.waitFor(async () => {
       const status = page.getByText(/Status:/)
-      await expect.element(status).not.toHaveTextContent('loading...')
+      await expect.element(status).not.toMatchTextContent('loading...')
     })
   })
 

@@ -8,11 +8,11 @@ describe('[collection] useListCollection', () => {
     const items = screen.getByTestId('items')
 
     await screen.getByRole('button', { name: 'Remove beta' }).click()
-    await expect.element(items).toHaveTextContent('a,c,d')
+    await expect.element(items).toMatchTextContent('a,c,d')
     await screen.getByRole('button', { name: 'Filter alpha' }).click()
-    await expect.element(items).toHaveTextContent('a')
+    await expect.element(items).toMatchTextContent('a')
     await screen.getByRole('button', { name: 'Clear filter' }).click()
-    await expect.element(items).toHaveTextContent('a,c,d')
+    await expect.element(items).toMatchTextContent('a,c,d')
   })
 
   it('moves items before and after forward targets without an index offset', async () => {
@@ -20,12 +20,12 @@ describe('[collection] useListCollection', () => {
     const items = screen.getByTestId('items')
 
     await screen.getByRole('button', { name: 'Move alpha before charlie' }).click()
-    await expect.element(items).toHaveTextContent('b,a,c,d')
+    await expect.element(items).toMatchTextContent('b,a,c,d')
     await screen.getByRole('button', { name: 'Reset' }).click()
     await screen.getByRole('button', { name: 'Move alpha after charlie' }).click()
-    await expect.element(items).toHaveTextContent('b,c,a,d')
+    await expect.element(items).toMatchTextContent('b,c,a,d')
     await screen.getByRole('button', { name: 'Reset' }).click()
     await screen.getByRole('button', { name: 'Move beta after itself' }).click()
-    await expect.element(items).toHaveTextContent('a,b,c,d')
+    await expect.element(items).toMatchTextContent('a,b,c,d')
   })
 })

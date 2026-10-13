@@ -12,7 +12,7 @@ import { QrCode, qrCodeAnatomy } from '../index'
 
 describe('[qr-code] component', () => {
   it.each(getParts(qrCodeAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -21,19 +21,19 @@ describe('[qr-code] component', () => {
   })
 
   it('should render the pattern path for the provided value', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await expect.element(page.getByTestId('pattern')).toBeInTheDocument()
   })
 
   it('should render overlay content', async () => {
-    render(<WithOverlay />)
+    await render(<WithOverlay />)
 
     await expect.element(page.getByAltText('Logo')).toBeInTheDocument()
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(<InitialValue />)
+    await render(<InitialValue />)
     await expect.element(page.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('https://destyler.org'))
   })
 })
@@ -62,16 +62,16 @@ function ValueState(props: UseQrCodeProps) {
 describe('qr-code value state', () => {
   it('keeps the edited value and encoded content when unrelated props and defaultValue change', async () => {
     const screen = await render(<ValueState defaultValue="https://destyler.org" />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('https://destyler.org')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('https://destyler.org')
     await expect.element(page.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('https://destyler.org'))
     await userEvent.click(page.getByRole('button', { name: 'Set value' }))
-    await expect.element(page.getByTestId('value')).toHaveTextContent('https://updated.example')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('https://updated.example')
     await expect.element(page.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('https://updated.example'))
 
     await screen.rerender(<ValueState defaultValue="https://destyler.org" ids={{ root: 'updated-qr-code' }} />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('https://updated.example')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('https://updated.example')
     await screen.rerender(<ValueState defaultValue="https://replacement.example" />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('https://updated.example')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('https://updated.example')
     await expect.element(page.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('https://updated.example'))
   })
 
@@ -80,7 +80,7 @@ describe('qr-code value state', () => {
     await expect.element(page.getByTestId('value')).toBeEmptyDOMElement()
     await expect.element(page.getByTestId('pattern')).toHaveAttribute('d', expectedPattern(''))
     await screen.rerender(<ValueState defaultValue="https://destyler.org" value="https://updated.example" />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('https://updated.example')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('https://updated.example')
     await expect.element(page.getByTestId('pattern')).toHaveAttribute('d', expectedPattern('https://updated.example'))
     await screen.rerender(<ValueState defaultValue="https://destyler.org" value="" />)
     await expect.element(page.getByTestId('value')).toBeEmptyDOMElement()

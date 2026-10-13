@@ -26,7 +26,7 @@ describe('[select] component', () => {
     const item = page.getByTestId('positioner').getByText('React')
 
     await userEvent.click(item)
-    await vi.waitFor(async () => await expect.element(trigger).toHaveTextContent('React'))
+    await vi.waitFor(async () => await expect.element(trigger).toMatchTextContent('React'))
   })
 
   it('should close on select', async () => {
@@ -62,7 +62,7 @@ describe('[select] component', () => {
 
     await userEvent.click(itemReact)
     await userEvent.click(itemVue)
-    await vi.waitFor(async () => await expect.element(trigger).toHaveTextContent('React, Vue'))
+    await vi.waitFor(async () => await expect.element(trigger).toMatchTextContent('React, Vue'))
   })
 
   it('should call onValueChange when item is selected', async () => {
@@ -118,7 +118,7 @@ describe('[select] component', () => {
 
   it('seeds default* via InitialValue example', async () => {
     await render(InitialValue)
-    await expect.element(page.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
+    await expect.element(page.getByRole('combobox', { name: 'Framework' })).toMatchTextContent('Vue')
   })
 })
 

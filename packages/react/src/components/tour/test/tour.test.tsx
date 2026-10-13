@@ -6,7 +6,7 @@ import { Tour, tourAnatomy } from '../index'
 
 describe('[tour] component', () => {
   it.each(getParts(tourAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     await vi.waitFor(() => {
       expect(document.querySelector(part)).toBeInTheDocument()
     })
@@ -17,13 +17,13 @@ describe('[tour] component', () => {
   })
 
   it('uses standard previous and next actions at the one-step boundaries', async () => {
-    render(<Basic />)
+    await render(<Basic />)
     await vi.waitFor(() => {
       const previous = document.querySelector('[data-part="action-trigger"][data-type="prev"]')
       const next = document.querySelector('[data-part="action-trigger"][data-type="next"]')
-      expect(previous).toHaveTextContent('Prev')
+      expect(previous).toMatchTextContent('Prev')
       expect(previous).toBeDisabled()
-      expect(next).toHaveTextContent('Next')
+      expect(next).toMatchTextContent('Next')
       expect(next).toBeDisabled()
     })
   })

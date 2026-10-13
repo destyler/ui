@@ -9,7 +9,7 @@ import { OtpInput, otpInputAnatomy } from '../index'
 
 describe('[otp-input] component', () => {
   it.each(getParts(otpInputAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -18,14 +18,14 @@ describe('[otp-input] component', () => {
   })
 
   it('should have the proper aria labels', async () => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(page.getByLabelText('pin code 1 of 3')).toHaveLength(1)
     expect(page.getByLabelText('pin code 2 of 3')).toHaveLength(1)
     expect(page.getByLabelText('pin code 3 of 3')).toHaveLength(1)
   })
 
   it('should autofocus the first input', async () => {
-    render(
+    await render(
       <OtpInput.Root autoFocus>
         <OtpInput.Label>Label</OtpInput.Label>
         <OtpInput.Control>
@@ -39,7 +39,7 @@ describe('[otp-input] component', () => {
   })
 
   it('should move focus to the next item when enter a value', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await userEvent.type(page.getByLabelText('pin code 1 of 3'), '1')
     await vi.waitFor(() => expect(page.getByLabelText('pin code 2 of 3')).toHaveFocus())
@@ -49,7 +49,7 @@ describe('[otp-input] component', () => {
   })
 
   it('should clear the previous input when pressing backspace', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await userEvent.type(page.getByLabelText('pin code 1 of 3'), '1')
     await userEvent.type(page.getByLabelText('pin code 2 of 3'), '2')
@@ -64,7 +64,7 @@ describe('[otp-input] component', () => {
 
   it('should invoke onValueComplete when all inputs are filled out', async () => {
     const onValueComplete = vi.fn()
-    render(
+    await render(
       <OtpInput.Root onValueComplete={onValueComplete}>
         <OtpInput.Label>Label</OtpInput.Label>
         <OtpInput.Control>
@@ -88,7 +88,7 @@ describe('[otp-input] component', () => {
   })
 
   it('should set one-time-code for autocomplete on fields', async () => {
-    render(
+    await render(
       <OtpInput.Root otp>
         <OtpInput.Label>Label</OtpInput.Label>
         <OtpInput.Control>
@@ -106,7 +106,7 @@ describe('[otp-input] component', () => {
 
   it('should replace last input calls onValueComplete correctly', async () => {
     const onValueComplete = vi.fn()
-    render(
+    await render(
       <OtpInput.Root onValueComplete={onValueComplete}>
         <OtpInput.Label>Label</OtpInput.Label>
         <OtpInput.Control>
@@ -157,7 +157,7 @@ describe('[otp-input] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(<InitialValue />)
+    await render(<InitialValue />)
     const inputs = document.querySelectorAll('[data-scope="pin-input"][data-part="input"], [data-scope="otp-input"][data-part="input"]')
     expect(inputs.length).toBeGreaterThanOrEqual(3)
     expect((inputs[0] as HTMLInputElement).value).toBe('1')
@@ -168,33 +168,33 @@ describe('[otp-input] component', () => {
 
 describe('otp input Field', () => {
   it('should set input as disabled', async () => {
-    render(<WithField disabled />)
+    await render(<WithField disabled />)
     await expect.element(page.getByRole('textbox', { name: /pin code 1 of 3/i })).toBeDisabled()
   })
 
   it('should set input as readonly', async () => {
-    render(<WithField readOnly />)
+    await render(<WithField readOnly />)
     await expect.element(page.getByRole('textbox', { name: /pin code 1 of 3/i })).toHaveAttribute('readonly')
   })
 
   it('should display helper text', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     expect(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(<WithField invalid />)
+    await render(<WithField invalid />)
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on input when label is clicked', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await userEvent.click(page.getByText(/label/i))
     expect(page.getByRole('textbox', { name: /pin code 1 of 3/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(<WithField />)
+    await render(<WithField />)
 
     expect(page.getByText('Error Info')).not.toBeInTheDocument()
   })

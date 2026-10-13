@@ -14,7 +14,7 @@ describe('composable: useForwardProps', () => {
     })
 
     const element = page.getByTestId('forwarded')
-    await expect.element(element).toHaveTextContent('Test Title')
+    await expect.element(element).toMatchTextContent('Test Title')
     await expect.element(element).toHaveAttribute('data-disabled', 'true')
   })
 
@@ -26,7 +26,7 @@ describe('composable: useForwardProps', () => {
     })
 
     const element = page.getByTestId('forwarded')
-    await expect.element(element).toHaveTextContent('Custom Title')
+    await expect.element(element).toMatchTextContent('Custom Title')
     await expect.element(element).toHaveAttribute('data-disabled', 'false')
   })
 
@@ -39,7 +39,7 @@ describe('composable: useForwardProps', () => {
     })
 
     const element = page.getByTestId('child')
-    await expect.element(element).toHaveTextContent('Parent Title')
+    await expect.element(element).toMatchTextContent('Parent Title')
     await expect.element(element).toHaveAttribute('data-variant', 'primary')
   })
 
@@ -52,6 +52,6 @@ describe('composable: useForwardProps', () => {
     })
 
     const element = page.getByTestId('forwarded')
-    await expect.element(element).toHaveTextContent('Title')
+    await expect.element(element).toMatchTextContent('Title')
   })
 })

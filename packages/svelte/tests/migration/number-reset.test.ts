@@ -29,7 +29,7 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
         // A focused core input may keep raw numeric text; both representations
         // must preserve the seed, rather than the browser-reset empty value.
         await vi.waitFor(() => expect(['10', '10.00']).toContain(input.value))
-        await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+        await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
         expect(new FormData(form).get('answer')).toBe(input.value)
         if (action === 'composing') {
           input.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true, data: '123' }))
@@ -46,7 +46,7 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
       const form = screen.getByTestId('form').element() as HTMLFormElement
       form.reset()
       await vi.waitFor(() => expect(['10', '10.00']).toContain(input.value))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
       expect(new FormData(form).get('answer')).toBe(input.value)
     })
 
@@ -61,14 +61,14 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
       // Reset the old form first: its stale listener must be gone before target phase.
       original.reset()
       await new Promise(resolve => setTimeout(resolve, 0))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('12.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('12.00')
       expect(input.value).toBe('12')
       moved.reset()
       await vi.waitFor(() => expect(['10', '10.00']).toContain(input.value))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
       await screen.getByTestId('input').fill('12')
       original.reset()
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('12.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('12.00')
       expect(input.value).toBe('12')
     })
 
@@ -79,11 +79,11 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
       const form = screen.getByTestId('form').element() as HTMLFormElement
       form.reset()
       await new Promise(resolve => setTimeout(resolve, 0))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('12.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('12.00')
       await screen.rerender({ showInput: true })
       form.reset()
       await vi.waitFor(() => expect(['10', '10.00']).toContain((screen.getByTestId('input').element() as HTMLInputElement).value))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
     })
 
     it('observes a reset whose propagation is stopped without canceling it', async () => {
@@ -93,7 +93,7 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
       form.reset()
       const input = screen.getByTestId('input').element() as HTMLInputElement
       await vi.waitFor(() => expect(input.value).toBe('10.00'))
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('10.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('10.00')
       expect(new FormData(form).get('answer')).toBe('10.00')
     })
 
@@ -105,7 +105,7 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
       ;(screen.getByTestId('form').element() as HTMLFormElement).reset()
       await new Promise(resolve => setTimeout(resolve, 0))
       expect(input.value).toBe(before)
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent('12.00')
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent('12.00')
     })
   })
 }

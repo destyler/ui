@@ -26,6 +26,8 @@ describe('reactive asChild composition', () => {
       'data-parent': 'retained',
       'onClick': parentClick,
     }, () => h('button', { type: 'button', class: 'child', ref: setChildRef, onClick: childClick }, label.value)))
+    let timestamp = Date.now()
+    const clock = vi.spyOn(Date, 'now').mockImplementation(() => timestamp)
     try {
       app.mount(container)
       await nextTick()
@@ -61,6 +63,8 @@ describe('reactive asChild composition', () => {
         expect(childRef.value).toBe(button)
         expect(document.activeElement).toBe(button)
         expect(button.textContent).toBe(label.value)
+        // Give the synchronous click a later timestamp than Vue's listener attachment.
+        timestamp += 1
         button.click()
         expect(parentClick).toHaveBeenCalledTimes(index + 1)
         expect(childClick).toHaveBeenCalledTimes(index + 1)
@@ -68,8 +72,13 @@ describe('reactive asChild composition', () => {
       }
     }
     finally {
-      app.unmount()
-      container.remove()
+      try {
+        app.unmount()
+        container.remove()
+      }
+      finally {
+        clock.mockRestore()
+      }
     }
     expect(exposed.value).toBeNull()
     expect(childRef.value).toBeNull()
