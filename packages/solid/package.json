@@ -191,7 +191,6 @@
     "@testing-library/user-event": "catalog:solid-test",
     "@vitest/browser-playwright": "catalog:test",
     "@vitest/ui": "catalog:test",
-    "jsdom": "catalog:solid-test",
     "lucide-solid": "catalog:solid-test",
     "publint": "catalog:build",
     "resize-observer-polyfill": "catalog:solid-test",
