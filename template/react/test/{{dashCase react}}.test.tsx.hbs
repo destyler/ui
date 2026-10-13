@@ -1,12 +1,12 @@
-import { render } from 'vitest-browser-react'
 import { describe, expect, it } from 'vitest'
+import { render } from 'vitest-browser-react'
 import { getExports, getParts } from '../../../../../../utils/test'
 import { Basic } from '../examples/Basic'
 import { {{capitalize (camelize react)}}, {{camelize react}}Anatomy } from '../index'
 
 describe('[{{dashCase react}}] component', () => {
-  it.each(getParts({{camelize react}}Anatomy))('should render part %s', (part) => {
-    render(<Basic />)
+  it.each(getParts({{camelize react}}Anatomy))('should render part %s', async (part) => {
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
