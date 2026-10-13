@@ -103,10 +103,13 @@ try {
       run(process.execPath, ['build.mjs'], consumerDir, { NODE_ENV: mode })
       run(process.execPath, ['ssr.mjs'], consumerDir, { NODE_ENV: mode })
       run(process.execPath, ['--conditions=browser', 'hydrate.mjs'], consumerDir, { NODE_ENV: mode })
-      if (process.env.PACKED_BROWSER === '1')
+      run(process.execPath, ['--conditions=browser', 'import.mjs'], consumerDir, { NODE_ENV: mode })
+      if (process.env.PACKED_BROWSER === '1') {
         run(process.execPath, ['browser.mjs'], consumerDir, { NODE_ENV: mode })
+        run(process.execPath, ['import-browser.mjs'], consumerDir, { NODE_ENV: mode })
+      }
     }
-    console.log(`Packed ${framework} ${version}: ${entries.length} public entries, strict types, SSR, hydration and repeated interactions passed`)
+    console.log(`Packed ${framework} ${version}: ${entries.length} public entries, strict types, SSR, hydration, default imports and repeated interactions passed`)
   }
 }
 finally {
