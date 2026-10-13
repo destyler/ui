@@ -10,7 +10,7 @@ import { Edit, editAnatomy } from '../index'
 
 describe('[edit] component', () => {
   it.each(getParts(editAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,7 +19,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to focus the placeholder and enter a value', async () => {
-    render(Basic)
+    await render(Basic)
     await page.getByText('Placeholder').click()
 
     const input = page.getByLabelText('editable input')
@@ -30,7 +30,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to dbl click the placeholder to enter a value', async () => {
-    render(Basic)
+    await render(Basic)
     await userEvent.dblClick(page.getByText('Placeholder'))
 
     await userEvent.clear(page.getByRole('textbox'))
@@ -40,7 +40,7 @@ describe('[edit] component', () => {
   })
 
   it('should be possible to hide input if click EditableCancelTrigger ', async () => {
-    render(Controlled, { props: { activationMode: 'dblclick' } })
+    await render(Controlled, { props: { activationMode: 'dblclick' } })
 
     await userEvent.dblClick(page.getByText('Placeholder'))
 
@@ -58,38 +58,38 @@ describe('[edit] component', () => {
 })
 
 it('seeds default* via InitialValue example', async () => {
-  render(InitialValue)
+  await render(InitialValue)
   await expect.element(page.getByText('Hello')).toBeInTheDocument()
 })
 
 describe('editable / Field', () => {
   it('should set editable as required', async () => {
-    render(WithField, { props: { required: true } })
+    await render(WithField, { props: { required: true } })
     await expect.element(page.getByLabelText('editable input')).toBeRequired()
   })
 
   it('should set editable as disabled', async () => {
-    render(WithField, { props: { disabled: true } })
+    await render(WithField, { props: { disabled: true } })
     await expect.element(page.getByLabelText('editable input')).toBeDisabled()
   })
 
   it('should set editable as readonly', async () => {
-    render(WithField, { props: { readOnly: true } })
+    await render(WithField, { props: { readOnly: true } })
     await expect.element(page.getByLabelText('editable input')).toHaveAttribute('readonly')
   })
 
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })

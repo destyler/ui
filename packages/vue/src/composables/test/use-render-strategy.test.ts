@@ -5,17 +5,17 @@ import UseRenderStrategyBasic from './fixtures/UseRenderStrategyBasic.vue'
 
 describe('composable: useRenderStrategyProps', () => {
   it('should use default values when not provided', async () => {
-    render(UseRenderStrategyBasic)
+    await render(UseRenderStrategyBasic)
 
     const lazyMount = page.getByTestId('lazy-mount')
     const unmountOnExit = page.getByTestId('unmount-on-exit')
 
-    await expect.element(lazyMount).toHaveTextContent('false')
-    await expect.element(unmountOnExit).toHaveTextContent('false')
+    await expect.element(lazyMount).toMatchTextContent('false')
+    await expect.element(unmountOnExit).toMatchTextContent('false')
   })
 
   it('should provide and consume render strategy props', async () => {
-    render(UseRenderStrategyBasic, {
+    await render(UseRenderStrategyBasic, {
       props: {
         lazyMount: true,
         unmountOnExit: false,
@@ -26,8 +26,8 @@ describe('composable: useRenderStrategyProps', () => {
     const unmountOnExit = page.getByTestId('unmount-on-exit')
 
     await vi.waitFor(async () => {
-      await expect.element(lazyMount).toHaveTextContent('true')
+      await expect.element(lazyMount).toMatchTextContent('true')
     }, { timeout: 5000 })
-    await expect.element(unmountOnExit).toHaveTextContent('false')
+    await expect.element(unmountOnExit).toMatchTextContent('false')
   })
 })

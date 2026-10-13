@@ -8,7 +8,7 @@ import { Calendar, calendarAnatomy } from '../index'
 
 describe('[calendar] component', () => {
   it.each(getParts(calendarAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[calendar] component', () => {
   })
 
   it('should be able to lazy mount', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: {
         lazyMount: true,
       },
@@ -33,7 +33,7 @@ describe('[calendar] component', () => {
   })
 
   it('should lazy mount and unmount on exit', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: {
         lazyMount: true,
         unmountOnExit: true,
@@ -50,7 +50,7 @@ describe('[calendar] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(InitialValue)
+    await render(InitialValue)
     const input = document.querySelector('[data-scope="date-picker"][data-part="input"], [data-scope="calendar"][data-part="input"], input') as HTMLInputElement | null
     expect(input).toBeTruthy()
     expect(input!.value.length).toBeGreaterThan(0)

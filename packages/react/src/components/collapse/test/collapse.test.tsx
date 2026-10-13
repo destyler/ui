@@ -7,32 +7,32 @@ import { Basic } from '../examples/Basic'
 import { Collapse, collapseAnatomy } from '../index'
 
 describe('[collapse] parts & exports', () => {
-  it.each(getParts(collapseAnatomy))('should render part %s', (part) => {
-    render(<Basic />)
+  it.each(getParts(collapseAnatomy))('should render part %s', async (part) => {
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
-  it.each(getExports(collapseAnatomy))('should export %s', (part) => {
-    render(<Basic />)
+  it.each(getExports(collapseAnatomy))('should export %s', async (part) => {
+    await render(<Basic />)
     expect(Collapse).toHaveProperty(part, expect.anything())
   })
 })
 
 describe('[collapse] components', () => {
   it('should not have an expanded item by default', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await expect.element(page.getByRole('button', { name: 'React Trigger' })).toHaveAttribute('aria-expanded', 'false')
   })
 
   it('should open item specified in defaultValue', async () => {
-    render(<Basic defaultValue={['Solid']} />)
+    await render(<Basic defaultValue={['Solid']} />)
 
     await expect.element(page.getByRole('button', { name: 'Solid Trigger' })).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('should collapse an expanded item when collapsible is true', async () => {
-    render(<Basic collapsible />)
+    await render(<Basic collapsible />)
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -46,13 +46,13 @@ describe('[collapse] components', () => {
   })
 
   it('should disable a single item', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await expect.element(page.getByRole('button', { name: 'Svelte Trigger' })).toBeDisabled()
   })
 
   it('should disable all items when disabled is true', async () => {
-    render(<Basic disabled />)
+    await render(<Basic disabled />)
 
     await expect.element(page.getByRole('button', { name: 'React Trigger' })).toBeDisabled()
     await expect.element(page.getByRole('button', { name: 'Solid Trigger' })).toBeDisabled()
@@ -61,7 +61,7 @@ describe('[collapse] components', () => {
   })
 
   it('should allow multiple items to be expanded when multiple is true', async () => {
-    render(<Basic multiple />)
+    await render(<Basic multiple />)
 
     const reactButton = page.getByRole('button', { name: 'React Trigger' })
     const vueButton = page.getByRole('button', { name: 'Vue Trigger' })
@@ -75,7 +75,7 @@ describe('[collapse] components', () => {
 
   it('should call onValueChange when an item is clicked', async () => {
     const onValueChange = vi.fn()
-    render(<Basic onValueChange={onValueChange} />)
+    await render(<Basic onValueChange={onValueChange} />)
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -84,7 +84,7 @@ describe('[collapse] components', () => {
   })
 
   it('should render text direction based on dir prop', async () => {
-    render(
+    await render(
       <LocaleProvider locale="ar-AE">
         <Basic />
       </LocaleProvider>,
@@ -95,7 +95,7 @@ describe('[collapse] components', () => {
   })
 
   it('should focus the next/previous item on arrow up & down', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const firstButton = page.getByRole('button', { name: 'React Trigger' })
     const secondButton = page.getByRole('button', { name: 'Solid Trigger' })
@@ -110,7 +110,7 @@ describe('[collapse] components', () => {
   })
 
   it('should focus the first/last item on home & end', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const firstButton = page.getByRole('button', { name: 'React Trigger' })
     const lastButton = page.getByRole('button', { name: 'Vue Trigger' })
@@ -125,7 +125,7 @@ describe('[collapse] components', () => {
   })
 
   it('should not collapse the current visible item', async () => {
-    render(<Basic collapsible={false} />)
+    await render(<Basic collapsible={false} />)
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -137,7 +137,7 @@ describe('[collapse] components', () => {
   })
 
   it('should move the focus to the next element when pressing tab', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const firstButton = page.getByRole('button', { name: 'React Trigger' })
     const secondButton = page.getByRole('button', { name: 'Solid Trigger' })
@@ -149,7 +149,7 @@ describe('[collapse] components', () => {
   })
 
   it('should lazy mount an collapse item', async () => {
-    render(<Basic lazyMount collapsible />)
+    await render(<Basic lazyMount collapsible />)
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -163,7 +163,7 @@ describe('[collapse] components', () => {
   })
 
   it('should not have aria-controls if lazy mounted', async () => {
-    render(<Basic lazyMount />)
+    await render(<Basic lazyMount />)
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -174,7 +174,7 @@ describe('[collapse] components', () => {
   })
 
   it('should lazy mount and unmount on exit an collapse item', async () => {
-    render(<Basic lazyMount unmountOnExit collapsible />)
+    await render(<Basic lazyMount unmountOnExit collapsible />)
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 

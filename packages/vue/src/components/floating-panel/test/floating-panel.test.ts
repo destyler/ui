@@ -9,7 +9,7 @@ import { FloatingPanel, floatingPanelAnatomy } from '../index'
 
 describe('[floating-panel] component', () => {
   it.each(getParts(floatingPanelAnatomy))('should render part %s', async (part) => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -18,7 +18,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('should open panel when trigger is clicked', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('Toggle Panel'))
 
@@ -26,7 +26,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('should close panel when close trigger is clicked', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     await vi.waitFor(async () => await expect.element(page.getByText('Default Open Panel')).toBeVisible())
 
@@ -36,7 +36,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('should open panel and close with close trigger', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('Toggle Panel'))
     await vi.waitFor(async () => await expect.element(page.getByText('Floating Panel')).toBeVisible())
@@ -46,13 +46,13 @@ describe('[floating-panel] component', () => {
   })
 
   it('should render with default open state', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     await vi.waitFor(async () => await expect.element(page.getByText('Default Open Panel')).toBeVisible())
   })
 
   it('should have correct ARIA attributes on trigger', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = document.querySelector('[data-scope="floating-panel"][data-part="trigger"]')
     expect(trigger).toBeInTheDocument()
@@ -60,14 +60,14 @@ describe('[floating-panel] component', () => {
   })
 
   it('should render all resize triggers', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     const resizeTriggers = document.querySelectorAll('[data-scope="floating-panel"][data-part="resize-trigger"]')
     expect(resizeTriggers.length).toBe(8)
   })
 
   it('should render header with title', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     await vi.waitFor(async () => {
       const header = document.querySelector('[data-scope="floating-panel"][data-part="header"]')
@@ -79,7 +79,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('should render body content', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     await vi.waitFor(async () => {
       const body = document.querySelector('[data-scope="floating-panel"][data-part="body"]')
@@ -88,7 +88,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('should render window control triggers', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     await vi.waitFor(async () => {
       const minimizeTrigger = document.querySelector('[data-scope="floating-panel"][data-part="minimize-trigger"]')
@@ -106,7 +106,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('should render drag trigger', async () => {
-    render(DefaultOpen)
+    await render(DefaultOpen)
 
     await vi.waitFor(async () => {
       const dragTrigger = document.querySelector('[data-scope="floating-panel"][data-part="drag-trigger"]')
@@ -115,7 +115,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('Initial Open Panel')).toBeVisible()
   })
 })

@@ -12,7 +12,7 @@ describe('[scroll-area] component', () => {
 
   describe('basic functionality', () => {
     it('should render content inside viewport', async () => {
-      render(Basic)
+      await render(Basic)
       await expect.element(page.getByText('Tags')).toBeInTheDocument()
     })
   })

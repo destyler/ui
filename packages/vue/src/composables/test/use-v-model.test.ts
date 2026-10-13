@@ -14,7 +14,7 @@ describe('composable: useVModel', () => {
       modelValue.value = value
     })
 
-    render(UseVModelBasic, {
+    await render(UseVModelBasic, {
       props: {
         'modelValue': modelValue.value,
         'onUpdate:modelValue': onUpdate,
@@ -36,7 +36,7 @@ describe('composable: useVModel', () => {
       modelValue.value = value
     })
 
-    render(UseVModelPassive, {
+    await render(UseVModelPassive, {
       props: {
         'modelValue': modelValue.value,
         'onUpdate:modelValue': onUpdate,
@@ -55,7 +55,7 @@ describe('composable: useVModel', () => {
   })
 
   it('should use default value when modelValue is undefined', async () => {
-    render(UseVModelDefaultValue, {
+    await render(UseVModelDefaultValue, {
       props: {
         modelValue: undefined,
       },
@@ -69,7 +69,7 @@ describe('composable: useVModel', () => {
     const onCustomEvent = vi.fn()
     const onAnotherEvent = vi.fn()
 
-    render(UseVModelCustomEvent, {
+    await render(UseVModelCustomEvent, {
       props: {
         modelValue: 'initial',
         onCustomEvent,
@@ -90,7 +90,7 @@ describe('composable: useVModel', () => {
   it('should handle named key prop', async () => {
     const onUpdate = vi.fn()
 
-    render(UseVModelBasic, {
+    await render(UseVModelBasic, {
       props: {
         'modelValue': 'test',
         'onUpdate:modelValue': onUpdate,

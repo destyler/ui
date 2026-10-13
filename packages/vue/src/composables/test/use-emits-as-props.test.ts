@@ -8,7 +8,7 @@ describe('composable: useEmitAsProps', () => {
     const onClick = vi.fn()
     const onChange = vi.fn()
 
-    render(UseEmitAsPropsBasic, {
+    await render(UseEmitAsPropsBasic, {
       props: {
         onClick,
         onChange,
@@ -25,7 +25,7 @@ describe('composable: useEmitAsProps', () => {
     const onFocus = vi.fn()
     const onBlur = vi.fn()
 
-    render(UseEmitAsPropsBasic, {
+    await render(UseEmitAsPropsBasic, {
       props: {
         onFocus,
         onBlur,
@@ -49,7 +49,7 @@ describe('composable: useEmitAsProps', () => {
   it('should pass event arguments', async () => {
     const onCustom = vi.fn()
 
-    render(UseEmitAsPropsBasic, {
+    await render(UseEmitAsPropsBasic, {
       props: {
         onCustom,
       },

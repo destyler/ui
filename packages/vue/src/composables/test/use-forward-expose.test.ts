@@ -5,11 +5,11 @@ import UseForwardExposeChild from './fixtures/UseForwardExposeChild.vue'
 
 describe('composable: useForwardExpose', () => {
   it('should forward ref from child component', async () => {
-    render(UseForwardExposeChild)
+    await render(UseForwardExposeChild)
 
     const element = page.getByTestId('child-result')
     await vi.waitFor(async () => {
-      await expect.element(element).toHaveTextContent('BUTTON')
+      await expect.element(element).toMatchTextContent('BUTTON')
     }, { timeout: 5000 })
   })
 })

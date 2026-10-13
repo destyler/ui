@@ -7,7 +7,7 @@ import { Toggle, toggleAnatomy } from '../index'
 
 describe('[toggle] component', () => {
   it.each(getParts(toggleAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -16,7 +16,7 @@ describe('[toggle] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(InitialValue)
+    await render(InitialValue)
     const root = document.querySelector('[data-scope="toggle"][data-part="root"]')
     expect(root).toHaveAttribute('data-state', 'on')
   })

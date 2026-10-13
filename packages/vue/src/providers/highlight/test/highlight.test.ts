@@ -9,7 +9,7 @@ import WithInput from '../examples/WithInput.vue'
 
 describe('[highlight] provider', () => {
   it('highlights a single query in text', async () => {
-    const { container } = render(Basic)
+    const { container } = await render(Basic)
 
     const mark = container.querySelector('mark')
     expect(mark).not.toBeNull()
@@ -17,7 +17,7 @@ describe('[highlight] provider', () => {
   })
 
   it('highlights multiple queries in text', async () => {
-    const { container } = render(Multiple)
+    const { container } = await render(Multiple)
 
     const marks = container.querySelectorAll('mark')
     expect(marks.length).toBe(2)
@@ -28,7 +28,7 @@ describe('[highlight] provider', () => {
   })
 
   it('ignores case when ignoreCase is true', async () => {
-    const { container } = render(IgnoreCase)
+    const { container } = await render(IgnoreCase)
 
     const marks = container.querySelectorAll('mark')
     expect(marks.length).toBe(2)
@@ -40,7 +40,7 @@ describe('[highlight] provider', () => {
 
   describe('matchAll option', () => {
     it('highlights all occurrences when matchAll is true', async () => {
-      const { container } = render(MatchAll)
+      const { container } = await render(MatchAll)
 
       const headings = container.querySelectorAll('h3')
       const matchAllSection = headings[0]?.parentElement
@@ -60,14 +60,14 @@ describe('[highlight] provider', () => {
     })
 
     it('highlights only first occurrence when matchAll is false', async () => {
-      render(MatchAll)
+      await render(MatchAll)
 
       await expect.element(page.getByText('Match First Occurrence Only')).toBeVisible()
     })
   })
 
   it('updates highlights dynamically with input', async () => {
-    const { container } = render(WithInput)
+    const { container } = await render(WithInput)
 
     const input = container.querySelector('input')
     expect(input).not.toBeNull()
@@ -92,7 +92,7 @@ describe('[highlight] provider', () => {
   })
 
   it('renders text without marks when query is empty', async () => {
-    const { container } = render(WithInput)
+    const { container } = await render(WithInput)
 
     const input = container.querySelector('input')
 

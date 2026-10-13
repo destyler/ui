@@ -9,7 +9,7 @@ import WithField from '../examples/WithField.vue'
 import { OtpInput, otpInputAnatomy } from '../index'
 
 async function renderOnNextTick(TestComponent: any, options?: any) {
-  const view = render(TestComponent, options)
+  const view = await render(TestComponent, options)
 
   await nextTick()
 
@@ -18,7 +18,7 @@ async function renderOnNextTick(TestComponent: any, options?: any) {
 
 describe('[otp-input] component', () => {
   it.each(getParts(otpInputAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -119,7 +119,7 @@ describe('[otp-input] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(InitialValue)
+    await render(InitialValue)
     const inputs = document.querySelectorAll('[data-scope="pin-input"][data-part="input"], [data-scope="otp-input"][data-part="input"]')
     expect(inputs.length).toBeGreaterThanOrEqual(3)
     expect((inputs[0] as HTMLInputElement).value).toBe('1')

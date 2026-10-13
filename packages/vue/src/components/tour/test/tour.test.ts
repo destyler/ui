@@ -6,7 +6,7 @@ import { Tour, tourAnatomy } from '../index'
 
 describe('[tour] component', () => {
   it.each(getParts(tourAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     await vi.waitFor(() => {
       expect(document.querySelector(part)).toBeInTheDocument()
     })
@@ -17,7 +17,7 @@ describe('[tour] component', () => {
   })
 
   it('connects previous and next actions and disables them at the single-step boundaries', async () => {
-    render(Basic)
+    await render(Basic)
     await vi.waitFor(() => {
       expect(document.querySelector('[data-part="action-trigger"][data-type="prev"]')).toBeDisabled()
       expect(document.querySelector('[data-part="action-trigger"][data-type="next"]')).toBeDisabled()

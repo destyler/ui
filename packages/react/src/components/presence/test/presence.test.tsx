@@ -5,7 +5,7 @@ import { Basic } from '../examples/Basic'
 
 describe('[presence] component', () => {
   it('should control presence when not lazy mounting and not unmounting on exit', async () => {
-    render(<Basic />)
+    await render(<Basic />)
     await expect.element(page.getByTestId('box')).not.toBeVisible()
 
     await userEvent.click(page.getByRole('button'))
@@ -18,7 +18,7 @@ describe('[presence] component', () => {
   })
 
   it('should control presence when lazy mounting and not unmounting on exit', async () => {
-    render(<Basic lazyMount />)
+    await render(<Basic lazyMount />)
     await expect.element(page.getByTestId('box')).not.toBeInTheDocument()
 
     await userEvent.click(page.getByRole('button'))
@@ -31,7 +31,7 @@ describe('[presence] component', () => {
   })
 
   it('should control presence when not lazy mounting and unmounting on exit ', async () => {
-    render(<Basic unmountOnExit />)
+    await render(<Basic unmountOnExit />)
     await expect.element(page.getByTestId('box')).not.toBeVisible()
 
     await userEvent.click(page.getByRole('button'))
@@ -42,7 +42,7 @@ describe('[presence] component', () => {
   })
 
   it('should control presence when lazy mounting and unmounting on exit', async () => {
-    render(<Basic lazyMount unmountOnExit />)
+    await render(<Basic lazyMount unmountOnExit />)
 
     await expect.element(page.getByTestId('box')).not.toBeInTheDocument()
 

@@ -8,8 +8,8 @@ import { InitialValue } from '../examples/InitialValue'
 import { ToggleGroup, toggleGroupAnatomy } from '../index'
 
 describe('[toggle-group] component', () => {
-  it.each(getParts(toggleGroupAnatomy))('should render part %s', (part) => {
-    render(<Basic />)
+  it.each(getParts(toggleGroupAnatomy))('should render part %s', async (part) => {
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -18,13 +18,13 @@ describe('[toggle-group] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(<InitialValue />)
+    await render(<InitialValue />)
     const item = page.getByText('A', { exact: true })
     await expect.element(item).toHaveAttribute('data-state', 'on')
   })
 
   it('keeps the controlled array value in sync across selection and deselection', async () => {
-    render(<Controlled />)
+    await render(<Controlled />)
     const a = page.getByRole('radio', { name: 'A', exact: true })
     const b = page.getByRole('radio', { name: 'B', exact: true })
     const c = page.getByRole('radio', { name: 'C', exact: true })

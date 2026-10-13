@@ -8,8 +8,8 @@ import CheckedFixture from './checked-binding.fixture.svelte'
 type BindingScreen = Awaited<ReturnType<typeof render<typeof BindingFixture>>>
 
 async function expectState(screen: BindingScreen, testCase: BindingCase, value: unknown, ...parent: unknown[]) {
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent(formatState(testCase, value))
-  await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(formatState(testCase, parent.length ? parent[0] : value))
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent(formatState(testCase, value))
+  await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(formatState(testCase, parent.length ? parent[0] : value))
   if (testCase.state === 'open') {
     await expect.element(screen.getByTestId('trigger')).toHaveAttribute('data-state', value ? 'open' : 'closed')
     if (value)
@@ -88,7 +88,7 @@ describe.each(bindingCases)('$name binding contract', (testCase) => {
       await expectState(screen, testCase, testCase.uncontrolledInitial(), undefined)
     }
     else {
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('undefined')
+      await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('undefined')
     }
     for (let cycle = 0; cycle < 2; cycle++) {
       for (const [button, value] of [['request-next', testCase.next()], ['request-initial', testCase.initial()]] as const) {
@@ -159,7 +159,7 @@ describe.each(bindingCases)('$name binding contract', (testCase) => {
 type CheckedScreen = Awaited<ReturnType<typeof render<typeof CheckedFixture>>>
 
 async function expectChecked(screen: CheckedScreen, family: string, checked: boolean) {
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent(String(checked))
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent(String(checked))
   if (family === 'toggle') {
     await expect.element(screen.getByTestId('toggle')).toHaveAttribute('aria-pressed', String(checked))
     await expect.element(screen.getByTestId('toggle')).toHaveAttribute('data-state', checked ? 'on' : 'off')
@@ -182,7 +182,7 @@ for (const family of ['checkbox', 'switch', 'toggle'] as const) {
         await expectChecked(screen, family, initial)
         expect(onChange).toHaveBeenNthCalledWith(attempt + 1, !initial)
         expect(onChange).toHaveBeenCalledTimes(attempt + 1)
-        await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(String(initial))
+        await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(String(initial))
       }
     })
 
@@ -195,7 +195,7 @@ for (const family of ['checkbox', 'switch', 'toggle'] as const) {
         await expectChecked(screen, family, false)
         expect(onChange).toHaveBeenNthCalledWith(attempt + 1, true)
         expect(onWrite).toHaveBeenNthCalledWith(attempt + 1, true)
-        await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('false')
+        await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('false')
       }
     })
 
@@ -209,7 +209,7 @@ for (const family of ['checkbox', 'switch', 'toggle'] as const) {
         await expectChecked(screen, family, checked)
         expect(onChange).toHaveBeenNthCalledWith(attempt + 1, checked)
         if (mode !== 'uncontrolled')
-          await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(String(checked))
+          await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(String(checked))
       }
       await screen.getByTestId('unrelated').click()
       await expectChecked(screen, family, false)
@@ -224,7 +224,7 @@ describe('checkbox.Group binding', () => {
     for (let attempt = 0; attempt < 2; attempt++) {
       await screen.getByTestId('label').click()
       await expectChecked(screen, 'group', true)
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('["one"]')
+      await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('["one"]')
       expect(onChange).toHaveBeenNthCalledWith(attempt + 1, [])
     }
     await screen.getByTestId('external-reset').click()
@@ -241,29 +241,29 @@ describe('checkbox.Group binding', () => {
       await expectChecked(screen, 'group', true)
       await screen.getByTestId('label').click()
       await expectChecked(screen, 'group', false)
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('[]')
+      await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('[]')
       expect(onChange).toHaveBeenLastCalledWith([])
       await screen.getByTestId('external-set').click()
       await expectChecked(screen, 'group', true)
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('["one"]')
+      await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('["one"]')
     }
   })
 
   it('writes a group binding initially undefined on its first click', async () => {
     const screen = await render(CheckedFixture, { props: { family: 'group', mode: 'bound-undefined', initial: [] } })
-    await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('undefined')
+    await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('undefined')
     await screen.getByTestId('label').click()
     await expectChecked(screen, 'group', true)
-    await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('["one"]')
+    await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('["one"]')
     await screen.getByTestId('label').click()
     await expectChecked(screen, 'group', false)
-    await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('[]')
+    await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('[]')
   })
 })
 
 describe('radio native input binding', () => {
   async function expectRadio(screen: CheckedScreen, selected: 'one' | 'two') {
-    await expect.element(screen.getByTestId('api-state')).toHaveTextContent(selected)
+    await expect.element(screen.getByTestId('api-state')).toMatchTextContent(selected)
     for (const value of ['one', 'two']) {
       await expect.element(screen.getByTestId(`control-${value}`)).toHaveAttribute('data-state', value === selected ? 'checked' : 'unchecked')
       await vi.waitFor(() => expect((screen.getByTestId(`input-${value}`).element() as HTMLInputElement).checked).toBe(value === selected))
@@ -277,7 +277,7 @@ describe('radio native input binding', () => {
     for (let attempt = 0; attempt < 2; attempt++) {
       await screen.getByTestId('label-two').click()
       await expectRadio(screen, 'one')
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent('"one"')
+      await expect.element(screen.getByTestId('parent-state')).toMatchTextContent('"one"')
       expect(onChange).toHaveBeenNthCalledWith(attempt + 1, 'two')
       if (mode === 'bound-veto')
         expect(onWrite).toHaveBeenNthCalledWith(attempt + 1, 'two')
@@ -291,7 +291,7 @@ describe('radio native input binding', () => {
         await screen.getByTestId(`label-${value}`).click()
         await expectRadio(screen, value)
         if (mode !== 'uncontrolled')
-          await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(JSON.stringify(value))
+          await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(JSON.stringify(value))
       }
     }
   })

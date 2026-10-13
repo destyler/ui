@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [20, 22, 24]
+        node: [22.22.3, '24']
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -71,23 +71,23 @@ jobs:
         run: pnpm run test:ci
 
       - name: Check React package
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/react check
 
       - name: Check Vue package
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/vue check
 
       - name: Check Svelte package
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/svelte check:ci
 
       - name: Check Solid package
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/solid check
 
       - name: Check public API documentation
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: |
           pnpm run build
           pnpm run docs:generate:types
@@ -95,21 +95,21 @@ jobs:
           pnpm run docs:check
 
       - name: Test built Solid docs icons
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: |
           node --test scripts/test-docs-script-response.mjs
           pnpm --dir docs exec astro build
           node scripts/test-docs-solid-icons.mjs
 
       - name: Test complete documentation highlighting
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: |
           node --import tsx --test docs/scripts/test-shiki.ts docs/scripts/test-shiki-complete.ts
           node scripts/test-docs-highlighting.mjs
           node --import tsx scripts/test-docs-file-upload-source.mjs
 
       - name: Upload Solid docs icon evidence
-        if: always() && matrix.node == 22
+        if: always() && matrix.node == '22.22.3'
         uses: actions/upload-artifact@v4
         with:
           name: docs-solid-icons-node22
@@ -118,27 +118,27 @@ jobs:
           retention-days: 14
 
       - name: Build Svelte Storybook
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/svelte build-storybook
 
       - name: Build Solid Storybook
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/solid build-storybook
 
       - name: Build React Storybook
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/react build-storybook
 
       - name: Build Vue Storybook
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: pnpm --filter @destyler-ui/vue build-storybook
 
       - name: Test built docs CTA contrast
-        if: matrix.node == 22
+        if: matrix.node == '22.22.3'
         run: node scripts/test-docs-cta-contrast.mjs
 
       - name: Upload docs CTA contrast evidence
-        if: always() && matrix.node == 22
+        if: always() && matrix.node == '22.22.3'
         uses: actions/upload-artifact@v4
         with:
           name: docs-cta-contrast-node22

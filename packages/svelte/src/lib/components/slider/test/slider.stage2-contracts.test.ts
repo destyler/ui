@@ -74,10 +74,10 @@ describe('slider thumb ownership and controlled arrays', () => {
     screen.getByTestId('second-thumb').element().focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(onValueChange).toHaveBeenLastCalledWith({ value: [20, 81] })
-    await expect.element(screen.getByTestId('values')).toHaveTextContent(mode === 'accept' ? '20, 81' : '20, 80')
+    await expect.element(screen.getByTestId('values')).toMatchTextContent(mode === 'accept' ? '20, 81' : '20, 80')
     if (mode === 'delay') {
       await screen.getByRole('button', { name: 'Accept pending' }).click()
-      await expect.element(screen.getByTestId('values')).toHaveTextContent('20, 81')
+      await expect.element(screen.getByTestId('values')).toMatchTextContent('20, 81')
     }
     expect(formEntries(screen.getByTestId('slider-form').element() as HTMLFormElement)).toEqual([['low', '20'], ['high', mode === 'veto' ? '80' : '81']])
   })
@@ -88,6 +88,6 @@ describe('slider thumb ownership and controlled arrays', () => {
     screen.getByTestId('first-thumb').element().focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(onValueChange).not.toHaveBeenCalled()
-    await expect.element(screen.getByTestId('values')).toHaveTextContent('20, 80')
+    await expect.element(screen.getByTestId('values')).toMatchTextContent('20, 80')
   })
 })

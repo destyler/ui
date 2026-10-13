@@ -1,35 +1,61 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs/promises'
-import { createRequire } from 'node:module'
 import path from 'node:path'
 import process from 'node:process'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { Window } from 'happy-dom'
 import ts from 'typescript'
+import { loadAstroCompiler } from '../docs/test/astro-compiler.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const sourceRoot = process.env.ASTRO_TEST_SOURCE_ROOT || root
-const docsRequire = createRequire(path.join(root, 'docs/package.json'))
-const astroRequire = createRequire(docsRequire.resolve('astro'))
-const { parse } = astroRequire('@astrojs/compiler')
+const { parse } = loadAstroCompiler('@astrojs/compiler-rs')
 
-async function scripts(file) {
-  const source = await fs.readFile(path.join(sourceRoot, 'docs/src/components', file), 'utf8')
-  const { ast } = await parse(source)
+function scriptsFromSource(source) {
+  const { ast, diagnostics } = parse(source)
+  assert.equal(ast.type, 'AstroRoot')
+  assert.deepEqual(diagnostics.filter(diagnostic => diagnostic.severity === 'error'), [])
   const result = []
   function visit(node) {
-    if (node.type === 'element' && node.name === 'script') {
-      const code = node.children.map(child => child.value ?? '').join('')
+    if (!node || typeof node !== 'object')
+      return
+    if (node.type === 'JSXElement' && node.openingElement.name.type === 'JSXIdentifier' && node.openingElement.name.name === 'script') {
+      // ESTree stores script programs, so retain the full source between the tags.
+      const code = source.slice(node.openingElement.end, node.closingElement?.start ?? node.openingElement.end)
       result.push(ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } }).outputText)
     }
     else {
-      node.children?.forEach(visit)
+      // Scripts can be nested inside template expressions as well as children.
+      for (const value of Object.values(node)) {
+        if (Array.isArray(value))
+          value.forEach(visit)
+        else
+          visit(value)
+      }
     }
   }
-  visit(ast)
+  ast.body.forEach(visit)
   return result
 }
+
+async function scripts(file) {
+  return scriptsFromSource(await fs.readFile(path.join(sourceRoot, 'docs/src/components', file), 'utf8'))
+}
+
+test('docs checks reject a hoisted compiler that Astro no longer declares', () => {
+  assert.throws(() => loadAstroCompiler('@astrojs/compiler'), /must use a compiler declared by the installed Astro/)
+})
+
+test('the active Astro compiler preserves nested scripts, Unicode offsets, and source order', () => {
+  const source = `<p>中😀</p><section>{true && <script is:inline>console.log('nested ✓')</script>}</section>
+    <script>const value: string = 'processed'; console.log(value)</script><script is:inline>console.log('last')</script>`
+  assert.deepEqual(scriptsFromSource(source), [
+    'console.log(\'nested ✓\');\n',
+    'const value = \'processed\';\nconsole.log(value);\n',
+    'console.log(\'last\');\n',
+  ])
+})
 
 for (const mobile of [false, true]) {
   test(`${mobile ? 'mobile' : 'desktop'} ToC keeps heading selection and idempotent current-link updates`, async () => {

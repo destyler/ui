@@ -35,7 +35,7 @@ describe('[carousel] component', () => {
   it('synchronizes controlled and RootProvider controls', async () => {
     const controlled = await render(Controlled)
     await userEvent.click(controlled.getByRole('button', { name: 'Next' }))
-    await expect.element(controlled.getByRole('status')).toHaveTextContent('1')
+    await expect.element(controlled.getByRole('status')).toMatchTextContent('1')
     controlled.unmount()
 
     const provider = await render(RootProvider)

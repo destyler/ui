@@ -10,6 +10,8 @@ export default mergeConfig(
       exclude: [...configDefaults.exclude, '**/*.ssr.test.ts', '**/*.unit.test.ts'],
       environment: 'happy-dom',
       browser: {
+        // Preserve the case-insensitive substring locators used before Vitest 5.
+        locators: { exact: false },
         enabled: true,
         provider: playwright(),
         instances: [

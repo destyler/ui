@@ -9,8 +9,8 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
       for (const value of [null, 'one', null]) {
         await screen.rerender({ value })
         const state = value === null ? 'closed' : 'open'
-        await expect.element(screen.getByTestId('api-value')).toHaveTextContent(String(value))
-        await expect.element(screen.getByTestId('api-open')).toHaveTextContent(String(value !== null))
+        await expect.element(screen.getByTestId('api-value')).toMatchTextContent(String(value))
+        await expect.element(screen.getByTestId('api-open')).toMatchTextContent(String(value !== null))
         for (const part of ['trigger', 'content', 'viewport-positioner'])
           await expect.element(screen.getByTestId(part)).toHaveAttribute('data-state', state)
       }
@@ -18,8 +18,8 @@ for (const entry of ['root', 'provider', 'hook'] as const) {
 
     it('retains the default seed when live value is undefined', async () => {
       const screen = await render(NavigationNullFixture, { props: { entry, value: undefined, defaultValue: 'one' } })
-      await expect.element(screen.getByTestId('api-value')).toHaveTextContent('one')
-      await expect.element(screen.getByTestId('api-open')).toHaveTextContent('true')
+      await expect.element(screen.getByTestId('api-value')).toMatchTextContent('one')
+      await expect.element(screen.getByTestId('api-open')).toMatchTextContent('true')
     })
   })
 }

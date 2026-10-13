@@ -78,21 +78,22 @@ try {
         'happy-dom': '20.3.3',
         'typescript': '5.9.3',
         'vite': '7.2.7',
-        ...(process.env.PACKED_BROWSER === '1' ? { playwright: '1.57.0' } : {}),
+        ...(process.env.PACKED_BROWSER === '1' ? { playwright: '1.64.0' } : {}),
         ...config.tools,
       },
     }, null, 2))
-    run(npm, ['install', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false'], consumerDir)
+    run(npm, ['install', '--engine-strict', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false'], consumerDir)
     const consumerRequire = createRequire(path.join(consumerDir, 'package.json'))
     const viteRequire = createRequire(consumerRequire.resolve('vite/package.json'))
     ensureRollupNative(viteRequire, (dependency) => {
       console.log(`Repairing missing fixture-toolchain optional dependency: ${dependency}`)
-      run(npm, ['install', '--no-save', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false', dependency], consumerDir)
+      run(npm, ['install', '--engine-strict', '--no-save', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false', dependency], consumerDir)
     })
     const installedDir = path.join(consumerDir, 'node_modules', packageName)
     assert.equal((await lstat(installedDir)).isSymbolicLink(), false, 'Install the tarball, never the worktree')
     assert.ok((await realpath(installedDir)).startsWith(consumerDir))
     const manifest = JSON.parse(await readFile(path.join(installedDir, 'package.json'), 'utf8'))
+    assert.equal(manifest.engines?.node, '>=22.22.3', 'The published package must declare the supported Node.js floor')
     const installedFramework = JSON.parse(await readFile(path.join(consumerDir, 'node_modules', config.dependency, 'package.json'), 'utf8'))
     assert.equal(installedFramework.version, version)
     const packageRequire = createRequire(path.join(installedDir, 'package.json'))

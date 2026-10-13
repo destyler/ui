@@ -8,7 +8,7 @@ import SrcDoc from '../examples/SrcDoc.vue'
 
 describe('[frame] provider', () => {
   it('should render content inside the iframe', async () => {
-    render(Basic)
+    await render(Basic)
 
     await nextTick()
 
@@ -17,7 +17,7 @@ describe('[frame] provider', () => {
   })
 
   it('should apply custom styles from head slot', async () => {
-    render(Basic)
+    await render(Basic)
 
     await nextTick()
 
@@ -34,7 +34,7 @@ describe('[frame] provider', () => {
   })
 
   it('should render content with custom srcDoc', async () => {
-    render(SrcDoc)
+    await render(SrcDoc)
 
     await nextTick()
 
@@ -52,7 +52,7 @@ describe('[frame] provider', () => {
   })
 
   it('should emit mount event when frame is ready', async () => {
-    render(Script)
+    await render(Script)
 
     await nextTick()
 
@@ -71,7 +71,7 @@ describe('[frame] provider', () => {
   })
 
   it('should expose frameRef for external access', async () => {
-    render(Script)
+    await render(Script)
 
     await nextTick()
 
@@ -86,7 +86,7 @@ describe('[frame] provider', () => {
   })
 
   it('should set CSS variables for frame dimensions', async () => {
-    render(Basic)
+    await render(Basic)
 
     await nextTick()
 
@@ -104,7 +104,7 @@ describe('[frame] provider', () => {
   })
 
   it('should teleport content to frame-root element', async () => {
-    render(Basic)
+    await render(Basic)
 
     await nextTick()
 

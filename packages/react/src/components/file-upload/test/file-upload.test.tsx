@@ -5,8 +5,8 @@ import { Basic } from '../examples/Basic'
 import { FileUpload, fileUploadAnatomy } from '../index'
 
 describe('[file-upload] component', () => {
-  it.each(getParts(fileUploadAnatomy))('should render part %s', (part) => {
-    render(<Basic />)
+  it.each(getParts(fileUploadAnatomy))('should render part %s', async (part) => {
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 

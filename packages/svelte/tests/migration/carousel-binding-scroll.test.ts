@@ -6,7 +6,7 @@ it.each(['bound', 'bound-undefined'] as const)('carousel %s keeps the latest req
   const onChange = vi.fn()
   const onWrite = vi.fn()
   const screen = await render(BindingFixture, { props: { name: 'Carousel.page', mode, onChange, onWrite } })
-  await expect.element(screen.getByTestId('api-state')).toHaveTextContent('0')
+  await expect.element(screen.getByTestId('api-state')).toMatchTextContent('0')
   onChange.mockClear()
   onWrite.mockClear()
   const expected: number[] = []
@@ -17,8 +17,8 @@ it.each(['bound', 'bound-undefined'] as const)('carousel %s keeps the latest req
     for (const [button, value] of [['request-next', 1], ['request-initial', 0]] as const) {
       expected.push(value)
       await screen.getByTestId(button).click()
-      await expect.element(screen.getByTestId('api-state')).toHaveTextContent(String(value))
-      await expect.element(screen.getByTestId('parent-state')).toHaveTextContent(String(value))
+      await expect.element(screen.getByTestId('api-state')).toMatchTextContent(String(value))
+      await expect.element(screen.getByTestId('parent-state')).toMatchTextContent(String(value))
       expect(onChange.mock.lastCall?.[0]).toBe(value)
       expect(onWrite.mock.lastCall?.[0]).toBe(value)
     }
@@ -28,8 +28,8 @@ it.each(['bound', 'bound-undefined'] as const)('carousel %s keeps the latest req
   // the click can miss an obsolete callback overwriting the final request.
   // Observe beyond that window with real timers; do not poll until it recovers.
   await new Promise<void>(resolve => setTimeout(resolve, 250))
-  expect(screen.getByTestId('api-state').element()).toHaveTextContent('0')
-  expect(screen.getByTestId('parent-state').element()).toHaveTextContent('0')
+  expect(screen.getByTestId('api-state').element()).toMatchTextContent('0')
+  expect(screen.getByTestId('parent-state').element()).toMatchTextContent('0')
   // Exact histories also reject a transient stale callback/writeback that
   // happens to return to zero before the final DOM assertion.
   expect(onChange.mock.calls.map(([value]) => value)).toEqual(expected)

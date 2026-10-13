@@ -8,7 +8,7 @@ import { NumberInput, numberInputAnatomy } from '../index'
 
 describe('[number-input] component', () => {
   it.each(getParts(numberInputAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[number-input] component', () => {
   })
 
   it('should handle wheel event when allowMouseWheel is true', async () => {
-    render(Basic, { props: { allowMouseWheel: true } })
+    await render(Basic, { props: { allowMouseWheel: true } })
     const input = page.getByRole('spinbutton')
     await input.click()
     const el = input.element()
@@ -29,7 +29,7 @@ describe('[number-input] component', () => {
   })
 
   it('should clamp value on blur when clampValueOnBlur is true', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: { clampValueOnBlur: true, min: 0, max: 10, defaultValue: '15' },
     })
     const input = page.getByRole('spinbutton')
@@ -40,20 +40,20 @@ describe('[number-input] component', () => {
   })
 
   it('should allow value to exceed max when allowOverflow is true', async () => {
-    render(Basic, { props: { allowOverflow: true, max: 10, defaultValue: '15' } })
+    await render(Basic, { props: { allowOverflow: true, max: 10, defaultValue: '15' } })
     const input = page.getByRole('spinbutton')
     expect(input).toHaveValue('15')
   })
 
   it('should handle custom format and parse functions', async () => {
-    render(Basic, { props: { formatOptions: { currency: 'USD' }, defaultValue: '5' } })
+    await render(Basic, { props: { formatOptions: { currency: 'USD' }, defaultValue: '5' } })
     const input = page.getByRole('spinbutton')
 
     await vi.waitFor(async () => await expect.element(input).toHaveValue('5'))
   })
 
   it('should increment value by step when using increment button', async () => {
-    render(Basic, { props: { step: 5, defaultValue: '0' } })
+    await render(Basic, { props: { step: 5, defaultValue: '0' } })
     const incrementBtn = page.getByText('+1')
     await userEvent.click(incrementBtn)
 
@@ -64,38 +64,38 @@ describe('[number-input] component', () => {
 
 describe('[number-input] Field', () => {
   it('should set input as required', async () => {
-    render(WithField, { props: { required: true } })
+    await render(WithField, { props: { required: true } })
     expect(page.getByRole('spinbutton', { name: /label/i })).toBeRequired()
   })
 
   it('should set input as disabled', async () => {
-    render(WithField, { props: { disabled: true } })
+    await render(WithField, { props: { disabled: true } })
     expect(page.getByRole('spinbutton', { name: /label/i })).toBeDisabled()
   })
 
   it('should set input as readonly', async () => {
-    render(WithField, { props: { readOnly: true } })
+    await render(WithField, { props: { readOnly: true } })
     expect(page.getByRole('spinbutton', { name: /label/i })).toHaveAttribute('readonly')
   })
 
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     expect(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     expect(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on input when label is clicked', async () => {
-    render(WithField)
+    await render(WithField)
     await userEvent.click(page.getByText(/label/i))
     expect(page.getByRole('spinbutton', { name: /label/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(WithField)
+    await render(WithField)
     expect(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })

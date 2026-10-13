@@ -8,7 +8,7 @@ import { Separator, separatorAnatomy } from '../index'
 
 describe('[separator] component', () => {
   it.each(getParts(separatorAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,32 +17,32 @@ describe('[separator] component', () => {
   })
 
   it('should render horizontal separator by default', async () => {
-    render(<Basic />)
+    await render(<Basic />)
     const separator = document.querySelector('[data-scope="separator"][data-part="root"]')
     expect(separator).toBeInTheDocument()
     expect(separator).toHaveAttribute('data-orientation', 'horizontal')
   })
 
   it('should render vertical separator', async () => {
-    render(<Vertical />)
+    await render(<Vertical />)
     const separator = document.querySelector('[data-scope="separator"][data-part="root"][data-orientation="vertical"]')
     expect(separator).toBeInTheDocument()
   })
 
   it('should work with RootProvider', async () => {
-    render(<RootProvider />)
+    await render(<RootProvider />)
     const separator = document.querySelector('[data-scope="separator"][data-part="root"]')
     expect(separator).toBeInTheDocument()
   })
 
   it('should have correct ARIA role', async () => {
-    render(<Basic />)
+    await render(<Basic />)
     const separator = document.querySelector('[data-scope="separator"][data-part="root"]')
     expect(separator).toHaveAttribute('role', 'separator')
   })
 
   it('should have aria-orientation attribute', async () => {
-    render(<Vertical />)
+    await render(<Vertical />)
     const separator = document.querySelector('[data-scope="separator"][data-part="root"][data-orientation="vertical"]')
     expect(separator).toHaveAttribute('aria-orientation', 'vertical')
   })

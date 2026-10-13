@@ -8,7 +8,7 @@ describe('composable: useForwardPropsEmits', () => {
   it('should forward both props and emits', async () => {
     const onUpdate = vi.fn()
 
-    render(UseForwardPropsEmitsBasic, {
+    await render(UseForwardPropsEmitsBasic, {
       props: {
         label: 'Test Label',
         onUpdate,
@@ -16,7 +16,7 @@ describe('composable: useForwardPropsEmits', () => {
     })
 
     const element = page.getByTestId('label')
-    await expect.element(element).toHaveTextContent('Test Label')
+    await expect.element(element).toMatchTextContent('Test Label')
 
     const button = page.getByTestId('button')
     await userEvent.click(button)
@@ -27,7 +27,7 @@ describe('composable: useForwardPropsEmits', () => {
   it('should forward props and emits from parent to child', async () => {
     const onUpdate = vi.fn()
 
-    render(UseForwardPropsEmitsParent, {
+    await render(UseForwardPropsEmitsParent, {
       props: {
         label: 'Parent Label',
         value: 'test-value',
@@ -36,8 +36,8 @@ describe('composable: useForwardPropsEmits', () => {
     })
 
     const element = page.getByTestId('child-label')
-    await expect.element(element).toHaveTextContent('Parent Label')
-    await expect.element(page.getByTestId('child-value')).toHaveTextContent('test-value')
+    await expect.element(element).toMatchTextContent('Parent Label')
+    await expect.element(page.getByTestId('child-value')).toMatchTextContent('test-value')
 
     const button = page.getByTestId('child-button')
     await userEvent.click(button)
@@ -46,13 +46,13 @@ describe('composable: useForwardPropsEmits', () => {
   })
 
   it('should handle props without emits', async () => {
-    render(UseForwardPropsEmitsBasic, {
+    await render(UseForwardPropsEmitsBasic, {
       props: {
         label: 'No Emit Label',
       },
     })
 
     const element = page.getByTestId('label')
-    await expect.element(element).toHaveTextContent('No Emit Label')
+    await expect.element(element).toMatchTextContent('No Emit Label')
   })
 })

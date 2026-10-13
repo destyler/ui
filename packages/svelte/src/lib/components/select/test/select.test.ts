@@ -28,7 +28,7 @@ describe('[select] component', () => {
     const trigger = screen.getByRole('combobox', { name: 'Framework' })
     await trigger.click()
     await screen.getByTestId('positioner').getByText('React').click()
-    await expect.element(trigger).toHaveTextContent('React')
+    await expect.element(trigger).toMatchTextContent('React')
     await expect.element(screen.getByText('Frameworks')).not.toBeVisible()
   })
 
@@ -39,7 +39,7 @@ describe('[select] component', () => {
     const positioner = screen.getByTestId('positioner')
     await positioner.getByText('React').click()
     await positioner.getByText('Vue').click()
-    await expect.element(trigger).toHaveTextContent('React, Vue')
+    await expect.element(trigger).toMatchTextContent('React, Vue')
   })
 
   it('keeps controlled and reactive examples aligned with the shared DOM', async () => {
@@ -134,6 +134,6 @@ describe('[select] field integration', () => {
 describe('[select] default*', () => {
   it('seeds default* via InitialValue example', async () => {
     const screen = await render(InitialValue)
-    await expect.element(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
+    await expect.element(screen.getByRole('combobox', { name: 'Framework' })).toMatchTextContent('Vue')
   })
 })

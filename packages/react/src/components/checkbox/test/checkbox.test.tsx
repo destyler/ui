@@ -13,25 +13,25 @@ import { Checkbox, checkboxAnatomy } from '../index'
 
 describe('[checkbox] component', () => {
   it.each(getParts(checkboxAnatomy).filter(p => !p.includes('group')))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
 
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
   it('should render part [data-scope="checkbox"][data-part="group"]', async () => {
-    render(<Group />)
+    await render(<Group />)
 
     expect(document.querySelector('[data-scope="checkbox"][data-part="group"]')).toBeInTheDocument()
   })
 
   it.each(getExports(checkboxAnatomy))('should export %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(Checkbox).toHaveProperty(part, expect.anything())
   })
 
   it('should handle check and unchecked', async () => {
     const onCheckedChange = vi.fn()
-    render(<Basic onCheckedChange={onCheckedChange} />)
+    await render(<Basic onCheckedChange={onCheckedChange} />)
 
     const checkbox = page.getByRole('checkbox')
     const label = page.getByText('Checkbox')
@@ -41,13 +41,13 @@ describe('[checkbox] component', () => {
   })
 
   it('should allow controlled usage', async () => {
-    render(<Controlled />)
+    await render(<Controlled />)
 
     await expect.element(page.getByRole('checkbox').first()).toBeChecked()
   })
 
   it('should handle indeterminate state from example', async () => {
-    render(<Indeterminate />)
+    await render(<Indeterminate />)
     await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'indeterminate')
     await userEvent.click(page.getByText('Checkbox', { exact: true }))
     await expect.element(page.getByRole('checkbox')).toBeChecked()
@@ -57,7 +57,7 @@ describe('[checkbox] component', () => {
     await expect.element(page.getByTestId('control')).toHaveAttribute('data-state', 'unchecked')
   })
   it('seeds default* via InitialValue example', async () => {
-    render(<InitialValue />)
+    await render(<InitialValue />)
     await expect.element(page.getByRole('checkbox')).toBeChecked()
   })
 
@@ -75,7 +75,7 @@ describe('[checkbox] component', () => {
         </>
       )
     }
-    render(<Harness />)
+    await render(<Harness />)
     const checkbox = page.getByRole('checkbox', { name: 'Standalone checkbox' })
     await expect.element(checkbox).toBeChecked()
     await userEvent.click(page.getByText('Standalone checkbox'))
@@ -85,7 +85,7 @@ describe('[checkbox] component', () => {
   })
 
   it('omits undefined checked so defaultChecked stays uncontrolled', async () => {
-    render(
+    await render(
       <Checkbox.Root defaultChecked checked={undefined}>
         <Checkbox.Label>Undefined live checkbox</Checkbox.Label>
         <Checkbox.Control />
@@ -121,58 +121,58 @@ describe('[checkbox] component', () => {
     await userEvent.click(page.getByText('Reset checkbox', { exact: true }))
     await expect.element(checkbox).not.toBeChecked()
     await expect.element(control).toHaveAttribute('data-state', 'unchecked')
-    await expect.element(state).toHaveTextContent('false')
+    await expect.element(state).toMatchTextContent('false')
 
     await screen.rerender(<ResetExample defaultChecked={false} />)
     await expect.element(checkbox).not.toBeChecked()
     await userEvent.click(page.getByRole('button', { name: 'Reset form' }))
     await expect.element(checkbox).toBeChecked()
     await expect.element(control).toHaveAttribute('data-state', 'checked')
-    await expect.element(state).toHaveTextContent('true')
+    await expect.element(state).toMatchTextContent('true')
 
     await userEvent.click(page.getByText('Reset checkbox', { exact: true }))
-    await expect.element(state).toHaveTextContent('false')
+    await expect.element(state).toMatchTextContent('false')
     await userEvent.click(page.getByRole('button', { name: 'Reset form' }))
     await expect.element(checkbox).toBeChecked()
     await expect.element(control).toHaveAttribute('data-state', 'checked')
-    await expect.element(state).toHaveTextContent('true')
+    await expect.element(state).toMatchTextContent('true')
   })
 })
 
 describe('checkbox / Field', () => {
   it('should set checkbox as required', async () => {
-    render(<WithField required />)
+    await render(<WithField required />)
     await expect.element(page.getByRole('checkbox', { name: /label/i })).toBeRequired()
   })
 
   it('should set input as disabled', async () => {
-    render(<WithField disabled />)
+    await render(<WithField disabled />)
     await expect.element(page.getByRole('checkbox', { name: /label/i })).toBeDisabled()
   })
 
   it('should set input as readonly', async () => {
-    render(<WithField readOnly />)
+    await render(<WithField readOnly />)
     await expect.element(page.getByText('Label')).toHaveAttribute('data-readonly')
   })
 
   it('should display helper text', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(<WithField invalid />)
+    await render(<WithField invalid />)
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on input when label is clicked', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByRole('checkbox', { name: /label/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })

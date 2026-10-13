@@ -9,7 +9,7 @@ import { Breadcrumbs, breadcrumbsAnatomy } from '../index'
 
 describe('[breadcrumbs] component', () => {
   it.each(getParts(breadcrumbsAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,7 +19,7 @@ describe('[breadcrumbs] component', () => {
 
   describe('basic example', () => {
     it('should render all breadcrumb items', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       await expect.element(page.getByText('Home')).toBeVisible()
       await expect.element(page.getByText('Products')).toBeVisible()
       await expect.element(page.getByText('Electronics')).toBeVisible()
@@ -27,27 +27,27 @@ describe('[breadcrumbs] component', () => {
     })
 
     it('should render separators for items with href', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       const separators = document.querySelectorAll('[data-part="separator"]')
       expect(separators.length).toBe(3)
     })
 
     it('should not render separator for last item without href', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       const smartphones = page.getByText('Smartphones')
       const listItem = smartphones.element().closest('[data-part="item"]')
       expect(listItem?.querySelector('[data-part="separator"]')).toBeNull()
     })
 
     it('should render links', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       await expect.element(page.getByRole('link', { name: 'Home' })).toBeVisible()
       await expect.element(page.getByRole('link', { name: 'Products' })).toBeVisible()
       await expect.element(page.getByRole('link', { name: 'Electronics' })).toBeVisible()
     })
 
     it('preserves destination, current-page, and item-label semantics', async () => {
-      render(<Basic />)
+      await render(<Basic />)
       const home = page.getByRole('link', { name: 'Home' })
       const current = page.getByRole('link', { name: 'Smartphones' })
       await expect.element(home).toHaveAttribute('href', '/')
@@ -62,28 +62,28 @@ describe('[breadcrumbs] component', () => {
 
   describe('rootProvider example', () => {
     it('should render breadcrumb items', async () => {
-      render(<RootProvider />)
+      await render(<RootProvider />)
       await expect.element(page.getByText('Home')).toBeVisible()
       await expect.element(page.getByText('Products')).toBeVisible()
       await expect.element(page.getByText('Electronics')).toBeVisible()
     })
 
     it('should render add item button', async () => {
-      render(<RootProvider />)
+      await render(<RootProvider />)
       await expect.element(page.getByText('Add Item')).toBeVisible()
     })
   })
 
   describe('context example', () => {
     it('should render breadcrumb items with custom icons', async () => {
-      render(<Context />)
+      await render(<Context />)
       await expect.element(page.getByText('Dashboard')).toBeVisible()
       await expect.element(page.getByText('Settings')).toBeVisible()
       await expect.element(page.getByText('Profile')).toBeVisible()
     })
 
     it('should display hovered and focused state', async () => {
-      render(<Context />)
+      await render(<Context />)
       await expect.element(page.getByText('Hovered: none')).toBeVisible()
       await expect.element(page.getByText('Focused: none')).toBeVisible()
 
@@ -102,7 +102,7 @@ describe('[breadcrumbs] component', () => {
     })
 
     it('should render custom SVG separators', async () => {
-      render(<Context />)
+      await render(<Context />)
       const separators = document.querySelectorAll('[data-part="separator"] svg')
       expect(separators.length).toBe(2)
     })

@@ -10,7 +10,7 @@ import { Signature, signatureAnatomy } from '../index'
 
 describe('[signature] component', () => {
   it.each(getParts(signatureAnatomy).filter(p => !p.includes('segment-path')))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,24 +19,24 @@ describe('[signature] component', () => {
   })
 
   it('should render signature label', async () => {
-    render(Basic)
+    await render(Basic)
     await expect.element(page.getByText('Sign below')).toBeInTheDocument()
   })
 
   it('should render signature control with svg', async () => {
-    render(Basic)
+    await render(Basic)
     const svg = document.querySelector('svg[data-part="segment"]')
     expect(svg).toBeInTheDocument()
   })
 
   it('should render clear button', async () => {
-    render(Basic)
+    await render(Basic)
     const clearButton = document.querySelector('[data-part="clear-trigger"]')
     expect(clearButton).toBeInTheDocument()
   })
 
   it('should have control element ready for drawing', async () => {
-    render(Basic)
+    await render(Basic)
 
     const control = document.querySelector('[data-part="control"]')
     expect(control).toBeInTheDocument()
@@ -45,7 +45,7 @@ describe('[signature] component', () => {
   })
 
   it('should render clear button with correct attributes', async () => {
-    render(Basic)
+    await render(Basic)
 
     const clearButton = document.querySelector('[data-part="clear-trigger"]')
     expect(clearButton).toBeInTheDocument()
@@ -54,13 +54,13 @@ describe('[signature] component', () => {
   })
 
   it('should render guide lines', async () => {
-    render(Basic)
+    await render(Basic)
     const guide = document.querySelector('[data-part="guide"]')
     expect(guide).toBeInTheDocument()
   })
 
   it('should render image preview component', async () => {
-    render(ImagePreview)
+    await render(ImagePreview)
 
     const control = document.querySelector('[data-part="control"]')
     expect(control).toBeInTheDocument()
@@ -71,7 +71,7 @@ describe('[signature] component', () => {
   })
 
   it('should support custom fill color', async () => {
-    render(ImagePreview)
+    await render(ImagePreview)
 
     const segment = document.querySelector('[data-part="segment"]')
     expect(segment).toBeInTheDocument()
@@ -79,7 +79,7 @@ describe('[signature] component', () => {
   })
 
   it('should work with RootProvider', async () => {
-    render(RootProvider)
+    await render(RootProvider)
 
     // Should render external clear button
     const externalClearButton = page.getByRole('button', { name: 'Clear' }).first()
@@ -91,7 +91,7 @@ describe('[signature] component', () => {
   })
 
   it('should have external clear button when using RootProvider', async () => {
-    render(RootProvider)
+    await render(RootProvider)
 
     const control = document.querySelector('[data-part="control"]')
     expect(control).toBeInTheDocument()
@@ -107,12 +107,12 @@ describe('[signature] component', () => {
 
 describe('signature / Field', () => {
   it('should render with field wrapper', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Label')).toBeInTheDocument()
   })
 
   it('should render hidden input', async () => {
-    render(WithField)
+    await render(WithField)
 
     const hiddenInput = document.querySelector('input[hidden]')
     expect(hiddenInput).toBeInTheDocument()
@@ -120,17 +120,17 @@ describe('signature / Field', () => {
   })
 
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when invalid', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should have hidden input for form submission', async () => {
-    render(WithField)
+    await render(WithField)
 
     const hiddenInput = document.querySelector('input[hidden]') as HTMLInputElement
     expect(hiddenInput).toBeInTheDocument()
@@ -139,7 +139,7 @@ describe('signature / Field', () => {
   })
 
   it('should have clear button in field', async () => {
-    render(WithField)
+    await render(WithField)
 
     const clearButton = document.querySelector('[data-part="clear-trigger"]')
     expect(clearButton).toBeInTheDocument()

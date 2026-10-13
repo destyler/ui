@@ -7,8 +7,8 @@ import { InitialOpen } from '../examples/InitialOpen'
 import { FloatingPanel, floatingPanelAnatomy } from '../index'
 
 describe('[floating-panel] component', () => {
-  it.each(getParts(floatingPanelAnatomy))('should render part %s', (part) => {
-    render(<Basic />)
+  it.each(getParts(floatingPanelAnatomy))('should render part %s', async (part) => {
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[floating-panel] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(<InitialOpen />)
+    await render(<InitialOpen />)
     await expect.element(page.getByText('Initial Open Panel')).toBeVisible()
   })
 })

@@ -8,7 +8,7 @@ import { FileUpload, fileUploadAnatomy } from '../index'
 
 describe('[file-upload] component', () => {
   it.each(getParts(fileUploadAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,33 +19,33 @@ describe('[file-upload] component', () => {
 
 describe('file Upload / Field', () => {
   it('should set file upload as required', async () => {
-    render(WithField, { props: { required: true } })
+    await render(WithField, { props: { required: true } })
     await expect.element(page.getByTestId('input')).toBeRequired()
   })
 
   it('should set file upload as disabled', async () => {
-    render(WithField, { props: { disabled: true } })
+    await render(WithField, { props: { disabled: true } })
     await expect.element(page.getByTestId('input')).toBeDisabled()
   })
 
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on file upload when label is clicked', async () => {
-    render(WithField)
+    await render(WithField)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByTestId('input')).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })

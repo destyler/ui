@@ -5,7 +5,7 @@ import ClientOnlyBasic from './fixtures/ClientOnlyBasic.vue'
 
 describe('[client-only] provider', () => {
   it('shows client content after hydration and hides the fallback slot', async () => {
-    render(ClientOnlyBasic)
+    await render(ClientOnlyBasic)
 
     const client = page.getByTestId('client-slot')
     const fallback = page.getByTestId('fallback-slot')

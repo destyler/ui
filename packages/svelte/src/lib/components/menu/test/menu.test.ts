@@ -106,7 +106,7 @@ describe('[menu] component', () => {
     await userEvent.keyboard('{ArrowDown}')
     await vi.waitFor(() => {
       const item = document.querySelector('[data-part="item"][data-highlighted]')
-      expect(item).toHaveTextContent('React')
+      expect(item).toMatchTextContent('React')
     })
   })
 

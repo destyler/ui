@@ -10,7 +10,7 @@ import { Dynamic, dynamicAnatomy } from '../index'
 
 describe('[dynamic] component', () => {
   it.each(getParts(dynamicAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,7 +19,7 @@ describe('[dynamic] component', () => {
   })
 
   it('should clear all item when clear all button is clicked', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await expect.element(page.getByText('react')).toBeInTheDocument()
     await expect.element(page.getByText('solid')).toBeInTheDocument()
@@ -34,30 +34,30 @@ describe('[dynamic] component', () => {
 })
 
 it('seeds default* via InitialValue example', async () => {
-  render(<InitialValue />)
+  await render(<InitialValue />)
   await expect.element(page.getByText('React')).toBeInTheDocument()
   await expect.element(page.getByText('Solid')).toBeInTheDocument()
 })
 
 describe('tagsInput / Field', () => {
   it('should display helper text', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(<WithField invalid />)
+    await render(<WithField invalid />)
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on tags input when label is clicked', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByRole('textbox', { name: /label/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })
@@ -82,22 +82,22 @@ function ValueState(props: UseDynamicProps) {
 describe('dynamic value state', () => {
   it('keeps internal edits when unrelated props and defaultValue change', async () => {
     const screen = await render(<ValueState defaultValue={['Initial']} />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Initial"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Initial"]')
     await userEvent.click(page.getByRole('button', { name: 'Set value' }))
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Edited"]')
 
     await screen.rerender(<ValueState defaultValue={['Initial']} readOnly />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Edited"]')
     await screen.rerender(<ValueState defaultValue={['Replacement']} />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Edited"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Edited"]')
   })
 
   it('prefers an explicit empty value and follows live value updates', async () => {
     const screen = await render(<ValueState defaultValue={['Initial']} value={[]} />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('[]')
     await screen.rerender(<ValueState defaultValue={['Initial']} value={['Updated']} />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('["Updated"]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('["Updated"]')
     await screen.rerender(<ValueState defaultValue={['Initial']} value={[]} />)
-    await expect.element(page.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(page.getByTestId('value')).toMatchTextContent('[]')
   })
 })

@@ -104,6 +104,9 @@
     "README.md",
     "dist"
   ],
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
@@ -198,7 +201,6 @@
     "unplugin-solid": "catalog:solid-build",
     "vite": "catalog:runtime",
     "vite-plugin-solid": "catalog:solid-build",
-    "vitest": "catalog:test",
-    "vitest-browser-solid": "catalog:solid-test"
+    "vitest": "catalog:test"
   }
 }

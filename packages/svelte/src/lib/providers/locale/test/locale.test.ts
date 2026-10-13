@@ -39,7 +39,7 @@ describe('[locale] provider', () => {
   it('uses the provider locale for filtering and allows an explicit override', async () => {
     await render(FilterFixture)
 
-    await expect.element(page.getByTestId('context-filter')).toHaveTextContent('true')
-    await expect.element(page.getByTestId('overridden-filter')).toHaveTextContent('false')
+    await expect.element(page.getByTestId('context-filter')).toMatchTextContent('true')
+    await expect.element(page.getByTestId('overridden-filter')).toMatchTextContent('false')
   })
 })

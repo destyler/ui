@@ -8,7 +8,7 @@ import { ColorPicker, colorPickerAnatomy, parseColor } from '../index'
 
 describe('[color-picker] component', () => {
   it.each(getParts(colorPickerAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[color-picker] component', () => {
   })
 
   it('should be able to lazy mount', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: {
         lazyMount: true,
       },
@@ -33,7 +33,7 @@ describe('[color-picker] component', () => {
   }, 7000)
 
   it('should lazy mount and unmount on exit', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: {
         lazyMount: true,
         unmountOnExit: true,
@@ -52,7 +52,7 @@ describe('[color-picker] component', () => {
   }, 7000)
 
   it('should render with default value', async () => {
-    render(Basic, { props: { defaultValue: parseColor('#ff00ff') } })
+    await render(Basic, { props: { defaultValue: parseColor('#ff00ff') } })
 
     await expect.element(page.getByTestId('swatch-trigger')).toHaveStyle({
       backgroundColor: 'rgb(255, 0, 255)',
@@ -62,38 +62,38 @@ describe('[color-picker] component', () => {
 
 describe('color Picker / Field', () => {
   it('should set color picker as required', async () => {
-    render(WithField, { props: { required: true } })
+    await render(WithField, { props: { required: true } })
     await expect.element(page.getByRole('textbox', { name: /label/i })).toBeRequired()
   })
 
   it('should set color picker as disabled', async () => {
-    render(WithField, { props: { disabled: true } })
+    await render(WithField, { props: { disabled: true } })
     await expect.element(page.getByRole('textbox', { name: /label/i })).toBeDisabled()
   })
 
   it('should set color picker as readonly', async () => {
-    render(WithField, { props: { readOnly: true } })
+    await render(WithField, { props: { readOnly: true } })
     await expect.element(page.getByRole('textbox', { name: /label/i })).toHaveAttribute('readonly')
   })
 
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on input when label is clicked', async () => {
-    render(WithField)
+    await render(WithField)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByRole('textbox', { name: /hex/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByTestId('Error Info')).not.toBeInTheDocument()
   })
 })

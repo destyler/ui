@@ -8,7 +8,7 @@ import { ToggleGroup, toggleGroupAnatomy } from '../index'
 
 describe('[toggle-group] component', () => {
   it.each(getParts(toggleGroupAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[toggle-group] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(InitialValue)
+    await render(InitialValue)
     const item = page.getByText('A', { exact: true })
     await expect.element(item).toHaveAttribute('data-state', 'on')
   })

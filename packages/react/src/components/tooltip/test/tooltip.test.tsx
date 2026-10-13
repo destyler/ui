@@ -11,7 +11,7 @@ import { Tooltip, tooltipAnatomy } from '../index'
 
 describe('[tooltip] parts & exports', () => {
   it.each(getParts(tooltipAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -20,14 +20,14 @@ describe('[tooltip] parts & exports', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(<InitialOpen />)
+    await render(<InitialOpen />)
     await expect.element(page.getByText('content')).toBeVisible()
   })
 })
 
 describe('[tooltip] functionality', () => {
   it('should open on trigger hover', async () => {
-    render(<Timings />)
+    await render(<Timings />)
 
     const trigger = page.getByRole('button', { name: 'Hover Me' })
     await userEvent.hover(trigger)
@@ -36,7 +36,7 @@ describe('[tooltip] functionality', () => {
   })
 
   it('should work in controlled mode', async () => {
-    render(<Controlled />)
+    await render(<Controlled />)
 
     const toggleButton = page.getByRole('button', { name: 'Toggle' })
 
@@ -47,7 +47,7 @@ describe('[tooltip] functionality', () => {
   })
 
   it('should open via api', async () => {
-    render(<RootProvider />)
+    await render(<RootProvider />)
 
     const openButton = page.getByRole('button', { name: 'Open' })
     await userEvent.click(openButton)

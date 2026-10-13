@@ -23,7 +23,7 @@ describe('[focus-trap] provider', () => {
     const cleanup = vi.fn()
     vi.mocked(trapFocus).mockReturnValue(cleanup)
 
-    render(FocusTrapBasic)
+    await render(FocusTrapBasic)
     await nextTick()
 
     expect(trapFocus).toHaveBeenCalledTimes(1)
@@ -44,7 +44,7 @@ describe('[focus-trap] provider', () => {
     const activate = vi.fn()
     const deactivate = vi.fn()
 
-    render(FocusTrap, {
+    await render(FocusTrap, {
       props: {
         onActivate: activate,
         onDeactivate: deactivate,
@@ -68,7 +68,7 @@ describe('[focus-trap] provider', () => {
     const cleanup = vi.fn()
     vi.mocked(trapFocus).mockReturnValue(cleanup)
 
-    render(FocusTrapToggle)
+    await render(FocusTrapToggle)
     await nextTick()
 
     await userEvent.click(page.getByTestId('toggle'))
@@ -77,7 +77,7 @@ describe('[focus-trap] provider', () => {
   })
 
   it('does not activate when disabled', async () => {
-    render(FocusTrap, {
+    await render(FocusTrap, {
       props: {
         disabled: true,
       },

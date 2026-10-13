@@ -15,6 +15,8 @@ export default mergeConfig(
         'storybook-static/**',
       ],
       browser: {
+        // Preserve the case-insensitive substring locators used before Vitest 5.
+        locators: { exact: false },
         enabled: true,
         provider: playwright(),
         instances: [

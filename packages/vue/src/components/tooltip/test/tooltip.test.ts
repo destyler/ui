@@ -8,7 +8,7 @@ import { Tooltip, tooltipAnatomy } from '../index'
 
 describe('[tooltip] component', () => {
   it.each(getParts(tooltipAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[tooltip] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('content')).toBeVisible()
   })
 })

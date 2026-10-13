@@ -11,7 +11,7 @@ import { Radio, radioAnatomy } from '../index'
 
 describe('[radio] component', () => {
   it.each(getParts(radioAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -20,7 +20,7 @@ describe('[radio] component', () => {
   })
 
   it('should render radio items with correct labels', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await expect.element(page.getByText('React')).toBeInTheDocument()
     await expect.element(page.getByText('Solid')).toBeInTheDocument()
@@ -29,7 +29,7 @@ describe('[radio] component', () => {
   })
 
   it('should handle radio selection', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const reactLabel = page.getByText('React')
     await userEvent.click(reactLabel)
@@ -43,7 +43,7 @@ describe('[radio] component', () => {
   })
 
   it('should allow switching between radio items', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     // 选择第一个
     await userEvent.click(page.getByText('React'))
@@ -60,7 +60,7 @@ describe('[radio] component', () => {
   })
 
   it('should disable specific radio item', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const radioItems = document.querySelectorAll('[data-scope="radio-group"][data-part="item"]')
     const svelteItem = Array.from(radioItems).find(item =>
@@ -71,7 +71,7 @@ describe('[radio] component', () => {
   })
 
   it('should not select disabled item when clicked', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const radioItems = document.querySelectorAll('[data-scope="radio-group"][data-part="item"]')
     const svelteItem = Array.from(radioItems).find(item =>
@@ -85,7 +85,7 @@ describe('[radio] component', () => {
   })
 
   it('should set initial value', async () => {
-    render(<InitialValue />)
+    await render(<InitialValue />)
 
     const radioItems = document.querySelectorAll('[data-scope="radio-group"][data-part="item"]')
     const solidItem = Array.from(radioItems).find(item =>
@@ -97,7 +97,7 @@ describe('[radio] component', () => {
 
   it('should emit value-change event when selection changes', async () => {
     const onValueChange = vi.fn()
-    render(<OnEvent onValueChange={onValueChange} />)
+    await render(<OnEvent onValueChange={onValueChange} />)
 
     await userEvent.click(page.getByText('Vue'))
 
@@ -107,7 +107,7 @@ describe('[radio] component', () => {
   })
 
   it('should work with RootProvider', async () => {
-    render(<RootProvider />)
+    await render(<RootProvider />)
 
     await expect.element(page.getByText('Focus')).toBeInTheDocument()
     await expect.element(page.getByText('React')).toBeInTheDocument()
@@ -116,7 +116,7 @@ describe('[radio] component', () => {
   })
 
   it('should focus radio group when focus button is clicked', async () => {
-    render(<RootProvider />)
+    await render(<RootProvider />)
 
     const focusButton = page.getByText('Focus')
     await userEvent.click(focusButton)
@@ -128,14 +128,14 @@ describe('[radio] component', () => {
 
 describe('[radio] disabled state', () => {
   it('should disable entire radio group', async () => {
-    render(<Disabled />)
+    await render(<Disabled />)
 
     const radioRoot = document.querySelector('[data-scope="radio-group"][data-part="root"]') as HTMLElement
     await expect.element(radioRoot).toHaveAttribute('data-disabled')
   })
 
   it('should not allow selection when radio group is disabled', async () => {
-    render(<Disabled />)
+    await render(<Disabled />)
 
     const radioItems = document.querySelectorAll('[data-scope="radio-group"][data-part="item"]')
     const reactItem = Array.from(radioItems).find(item =>
@@ -149,7 +149,7 @@ describe('[radio] disabled state', () => {
   })
 
   it('should have disabled attribute on all items when group is disabled', async () => {
-    render(<Disabled />)
+    await render(<Disabled />)
 
     const radioItems = document.querySelectorAll('[data-scope="radio-group"][data-part="item"]')
 

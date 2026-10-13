@@ -79,8 +79,8 @@ describe('[field] component', () => {
     selectElement.value = 'two'
     selectElement.dispatchEvent(new Event('input', { bubbles: true }))
 
-    await expect.element(screen.getByTestId('input-value')).toHaveTextContent('Updated input')
-    await expect.element(screen.getByTestId('textarea-value')).toHaveTextContent('Updated textarea')
-    await expect.element(screen.getByTestId('select-value')).toHaveTextContent('two')
+    await expect.element(screen.getByTestId('input-value')).toMatchTextContent('Updated input')
+    await expect.element(screen.getByTestId('textarea-value')).toMatchTextContent('Updated textarea')
+    await expect.element(screen.getByTestId('select-value')).toMatchTextContent('two')
   })
 })

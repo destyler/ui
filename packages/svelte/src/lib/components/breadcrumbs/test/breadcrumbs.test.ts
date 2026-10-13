@@ -39,7 +39,7 @@ describe('[breadcrumbs] component', () => {
   it('exposes hover and focus state through Context', async () => {
     const screen = await render(Context)
     expect(screen.container.querySelector(':scope > main')).toBeInTheDocument()
-    expect(screen.container.querySelector('[data-part="link"] > span')).toHaveTextContent('🏠')
+    expect(screen.container.querySelector('[data-part="link"] > span')).toMatchTextContent('🏠')
     const settings = page.getByRole('link', { name: 'Settings' })
     await expect.element(page.getByText('Hovered: none')).toBeVisible()
     await userEvent.hover(settings)

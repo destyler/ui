@@ -6,7 +6,7 @@ import OpenFixture from './open.fixture.svelte'
 import UiDefaultsFixture from './ui-defaults.fixture.svelte'
 
 async function expectOpen(screen: Awaited<ReturnType<typeof render<typeof OpenFixture>>>, open: boolean, family: OpenFamily) {
-  await expect.element(screen.getByTestId('api-open')).toHaveTextContent(String(open))
+  await expect.element(screen.getByTestId('api-open')).toMatchTextContent(String(open))
   await expect.element(screen.getByTestId('trigger')).toHaveAttribute('data-state', open ? 'open' : 'closed')
   if (open)
     await expect.element(screen.getByTestId('content')).toBeVisible()
@@ -15,7 +15,7 @@ async function expectOpen(screen: Awaited<ReturnType<typeof render<typeof OpenFi
   if (family === 'combobox') {
     const option = screen.getByTestId('option-one')
     await expect.element(option).toHaveAttribute('role', 'option')
-    await expect.element(option).toHaveTextContent('one')
+    await expect.element(option).toMatchTextContent('one')
     if (open)
       await expect.element(option).toBeVisible()
     else
@@ -68,15 +68,15 @@ describe.each(entries)('migration: %s boundary', (entry) => {
   it('keeps Calendar.defaultView initial-only after interaction and unrelated updates', async () => {
     const onViewChange = vi.fn()
     const screen = await render(UiDefaultsFixture, { props: { family: 'calendar', entry, defaultView: 'year', onViewChange } })
-    await expect.element(screen.getByTestId('api-view')).toHaveTextContent('year')
+    await expect.element(screen.getByTestId('api-view')).toMatchTextContent('year')
     await expect.element(screen.getByTestId('year-view')).toBeVisible()
     if (entry !== 'hook')
       await expect.element(screen.getByTestId('component-year-view')).toBeVisible()
     await screen.getByTestId('change-view').click()
-    await expect.element(screen.getByTestId('api-view')).toHaveTextContent('month')
+    await expect.element(screen.getByTestId('api-view')).toMatchTextContent('month')
     expect(onViewChange).toHaveBeenLastCalledWith(expect.objectContaining({ view: 'month' }))
     await screen.rerender({ defaultView: 'day', unrelated: 1 })
-    await expect.element(screen.getByTestId('api-view')).toHaveTextContent('month')
+    await expect.element(screen.getByTestId('api-view')).toMatchTextContent('month')
     await expect.element(screen.getByTestId('month-view')).toBeVisible()
     if (entry !== 'hook')
       await expect.element(screen.getByTestId('component-month-view')).toBeVisible()
@@ -84,9 +84,9 @@ describe.each(entries)('migration: %s boundary', (entry) => {
 
   it('gives Calendar.view priority and reflects subsequent live updates', async () => {
     const screen = await render(UiDefaultsFixture, { props: { family: 'calendar', entry, defaultView: 'year', view: 'month' } })
-    await expect.element(screen.getByTestId('api-view')).toHaveTextContent('month')
+    await expect.element(screen.getByTestId('api-view')).toMatchTextContent('month')
     await screen.rerender({ view: 'day' })
-    await expect.element(screen.getByTestId('api-view')).toHaveTextContent('day')
+    await expect.element(screen.getByTestId('api-view')).toMatchTextContent('day')
     await expect.element(screen.getByTestId('day-view')).toBeVisible()
   })
 
@@ -95,40 +95,40 @@ describe.each(entries)('migration: %s boundary', (entry) => {
     const onValueCommit = vi.fn()
     const onValueRevert = vi.fn()
     const screen = await render(UiDefaultsFixture, { props: { family: 'edit', entry, defaultEdit: true, onEditChange, onValueCommit, onValueRevert } })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('true')
     await expect.element(screen.getByTestId('edit-input')).not.toHaveAttribute('hidden')
     await expect.element(screen.getByTestId('edit-preview')).toHaveAttribute('hidden')
     expect(onEditChange).not.toHaveBeenCalled()
     await screen.getByTestId('edit-input').fill('Changed')
     await screen.getByTestId(`request-${action}`).click()
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('false')
     await expect.element(screen.getByTestId('edit-input')).toHaveAttribute('hidden')
     expect(onEditChange).toHaveBeenCalledExactlyOnceWith({ edit: false })
     if (action === 'submit') {
       expect(onValueCommit).toHaveBeenCalledExactlyOnceWith({ value: 'Changed' })
       expect(onValueRevert).not.toHaveBeenCalled()
-      await expect.element(screen.getByTestId('edit-preview')).toHaveTextContent('Changed')
+      await expect.element(screen.getByTestId('edit-preview')).toMatchTextContent('Changed')
     }
     else {
       expect(onValueRevert).toHaveBeenCalledExactlyOnceWith({ value: 'Original' })
       expect(onValueCommit).not.toHaveBeenCalled()
-      await expect.element(screen.getByTestId('edit-preview')).toHaveTextContent('Original')
+      await expect.element(screen.getByTestId('edit-preview')).toMatchTextContent('Original')
     }
     await screen.rerender({ defaultEdit: false, unrelated: 1 })
     await screen.rerender({ defaultEdit: true, unrelated: 2 })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('false')
     await screen.getByTestId('request-edit').click()
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('true')
     expect(onEditChange).toHaveBeenLastCalledWith({ edit: true })
     await screen.getByTestId(`request-${action}`).click()
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('false')
   })
 
   it.each([false, true])('gives explicit edit=%s priority over its default', async (edit) => {
     const screen = await render(UiDefaultsFixture, { props: { family: 'edit', entry, defaultEdit: !edit, edit } })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent(String(edit))
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent(String(edit))
     await screen.rerender({ edit: !edit })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent(String(!edit))
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent(String(!edit))
   })
 
   it('keeps controlled edit until its parent writes back', async () => {
@@ -136,13 +136,13 @@ describe.each(entries)('migration: %s boundary', (entry) => {
     const screen = await render(UiDefaultsFixture, { props: { family: 'edit', entry, defaultEdit: true, edit: false, onEditChange } })
     await screen.getByTestId('request-edit').click()
     expect(onEditChange).toHaveBeenLastCalledWith({ edit: true })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('false')
     await screen.rerender({ edit: true })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('true')
     await screen.getByTestId('request-submit').click()
     expect(onEditChange).toHaveBeenLastCalledWith({ edit: false })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('true')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('true')
     await screen.rerender({ edit: false })
-    await expect.element(screen.getByTestId('api-editing')).toHaveTextContent('false')
+    await expect.element(screen.getByTestId('api-editing')).toMatchTextContent('false')
   })
 })

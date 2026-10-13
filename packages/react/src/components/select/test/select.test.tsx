@@ -10,7 +10,7 @@ import { Select, selectAnatomy } from '../index'
 
 describe('[select] component', () => {
   it.each(getParts(selectAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,7 +19,7 @@ describe('[select] component', () => {
   })
 
   it('should handle item selection', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
     await userEvent.click(trigger)
@@ -27,11 +27,11 @@ describe('[select] component', () => {
     const item = page.getByTestId('positioner').getByText('React')
 
     await userEvent.click(item)
-    await vi.waitFor(async () => await expect.element(trigger).toHaveTextContent('React'))
+    await vi.waitFor(async () => await expect.element(trigger).toMatchTextContent('React'))
   })
 
   it('should close on select', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
     await userEvent.click(trigger)
@@ -43,7 +43,7 @@ describe('[select] component', () => {
   })
 
   it('should be disabled when disabled is true', async () => {
-    render(<Basic disabled />)
+    await render(<Basic disabled />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
 
@@ -51,7 +51,7 @@ describe('[select] component', () => {
   })
 
   it('should handle multiple selection', async () => {
-    render(<Basic multiple />)
+    await render(<Basic multiple />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
 
@@ -63,12 +63,12 @@ describe('[select] component', () => {
 
     await userEvent.click(itemReact)
     await userEvent.click(itemVue)
-    await vi.waitFor(async () => await expect.element(trigger).toHaveTextContent('React, Vue'))
+    await vi.waitFor(async () => await expect.element(trigger).toMatchTextContent('React, Vue'))
   })
 
   it('should call onValueChange when item is selected', async () => {
     const onValueChange = vi.fn()
-    render(<Basic onValueChange={onValueChange} />)
+    await render(<Basic onValueChange={onValueChange} />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
 
@@ -86,7 +86,7 @@ describe('[select] component', () => {
 
   it('should open menu when onOpenChange is called', async () => {
     const onOpenChange = vi.fn()
-    render(<Basic onOpenChange={onOpenChange} />)
+    await render(<Basic onOpenChange={onOpenChange} />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
 
@@ -102,28 +102,28 @@ describe('[select] component', () => {
     await render(<Controlled />)
     const trigger = page.getByRole('combobox', { name: 'Framework' })
     const hiddenSelect = document.querySelector('select')
-    await expect.element(trigger).toHaveTextContent('Vue')
+    await expect.element(trigger).toMatchTextContent('Vue')
     expect(hiddenSelect?.value).toBe('vue')
 
     for (const label of ['React', 'Solid']) {
       await userEvent.click(trigger)
       await userEvent.click(page.getByRole('option', { name: label }))
-      await expect.element(trigger).toHaveTextContent(label)
+      await expect.element(trigger).toMatchTextContent(label)
       expect(hiddenSelect?.value).toBe(label.toLowerCase())
       await expect.element(trigger).toHaveAttribute('aria-expanded', 'false')
     }
 
     await userEvent.click(page.getByRole('button', { name: 'Clear' }))
-    await expect.element(trigger).toHaveTextContent('Select a Framework')
+    await expect.element(trigger).toMatchTextContent('Select a Framework')
     expect(hiddenSelect?.value).toBe('')
     await userEvent.click(trigger)
     await userEvent.click(page.getByRole('option', { name: 'Vue' }))
-    await expect.element(trigger).toHaveTextContent('Vue')
+    await expect.element(trigger).toMatchTextContent('Vue')
     expect(hiddenSelect?.value).toBe('vue')
   })
 
   it('should be read-only when readOnly is true', async () => {
-    render(<Basic readOnly />)
+    await render(<Basic readOnly />)
 
     const trigger = page.getByRole('combobox', { name: 'Framework' })
 
@@ -132,7 +132,7 @@ describe('[select] component', () => {
   })
 
   it('should be able to lazy mount its items', async () => {
-    render(<Basic lazyMount />)
+    await render(<Basic lazyMount />)
     await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument()
 
     await userEvent.click(page.getByRole('combobox', { name: 'Framework' }))
@@ -140,7 +140,7 @@ describe('[select] component', () => {
   })
 
   it('should be able to lazy mount and unmount its items', async () => {
-    render(<Basic lazyMount unmountOnExit />)
+    await render(<Basic lazyMount unmountOnExit />)
     await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument()
     await userEvent.click(page.getByRole('combobox', { name: 'Framework' }))
     await expect.element(page.getByTestId('positioner')).toBeInTheDocument()
@@ -150,40 +150,40 @@ describe('[select] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(<InitialValue />)
-    await expect.element(page.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
+    await render(<InitialValue />)
+    await expect.element(page.getByRole('combobox', { name: 'Framework' })).toMatchTextContent('Vue')
   })
 })
 
 describe('[select] Field', () => {
   it('should set input as disabled', async () => {
-    render(<WithField disabled />)
+    await render(<WithField disabled />)
     await expect.element(page.getByRole('combobox')).toBeDisabled()
   })
 
   it('should set input as readonly', async () => {
-    render(<WithField readOnly />)
+    await render(<WithField readOnly />)
     await expect.element(page.getByRole('combobox')).toHaveAttribute('data-readonly')
   })
 
   it('should display helper text', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(<WithField invalid />)
+    await render(<WithField invalid />)
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on input when label is clicked', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByRole('combobox', { name: /label/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(<WithField />)
+    await render(<WithField />)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })
@@ -191,7 +191,7 @@ describe('[select] Field', () => {
 it('initialValue forwards detail-shaped callbacks while remaining interactive', async () => {
   const onValueChange = vi.fn()
   const onOpenChange = vi.fn()
-  render(<InitialValue onValueChange={onValueChange} onOpenChange={onOpenChange} />)
+  await render(<InitialValue onValueChange={onValueChange} onOpenChange={onOpenChange} />)
   await userEvent.click(page.getByRole('button', { name: 'Clear' }))
   expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value: [], items: [] }))
   const trigger = page.getByRole('combobox', { name: 'Framework' })
@@ -199,6 +199,6 @@ it('initialValue forwards detail-shaped callbacks while remaining interactive', 
   expect(onOpenChange).toHaveBeenLastCalledWith({ open: true })
   await userEvent.click(page.getByTestId('positioner').getByText('React', { exact: true }))
   expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value: ['react'] }))
-  await expect.element(trigger).toHaveTextContent('React')
+  await expect.element(trigger).toMatchTextContent('React')
   expect(onOpenChange).toHaveBeenLastCalledWith({ open: false })
 })

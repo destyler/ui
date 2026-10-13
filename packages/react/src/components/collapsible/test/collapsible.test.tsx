@@ -8,24 +8,24 @@ import { Collapsible, collapsibleAnatomy } from '../index'
 
 describe('[collapsible] parts & exports', () => {
   it.each(getParts(collapsibleAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
   it.each(getExports(collapsibleAnatomy))('should export %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(Collapsible).toHaveProperty(part, expect.anything())
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(<InitialOpen />)
+    await render(<InitialOpen />)
     await expect.element(page.getByText('Content')).toBeVisible()
   })
 })
 
 describe('[collapsible] components', () => {
   it('should toggle', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     await expect.element(page.getByText('Content')).not.toBeVisible()
 
@@ -34,21 +34,21 @@ describe('[collapsible] components', () => {
   })
 
   it('should be fully controlled (true)', async () => {
-    render(<Basic open={true} />)
+    await render(<Basic open={true} />)
 
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
     await expect.element(page.getByText('Content')).toBeVisible()
   })
 
   it('should be fully controlled (false)', async () => {
-    render(<Basic open={false} />)
+    await render(<Basic open={false} />)
 
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
     await vi.waitFor(() => expect(page.getByText('Content')).not.toBeVisible())
   })
 
   it('should lazy mount', async () => {
-    render(<Basic lazyMount />)
+    await render(<Basic lazyMount />)
     expect(page.getByText('Content')).not.toBeInTheDocument()
 
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
@@ -56,7 +56,7 @@ describe('[collapsible] components', () => {
   })
 
   it('should unmount on exit ', async () => {
-    render(<Basic unmountOnExit />)
+    await render(<Basic unmountOnExit />)
     expect(page.getByText('Content')).not.toBeVisible()
 
     await userEvent.click(page.getByRole('button', { name: 'Toggle' }))
@@ -67,7 +67,7 @@ describe('[collapsible] components', () => {
   })
 
   it('should lazy mount and unmount on exit', async () => {
-    render(<Basic lazyMount unmountOnExit />)
+    await render(<Basic lazyMount unmountOnExit />)
 
     expect(page.getByText('Content')).not.toBeInTheDocument()
 

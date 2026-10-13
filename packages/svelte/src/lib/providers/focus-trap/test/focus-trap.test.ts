@@ -13,7 +13,7 @@ describe('[focus-trap] provider', () => {
     await vi.waitFor(async () => {
       await expect.element(page.getByRole('button', { name: 'Initial focus' })).toHaveFocus()
     })
-    await expect.element(page.getByTestId('lifecycle')).toHaveTextContent('1:0')
+    await expect.element(page.getByTestId('lifecycle')).toMatchTextContent('1:0')
   })
 
   it('keeps forward and backward keyboard focus inside the trap', async () => {
@@ -44,7 +44,7 @@ describe('[focus-trap] provider', () => {
     await userEvent.click(page.getByRole('button', { name: 'Close trap' }))
 
     await expect.element(page.getByRole('button', { name: 'Close trap' })).not.toBeInTheDocument()
-    await expect.element(page.getByTestId('lifecycle')).toHaveTextContent('1:1')
+    await expect.element(page.getByTestId('lifecycle')).toMatchTextContent('1:1')
     await vi.waitFor(async () => await expect.element(trigger).toHaveFocus())
   })
 

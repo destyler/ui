@@ -8,7 +8,7 @@ import { HoverCard, hoverCardAnatomy } from '../index'
 
 describe('[hover-card] component', () => {
   it.each(getParts(hoverCardAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[hover-card] component', () => {
   })
 
   it('should open on hover', async () => {
-    render(Basic)
+    await render(Basic)
 
     const target = page.getByText('Hover me')
     await userEvent.hover(target)
@@ -31,7 +31,7 @@ describe('[hover-card] component', () => {
 
   it('should invoke onOpenChange', async () => {
     const onOpenChange = vi.fn()
-    render(Basic, { props: { onOpenChange } })
+    await render(Basic, { props: { onOpenChange } })
 
     await userEvent.hover(page.getByText('Hover me'))
 
@@ -40,7 +40,7 @@ describe('[hover-card] component', () => {
   })
 
   it('should lazy mount', async () => {
-    render(Basic, { props: { lazyMount: true } })
+    await render(Basic, { props: { lazyMount: true } })
 
     await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument()
 
@@ -49,7 +49,7 @@ describe('[hover-card] component', () => {
   })
 
   it('should lazy mount and unmount on exit', async () => {
-    render(Basic, { props: { lazyMount: true, unmountOnExit: true } })
+    await render(Basic, { props: { lazyMount: true, unmountOnExit: true } })
 
     await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument()
 
@@ -61,7 +61,7 @@ describe('[hover-card] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('Content')).toBeVisible()
   })
 })

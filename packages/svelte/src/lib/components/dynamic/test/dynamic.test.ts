@@ -65,16 +65,16 @@ describe('dynamic / initial value', () => {
     { value: [], expected: [] },
   ])('prefers the supplied live value, including $value', async ({ value, expected }) => {
     const screen = await render(ValueUnderTest, { props: { defaultValue: ['Default'], value } })
-    await expect.element(screen.getByTestId('value')).toHaveTextContent(JSON.stringify(expected))
+    await expect.element(screen.getByTestId('value')).toMatchTextContent(JSON.stringify(expected))
   })
 
   it('updates live values, including an empty array', async () => {
     const screen = await render(ValueUnderTest, { props: { defaultValue: ['Default'], value: ['First'] } })
 
     await screen.rerender({ value: ['Second'] })
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('["Second"]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('["Second"]')
     await screen.rerender({ value: [] })
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('[]')
   })
 
   it('keeps internal edits when unrelated props and defaultValue change', async () => {
@@ -82,19 +82,19 @@ describe('dynamic / initial value', () => {
 
     await screen.getByPlaceholder('Add tag').fill('Added')
     await userEvent.keyboard('{Enter}')
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('["Default","Added"]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('["Default","Added"]')
 
     await screen.rerender({ readOnly: true })
     await expect.element(screen.getByPlaceholder('Add tag')).toBeDisabled()
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('["Default","Added"]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('["Default","Added"]')
     await screen.rerender({ defaultValue: ['Replacement'] })
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('["Default","Added"]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('["Default","Added"]')
 
     await screen.rerender({ readOnly: false })
     await screen.getByText('Clear all').click()
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('[]')
     await screen.rerender({ defaultValue: ['Another default'], readOnly: true })
     await expect.element(screen.getByPlaceholder('Add tag')).toBeDisabled()
-    await expect.element(screen.getByTestId('value')).toHaveTextContent('[]')
+    await expect.element(screen.getByTestId('value')).toMatchTextContent('[]')
   })
 })

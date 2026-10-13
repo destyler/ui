@@ -21,10 +21,10 @@ describe('[toggle] component', () => {
     const toggle = screen.getByRole('button', { name: 'Toggle' })
     const indicator = screen.container.querySelector('[data-part="indicator"]')
     await expect.element(toggle).toHaveAttribute('aria-pressed', 'false')
-    expect(indicator).toHaveTextContent('')
+    expect(indicator).toMatchTextContent('')
     await userEvent.click(toggle)
     await expect.element(toggle).toHaveAttribute('aria-pressed', 'true')
-    expect(indicator).toHaveTextContent('✓')
+    expect(indicator).toMatchTextContent('✓')
   })
 
   it('seeds default* via InitialValue example', async () => {

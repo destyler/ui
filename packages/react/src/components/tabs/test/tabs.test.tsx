@@ -8,7 +8,7 @@ import { Tabs, tabsAnatomy } from '../index'
 
 describe('[tabs] component', () => {
   it.each(getParts(tabsAnatomy))('should render part %s', async (part) => {
-    render(<Basic />)
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,14 +17,14 @@ describe('[tabs] component', () => {
   })
 
   it('should render the content of tab when active', async () => {
-    render(<Basic defaultValue="React" />)
+    await render(<Basic defaultValue="React" />)
 
     await expect.element(page.getByText('React Content')).toBeVisible()
   })
 
   it('should activate tab on click', async () => {
     const onValueChange = vi.fn()
-    render(<Basic onValueChange={onValueChange} />)
+    await render(<Basic onValueChange={onValueChange} />)
 
     const tab = page.getByText('React Trigger')
 
@@ -33,7 +33,7 @@ describe('[tabs] component', () => {
   })
 
   it('should not focus disabled tab', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const solidTab = page.getByText('Solid Trigger')
     const disabledTab = page.getByText('Svelte Trigger')
@@ -51,7 +51,7 @@ describe('[tabs] component', () => {
   })
 
   it('should show content when tab is activated', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const firstTab = page.getByText('React Trigger')
     const firstContent = page.getByText('React Content')
@@ -63,7 +63,7 @@ describe('[tabs] component', () => {
   })
 
   it('should loop focus by default', async () => {
-    render(<Basic />)
+    await render(<Basic />)
 
     const firstTab = page.getByText('React Trigger')
     const lastTab = page.getByText('Vue Trigger')
@@ -76,7 +76,7 @@ describe('[tabs] component', () => {
   })
 
   it('should not loop focus if loop is false', async () => {
-    render(<Basic loopFocus={false} />)
+    await render(<Basic loopFocus={false} />)
 
     const lastTab = page.getByText('Vue Trigger')
 
@@ -88,7 +88,7 @@ describe('[tabs] component', () => {
   })
 
   it('should handle orientation', async () => {
-    render(<Basic orientation="vertical" />)
+    await render(<Basic orientation="vertical" />)
 
     const firstTab = page.getByText('React Trigger')
     const secondTab = page.getByText('Solid Trigger')
@@ -101,7 +101,7 @@ describe('[tabs] component', () => {
   })
 
   it('should lazy mount a tab', async () => {
-    render(<Basic lazyMount />)
+    await render(<Basic lazyMount />)
 
     await expect.element(page.getByText('React Content')).not.toBeInTheDocument()
 
@@ -110,7 +110,7 @@ describe('[tabs] component', () => {
   })
 
   it('should lazy mount and unmount on exit a tab', async () => {
-    render(<Basic lazyMount unmountOnExit />)
+    await render(<Basic lazyMount unmountOnExit />)
 
     await expect.element(page.getByText('React Content')).not.toBeInTheDocument()
 
@@ -130,7 +130,7 @@ describe('[tabs] component', () => {
         </>
       )
     }
-    render(<Harness />)
+    await render(<Harness />)
     const solidTab = page.getByText('Solid Trigger')
     await userEvent.click(solidTab)
     await expect.element(solidTab).toHaveAttribute('aria-selected', 'true')

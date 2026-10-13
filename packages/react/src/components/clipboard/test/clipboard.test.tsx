@@ -5,13 +5,13 @@ import { Basic } from '../examples/Basic'
 import { Clipboard, clipboardAnatomy } from '../index'
 
 describe('[clipboard] component', () => {
-  it.each(getParts(clipboardAnatomy))('should render part %s', (part) => {
-    render(<Basic />)
+  it.each(getParts(clipboardAnatomy))('should render part %s', async (part) => {
+    await render(<Basic />)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
-  it.each(getExports(clipboardAnatomy))('should export %s', (part) => {
-    render(<Basic />)
+  it.each(getExports(clipboardAnatomy))('should export %s', async (part) => {
+    await render(<Basic />)
     expect(Clipboard).toHaveProperty(part, expect.anything())
   })
 })

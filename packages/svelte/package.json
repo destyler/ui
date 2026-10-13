@@ -308,6 +308,9 @@
     "!dist/components/component-categories.*",
     "!dist/providers/provider-categories.*"
   ],
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "publishConfig": {
     "access": "public"
   },

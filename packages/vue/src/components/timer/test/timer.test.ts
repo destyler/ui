@@ -14,7 +14,7 @@ describe('[timer] component', () => {
   )
 
   it.each(parts)('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     await vi.waitFor(() => {
       expect(document.querySelector(part)).toBeInTheDocument()
     })

@@ -6,7 +6,7 @@ import { Avatar, avatarAnatomy } from '../index'
 
 describe('[avatar] component', () => {
   it.each(getParts(avatarAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 

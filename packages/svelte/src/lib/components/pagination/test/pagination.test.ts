@@ -48,7 +48,7 @@ describe('[pagination] component', () => {
     const suffixes = screen.container.querySelectorAll('span.visually-hidden')
     expect(suffixes).toHaveLength(2)
     for (const suffix of suffixes)
-      expect(suffix).toHaveTextContent('Page')
+      expect(suffix).toMatchTextContent('Page')
   })
 
   it('seeds default* via InitialPage example', async () => {

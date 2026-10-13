@@ -10,6 +10,8 @@ export function browserSmokeConfig(framework: string, root: URL) {
       include: ['src/**/*.browser-smoke.{ts,tsx}'],
       testTimeout: 30_000,
       browser: {
+        // Preserve the case-insensitive substring locators used before Vitest 5.
+        locators: { exact: false },
         enabled: true,
         headless: true,
         provider: playwright(),

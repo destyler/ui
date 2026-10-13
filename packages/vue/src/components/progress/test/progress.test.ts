@@ -15,7 +15,7 @@ import ControlledWriteback from './ControlledWriteback.vue'
 
 describe('[progress] component', () => {
   it.each(getParts(progressAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -24,19 +24,19 @@ describe('[progress] component', () => {
   })
 
   it('seeds defaultValue when live value is omitted', async () => {
-    render(InitialValue)
+    await render(InitialValue)
     await expect.element(page.getByText('70%')).toBeInTheDocument()
   })
 
   it('updates UI when parent controlled value changes', async () => {
-    render(ControlledWriteback)
+    await render(ControlledWriteback)
     await expect.element(page.getByText('42%')).toBeInTheDocument()
     await userEvent.click(page.getByRole('button', { name: 'parent-set-80' }))
     await expect.element(page.getByText('80%')).toBeInTheDocument()
   })
 
   it('writes parent state back through valueChange when api.setValue runs', async () => {
-    render(ControlledWriteback)
+    await render(ControlledWriteback)
     await expect.element(page.getByText('42%')).toBeInTheDocument()
     await userEvent.click(page.getByRole('button', { name: 'api-set-65' }))
     await expect.element(page.getByText('65%')).toBeInTheDocument()
@@ -44,18 +44,18 @@ describe('[progress] component', () => {
 
   describe('circular progress', () => {
     it('should render circular basic progress with default value', async () => {
-      render(CircularBasic)
+      await render(CircularBasic)
       await expect.element(page.getByText('Label')).toBeInTheDocument()
       await expect.element(page.getByText('42%')).toBeInTheDocument()
     })
 
     it('should handle controlled circular progress', async () => {
-      render(CircularControlled)
+      await render(CircularControlled)
       await expect.element(page.getByText('42%')).toBeInTheDocument()
     })
 
     it('should handle min/max range in circular progress', async () => {
-      render(CircularMinMax)
+      await render(CircularMinMax)
       await expect.element(page.getByText('Label')).toBeInTheDocument()
       // Value is 20, min is 10, max is 30, so percentage is (20-10)/(30-10) = 50%
       await expect.element(page.getByText('50%')).toBeInTheDocument()
@@ -64,18 +64,18 @@ describe('[progress] component', () => {
 
   describe('linear progress', () => {
     it('should render linear basic progress with default value', async () => {
-      render(LinearBasic)
+      await render(LinearBasic)
       await expect.element(page.getByText('Label')).toBeInTheDocument()
       await expect.element(page.getByText('42%')).toBeInTheDocument()
     })
 
     it('should handle controlled linear progress', async () => {
-      render(LinearControlled)
+      await render(LinearControlled)
       await expect.element(page.getByText('42%')).toBeInTheDocument()
     })
 
     it('should handle min/max range in linear progress', async () => {
-      render(LinearMinMax)
+      await render(LinearMinMax)
       await expect.element(page.getByText('Label')).toBeInTheDocument()
       // Value is 20, min is 10, max is 30, so percentage is (20-10)/(30-10) = 50%
       await expect.element(page.getByText('50%')).toBeInTheDocument()

@@ -134,10 +134,10 @@ describe('[floating-panel] component', () => {
 
   it('keeps body copy in paragraph elements used by the shared styles', async () => {
     const basic = await render(Basic)
-    expect(basic.container.querySelector('[data-part="body"] > p')).toHaveTextContent('Some content')
+    expect(basic.container.querySelector('[data-part="body"] > p')).toMatchTextContent('Some content')
     basic.unmount()
 
     const defaultOpen = await render(DefaultOpen)
-    expect(defaultOpen.container.querySelector('[data-part="body"] > p')).toHaveTextContent('This panel opens by default')
+    expect(defaultOpen.container.querySelector('[data-part="body"] > p')).toMatchTextContent('This panel opens by default')
   })
 })

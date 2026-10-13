@@ -20,7 +20,7 @@ describe('[focus-trap] provider', () => {
     const cleanup = vi.fn()
     vi.mocked(trapFocus).mockReturnValue(cleanup)
 
-    render(
+    await render(
       <FocusTrap data-testid="trap-root">
         <button type="button">Inside trap</button>
       </FocusTrap>,
@@ -39,7 +39,7 @@ describe('[focus-trap] provider', () => {
     const activate = vi.fn()
     const deactivate = vi.fn()
 
-    render(
+    await render(
       <FocusTrap onActivate={activate} onDeactivate={deactivate}>
         <button type="button">Inside trap</button>
       </FocusTrap>,
@@ -55,7 +55,7 @@ describe('[focus-trap] provider', () => {
   })
 
   it('does not activate when disabled', async () => {
-    render(
+    await render(
       <FocusTrap disabled>
         <button type="button">Inside trap</button>
       </FocusTrap>,
@@ -67,7 +67,7 @@ describe('[focus-trap] provider', () => {
   it('renders children correctly', async () => {
     vi.mocked(trapFocus).mockReturnValue(vi.fn())
 
-    render(
+    await render(
       <FocusTrap>
         <button type="button">Test Button</button>
       </FocusTrap>,
