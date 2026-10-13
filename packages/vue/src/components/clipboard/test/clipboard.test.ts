@@ -6,12 +6,12 @@ import Basic from '../examples/Basic.vue'
 
 describe('[clipboard] component', () => {
   it.each(getParts(clipboardAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
   it.each(getExports(clipboardAnatomy))('should export %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(Clipboard).toHaveProperty(part, expect.anything())
   })
 })

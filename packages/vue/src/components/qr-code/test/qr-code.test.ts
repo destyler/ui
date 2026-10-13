@@ -13,7 +13,7 @@ import ValueState from './ValueState.vue'
 
 describe('[qr-code] component', () => {
   it.each(getParts(qrCodeAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -22,7 +22,7 @@ describe('[qr-code] component', () => {
   })
 
   it('should render the pattern path for the provided value', async () => {
-    render(Basic)
+    await render(Basic)
 
     const patternPath = document.querySelector('[data-part="pattern"]')
     expect(patternPath).toBeInTheDocument()
@@ -30,7 +30,7 @@ describe('[qr-code] component', () => {
   })
 
   it('should render overlay content', async () => {
-    render(WithOverlay)
+    await render(WithOverlay)
 
     await expect.element(page.getByAltText('Logo')).toBeInTheDocument()
   })

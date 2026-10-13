@@ -6,21 +6,21 @@ import UnrefElementWithComponent from './fixtures/UnrefElementWithComponent.vue'
 
 describe('util: unrefElement', () => {
   it('should unref a template ref to HTMLElement', async () => {
-    render(UnrefElementBasic)
+    await render(UnrefElementBasic)
 
     const element = page.getByTestId('result')
     await expect.element(element).toHaveTextContent('DIV')
   })
 
   it('should get $el from Vue component instance', async () => {
-    render(UnrefElementWithComponent)
+    await render(UnrefElementWithComponent)
 
     const element = page.getByTestId('result')
     await expect.element(element).toHaveTextContent('BUTTON')
   })
 
   it('should handle null ref', async () => {
-    render(UnrefElementBasic, {
+    await render(UnrefElementBasic, {
       props: {
         showElement: false,
       },

@@ -8,7 +8,7 @@ import { Carousel, carouselAnatomy } from '../index'
 
 describe('[carousel] component', () => {
   it.each(getParts(carouselAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[carousel] component', () => {
   })
 
   it('should have the correct disabled / enabled states for control buttons', async () => {
-    render(Basic)
+    await render(Basic)
     const prevButton = page.getByRole('button', { name: 'Previous slide' })
     const nextButton = page.getByRole('button', { name: 'Next slide' })
 
@@ -26,7 +26,7 @@ describe('[carousel] component', () => {
   })
 
   it('seeds default* via InitialPage example', async () => {
-    render(InitialPage)
+    await render(InitialPage)
     await expect.element(page.getByRole('button', { name: 'Previous slide' })).toBeEnabled()
   })
 })

@@ -9,7 +9,7 @@ import { Combobox, comboboxAnatomy } from '../index'
 
 describe('[combobox] component', () => {
   it.each(getParts(comboboxAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -18,14 +18,14 @@ describe('[combobox] component', () => {
   })
 
   it('should show options on click', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(async () => await expect.element(page.getByRole('option', { name: 'React' })).toBeVisible())
   })
 
   it('should handle item selection', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(async () => await expect.element(page.getByRole('option', { name: 'React' })).toBeVisible())
@@ -36,7 +36,7 @@ describe('[combobox] component', () => {
 
   it('should call onValueChange when item is selected', async () => {
     const onValueChange = vi.fn()
-    render(Basic, { props: { onValueChange } })
+    await render(Basic, { props: { onValueChange } })
 
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(async () => await expect.element(page.getByRole('option', { name: 'React' })).toBeVisible())
@@ -47,21 +47,21 @@ describe('[combobox] component', () => {
 
   it('should open menu when onOpenChange is called', async () => {
     const onOpenChange = vi.fn()
-    render(Basic, { props: { onOpenChange } })
+    await render(Basic, { props: { onOpenChange } })
 
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(() => expect(onOpenChange).toHaveBeenCalledTimes(1))
   })
 
   it('should be read-only when readOnly is true', async () => {
-    render(Basic, { props: { readOnly: true } })
+    await render(Basic, { props: { readOnly: true } })
 
     await userEvent.click(page.getByText('Open'))
     await vi.waitFor(async () => await expect.element(page.getByRole('option', { name: 'React' })).not.toBeInTheDocument())
   })
 
   it('should be able to lazy mount its items', async () => {
-    render(Basic, { props: { lazyMount: true } })
+    await render(Basic, { props: { lazyMount: true } })
     await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument()
 
     await userEvent.click(page.getByText('Open'))
@@ -69,7 +69,7 @@ describe('[combobox] component', () => {
   })
 
   it('should be able to lazy mount and unmount its items', async () => {
-    render(Basic, { props: { lazyMount: true, unmountOnExit: true } })
+    await render(Basic, { props: { lazyMount: true, unmountOnExit: true } })
     await expect.element(page.getByTestId('positioner')).not.toBeInTheDocument()
 
     await userEvent.click(page.getByText('Open'))
@@ -81,45 +81,45 @@ describe('[combobox] component', () => {
 })
 
 it('seeds default* via InitialValue example', async () => {
-  render(InitialValue)
+  await render(InitialValue)
   const input = document.querySelector('[data-scope="combobox"][data-part="input"]') as HTMLInputElement
   expect(input?.value?.toLowerCase()).toContain('vue')
 })
 
 describe('combobox / Field', () => {
   it('should set combobox as required', async () => {
-    render(WithField, { props: { required: true } })
+    await render(WithField, { props: { required: true } })
     await expect.element(page.getByRole('combobox', { name: /label/i })).toBeRequired()
   })
 
   it('should set combobox as disabled', async () => {
-    render(WithField, { props: { disabled: true } })
+    await render(WithField, { props: { disabled: true } })
     await expect.element(page.getByRole('combobox', { name: /label/i })).toBeDisabled()
   })
 
   it('should set combobox as readonly', async () => {
-    render(WithField, { props: { readOnly: true } })
+    await render(WithField, { props: { readOnly: true } })
     await expect.element(page.getByRole('combobox', { name: /label/i })).toHaveAttribute('readonly')
   })
 
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on combobox when label is clicked', async () => {
-    render(WithField)
+    await render(WithField)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByRole('combobox', { name: /label/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })

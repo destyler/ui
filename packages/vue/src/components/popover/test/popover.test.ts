@@ -8,7 +8,7 @@ import { Popover, popoverAnatomy } from '../index'
 
 describe('[popover] component', () => {
   it.each(getParts(popoverAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[popover] component', () => {
   })
 
   it('should open and close the popover', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('click me'))
     await expect.element(page.getByRole('dialog')).toBeInTheDocument()
@@ -27,7 +27,7 @@ describe('[popover] component', () => {
   })
 
   it('should hide the popover when escape is pressed', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('click me'))
     await expect.element(page.getByRole('dialog')).toBeInTheDocument()
@@ -37,14 +37,14 @@ describe('[popover] component', () => {
   })
 
   it('should focus the first focusable element', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('click me'))
     await expect.element(page.getByRole('dialog')).toBeInTheDocument()
   })
 
   it('should be able to lazy mount', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: {
         lazyMount: true,
       },
@@ -60,7 +60,7 @@ describe('[popover] component', () => {
   })
 
   it('should lazy mount and unmount on exit', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: {
         lazyMount: true,
         unmountOnExit: true,
@@ -77,7 +77,7 @@ describe('[popover] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('title')).toBeVisible()
   })
 })

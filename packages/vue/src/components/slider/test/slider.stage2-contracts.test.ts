@@ -12,7 +12,7 @@ function formEntries(form: HTMLFormElement) {
 describe('slider controlled multi-thumb arrays', () => {
   it.each(['accept', 'veto', 'delay'] as const)('preserves parent %s and exact form values', async (mode) => {
     const onValueChange = vi.fn()
-    render(Stage2Contracts, { props: { mode, onValueChange } })
+    await render(Stage2Contracts, { props: { mode, onValueChange } })
     page.getByRole('slider').nth(1).element().focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(onValueChange).toHaveBeenLastCalledWith({ value: [20, 81] })

@@ -1,15 +1,13 @@
 import { execFileSync } from 'node:child_process'
 import { readFile } from 'node:fs/promises'
-import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
+import { loadAstroCompiler } from './astro-compiler.mjs'
 
 const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.resolve(docsRoot, '..')
-const docsRequire = createRequire(import.meta.url)
-const astroRequire = createRequire(docsRequire.resolve('astro'))
-const { transform } = astroRequire('@astrojs/compiler')
+const { transform } = loadAstroCompiler('@astrojs/compiler-rs')
 const baseline = 'a87edc624aa9610e6059c690874ac247d10feaa0'
 
 /** @returns {{ name: string, enforce: 'pre', load(id: string): Promise<{ code: string, map: null } | undefined> }} A docs-only loader compatible with the installed Vite and Vitest plugin hooks. */

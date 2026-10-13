@@ -14,7 +14,7 @@ import { Menu, menuAnatomy } from '../index'
 
 describe('[menu] component', () => {
   it.each(getParts(menuAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
 
     // trigger-item 只在打开菜单后的嵌套菜单中存在
     if (part.includes('trigger-item')) {
@@ -30,13 +30,13 @@ describe('[menu] component', () => {
   })
 
   it('should not show menu content by default', async () => {
-    render(Basic)
+    await render(Basic)
 
     await expect.element(page.getByTestId('positioner')).not.toBeVisible()
   })
 
   it('should open menu when trigger is clicked', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -45,7 +45,7 @@ describe('[menu] component', () => {
   })
 
   it('should close menu when clicking outside', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -60,7 +60,7 @@ describe('[menu] component', () => {
   })
 
   it('should close menu when escape key is pressed', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -75,7 +75,7 @@ describe('[menu] component', () => {
   })
 
   it('should support controlled open state', async () => {
-    render(Controlled)
+    await render(Controlled)
 
     const externalTrigger = page.getByRole('button', { name: 'Trigger from the outside' })
     for (let cycle = 0; cycle < 2; cycle++) {
@@ -95,7 +95,7 @@ describe('[menu] component', () => {
   })
 
   it('should render disabled menu item', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -105,7 +105,7 @@ describe('[menu] component', () => {
   })
 
   it('should support checkbox items', async () => {
-    render(Checkbox)
+    await render(Checkbox)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -126,7 +126,7 @@ describe('[menu] component', () => {
   })
 
   it('should support radio group items', async () => {
-    render(RadioGroup)
+    await render(RadioGroup)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -147,7 +147,7 @@ describe('[menu] component', () => {
   })
 
   it('should render item groups with labels', async () => {
-    render(Group)
+    await render(Group)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -159,7 +159,7 @@ describe('[menu] component', () => {
   })
 
   it('should support nested menus', async () => {
-    render(Nested)
+    await render(Nested)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -176,7 +176,7 @@ describe('[menu] component', () => {
   })
 
   it('should open context menu on right click', async () => {
-    render(Context)
+    await render(Context)
 
     const contextTrigger = page.getByText('Right click me')
     await contextTrigger.click({ button: 'right' })
@@ -189,7 +189,7 @@ describe('[menu] component', () => {
   })
 
   it('should render separator between menu sections', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -199,7 +199,7 @@ describe('[menu] component', () => {
   })
 
   it('should render arrow and arrow tip', async () => {
-    render(Basic)
+    await render(Basic)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -209,7 +209,7 @@ describe('[menu] component', () => {
   })
 
   it('should support keyboard navigation', async () => {
-    render(Group)
+    await render(Group)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -227,7 +227,7 @@ describe('[menu] component', () => {
   })
 
   it('should close menu when clicking a menu item', async () => {
-    render(Group)
+    await render(Group)
 
     const trigger = page.getByRole('button', { name: 'Open menu' })
     await userEvent.click(trigger)
@@ -242,7 +242,7 @@ describe('[menu] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('Check me')).toBeVisible()
   })
 })

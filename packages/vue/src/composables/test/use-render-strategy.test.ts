@@ -5,7 +5,7 @@ import UseRenderStrategyBasic from './fixtures/UseRenderStrategyBasic.vue'
 
 describe('composable: useRenderStrategyProps', () => {
   it('should use default values when not provided', async () => {
-    render(UseRenderStrategyBasic)
+    await render(UseRenderStrategyBasic)
 
     const lazyMount = page.getByTestId('lazy-mount')
     const unmountOnExit = page.getByTestId('unmount-on-exit')
@@ -15,7 +15,7 @@ describe('composable: useRenderStrategyProps', () => {
   })
 
   it('should provide and consume render strategy props', async () => {
-    render(UseRenderStrategyBasic, {
+    await render(UseRenderStrategyBasic, {
       props: {
         lazyMount: true,
         unmountOnExit: false,

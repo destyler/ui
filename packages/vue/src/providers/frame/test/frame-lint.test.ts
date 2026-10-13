@@ -12,7 +12,7 @@ describe('frame lint pilot native contracts', () => {
     const Fixture = defineComponent({
       setup: () => () => h(Frame, { ref: frame, title: 'Lint pilot frame', onMount, onUnmount }, () => h('button', 'Portal content')),
     })
-    const screen = render(Fixture)
+    const screen = await render(Fixture)
     try {
       await vi.waitFor(() => {
         const iframe = screen.container.querySelector('iframe')
@@ -24,7 +24,7 @@ describe('frame lint pilot native contracts', () => {
       })
     }
     finally {
-      screen.unmount()
+      await screen.unmount()
     }
     await vi.waitFor(() => expect(onUnmount).toHaveBeenCalledTimes(1))
     expect(onMount).toHaveBeenCalledTimes(1)
@@ -32,7 +32,7 @@ describe('frame lint pilot native contracts', () => {
   })
 
   it('renders the Basic example static style tag into the iframe head', async () => {
-    const screen = render(Basic)
+    const screen = await render(Basic)
     try {
       await vi.waitFor(() => {
         const iframe = screen.container.querySelector('iframe')
@@ -43,7 +43,7 @@ describe('frame lint pilot native contracts', () => {
       })
     }
     finally {
-      screen.unmount()
+      await screen.unmount()
     }
   })
 })

@@ -9,7 +9,7 @@ import { Steps, stepsAnatomy } from '../index'
 
 describe('[steps] component', () => {
   it.each(getParts(stepsAnatomy).filter(part => !part.includes('progress')))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -19,25 +19,25 @@ describe('[steps] component', () => {
 
   describe('basic example', () => {
     it('should render initial step content', async () => {
-      const screen = render(Basic)
+      const screen = await render(Basic)
       await expect.element(screen.getByText('First - Contact Info')).toBeVisible()
     })
 
     it('should navigate to next step on Next button click', async () => {
-      const screen = render(Basic)
+      const screen = await render(Basic)
       await screen.getByText('Next').click()
       await expect.element(screen.getByText('Second - Date & Time')).toBeVisible()
     })
 
     it('should navigate to previous step on Prev button click', async () => {
-      const screen = render(Basic)
+      const screen = await render(Basic)
       await screen.getByText('Next').click()
       await screen.getByText('Back').click()
       await expect.element(screen.getByText('First - Contact Info')).toBeVisible()
     })
 
     it('should show completed content after last step', async () => {
-      const screen = render(Basic)
+      const screen = await render(Basic)
       await screen.getByText('Next').click()
       await screen.getByText('Next').click()
       await screen.getByText('Next').click()
@@ -47,18 +47,18 @@ describe('[steps] component', () => {
 
   describe('rootProvider example', () => {
     it('should render initial step content', async () => {
-      const screen = render(RootProvider)
+      const screen = await render(RootProvider)
       await expect.element(screen.getByText('First - Contact Info')).toBeVisible()
     })
 
     it('should navigate to next step on Next button click', async () => {
-      const screen = render(RootProvider)
+      const screen = await render(RootProvider)
       await screen.getByText('Next').click()
       await expect.element(screen.getByText('Second - Date & Time')).toBeVisible()
     })
 
     it('should reset to first step on Reset button click', async () => {
-      const screen = render(RootProvider)
+      const screen = await render(RootProvider)
       await screen.getByText('Next').click()
       await screen.getByText('Reset').click()
       await expect.element(screen.getByText('First - Contact Info')).toBeVisible()
@@ -66,7 +66,7 @@ describe('[steps] component', () => {
   })
 
   it('seeds default* via InitialStep example', async () => {
-    render(InitialStep)
+    await render(InitialStep)
     await expect.element(page.getByText('Second - Date & Time')).toBeVisible()
   })
 })

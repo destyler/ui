@@ -7,7 +7,7 @@
   "author": "Elone Hoo <hi@elonehoo.me>",
   "license": "MIT",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22.22.3"
   },
   "scripts": {
     "build": "pnpm run --filter \"./packages/**\" -r build",

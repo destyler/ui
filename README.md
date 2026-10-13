@@ -63,7 +63,9 @@ For stateful roots, use a supported `default*` prop to seed uncontrolled state, 
 
 ## Work on this repository
 
-Use Node.js `>=20.19.0` and the repository's pinned package manager, `pnpm@10.28.0`.
+Use Node.js `>=22.22.3` and the repository's pinned package manager, `pnpm@10.28.0`.
+
+The same Node.js minimum applies to all four public UI packages, including consumers and SSR. Node 20 is no longer supported by UI; see the [Node.js migration guide](docs/node-support.md) for install behavior and validation scope.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -75,7 +77,7 @@ pnpm docs:dev
 ## Browser accessibility smoke gate
 
 Run `pnpm exec playwright install --with-deps chromium firefox webkit`, then
-`pnpm run test:browser-smoke`. The dedicated Node 22 CI job runs three shared
+`pnpm run test:browser-smoke`. The dedicated Node 22.22.3 CI job runs three shared
 cases (Checkbox, Dialog, Tree) in React, Vue, Svelte and Solid across Chromium,
 Firefox and WebKit: **36 real-browser cases**, plus browser-free policy tests.
 JUnit results and failure screenshots are retained as CI artifacts. Release

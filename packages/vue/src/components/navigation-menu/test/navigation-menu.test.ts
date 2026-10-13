@@ -7,7 +7,7 @@ import { NavigationMenu, navigationMenuAnatomy } from '../index'
 
 describe('[navigation-menu] component', () => {
   it.each(getParts(navigationMenuAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
 
     // viewport 相关部分只在打开菜单后存在
     if (part.includes('viewport') || part.includes('content') || part.includes('arrow')) {
@@ -25,7 +25,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should render navigation menu triggers', async () => {
-    render(Basic)
+    await render(Basic)
 
     await expect.element(page.getByRole('button', { name: 'Getting started' })).toBeVisible()
     await expect.element(page.getByRole('button', { name: /^Components/ })).toBeVisible()
@@ -33,14 +33,14 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should not show content by default', async () => {
-    render(Basic)
+    await render(Basic)
 
     await expect.element(page.getByText('How to install dependencies and structure your app.')).not.toBeVisible()
   })
 
   it('should invoke onValueChange when value changes', async () => {
     const onValueChange = vi.fn()
-    render(Basic, { props: { onValueChange, openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { onValueChange, openDelay: 0, closeDelay: 0 } })
 
     const trigger = page.getByRole('button', { name: 'Getting started' })
     await userEvent.click(trigger)
@@ -51,7 +51,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should support controlled modelValue', async () => {
-    render(Basic, { props: { modelValue: 'components', openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { modelValue: 'components', openDelay: 0, closeDelay: 0 } })
 
     await vi.waitFor(async () => {
       await expect.element(page.getByText('A modal dialog that interrupts the user with important content.')).toBeVisible()
@@ -65,7 +65,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should support default value', async () => {
-    render(Basic, { props: { defaultValue: 'components', openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { defaultValue: 'components', openDelay: 0, closeDelay: 0 } })
 
     await vi.waitFor(async () => {
       await expect.element(page.getByText('A modal dialog that interrupts the user with important content.')).toBeVisible()
@@ -73,7 +73,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should render link item without dropdown', async () => {
-    render(Basic)
+    await render(Basic)
 
     const documentationLink = page.getByRole('link', { name: 'Documentation' })
     await expect.element(documentationLink).toBeVisible()
@@ -86,7 +86,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should open on hover when hover trigger is enabled', async () => {
-    render(Basic, { props: { disableHoverTrigger: false, openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { disableHoverTrigger: false, openDelay: 0, closeDelay: 0 } })
 
     const trigger = page.getByRole('button', { name: 'Getting started' })
     await userEvent.hover(trigger)
@@ -97,7 +97,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should not open on hover when hover trigger is disabled', async () => {
-    render(Basic, { props: { disableHoverTrigger: true, openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { disableHoverTrigger: true, openDelay: 0, closeDelay: 0 } })
 
     const trigger = page.getByRole('button', { name: 'Getting started' })
     await userEvent.hover(trigger)
@@ -108,7 +108,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should not open on click when click trigger is disabled', async () => {
-    render(Basic, { props: { disableClickTrigger: true, disableHoverTrigger: true, openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { disableClickTrigger: true, disableHoverTrigger: true, openDelay: 0, closeDelay: 0 } })
 
     const trigger = page.getByRole('button', { name: 'Getting started' })
     await userEvent.click(trigger)
@@ -117,7 +117,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should support keyboard navigation with arrow keys', async () => {
-    render(Basic, { props: { openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { openDelay: 0, closeDelay: 0 } })
 
     const firstTrigger = page.getByRole('button', { name: 'Getting started' })
     await userEvent.click(firstTrigger)
@@ -136,7 +136,7 @@ describe('[navigation-menu] component', () => {
   })
 
   it('should render components content correctly', { retry: 2 }, async () => {
-    render(Basic, { props: { openDelay: 0, closeDelay: 0 } })
+    await render(Basic, { props: { openDelay: 0, closeDelay: 0 } })
 
     const trigger = page.getByRole('button', { name: /^Components/ })
     await expect.element(trigger).toBeVisible()

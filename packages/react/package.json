@@ -23,6 +23,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -100,7 +103,9 @@
     "react-compiler-runtime": "catalog:runtime"
   },
   "devDependencies": {
+    "@babel/core": "catalog:build",
     "@destyler/types": "catalog:prod",
+    "@rolldown/plugin-babel": "catalog:build",
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "@vitejs/plugin-react": "catalog:runtime",

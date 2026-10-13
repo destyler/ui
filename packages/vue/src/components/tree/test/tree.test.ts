@@ -7,7 +7,7 @@ import { Tree, treeAnatomy } from '../index'
 
 describe('[tree] component', () => {
   it.each(getParts(treeAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -16,7 +16,7 @@ describe('[tree] component', () => {
   })
 
   it('seeds default* via InitialValue example', async () => {
-    render(InitialValue)
+    await render(InitialValue)
     const src = document.querySelector('[data-part="branch"][data-value="src"]')!
     const modules = document.querySelector('[data-part="branch"][data-value="node_modules"]')!
     expect(src).toHaveAttribute('aria-selected', 'true')

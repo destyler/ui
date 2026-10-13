@@ -8,7 +8,7 @@ describe('composable: useForwardPropsEmits', () => {
   it('should forward both props and emits', async () => {
     const onUpdate = vi.fn()
 
-    render(UseForwardPropsEmitsBasic, {
+    await render(UseForwardPropsEmitsBasic, {
       props: {
         label: 'Test Label',
         onUpdate,
@@ -27,7 +27,7 @@ describe('composable: useForwardPropsEmits', () => {
   it('should forward props and emits from parent to child', async () => {
     const onUpdate = vi.fn()
 
-    render(UseForwardPropsEmitsParent, {
+    await render(UseForwardPropsEmitsParent, {
       props: {
         label: 'Parent Label',
         value: 'test-value',
@@ -46,7 +46,7 @@ describe('composable: useForwardPropsEmits', () => {
   })
 
   it('should handle props without emits', async () => {
-    render(UseForwardPropsEmitsBasic, {
+    await render(UseForwardPropsEmitsBasic, {
       props: {
         label: 'No Emit Label',
       },

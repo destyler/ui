@@ -11,28 +11,28 @@ import { Collapse, collapseAnatomy } from '../index'
 
 describe('[collapse] component', () => {
   it.each(getParts(collapseAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
 
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
   it.each(getExports(collapseAnatomy))('should export %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(Collapse).toHaveProperty(part, expect.anything())
   })
 
   it('should not have an expanded item by default', async () => {
-    render(Basic)
+    await render(Basic)
     await expect.element(page.getByRole('button', { name: 'React trigger' })).toHaveAttribute('aria-expanded', 'false')
   })
 
   it('should open item specified in defaultValue', async () => {
-    render(Controlled)
+    await render(Controlled)
     await expect.element(page.getByRole('button', { name: 'Vue trigger' })).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('should collapse an expanded item when collapsible is true', async () => {
-    render(Collapsible)
+    await render(Collapsible)
 
     await userEvent.click(page.getByRole('button', { name: 'React Trigger' }))
 
@@ -43,12 +43,12 @@ describe('[collapse] component', () => {
   })
 
   it('should disable all items when disabled is true', async () => {
-    render(Disabled)
+    await render(Disabled)
     await expect.element(page.getByRole('button', { name: 'React Trigger' })).toBeDisabled()
   })
 
   it('should allow multiple items to be expanded when multiple is true', async () => {
-    render(Multiple)
+    await render(Multiple)
 
     await userEvent.click(page.getByRole('button', { name: 'React Trigger' }))
     await userEvent.click(page.getByRole('button', { name: 'Vue Trigger' }))
@@ -59,14 +59,14 @@ describe('[collapse] component', () => {
 
   it('should call onValueChange when an item is clicked', async () => {
     const onValueChange = vi.fn()
-    render(Basic, { props: { onValueChange } })
+    await render(Basic, { props: { onValueChange } })
 
     await userEvent.click(page.getByRole('button', { name: 'React Trigger' }))
     expect(onValueChange).toHaveBeenCalled()
   })
 
   it('should focus the next/previous item on arrow up & down', async () => {
-    render(Basic)
+    await render(Basic)
 
     const firstTrigger = page.getByRole('button', { name: 'React Trigger' })
     const secondTrigger = page.getByRole('button', { name: 'Solid Trigger' })
@@ -81,7 +81,7 @@ describe('[collapse] component', () => {
   })
 
   it('should focus the first/last item on home & end', async () => {
-    render(Basic)
+    await render(Basic)
 
     const firstTrigger = page.getByRole('button', { name: 'React Trigger' })
     const lastTrigger = page.getByRole('button', { name: 'Vue Trigger' })
@@ -96,7 +96,7 @@ describe('[collapse] component', () => {
   })
 
   it('should not collapse the current visible item', async () => {
-    render(Basic)
+    await render(Basic)
 
     const firstTrigger = page.getByRole('button', { name: 'React Trigger' })
 
@@ -108,7 +108,7 @@ describe('[collapse] component', () => {
   })
 
   it('should move the focus to the next element when pressing tab', async () => {
-    render(Basic)
+    await render(Basic)
 
     const firstTrigger = page.getByRole('button', { name: 'React Trigger' })
     const secondTrigger = page.getByRole('button', { name: 'Solid Trigger' })
@@ -120,7 +120,7 @@ describe('[collapse] component', () => {
   })
 
   it('should lazy mount an collapse item', async () => {
-    render(Basic, { props: { lazyMount: true, collapsible: true } })
+    await render(Basic, { props: { lazyMount: true, collapsible: true } })
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -136,7 +136,7 @@ describe('[collapse] component', () => {
   })
 
   it('should not have aria-controls if lazy mounted', async () => {
-    render(Basic, { props: { lazyMount: true } })
+    await render(Basic, { props: { lazyMount: true } })
 
     const button = page.getByRole('button', { name: 'React Trigger' })
 
@@ -147,7 +147,7 @@ describe('[collapse] component', () => {
   })
 
   it('should lazy mount and unmount on exit an collapse item', async () => {
-    render(Basic, {
+    await render(Basic, {
       props: { lazyMount: true, unmountOnExit: true, collapsible: true },
     })
 

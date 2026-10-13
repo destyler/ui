@@ -8,7 +8,7 @@ import { Pagination, paginationAnatomy } from '../index'
 
 describe('[pagination] component', () => {
   it.each(getParts(paginationAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[pagination] component', () => {
   })
 
   it('should update page when item is clicked', async () => {
-    render(Basic)
+    await render(Basic)
 
     const pageTwoLink = page.getByLabelText('page 2')
     await expect.element(pageTwoLink).not.toHaveAttribute('aria-current', 'page')
@@ -27,7 +27,7 @@ describe('[pagination] component', () => {
   })
 
   it('should update page when next button is clicked', async () => {
-    render(Basic)
+    await render(Basic)
 
     const pageOneLink = page.getByLabelText('page 1', { exact: true })
     await expect.element(pageOneLink).toHaveAttribute('aria-current', 'page')
@@ -39,7 +39,7 @@ describe('[pagination] component', () => {
   })
 
   it('should update page when prev button is clicked', async () => {
-    render(Basic)
+    await render(Basic)
 
     const pageTwoLink = page.getByLabelText('page 2')
     await userEvent.click(pageTwoLink)
@@ -51,7 +51,7 @@ describe('[pagination] component', () => {
   })
 
   it('seeds default* via InitialPage example', async () => {
-    render(InitialPage)
+    await render(InitialPage)
     await expect.element(page.getByLabelText('page 5')).toHaveAttribute('aria-current', 'page')
   })
 })

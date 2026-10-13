@@ -8,7 +8,7 @@ import { Label, labelAnatomy } from '../index'
 
 describe('[label] component', () => {
   it.each(getParts(labelAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,12 +17,12 @@ describe('[label] component', () => {
   })
 
   it('should render label text', async () => {
-    render(Basic)
+    await render(Basic)
     await expect.element(page.getByText('Username')).toBeVisible()
   })
 
   it('should work with RootProvider', async () => {
-    render(RootProvider)
+    await render(RootProvider)
     await expect.element(page.getByText('Email Address')).toBeVisible()
   })
 })

@@ -9,7 +9,7 @@ import UnmountOnExit from '../examples/UnmountOnExit.vue'
 
 describe('[collapsible] components test', () => {
   it('should control presence when not lazy mounting and not unmounting on exit', async () => {
-    render(Basic)
+    await render(Basic)
 
     await expect.element(page.getByText('Content')).not.toBeVisible()
 
@@ -25,7 +25,7 @@ describe('[collapsible] components test', () => {
   })
 
   it('should control presence when lazy mounting and not unmounting on exit', async () => {
-    render(LazyMount)
+    await render(LazyMount)
 
     await expect.element(page.getByText('Content')).not.toBeInTheDocument()
 
@@ -41,7 +41,7 @@ describe('[collapsible] components test', () => {
   })
 
   it('should control presence when not lazy mounting and unmounting on exit ', async () => {
-    render(UnmountOnExit)
+    await render(UnmountOnExit)
 
     await expect.element(page.getByText('Content')).not.toBeVisible()
 
@@ -57,7 +57,7 @@ describe('[collapsible] components test', () => {
   })
 
   it('should control presence when lazy mounting and unmounting on exit', async () => {
-    render(LazyMountAndUnmountOnExit)
+    await render(LazyMountAndUnmountOnExit)
 
     await expect.element(page.getByText('Content')).not.toBeInTheDocument()
 
@@ -73,7 +73,7 @@ describe('[collapsible] components test', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('Content')).toBeVisible()
   })
 })

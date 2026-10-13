@@ -11,7 +11,7 @@ import ValueState from './ValueState.vue'
 
 describe('[dynamic] component', () => {
   it.each(getParts(dynamicAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -20,7 +20,7 @@ describe('[dynamic] component', () => {
   })
 
   it('should clear all item when clear all button is clicked', async () => {
-    render(Basic)
+    await render(Basic)
 
     await expect.element(page.getByText('react')).toBeInTheDocument()
     await expect.element(page.getByText('solid')).toBeInTheDocument()
@@ -35,30 +35,30 @@ describe('[dynamic] component', () => {
 })
 
 it('seeds default* via InitialValue example', async () => {
-  render(InitialValue)
+  await render(InitialValue)
   await expect.element(page.getByText('React')).toBeInTheDocument()
   await expect.element(page.getByText('Solid')).toBeInTheDocument()
 })
 
 describe('tagsInput / Field', () => {
   it('should display helper text', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Additional Info')).toBeInTheDocument()
   })
 
   it('should display error text when error is present', async () => {
-    render(WithField, { props: { invalid: true } })
+    await render(WithField, { props: { invalid: true } })
     await expect.element(page.getByText('Error Info')).toBeInTheDocument()
   })
 
   it('should focus on tags input when label is clicked', async () => {
-    render(WithField)
+    await render(WithField)
     await userEvent.click(page.getByText(/label/i))
     await expect.element(page.getByRole('textbox', { name: /label/i })).toHaveFocus()
   })
 
   it('should not display error text when no error is present', async () => {
-    render(WithField)
+    await render(WithField)
     await expect.element(page.getByText('Error Info')).not.toBeInTheDocument()
   })
 })

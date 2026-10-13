@@ -8,7 +8,7 @@ import { Dialog, dialogAnatomy } from '../index'
 
 describe('[dialog] component', () => {
   it.each(getParts(dialogAnatomy))('should render part %s', async (part) => {
-    render(Basic)
+    await render(Basic)
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
@@ -17,7 +17,7 @@ describe('[dialog] component', () => {
   })
 
   it('should show dialog content when opened', async () => {
-    render(Basic)
+    await render(Basic)
 
     await userEvent.click(page.getByText('Open Dialog'))
 
@@ -28,7 +28,7 @@ describe('[dialog] component', () => {
   })
 
   it('seeds default* via InitialOpen example', async () => {
-    render(InitialOpen)
+    await render(InitialOpen)
     await expect.element(page.getByText('Dialog Title')).toBeVisible()
   })
 })

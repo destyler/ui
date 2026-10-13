@@ -6,14 +6,14 @@ import CreateContextProvider from './fixtures/CreateContextProvider.vue'
 
 describe('util: createContext', () => {
   it('should use fallback value when no provider', async () => {
-    render(CreateContextConsumerWithFallback)
+    await render(CreateContextConsumerWithFallback)
 
     const element = page.getByTestId('consumer')
     await expect.element(element).toHaveTextContent('fallback-value')
   })
 
   it('should provide and inject context value', async () => {
-    render(CreateContextProvider, {
+    await render(CreateContextProvider, {
       props: {
         value: 'test-value',
       },
@@ -26,7 +26,7 @@ describe('util: createContext', () => {
   })
 
   it('should provide object context', async () => {
-    render(CreateContextProvider, {
+    await render(CreateContextProvider, {
       props: {
         value: { name: 'test', count: 42 },
       },
@@ -39,7 +39,7 @@ describe('util: createContext', () => {
   })
 
   it('should override parent context with nested provider', async () => {
-    render(CreateContextProvider, {
+    await render(CreateContextProvider, {
       props: {
         value: 'parent-value',
         nested: true,

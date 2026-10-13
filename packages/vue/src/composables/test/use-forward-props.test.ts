@@ -6,7 +6,7 @@ import UseForwardPropsParent from './fixtures/UseForwardPropsParent.vue'
 
 describe('composable: useForwardProps', () => {
   it('should forward props correctly', async () => {
-    render(UseForwardPropsBasic, {
+    await render(UseForwardPropsBasic, {
       props: {
         title: 'Test Title',
         disabled: true,
@@ -19,7 +19,7 @@ describe('composable: useForwardProps', () => {
   })
 
   it('should use default props when not provided', async () => {
-    render(UseForwardPropsBasic, {
+    await render(UseForwardPropsBasic, {
       props: {
         title: 'Custom Title',
       },
@@ -31,7 +31,7 @@ describe('composable: useForwardProps', () => {
   })
 
   it('should forward props from parent to child', async () => {
-    render(UseForwardPropsParent, {
+    await render(UseForwardPropsParent, {
       props: {
         title: 'Parent Title',
         variant: 'primary',
@@ -44,7 +44,7 @@ describe('composable: useForwardProps', () => {
   })
 
   it('should handle camelCase and kebab-case props', async () => {
-    render(UseForwardPropsBasic, {
+    await render(UseForwardPropsBasic, {
       props: {
         'data-custom': 'value',
         'title': 'Title',
