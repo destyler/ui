@@ -11,8 +11,8 @@
  */
 
 import fs from 'node:fs'
-import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { root } from 'astro:config/server'
 import { frameworks } from '../config/frameworks'
 import { formatExampleSourceComment, getExampleSourcePath, rewriteExampleSourceImports } from '../utils/example-source'
 import { highlight } from '../utils/shiki'
@@ -30,8 +30,8 @@ interface Props {
 
 const { component, example = 'Basic' } = Astro.props
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const workspaceRoot = path.resolve(__dirname, '../../..')
+// Astro bundles this component outside src; resolve examples from the configured docs root.
+const workspaceRoot = fileURLToPath(new URL('../', root))
 
 const highlightedExamples = await Promise.all(frameworks.map(async (framework) => {
   const sourcePath = getExampleSourcePath(workspaceRoot, framework, component, example)

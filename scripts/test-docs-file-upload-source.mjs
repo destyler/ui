@@ -30,6 +30,21 @@ try {
     assert.equal(await block.textContent(), source, 'native DOM preserves the complete file-upload source')
   }
   console.log(JSON.stringify({ route: '/components/file-upload/', example: 'Basic', framework: 'vue', exactText: true }))
+
+  // Missing-example HTML comments contain '<', so markup presence alone cannot
+  // prove that ComponentPreview resolved the original source after bundling.
+  const checkboxHtml = await readFile(path.join(dist, 'components/checkbox/index.html'), 'utf8')
+  await page.setContent(checkboxHtml, { waitUntil: 'domcontentloaded' })
+  for (const framework of frameworks) {
+    const sourcePath = getExampleSourcePath(root, framework, 'checkbox', 'Basic')
+    const source = rewriteExampleSourceImports(await readFile(sourcePath, 'utf8'), framework, sourcePath)
+    const code = page.locator(`.ds-component-preview:has(.ds-preview-frame.checkbox-basic) .ds-code-block[data-fw="${framework.id}"] pre.shiki > code`)
+    assert.equal(await code.count(), 2, `locate both built Basic ${framework.label} checkbox snippets`)
+    for (const block of await code.all()) {
+      assert.equal(await block.textContent(), source, `native DOM preserves the complete ${framework.label} checkbox source`)
+    }
+    console.log(JSON.stringify({ route: '/components/checkbox/', example: 'Basic', framework: framework.id, exactText: true }))
+  }
 }
 finally {
   await browser.close()
