@@ -52,8 +52,8 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Verify archive errors and React component generator
-        run: node --test scripts/test-zip.mjs scripts/test-react-generator.mjs
+      - name: Verify archive errors, React generator and Chromatic registration
+        run: node --test scripts/test-zip.mjs scripts/test-react-generator.mjs scripts/test-chromatic-share-registration.mjs
 
       - name: Clear Vite cache
         run: |
