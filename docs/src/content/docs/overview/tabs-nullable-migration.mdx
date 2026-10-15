@@ -38,6 +38,10 @@ Vue's public `modelValue`, `defaultValue`, `valueChange` and `update:modelValue`
 
 ## Core dependency boundary
 
-The currently pinned `@destyler/tabs@0.2.11` can receive a parent-controlled `null`, but suppresses null change notifications initiated by `clearValue()` or `deselectable`. The [core correction](https://github.com/destyler/destyler/pull/208) (reviewed head `a462bf8fe4c1df518f2ecc00cf9fb0a4a181ca4f`) reports those requests and widens `ValueChangeDetails.value` to `string | null`.
+The pinned `@destyler/tabs@0.2.13` includes the [core correction](https://github.com/destyler/destyler/pull/208): `clearValue()` and deselectable user activation report `{ value: null }`, and `ValueChangeDetails.value` is `string | null`. This includes clicking the selected trigger and pressing Enter on it in manual activation mode.
 
-This UI migration prepares types, examples and consumer tests while retaining the published dependency. It does not make the core notification correction available in version `0.2.11`, invent a dependency version, or change controlled ownership. Adopt a released core version containing that correction through the normal release process before relying on null notifications. A controlled parent still decides whether to accept a requested value.
+A controlled parent still owns the selection. Accept a clear request by writing `null` back, keep the current value to veto it, or apply the requested value later. Repeated clear requests while a non-null value remains controlled notify again; after the parent accepts `null`, another `clearValue()` is a no-op. Parent writes do not echo a value-change notification. Uncontrolled Tabs update their own selection and report the change.
+
+`setValue(value)` continues to accept a string and select that tab, even with `deselectable` enabled. Calling it with the already selected string does not toggle the selection off. Use `clearValue()` to request an empty selection.
+
+Consumers upgrading from `0.2.11` must handle these newly delivered null notifications. That version accepted parent-controlled `null` but suppressed core-initiated null change callbacks; widening a handler alone did not enable them.
