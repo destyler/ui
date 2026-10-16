@@ -11,7 +11,7 @@ import {
 
   memo,
 } from 'react'
-import { composeRefs } from '../utils/compose-refs'
+import { useComposedRefs } from '../utils/compose-refs'
 
 export interface PolymorphicProps {
   /**
@@ -47,21 +47,21 @@ function withAsChild(Component: React.ElementType) {
     forwardRef<unknown, PropsWithRef<typeof Component>>((props, ref) => {
       const { asChild, children, ...restProps } = props
 
+      const onlyChild = asChild ? Children.only(children) : null
+      const childRef = isValidElement(onlyChild) ? getRef(onlyChild) : undefined
+      const composedRef = useComposedRefs(ref, childRef)
+
       if (!asChild) {
         return createElement(Component, { ...restProps, ref }, children)
       }
-
-      const onlyChild: React.ReactNode = Children.only(children)
 
       if (!isValidElement<Record<string, unknown>>(onlyChild)) {
         return null
       }
 
-      const childRef = getRef(onlyChild)
-
       return cloneElement(onlyChild, {
         ...mergeProps(restProps, onlyChild.props),
-        ref: ref ? composeRefs(ref, childRef) : childRef,
+        ref: ref ? composedRef : childRef,
       })
     }),
   )

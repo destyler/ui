@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
-import { Toggle } from '@destyler-ui/react'
-import { createElement, createRef, version } from 'react'
+import { Presence, Toggle } from '@destyler-ui/react'
+import { createElement, createRef, StrictMode, version } from 'react'
 import { flushSync } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 
@@ -53,6 +53,54 @@ export function verifyRefs() {
       assert.equal(objectRef.current, null)
       assert.deepEqual(cleaned, [firstCleanupNode, secondCleanupNode])
       assert.deepEqual(calls, [firstCleanupNode, secondCleanupNode], 'Cleanup refs must not also receive null')
+    }
+
+    for (const strict of [false, true]) {
+      for (const asChild of [false, true]) {
+        const attached = []
+        const detached = []
+        const nodeRef = createRef()
+        const ownerRef = (node) => {
+          nodeRef.current = node
+          if (node)
+            attached.push(node)
+          else
+            detached.push(null)
+        }
+        const childRef = createRef()
+        const tree = (label, key = 'first') => {
+          const element = createElement(Presence, {
+            present: true,
+            immediate: true,
+            asChild,
+            ref: ownerRef,
+            ...(asChild ? {} : { key }),
+          }, asChild ? createElement('button', { key, ref: childRef }, label) : label)
+          return strict ? createElement(StrictMode, null, element) : element
+        }
+        flushSync(() => root.render(tree('first render')))
+        const firstNode = container.querySelector('[data-scope="presence"]')
+        assert.ok(firstNode, 'Presence must mount without a render/ref feedback loop')
+        assert.equal(nodeRef.current, firstNode)
+        if (asChild)
+          assert.equal(childRef.current, firstNode)
+        const initialAttachCount = attached.length
+        const initialDetachCount = detached.length
+        flushSync(() => root.render(tree('changed content')))
+        assert.equal(nodeRef.current, firstNode)
+        assert.equal(attached.length, initialAttachCount, 'Unrelated props must not reattach presence refs')
+        assert.equal(detached.length, initialDetachCount, 'Unrelated props must not detach presence refs')
+        flushSync(() => root.render(tree('replacement', 'second')))
+        const secondNode = container.querySelector('[data-scope="presence"]')
+        assert.ok(secondNode)
+        assert.notEqual(secondNode, firstNode)
+        assert.equal(nodeRef.current, secondNode)
+        if (asChild)
+          assert.equal(childRef.current, secondNode)
+        flushSync(() => root.render(null))
+        assert.equal(nodeRef.current, null)
+        assert.equal(childRef.current, null)
+      }
     }
   }
   finally {
