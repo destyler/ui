@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js'
 import { isServer, render } from 'solid-js/web'
-import { afterEach, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { page, userEvent } from 'vitest/browser'
 import { Tabs } from '../index'
 
@@ -8,10 +8,43 @@ type Mode = 'accept' | 'veto' | 'delay' | 'uncontrolled'
 type ClearSource = 'clearValue' | 'click' | 'Enter'
 const clearSources: ClearSource[] = ['clearValue', 'click', 'Enter']
 const disposers: (() => void)[] = []
+const changesAfterDisposal: { value: string | null }[] = []
+let lifecyclePhase = 'test'
+let restoreWarningSpy: (() => void) | undefined
 
-afterEach(() => {
-  disposers.splice(0).forEach(dispose => dispose())
-  document.body.replaceChildren()
+beforeEach(({ task }) => {
+  lifecyclePhase = 'test'
+  changesAfterDisposal.length = 0
+  const warn = console.warn.bind(console)
+  const warningSpy = vi.spyOn(console, 'warn').mockImplementation((...args) => {
+    warn(...args)
+    if (args[0] === '[@destyler/xstate > transition] Cannot transition a stopped machine') {
+      warn('[tabs-stopped-machine-diagnostic]', JSON.stringify({
+        test: task.name,
+        lifecyclePhase,
+        stack: new Error('Tabs stopped-machine warning').stack,
+      }))
+    }
+  })
+  restoreWarningSpy = () => warningSpy.mockRestore()
+})
+
+afterEach(async () => {
+  try {
+    lifecyclePhase = 'disposing-roots'
+    disposers.splice(0).forEach(dispose => dispose())
+    lifecyclePhase = 'roots-disposed'
+    lifecyclePhase = 'replacing-body'
+    document.body.replaceChildren()
+    lifecyclePhase = 'body-replaced'
+    // Observe pending activation frames without changing focus or event dispatch.
+    await settle()
+    expect(changesAfterDisposal).toEqual([])
+  }
+  finally {
+    restoreWarningSpy?.()
+    restoreWarningSpy = undefined
+  }
 })
 
 function Fixture(props: { mode: Mode, onChange: (details: { value: string | null }) => void }) {
@@ -59,11 +92,19 @@ async function settle() {
 }
 
 async function mountFixture(mode: Mode) {
-  const changes = vi.fn()
+  let disposalStarted = false
+  const changes = vi.fn((details: { value: string | null }) => {
+    if (disposalStarted)
+      changesAfterDisposal.push(details)
+  })
   const container = document.createElement('div')
   document.body.append(container)
   expect(isServer).toBe(false)
-  disposers.push(render(() => <Fixture mode={mode} onChange={changes} />, container))
+  const dispose = render(() => <Fixture mode={mode} onChange={changes} />, container)
+  disposers.push(() => {
+    disposalStarted = true
+    dispose()
+  })
   await settle()
   expect(changes).not.toHaveBeenCalled()
   return { container, changes }
