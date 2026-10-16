@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 type PossibleRef<T> = React.Ref<T | null> | undefined
 
 function setRef<T>(ref: PossibleRef<T>, value: T) {
@@ -25,4 +27,9 @@ export function composeRefs<T>(...refs: PossibleRef<T>[]): (node: T | null) => v
       }
     }
   }
+}
+
+/** Keep callback-ref attachment stable while both owners are unchanged. */
+export function useComposedRefs<T>(first: PossibleRef<T>, second: PossibleRef<T>) {
+  return useMemo(() => composeRefs(first, second), [first, second])
 }

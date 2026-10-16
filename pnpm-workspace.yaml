@@ -24,7 +24,7 @@ catalogs:
     '@astrojs/svelte': ^9.0.1
     '@astrojs/starlight': ^0.42.6
     '@astrojs/vue': ^7.0.3
-    '@destyler/docs': ^0.2.11
+    '@destyler/docs': ^0.2.13
     astro: ^7.3.8
     shiki: ^4.5.0
     tsx: ^4.23.15
@@ -58,64 +58,64 @@ catalogs:
     plop: ^4.0.5
     taze: ^21.3.0
   prod:
-    '@destyler/anatomy': ^0.2.11
-    '@destyler/aspect-ratio': ^0.2.11
-    '@destyler/auto-resize': ^0.2.11
-    '@destyler/breadcrumbs': ^0.2.11
-    '@destyler/calendar': ^0.2.11
-    '@destyler/carousel': ^0.2.11
-    '@destyler/checkbox': ^0.2.11
-    '@destyler/clipboard': ^0.2.11
-    '@destyler/collapse': ^0.2.11
-    '@destyler/collapsible': ^0.2.11
-    '@destyler/collection': ^0.2.11
-    '@destyler/color-picker': ^0.2.11
-    '@destyler/combobox': ^0.2.11
-    '@destyler/dialog': ^0.2.11
-    '@destyler/dom': ^0.2.11
-    '@destyler/dynamic': ^0.2.11
-    '@destyler/edit': ^0.2.11
-    '@destyler/file-upload': ^0.2.11
-    '@destyler/floating-panel': ^0.2.11
-    '@destyler/focus-trap': ^0.2.11
-    '@destyler/highlight-text': ^0.2.11
-    '@destyler/hover-card': ^0.2.11
-    '@destyler/i18n': ^0.2.11
-    '@destyler/image': ^0.2.11
-    '@destyler/label': ^0.2.11
-    '@destyler/menu': ^0.2.11
-    '@destyler/navigation-menu': ^0.2.11
-    '@destyler/number-input': ^0.2.11
-    '@destyler/otp-input': ^0.2.11
-    '@destyler/pagination': ^0.2.11
-    '@destyler/popover': ^0.2.11
-    '@destyler/presence': ^0.2.11
-    '@destyler/progress': ^0.2.11
-    '@destyler/qr-code': ^0.2.11
-    '@destyler/radio': ^0.2.11
-    '@destyler/react': ^0.2.11
-    '@destyler/scroll-area': ^0.2.11
-    '@destyler/select': ^0.2.11
-    '@destyler/separator': ^0.2.11
-    '@destyler/signature': ^0.2.11
-    '@destyler/slider': ^0.2.11
-    '@destyler/splitter': ^0.2.11
-    '@destyler/steps': ^0.2.11
-    '@destyler/store': ^0.2.11
-    '@destyler/solid': ^0.2.11
-    '@destyler/svelte': ^0.2.11
-    '@destyler/switch': ^0.2.11
-    '@destyler/tabs': ^0.2.11
-    '@destyler/timer': ^0.2.11
-    '@destyler/toast': ^0.2.11
-    '@destyler/toggle': ^0.2.11
-    '@destyler/tooltip': ^0.2.11
-    '@destyler/tour': ^0.2.11
-    '@destyler/tree': ^0.2.11
-    '@destyler/types': ^0.2.11
-    '@destyler/utils': ^0.2.11
-    '@destyler/vue': ^0.2.11
-    '@destyler/xstate': ^0.2.11
+    '@destyler/anatomy': ^0.2.13
+    '@destyler/aspect-ratio': ^0.2.13
+    '@destyler/auto-resize': ^0.2.13
+    '@destyler/breadcrumbs': ^0.2.13
+    '@destyler/calendar': ^0.2.13
+    '@destyler/carousel': ^0.2.13
+    '@destyler/checkbox': ^0.2.13
+    '@destyler/clipboard': ^0.2.13
+    '@destyler/collapse': ^0.2.13
+    '@destyler/collapsible': ^0.2.13
+    '@destyler/collection': ^0.2.13
+    '@destyler/color-picker': ^0.2.13
+    '@destyler/combobox': ^0.2.13
+    '@destyler/dialog': ^0.2.13
+    '@destyler/dom': ^0.2.13
+    '@destyler/dynamic': ^0.2.13
+    '@destyler/edit': ^0.2.13
+    '@destyler/file-upload': ^0.2.13
+    '@destyler/floating-panel': ^0.2.13
+    '@destyler/focus-trap': ^0.2.13
+    '@destyler/highlight-text': ^0.2.13
+    '@destyler/hover-card': ^0.2.13
+    '@destyler/i18n': ^0.2.13
+    '@destyler/image': ^0.2.13
+    '@destyler/label': ^0.2.13
+    '@destyler/menu': ^0.2.13
+    '@destyler/navigation-menu': ^0.2.13
+    '@destyler/number-input': ^0.2.13
+    '@destyler/otp-input': ^0.2.13
+    '@destyler/pagination': ^0.2.13
+    '@destyler/popover': ^0.2.13
+    '@destyler/presence': ^0.2.13
+    '@destyler/progress': ^0.2.13
+    '@destyler/qr-code': ^0.2.13
+    '@destyler/radio': ^0.2.13
+    '@destyler/react': ^0.2.13
+    '@destyler/scroll-area': ^0.2.13
+    '@destyler/select': ^0.2.13
+    '@destyler/separator': ^0.2.13
+    '@destyler/signature': ^0.2.13
+    '@destyler/slider': ^0.2.13
+    '@destyler/splitter': ^0.2.13
+    '@destyler/steps': ^0.2.13
+    '@destyler/store': ^0.2.13
+    '@destyler/solid': ^0.2.13
+    '@destyler/svelte': ^0.2.13
+    '@destyler/switch': ^0.2.13
+    '@destyler/tabs': ^0.2.13
+    '@destyler/timer': ^0.2.13
+    '@destyler/toast': ^0.2.13
+    '@destyler/toggle': ^0.2.13
+    '@destyler/tooltip': ^0.2.13
+    '@destyler/tour': ^0.2.13
+    '@destyler/tree': ^0.2.13
+    '@destyler/types': ^0.2.13
+    '@destyler/utils': ^0.2.13
+    '@destyler/vue': ^0.2.13
+    '@destyler/xstate': ^0.2.13
   runtime:
     '@vitejs/devtools': ^0.7.6
     '@vitejs/plugin-react': ^6.1.2
@@ -126,7 +126,7 @@ catalogs:
     '@sveltejs/vite-plugin-svelte': ^7.3.1
     vite: ^8.3.4
   stories:
-    '@chromatic-com/storybook': ^5.0.0
+    '@chromatic-com/storybook': 5.5.1
     '@storybook/addon-a11y': ^10.6.2
     '@storybook/addon-docs': ^10.6.2
     '@storybook/addon-vitest': ^10.6.2
@@ -174,6 +174,8 @@ shellEmulator: true
 
 # Preserve reviewed direct-effect and eager-reactivity warnings while keeping
 # upstream defaults. Exact versions make compatibility patch upgrades explicit.
+# Chromatic removes only the Share UI entry and stays exactly version-pinned.
 patchedDependencies:
+  '@chromatic-com/storybook@5.5.1': patches/@chromatic-com__storybook@5.5.1.patch
   eslint-plugin-react-x@5.27.1: patches/eslint-plugin-react-x@5.27.1.patch
   eslint-plugin-solid@0.18.1: patches/eslint-plugin-solid@0.18.1.patch

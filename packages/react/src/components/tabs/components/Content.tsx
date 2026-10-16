@@ -5,7 +5,7 @@ import { forwardRef } from 'react'
 import { PresenceProvider, usePresence } from '~/components/presence'
 import { ui } from '~/factory'
 import { useDebounce } from '~/hooks/use-debounce'
-import { composeRefs } from '~/utils/compose-refs'
+import { useComposedRefs } from '~/utils/compose-refs'
 import { createSplitProps } from '~/utils/create-split-props'
 import { useRenderStrategyPropsContext } from '~/utils/render-strategy'
 import { useTabsContext } from '../hooks/use-tabs-context'
@@ -24,11 +24,12 @@ export const TabContent = forwardRef<HTMLDivElement, TabContentProps>((props, re
     immediate: true,
   })
 
+  const composedRef = useComposedRefs(presence.ref, ref)
   const mergedProps = mergeProps(tabs.getContentProps(contentProps), presence.getPresenceProps(), localProps)
 
   return (
     <PresenceProvider value={presence}>
-      {presence.unmounted ? null : <ui.div {...mergedProps} ref={composeRefs(presence.ref, ref)} />}
+      {presence.unmounted ? null : <ui.div {...mergedProps} ref={composedRef} />}
     </PresenceProvider>
   )
 })
