@@ -3,7 +3,7 @@ import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
-import { composeRefs } from '~/utils/compose-refs'
+import { useComposedRefs } from '~/utils/compose-refs'
 import { useRenderStrategyPropsContext } from '~/utils/render-strategy'
 import { useDialogContext } from '../hooks/use-dialog-context'
 
@@ -14,13 +14,14 @@ export const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>((p
   const dialog = useDialogContext()
   const renderStrategyProps = useRenderStrategyPropsContext()
   const presence = usePresence({ ...renderStrategyProps, present: dialog.open })
+  const composedRef = useComposedRefs(presence.ref, ref)
   const mergedProps = mergeProps(dialog.getBackdropProps(), props)
 
   if (presence.unmounted) {
     return null
   }
 
-  return <ui.div {...mergedProps} ref={composeRefs(presence.ref, ref)} />
+  return <ui.div {...mergedProps} ref={composedRef} />
 })
 
 DialogBackdrop.displayName = 'DialogBackdrop'

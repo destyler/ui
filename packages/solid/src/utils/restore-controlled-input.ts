@@ -11,6 +11,8 @@ export function restoreControlledInput(
     onClick(event) {
       // Read currentTarget before Solid's delegated event traversal moves on.
       const input = event.currentTarget
+      const checked = input.checked
+      const indeterminate = input.indeterminate
       try {
         if (typeof onClick === 'function')
           onClick(event)
@@ -18,6 +20,13 @@ export function restoreControlledInput(
           onClick[0](onClick[1], event)
       }
       finally {
+        // Core may synchronously restore its controlled state during onClick.
+        // Keep the browser's proposal until native input/change dispatch has
+        // finished, including radio activation (which requires checked=true).
+        if (!event.defaultPrevented) {
+          input.checked = checked
+          input.indeterminate = indeterminate
+        }
         // Native input/change listeners must see the proposal, and a later
         // click handler may still cancel activation. Restore after dispatch
         // from the latest parent state, once both have had their opportunity.

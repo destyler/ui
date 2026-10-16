@@ -111,7 +111,7 @@ export const valueBindingCases: BindingCase[] = [
   },
   { name: 'Steps.step', family: 'steps', components: Steps, state: 'step', read: api => api.value, initial: () => 0, next: () => 1, props: () => ({ count: 3 }) },
   { name: 'Tabs.value', family: 'tabs', components: Tabs, state: 'value', initial: () => 'one', next: () => 'two' },
-  { name: 'ToggleGroup.value', request: (api, value) => api.setValue(value[0]), family: 'toggle-group', components: ToggleGroup, state: 'value', initial: arrayInitial, next: arrayNext },
+  { name: 'ToggleGroup.value', family: 'toggle-group', components: ToggleGroup, state: 'value', initial: arrayInitial, next: arrayNext },
   { name: 'Tree.expandedValue', callback: 'onExpandedChange', family: 'tree', components: Tree, state: 'expandedValue', initial: () => [], next: arrayInitial, props: treeProps },
   { name: 'Tree.selectedValue', callback: 'onSelectionChange', family: 'tree', components: Tree, state: 'selectedValue', initial: arrayInitial, next: arrayNext, props: treeProps },
 ]

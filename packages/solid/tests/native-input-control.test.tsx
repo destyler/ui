@@ -134,6 +134,24 @@ describe.each(boundaries)('native controlled inputs through %s', (boundary) => {
       expect(seen).toHaveBeenCalledTimes(2)
     })
 
+    it.each([true, false])('keeps a vetoed checked=%s proposal visible through native input and change', async (checked) => {
+      const seen = vi.fn((event: Event & { currentTarget: HTMLInputElement }) => [
+        event.type,
+        event.currentTarget.checked,
+        event.currentTarget.indeterminate,
+      ])
+      const { input, assertState } = renderToggle(kind, boundary, { checked }, { onInput: seen, onChange: seen })
+      for (let index = 0; index < 2; index++) {
+        input.click()
+        expect(seen.mock.results.slice(index * 2).map(result => result.value)).toEqual([
+          ['input', !checked, false],
+          ['change', !checked, false],
+        ])
+        await waitFor(() => assertState(checked))
+      }
+      expect(seen).toHaveBeenCalledTimes(4)
+    })
+
     it('preserves accepted changes and subsequent clicks', async () => {
       const [checked, setChecked] = createSignal(true)
       const onCheckedChange = vi.fn((details: { checked: boolean | string }) => setChecked(details.checked === true))
@@ -199,6 +217,24 @@ describe.each(boundaries)('native controlled inputs through %s', (boundary) => {
     inputs[0].click()
     await waitFor(() => assertState('one'))
     expect(onValueChange.mock.calls.map(([details]) => details.value)).toEqual(['two', 'one'])
+  })
+
+  it('keeps a vetoed radio proposal and its unchecked sibling visible through native input and change', async () => {
+    const seen = vi.fn((event: Event & { currentTarget: HTMLInputElement }) => [
+      event.type,
+      event.currentTarget.value,
+      [...event.currentTarget.form!.querySelectorAll('input')].map(input => input.checked),
+    ])
+    const { inputs, assertState } = renderRadio(boundary, { value: 'one' }, { onInput: seen, onChange: seen })
+    for (let index = 0; index < 2; index++) {
+      inputs[1].click()
+      expect(seen.mock.results.slice(index * 2).map(result => result.value)).toEqual([
+        ['input', 'two', [false, true]],
+        ['change', 'two', [false, true]],
+      ])
+      await waitFor(() => assertState('one'))
+    }
+    expect(seen).toHaveBeenCalledTimes(4)
   })
 
   it('restores a radio group until a delayed parent update arrives', async () => {

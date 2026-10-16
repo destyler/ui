@@ -3,7 +3,7 @@ import { mergeProps } from '@destyler/react'
 import { forwardRef } from 'react'
 import { usePresence } from '~/components/presence'
 import { ui } from '~/factory'
-import { composeRefs } from '~/utils/compose-refs'
+import { useComposedRefs } from '~/utils/compose-refs'
 import { useRenderStrategyPropsContext } from '~/utils/render-strategy'
 import { useTourContext } from '../hooks/use-tour-context'
 
@@ -17,13 +17,14 @@ export const TourBackdrop = forwardRef<HTMLDivElement, TourBackdropProps>((props
     ...renderStrategyProps,
     present: tour.open,
   })
+  const composedRef = useComposedRefs(presence.ref, ref)
   const mergedProps = mergeProps(tour.getBackdropProps(), presence.getPresenceProps(), props)
 
   if (presence.unmounted) {
     return null
   }
 
-  return <ui.div {...mergedProps} ref={composeRefs(presence.ref, ref)} hidden={!tour.step?.backdrop} />
+  return <ui.div {...mergedProps} ref={composedRef} hidden={!tour.step?.backdrop} />
 })
 
 TourBackdrop.displayName = 'TourBackdrop'
