@@ -120,7 +120,7 @@ catalogs:
     '@sveltejs/vite-plugin-svelte': ^7.3.1
     vite: ^8.3.4
   stories:
-    '@chromatic-com/storybook': ^5.0.0
+    '@chromatic-com/storybook': 5.5.1
     '@storybook/addon-a11y': ^10.6.2
     '@storybook/addon-docs': ^10.6.2
     '@storybook/addon-vitest': ^10.6.2
@@ -158,6 +158,10 @@ catalogs:
     tslib: ^2.8.1
     typescript: ^5.9.3
     vue-tsc: ^3.3.13
+
+# This patch removes only the Share UI entry; keep the version exact until reviewed.
+patchedDependencies:
+  '@chromatic-com/storybook@5.5.1': patches/@chromatic-com__storybook@5.5.1.patch
 
 onlyBuiltDependencies:
   - esbuild
