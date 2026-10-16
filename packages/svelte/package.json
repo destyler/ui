@@ -406,6 +406,7 @@
     "publint": "catalog:build",
     "svelte": "catalog:framework",
     "svelte-check": "catalog:build",
+    "typescript": "catalog:types",
     "vite": "catalog:svelte-runtime",
     "vitest": "catalog:test",
     "vitest-browser-svelte": "catalog:test"

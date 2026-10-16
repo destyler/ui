@@ -1,0 +1,270 @@
+diff --git a/dist/chunk-ITE5AC2W.mjs b/dist/chunk-ITE5AC2W.mjs
+--- a/dist/chunk-ITE5AC2W.mjs
++++ b/dist/chunk-ITE5AC2W.mjs
+@@ -3434,6 +3434,11 @@
+                   type: "string"
+                 },
+                 default: []
++              },
++              allowEagerMemoArguments: {
++                description: "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++                type: "boolean",
++                default: true
+               }
+             },
+             additionalProperties: false
+@@ -3455,7 +3460,8 @@
+       },
+       defaultOptions: [
+         {
+-          customReactiveFunctions: []
++          customReactiveFunctions: [],
++          allowEagerMemoArguments: true
+         }
+       ],
+       create(context, [options]) {
+@@ -3950,7 +3956,7 @@
+                 const traced = trace(childNode, context);
+                 if (isFunctionNode(traced) || traced.type === "Identifier" && traced.parent.type !== "MemberExpression" && !(traced.parent.type === "CallExpression" && traced.parent.callee === traced) || // memo accessors traced to their initializing call, e.g. passing a variable
+                 // holding a createMemo result — treat like passing a signal
+-                traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
++                (options.allowEagerMemoArguments !== false || !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) && traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
+                   ["createMemo", "createSelector", "children", "createProjection"],
+                   traced.callee.name
+                 )) {
+diff --git a/dist/configs/recommended.js b/dist/configs/recommended.js
+--- a/dist/configs/recommended.js
++++ b/dist/configs/recommended.js
+@@ -3320,6 +3320,11 @@
+               type: "string"
+             },
+             default: []
++          },
++          allowEagerMemoArguments: {
++            description: "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++            type: "boolean",
++            default: true
+           }
+         },
+         additionalProperties: false
+@@ -3341,7 +3346,8 @@
+   },
+   defaultOptions: [
+     {
+-      customReactiveFunctions: []
++      customReactiveFunctions: [],
++      allowEagerMemoArguments: true
+     }
+   ],
+   create(context, [options]) {
+@@ -3836,7 +3842,7 @@
+             const traced = trace(childNode, context);
+             if (isFunctionNode(traced) || traced.type === "Identifier" && traced.parent.type !== "MemberExpression" && !(traced.parent.type === "CallExpression" && traced.parent.callee === traced) || // memo accessors traced to their initializing call, e.g. passing a variable
+             // holding a createMemo result — treat like passing a signal
+-            traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
++            (options.allowEagerMemoArguments !== false || !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) && traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
+               ["createMemo", "createSelector", "children", "createProjection"],
+               traced.callee.name
+             )) {
+diff --git a/dist/configs/typescript.js b/dist/configs/typescript.js
+--- a/dist/configs/typescript.js
++++ b/dist/configs/typescript.js
+@@ -3436,6 +3436,11 @@
+                   type: "string"
+                 },
+                 default: []
++              },
++              allowEagerMemoArguments: {
++                description: "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++                type: "boolean",
++                default: true
+               }
+             },
+             additionalProperties: false
+@@ -3457,7 +3462,8 @@
+       },
+       defaultOptions: [
+         {
+-          customReactiveFunctions: []
++          customReactiveFunctions: [],
++          allowEagerMemoArguments: true
+         }
+       ],
+       create(context, [options]) {
+@@ -3952,7 +3958,7 @@
+                 const traced = trace(childNode, context);
+                 if (isFunctionNode(traced) || traced.type === "Identifier" && traced.parent.type !== "MemberExpression" && !(traced.parent.type === "CallExpression" && traced.parent.callee === traced) || // memo accessors traced to their initializing call, e.g. passing a variable
+                 // holding a createMemo result — treat like passing a signal
+-                traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
++                (options.allowEagerMemoArguments !== false || !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) && traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
+                   ["createMemo", "createSelector", "children", "createProjection"],
+                   traced.callee.name
+                 )) {
+diff --git a/dist/configs/v2-strict.js b/dist/configs/v2-strict.js
+--- a/dist/configs/v2-strict.js
++++ b/dist/configs/v2-strict.js
+@@ -3436,6 +3436,11 @@
+                   type: "string"
+                 },
+                 default: []
++              },
++              allowEagerMemoArguments: {
++                description: "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++                type: "boolean",
++                default: true
+               }
+             },
+             additionalProperties: false
+@@ -3457,7 +3462,8 @@
+       },
+       defaultOptions: [
+         {
+-          customReactiveFunctions: []
++          customReactiveFunctions: [],
++          allowEagerMemoArguments: true
+         }
+       ],
+       create(context, [options]) {
+@@ -3952,7 +3958,7 @@
+                 const traced = trace(childNode, context);
+                 if (isFunctionNode(traced) || traced.type === "Identifier" && traced.parent.type !== "MemberExpression" && !(traced.parent.type === "CallExpression" && traced.parent.callee === traced) || // memo accessors traced to their initializing call, e.g. passing a variable
+                 // holding a createMemo result — treat like passing a signal
+-                traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
++                (options.allowEagerMemoArguments !== false || !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) && traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
+                   ["createMemo", "createSelector", "children", "createProjection"],
+                   traced.callee.name
+                 )) {
+diff --git a/dist/configs/v2.js b/dist/configs/v2.js
+--- a/dist/configs/v2.js
++++ b/dist/configs/v2.js
+@@ -3436,6 +3436,11 @@
+                   type: "string"
+                 },
+                 default: []
++              },
++              allowEagerMemoArguments: {
++                description: "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++                type: "boolean",
++                default: true
+               }
+             },
+             additionalProperties: false
+@@ -3457,7 +3462,8 @@
+       },
+       defaultOptions: [
+         {
+-          customReactiveFunctions: []
++          customReactiveFunctions: [],
++          allowEagerMemoArguments: true
+         }
+       ],
+       create(context, [options]) {
+@@ -3952,7 +3958,7 @@
+                 const traced = trace(childNode, context);
+                 if (isFunctionNode(traced) || traced.type === "Identifier" && traced.parent.type !== "MemberExpression" && !(traced.parent.type === "CallExpression" && traced.parent.callee === traced) || // memo accessors traced to their initializing call, e.g. passing a variable
+                 // holding a createMemo result — treat like passing a signal
+-                traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
++                (options.allowEagerMemoArguments !== false || !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) && traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
+                   ["createMemo", "createSelector", "children", "createProjection"],
+                   traced.callee.name
+                 )) {
+diff --git a/dist/index.js b/dist/index.js
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -3436,6 +3436,11 @@
+                   type: "string"
+                 },
+                 default: []
++              },
++              allowEagerMemoArguments: {
++                description: "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++                type: "boolean",
++                default: true
+               }
+             },
+             additionalProperties: false
+@@ -3457,7 +3462,8 @@
+       },
+       defaultOptions: [
+         {
+-          customReactiveFunctions: []
++          customReactiveFunctions: [],
++          allowEagerMemoArguments: true
+         }
+       ],
+       create(context, [options]) {
+@@ -3952,7 +3958,7 @@
+                 const traced = trace(childNode, context);
+                 if (isFunctionNode(traced) || traced.type === "Identifier" && traced.parent.type !== "MemberExpression" && !(traced.parent.type === "CallExpression" && traced.parent.callee === traced) || // memo accessors traced to their initializing call, e.g. passing a variable
+                 // holding a createMemo result — treat like passing a signal
+-                traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
++                (options.allowEagerMemoArguments !== false || !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) && traced.type === "CallExpression" && traced.callee.type === "Identifier" && matchImport(
+                   ["createMemo", "createSelector", "children", "createProjection"],
+                   traced.callee.name
+                 )) {
+diff --git a/dist/plugin-D9Rde3hd.d.mts b/dist/plugin-D9Rde3hd.d.mts
+--- a/dist/plugin-D9Rde3hd.d.mts
++++ b/dist/plugin-D9Rde3hd.d.mts
+@@ -52,6 +52,7 @@
+     "prefer-structured-class": TSESLint.RuleModule<"manualClassString" | "useStructuredForm", [], unknown, TSESLint.RuleListener>;
+     reactivity: TSESLint.RuleModule<"noWrite" | "untrackedReactive" | "expectedFunctionGotExpression" | "badSignal" | "badUnnamedDerivedSignal" | "shouldDestructure" | "shouldAssign" | "noAsyncTrackedScope" | "readAfterAwait" | "staleCapture" | "providerValue", [{
+         customReactiveFunctions: string[];
++        allowEagerMemoArguments?: boolean;
+     }], unknown, TSESLint.RuleListener>;
+     "removed-api": TSESLint.RuleModule<"renamed" | "removed" | "webMoved" | "storeMoved" | "classList", [], unknown, TSESLint.RuleListener>;
+     "require-async-server-function": TSESLint.RuleModule<"asyncServerFunction", [], unknown, TSESLint.RuleListener>;
+diff --git a/dist/plugin-D9Rde3hd.d.ts b/dist/plugin-D9Rde3hd.d.ts
+--- a/dist/plugin-D9Rde3hd.d.ts
++++ b/dist/plugin-D9Rde3hd.d.ts
+@@ -52,6 +52,7 @@
+     "prefer-structured-class": TSESLint.RuleModule<"manualClassString" | "useStructuredForm", [], unknown, TSESLint.RuleListener>;
+     reactivity: TSESLint.RuleModule<"noWrite" | "untrackedReactive" | "expectedFunctionGotExpression" | "badSignal" | "badUnnamedDerivedSignal" | "shouldDestructure" | "shouldAssign" | "noAsyncTrackedScope" | "readAfterAwait" | "staleCapture" | "providerValue", [{
+         customReactiveFunctions: string[];
++        allowEagerMemoArguments?: boolean;
+     }], unknown, TSESLint.RuleListener>;
+     "removed-api": TSESLint.RuleModule<"renamed" | "removed" | "webMoved" | "storeMoved" | "classList", [], unknown, TSESLint.RuleListener>;
+     "require-async-server-function": TSESLint.RuleModule<"asyncServerFunction", [], unknown, TSESLint.RuleListener>;
+diff --git a/src/rules/reactivity.ts b/src/rules/reactivity.ts
+--- a/src/rules/reactivity.ts
++++ b/src/rules/reactivity.ts
+@@ -248,7 +248,7 @@
+   | "readAfterAwait"
+   | "staleCapture"
+   | "providerValue";
+-type Options = [{ customReactiveFunctions: string[] }];
++type Options = [{ customReactiveFunctions: string[]; allowEagerMemoArguments?: boolean }];
+ 
+ export default createRule<Options, MessageIds>({
+   meta: {
+@@ -270,6 +270,12 @@
+               type: "string",
+             },
+             default: [],
++          },
++          allowEagerMemoArguments: {
++            description:
++              "Allow eager memo reads in custom reactive function arguments. Set false to retain conservative reactivity warnings.",
++            type: "boolean",
++            default: true,
+           },
+         },
+         additionalProperties: false,
+@@ -302,6 +308,7 @@
+   defaultOptions: [
+     {
+       customReactiveFunctions: [],
++      allowEagerMemoArguments: true,
+     },
+   ],
+   create(context, [options]) {
+@@ -1170,7 +1177,9 @@
+                 !(traced.parent.type === "CallExpression" && traced.parent.callee === traced)) ||
+               // memo accessors traced to their initializing call, e.g. passing a variable
+               // holding a createMemo result — treat like passing a signal
+-              (traced.type === "CallExpression" &&
++              ((options.allowEagerMemoArguments !== false ||
++                !(childNode.parent?.type === "CallExpression" && childNode.parent.callee === childNode)) &&
++                traced.type === "CallExpression" &&
+                 traced.callee.type === "Identifier" &&
+                 matchImport(
+                   ["createMemo", "createSelector", "children", "createProjection"],

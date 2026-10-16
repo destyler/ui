@@ -30,6 +30,39 @@ test('Solid rules resolve for package TS/TSX/JS/JSX without replacing the TS par
   }
 })
 
+test('the isolated plugin preserves all 16 Antfu 7 Solid rules with materialized defaults', async () => {
+  const config = await eslint.calculateConfigForFile(solidPath)
+  const expected = {
+    'solid/components-return-once': [1],
+    'solid/event-handlers': [2, { ignoreCase: false, warnOnSpread: false }],
+    'solid/imports': [2],
+    'solid/jsx-no-duplicate-props': [2],
+    'solid/jsx-no-script-url': [2],
+    'solid/jsx-no-undef': [2, { allowGlobals: false, autoImport: true, typescriptEnabled: true }],
+    'solid/jsx-uses-vars': [2],
+    'solid/no-destructure': [2],
+    'solid/no-innerhtml': [2, { allowStatic: true }],
+    'solid/no-react-deps': [2],
+    'solid/no-react-specific-props': [2],
+    'solid/no-unknown-namespaces': [0],
+    'solid/prefer-for': [2],
+    'solid/reactivity': [1, { customReactiveFunctions: [], allowEagerMemoArguments: false }],
+    'solid/self-closing-comp': [2],
+    'solid/style-prop': [2, { allowString: false, styleProps: ['style', 'css'] }],
+  }
+  assert.equal(Object.keys(expected).length, 16)
+  assert.deepEqual(Object.fromEntries(Object.entries(config.rules).filter(([name]) => name.startsWith('solid/'))), expected)
+})
+
+test('the repository opts into eager memo warnings without rejecting live accessors', async () => {
+  const source = expression => `import { createMemo } from 'solid-js'\nexport function Probe() { const memo = createMemo(() => 1); useThing(${expression}); return <div/> }\n`
+  const filePath = 'packages/solid/tests/reactivity-config-probe.tsx'
+  const eager = (await lint(source('memo()'), filePath)).filter(message => message.ruleId === 'solid/reactivity')
+  assert.deepEqual(eager.map(message => message.messageId), ['untrackedReactive'])
+  assert.equal(count(await lint(source('memo'), filePath), 'solid/reactivity'), 0)
+  assert.equal(count(await lint(source('() => memo()'), filePath), 'solid/reactivity'), 0)
+})
+
 test('the Solid memo and import rules execute their negative/positive controls', async () => {
   const badMemo = await lint(`import { createMemo } from 'solid-js'\nexport const useProbe = () => createMemo(() => 1, [])\n`)
   const goodMemo = await lint(`import { createMemo } from 'solid-js'\nexport const useProbe = () => createMemo(() => 1)\n`)

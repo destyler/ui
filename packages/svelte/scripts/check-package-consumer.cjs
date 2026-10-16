@@ -92,7 +92,7 @@ export type ConsumerProps = PaginationRootProps
   `
   run(process.execPath, ['--conditions=svelte', '--input-type=module', '--eval', importRuneHook])
 
-  const tsc = require.resolve('typescript/bin/tsc')
+  const tsc = require.resolve('typescript/bin/tsc6')
   run(process.execPath, [tsc, '--project', path.join(fixtureRoot, 'tsconfig.json')])
   run(process.execPath, [tsc, '--project', path.join(fixtureRoot, 'tsconfig.bundler.json')])
   process.stdout.write('Package consumer checked: Node ESM, svelte condition, and TypeScript NodeNext/Bundler\n')

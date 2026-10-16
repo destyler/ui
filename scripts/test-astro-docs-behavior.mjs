@@ -23,7 +23,8 @@ function scriptsFromSource(source) {
     if (node.type === 'JSXElement' && node.openingElement.name.type === 'JSXIdentifier' && node.openingElement.name.name === 'script') {
       // ESTree stores script programs, so retain the full source between the tags.
       const code = source.slice(node.openingElement.end, node.closingElement?.start ?? node.openingElement.end)
-      result.push(ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } }).outputText)
+      // Preserve native script output: the API 6 default otherwise adds strict prologues.
+      result.push(ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, alwaysStrict: false } }).outputText)
     }
     else {
       // Scripts can be nested inside template expressions as well as children.

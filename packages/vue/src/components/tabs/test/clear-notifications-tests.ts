@@ -89,16 +89,16 @@ export function registerClearNotificationTests(interactions: Interactions = {
       for (let attempt = 1; attempt <= 2; attempt++) {
         await test.clear(source)
         await vi.waitFor(() => {
-          test.expectChanges(Array.from({ length: attempt }, () => null))
+          test.expectChanges(Array.from<null>({ length: attempt }).fill(null))
           expectSelection(test.container, null)
           test.expectParent(null)
         })
         await test.action('api-clear')
         expectSelection(test.container, null)
-        test.expectChanges(Array.from({ length: attempt }, () => null))
+        test.expectChanges(Array.from<null>({ length: attempt }).fill(null))
         await test.action('parent-restore')
         await vi.waitFor(() => expectSelection(test.container, 'alpha'))
-        test.expectChanges(Array.from({ length: attempt }, () => null))
+        test.expectChanges(Array.from<null>({ length: attempt }).fill(null))
       }
     })
 
@@ -106,7 +106,7 @@ export function registerClearNotificationTests(interactions: Interactions = {
       const test = await setup('veto')
       for (let attempt = 1; attempt <= 2; attempt++) {
         await test.clear(source)
-        await vi.waitFor(() => test.expectChanges(Array.from({ length: attempt }, () => null)))
+        await vi.waitFor(() => test.expectChanges(Array.from<null>({ length: attempt }).fill(null)))
         expectSelection(test.container, 'alpha')
         test.expectParent('alpha')
       }
@@ -119,7 +119,7 @@ export function registerClearNotificationTests(interactions: Interactions = {
       const test = await setup('delay')
       for (let attempt = 1; attempt <= 2; attempt++) {
         await test.clear(source)
-        await vi.waitFor(() => test.expectChanges(Array.from({ length: attempt }, () => null)))
+        await vi.waitFor(() => test.expectChanges(Array.from<null>({ length: attempt }).fill(null)))
         expectSelection(test.container, 'alpha')
         test.expectParent('alpha')
       }

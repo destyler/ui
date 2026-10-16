@@ -14,6 +14,9 @@ test('Astro TypeScript frontmatter uses the actual Astro parser and processor', 
   const config = await eslint.calculateConfigForFile(astroPath)
   assert.equal(config?.languageOptions.parser.meta.name, 'astro-eslint-parser')
   assert.equal(config?.processor.meta.name, 'astro/client-side-ts')
+  assert.equal(config.rules['node/no-deprecated-api'][0], 2)
+  assert.equal(config.rules['jsdoc/check-access'][0], 1)
+  assert.equal(config.rules['unicorn/error-message'][0], 2)
   const results = await eslint.lintText(`---
 const title: string = 'Title'
 ---

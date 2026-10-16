@@ -1,4 +1,6 @@
-import antfu, { astro, react, solid, svelte, vue } from '@antfu/eslint-config'
+import antfu, { astro, GLOB_SRC, svelte, vue } from '@antfu/eslint-config'
+import solidConfig from '@destyler-ui/eslint-solid'
+import reactConfig from './tooling/react-config.mjs'
 
 // Stage 2 pilot: activate Vue rules for the reviewed Frame provider only.
 // Keep this explicit list until each additional source cohort has been reviewed.
@@ -46,9 +48,7 @@ export default antfu(
     },
   },
   // Preset builders return Promise<FlatConfig[]>; the composer resolves them.
-  react({
-    files: ['packages/react/**/*.{js,ts,jsx,tsx}'],
-  }),
+  reactConfig,
   {
     // Preserve this existing global style override, including other JSX users.
     rules: {
@@ -62,9 +62,7 @@ export default antfu(
   },
   // Resolve the async preset through the composer; spreading it drops its rules.
   // Other inactive framework presets remain separately tracked work.
-  solid({
-    files: ['packages/solid/**/*.{js,ts,jsx,tsx}'],
-  }),
+  solidConfig,
   {
     files: ['packages/svelte/package.json'],
     rules: {
@@ -76,4 +74,9 @@ export default antfu(
   astro({
     files: ['docs/**/*.astro'],
   }),
-)
+).overrides({
+  // Antfu 9 narrows these to JS/TS; keep the reviewed Vue/Astro policy too.
+  'antfu/node/rules': { files: [GLOB_SRC, ...vueFrameFiles, 'docs/**/*.astro'] },
+  'antfu/jsdoc/rules': { files: [GLOB_SRC, ...vueFrameFiles, 'docs/**/*.astro'] },
+  'antfu/unicorn/rules': { files: [GLOB_SRC, ...vueFrameFiles, 'docs/**/*.astro'] },
+})

@@ -11,7 +11,7 @@ export function ToastPromise(props: ToastPromiseProps = {}) {
 
   const createSuccessPromise = () => {
     toaster.promise(
-      new Promise(resolve => setTimeout(() => resolve('done'), props.promiseDelay ?? 1000)),
+      new Promise(resolve => setTimeout(resolve, props.promiseDelay ?? 1000, 'done')),
       {
         loading: { title: 'Loading...', description: 'Please wait' },
         success: { title: 'Success!', description: 'Operation completed' },

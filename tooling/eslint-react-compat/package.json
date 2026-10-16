@@ -1,0 +1,19 @@
+{
+  "name": "@destyler-ui/eslint-react-compat",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": "./index.mjs",
+  "engines": {
+    "node": ">=22.22.3"
+  },
+  "dependencies": {
+    "@eslint-react/core": "catalog:lint",
+    "@eslint-react/jsx": "catalog:lint",
+    "@eslint-react/shared": "catalog:lint",
+    "@eslint-react/var": "catalog:lint",
+    "eslint": "catalog:lint",
+    "typescript": "catalog:types"
+  }
+}

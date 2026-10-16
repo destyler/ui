@@ -1,0 +1,48 @@
+diff --git a/dist/index.js b/dist/index.js
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -6694,6 +6694,7 @@
+ //#endregion
+ //#region src/rules/set-state-in-effect/effects.ts
+ function inferViolations$2(context, facts) {
++	const { allowRefDerived = true, allowEmptySetter = true } = context.options[0] ?? {};
+ 	const { additionalEffectHooks } = getSettingsFromContext(context);
+ 	const resolver = createSetStateResolver$1(context);
+ 	const getText = (n) => context.sourceCode.getText(n);
+@@ -6714,9 +6715,9 @@
+ 		if (enclosingFunctionKind === "deferred") continue;
+ 		if (setupFunction != null && (enclosingFunction === setupFunction || enclosingFunctionKind === "immediate" && Traverse.findParent(enclosingFunction, Check.isFunction) === setupFunction)) {
+ 			const args0 = node.arguments.at(0);
+-			if (args0 == null) continue;
+-			if (isArgumentUsingRefValue(context, args0)) continue;
+-			if (isRefGatedContext(context, node)) continue;
++			if (allowEmptySetter && args0 == null) continue;
++			if (allowRefDerived && args0 != null && isArgumentUsingRefValue(context, args0)) continue;
++			if (allowRefDerived && isRefGatedContext(context, node)) continue;
+ 			violations.push({
+ 				name: getText(Extract.unwrap(node.callee)),
+ 				node
+@@ -6747,6 +6748,7 @@
+ 		if (isUseEffectCall(parent)) getOrInsertComputed(setStateInEffectSetup, parent, () => []).push(node);
+ 	}
+ 	const isExemptSetStateCall = (setStateCall, refParams) => {
++		if (!allowRefDerived) return false;
+ 		const callNode = getSetStateCallExpression(setStateCall);
+ 		if (isRefGatedContext(context, callNode, refParams)) return true;
+ 		if (callNode.type !== AST_NODE_TYPES.CallExpression) return false;
+@@ -6811,7 +6813,14 @@
+ 		type: "problem",
+ 		docs: { description: "Validates against setting state synchronously in an effect, which can lead to re-renders that degrade performance." },
+ 		messages: { default: "Do not call the 'set' function '{{name}}' of 'useState' synchronously in an effect. This can lead to unnecessary re-renders and performance issues." },
+-		schema: []
++		schema: [{
++			type: "object",
++			properties: {
++				allowRefDerived: { type: "boolean", default: true },
++				allowEmptySetter: { type: "boolean", default: true }
++			},
++			additionalProperties: false
++		}]
+ 	},
+ 	name: "set-state-in-effect",
+ 	create: create$5

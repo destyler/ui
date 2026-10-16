@@ -27,7 +27,7 @@ test('splits all context bindings while preserving types and exports', () => {
 })
 
 test('drops only the default twentieth Vue DefineComponent argument', () => {
-  const prefix = Array.from({ length: 19 }, () => '{}').join(', ')
+  const prefix = Array.from({ length: 19 }).fill('{}').join(', ')
   for (const name of ['import("vue").DefineComponent', 'Vue.DefineComponent']) {
     const result = rewrite(`import * as Vue from "vue"; type Component = ${name}<${prefix}, any>;`)
     assert.ok(!result.includes(', any>'))
