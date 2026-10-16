@@ -88,7 +88,7 @@ try {
         '@destyler-ui/react': `file:${path.join(temporaryDir, tarballs[0])}`,
         '@types/react': consumer.types,
         '@types/react-dom': consumer.domTypes,
-        'happy-dom': '20.3.3',
+        'happy-dom': '21.0.1',
         'react': consumer.react,
         'react-dom': consumer.react,
         'typescript': '5.9.3',

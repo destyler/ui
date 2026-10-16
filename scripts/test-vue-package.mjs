@@ -74,7 +74,7 @@ try {
       dependencies: {
         [packageName]: `file:${path.join(temporaryDir, tarballs[0])}`,
         [config.dependency]: version,
-        'happy-dom': '20.3.3',
+        'happy-dom': '21.0.1',
         'typescript': '5.9.3',
         'vite': '7.2.7',
         ...(process.env.PACKED_BROWSER === '1' ? { playwright: '1.64.0' } : {}),

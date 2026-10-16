@@ -210,7 +210,12 @@ export function registerDescriptionLifecycleTests() {
 
     it('uses the owner document and does not link colliding IDs in the outer document', async () => {
       const iframe = document.createElement('iframe')
-      document.body.append(iframe)
+      // Keep the frame local without enabling external iframe loading in Happy DOM.
+      iframe.srcdoc = ''
+      await new Promise<void>((resolve) => {
+        iframe.addEventListener('load', () => resolve(), { once: true })
+        document.body.append(iframe)
+      })
       const doc = iframe.contentDocument!
       const outer = document.createElement('span')
       outer.id = `${kind}::first::helper-text`
