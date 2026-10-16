@@ -37,6 +37,9 @@ function compile(source) {
 for (const path of pilotPaths) {
   const config = await engine.calculateConfigForFile(path)
   assert.equal(config.languageOptions.parser.meta.name, 'vue-eslint-parser', path)
+  assert.equal(config.rules['node/no-deprecated-api'][0], 2, path)
+  assert.equal(config.rules['jsdoc/check-access'][0], 1, path)
+  assert.equal(config.rules['unicorn/error-message'][0], 2, path)
   assert(hasError(await messages('<template>\n  <div v-if="ok" v-else />\n</template>\n', path), 'vue/valid-v-else'), path)
   assert.equal(config.rules['vue/singleline-html-element-content-newline'][0], 1, path)
 }

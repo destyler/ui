@@ -192,7 +192,7 @@ for (const control of controls) {
         for (let index = 0; index < 3; index++) {
           await harness.request(control.next)
           harness.assertValue(control.initial)
-          expect(harness.requests.mock.calls.map(([value]) => value)).toEqual(Array.from({ length: index + 1 }, () => control.next))
+          expect(harness.requests.mock.calls.map(([value]) => value)).toEqual(Array.from({ length: index + 1 }).fill(control.next))
         }
       })
 

@@ -11,7 +11,7 @@ export function ToastPromise() {
 
   const createSuccessPromise = () => {
     const promise = new Promise<string>((resolve) => {
-      setTimeout(() => resolve('done'), 1000)
+      setTimeout(resolve, 1000, 'done')
     })
     toaster.promise(promise, promiseOptions)
   }

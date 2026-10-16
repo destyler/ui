@@ -102,6 +102,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:runtime",
+    "typescript": "catalog:types",
     "vue": "catalog:framework",
     "vue-tsc": "catalog:types"
   }

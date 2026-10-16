@@ -25,8 +25,9 @@ export function astroClientContracts() {
         ? execFileSync('git', ['show', `${baseline}:${path.relative(repoRoot, file).split(path.sep).join('/')}`], { cwd: repoRoot, encoding: 'utf8' })
         : await readFile(file, 'utf8')
       const result = await transform(source, { filename: file })
+      // Preserve native script output: the API 6 default otherwise adds strict prologues.
       const scripts = result.scripts.map(script => ts.transpileModule(script.code, {
-        compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
+        compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, alwaysStrict: false },
       }).outputText)
       return { code: `export default ${JSON.stringify(scripts)}`, map: null }
     },

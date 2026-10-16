@@ -1,0 +1,189 @@
+{
+  "source": "@antfu/eslint-config@7.0.1 React policy; React Compiler absent at workspace root; Vite constant exports enabled",
+  "rules": {
+    "react/jsx-key-before-spread": [
+      1
+    ],
+    "react/jsx-no-comment-textnodes": [
+      1
+    ],
+    "react/jsx-no-duplicate-props": [
+      1
+    ],
+    "react/jsx-uses-react": [
+      1
+    ],
+    "react/jsx-uses-vars": [
+      1
+    ],
+    "react/no-access-state-in-setstate": [
+      2
+    ],
+    "react/no-array-index-key": [
+      1
+    ],
+    "react/no-children-count": [
+      1
+    ],
+    "react/no-children-for-each": [
+      1
+    ],
+    "react/no-children-map": [
+      1
+    ],
+    "react/no-children-only": [
+      1
+    ],
+    "react/no-children-to-array": [
+      1
+    ],
+    "react/no-clone-element": [
+      1
+    ],
+    "react/no-component-will-mount": [
+      2
+    ],
+    "react/no-component-will-receive-props": [
+      2
+    ],
+    "react/no-component-will-update": [
+      2
+    ],
+    "react/no-context-provider": [
+      1
+    ],
+    "react/no-create-ref": [
+      2
+    ],
+    "react/no-default-props": [
+      2
+    ],
+    "react/no-direct-mutation-state": [
+      2
+    ],
+    "react/no-duplicate-key": [
+      2
+    ],
+    "react/no-forward-ref": [
+      1
+    ],
+    "react/no-implicit-key": [
+      1
+    ],
+    "react/no-missing-key": [
+      2
+    ],
+    "react/no-nested-component-definitions": [
+      2
+    ],
+    "react/no-nested-lazy-component-declarations": [
+      2
+    ],
+    "react/no-prop-types": [
+      2
+    ],
+    "react/no-redundant-should-component-update": [
+      2
+    ],
+    "react/no-set-state-in-component-did-mount": [
+      1
+    ],
+    "react/no-set-state-in-component-did-update": [
+      1
+    ],
+    "react/no-set-state-in-component-will-update": [
+      1
+    ],
+    "react/no-string-refs": [
+      2
+    ],
+    "react/no-unnecessary-use-prefix": [
+      1
+    ],
+    "react/no-unsafe-component-will-mount": [
+      1
+    ],
+    "react/no-unsafe-component-will-receive-props": [
+      1
+    ],
+    "react/no-unsafe-component-will-update": [
+      1
+    ],
+    "react/no-use-context": [
+      1
+    ],
+    "react/no-useless-forward-ref": [
+      1
+    ],
+    "react/prefer-use-state-lazy-initialization": [
+      1
+    ],
+    "react/prefer-namespace-import": [
+      2
+    ],
+    "react-dom/no-dangerously-set-innerhtml": [
+      1
+    ],
+    "react-dom/no-dangerously-set-innerhtml-with-children": [
+      2
+    ],
+    "react-dom/no-find-dom-node": [
+      2
+    ],
+    "react-dom/no-flush-sync": [
+      2
+    ],
+    "react-dom/no-hydrate": [
+      2
+    ],
+    "react-dom/no-namespace": [
+      2
+    ],
+    "react-dom/no-render": [
+      2
+    ],
+    "react-dom/no-render-return-value": [
+      2
+    ],
+    "react-dom/no-script-url": [
+      1
+    ],
+    "react-dom/no-unsafe-iframe-sandbox": [
+      1
+    ],
+    "react-dom/no-use-form-state": [
+      2
+    ],
+    "react-dom/no-void-elements-with-children": [
+      2
+    ],
+    "react-hooks/rules-of-hooks": [
+      2
+    ],
+    "react-hooks/exhaustive-deps": [
+      1
+    ],
+    "react-hooks-extra/no-direct-set-state-in-use-effect": [
+      1
+    ],
+    "react-web-api/no-leaked-event-listener": [
+      1
+    ],
+    "react-web-api/no-leaked-interval": [
+      1
+    ],
+    "react-web-api/no-leaked-resize-observer": [
+      1
+    ],
+    "react-web-api/no-leaked-timeout": [
+      1
+    ],
+    "react-refresh/only-export-components": [
+      1,
+      {
+        "allowConstantExport": true,
+        "allowExportNames": []
+      }
+    ]
+  }
+}
