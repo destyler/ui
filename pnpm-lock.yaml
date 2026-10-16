@@ -13,11 +13,11 @@ catalogs:
       specifier: ^0.2.4
       version: 0.2.4
     '@sveltejs/kit':
-      specifier: ^2.70.3
-      version: 2.70.3
+      specifier: 3.1.0
+      version: 3.1.0
     '@sveltejs/package':
-      specifier: ^2.5.8
-      version: 2.5.8
+      specifier: 3.0.1
+      version: 3.0.1
     babel-plugin-react-compiler:
       specifier: ^1.0.0
       version: 1.0.0
@@ -512,7 +512,7 @@ importers:
         version: typescript@7.0.2
       '@vitejs/devtools':
         specifier: catalog:runtime
-        version: 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
+        version: 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       '@vitest/browser-playwright':
         specifier: catalog:test
         version: 5.0.4(playwright@1.64.0)(vite@8.3.4)(vitest@5.0.4)
@@ -1239,10 +1239,10 @@ importers:
     devDependencies:
       '@sveltejs/kit':
         specifier: catalog:build
-        version: 2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4))(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)
+        version: 3.1.0(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4))(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)
       '@sveltejs/package':
         specifier: catalog:build
-        version: 2.5.8(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))
+        version: 3.0.1(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))
       '@sveltejs/vite-plugin-svelte':
         specifier: catalog:svelte-runtime
         version: 7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)
@@ -3842,8 +3842,8 @@ packages:
       '@solidjs/router':
         optional: true
 
-  '@standard-schema/spec@1.0.0':
-    resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
+  '@standard-schema/spec@1.1.0':
+    resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
   '@storybook/addon-a11y@10.6.2':
     resolution: {integrity: sha512-zleS+btwrTRcUf3opbZntKsEt6PTqAtxsek08tx5jh5fRvd6wWmtnwW3uaBcypfIKnheTB3KGljJwFX+Mc+Umg==}
@@ -3979,16 +3979,16 @@ packages:
     peerDependencies:
       acorn: ^8.9.0
 
-  '@sveltejs/kit@2.70.3':
-    resolution: {integrity: sha512-UDvEYuZqAMbfB/oXIoqKvbKcb7YczK5zYrzmsGV1zRJk03jntwp8dXiYoIJotxAndsKvcPFtx9H1GRSKFdSHgg==}
-    engines: {node: '>=18.13'}
+  '@sveltejs/kit@3.1.0':
+    resolution: {integrity: sha512-JTWlq2HQlkqx6vIoxhC0R6sc4WVqbQoRyEmr5YlqKmiYbzY1U3awtSWTmjMLlS056a49AmkQR6rnNANXIE8B0Q==}
+    engines: {node: '>=22.17'}
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.0.0
-      '@sveltejs/vite-plugin-svelte': ^3.0.0 || ^4.0.0-next.1 || ^5.0.0 || ^6.0.0-next.0 || ^7.0.0
-      svelte: ^4.0.0 || ^5.0.0-next.0
-      typescript: ^5.3.3 || ^6.0.0
-      vite: ^5.0.3 || ^6.0.0 || ^7.0.0-beta.0 || ^8.0.0
+      '@sveltejs/vite-plugin-svelte': ^7.0.0
+      svelte: ^5.57.1
+      typescript: ^6.0.0
+      vite: ^8.0.12
     peerDependenciesMeta:
       '@opentelemetry/api':
         optional: true
@@ -3999,12 +3999,16 @@ packages:
     resolution: {integrity: sha512-VT3qmUb8pRV2QrZjd8iAmtg8lf4W0TIjZbvXtz5MKei/q96teWZgGJyyidJzOjzZzvdq616eSRVeMYIQChUTAQ==}
     engines: {node: '>= 18.0.0'}
 
-  '@sveltejs/package@2.5.8':
-    resolution: {integrity: sha512-zeBbsXYvHiBu56v4gJaGQoEHzg96w0E1j3dOMX8vo56s6vI5eQ57ZEZhudjwjnegnVitRRu5MrmhO0eNvaonIw==}
-    engines: {node: ^16.14 || >=18}
+  '@sveltejs/package@3.0.1':
+    resolution: {integrity: sha512-QblEaqd2r685OZWVO4I0DLAKUOozIp7YxvahxPYntv+4zzMQbisX2vubBEg2d8riF+bPF13AqTzMFlhyuSlaRQ==}
+    engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
       svelte: ^3.44.0 || ^4.0.0 || ^5.0.0-next.1
+      typescript: ^6.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   '@sveltejs/vite-plugin-svelte@7.3.1':
     resolution: {integrity: sha512-ZPsLN8B1e/En+Ak5s4V7srFDT532oS0qieLsQwu63NGKsS+iAjoO2Js1BochlHlglcU+Pt7WAO3C5Ee+4f6gVA==}
@@ -4075,9 +4079,6 @@ packages:
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
-
-  '@types/cookie@0.6.0':
-    resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -5332,10 +5333,6 @@ packages:
 
   cookie-es@1.2.3:
     resolution: {integrity: sha512-lXVyvUvrNXblMqzIRrxHb57UUVmqsSWlxqt3XIjCkUP0wDAf6uicO6KMbEgYrMNtEvWgWHwe42CKxPu9MYAnWw==}
-
-  cookie@0.6.0:
-    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
-    engines: {node: '>= 0.6'}
 
   cookie@2.0.1:
     resolution: {integrity: sha512-yuToqVvRrj6pfDXREyQAAv8SkAEk/8GS3jQRTiUMm66TVtBYmqQeoEjL2Lmq8Rpo6271vH76InTChTitEAm65w==}
@@ -6666,10 +6663,6 @@ packages:
   keyv@5.6.0:
     resolution: {integrity: sha512-CYDD3SOtsHtyXeEORYRx2qBtpDJFjRTGXUtmNEMGyzYOKj1TE3tycdlho7kA1Ufx9OYWZzg52QFBGALTirzDSw==}
 
-  kleur@4.1.5:
-    resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
-    engines: {node: '>=6'}
-
   klona@2.0.6:
     resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
     engines: {node: '>= 8'}
@@ -7737,11 +7730,6 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.7.3:
-    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   semver@7.8.5:
     resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
@@ -7756,9 +7744,6 @@ packages:
   seroval@1.6.9:
     resolution: {integrity: sha512-UeEzHwAK+yl0YLbsvROV1t5yMYEwZZ0CfKYxDvUgS2fO9Vxdf8djqVIB+OuVpuawRNPqw68LE1Du/GMsW2ZPqA==}
     engines: {node: '>=10'}
-
-  set-cookie-parser@3.1.2:
-    resolution: {integrity: sha512-5/r/lTwbJ3zQ+qwdUFZYeRNqda7P5HD8zQKqlSjdGt1/S0cjLAphHusj4Y58ahDtWn/g32xrIS58/ikOvwl0Lw==}
 
   sharp@0.35.5:
     resolution: {integrity: sha512-Ywn4OnzGukp7CDMrp08RQ50YKmuwG47brZgIVPTvBaaAfQlRlygrRqSrxdCiL9M+LlzLBiJ68IR1QqvzHyjC7g==}
@@ -10091,20 +10076,12 @@ snapshots:
       - crossws
       - ocache
 
-  '@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)':
-    dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
-    optionalDependencies:
-      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
-
   '@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)':
     dependencies:
       '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
       '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
-    optional: true
 
   '@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)':
     dependencies:
@@ -10148,6 +10125,7 @@ snapshots:
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+    optional: true
 
   '@devframes/plugin-messages@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
@@ -10157,11 +10135,10 @@ snapshots:
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
-    optional: true
 
-  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       cac: 7.1.0
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
       zigpty: 0.2.1
@@ -10170,10 +10147,11 @@ snapshots:
     transitivePeerDependencies:
       - '@devframes/hub'
       - '@devframes/hub-ui'
+    optional: true
 
-  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       cac: 7.1.0
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
       zigpty: 0.2.1
@@ -10182,31 +10160,30 @@ snapshots:
     transitivePeerDependencies:
       - '@devframes/hub'
       - '@devframes/hub-ui'
-    optional: true
 
   '@devframes/service-open@1.2.4(devframe@1.2.4)':
     dependencies:
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
       pathe: 2.0.3
 
-  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
       pathe: 2.0.3
     optionalDependencies:
       '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+    optional: true
 
-  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
       pathe: 2.0.3
     optionalDependencies:
       '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
-    optional: true
 
   '@e18e/eslint-plugin@0.8.1(eslint@10.12.0(jiti@2.7.0))':
     dependencies:
@@ -11323,7 +11300,7 @@ snapshots:
     optionalDependencies:
       '@solidjs/router': 1.0.0(solid-js@1.9.17)
 
-  '@standard-schema/spec@1.0.0': {}
+  '@standard-schema/spec@1.1.0': {}
 
   '@storybook/addon-a11y@10.6.2(storybook@10.6.2(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.0))':
     dependencies:
@@ -11478,20 +11455,16 @@ snapshots:
     dependencies:
       acorn: 8.18.0
 
-  '@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4))(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)':
+  '@sveltejs/kit@3.1.0(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4))(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)':
     dependencies:
-      '@standard-schema/spec': 1.0.0
-      '@sveltejs/acorn-typescript': 1.0.13(acorn@8.18.0)
+      '@rolldown/pluginutils': 1.0.1
+      '@standard-schema/spec': 1.1.0
       '@sveltejs/vite-plugin-svelte': 7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)
-      '@types/cookie': 0.6.0
-      acorn: 8.18.0
-      cookie: 0.6.0
-      devalue: 5.9.2
+      cookie: 2.0.1
+      devalue: 5.9.4
       esm-env: 1.2.2
-      kleur: 4.1.5
-      magic-string: 0.30.21
+      magic-string: 1.4.3
       mrmime: 2.0.1
-      set-cookie-parser: 3.1.2
       sirv: 3.0.2
       svelte: 5.57.2(@typescript-eslint/types@8.71.2)
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
@@ -11500,16 +11473,14 @@ snapshots:
 
   '@sveltejs/load-config@0.2.3': {}
 
-  '@sveltejs/package@2.5.8(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))':
+  '@sveltejs/package@3.0.1(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))':
     dependencies:
+      '@sveltejs/load-config': 0.2.3
       chokidar: 5.0.0
-      kleur: 4.1.5
-      sade: 1.8.1
-      semver: 7.7.3
       svelte: 5.57.2(@typescript-eslint/types@8.71.2)
       svelte2tsx: 0.7.61(@typescript/typescript6@6.0.2)(svelte@5.57.2(@typescript-eslint/types@8.71.2))
-    transitivePeerDependencies:
-      - typescript
+    optionalDependencies:
+      typescript: '@typescript/typescript6@6.0.2'
 
   '@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))(vite@8.3.4)':
     dependencies:
@@ -11605,8 +11576,6 @@ snapshots:
     dependencies:
       '@types/deep-eql': 4.0.2
       assertion-error: 2.0.1
-
-  '@types/cookie@0.6.0': {}
 
   '@types/debug@4.1.12':
     dependencies:
@@ -12124,6 +12093,7 @@ snapshots:
       - crossws
       - ocache
       - srvx
+    optional: true
 
   '@vitejs/devtools-kit@0.7.6(@devframes/agentic@1.2.4)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
@@ -12140,17 +12110,16 @@ snapshots:
       - crossws
       - ocache
       - srvx
-    optional: true
 
   '@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
       '@devframes/agentic': 1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
       '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
       '@devframes/json-render-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
       '@devframes/plugin-inspect': 1.2.4(devframe@1.2.4)(vite@8.3.4)
       '@devframes/plugin-messages': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
-      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       '@vitejs/devtools-kit': 0.7.6(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       cac: 7.1.0
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
@@ -12168,6 +12137,7 @@ snapshots:
       - crossws
       - ocache
       - srvx
+    optional: true
 
   '@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
@@ -12177,7 +12147,7 @@ snapshots:
       '@devframes/json-render-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
       '@devframes/plugin-inspect': 1.2.4(devframe@1.2.4)(vite@8.3.4)
       '@devframes/plugin-messages': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
-      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       '@vitejs/devtools-kit': 0.7.6(@devframes/agentic@1.2.4)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       cac: 7.1.0
       devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
@@ -12195,7 +12165,6 @@ snapshots:
       - crossws
       - ocache
       - srvx
-    optional: true
 
   '@vitejs/plugin-react@6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.28.4)(rolldown@1.2.13)(vite@8.3.4))(babel-plugin-react-compiler@1.0.0)(vite@8.3.4)':
     dependencies:
@@ -13146,8 +13115,6 @@ snapshots:
   convert-source-map@2.0.0: {}
 
   cookie-es@1.2.3: {}
-
-  cookie@0.6.0: {}
 
   cookie@2.0.1: {}
 
@@ -14600,8 +14567,6 @@ snapshots:
     dependencies:
       '@keyv/serialize': 1.1.1
 
-  kleur@4.1.5: {}
-
   klona@2.0.6: {}
 
   known-css-properties@0.30.0: {}
@@ -16017,8 +15982,6 @@ snapshots:
 
   semver@6.3.1: {}
 
-  semver@7.7.3: {}
-
   semver@7.8.5: {}
 
   seroval-plugins@1.6.9(seroval@1.6.9):
@@ -16026,8 +15989,6 @@ snapshots:
       seroval: 1.6.9
 
   seroval@1.6.9: {}
-
-  set-cookie-parser@3.1.2: {}
 
   sharp@0.35.5(@types/node@26.6.5):
     dependencies:
@@ -16473,7 +16434,7 @@ snapshots:
       unconfig-core: 7.5.0
       verkit: 0.5.0
     optionalDependencies:
-      '@vitejs/devtools': 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
+      '@vitejs/devtools': 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       publint: 0.3.25
       tsx: 4.23.15
       typescript: '@typescript/typescript6@6.0.2'
