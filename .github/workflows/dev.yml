@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy Dev Page
+    name: Build Dev Page
     steps:
       - uses: actions/checkout@v6
         with:
@@ -31,13 +31,3 @@ jobs:
 
       - name: Build Document
         run: pnpm run docs:build
-
-      - name: Zip dev.destyler.org
-        run: pnpm exec tsx scripts/zip.ts docs/dist docs-dist
-
-      - name: Deploy dev.destyler.org
-        run: pnpm exec tsx scripts/deploy.ts ${TOKEN} ${ENV} ${SERVICE} docs-dist.zip
-        env:
-          TOKEN: ${{secrets.ZEABUR_TOKEN}}
-          ENV: ${{secrets.DEV_UI_DESTYLER_ENV}}
-          SERVICE: ${{secrets.DEV_UI_DESTYLER_ORG}}
