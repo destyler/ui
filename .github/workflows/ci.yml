@@ -35,6 +35,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Verify publish scope offline
+        run: |
+          node --test scripts/test-publish.mjs
+          node scripts/publish-packages.mjs --check
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 

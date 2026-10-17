@@ -1,6 +1,6 @@
 {
   "name": "@destyler-ui/private",
-  "private": "true",
+  "private": true,
   "exports": {
     ".": {
       "import": "./src/index.ts",
