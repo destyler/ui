@@ -24,6 +24,11 @@ jobs:
         with:
           node-version: 22.22.3
           registry-url: https://registry.npmjs.org/
+      - name: Verify publish scope offline
+        run: |
+          node --test scripts/test-publish.mjs
+          node scripts/publish-packages.mjs --check
+
       - uses: pnpm/action-setup@v4
       - run: pnpm install --frozen-lockfile
 

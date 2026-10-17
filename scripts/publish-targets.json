@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "workspacePatterns": [
+    "docs",
+    "packages/*",
+    "utils",
+    "tooling/*"
+  ],
+  "publicPackages": [
+    { "path": "packages/react", "name": "@destyler-ui/react" },
+    { "path": "packages/solid", "name": "@destyler-ui/solid" },
+    { "path": "packages/svelte", "name": "@destyler-ui/svelte" },
+    { "path": "packages/vue", "name": "@destyler-ui/vue" }
+  ],
+  "privatePackages": [
+    { "path": ".", "name": "@destyler-ui/monorepo" },
+    { "path": "docs", "name": "@destyler-ui/docs" },
+    { "path": "utils", "name": "@destyler-ui/private" },
+    { "path": "tooling/eslint-react-compat", "name": "@destyler-ui/eslint-react-compat" },
+    { "path": "tooling/eslint-solid", "name": "@destyler-ui/eslint-solid" }
+  ]
+}
