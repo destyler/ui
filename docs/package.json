@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "pnpm run prepare:docs && astro dev",
     "start": "pnpm run dev",
-    "build": "pnpm run prepare:docs && pnpm run check:docs && astro build",
+    "build": "pnpm run prepare:docs && pnpm run check:docs && astro build && pnpm run check:site",
     "prepare:docs": "pnpm run build:frameworks && pnpm run generate:types && pnpm run validate:types",
     "build:frameworks": "pnpm --dir .. run build",
     "preview": "astro preview",
@@ -16,7 +16,8 @@
     "generate:types:solid": "tsx scripts/generate-type-docs.ts solid",
     "generate:types:svelte": "tsx scripts/generate-type-docs.ts svelte",
     "validate:types": "tsx scripts/validate-type-docs.ts",
-    "check:docs": "tsx scripts/check-docs.ts"
+    "check:docs": "tsx scripts/check-docs.ts",
+    "check:site": "node --test ../scripts/test-docs-site-origin.mjs"
   },
   "dependencies": {
     "@destyler/docs": "catalog:docs"
