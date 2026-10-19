@@ -62,7 +62,7 @@ function destylerSourceAlias(): any {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ui.destyler.dev',
+  site: 'https://ui.destyler.org',
   integrations: [
     UnoCSS({
       injectReset: true,

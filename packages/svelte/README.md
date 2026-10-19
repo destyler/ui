@@ -52,7 +52,7 @@ import { Checkbox as CheckboxFromSubpath } from '@destyler-ui/svelte/checkbox'
 
 Runtime helpers are exported from the root package and dedicated subpaths, including `ClientOnly`, `EnvironmentProvider`, `FocusTrap`, `Format`, `Frame`, `Highlight`, and `LocaleProvider`.
 
-See the [Destyler UI documentation](https://ui.destyler.dev/overview/getting-started/) for component examples, API tables, and provider guides.
+See the [Destyler UI documentation](https://ui.destyler.org/overview/getting-started/) for component examples, API tables, and provider guides.
 
 ## Tree branch triggers
 
