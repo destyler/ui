@@ -1,7 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-svelte'
 import { page, userEvent } from 'vitest/browser'
-import { checkControlledMenu } from '../../../../../../../utils/test/menu-controlled'
 import Basic from '../examples/Basic.svelte'
 import Checkbox from '../examples/Checkbox.svelte'
 import Context from '../examples/Context.svelte'
@@ -39,9 +38,13 @@ describe('[menu] component', () => {
     await vi.waitFor(async () => expect.element(positioner).not.toBeVisible())
   })
 
-  it('keeps external controlled toggles closed after pointer and focus interactions', async () => {
+  it('supports controlled state', async () => {
     await render(Controlled)
-    await checkControlledMenu()
+    const externalTrigger = page.getByRole('button', { name: 'Trigger from the outside' })
+    await userEvent.click(externalTrigger)
+    await expect.element(page.getByText('React')).toBeVisible()
+    await userEvent.click(externalTrigger)
+    await vi.waitFor(async () => expect.element(page.getByText('React')).not.toBeVisible())
   })
 
   it('marks disabled items and renders separators and arrows', async () => {

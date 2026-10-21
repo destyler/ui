@@ -29,7 +29,7 @@ export async function checkControlledMenu() {
       expect(events).toEqual(['pointerdown', 'focusin', 'click'])
       await expect.element(item).not.toBeVisible()
       await settle()
-      expect(item).not.toBeVisible()
+      expect(item.element()).not.toBeVisible()
       await vi.waitFor(() => listeners.expectEmpty())
     }
 
@@ -40,7 +40,8 @@ export async function checkControlledMenu() {
     await userEvent.click(document.body)
     await expect.element(item).not.toBeVisible()
     await settle()
-    expect(item).not.toBeVisible()
+    expect(item.element()).not.toBeVisible()
+    await vi.waitFor(() => listeners.expectEmpty())
   }
   finally {
     for (const type of ['pointerdown', 'focusin', 'click'])
