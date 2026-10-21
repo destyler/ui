@@ -17,7 +17,15 @@ describe('signature / Parts & Exports', () => {
     expect(document.querySelector(part)).toBeInTheDocument()
   })
 
-  it.skip.each(getExports(signatureAnatomy))('should export %s', async (part) => {
+  // SegmentPath is an internal SVG path rendered by Segment, not a component export.
+  const componentExports = [
+    ...getExports(signatureAnatomy).filter(part => part !== 'SegmentPath'),
+    'Context',
+    'HiddenInput',
+    'RootProvider',
+  ]
+
+  it.each(componentExports)('should export %s', async (part) => {
     expectExport(Signature, part)
   })
 

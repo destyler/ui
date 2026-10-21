@@ -17,7 +17,7 @@ describe('select', () => {
     expectExport(Select, part)
   })
 
-  it.skip('should handle item selection', async () => {
+  it('should handle item selection', async () => {
     render(() => <ComponentUnderTest />)
     const trigger = screen.getByRole('combobox', { name: 'Framework' })
     await user.click(trigger)
@@ -25,6 +25,14 @@ describe('select', () => {
     const item = screen.getByText('React', { ignore: 'option' })
     await user.click(item)
     await waitFor(() => expect(trigger).toHaveTextContent('React'))
+    expect(document.querySelector('select')).toHaveValue('react')
+
+    await user.click(trigger)
+    const selected = await screen.findByRole('option', { name: 'React' })
+    expect(selected).toHaveAttribute('aria-selected', 'true')
+    await user.click(screen.getByRole('option', { name: 'Vue' }))
+    await waitFor(() => expect(trigger).toHaveTextContent('Vue'))
+    expect(document.querySelector('select')).toHaveValue('vue')
   })
 
   it('should close on select', async () => {
@@ -114,7 +122,7 @@ describe('select', () => {
     expect(screen.getByTestId('positioner')).toBeInTheDocument()
   })
 
-  it.skip('should be able to lazy mount and unmount its items', async () => {
+  it('should be able to lazy mount and unmount its items', async () => {
     render(() => <ComponentUnderTest lazyMount unmountOnExit />)
     expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()
 
@@ -122,12 +130,15 @@ describe('select', () => {
     expect(screen.getByTestId('positioner')).toBeInTheDocument()
 
     await user.click(screen.getByRole('combobox', { name: 'Framework' }))
-    expect(screen.queryByTestId('positioner')).not.toBeInTheDocument()
+    await waitFor(() => expect(screen.queryByTestId('positioner')).not.toBeInTheDocument())
 
-    it('seeds default* via InitialValue example', async () => {
-      render(() => <InitialValue />)
-      expect(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
-    })
+    await user.click(screen.getByRole('combobox', { name: 'Framework' }))
+    expect(await screen.findByTestId('positioner')).toBeVisible()
+  })
+
+  it('seeds default* via InitialValue example', async () => {
+    render(() => <InitialValue />)
+    expect(screen.getByRole('combobox', { name: 'Framework' })).toHaveTextContent('Vue')
   })
 })
 

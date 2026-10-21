@@ -63,10 +63,13 @@ function ComponentUnderTest(props: ComponentUnderTestProps) {
 }
 
 describe('menu / Parts & Exports', () => {
-  it.skip.each(getParts(menuAnatomy))('should render part! %s', async (part) => {
+  it.each(getParts(menuAnatomy))('should render part! %s', async (part) => {
     render(() => <ComponentUnderTest />)
 
-    expect(document.querySelector(part)).toBeInTheDocument()
+    // Opening the parent connects the nested menu's TriggerItem to its parent.
+    fireEvent.click(screen.getByRole('button', { name: 'Open menu' }))
+    await waitFor(() => expect(screen.getByText('JS Frameworks')).toBeVisible())
+    await waitFor(() => expect(document.querySelector(part)).toBeInTheDocument())
   })
 
   it.each(getExports(menuAnatomy))('should export %s', async (part) => {
