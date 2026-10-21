@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { cp, mkdir, readFile, realpath, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+
+import { assertCoreVersions, assertInstalledArtifact, prepareEvidenceDirectory, requireTarball } from './core-compat-utils.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const [source, output] = process.argv.slice(2)
@@ -18,8 +20,8 @@ const runtimes = {
   solid: { 'solid-js': '1.9.17', 'vite-plugin-solid': '2.11.14' },
   svelte: { 'svelte': '5.57.2', '@sveltejs/vite-plugin-svelte': '6.2.1' },
 }
-const evidence = path.resolve(output)
-await mkdir(evidence, { recursive: true })
+const evidence = await prepareEvidenceDirectory(path.resolve(output))
+const workspace = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
 function run(command, args, cwd) {
   const result = spawnSync(command, args, { cwd, encoding: 'utf8', env: process.env, maxBuffer: 20 * 1024 * 1024 })
   const log = `${result.stdout || ''}${result.stderr || ''}`
@@ -39,17 +41,18 @@ for (const [framework, dependencies] of Object.entries(runtimes)) {
     await cp(path.join(root, 'scripts/fixtures/core-compat'), consumer, { recursive: true })
     const manifest = JSON.parse(await readFile(path.join(root, 'packages', framework, 'package.json'), 'utf8'))
     const overrides = Object.fromEntries(Object.keys(manifest.dependencies).filter(key => key.startsWith('@destyler/')).map(key => [key, core]))
+    const uiSource = registry ? source : `file:${await requireTarball(source, framework, manifest.version)}`
     await writeFile(path.join(consumer, 'package.json'), JSON.stringify({
       name: `destyler-${framework}-core-compat`,
       private: true,
       type: 'module',
-      dependencies: { [name]: registry ? source : `file:${path.resolve(source, `destyler-ui-${framework}-${manifest.version}.tgz`)}`, ...dependencies, 'happy-dom': '21.0.1', 'vite': '7.2.7' },
+      dependencies: { [name]: uiSource, ...dependencies, 'happy-dom': '21.0.1', 'vite': '7.2.7' },
       overrides,
     }, null, 2))
     stage = 'install'
     await writeFile(path.join(consumer, 'install.log'), run(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['install', '--engine-strict', '--ignore-scripts', '--no-audit', '--no-fund'], consumer))
     const installed = path.join(consumer, 'node_modules', name)
-    assert.ok((await realpath(installed)).startsWith(consumer), 'Must consume installed artifact, not workspace source')
+    await assertInstalledArtifact(installed, consumer)
     const require = createRequire(path.join(installed, 'package.json'))
     const installedManifest = JSON.parse(await readFile(path.join(installed, 'package.json'), 'utf8'))
     const dialogManifest = path.resolve(path.dirname(require.resolve('@destyler/dialog')), '../package.json')
@@ -60,12 +63,11 @@ for (const [framework, dependencies] of Object.entries(runtimes)) {
     }
     else {
       assert.equal(installedManifest.version, manifest.version)
-      assert.equal(installedManifest.engines.node, '>=22.22.3')
+      assert.equal(installedManifest.engines?.node, workspace.engines.node, 'Packed package must match the workspace Node support policy')
     }
     const lock = await readFile(path.join(consumer, 'package-lock.json'), 'utf8')
     const resolvedCore = Object.fromEntries(Object.entries(JSON.parse(lock).packages).filter(([key]) => /node_modules\/@destyler\//.test(key)).map(([key, value]) => [key, value.version]))
-    for (const [key, version] of Object.entries(resolvedCore))
-      assert.equal(version, core, `${key} must resolve the exact tested core release`)
+    assertCoreVersions(resolvedCore, core)
     const resolvedRuntimes = Object.fromEntries(await Promise.all(Object.keys(dependencies).map(async (dependency) => {
       const runtime = JSON.parse(await readFile(path.join(consumer, 'node_modules', dependency, 'package.json'), 'utf8'))
       assert.equal(runtime.version, dependencies[dependency], `${dependency} must match its exact test pin`)

@@ -53,7 +53,9 @@ jobs:
           pnpm --filter @destyler-ui/svelte build-storybook
           pnpm --filter @destyler-ui/solid build-storybook
           pnpm run docs:build
-          pnpm run test:core-compat test/core-compat
+
+      - name: Verify exact-core packed Dialog consumers
+        run: pnpm run test:core-compat test/core-compat
 
       - name: Upload exact-core consumer evidence
         if: always()

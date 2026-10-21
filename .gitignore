@@ -32,6 +32,7 @@ storybook-static
 test/report
 test/junit.xml
 test/results
+test/core-compat/
 html
 __screenshots__
 .node-modules-inspector
