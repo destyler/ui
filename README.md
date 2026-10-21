@@ -74,6 +74,8 @@ pnpm docs:dev
 
 `docs:dev` prepares the framework builds and generated API data before starting the documentation server. Other entry points include `pnpm build`, `pnpm lint`, and `pnpm test:ci`; browser tests need Playwright browsers installed (`pnpm exec playwright install`). See [CI](.github/workflows/ci.yml) for the complete checks and system dependency setup.
 
+Before preparing a release, review the [release scope and release-note checklist](docs/release-scope.md#release-note-preparation), including pending breaking changes and migration links.
+
 ## Browser accessibility smoke gate
 
 Run `pnpm exec playwright install --with-deps chromium firefox webkit`, then
