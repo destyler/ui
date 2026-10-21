@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
+import { checkControlledMenu } from '../../../../../../utils/test/menu-controlled'
 import { Basic } from '../examples/Basic'
 import { Checkbox } from '../examples/Checkbox'
 import { Context } from '../examples/Context'
@@ -66,16 +67,9 @@ describe('[menu] component', () => {
     await userEvent.keyboard('{Escape}')
   })
 
-  it('should support controlled open state', async () => {
+  it('keeps external controlled toggles closed after pointer and focus interactions', async () => {
     await render(<Controlled />)
-
-    const externalTrigger = page.getByRole('button', { name: 'Trigger from the outside' })
-
-    await userEvent.click(externalTrigger)
-
-    await expect.element(page.getByText('React')).toBeVisible()
-
-    await userEvent.click(externalTrigger)
+    await checkControlledMenu()
   })
 
   it('should render disabled menu item', async () => {
