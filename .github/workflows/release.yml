@@ -53,6 +53,21 @@ jobs:
           pnpm --filter @destyler-ui/svelte build-storybook
           pnpm --filter @destyler-ui/solid build-storybook
           pnpm run docs:build
+          pnpm run test:core-compat test/core-compat
+
+      - name: Upload exact-core consumer evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-compat-consumers
+          path: |
+            test/core-compat/results.json
+            test/core-compat/*/package.json
+            test/core-compat/*/package-lock.json
+            test/core-compat/*/versions.json
+            test/core-compat/*/*.log
+          if-no-files-found: ignore
+          retention-days: 14
 
       - run: npx changelogithub
         continue-on-error: true
