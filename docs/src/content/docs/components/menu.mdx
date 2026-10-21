@@ -164,6 +164,17 @@ Use a context menu triggered by right-click.
 
 Control the open state of the menu programmatically.
 
+An external toggle button is outside the menu, unlike the registered `Menu.Trigger`.
+In the example below, `onInteractOutside` prevents dismissal only when the original
+event targets that external button or one of its descendants. This lets its click
+handler toggle the controlled state without pointerdown or focus closing the menu
+first and the subsequent click reopening it.
+
+Focusing this external button alone intentionally keeps the menu open; activating
+the button toggles it. Interacting with unrelated outside elements still dismisses
+the menu. Keep the exception scoped to the specific button rather than preventing
+all outside interactions.
+
 <ComponentPreview component="menu" example="Controlled" />
 
 ### Initial Open

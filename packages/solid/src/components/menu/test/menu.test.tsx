@@ -1,7 +1,9 @@
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { createSignal, Index, splitProps } from 'solid-js'
 import { Menu, menuAnatomy, useMenu } from '..'
+import { checkControlledMenu } from '../../../../../../utils/test/menu-controlled'
 import { expectExport, getExports, getParts } from '../../../setup-test'
+import { Controlled } from '../examples/Controlled'
 import { InitialOpen } from '../examples/InitialOpen'
 
 interface ComponentUnderTestProps extends Menu.RootProps {
@@ -78,6 +80,11 @@ describe('menu / Parts & Exports', () => {
 })
 
 describe('menu', () => {
+  it('keeps external controlled toggles closed after pointer and focus interactions', async () => {
+    render(() => <Controlled />)
+    await checkControlledMenu()
+  })
+
   it('should set correct aria attributes on disabled MenuItems', () => {
     render(() => <ComponentUnderTest />)
     expect(screen.getByText('Dialog')).toHaveAttribute('aria-disabled', 'true')
