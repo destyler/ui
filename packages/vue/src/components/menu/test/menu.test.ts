@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { page, userEvent } from 'vitest/browser'
 import { getExports, getParts } from '../../../../../../utils/test'
+import { checkControlledMenu } from '../../../../../../utils/test/menu-controlled'
 import Basic from '../examples/Basic.vue'
 import Checkbox from '../examples/Checkbox.vue'
 import Context from '../examples/Context.vue'
@@ -74,24 +75,9 @@ describe('[menu] component', () => {
     })
   })
 
-  it('should support controlled open state', async () => {
+  it('keeps external controlled toggles closed after pointer and focus interactions', async () => {
     await render(Controlled)
-
-    const externalTrigger = page.getByRole('button', { name: 'Trigger from the outside' })
-    for (let cycle = 0; cycle < 2; cycle++) {
-      await userEvent.click(externalTrigger)
-      await expect.element(page.getByText('React')).toBeVisible()
-      // The outside-interaction listener is deferred. Exercise an established
-      // open menu, so pointerdown cannot race listener installation.
-      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
-      await userEvent.click(externalTrigger)
-      await vi.waitFor(() => {
-        expect(page.getByText('React')).not.toBeVisible()
-      })
-      // A transient outside-dismiss must not hide a later click-driven reopen.
-      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
-      expect(page.getByText('React')).not.toBeVisible()
-    }
+    await checkControlledMenu()
   })
 
   it('should render disabled menu item', async () => {
