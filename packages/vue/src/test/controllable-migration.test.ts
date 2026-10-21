@@ -488,7 +488,8 @@ it('shared text editing: NumberInput preserves accepted partial text and caret',
     input.setSelectionRange(1, 1)
     input.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }))
     await flush()
-    // Core schedules input reconciliation and cursor restoration with raf.
+    // @destyler/number-input 0.2.13 sync.input schedules reconciliation and
+    // cursor restoration together in one @destyler/dom raf callback.
     // Wait for that frame, not just the already-correct pre-reconciliation DOM.
     await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
     await flush()
