@@ -112,10 +112,10 @@ describe('numberInput', () => {
     await waitFor(() => expect(input).toHaveAttribute('readonly'))
   })
 
-  it.skip('should handle min and max fraction digits', async () => {
+  it('should handle min and max fraction digits', async () => {
     render(() => (
       <ComponentUnderTest
-        value="1.00"
+        defaultValue="1.00"
         formatOptions={{ minimumFractionDigits: 2, maximumFractionDigits: 3 }}
       />
     ))
@@ -130,6 +130,12 @@ describe('numberInput', () => {
     await waitFor(() => {
       expect(input).toHaveValue('1.123')
     })
+
+    await user.clear(input)
+    await user.type(input, '2.5')
+    input.blur()
+
+    await waitFor(() => expect(input).toHaveValue('2.50'))
   })
 })
 

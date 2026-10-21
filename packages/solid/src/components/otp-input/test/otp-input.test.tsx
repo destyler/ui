@@ -143,9 +143,27 @@ it('seeds default* via InitialValue example', async () => {
 })
 
 describe('otpInput / Field', () => {
-  it.skip('should set input as required', async () => {
-    render(() => <WithField required />)
-    expect(screen.getByRole('textbox', { name: /pin code 1 of 3/i })).toBeRequired()
+  it('should apply required to the aggregate form input and react to Field changes', async () => {
+    const [required, setRequired] = createSignal(true)
+    render(() => <WithField required={required()} />)
+
+    // The hidden text input represents the whole code for native form validation.
+    // Individual digit inputs deliberately do not carry the required constraint.
+    const input = document.querySelector<HTMLInputElement>('input[aria-hidden="true"]')!
+    expect(input).toBeRequired()
+    expect(input.validity.valueMissing).toBe(true)
+    for (const digit of screen.getAllByRole('textbox')) {
+      expect(digit).not.toBeRequired()
+    }
+
+    await user.type(screen.getByLabelText('pin code 1 of 3'), '1')
+    await user.type(screen.getByLabelText('pin code 2 of 3'), '2')
+    await user.type(screen.getByLabelText('pin code 3 of 3'), '3')
+    await waitFor(() => expect(input).toHaveValue('123'))
+    expect(input.validity.valueMissing).toBe(false)
+
+    setRequired(false)
+    await waitFor(() => expect(input).not.toBeRequired())
   })
 
   it('should set input as disabled', async () => {

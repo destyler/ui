@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@solidjs/testing-library'
 import user from '@testing-library/user-event'
 import { createSignal } from 'solid-js'
 import { Popover, popoverAnatomy, usePopover } from '../'
+import { trackDocumentListeners } from '../../../../../../utils/test/document-listeners'
 import { expectExport, getExports, getParts } from '../../../setup-test'
 import { InitialOpen } from '../examples/InitialOpen'
 import { ComponentUnderTest } from './basic'
@@ -43,14 +44,23 @@ describe('popover', () => {
     warn.mockRestore()
   })
 
-  it.skip('should hide the popover when escape is pressed', async () => {
+  it('should hide the popover when escape is pressed', async () => {
     render(() => <ComponentUnderTest />)
 
-    await user.click(screen.getByText('click me'))
-    await waitFor(() => expect(screen.queryByText('title')).not.toBeVisible())
+    const listeners = trackDocumentListeners(document, 'keydown')
+    try {
+      await user.click(screen.getByText('click me'))
+      await waitFor(() => expect(screen.getByRole('dialog')).toBeVisible())
+      // Dismissal listeners are deferred; visible content alone is not readiness.
+      await waitFor(() => listeners.expectActive())
 
-    await user.keyboard('[Escape]')
-    await waitFor(() => expect(screen.queryByText('title')).not.toBeVisible())
+      await user.keyboard('[Escape]')
+      await waitFor(() => expect(screen.queryByText('title')).not.toBeVisible())
+      await waitFor(() => listeners.expectEmpty())
+    }
+    finally {
+      listeners.restore()
+    }
   })
 
   it('should focus the first focusable element', async () => {
