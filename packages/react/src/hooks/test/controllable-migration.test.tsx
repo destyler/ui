@@ -38,6 +38,7 @@ import { InitialValue as TreeInitialValue } from '~/components/tree/examples/Ini
 import { createFileTreeCollection, createListCollection } from '~/utils/collection'
 import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, ownershipScenarios } from '../../../../../utils/test/behavior-contracts'
 import { trackDocumentListeners } from '../../../../../utils/test/document-listeners'
+import { assertAfterObservationWindow } from '../../../../../utils/test/observation-window'
 
 // These tests run in the browser suite, and can also run in happy-dom with the
 // production React Compiler enabled. The hook implementations are never mocked.
@@ -730,8 +731,9 @@ it('shared dialog lifecycle: restores focus twice and disposes document keydown 
     await act(async () => harness.root.unmount())
     roots.splice(roots.indexOf(harness.root), 1)
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-    await new Promise(resolve => setTimeout(resolve, 35))
-    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await assertAfterObservationWindow(() => {
+      expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    })
     await vi.waitFor(() => listeners.expectEmpty())
   }
   finally {

@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createApp, defineComponent, h, nextTick, reactive } from 'vue'
 import { assertFocusRestored, assertOwnershipCoverage, assertOwnershipSnapshot, assertTextSelection, ownershipScenarios } from '../../../../utils/test/behavior-contracts'
 import { trackDocumentListeners } from '../../../../utils/test/document-listeners'
+import { assertAfterObservationWindow } from '../../../../utils/test/observation-window'
 import { Calendar, parseDate, useCalendar } from '../components/calendar'
 import { Checkbox, useCheckbox } from '../components/checkbox'
 import CheckboxIndeterminate from '../components/checkbox/examples/Indeterminate.vue'
@@ -467,8 +468,9 @@ it('shared dialog lifecycle: restores focus twice and disposes document keydown 
     await vi.waitFor(() => listeners.expectActive())
     instance.unmount()
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
-    await new Promise(resolve => setTimeout(resolve, 35))
-    expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    await assertAfterObservationWindow(() => {
+      expect(onOpenChange.mock.calls.map(([details]) => details.open)).toEqual([true, false, true, false, true])
+    })
     await vi.waitFor(() => listeners.expectEmpty())
   }
   finally {
@@ -486,7 +488,11 @@ it('shared text editing: NumberInput preserves accepted partial text and caret',
     input.setSelectionRange(1, 1)
     input.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }))
     await flush()
-    await new Promise(resolve => setTimeout(resolve, 35))
+    // @destyler/number-input 0.2.13 sync.input schedules reconciliation and
+    // cursor restoration together in one @destyler/dom raf callback.
+    // Wait for that frame, not just the already-correct pre-reconciliation DOM.
+    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
+    await flush()
     assertTextSelection(input, value, 1)
     expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ value }))
   }
