@@ -7,7 +7,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 
-import { assertCoreVersions, assertInstalledArtifact, prepareEvidenceDirectory, requireTarball } from './core-compat-utils.mjs'
+import { assertCoreVersions, assertInstalledArtifact, getArtifactIdentity, prepareEvidenceDirectory, requireNodePolicy, requireTarball } from './core-compat-utils.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const [source, output] = process.argv.slice(2)
@@ -21,7 +21,7 @@ const runtimes = {
   svelte: { 'svelte': '5.57.2', '@sveltejs/vite-plugin-svelte': '6.2.1' },
 }
 const evidence = await prepareEvidenceDirectory(path.resolve(output))
-const workspace = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
+const nodePolicy = requireNodePolicy(JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8')))
 function run(command, args, cwd) {
   const result = spawnSync(command, args, { cwd, encoding: 'utf8', env: process.env, maxBuffer: 20 * 1024 * 1024 })
   const log = `${result.stdout || ''}${result.stderr || ''}`
@@ -63,17 +63,19 @@ for (const [framework, dependencies] of Object.entries(runtimes)) {
     }
     else {
       assert.equal(installedManifest.version, manifest.version)
-      assert.equal(installedManifest.engines?.node, workspace.engines.node, 'Packed package must match the workspace Node support policy')
+      assert.equal(installedManifest.engines?.node, nodePolicy, 'Packed package must match the workspace Node support policy')
     }
     const lock = await readFile(path.join(consumer, 'package-lock.json'), 'utf8')
-    const resolvedCore = Object.fromEntries(Object.entries(JSON.parse(lock).packages).filter(([key]) => /node_modules\/@destyler\//.test(key)).map(([key, value]) => [key, value.version]))
+    const parsedLock = JSON.parse(lock)
+    const uiArtifact = getArtifactIdentity(parsedLock, name)
+    const resolvedCore = Object.fromEntries(Object.entries(parsedLock.packages).filter(([key]) => /node_modules\/@destyler\//.test(key)).map(([key, value]) => [key, value.version]))
     assertCoreVersions(resolvedCore, core)
     const resolvedRuntimes = Object.fromEntries(await Promise.all(Object.keys(dependencies).map(async (dependency) => {
       const runtime = JSON.parse(await readFile(path.join(consumer, 'node_modules', dependency, 'package.json'), 'utf8'))
       assert.equal(runtime.version, dependencies[dependency], `${dependency} must match its exact test pin`)
       return [dependency, runtime.version]
     })))
-    const versions = { ui: installedManifest.version, dialog: dialogVersion, node: process.version, source, runtimes: resolvedRuntimes, core: resolvedCore, lockSha256: createHash('sha256').update(lock).digest('hex') }
+    const versions = { ui: installedManifest.version, uiArtifact, dialog: dialogVersion, node: process.version, source, runtimes: resolvedRuntimes, core: resolvedCore, lockSha256: createHash('sha256').update(lock).digest('hex') }
     await writeFile(path.join(consumer, 'versions.json'), JSON.stringify(versions, null, 2))
     stage = 'build'
     await writeFile(path.join(consumer, 'build.log'), run(process.execPath, ['build.mjs', framework], consumer))

@@ -43,3 +43,16 @@ export async function withTemporaryDirectory(prefix, action) {
     await rm(directory, { recursive: true, force: true })
   }
 }
+
+export function requireNodePolicy(workspace) {
+  const node = workspace.engines?.node
+  assert.ok(typeof node === 'string' && node.trim(), 'Workspace package.json must declare a non-empty engines.node support policy before running core compatibility checks')
+  return node
+}
+
+export function getArtifactIdentity(lock, packageName) {
+  const artifact = lock.packages?.[`node_modules/${packageName}`]
+  assert.ok(typeof artifact?.integrity === 'string' && artifact.integrity, `${packageName} must have integrity recorded in the consumer lockfile`)
+  assert.ok(typeof artifact.resolved === 'string' && artifact.resolved, `${packageName} must have a resolved artifact recorded in the consumer lockfile`)
+  return { resolved: artifact.resolved, integrity: artifact.integrity }
+}

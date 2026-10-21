@@ -6,7 +6,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
-import { assertCoreVersions, assertInstalledArtifact, prepareEvidenceDirectory, requireTarball, withTemporaryDirectory } from './core-compat-utils.mjs'
+import { assertCoreVersions, assertInstalledArtifact, getArtifactIdentity, prepareEvidenceDirectory, requireNodePolicy, requireTarball, withTemporaryDirectory } from './core-compat-utils.mjs'
 
 async function fixture(t) {
   const directory = await mkdtemp(path.join(tmpdir(), 'core-compat-test-'))
@@ -112,3 +112,17 @@ for (const packed of [false, true]) {
     assert.deepEqual(await readdir(root), ['results.json'])
   })
 }
+
+test('requires an explicit workspace Node policy before installation', () => {
+  assert.equal(requireNodePolicy({ engines: { node: '>=22.22.3' } }), '>=22.22.3')
+  for (const workspace of [{}, { engines: {} }, { engines: { node: '' } }, { engines: { node: ' ' } }])
+    assert.throws(() => requireNodePolicy(workspace), /Workspace package.json.*engines.node/)
+})
+
+test('retains artifact integrity independently of a temporary tarball path', () => {
+  const artifact = { resolved: 'file:/removed/package.tgz', integrity: 'sha512-Zml4dHVyZQ==', version: '0.0.1-beta.17' }
+  const lock = { packages: { 'node_modules/@destyler-ui/vue': artifact } }
+  assert.deepEqual(getArtifactIdentity(lock, '@destyler-ui/vue'), { resolved: artifact.resolved, integrity: artifact.integrity })
+  assert.throws(() => getArtifactIdentity({ packages: {} }, '@destyler-ui/vue'), /integrity recorded/)
+  assert.throws(() => getArtifactIdentity({ packages: { 'node_modules/@destyler-ui/vue': { integrity: artifact.integrity } } }, '@destyler-ui/vue'), /resolved artifact/)
+})
