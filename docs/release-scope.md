@@ -69,6 +69,48 @@ or mark additional packages public to work around a failure.
 
 ## Explicit publishing
 
+### Release-note preparation
+
+The root `pnpm release` command bumps versions, commits, pushes, and creates a
+tag. A pushed `v*` tag starts the [Release workflow](../.github/workflows/release.yml),
+which runs `npx changelogithub` after verification to generate GitHub release
+notes from the release's changes. This document is a manual preparation source;
+it is not automatically included in those generated notes.
+
+Before an authorized release, review its commit range and prepare the breaking
+changes and migration links below for the GitHub release description. After
+generation, verify that the published description includes them, adding any
+missing detail through the authorized release process. Do not rely on a commit
+title alone: the changelog generation step currently allows failure without
+blocking npm publication. Neither a successful publish guard nor an npm publish
+confirms that these migration notes reached users.
+
+#### Pending note: Svelte Tree branch triggers
+
+Include this breaking-change summary in the next release containing
+[#60](https://github.com/destyler/ui/pull/60). No release version is assigned here;
+this entry does not claim that the change has been published.
+
+- **Breaking default-element and focus change:** Svelte `Tree.BranchTrigger`
+  now renders a non-tabbable `div` with `role="button"` instead of a native
+  `button`. Inside `Tree.BranchControl`, the trigger handles pointer expansion;
+  the branch control owns keyboard navigation and the tree's roving tab stop.
+- **Breaking public-type change:** props and event `currentTarget` types now
+  describe `HTMLDivElement` rather than `HTMLButtonElement`. Consumers relying
+  on button-only attributes or native button defaults must use explicit
+  `asChild` composition and adapt the snippet props to their chosen element's
+  types.
+- Follow the existing [Tree branch triggers migration guide](https://github.com/destyler/ui/blob/main/packages/svelte/README.md#tree-branch-triggers).
+  Caller-added focusable children or `tabindex` can reintroduce extra tab stops
+  or nested interactive controls; check keyboard and accessibility behavior in
+  the composed tree.
+
+Once a release containing this change is confirmed, replace this pending note
+with a link to that release's migration notes instead of copying it into every
+subsequent release.
+
+### Publish guard
+
 `pnpm run publish:ci` invokes `node scripts/publish-packages.mjs --publish`.
 This is the real publishing mode and is intended only for an authorized release,
 after all existing release gates pass. No argument means check only.
