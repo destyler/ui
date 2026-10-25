@@ -37,7 +37,7 @@ jobs:
 
       - name: Verify publish scope offline
         run: |
-          node --test scripts/test-publish.mjs
+          node --test scripts/test-publish.mjs scripts/test-ci-retry.mjs
           node scripts/publish-packages.mjs --check
 
       - name: Install pnpm
@@ -69,8 +69,23 @@ jobs:
           rm -rf packages/solid/node_modules/.vite
           rm -rf packages/solid/node_modules/.cache
 
+      # The hosted runner's Azure apt mirror has stalled for the full six-hour
+      # job limit. Keep all browser engines, but bound and retry installation only.
+      - name: Configure apt downloads
+        timeout-minutes: 1
+        run: |
+          printf '%s\n' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' 'Acquire::Retries "2";' | sudo tee /etc/apt/apt.conf.d/99-ci-downloads
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            sudo sed -i -E 's|https?://azure\.archive\.ubuntu\.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
+          fi
+
+      - name: Install Playwright system dependencies
+        timeout-minutes: 12
+        run: bash scripts/ci-retry.sh sudo timeout --kill-after=15s 5m "$(command -v node)" "$PWD/node_modules/playwright/cli.js" install-deps
+
       - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps
+        timeout-minutes: 12
+        run: bash scripts/ci-retry.sh timeout --kill-after=15s 5m pnpm playwright install
 
       - name: Test
         run: pnpm run test:ci
