@@ -81,6 +81,10 @@ test('missing command fails closed', (t) => {
   assert.equal(f.run(['/nonexistent-ci-install-command']).status, 127)
 })
 
+// This dependency-free gate runs BEFORE pnpm install. These source assertions
+// intentionally protect installation-only retries, bounded privileged processes,
+// both supported Node lines, and unsoftened tests; they are not a YAML parser.
+// When changing workflow formatting, preserve those invariants in the assertions.
 test('CI bounds installation without retrying or suppressing tests', () => {
   const workflow = readFileSync(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8')
   assert.match(workflow, /node: \[22\.22\.3, '24'\]/)
@@ -90,4 +94,14 @@ test('CI bounds installation without retrying or suppressing tests', () => {
   assert.equal((workflow.match(/bash scripts\/ci-retry.sh/g) || []).length, 2)
   assert.match(workflow, /- name: Test\n {8}run: pnpm run test:ci/)
   assert.doesNotMatch(workflow, /continue-on-error/)
+})
+
+test('Playwright CLI path is backed by an explicit root dependency', () => {
+  const manifest = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
+  assert.ok(manifest.devDependencies.playwright, 'Update the privileged CLI invocation if removing the direct playwright dependency')
+})
+
+test('retry helper can also be invoked directly', () => {
+  const result = spawnSync(script, ['true'], { encoding: 'utf8', timeout: 5000 })
+  assert.equal(result.status, 0, result.error?.message || result.stderr)
 })

@@ -37,7 +37,7 @@ jobs:
 
       - name: Verify publish scope offline
         run: |
-          node --test scripts/test-publish.mjs scripts/test-ci-retry.mjs
+          node --test scripts/test-publish.mjs scripts/test-ci-retry.mjs scripts/test-configure-ci-apt.mjs
           node scripts/publish-packages.mjs --check
 
       - name: Install pnpm
@@ -73,12 +73,10 @@ jobs:
       # job limit. Keep all browser engines, but bound and retry installation only.
       - name: Configure apt downloads
         timeout-minutes: 1
-        run: |
-          printf '%s\n' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' 'Acquire::Retries "2";' | sudo tee /etc/apt/apt.conf.d/99-ci-downloads
-          if [ -f /etc/apt/apt-mirrors.txt ]; then
-            sudo sed -i -E 's|https?://azure\.archive\.ubuntu\.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
-          fi
+        run: sudo bash scripts/configure-ci-apt.sh
 
+      # playwright is a direct root dependency, not an incidental hoist. Its
+      # cli.js subpath is not exported, so require.resolve cannot resolve it.
       - name: Install Playwright system dependencies
         timeout-minutes: 12
         run: bash scripts/ci-retry.sh sudo timeout --kill-after=15s 5m "$(command -v node)" "$PWD/node_modules/playwright/cli.js" install-deps
