@@ -6,9 +6,16 @@ rendering. The root manifest and all four public `@destyler-ui/*` package
 manifests declare `engines.node: ">=22.22.3"`.
 
 Node 20 and Node 22 versions below 22.22.3 are outside the UI support range.
-This changes UI's support contract only; it does not change the separate
-`@destyler/*` core packages' Node 20 consumer contract or dependency versions.
-It also does not change previously published UI artifacts.
+Restoring Node 20 support is not planned for UI or core.
+
+- UI requires Node.js 22.22.3 or newer starting with the release containing
+  its support migration.
+- [destyler/destyler#360](https://github.com/destyler/destyler/pull/360) sets
+  the same minimum for all public `@destyler/*` packages in the next core
+  release containing that change. See the
+  [core Node support guide](https://github.com/destyler/destyler/blob/main/document/src/content/guide/node-support.mdx)
+  for consumer requirements and the separate repository-tooling range.
+- These migrations do not change previously published UI or core artifacts.
 
 ## Upgrade an application
 
