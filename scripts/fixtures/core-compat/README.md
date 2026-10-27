@@ -1,4 +1,4 @@
-# Exact-core installed Dialog consumers
+# Exact-core installed consumers
 
 Regression coverage for [UI #151](https://github.com/destyler/ui/issues/151).
 These consumers import installed package artifacts, not workspace aliases.
@@ -15,7 +15,7 @@ Use Node >=22.22.3 and pnpm 10.28.0, then install the workspace lockfile.
 - `node scripts/test-core-compat.mjs /path/to/tarballs /tmp/ui-candidate-evidence`
   tests existing packs named by `pnpm pack` (the versions must match the checkout).
 
-The runner pins framework runtimes and core 0.3.0 using npm overrides, checks the
+The runner pins framework runtimes and core 0.3.1 using npm overrides, checks the
 resolved core packages, and retains each consumer's package-lock.json, version
 record (including the UI artifact URL/path and integrity hash), lock SHA-256, build/interaction logs, and a combined results.json. An empty
 evidence directory is required and checked before work begins; old
@@ -28,8 +28,9 @@ Dependency lifecycle scripts are disabled; nothing is published or retagged.
 
 ## Contract and limits
 
-Each framework renders Dialog.Root, Trigger, Positioner, Content, Title, and
-CloseTrigger. The same interaction assertions cover:
+Each framework renders Dialog, Popover, and Menu with Root, Trigger, Positioner,
+and Content. Dialog and Popover also render Title and CloseTrigger. Menu renders
+one Item. The same interaction assertions cover each of those three components:
 
 1. Omitted `open`: uncontrolled open/close twice, with change callbacks.
 2. `defaultOpen=false`: uncontrolled open/close twice.
@@ -37,6 +38,12 @@ CloseTrigger. The same interaction assertions cover:
    must seed state, not become a controlled value.
 4. `open=false`: clicking requests `true`, but state remains closed without a
    parent update.
+
+Menu closes through its trigger. Dialog and Popover close through CloseTrigger.
+
+Each framework also renders deselectable Tabs with no initial value. Selecting
+`alpha`, activating that selected trigger again, then selecting `beta` reports
+`alpha`, `null`, and `beta`.
 
 The production Vite bundles run with Happy DOM. This is an installed-component
 state regression, not real-browser accessibility, focus, SSR, all-component, or

@@ -1,17 +1,8 @@
 # Compatibility patches
 
 These exact-version patches do not change public UI peers. Upgrades require
-independent review. Lint patches affect development tooling only. Core 0.3.0
-patches change declaration files only.
+independent review. Lint patches affect development tooling only.
 
-## @destyler/* 0.3.0 declaration restoration
-
-Published `@destyler/*@0.3.0` runtime bundles match 0.2.13. For the packages
-listed in `pnpm-workspace.yaml`, `dist/index.d.mts` emits `machine`, `anatomy`,
-and some `props` / `splitProps` values as `any`. These patches restore the
-0.2.13 declarations for those symbols so UI `useMachine` and `connect` keep
-their state types, including nullable Tabs `ValueChangeDetails`. They do not
-modify `dist/index.mjs`.
 The 2026-10-16 lint reconstruction uses verified official package sources and
 retained source evidence; it does not claim byte identity with the lost local
 checkpoint.

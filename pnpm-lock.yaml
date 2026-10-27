@@ -47,8 +47,8 @@ catalogs:
       specifier: ^7.0.3
       version: 7.0.3
     '@destyler/docs':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     astro:
       specifier: ^7.3.8
       version: 7.3.8
@@ -139,179 +139,179 @@ catalogs:
       version: 21.3.0
   prod:
     '@destyler/anatomy':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/aspect-ratio':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/auto-resize':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/breadcrumbs':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/calendar':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/carousel':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/checkbox':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/clipboard':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/collapse':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/collapsible':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/collection':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/color-picker':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/combobox':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/dialog':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/dom':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/dynamic':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/edit':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/file-upload':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/floating-panel':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/focus-trap':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/highlight-text':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/hover-card':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/i18n':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/image':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/label':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/menu':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/navigation-menu':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/number-input':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/otp-input':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/pagination':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/popover':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/presence':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/progress':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/qr-code':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/radio':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/react':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/scroll-area':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/select':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/separator':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/signature':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/slider':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/solid':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/splitter':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/steps':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/store':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/svelte':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/switch':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/tabs':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/timer':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/toast':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/toggle':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/tooltip':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/tour':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/tree':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/types':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/utils':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/vue':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
     '@destyler/xstate':
-      specifier: ^0.3.0
-      version: 0.3.0
+      specifier: ^0.3.1
+      version: 0.3.1
   runtime:
     '@vitejs/devtools':
       specifier: ^0.7.6
@@ -454,60 +454,6 @@ patchedDependencies:
   '@chromatic-com/storybook@5.5.1':
     hash: bb4128b07827a81dbaed1d2cdd9eb1b452f9dcd2f1c2b8f8f300f4eb5396f56b
     path: patches/@chromatic-com__storybook@5.5.1.patch
-  '@destyler/calendar@0.3.0':
-    hash: 8e7c5af812d43bfc4141e19a93c2c3bdbe072ea30ac561bf2d381f1fd40892af
-    path: patches/@destyler__calendar@0.3.0.patch
-  '@destyler/carousel@0.3.0':
-    hash: d79b4cbb943c905657cca82a79fb6468f5e3918aa922d835142ada59adeb10ee
-    path: patches/@destyler__carousel@0.3.0.patch
-  '@destyler/checkbox@0.3.0':
-    hash: f533d468a77b43a068270b6891ed3cbe2fc3f5314ac4008fa1e667f053f181c4
-    path: patches/@destyler__checkbox@0.3.0.patch
-  '@destyler/color-picker@0.3.0':
-    hash: e127a1369d33e9c57f1037d719626067e8f3b4b0c9d0e5240a898ed87f7f2074
-    path: patches/@destyler__color-picker@0.3.0.patch
-  '@destyler/combobox@0.3.0':
-    hash: eab39caf1b037141240efb5b868eef07a9bb1ebcaf5a1ca77792630641e844fe
-    path: patches/@destyler__combobox@0.3.0.patch
-  '@destyler/dialog@0.3.0':
-    hash: 03d0c7d422f05b31bdeb73012f078699c85e5e057290243f80b20a0efee3268a
-    path: patches/@destyler__dialog@0.3.0.patch
-  '@destyler/dynamic@0.3.0':
-    hash: 317d2c6e70e61da312b9c92a80fc166fe02c866a6949dc3aff7b159f60f6a66d
-    path: patches/@destyler__dynamic@0.3.0.patch
-  '@destyler/edit@0.3.0':
-    hash: 72ac656d69a08b5fee5316cf7ceaba90f84311e719ea947836ffba3649a6df53
-    path: patches/@destyler__edit@0.3.0.patch
-  '@destyler/file-upload@0.3.0':
-    hash: 70645fdc38327fa053f5ca72dc2894a95eaa6c874d5b0638281f4dfdfc11d693
-    path: patches/@destyler__file-upload@0.3.0.patch
-  '@destyler/floating-panel@0.3.0':
-    hash: 94375765de09098925743f723f9cb43bab47842c6e1b2e5eda2bd0b964797a5f
-    path: patches/@destyler__floating-panel@0.3.0.patch
-  '@destyler/hover-card@0.3.0':
-    hash: 313da723386183ad1e66727665153d2c5bd90f2d8b1e5bceefa83f066702f955
-    path: patches/@destyler__hover-card@0.3.0.patch
-  '@destyler/menu@0.3.0':
-    hash: 1d019aea94ad8857e0cdb75d069ed0da17b041bc2a91688a80a738e5befb84bf
-    path: patches/@destyler__menu@0.3.0.patch
-  '@destyler/popover@0.3.0':
-    hash: 8cff22d90b223ceb791280a05634815ce61a243ebd91a7d9d67a2b22180ec0c1
-    path: patches/@destyler__popover@0.3.0.patch
-  '@destyler/radio@0.3.0':
-    hash: 26ec169ab021f984b4503dd6c31999bf461663136ee322401d0e2bd8f9b34553
-    path: patches/@destyler__radio@0.3.0.patch
-  '@destyler/select@0.3.0':
-    hash: 56292541240bce7215d84077e09a3fbde9b93242e609f8869ba46656d91b92c9
-    path: patches/@destyler__select@0.3.0.patch
-  '@destyler/switch@0.3.0':
-    hash: b84062c103cf06fbf7ab3fe5853b4c20836c4459bb05d4a8fa226b2a72a2f9e8
-    path: patches/@destyler__switch@0.3.0.patch
-  '@destyler/tooltip@0.3.0':
-    hash: 9647bb484c828c5b7367e2844ae87e7f310d3755524629f627456a8512d88f7f
-    path: patches/@destyler__tooltip@0.3.0.patch
-  '@destyler/tour@0.3.0':
-    hash: b0178e5d387df87645489ebf1de06487fbdf1de256f8c1ff5391a91ebe7551dd
-    path: patches/@destyler__tour@0.3.0.patch
   eslint-plugin-react-x@5.27.1:
     hash: fa95afd13e79f925533d8f066567454b2d10074f0b15500f484641e6bc58c2a2
     path: patches/eslint-plugin-react-x@5.27.1.patch
@@ -533,7 +479,7 @@ importers:
         version: link:tooling/eslint-solid
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@eslint-react/eslint-plugin':
         specifier: catalog:lint
         version: 5.27.1(@typescript/typescript6@6.0.2)(eslint@10.12.0(jiti@2.7.0))
@@ -566,7 +512,7 @@ importers:
         version: typescript@7.0.2
       '@vitejs/devtools':
         specifier: catalog:runtime
-        version: 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
+        version: 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       '@vitest/browser-playwright':
         specifier: catalog:test
         version: 5.0.4(playwright@1.64.0)(vite@8.3.4)(vitest@5.0.4)
@@ -620,7 +566,7 @@ importers:
         version: 21.3.0
       tsdown:
         specifier: catalog:build
-        version: 0.23.1(@typescript/typescript6@6.0.2)(@vitejs/devtools@0.7.6)(@volar/typescript@2.4.28)(@vue/language-core@3.3.13)(oxc-resolver@11.21.2)(publint@0.3.25)(tsx@4.23.15)(unrun@0.2.25(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(synckit@0.11.13))(vue-tsc@3.3.13(@typescript/typescript6@6.0.2))
+        version: 0.23.1(@typescript/typescript6@6.0.2)(@vitejs/devtools@0.7.6)(@volar/typescript@2.4.28)(@vue/language-core@3.3.13)(oxc-resolver@11.21.2)(publint@0.3.25)(tsx@4.23.15)(unrun@0.2.25(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(synckit@0.11.13))(vue-tsc@3.3.13(@typescript/typescript6@6.0.2))
       tslib:
         specifier: catalog:types
         version: 2.8.1
@@ -647,7 +593,7 @@ importers:
     dependencies:
       '@destyler/docs':
         specifier: catalog:docs
-        version: 0.3.0
+        version: 0.3.1
     devDependencies:
       '@astrojs/react':
         specifier: catalog:docs
@@ -714,163 +660,163 @@ importers:
     dependencies:
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/aspect-ratio':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/auto-resize':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/breadcrumbs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/calendar':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8e7c5af812d43bfc4141e19a93c2c3bdbe072ea30ac561bf2d381f1fd40892af)(@internationalized/date@3.10.0)
+        version: 0.3.1(@internationalized/date@3.10.0)
       '@destyler/carousel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=d79b4cbb943c905657cca82a79fb6468f5e3918aa922d835142ada59adeb10ee)
+        version: 0.3.1
       '@destyler/checkbox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=f533d468a77b43a068270b6891ed3cbe2fc3f5314ac4008fa1e667f053f181c4)
+        version: 0.3.1
       '@destyler/clipboard':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapse':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapsible':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collection':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/color-picker':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=e127a1369d33e9c57f1037d719626067e8f3b4b0c9d0e5240a898ed87f7f2074)
+        version: 0.3.1
       '@destyler/combobox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=eab39caf1b037141240efb5b868eef07a9bb1ebcaf5a1ca77792630641e844fe)
+        version: 0.3.1
       '@destyler/dialog':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=03d0c7d422f05b31bdeb73012f078699c85e5e057290243f80b20a0efee3268a)
+        version: 0.3.1
       '@destyler/dom':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/dynamic':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=317d2c6e70e61da312b9c92a80fc166fe02c866a6949dc3aff7b159f60f6a66d)
+        version: 0.3.1
       '@destyler/edit':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=72ac656d69a08b5fee5316cf7ceaba90f84311e719ea947836ffba3649a6df53)
+        version: 0.3.1
       '@destyler/file-upload':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=70645fdc38327fa053f5ca72dc2894a95eaa6c874d5b0638281f4dfdfc11d693)
+        version: 0.3.1
       '@destyler/floating-panel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=94375765de09098925743f723f9cb43bab47842c6e1b2e5eda2bd0b964797a5f)
+        version: 0.3.1
       '@destyler/focus-trap':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/highlight-text':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/hover-card':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=313da723386183ad1e66727665153d2c5bd90f2d8b1e5bceefa83f066702f955)
+        version: 0.3.1
       '@destyler/i18n':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/image':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/label':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/menu':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=1d019aea94ad8857e0cdb75d069ed0da17b041bc2a91688a80a738e5befb84bf)
+        version: 0.3.1
       '@destyler/navigation-menu':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/number-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/otp-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/pagination':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/popover':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8cff22d90b223ceb791280a05634815ce61a243ebd91a7d9d67a2b22180ec0c1)
+        version: 0.3.1
       '@destyler/presence':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/progress':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/qr-code':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/radio':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=26ec169ab021f984b4503dd6c31999bf461663136ee322401d0e2bd8f9b34553)
+        version: 0.3.1
       '@destyler/react':
         specifier: catalog:prod
-        version: 0.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        version: 0.3.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@destyler/scroll-area':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/select':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=56292541240bce7215d84077e09a3fbde9b93242e609f8869ba46656d91b92c9)
+        version: 0.3.1
       '@destyler/separator':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/signature':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/slider':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/splitter':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/steps':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/switch':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b84062c103cf06fbf7ab3fe5853b4c20836c4459bb05d4a8fa226b2a72a2f9e8)
+        version: 0.3.1
       '@destyler/tabs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/timer':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toast':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toggle':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/tooltip':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=9647bb484c828c5b7367e2844ae87e7f310d3755524629f627456a8512d88f7f)
+        version: 0.3.1
       '@destyler/tour':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b0178e5d387df87645489ebf1de06487fbdf1de256f8c1ff5391a91ebe7551dd)
+        version: 0.3.1
       '@destyler/tree':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/utils':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/xstate':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       react-compiler-runtime:
         specifier: catalog:runtime
         version: 1.0.0(react@19.3.0)
@@ -880,7 +826,7 @@ importers:
         version: 8.0.7
       '@destyler/types':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@rolldown/plugin-babel':
         specifier: catalog:build
         version: 0.2.4(@babel/core@8.0.7)(@babel/runtime@7.28.4)(rolldown@1.2.13)(vite@8.3.4)
@@ -910,169 +856,169 @@ importers:
     dependencies:
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/aspect-ratio':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/auto-resize':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/breadcrumbs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/calendar':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8e7c5af812d43bfc4141e19a93c2c3bdbe072ea30ac561bf2d381f1fd40892af)(@internationalized/date@3.10.0)
+        version: 0.3.1(@internationalized/date@3.10.0)
       '@destyler/carousel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=d79b4cbb943c905657cca82a79fb6468f5e3918aa922d835142ada59adeb10ee)
+        version: 0.3.1
       '@destyler/checkbox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=f533d468a77b43a068270b6891ed3cbe2fc3f5314ac4008fa1e667f053f181c4)
+        version: 0.3.1
       '@destyler/clipboard':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapse':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapsible':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collection':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/color-picker':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=e127a1369d33e9c57f1037d719626067e8f3b4b0c9d0e5240a898ed87f7f2074)
+        version: 0.3.1
       '@destyler/combobox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=eab39caf1b037141240efb5b868eef07a9bb1ebcaf5a1ca77792630641e844fe)
+        version: 0.3.1
       '@destyler/dialog':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=03d0c7d422f05b31bdeb73012f078699c85e5e057290243f80b20a0efee3268a)
+        version: 0.3.1
       '@destyler/dom':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/dynamic':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=317d2c6e70e61da312b9c92a80fc166fe02c866a6949dc3aff7b159f60f6a66d)
+        version: 0.3.1
       '@destyler/edit':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=72ac656d69a08b5fee5316cf7ceaba90f84311e719ea947836ffba3649a6df53)
+        version: 0.3.1
       '@destyler/file-upload':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=70645fdc38327fa053f5ca72dc2894a95eaa6c874d5b0638281f4dfdfc11d693)
+        version: 0.3.1
       '@destyler/floating-panel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=94375765de09098925743f723f9cb43bab47842c6e1b2e5eda2bd0b964797a5f)
+        version: 0.3.1
       '@destyler/focus-trap':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/highlight-text':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/hover-card':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=313da723386183ad1e66727665153d2c5bd90f2d8b1e5bceefa83f066702f955)
+        version: 0.3.1
       '@destyler/i18n':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/image':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/label':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/menu':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=1d019aea94ad8857e0cdb75d069ed0da17b041bc2a91688a80a738e5befb84bf)
+        version: 0.3.1
       '@destyler/navigation-menu':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/number-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/otp-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/pagination':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/popover':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8cff22d90b223ceb791280a05634815ce61a243ebd91a7d9d67a2b22180ec0c1)
+        version: 0.3.1
       '@destyler/presence':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/progress':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/qr-code':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/radio':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=26ec169ab021f984b4503dd6c31999bf461663136ee322401d0e2bd8f9b34553)
+        version: 0.3.1
       '@destyler/scroll-area':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/select':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=56292541240bce7215d84077e09a3fbde9b93242e609f8869ba46656d91b92c9)
+        version: 0.3.1
       '@destyler/separator':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/signature':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/slider':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/solid':
         specifier: catalog:prod
-        version: 0.3.0(solid-js@1.9.17)
+        version: 0.3.1(solid-js@1.9.17)
       '@destyler/splitter':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/steps':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/store':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/switch':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b84062c103cf06fbf7ab3fe5853b4c20836c4459bb05d4a8fa226b2a72a2f9e8)
+        version: 0.3.1
       '@destyler/tabs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/timer':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toast':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toggle':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/tooltip':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=9647bb484c828c5b7367e2844ae87e7f310d3755524629f627456a8512d88f7f)
+        version: 0.3.1
       '@destyler/tour':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b0178e5d387df87645489ebf1de06487fbdf1de256f8c1ff5391a91ebe7551dd)
+        version: 0.3.1
       '@destyler/tree':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/types':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/utils':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/xstate':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
     devDependencies:
       '@modular-forms/solid':
         specifier: catalog:solid-test
@@ -1127,169 +1073,169 @@ importers:
     dependencies:
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/aspect-ratio':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/auto-resize':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/breadcrumbs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/calendar':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8e7c5af812d43bfc4141e19a93c2c3bdbe072ea30ac561bf2d381f1fd40892af)(@internationalized/date@3.10.0)
+        version: 0.3.1(@internationalized/date@3.10.0)
       '@destyler/carousel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=d79b4cbb943c905657cca82a79fb6468f5e3918aa922d835142ada59adeb10ee)
+        version: 0.3.1
       '@destyler/checkbox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=f533d468a77b43a068270b6891ed3cbe2fc3f5314ac4008fa1e667f053f181c4)
+        version: 0.3.1
       '@destyler/clipboard':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapse':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapsible':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collection':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/color-picker':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=e127a1369d33e9c57f1037d719626067e8f3b4b0c9d0e5240a898ed87f7f2074)
+        version: 0.3.1
       '@destyler/combobox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=eab39caf1b037141240efb5b868eef07a9bb1ebcaf5a1ca77792630641e844fe)
+        version: 0.3.1
       '@destyler/dialog':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=03d0c7d422f05b31bdeb73012f078699c85e5e057290243f80b20a0efee3268a)
+        version: 0.3.1
       '@destyler/dom':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/dynamic':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=317d2c6e70e61da312b9c92a80fc166fe02c866a6949dc3aff7b159f60f6a66d)
+        version: 0.3.1
       '@destyler/edit':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=72ac656d69a08b5fee5316cf7ceaba90f84311e719ea947836ffba3649a6df53)
+        version: 0.3.1
       '@destyler/file-upload':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=70645fdc38327fa053f5ca72dc2894a95eaa6c874d5b0638281f4dfdfc11d693)
+        version: 0.3.1
       '@destyler/floating-panel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=94375765de09098925743f723f9cb43bab47842c6e1b2e5eda2bd0b964797a5f)
+        version: 0.3.1
       '@destyler/focus-trap':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/highlight-text':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/hover-card':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=313da723386183ad1e66727665153d2c5bd90f2d8b1e5bceefa83f066702f955)
+        version: 0.3.1
       '@destyler/i18n':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/image':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/label':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/menu':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=1d019aea94ad8857e0cdb75d069ed0da17b041bc2a91688a80a738e5befb84bf)
+        version: 0.3.1
       '@destyler/navigation-menu':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/number-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/otp-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/pagination':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/popover':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8cff22d90b223ceb791280a05634815ce61a243ebd91a7d9d67a2b22180ec0c1)
+        version: 0.3.1
       '@destyler/presence':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/progress':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/qr-code':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/radio':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=26ec169ab021f984b4503dd6c31999bf461663136ee322401d0e2bd8f9b34553)
+        version: 0.3.1
       '@destyler/scroll-area':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/select':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=56292541240bce7215d84077e09a3fbde9b93242e609f8869ba46656d91b92c9)
+        version: 0.3.1
       '@destyler/separator':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/signature':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/slider':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/splitter':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/steps':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/store':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/svelte':
         specifier: catalog:prod
-        version: 0.3.0(svelte@5.57.2(@typescript-eslint/types@8.71.2))
+        version: 0.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))
       '@destyler/switch':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b84062c103cf06fbf7ab3fe5853b4c20836c4459bb05d4a8fa226b2a72a2f9e8)
+        version: 0.3.1
       '@destyler/tabs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/timer':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toast':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toggle':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/tooltip':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=9647bb484c828c5b7367e2844ae87e7f310d3755524629f627456a8512d88f7f)
+        version: 0.3.1
       '@destyler/tour':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b0178e5d387df87645489ebf1de06487fbdf1de256f8c1ff5391a91ebe7551dd)
+        version: 0.3.1
       '@destyler/tree':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/types':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/utils':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/xstate':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
     devDependencies:
       '@sveltejs/kit':
         specifier: catalog:build
@@ -1332,163 +1278,163 @@ importers:
     dependencies:
       '@destyler/anatomy':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/aspect-ratio':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/auto-resize':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/breadcrumbs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/calendar':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8e7c5af812d43bfc4141e19a93c2c3bdbe072ea30ac561bf2d381f1fd40892af)(@internationalized/date@3.10.0)
+        version: 0.3.1(@internationalized/date@3.10.0)
       '@destyler/carousel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=d79b4cbb943c905657cca82a79fb6468f5e3918aa922d835142ada59adeb10ee)
+        version: 0.3.1
       '@destyler/checkbox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=f533d468a77b43a068270b6891ed3cbe2fc3f5314ac4008fa1e667f053f181c4)
+        version: 0.3.1
       '@destyler/clipboard':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapse':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collapsible':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/collection':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/color-picker':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=e127a1369d33e9c57f1037d719626067e8f3b4b0c9d0e5240a898ed87f7f2074)
+        version: 0.3.1
       '@destyler/combobox':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=eab39caf1b037141240efb5b868eef07a9bb1ebcaf5a1ca77792630641e844fe)
+        version: 0.3.1
       '@destyler/dialog':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=03d0c7d422f05b31bdeb73012f078699c85e5e057290243f80b20a0efee3268a)
+        version: 0.3.1
       '@destyler/dom':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/dynamic':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=317d2c6e70e61da312b9c92a80fc166fe02c866a6949dc3aff7b159f60f6a66d)
+        version: 0.3.1
       '@destyler/edit':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=72ac656d69a08b5fee5316cf7ceaba90f84311e719ea947836ffba3649a6df53)
+        version: 0.3.1
       '@destyler/file-upload':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=70645fdc38327fa053f5ca72dc2894a95eaa6c874d5b0638281f4dfdfc11d693)
+        version: 0.3.1
       '@destyler/floating-panel':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=94375765de09098925743f723f9cb43bab47842c6e1b2e5eda2bd0b964797a5f)
+        version: 0.3.1
       '@destyler/focus-trap':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/highlight-text':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/hover-card':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=313da723386183ad1e66727665153d2c5bd90f2d8b1e5bceefa83f066702f955)
+        version: 0.3.1
       '@destyler/i18n':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/image':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/label':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/menu':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=1d019aea94ad8857e0cdb75d069ed0da17b041bc2a91688a80a738e5befb84bf)
+        version: 0.3.1
       '@destyler/navigation-menu':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/number-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/otp-input':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/pagination':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/popover':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=8cff22d90b223ceb791280a05634815ce61a243ebd91a7d9d67a2b22180ec0c1)
+        version: 0.3.1
       '@destyler/presence':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/progress':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/qr-code':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/radio':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=26ec169ab021f984b4503dd6c31999bf461663136ee322401d0e2bd8f9b34553)
+        version: 0.3.1
       '@destyler/scroll-area':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/select':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=56292541240bce7215d84077e09a3fbde9b93242e609f8869ba46656d91b92c9)
+        version: 0.3.1
       '@destyler/separator':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/signature':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/slider':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/splitter':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/steps':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/switch':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b84062c103cf06fbf7ab3fe5853b4c20836c4459bb05d4a8fa226b2a72a2f9e8)
+        version: 0.3.1
       '@destyler/tabs':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/timer':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toast':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/toggle':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/tooltip':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=9647bb484c828c5b7367e2844ae87e7f310d3755524629f627456a8512d88f7f)
+        version: 0.3.1
       '@destyler/tour':
         specifier: catalog:prod
-        version: 0.3.0(patch_hash=b0178e5d387df87645489ebf1de06487fbdf1de256f8c1ff5391a91ebe7551dd)
+        version: 0.3.1
       '@destyler/tree':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/utils':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
       '@destyler/vue':
         specifier: catalog:prod
-        version: 0.3.0(vue@3.5.44(@typescript/typescript6@6.0.2))
+        version: 0.3.1(vue@3.5.44(@typescript/typescript6@6.0.2))
       '@destyler/xstate':
         specifier: catalog:prod
-        version: 0.3.0
+        version: 0.3.1
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:runtime
@@ -2137,309 +2083,309 @@ packages:
     resolution: {integrity: sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==}
     engines: {node: '>=14'}
 
-  '@destyler/anatomy@0.3.0':
-    resolution: {integrity: sha512-ejVIhMh3axEcc3fFQIp7f+k4YbS5WIBrhi+UcDHhUj1Iwz3wiKYXf96jPZxJXfewrMr+80pNhf+iJ5/syqqnfw==}
+  '@destyler/anatomy@0.3.1':
+    resolution: {integrity: sha512-xw+6qRiZt5HFBBXJB9V41NddA2TtMab6AGRg3DVXrXs6pcJP4cwBO5dcgdunpDiQkOMpZmHu/9bMP4Unmcvg1A==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/aria-hidden@0.3.0':
-    resolution: {integrity: sha512-Pvd/d4Wy1oUbnhhqBaDJ/xHiYHYe3AvydiR7+Vpy73sDdbPId3hXjHbA/39qDWXcd6EBvHq8mbBQ+ArkbSHOpg==}
+  '@destyler/aria-hidden@0.3.1':
+    resolution: {integrity: sha512-5pktJfsyLUKVJXwr78pPcLTg5AYhN1ggwJmhRi22vVb8bNlYZ6NSmAxY5j/GDZbYjboPmSlm7NiO42q4padyGQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/aspect-ratio@0.3.0':
-    resolution: {integrity: sha512-pJrpJ0efW6cOl7KH1CPCkbJCMFLjSfquuiVgSY1UPgsbMRXHNs5BbX/NAPGOZwViNwnT612/lFHC4MzYBX/xbg==}
+  '@destyler/aspect-ratio@0.3.1':
+    resolution: {integrity: sha512-zcVxSid+VEguF4SQLcmsbo/stCCOavUHfX5LI85PqBCFWjyi9X7DPQ7Dd09r7U2eaT+TqPDE6a/02Sa8bqyEyA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/auto-resize@0.3.0':
-    resolution: {integrity: sha512-tuXsUpFCDdvC8L0D6qwj01OGfMDBIcH+inDcUuGRDsa9e7UgHdyyYMsDa3+mzrmSF+AMyfPHGwsmvaSDnZMHbw==}
+  '@destyler/auto-resize@0.3.1':
+    resolution: {integrity: sha512-mlH91o7KSsVzaHYC5+dlXZOYGcUck/P2j/6lAC4p4WjkNFqnkLigxNxiPV2pKf8N78C/Tzz5pjUX7OPucVvUHg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/breadcrumbs@0.3.0':
-    resolution: {integrity: sha512-2sDqFY+lu9X4AKE2L1JjInR4qLzzJr3AX0dNdOo9W7UoeAh7+qo/XwtN3WWm3VaZxXqu65n9WGMIR3TsD4lVFw==}
+  '@destyler/breadcrumbs@0.3.1':
+    resolution: {integrity: sha512-4Kq+bM2zRgT7x45IePO7JXcbMO2D6nBUCUnrmhvnm/DRnv9zOrs1HYEOBga0UQx6B0nqFK+PnAh1Tsk0wJ0+lA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/calendar@0.3.0':
-    resolution: {integrity: sha512-Xydg4SwQ7R+fwyBj8hMgf+nLgNQxDIJBZh7qFXpcCFfRMoKPRU7/e5xvcDTMrTj5e90aQGRXicYXo230d7yWCQ==}
-    engines: {node: '>=22.22.3'}
-    peerDependencies:
-      '@internationalized/date': '>=3.0.0'
-
-  '@destyler/carousel@0.3.0':
-    resolution: {integrity: sha512-qaVAFMErCpwd/Ld94utlXWQMSvp1GxoaFDVP5cM3+to/ez76xcdoWH184WYqDPDrdToUb5giNFyAAqCmK7XcFA==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/checkbox@0.3.0':
-    resolution: {integrity: sha512-qLgty9ukrgrM1trXIXa/p4617vzrdTbvKZBd+WnJdNFYsL0YiGPzImrD27Qr47zxAZ7gBmeTE6Viy+lKExfITA==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/clipboard@0.3.0':
-    resolution: {integrity: sha512-0Wr+2vrexD/2Y8K/Ks7MBuhXjbdawYI3DBMSLIak2jIuZ7P+NcBOF0OABWsctVaUp1mLbZrOLf6a+2QzRjoZ2Q==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/collapse@0.3.0':
-    resolution: {integrity: sha512-j3APPicJLj7XlB9eREwOHVE9EWdCkpgciLz2lH7UszyrnvQaRdSWoedRGid8on0PfAyCL/Pd/L9jirVfFuLYqg==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/collapsible@0.3.0':
-    resolution: {integrity: sha512-YOVvfqAqIcxdfeofdKad3l82XY2LaT1wkiuWWqLN7Muta/u6oyzPUotMkyr2w1M9WZx3I0yjYUnjh3dF9DLL8g==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/collection@0.3.0':
-    resolution: {integrity: sha512-U7Ay/yYD4SdMzgff4odWYt+Es9ZPXRGqjo9UxaTkFq2gKrb5y3kE8PsBe+JuX6CJ97/gGcT0z4iU2epcAXIq3g==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/color-picker@0.3.0':
-    resolution: {integrity: sha512-jrz5blSfLsBpIA+vrfjVKUOPpI9gYoIEff/C2BJab0yUHjZYYVYWYOEMBq+IbU0490ZLTtgZpenXhUBeryga2Q==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/color@0.3.0':
-    resolution: {integrity: sha512-arAPSz1RI2QvW+/slrjNCmUeKSAjiaIs+QuIuAmXO8MD9BxqaQI2x+odFmMxdcPYyWc+j/XYrQU2qOvXroe7iA==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/combobox@0.3.0':
-    resolution: {integrity: sha512-BpDgLq9VLKUam2VxSTam9caelHrKDfKyiMO/voSaSpeRidZ3hWJmYnkNytdYUvYuzRiBolInmoNr/erqb5k6vA==}
-    engines: {node: '>=22.22.3'}
-
-  '@destyler/date@0.3.0':
-    resolution: {integrity: sha512-pFbqqmxodop5B9BZqMNqblRWUewHdKKK0sFTJ70znut6xkqSj+OPhPziH6HlVQ3nweSTi9flpZG9xQnZPstRmQ==}
+  '@destyler/calendar@0.3.1':
+    resolution: {integrity: sha512-dGfGTw/uop4EuBVwaUUgQq8+jr7Hvpld1FZuZugW1KPabkXvYRq+yMFCUSgkzhkxGXzNUyE7xE19xmbWkCc2zA==}
     engines: {node: '>=22.22.3'}
     peerDependencies:
       '@internationalized/date': '>=3.0.0'
 
-  '@destyler/dialog@0.3.0':
-    resolution: {integrity: sha512-74ZilejlcxY/CRPln0r+lHPiq5npXVqb6yhRIz0yITVRgYPrtKnCFBaT7jPKn36ipEgNcGzz3OXG5QfGwF/wDw==}
+  '@destyler/carousel@0.3.1':
+    resolution: {integrity: sha512-fVKgIruL5iawUHfJb6+dn8Ej8/svQeEtSv1Ap14R6AlQZN0eRdqnojeXONO2Ct2CSIqcIHVHaUnGU47niM+i0Q==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/dismissable@0.3.0':
-    resolution: {integrity: sha512-JFz6G/pd8W9WDp/SACS8vImc46Xlqcx+n4n3sgmXQFjVsFbtPVP3M9QDd95QncjVynLefaUbl/XaF7PJnG6m1Q==}
+  '@destyler/checkbox@0.3.1':
+    resolution: {integrity: sha512-06pHLZ57Pxytgz5IeLA25d5GE97z5jOraSu19xeN+7JfF7Sg7ehiMX/LFlMi67r4BsJQtz0xPZIyhfSEMvdxUA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/docs@0.3.0':
-    resolution: {integrity: sha512-JgLFOdMT8Q3YKM30iMezNI6V5ghVIRiMSEreW5zRO4MTHDvnR78i2Xwbe1GM+GMPgjaaIoyijAbCgoEDJM7e2A==}
+  '@destyler/clipboard@0.3.1':
+    resolution: {integrity: sha512-7dSMhdkHcXgCvFVlLjy1InFl0EceciJ8MqBCrHWYrxuaetolcLiehZmNQYsWZh4Hyxt4Vs4ZF0xkm4ZpvggXkQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/dom@0.3.0':
-    resolution: {integrity: sha512-CD+xAVHRrJag4qJoWv2CBpi5HumEDxUC64UW/DoSynQL6abRAAmW580OBfuGaLaCYBwyk4RARYWJgH2mQKoOyg==}
+  '@destyler/collapse@0.3.1':
+    resolution: {integrity: sha512-h24/ScSgdQPAG/yi8wGtkD+jJdGyobsuj9Uoq2mmE/lOm8qEiU/VN0zkAEzxpU/5OUA1pTnzAaQn4XVkZOWt9w==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/dynamic@0.3.0':
-    resolution: {integrity: sha512-aB64ysmLnBVQzG0q7iR/9RjMwcFdpyZyvVTBaJIcFZoqRxF3jYvLlOqQQ8kBQQEM5hJGse9W4Oi2EfMgF7P4bw==}
+  '@destyler/collapsible@0.3.1':
+    resolution: {integrity: sha512-Yq/H+b/ZMnfaSCjL4Jd4Mdu0gD0tQb7J9ywVZsnNTNvF147rIXkLnf4MOt8zRnFnQ2fVnJOHDNtAKPVl2q3kwQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/edit@0.3.0':
-    resolution: {integrity: sha512-asqGgEkqFXCB4E5CN6paLCG2fFmY2N/fq9Li8EWeSqYVIr+W8qyNzn0G3b4ffFWUc9NDWSZ+mcjsssNzGG959w==}
+  '@destyler/collection@0.3.1':
+    resolution: {integrity: sha512-cvn+5Mu2g7Q6ps/AU5EyJMkjKpPimqMn2+zOXwfwkMZYHOrPPbTg+J0KU5yw/bVRRgWK9gAna7hkCYyk525gmg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/element-rect@0.3.0':
-    resolution: {integrity: sha512-S9SCI4FgTBjY9Z1ib64BursOXKi7ZQkuqDPrlzbAf5n6ewWIsV7DjOrzlTgCIFTLgwdYDDD99xu/4GQHVeSD7Q==}
+  '@destyler/color-picker@0.3.1':
+    resolution: {integrity: sha512-Xl2/ClZA/6LHicw/A+Vs9vRZ1Olqywb8fGL6A+x0IDMpXn4M1IpZIskaRHyQ+sOyhAJG+PJDjtAflHVyPeMxPQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/file-upload@0.3.0':
-    resolution: {integrity: sha512-WnP6m589SfeD55NrKz+oNHi0gdV/SPwz3VScEhO6WN0UJDX6sbztkZy7VUcM1/pKAVjp7N98TDDHhyssje51Jw==}
+  '@destyler/color@0.3.1':
+    resolution: {integrity: sha512-NGEf9jlkrxMfxC+dRoJmdZaQmA71TfNZ2BvRigQ3LpKGIwyaup1KlLjR+/5+ZOQ97asJGYJf2PUe9O8vS9W/ug==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/file@0.3.0':
-    resolution: {integrity: sha512-DOwzsLVjzSF6ZyyovJ6T441i+I+W5n1bKrSFH1e7iryd3D+5k5mMu3iDvVv3OBdX6KHZkmllIMH7jo6S2uHETw==}
+  '@destyler/combobox@0.3.1':
+    resolution: {integrity: sha512-aVYCQ/8tewP/un95XOedjKYzch3C0zKquVzBqDUnM+nlHrsVZaFDYCzI6By7RHiTOMcM2xeWzVJcJMjC2ru33A==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/floating-panel@0.3.0':
-    resolution: {integrity: sha512-a8c3lLDgvDJQIeqF210ysl4/d23IkaIxozHRZZJjL1KrNsj06ojd+UArJ9n6y29qhZcPBVj7unqQPuY86wRVwA==}
+  '@destyler/date@0.3.1':
+    resolution: {integrity: sha512-XFj8OycTXr3mIDS7VqTuH962cw4yAJRhfkjSXkAuXhVcowSNwEj9a5vGOAaTL/mpgsbf+mZcVAQ7Y4IPtsmevQ==}
+    engines: {node: '>=22.22.3'}
+    peerDependencies:
+      '@internationalized/date': '>=3.0.0'
+
+  '@destyler/dialog@0.3.1':
+    resolution: {integrity: sha512-/UtGR4+OR9VS2eM5HyLtJVm824Uh0f+ZshmgBfTgNfbdU9ZeGJw/1GUZtTExb4N0M5OvWcHIxIWEfcXc8/CFKg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/focus-trap@0.3.0':
-    resolution: {integrity: sha512-ewm/EiJBRzwG6koxB1tRpesO+XwPQSAnQfq6LAA6W/6wZxZS7yehuxJEh6N9RLxGwIMb+P4k2e59dmUMxkyRyQ==}
+  '@destyler/dismissable@0.3.1':
+    resolution: {integrity: sha512-r01rgeP0idAqWArL8KnrOXcbMiz6U9p78ax+gmibg1P5jhxBa0gWMgwQE6PX/hAhk88rX0zrE152j1nB3bURKg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/focus-visible@0.3.0':
-    resolution: {integrity: sha512-94/CMF48LTP/PfQKAtzJnUPj+ACAWvq876hri4TbmkqG1+6Zhrrm0tE5Y21AOYoSB5TS17Zs1eg95yTppmapEg==}
+  '@destyler/docs@0.3.1':
+    resolution: {integrity: sha512-02PlD9OnMmOGxDdcJYz8wuavW9M/q63NWmmR9iE/9yVa4gDTC+pM6QXEjaBczNq65uY7Lr6VVy6WqhN+t0bcWQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/highlight-text@0.3.0':
-    resolution: {integrity: sha512-gGqb88PA/DV1xb5+Lc6DjnUVqnPDWT8lzW13mSTMEAm2Bg1UI3ndllT0FX/T8PshHdb24DlKn6KzcH0U5fqXIg==}
+  '@destyler/dom@0.3.1':
+    resolution: {integrity: sha512-+4EN9mvnWZgNYDiLwfirLKvYWSAWSRjlrQhDPnUUYFVu8kMNQvUtuMd5GiwXU31FhrvSqrFFZej/tRSf1zjgkw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/hover-card@0.3.0':
-    resolution: {integrity: sha512-pb4sMUDg7ju9+OS6NrxOvzJha37UV6l78E7zktymJ8IKvT+YwfZ+wEmLOQDXQ6tfBlXPxTLd6Q2AGiiamXy1QA==}
+  '@destyler/dynamic@0.3.1':
+    resolution: {integrity: sha512-gPyCcDv8tqjwMVtmCRzhN/K12YPLTuy/+UOSM7No8iDtewhsoaEOM5JlmfkdEQq+fet74rDC7Er6kv0VR9OeWQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/i18n@0.3.0':
-    resolution: {integrity: sha512-ndvFHBRy4UZoe9mFzo4hElvufcT82kTIsaT3voGSuLVSz6OQwaYsV/5iNjGI2NXGmwA7B0LfJLsKJ0V3ax96TQ==}
+  '@destyler/edit@0.3.1':
+    resolution: {integrity: sha512-fD43nqOP6/p8asTseM6IzTDMwz5vU06VTzDzS4Hl19Bq4l69MxcCc+V6v1tuJ5Vn10XwT/m6+AXv5l70FXh+3A==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/image@0.3.0':
-    resolution: {integrity: sha512-mf/ZNIC3K5/uQw6GeB5K9DaLIhSYKI0KGkPGA5jH2bhDrNsDHa+SR4wr5VF40YMvf7wKJ1dhnrCOLv6B/e4QVg==}
+  '@destyler/element-rect@0.3.1':
+    resolution: {integrity: sha512-3YOkWTyQtQTOoKnt7V5fMZLIslC+dMhbMnxshseUM7uya8udeOZ5/id8OQjd8auhLYKimQ1jz3+Kq7z1RRGbTg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/interact-outside@0.3.0':
-    resolution: {integrity: sha512-IhorAaom0ZPxMV18F4YjennO5oU5xAjbYjjI57f09DODu9e2rkdNbmWqb5nFfBddOq+jvceOfNyEsA5Q/0rJkA==}
+  '@destyler/file-upload@0.3.1':
+    resolution: {integrity: sha512-eoPf9WVzKLJVuxbOESuLn/fFKd6RCOAf7ySuPPLyHsfoYVvsJUvw810SqARxXm2W9mMw8o1OPPFrEQln7edw/A==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/label@0.3.0':
-    resolution: {integrity: sha512-sH1LxjvVKl00X4zbK82eFIpRMcVjlOVUee3eGHfoM2lJRx1XqhXoenbExwbwcJpYFGW+EtgTwPK5w/h2Rn6v7g==}
+  '@destyler/file@0.3.1':
+    resolution: {integrity: sha512-w2YZ5j+WZanUwkLyvQa0uGVWZPEOGX2ihKjekJ9uiEFUqxOyHxTbvNDNmOfCuZ5SVK/i9L6pYKxJsFBZ+x2uBw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/live-region@0.3.0':
-    resolution: {integrity: sha512-pxnNuHNtnnC6eRWR10r4M3yvKDzNllsYMSj0cVbzPxGEkntcvRmwQxkAAsHwLNHMXLdIx/tZNVl0fjY8koKSzw==}
+  '@destyler/floating-panel@0.3.1':
+    resolution: {integrity: sha512-0QWf/ZLSBxvtZfpAtKVpXRh/vjIloQcfrM/Q8sY5CAGFMdWdwIJ1cRDTOZNKLEAh8NSH5sZwP90BAnZfDcfW3w==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/menu@0.3.0':
-    resolution: {integrity: sha512-GKrYeJsklmLDG/WY8tKjwjcwiPWX1K+fKz8gMRGDIviDHOGZyEv/yZV+numEKRqjXuQYf0DjjTuMla4L8cfpeQ==}
+  '@destyler/focus-trap@0.3.1':
+    resolution: {integrity: sha512-S3M2Cw6b++o2Zco3ciQX8sBEJMihWwvGx1Tds50dlfoCnn3ZVQrK7GyEWHZqvF7022sA+kWutL5OqzVEn4nCrw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/navigation-menu@0.3.0':
-    resolution: {integrity: sha512-d4twsFdHjg0ARb37Xm2o+y7c5LsEYj5bhXe/qLrdWl527WyybC+bFbDP471gTJsnSxnb7JEzNxyEtK3nSW1N/Q==}
+  '@destyler/focus-visible@0.3.1':
+    resolution: {integrity: sha512-F9Oll/Pg/rcs0AJ5dhAzzeWt5wmK8RO7d2xGUK1mkLrRM7e6mQB87fjJAOpjrhEfi/DF45+JaG44Wu5BBQO0dg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/number-input@0.3.0':
-    resolution: {integrity: sha512-ucwFhvdP1O7PkFlFLIWDRLvqeGTrwdv64XNhxXBPhf/L4kr0vpS6PUfj6N+be7adGMxFSCZvQCbkTKauu4iKBA==}
+  '@destyler/highlight-text@0.3.1':
+    resolution: {integrity: sha512-MXFK4nSaJMfpL1413llPIwas75jNz0hgCZ+1TwP9vEYDnQPsetWhGp518KSSMWSfb9SCl+5FzhDxiniByiLiGw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/otp-input@0.3.0':
-    resolution: {integrity: sha512-YSeQ767J3wlq2R/hs7aYpnPkmLb2KT3IihMjmhV/2S8guWWUJ/ECmpD2NtzxUz5ysn7J9DYmWaGgSvX/QMbBIg==}
+  '@destyler/hover-card@0.3.1':
+    resolution: {integrity: sha512-las1irG474mVJyNPCzMCj7A8uK9DMXoYnhC43Tu9oFvI1TOJVRVzoyFqPDnVb15AxiCOKjAp+tJmFIMJzZAeZA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/pagination@0.3.0':
-    resolution: {integrity: sha512-1G52KKr5/ySqtoO+SoQxmZ3nZfasQqjGqWvXjX3xR7pQIK938HsKMDlFxOP1/VFjgE/Axo3QV/F1TuM35tR0CQ==}
+  '@destyler/i18n@0.3.1':
+    resolution: {integrity: sha512-BQGKIOuWuM6k3P8zZOf16CWXlh/Oifm34TP6RlZweqJFIEY1x23bv0W2fRlRtyIUqpotEeRcjXUSgkQwZ/orBA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/popover@0.3.0':
-    resolution: {integrity: sha512-MBXtQGREUfpapy7jhmRm7XlFj0TEoIM9TEGk1ZfTgzenXv0NSUZpaLkbg2WqCyEUw7BQW+oypnxdfdzm0eRt7Q==}
+  '@destyler/image@0.3.1':
+    resolution: {integrity: sha512-CBJo9Ii+vTFSbDySeugWGke1k623fu9jBwk0bOfSvKo/KP/RZD5hMHuXzMgYm8aje4/IeenqGhHw4EcfZb+Nvg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/popper@0.3.0':
-    resolution: {integrity: sha512-9N9WNdroMJspurdZIU6HP3tvU0Gt9fDMzpNIF15+e567aUDKvNJy4wxLpf/rWqFIBQqKkmOSdFc+gqhDGjKo3Q==}
+  '@destyler/interact-outside@0.3.1':
+    resolution: {integrity: sha512-7jzIQN5rXQMzIttV2WCNcPnER+aLE0CSJai81/fsg/sQvLAriXPgCed9voNjfKvaX1SQ3jqzxNrC9XzMHBq5JQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/presence@0.3.0':
-    resolution: {integrity: sha512-XGdiazHccrKtjX5h+STYpnBi3988nOeb6nlTFLxwyv6VPPhNneECTuMAK9/yGBBPvsN2/pUFySCcN91TZgPzyg==}
+  '@destyler/label@0.3.1':
+    resolution: {integrity: sha512-3NvhOVGZofwtDaeROgM8TXdZIQTuE0XgUiDVlT2bIfPauulg8C9EVVzUbzfy53zsIY41UBqzNqSGupXSJAc2Mg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/progress@0.3.0':
-    resolution: {integrity: sha512-FVAy7e7Nh9vWRWWyvuRzjCjXPMcTXrcRW49HbiW6D1iVXa1VPflECDUphcs/EHrGNylkvF7WwwyF5TvUWg42Vw==}
+  '@destyler/live-region@0.3.1':
+    resolution: {integrity: sha512-9ekJk42ddwDheDg+ITx2qzQcHfwgIwNM1eeDcM21jOWoMj+4tsNUFhI32RtJ8aD0gfHo0HeAzlscO2EHEpHurw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/qr-code@0.3.0':
-    resolution: {integrity: sha512-ZgfQwbOwNFYKCEp6kHiHJ2mp/SaNYqlgkqDg3B9M1ZR10DGB4o8+8Hi/B1mUOpbaXG/huYd20Sz1ujVyiebbtA==}
+  '@destyler/menu@0.3.1':
+    resolution: {integrity: sha512-XfjbxkUwJa0tiN9taCYMZ05p65VO/dCfXtnTagj7UsVeQSrMmTo51SgDfB85/3UIVmOUWx6UH2yBvT6yBZSZtA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/radio@0.3.0':
-    resolution: {integrity: sha512-bvrI9FFJPFnIzRP/Y1W0Jxl98QohVPUGyFw6dSd6BARLhtY+dJifStfdO5PRYjwUhrIJCIoaLI28BJvaI84bHg==}
+  '@destyler/navigation-menu@0.3.1':
+    resolution: {integrity: sha512-ZxJakkzctBx9BzZB+SfS7skaAukHoTaKj0iwhwoJM8yQ0J5ybr03Q2POMOqPIrnkid1OpifCEFgIRz+5tBVLCw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/react@0.3.0':
-    resolution: {integrity: sha512-TGddljbPA8NjxnCwQlosyqKtFsGOb7bmowwtRW66up9r/o8OfitTzYEh8BCs8XzqR42Knu37NzCgFivugtm/UQ==}
+  '@destyler/number-input@0.3.1':
+    resolution: {integrity: sha512-RB+IKGx+28NmFKYfE1HgLKCaJyylM2AJx0yyBoLSDh6pylujFFW+buCMW8EgbK460wz6W1fzNiZ+23bcQsZt3w==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/otp-input@0.3.1':
+    resolution: {integrity: sha512-7cRdVzDDnRJJJnEIAQA6j26GtHIeoHLbs/3nuvgiSwRibw1UJL1pVyVmxEHzAysqjpLZJfnxNK+OUax3cGHsVQ==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/pagination@0.3.1':
+    resolution: {integrity: sha512-7U6fevznF1gUiKhvmkNB0SFB621IFwSMCYKjUE2RsWCfhsu1LPST4kjNHZmdeyRP+AuwOhhTUA8JhzpZ0I60gA==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/popover@0.3.1':
+    resolution: {integrity: sha512-GGiAYfjkUkhSWiiRyYHogS8+jlOoz1h3xXlpPOW1SU1Y/xj1G0Vn6jRrZbhi0O415UCTBdVrWjXZljvFVUUWWQ==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/popper@0.3.1':
+    resolution: {integrity: sha512-j9OXsNFh2OBDorL0iFQyP8/OvT6lrnU0ws1iRz8emL9srj8DkxiXs4XRAakcsD/rGhw5i0ugVQ0MychsmPEGYQ==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/presence@0.3.1':
+    resolution: {integrity: sha512-/RABvwpi7gCfdxzFscSUrDKWJU1nv0QSr19+ZfhTvfKpdy7xp01oZ9Gr0hnOV7/rlegt6B8SvggGubzprZ3+9A==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/progress@0.3.1':
+    resolution: {integrity: sha512-CCmCPCl1DohTqVyH8SzQPTkKJtn1HFO0vVW7WsS3cezDr1eF9DEp6Hm36UPWq7J+QlHuZSuXJ4cOlTaPlO4lxw==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/qr-code@0.3.1':
+    resolution: {integrity: sha512-wFX972QfKEf139FeLNKR5/wLyANFqdQjYkeNzvqFGP8zZPLYjrHVLIFEMxrqIUVxBF7C2DBsw3ucRtM+LVT6Dw==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/radio@0.3.1':
+    resolution: {integrity: sha512-pIpFITscVmWTOaBr4fNiWAbzHwds0Sapv9Bg/a9j0u3eSn0qadvsHUwT5dbbbjp2p5IrWTTLgGjaLMCNGGUyww==}
+    engines: {node: '>=22.22.3'}
+
+  '@destyler/react@0.3.1':
+    resolution: {integrity: sha512-GXF1ZKizVLVX+OI06olg69Cb3DUYNZ9X2coGifhjysT51FV+FPk83pL1y0W8E/m67N80OwBzq3scTHz/8Vyexg==}
     engines: {node: '>=22.22.3'}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@destyler/rect@0.3.0':
-    resolution: {integrity: sha512-H4x2MQjGfCtUohVVJvCKucD3pRtMFqkaprxtVrs0p1cyTyUoJb0wIgNfl6/q/1ceqwB++Fzwu76bvmGFBJhWPA==}
+  '@destyler/rect@0.3.1':
+    resolution: {integrity: sha512-9X1Y7iyckF5m1g3j91FQbGlqbb2aiVEKdBzDD4nIpqWjS9Uw54Iv+oaVf9B8uapAUu1BLYBwqmmGJV2mBzvobQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/remove-scroll@0.3.0':
-    resolution: {integrity: sha512-0L8+rk7X3FxycsVEjiyCXjH0pn9aN0BxA8sFU9o8EsgBIonAS9dd886cOAnHgNvgpBqEPaKPqrT/5o3H3KvsNA==}
+  '@destyler/remove-scroll@0.3.1':
+    resolution: {integrity: sha512-wl5INk9ISHNjxMNlgo5bWn3JLNl18G6+1Vv3549C7MZYgqp1/dGecWYGJ/wrlBCjxhdg161pNbTosDRpDmHZNw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/scroll-area@0.3.0':
-    resolution: {integrity: sha512-YshN4mCACHbBmV3TtXGfm6IQMbatKKtYOFvqShcjhwut6q7jls8g/hrE+u0CjxyysNyYIgE8sT2FVVO54JVOmA==}
+  '@destyler/scroll-area@0.3.1':
+    resolution: {integrity: sha512-IkUbVdWuBlQUv75tMP1EyxaasXj5x9aAsVJXUg5FpRzlzad0Gu6Y6BNEZELeg6FED/iWBHhLvkmvfTDUmRUE1Q==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/scroll-snap@0.3.0':
-    resolution: {integrity: sha512-zW1O452jmG7zlGne4obfIWCCUKaLRfqeTb6Rn30LWZxBHp2//nO7MwNdF+OODS36QZ5ZTh9A5G1DwW9IxJHk4g==}
+  '@destyler/scroll-snap@0.3.1':
+    resolution: {integrity: sha512-lUrqk4+ogWPt4Ngj/pg1D1yvGPJqW6gH7Ct2YrvkJeX0wIs6Cu4y+/1f0HRlkR9pWc3V3mrfRZeXBUO9T/cjQQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/select@0.3.0':
-    resolution: {integrity: sha512-64pPnknAEEppUzzbdI1piv+i2zIKawBfZuXbW3kdUAPhFC222Mtkdo43bma0jeLNqux5W6C/wg6ihsfZveDWGA==}
+  '@destyler/select@0.3.1':
+    resolution: {integrity: sha512-65Ga/rQdbZf2QHzG+TDoQXwiuiXej8eCJ1M2iywErzpui585vMrh1PoWZmoLW2nb/L+yf+vyVCC8s/EDj0lFOQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/separator@0.3.0':
-    resolution: {integrity: sha512-0PGZ91R3aRHQtw2VfJIOg691zsZcmVvOGhRDKb7xeAjhpy2vWXv03XflTayj0hdR27EDIM+IgBpuV3Soo6d9TQ==}
+  '@destyler/separator@0.3.1':
+    resolution: {integrity: sha512-t9J5kutTNSkPzlf/usVu7OQ7bi2yvOX3lEP4HOGdKAPUQLF9ogbk7yCkuRFpKGl6W24hdS2ReVMKGFwkQ1IMKA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/signature@0.3.0':
-    resolution: {integrity: sha512-poS6r0l1R5h68HKdihmwq9tfGi6qaYi1p2/62H9Wqptzv+Dp+BV1nbn2HjBuS9ngpYq5TlhF9hFkW6pIlc/GIg==}
+  '@destyler/signature@0.3.1':
+    resolution: {integrity: sha512-2GysXmNUyl05yv2sDHw5B7pWq/uQeK0yz+EJV8iC+TUYmNBlVX0Fs6T0nQUKP+gOo99/bZCMpXbyJTd4Ya1F2Q==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/size@0.3.0':
-    resolution: {integrity: sha512-6NEBYPpqLwK2z2l78HFu5gr8IN5fmjl0JIjJs+K2L47We/viodPCIfzSQq8UjGBOIMdOXEgZd/xmRDoU0QjdQA==}
+  '@destyler/size@0.3.1':
+    resolution: {integrity: sha512-FS5dMYjUbxPwEZwpt9OrMk7EOnyzbFGCe3xHoz0Dz9k+8J4J7th9SI32FQ0rtlUXr44XsUhsI/Q/DQFktnvTPg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/slider@0.3.0':
-    resolution: {integrity: sha512-NKWVeDsOTXJLuvbs0KLeDekVIVoek//aP3RqJptmiCq4QI8Ujislz7xxY+BDODZ7iIcg4alq72/Q8En/8VfprA==}
+  '@destyler/slider@0.3.1':
+    resolution: {integrity: sha512-pLXFZClLHSh4xkJ62OxBC9EiTp8EYoX+nfS+jwCB9XH2A4iRj5gkM/69kHU5zMrPyrPcbPwcD1MUyJkqbKCwKg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/solid@0.3.0':
-    resolution: {integrity: sha512-A/NOZdAofz39Qd14yaUFa9mWvpw/0BpHBfUn73OnaeZeu+Tauy5YZpQeU4EARU6XA3FriD3EBRAHwYvBc1Mnbw==}
+  '@destyler/solid@0.3.1':
+    resolution: {integrity: sha512-MVDaGbpzy8JKayz6et5DzCMbbATFIFesB+JF7jGzCMibM4YjKjj941MTq6Ac9Uw5elTdnvYZG8rO9ATy7ZYGUA==}
     engines: {node: '>=22.22.3'}
     peerDependencies:
       solid-js: '>=1.1.3'
 
-  '@destyler/splitter@0.3.0':
-    resolution: {integrity: sha512-B12lXC+4Al6KNVnrnQ9NlmefV38KvK02l8ukbfCe8dT98Om/Bwsm5p+I16BmRuNb8j4BXPz59eOKKrBVOoJrAg==}
+  '@destyler/splitter@0.3.1':
+    resolution: {integrity: sha512-PDQRFpFV/tYpoJMkjNY4qMuVaaPJK3xyB6Xq1yq0YcQ5p93LRKRwuhwATb/b+72SO+nlClFrMULB+pkDjeMydA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/steps@0.3.0':
-    resolution: {integrity: sha512-3l1cWc1LnvkkMFHT+bTBWDidrqXcNfpefzyvzLnv6yDbYeVtXzVwqnzvLhhliaGQPC5mCaLJwizXrJAjjwjaAQ==}
+  '@destyler/steps@0.3.1':
+    resolution: {integrity: sha512-s16kT/KP/1E/vkbZ/oj2cGTiqEo5lxzP0rPt5Cr97CokEdvdN3N1pK5hRa2KZ+05Mm1Oc6QMD1dEv89teiJPhg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/store@0.3.0':
-    resolution: {integrity: sha512-gcEmZNI/UePSZDBoElXcrfnsMDS8Yl7Sd2YWZgDh9PjPvZZDWPpGnpDykob91RE3h4KNiCxP2SzKW6VxLgthGA==}
+  '@destyler/store@0.3.1':
+    resolution: {integrity: sha512-w6U9AilRLsyphEuFOE4clLqAlAbtZ/kdYOoQjZe7YGZbZTxakKG1ET50713J424sd3qTOpvEXtAdzkhuwjDdkQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/svelte@0.3.0':
-    resolution: {integrity: sha512-tGx7p+iJ7gYj+rXk2wPq00jE358FAuWmYIyd0X1+B19v77KwUv86z8OhOUk6oI+QMoLG1vC6Ly4FP+5A5vjNKg==}
+  '@destyler/svelte@0.3.1':
+    resolution: {integrity: sha512-WBmBNA2DsUG7MdqsXNny2Jw3SykddShJit9UdnM1rKx/gVQWfGH8WBC7UmIUMwhqgcuSsYxOEA4gRzgx8KfZCQ==}
     engines: {node: '>=22.22.3'}
     peerDependencies:
       svelte: '>=5.0.0'
 
-  '@destyler/switch@0.3.0':
-    resolution: {integrity: sha512-tWzd3ueoYmm78LvqaVewuMgYcWDpYVjvemvtZPgmiGA+LRcs0kLN000ItziyB2o/tTe8r1J1BBwQox/yCExqhA==}
+  '@destyler/switch@0.3.1':
+    resolution: {integrity: sha512-b7DOUZLLWOsf3ojqsHSLLuUzUc5wFzfXl+OZaTppMRiuRan1ddnk2KDpMG/ufkPFa4g8/9nwEfN+kbv0YxuBoA==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/tabs@0.3.0':
-    resolution: {integrity: sha512-nuD5M+Ion0gLdGrpCzV/RmVdXYoyyv7Q4bho37n4RZc/MCjQUQbQUNlvIoZ6+ubTbb+4x7QYyLMgshl3QkVjYA==}
+  '@destyler/tabs@0.3.1':
+    resolution: {integrity: sha512-VpG14+AnUjwgD5CTgYg8BMqif20x58/d5bi2FivBBtmL7oUQ2LPGFZkpl5LNA/8k5wsuuDx3wpxDI69s/t8aYg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/timer@0.3.0':
-    resolution: {integrity: sha512-pP0AnZsc47zCfrybJ3ggHPgec82zSOh/OgI7fFQuZSd9Q7e8kRrAAlMLsBseC8A1Zsl8dn0lw+3JT7JDhjSpvg==}
+  '@destyler/timer@0.3.1':
+    resolution: {integrity: sha512-51fn0IafB4PyyFAJZf7SdRA/JZ2V720XEEaHwIhswd5J6HjT7lzWOP90dy2yLRIv9DRosQBZiGsfPSjaliEFKQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/toast@0.3.0':
-    resolution: {integrity: sha512-QLeA6Sf5ztnadrGF6F2BDLgepEy9rL5qlmJxoa9eLv9zPNdwObTNIiwfgnZj1n5rtGHUrR8y283zdeyeuLFggw==}
+  '@destyler/toast@0.3.1':
+    resolution: {integrity: sha512-A1Hu+tHvselF18wkYJmv/UHPsnX4H+y3eWAxNzmKpBLjRljJMIBNx28JONQcIedwkoXv95SKBh/tqcj/6DgwWg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/toggle@0.3.0':
-    resolution: {integrity: sha512-JreZQuR5hWIHpdZsO5lBI/V/TGCt6i01Vpye8wvMdRXTydSZNuiCWNpTLSjF55GfGngICd8bLvRDrQP2jRRpNQ==}
+  '@destyler/toggle@0.3.1':
+    resolution: {integrity: sha512-p6udru4JJMit/dugSRYC0eBn1jq7QSB1E2iutrbP535YzT1I3aFPeHyaUnyrtB+k3mIKvgPeTTevhu5Ch8rqew==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/tooltip@0.3.0':
-    resolution: {integrity: sha512-2yBcAX+EQIZfuRD5n5t4rhQ/KEF5ODig4+sQoVCCBEAcyFYuB90FhbrdVKKnubMcJzJACZvWFE0L2B6/ow/v5A==}
+  '@destyler/tooltip@0.3.1':
+    resolution: {integrity: sha512-fXly1gWrD56qvkTxJrq/H74wxLA2jXKfjX5WbOaBfJEdScpa590Ix5Rp/QmPxXgeWBFyKqNGvUpXuBUOc46Ruw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/tour@0.3.0':
-    resolution: {integrity: sha512-uFrHSBoe//8J9F2svJlssRnhpDrjgVqkkOF0qQqbsWJXpCG7wNrP4oN9jbP2KGoMszhQXTw6q5Ejv1ZYmeqfXg==}
+  '@destyler/tour@0.3.1':
+    resolution: {integrity: sha512-XZkjfpV6K9xXocpjcgbQJdaLdM2xzN7I3kCliGqCIS9PI3XsvnjPcX3gM1FXTtU9OC5kesHXSU+yAGl2d3Nxvg==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/tree@0.3.0':
-    resolution: {integrity: sha512-+64SxmCcbOmzDvVhoVl4roh2HXNYeqi3zHbyY955TlaKUMR0I7bpb/HpjQd+6fumMjzih1ohDLHGNM4jAq5j9Q==}
+  '@destyler/tree@0.3.1':
+    resolution: {integrity: sha512-ubC3J1e8Z3wKHr2MqFzxbTaI4ZbM4cVACtMdUdOXNzFBrnPr5Q9Rw7y+j0otDXpe1bIy0ZI/PXYNpock08ufuQ==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/types@0.3.0':
-    resolution: {integrity: sha512-AUFy0Ex1yWBDK/OfZ9sp1NZ2dvw8hPdLYCkD3LwmUUMj1fIzTh82aVpdWnofplEG9AygtzuB38BonSKehgL7nQ==}
+  '@destyler/types@0.3.1':
+    resolution: {integrity: sha512-63WU97AxVfF3W4fzuLEE1o4cODe7AbfNv0n3/Pn+2aNKr0oDI8mMYfHdiA0HQGH480tL8aryr4dY0ghjP2tNsw==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/utils@0.3.0':
-    resolution: {integrity: sha512-87vMSWFMJgl6Gv/kGvhp/Ug/eaWc89fxTwcfpiS44enH6a5rWPKhEAGZ/f2GC9/Bu13JVke4ldjv7fR1CQDsCg==}
+  '@destyler/utils@0.3.1':
+    resolution: {integrity: sha512-B8SFCcy2WCyvLxbpYqo/KRJkrBe7W3u235MNRS1RxE8Y+CaJVcJM1nnNyAFTHFnNSLI7ILq0wdW0lujAbTYt/Q==}
     engines: {node: '>=22.22.3'}
 
-  '@destyler/vue@0.3.0':
-    resolution: {integrity: sha512-Lkiibvsuxq7rrNs0zlzRprMD2xCdAuCgSUVW57r309zJ8NBA+dRgKOi2FVAzDy2nGRR8d3bRr+9mRwmYzs3B5w==}
+  '@destyler/vue@0.3.1':
+    resolution: {integrity: sha512-nDUM87n2uz4CbS098132I5B7/4/wJn+VJZ9lA5DEYdmCDOWD68dznY6D6L9czZwlmW1/ytw62pCbfMg05blsWg==}
     engines: {node: '>=22.22.3'}
     peerDependencies:
       vue: '>=3.0.0'
 
-  '@destyler/xstate@0.3.0':
-    resolution: {integrity: sha512-ttiHksvOLhbI3U+iFgpxue13ptJ6ArOdPcKIRYuEAsnfcEiR0pe8nLelKVvATuJtE8Ts/v6JOoYtijzUS/Y7pw==}
+  '@destyler/xstate@0.3.1':
+    resolution: {integrity: sha512-EuxUPdHd/PTLw4rlwUAt3+iEg2mQ7DvE3h51j3ZHMpDE/BjBmvX6p0NlOqBO+kUSa0+o1nAktjltyVN4vCvVWg==}
     engines: {node: '>=22.22.3'}
 
   '@devframes/agentic@1.2.4':
@@ -9673,555 +9619,547 @@ snapshots:
 
   '@ctrl/tinycolor@4.2.0': {}
 
-  '@destyler/anatomy@0.3.0': {}
+  '@destyler/anatomy@0.3.1': {}
 
-  '@destyler/aria-hidden@0.3.0': {}
+  '@destyler/aria-hidden@0.3.1': {}
 
-  '@destyler/aspect-ratio@0.3.0':
+  '@destyler/aspect-ratio@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/auto-resize@0.3.0':
+  '@destyler/auto-resize@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
+      '@destyler/dom': 0.3.1
 
-  '@destyler/breadcrumbs@0.3.0':
+  '@destyler/breadcrumbs@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/calendar@0.3.0(patch_hash=8e7c5af812d43bfc4141e19a93c2c3bdbe072ea30ac561bf2d381f1fd40892af)(@internationalized/date@3.10.0)':
+  '@destyler/calendar@0.3.1(@internationalized/date@3.10.0)':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/date': 0.3.0(@internationalized/date@3.10.0)
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/live-region': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/date': 0.3.1(@internationalized/date@3.10.0)
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/live-region': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
       '@internationalized/date': 3.10.0
 
-  '@destyler/carousel@0.3.0(patch_hash=d79b4cbb943c905657cca82a79fb6468f5e3918aa922d835142ada59adeb10ee)':
+  '@destyler/carousel@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/scroll-snap': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/scroll-snap': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/checkbox@0.3.0(patch_hash=f533d468a77b43a068270b6891ed3cbe2fc3f5314ac4008fa1e667f053f181c4)':
+  '@destyler/checkbox@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/focus-visible': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/focus-visible': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/clipboard@0.3.0':
+  '@destyler/clipboard@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/collapse@0.3.0':
+  '@destyler/collapse@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/collapsible@0.3.0':
+  '@destyler/collapsible@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/collection@0.3.0':
+  '@destyler/collection@0.3.1':
     dependencies:
-      '@destyler/utils': 0.3.0
+      '@destyler/utils': 0.3.1
 
-  '@destyler/color-picker@0.3.0(patch_hash=e127a1369d33e9c57f1037d719626067e8f3b4b0c9d0e5240a898ed87f7f2074)':
+  '@destyler/color-picker@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/color': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/color': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/color@0.3.0':
+  '@destyler/color@0.3.1':
     dependencies:
-      '@destyler/utils': 0.3.0
+      '@destyler/utils': 0.3.1
 
-  '@destyler/combobox@0.3.0(patch_hash=eab39caf1b037141240efb5b868eef07a9bb1ebcaf5a1ca77792630641e844fe)':
+  '@destyler/combobox@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/aria-hidden': 0.3.0
-      '@destyler/collection': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/aria-hidden': 0.3.1
+      '@destyler/collection': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/date@0.3.0(@internationalized/date@3.10.0)':
+  '@destyler/date@0.3.1(@internationalized/date@3.10.0)':
     dependencies:
       '@internationalized/date': 3.10.0
 
-  '@destyler/dialog@0.3.0(patch_hash=03d0c7d422f05b31bdeb73012f078699c85e5e057290243f80b20a0efee3268a)':
+  '@destyler/dialog@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/aria-hidden': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/focus-trap': 0.3.0
-      '@destyler/remove-scroll': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/aria-hidden': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/focus-trap': 0.3.1
+      '@destyler/remove-scroll': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/dismissable@0.3.0':
+  '@destyler/dismissable@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
-      '@destyler/interact-outside': 0.3.0
-      '@destyler/utils': 0.3.0
+      '@destyler/dom': 0.3.1
+      '@destyler/interact-outside': 0.3.1
+      '@destyler/utils': 0.3.1
 
-  '@destyler/docs@0.3.0': {}
+  '@destyler/docs@0.3.1': {}
 
-  '@destyler/dom@0.3.0':
+  '@destyler/dom@0.3.1':
     dependencies:
-      '@destyler/types': 0.3.0
+      '@destyler/types': 0.3.1
 
-  '@destyler/dynamic@0.3.0(patch_hash=317d2c6e70e61da312b9c92a80fc166fe02c866a6949dc3aff7b159f60f6a66d)':
+  '@destyler/dynamic@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/auto-resize': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/interact-outside': 0.3.0
-      '@destyler/live-region': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/auto-resize': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/interact-outside': 0.3.1
+      '@destyler/live-region': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/edit@0.3.0(patch_hash=72ac656d69a08b5fee5316cf7ceaba90f84311e719ea947836ffba3649a6df53)':
+  '@destyler/edit@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/interact-outside': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/interact-outside': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/element-rect@0.3.0': {}
+  '@destyler/element-rect@0.3.1': {}
 
-  '@destyler/file-upload@0.3.0(patch_hash=70645fdc38327fa053f5ca72dc2894a95eaa6c874d5b0638281f4dfdfc11d693)':
+  '@destyler/file-upload@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/file': 0.3.0
-      '@destyler/i18n': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/file': 0.3.1
+      '@destyler/i18n': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/file@0.3.0': {}
+  '@destyler/file@0.3.1': {}
 
-  '@destyler/floating-panel@0.3.0(patch_hash=94375765de09098925743f723f9cb43bab47842c6e1b2e5eda2bd0b964797a5f)':
+  '@destyler/floating-panel@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/rect': 0.3.0
-      '@destyler/store': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/rect': 0.3.1
+      '@destyler/store': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/focus-trap@0.3.0':
+  '@destyler/focus-trap@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
+      '@destyler/dom': 0.3.1
 
-  '@destyler/focus-visible@0.3.0':
+  '@destyler/focus-visible@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
+      '@destyler/dom': 0.3.1
 
-  '@destyler/highlight-text@0.3.0': {}
+  '@destyler/highlight-text@0.3.1': {}
 
-  '@destyler/hover-card@0.3.0(patch_hash=313da723386183ad1e66727665153d2c5bd90f2d8b1e5bceefa83f066702f955)':
+  '@destyler/hover-card@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/i18n@0.3.0':
+  '@destyler/i18n@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
+      '@destyler/dom': 0.3.1
 
-  '@destyler/image@0.3.0':
+  '@destyler/image@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/interact-outside@0.3.0':
+  '@destyler/interact-outside@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
-      '@destyler/utils': 0.3.0
+      '@destyler/dom': 0.3.1
+      '@destyler/utils': 0.3.1
 
-  '@destyler/label@0.3.0':
+  '@destyler/label@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/live-region@0.3.0': {}
+  '@destyler/live-region@0.3.1': {}
 
-  '@destyler/menu@0.3.0(patch_hash=1d019aea94ad8857e0cdb75d069ed0da17b041bc2a91688a80a738e5befb84bf)':
+  '@destyler/menu@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/rect': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/rect': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/navigation-menu@0.3.0':
+  '@destyler/navigation-menu@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/number-input@0.3.0':
+  '@destyler/number-input@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
       '@internationalized/number': 3.6.9
 
-  '@destyler/otp-input@0.3.0':
+  '@destyler/otp-input@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/pagination@0.3.0':
+  '@destyler/pagination@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/popover@0.3.0(patch_hash=8cff22d90b223ceb791280a05634815ce61a243ebd91a7d9d67a2b22180ec0c1)':
+  '@destyler/popover@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/aria-hidden': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/focus-trap': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/remove-scroll': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/aria-hidden': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/focus-trap': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/remove-scroll': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/popper@0.3.0':
+  '@destyler/popper@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
-      '@destyler/utils': 0.3.0
+      '@destyler/dom': 0.3.1
+      '@destyler/utils': 0.3.1
       '@floating-ui/dom': 1.8.0
 
-  '@destyler/presence@0.3.0':
+  '@destyler/presence@0.3.1':
     dependencies:
-      '@destyler/types': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/types': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/progress@0.3.0':
+  '@destyler/progress@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/qr-code@0.3.0':
+  '@destyler/qr-code@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
       proxy-memoize: 3.0.1
       uqr: 0.1.3
 
-  '@destyler/radio@0.3.0(patch_hash=26ec169ab021f984b4503dd6c31999bf461663136ee322401d0e2bd8f9b34553)':
+  '@destyler/radio@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/element-rect': 0.3.0
-      '@destyler/focus-visible': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/element-rect': 0.3.1
+      '@destyler/focus-visible': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/react@0.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@destyler/react@0.3.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@destyler/store': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/store': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/xstate': 0.3.1
       proxy-compare: 3.0.1
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)
 
-  '@destyler/rect@0.3.0': {}
+  '@destyler/rect@0.3.1': {}
 
-  '@destyler/remove-scroll@0.3.0':
+  '@destyler/remove-scroll@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
+      '@destyler/dom': 0.3.1
 
-  '@destyler/scroll-area@0.3.0':
+  '@destyler/scroll-area@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/scroll-snap@0.3.0':
+  '@destyler/scroll-snap@0.3.1':
     dependencies:
-      '@destyler/dom': 0.3.0
+      '@destyler/dom': 0.3.1
 
-  '@destyler/select@0.3.0(patch_hash=56292541240bce7215d84077e09a3fbde9b93242e609f8869ba46656d91b92c9)':
+  '@destyler/select@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/collection': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/collection': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/separator@0.3.0':
+  '@destyler/separator@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/signature@0.3.0':
+  '@destyler/signature@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
       perfect-freehand: 1.2.3
 
-  '@destyler/size@0.3.0': {}
+  '@destyler/size@0.3.1': {}
 
-  '@destyler/slider@0.3.0':
+  '@destyler/slider@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/size': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/size': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/solid@0.3.0(solid-js@1.9.17)':
+  '@destyler/solid@0.3.1(solid-js@1.9.17)':
     dependencies:
-      '@destyler/store': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/store': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/xstate': 0.3.1
       solid-js: 1.9.17
 
-  '@destyler/splitter@0.3.0':
+  '@destyler/splitter@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/steps@0.3.0':
+  '@destyler/steps@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/store@0.3.0':
+  '@destyler/store@0.3.1':
     dependencies:
       proxy-compare: 3.0.1
 
-  '@destyler/svelte@0.3.0(svelte@5.57.2(@typescript-eslint/types@8.71.2))':
+  '@destyler/svelte@0.3.1(svelte@5.57.2(@typescript-eslint/types@8.71.2))':
     dependencies:
-      '@destyler/types': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/types': 0.3.1
+      '@destyler/xstate': 0.3.1
       svelte: 5.57.2(@typescript-eslint/types@8.71.2)
 
-  '@destyler/switch@0.3.0(patch_hash=b84062c103cf06fbf7ab3fe5853b4c20836c4459bb05d4a8fa226b2a72a2f9e8)':
+  '@destyler/switch@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/focus-visible': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/focus-visible': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/tabs@0.3.0':
+  '@destyler/tabs@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/element-rect': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/element-rect': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/timer@0.3.0':
+  '@destyler/timer@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/toast@0.3.0':
+  '@destyler/toast@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/toggle@0.3.0':
+  '@destyler/toggle@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/tooltip@0.3.0(patch_hash=9647bb484c828c5b7367e2844ae87e7f310d3755524629f627456a8512d88f7f)':
+  '@destyler/tooltip@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/focus-visible': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/focus-visible': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/tour@0.3.0(patch_hash=b0178e5d387df87645489ebf1de06487fbdf1de256f8c1ff5391a91ebe7551dd)':
+  '@destyler/tour@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/dismissable': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/focus-trap': 0.3.0
-      '@destyler/interact-outside': 0.3.0
-      '@destyler/popper': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/dismissable': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/focus-trap': 0.3.1
+      '@destyler/interact-outside': 0.3.1
+      '@destyler/popper': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/tree@0.3.0':
+  '@destyler/tree@0.3.1':
     dependencies:
-      '@destyler/anatomy': 0.3.0
-      '@destyler/collection': 0.3.0
-      '@destyler/dom': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/utils': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/anatomy': 0.3.1
+      '@destyler/collection': 0.3.1
+      '@destyler/dom': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/utils': 0.3.1
+      '@destyler/xstate': 0.3.1
 
-  '@destyler/types@0.3.0':
+  '@destyler/types@0.3.1':
     dependencies:
-      '@destyler/store': 0.3.0
-      '@destyler/utils': 0.3.0
+      '@destyler/store': 0.3.1
+      '@destyler/utils': 0.3.1
       csstype: 3.2.3
 
-  '@destyler/utils@0.3.0': {}
+  '@destyler/utils@0.3.1': {}
 
-  '@destyler/vue@0.3.0(vue@3.5.44(@typescript/typescript6@6.0.2))':
+  '@destyler/vue@0.3.1(vue@3.5.44(@typescript/typescript6@6.0.2))':
     dependencies:
-      '@destyler/store': 0.3.0
-      '@destyler/types': 0.3.0
-      '@destyler/xstate': 0.3.0
+      '@destyler/store': 0.3.1
+      '@destyler/types': 0.3.1
+      '@destyler/xstate': 0.3.1
       vue: 3.5.44(@typescript/typescript6@6.0.2)
 
-  '@destyler/xstate@0.3.0':
+  '@destyler/xstate@0.3.1':
     dependencies:
-      '@destyler/store': 0.3.0
-      '@destyler/utils': 0.3.0
+      '@destyler/store': 0.3.1
+      '@destyler/utils': 0.3.1
 
   '@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)':
     dependencies:
       '@modelcontextprotocol/client': 2.3.1
       '@modelcontextprotocol/server': 2.3.1
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       h3: 2.0.2(crossws@0.4.15(srvx@1.0.5))
       pathe: 2.0.3
     transitivePeerDependencies:
       - crossws
       - ocache
 
-  '@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)':
+  '@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)':
     dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
-      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
 
-  '@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)':
-    dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
-    optionalDependencies:
-      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
-    optional: true
-
-  '@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)':
+  '@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)':
     dependencies:
       destr: 2.0.5
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       h3: 2.0.2(crossws@0.4.15(srvx@1.0.5))
       pathe: 2.0.3
       tinyexec: 1.3.1
@@ -10232,93 +10170,93 @@ snapshots:
       - crossws
       - ocache
 
-  '@devframes/json-render-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)':
+  '@devframes/json-render-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)':
     optionalDependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
 
-  '@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)':
+  '@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)':
     dependencies:
       '@json-render/core': 0.21.0(zod@4.6.7)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       zod: 4.6.7
     optionalDependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
 
   '@devframes/plugin-inspect@1.2.4(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
-      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
 
   '@devframes/plugin-messages@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
       '@devframes/service-open': 1.2.4(devframe@1.2.4)
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+    optional: true
 
   '@devframes/plugin-messages@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
       '@devframes/service-open': 1.2.4(devframe@1.2.4)
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
-    optional: true
 
-  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       zigpty: 0.2.1
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
     transitivePeerDependencies:
       - '@devframes/hub'
       - '@devframes/hub-ui'
+    optional: true
 
-  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/plugin-terminals@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/vite': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       zigpty: 0.2.1
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
     transitivePeerDependencies:
       - '@devframes/hub'
       - '@devframes/hub-ui'
-    optional: true
 
   '@devframes/service-open@1.2.4(devframe@1.2.4)':
     dependencies:
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       pathe: 2.0.3
 
-  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       pathe: 2.0.3
     optionalDependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+    optional: true
 
-  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
+  '@devframes/vite@1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)':
     dependencies:
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       pathe: 2.0.3
     optionalDependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
       vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
-    optional: true
 
   '@e18e/eslint-plugin@0.8.1(eslint@10.12.0(jiti@2.7.0))':
     dependencies:
@@ -10946,17 +10884,17 @@ snapshots:
       '@tybys/wasm-util': 0.10.3
     optional: true
 
+  '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)':
+    dependencies:
+      '@emnapi/core': 1.11.0
+      '@emnapi/runtime': 1.11.0
+      '@tybys/wasm-util': 0.10.3
+    optional: true
+
   '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@emnapi/core': 1.11.3
       '@emnapi/runtime': 1.11.3
-      '@tybys/wasm-util': 0.10.3
-    optional: true
-
-  '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)':
-    dependencies:
-      '@emnapi/core': 1.9.2
-      '@emnapi/runtime': 1.9.2
       '@tybys/wasm-util': 0.10.3
     optional: true
 
@@ -11264,9 +11202,9 @@ snapshots:
   '@rolldown/binding-openharmony-arm64@1.2.13':
     optional: true
 
-  '@rolldown/binding-wasm32-wasi@1.0.0-beta.60(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)':
+  '@rolldown/binding-wasm32-wasi@1.0.0-beta.60(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)':
     dependencies:
-      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
@@ -12078,7 +12016,7 @@ snapshots:
       '@unocss/core': 66.11.0
       '@unocss/language-server': 66.11.0
       '@unocss/rule-utils': 66.11.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       tinyglobby: 0.2.17
       unplugin-utils: 0.3.2
     transitivePeerDependencies:
@@ -12215,9 +12153,9 @@ snapshots:
 
   '@vitejs/devtools-kit@0.7.6(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       local-pkg: 1.2.1
       nostics: 1.3.0
       package-manager-detector: 1.9.0
@@ -12228,12 +12166,13 @@ snapshots:
       - crossws
       - ocache
       - srvx
+    optional: true
 
   '@vitejs/devtools-kit@0.7.6(@devframes/agentic@1.2.4)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/json-render': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       local-pkg: 1.2.1
       nostics: 1.3.0
       package-manager-detector: 1.9.0
@@ -12244,20 +12183,19 @@ snapshots:
       - crossws
       - ocache
       - srvx
-    optional: true
 
   '@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
       '@devframes/agentic': 1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
-      '@devframes/json-render-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/json-render-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
       '@devframes/plugin-inspect': 1.2.4(devframe@1.2.4)(vite@8.3.4)
       '@devframes/plugin-messages': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
-      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       '@vitejs/devtools-kit': 0.7.6(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       h3: 2.0.2(crossws@0.4.15(srvx@1.0.5))
       local-pkg: 1.2.1
       nostics: 1.3.0
@@ -12272,19 +12210,20 @@ snapshots:
       - crossws
       - ocache
       - srvx
+    optional: true
 
   '@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)':
     dependencies:
       '@devframes/agentic': 1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
-      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
-      '@devframes/json-render-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/hub': 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4)
+      '@devframes/hub-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4)
+      '@devframes/json-render-ui': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)
       '@devframes/plugin-inspect': 1.2.4(devframe@1.2.4)(vite@8.3.4)
       '@devframes/plugin-messages': 1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
-      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
+      '@devframes/plugin-terminals': 1.2.4(@devframes/hub-ui@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(devframe@1.2.4))(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4)(vite@8.3.4)
       '@vitejs/devtools-kit': 0.7.6(@devframes/agentic@1.2.4)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       cac: 7.1.0
-      devframe: 1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5)
+      devframe: 1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5)
       h3: 2.0.2(crossws@0.4.15(srvx@1.0.5))
       local-pkg: 1.2.1
       nostics: 1.3.0
@@ -12299,7 +12238,6 @@ snapshots:
       - crossws
       - ocache
       - srvx
-    optional: true
 
   '@vitejs/plugin-react@6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.28.4)(rolldown@1.2.13)(vite@8.3.4))(babel-plugin-react-compiler@1.0.0)(vite@8.3.4)':
     dependencies:
@@ -12413,7 +12351,7 @@ snapshots:
       estree-walker: 3.0.3
       magic-string: 1.4.3
     optionalDependencies:
-      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -13373,7 +13311,7 @@ snapshots:
 
   devalue@5.9.4: {}
 
-  devframe@1.2.4(@devframes/agentic@1.2.4)(cac@7.1.0)(srvx@1.0.5):
+  devframe@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(cac@7.1.0)(srvx@1.0.5):
     dependencies:
       crossws: 0.4.15(srvx@1.0.5)
       h3: 2.0.2(crossws@0.4.15(srvx@1.0.5))
@@ -15986,7 +15924,7 @@ snapshots:
     transitivePeerDependencies:
       - oxc-resolver
 
-  rolldown@1.0.0-beta.60(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2):
+  rolldown@1.0.0-beta.60(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0):
     dependencies:
       '@oxc-project/types': 0.108.0
       '@rolldown/pluginutils': 1.0.0-beta.60
@@ -16001,7 +15939,7 @@ snapshots:
       '@rolldown/binding-linux-x64-gnu': 1.0.0-beta.60
       '@rolldown/binding-linux-x64-musl': 1.0.0-beta.60
       '@rolldown/binding-openharmony-arm64': 1.0.0-beta.60
-      '@rolldown/binding-wasm32-wasi': 1.0.0-beta.60(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
+      '@rolldown/binding-wasm32-wasi': 1.0.0-beta.60(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
       '@rolldown/binding-win32-arm64-msvc': 1.0.0-beta.60
       '@rolldown/binding-win32-x64-msvc': 1.0.0-beta.60
     transitivePeerDependencies:
@@ -16552,7 +16490,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.23.1(@typescript/typescript6@6.0.2)(@vitejs/devtools@0.7.6)(@volar/typescript@2.4.28)(@vue/language-core@3.3.13)(oxc-resolver@11.21.2)(publint@0.3.25)(tsx@4.23.15)(unrun@0.2.25(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(synckit@0.11.13))(vue-tsc@3.3.13(@typescript/typescript6@6.0.2)):
+  tsdown@0.23.1(@typescript/typescript6@6.0.2)(@vitejs/devtools@0.7.6)(@volar/typescript@2.4.28)(@vue/language-core@3.3.13)(oxc-resolver@11.21.2)(publint@0.3.25)(tsx@4.23.15)(unrun@0.2.25(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(synckit@0.11.13))(vue-tsc@3.3.13(@typescript/typescript6@6.0.2)):
     dependencies:
       cac: 7.0.1
       defu: 6.1.7
@@ -16569,11 +16507,11 @@ snapshots:
       unconfig-core: 7.5.0
       verkit: 0.5.0
     optionalDependencies:
-      '@vitejs/devtools': 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
+      '@vitejs/devtools': 0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4)
       publint: 0.3.25
       tsx: 4.23.15
       typescript: '@typescript/typescript6@6.0.2'
-      unrun: 0.2.25(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(synckit@0.11.13)
+      unrun: 0.2.25(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(synckit@0.11.13)
     transitivePeerDependencies:
       - '@typescript/native-preview'
       - '@volar/typescript'
@@ -16763,9 +16701,9 @@ snapshots:
       picomatch: 4.0.7
       webpack-virtual-modules: 0.6.2
 
-  unrun@0.2.25(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(synckit@0.11.13):
+  unrun@0.2.25(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)(synckit@0.11.13):
     dependencies:
-      rolldown: 1.0.0-beta.60(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
+      rolldown: 1.0.0-beta.60(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
     optionalDependencies:
       synckit: 0.11.13
     transitivePeerDependencies:
@@ -16937,7 +16875,7 @@ snapshots:
 
   vitefu@1.1.3(vite@8.3.4):
     optionalDependencies:
-      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
 
   vitest-browser-react@2.3.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.4):
     dependencies:
@@ -16974,7 +16912,7 @@ snapshots:
       tinybench: 6.2.2
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
-      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6(@devframes/json-render@1.2.4(@devframes/hub@1.2.4(@devframes/agentic@1.2.4(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.4))(devframe@1.2.4))(crossws@0.4.15(srvx@1.0.5))(srvx@1.0.5)(vite@8.3.4))(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+      vite: 8.3.4(@types/node@26.6.5)(@vitejs/devtools@0.7.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
       why-is-node-running: 3.2.1
     optionalDependencies:
       '@types/node': 26.6.5

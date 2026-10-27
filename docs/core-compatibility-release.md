@@ -6,10 +6,11 @@ policy remains separately tracked in [core #353](https://github.com/destyler/des
 ## Current installed-artifact gate
 
 `pnpm test:core-compat` builds the current checkout and pins every resolved
-`@destyler/*` package to exact core 0.3.0. The 2026-10-21 reproduction below
+`@destyler/*` package to exact core 0.3.1. The 2026-10-21 reproduction below
 records published beta.17 with core 0.2.13. A passing current gate shows the
-workspace Dialog open-state cases against core 0.3.0. It does not publish a
-package or change registry dist-tags.
+workspace Dialog, Popover, and Menu open-state cases, plus Tabs nullable
+selection, against core 0.3.1. It does not publish a package or change registry
+dist-tags.
 
 ## Reproduced on 2026-10-21
 
