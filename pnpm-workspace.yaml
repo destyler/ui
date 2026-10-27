@@ -24,7 +24,7 @@ catalogs:
     '@astrojs/svelte': ^9.0.1
     '@astrojs/starlight': ^0.42.6
     '@astrojs/vue': ^7.0.3
-    '@destyler/docs': ^0.2.13
+    '@destyler/docs': ^0.3.0
     astro: ^7.3.8
     shiki: ^4.5.0
     tsx: ^4.23.15
@@ -58,64 +58,64 @@ catalogs:
     plop: ^4.0.5
     taze: ^21.3.0
   prod:
-    '@destyler/anatomy': ^0.2.13
-    '@destyler/aspect-ratio': ^0.2.13
-    '@destyler/auto-resize': ^0.2.13
-    '@destyler/breadcrumbs': ^0.2.13
-    '@destyler/calendar': ^0.2.13
-    '@destyler/carousel': ^0.2.13
-    '@destyler/checkbox': ^0.2.13
-    '@destyler/clipboard': ^0.2.13
-    '@destyler/collapse': ^0.2.13
-    '@destyler/collapsible': ^0.2.13
-    '@destyler/collection': ^0.2.13
-    '@destyler/color-picker': ^0.2.13
-    '@destyler/combobox': ^0.2.13
-    '@destyler/dialog': ^0.2.13
-    '@destyler/dom': ^0.2.13
-    '@destyler/dynamic': ^0.2.13
-    '@destyler/edit': ^0.2.13
-    '@destyler/file-upload': ^0.2.13
-    '@destyler/floating-panel': ^0.2.13
-    '@destyler/focus-trap': ^0.2.13
-    '@destyler/highlight-text': ^0.2.13
-    '@destyler/hover-card': ^0.2.13
-    '@destyler/i18n': ^0.2.13
-    '@destyler/image': ^0.2.13
-    '@destyler/label': ^0.2.13
-    '@destyler/menu': ^0.2.13
-    '@destyler/navigation-menu': ^0.2.13
-    '@destyler/number-input': ^0.2.13
-    '@destyler/otp-input': ^0.2.13
-    '@destyler/pagination': ^0.2.13
-    '@destyler/popover': ^0.2.13
-    '@destyler/presence': ^0.2.13
-    '@destyler/progress': ^0.2.13
-    '@destyler/qr-code': ^0.2.13
-    '@destyler/radio': ^0.2.13
-    '@destyler/react': ^0.2.13
-    '@destyler/scroll-area': ^0.2.13
-    '@destyler/select': ^0.2.13
-    '@destyler/separator': ^0.2.13
-    '@destyler/signature': ^0.2.13
-    '@destyler/slider': ^0.2.13
-    '@destyler/splitter': ^0.2.13
-    '@destyler/steps': ^0.2.13
-    '@destyler/store': ^0.2.13
-    '@destyler/solid': ^0.2.13
-    '@destyler/svelte': ^0.2.13
-    '@destyler/switch': ^0.2.13
-    '@destyler/tabs': ^0.2.13
-    '@destyler/timer': ^0.2.13
-    '@destyler/toast': ^0.2.13
-    '@destyler/toggle': ^0.2.13
-    '@destyler/tooltip': ^0.2.13
-    '@destyler/tour': ^0.2.13
-    '@destyler/tree': ^0.2.13
-    '@destyler/types': ^0.2.13
-    '@destyler/utils': ^0.2.13
-    '@destyler/vue': ^0.2.13
-    '@destyler/xstate': ^0.2.13
+    '@destyler/anatomy': ^0.3.0
+    '@destyler/aspect-ratio': ^0.3.0
+    '@destyler/auto-resize': ^0.3.0
+    '@destyler/breadcrumbs': ^0.3.0
+    '@destyler/calendar': ^0.3.0
+    '@destyler/carousel': ^0.3.0
+    '@destyler/checkbox': ^0.3.0
+    '@destyler/clipboard': ^0.3.0
+    '@destyler/collapse': ^0.3.0
+    '@destyler/collapsible': ^0.3.0
+    '@destyler/collection': ^0.3.0
+    '@destyler/color-picker': ^0.3.0
+    '@destyler/combobox': ^0.3.0
+    '@destyler/dialog': ^0.3.0
+    '@destyler/dom': ^0.3.0
+    '@destyler/dynamic': ^0.3.0
+    '@destyler/edit': ^0.3.0
+    '@destyler/file-upload': ^0.3.0
+    '@destyler/floating-panel': ^0.3.0
+    '@destyler/focus-trap': ^0.3.0
+    '@destyler/highlight-text': ^0.3.0
+    '@destyler/hover-card': ^0.3.0
+    '@destyler/i18n': ^0.3.0
+    '@destyler/image': ^0.3.0
+    '@destyler/label': ^0.3.0
+    '@destyler/menu': ^0.3.0
+    '@destyler/navigation-menu': ^0.3.0
+    '@destyler/number-input': ^0.3.0
+    '@destyler/otp-input': ^0.3.0
+    '@destyler/pagination': ^0.3.0
+    '@destyler/popover': ^0.3.0
+    '@destyler/presence': ^0.3.0
+    '@destyler/progress': ^0.3.0
+    '@destyler/qr-code': ^0.3.0
+    '@destyler/radio': ^0.3.0
+    '@destyler/react': ^0.3.0
+    '@destyler/scroll-area': ^0.3.0
+    '@destyler/select': ^0.3.0
+    '@destyler/separator': ^0.3.0
+    '@destyler/signature': ^0.3.0
+    '@destyler/slider': ^0.3.0
+    '@destyler/splitter': ^0.3.0
+    '@destyler/steps': ^0.3.0
+    '@destyler/store': ^0.3.0
+    '@destyler/solid': ^0.3.0
+    '@destyler/svelte': ^0.3.0
+    '@destyler/switch': ^0.3.0
+    '@destyler/tabs': ^0.3.0
+    '@destyler/timer': ^0.3.0
+    '@destyler/toast': ^0.3.0
+    '@destyler/toggle': ^0.3.0
+    '@destyler/tooltip': ^0.3.0
+    '@destyler/tour': ^0.3.0
+    '@destyler/tree': ^0.3.0
+    '@destyler/types': ^0.3.0
+    '@destyler/utils': ^0.3.0
+    '@destyler/vue': ^0.3.0
+    '@destyler/xstate': ^0.3.0
   runtime:
     '@vitejs/devtools': ^0.7.6
     '@vitejs/plugin-react': ^6.1.2
@@ -175,7 +175,26 @@ shellEmulator: true
 # Preserve reviewed direct-effect and eager-reactivity warnings while keeping
 # upstream defaults. Exact versions make compatibility patch upgrades explicit.
 # Chromatic removes only the Share UI entry and stays exactly version-pinned.
+# Core 0.3.0 declaration patches restore machine/anatomy/props types emitted as any.
 patchedDependencies:
   '@chromatic-com/storybook@5.5.1': patches/@chromatic-com__storybook@5.5.1.patch
+  '@destyler/calendar@0.3.0': patches/@destyler__calendar@0.3.0.patch
+  '@destyler/carousel@0.3.0': patches/@destyler__carousel@0.3.0.patch
+  '@destyler/checkbox@0.3.0': patches/@destyler__checkbox@0.3.0.patch
+  '@destyler/color-picker@0.3.0': patches/@destyler__color-picker@0.3.0.patch
+  '@destyler/combobox@0.3.0': patches/@destyler__combobox@0.3.0.patch
+  '@destyler/dialog@0.3.0': patches/@destyler__dialog@0.3.0.patch
+  '@destyler/dynamic@0.3.0': patches/@destyler__dynamic@0.3.0.patch
+  '@destyler/edit@0.3.0': patches/@destyler__edit@0.3.0.patch
+  '@destyler/file-upload@0.3.0': patches/@destyler__file-upload@0.3.0.patch
+  '@destyler/floating-panel@0.3.0': patches/@destyler__floating-panel@0.3.0.patch
+  '@destyler/hover-card@0.3.0': patches/@destyler__hover-card@0.3.0.patch
+  '@destyler/menu@0.3.0': patches/@destyler__menu@0.3.0.patch
+  '@destyler/popover@0.3.0': patches/@destyler__popover@0.3.0.patch
+  '@destyler/radio@0.3.0': patches/@destyler__radio@0.3.0.patch
+  '@destyler/select@0.3.0': patches/@destyler__select@0.3.0.patch
+  '@destyler/switch@0.3.0': patches/@destyler__switch@0.3.0.patch
+  '@destyler/tooltip@0.3.0': patches/@destyler__tooltip@0.3.0.patch
+  '@destyler/tour@0.3.0': patches/@destyler__tour@0.3.0.patch
   eslint-plugin-react-x@5.27.1: patches/eslint-plugin-react-x@5.27.1.patch
   eslint-plugin-solid@0.18.1: patches/eslint-plugin-solid@0.18.1.patch

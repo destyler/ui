@@ -13,8 +13,9 @@ type DefaultPropMap<T> = Partial<Record<StringKey<T>, StringKey<T>>>
  * UI-only defaults (Calendar view, Edit edit) are adapted by their own hooks.
  *
  * Undefined values are omitted so presence detection treats omitted live props as
- * uncontrolled. The `_defaults` / `_controlled` parameters are retained for
- * call-site compatibility and are ignored.
+ * uncontrolled. Legacy `*.controlled` keys are dropped and are not forwarded to
+ * core. The `_defaults` / `_controlled` parameters are retained for call-site
+ * compatibility and are ignored.
  */
 export function createMachineProps<T extends MachineProps>(
   props: T,

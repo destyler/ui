@@ -1,0 +1,34 @@
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+--- a/dist/index.d.mts
++++ b/dist/index.d.mts
+@@ -1,7 +1,7 @@
+ import { AnyEventObject, ContextRef, Machine, XSend, XState } from "@destyler/xstate";
+ import { CommonProperties, DirectionProperty, NormalizeProps, Orientation, OrientationProperty, PropTypes, RequiredBy } from "@destyler/types";
+ //#region src/anatomy.d.ts
+-export declare const anatomy: any;
++export declare const anatomy: import("@destyler/anatomy").AnatomyInstance<"root" | "itemGroup" | "item" | "control" | "nextTrigger" | "prevTrigger" | "indicatorGroup" | "indicator" | "autoplayTrigger">;
+ //#endregion
+ //#region src/types.d.ts
+ interface PageChangeDetails {
+@@ -241,14 +241,14 @@
+ export declare function connect<T extends PropTypes>(state: State, send: Send, normalize: NormalizeProps<T>): MachineApi<T>;
+ //#endregion
+ //#region src/machine.d.ts
+-export declare function machine(userContext: UserDefinedContext): any;
++export declare function machine(userContext: UserDefinedContext): import("@destyler/xstate").Machine<MachineContext, MachineState, import("@destyler/xstate").AnyEventObject>;
+ //#endregion
+ //#region src/props.d.ts
+-export declare const props: any;
+-export declare const splitProps: any;
+-export declare const indicatorProps: any;
+-export declare const splitIndicatorProps: any;
+-export declare const itemProps: any;
+-export declare const splitItemProps: any;
++export declare const props: ("autoplay" | "id" | "ids" | "translations" | "slidesPerPage" | "slidesPerMove" | "allowMouseDrag" | "loop" | "page" | "defaultPage" | "spacing" | "padding" | "onPageChange" | "inViewThreshold" | "snapType" | "slideCount" | "onDragStatusChange" | "onAutoplayStatusChange" | "dir" | "getRootNode" | "orientation")[];
++export declare const splitProps: <Props extends Partial<UserDefinedContext>>(props: Props) => [Partial<UserDefinedContext>, Omit<Props, "autoplay" | "id" | "ids" | "translations" | "slidesPerPage" | "slidesPerMove" | "allowMouseDrag" | "loop" | "page" | "defaultPage" | "spacing" | "padding" | "onPageChange" | "inViewThreshold" | "snapType" | "slideCount" | "onDragStatusChange" | "onAutoplayStatusChange" | "dir" | "getRootNode" | "orientation">];
++export declare const indicatorProps: (keyof IndicatorProps)[];
++export declare const splitIndicatorProps: <Props extends IndicatorProps>(props: Props) => [IndicatorProps, Omit<Props, keyof IndicatorProps>];
++export declare const itemProps: (keyof ItemProps)[];
++export declare const splitItemProps: <Props extends ItemProps>(props: Props) => [ItemProps, Omit<Props, keyof ItemProps>];
+ //#endregion
+ export type { MachineApi as Api, AutoplayStatusDetails, UserDefinedContext as Context, DragStatusDetails, ElementIds, IndicatorProps, IntlTranslations, ItemProps, MachineState, Orientation, PageChangeDetails, Service, State };

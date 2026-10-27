@@ -101,7 +101,7 @@ export default function Basic() {
 
 ### Controlled
 
-Control the active tab programmatically.
+Control the active tab programmatically. The controlled value is `string | null`: `null` selects no tab. Keep parent state and the change handler wide enough for both, including a clear or deselect. See [Tabs nullable selection](/docs/overview/tabs-nullable-migration).
 
 <ComponentPreview component="tabs" example="Controlled" />
 

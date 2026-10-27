@@ -15,7 +15,7 @@ Use Node >=22.22.3 and pnpm 10.28.0, then install the workspace lockfile.
 - `node scripts/test-core-compat.mjs /path/to/tarballs /tmp/ui-candidate-evidence`
   tests existing packs named by `pnpm pack` (the versions must match the checkout).
 
-The runner pins framework runtimes and core 0.2.13 using npm overrides, checks the
+The runner pins framework runtimes and core 0.3.0 using npm overrides, checks the
 resolved core packages, and retains each consumer's package-lock.json, version
 record (including the UI artifact URL/path and integrity hash), lock SHA-256, build/interaction logs, and a combined results.json. An empty
 evidence directory is required and checked before work begins; old

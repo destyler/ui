@@ -11,6 +11,18 @@ describe('createMachineProps', () => {
     expect(props).toStrictEqual({ value: undefined, defaultValue: 'draft', disabled: false })
   })
 
+  it('drops legacy *.controlled keys instead of forwarding them to core', () => {
+    const result = createMachineProps({
+      'open': true,
+      'open.controlled': true,
+      'value.controlled': false,
+    })
+
+    expect(result.initial).toStrictEqual({ open: true })
+    expect(result.context).toStrictEqual({ open: true })
+    expect(Object.keys(result.context).some(key => key.endsWith('.controlled'))).toBe(false)
+  })
+
   it('keeps an explicit controlled value without *.controlled stamps', () => {
     const result = createMachineProps(
       { value: 'controlled', defaultValue: 'fallback' },

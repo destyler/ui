@@ -74,8 +74,8 @@ test('accepts the exact tarball filename', async (t) => {
 })
 
 test('explains exact-core drift without silently overriding the failure', () => {
-  assertCoreVersions({ 'node_modules/@destyler/dialog': '0.2.13' }, '0.2.13')
-  assert.throws(() => assertCoreVersions({ 'node_modules/@destyler/transitive': '0.2.14' }, '0.2.13'), /transitive.*0.2.14.*0.2.13.*overrides/)
+  assertCoreVersions({ 'node_modules/@destyler/dialog': '0.3.0' }, '0.3.0')
+  assert.throws(() => assertCoreVersions({ 'node_modules/@destyler/transitive': '0.3.1' }, '0.3.0'), /transitive.*0.3.1.*0.3.0.*overrides/)
 })
 
 for (const fail of [false, true]) {

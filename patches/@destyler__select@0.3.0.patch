@@ -1,0 +1,38 @@
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+--- a/dist/index.d.mts
++++ b/dist/index.d.mts
+@@ -5,7 +5,7 @@
+ import { FocusOutsideEvent, InteractOutsideEvent, InteractOutsideHandlers, PointerDownOutsideEvent } from "@destyler/dismissable";
+ import { CommonProperties, DirectionProperty, NormalizeProps, PropTypes, RequiredBy } from "@destyler/types";
+ //#region src/anatomy.d.ts
+-export declare const anatomy: any;
++export declare const anatomy: import("@destyler/anatomy").AnatomyInstance<"root" | "content" | "control" | "trigger" | "clearTrigger" | "label" | "positioner" | "item" | "itemGroup" | "itemGroupLabel" | "indicator" | "itemText" | "itemIndicator" | "list" | "valueText">;
+ //#endregion
+ //#region src/collection.d.ts
+ export declare function collection<T extends CollectionItem$1>(options: CollectionOptions$1<T>): ListCollection<T>;
+@@ -351,16 +351,16 @@
+ export declare function connect<T extends PropTypes, V extends CollectionItem = CollectionItem>(state: State, send: Send, normalize: NormalizeProps<T>): MachineApi<T, V>;
+ //#endregion
+ //#region src/machine.d.ts
+-export declare function machine<T extends CollectionItem>(userContext: UserDefinedContext<T>): any;
++export declare function machine<T extends CollectionItem>(userContext: UserDefinedContext<T>): import("@destyler/xstate").Machine<MachineContext, MachineState, import("@destyler/xstate").AnyEventObject>;
+ //#endregion
+ //#region src/props.d.ts
+-export declare const props: any;
+-export declare const splitProps: any;
+-export declare const itemProps: any;
+-export declare const splitItemProps: any;
+-export declare const itemGroupProps: any;
+-export declare const splitItemGroupProps: any;
+-export declare const itemGroupLabelProps: any;
+-export declare const splitItemGroupLabelProps: any;
++export declare const props: ("open" | "collection" | "ids" | "name" | "form" | "disabled" | "invalid" | "readOnly" | "required" | "closeOnSelect" | "onHighlightChange" | "onValueChange" | "onOpenChange" | "positioning" | "value" | "defaultValue" | "highlightedValue" | "loopFocus" | "multiple" | "defaultOpen" | "scrollToIndexFn" | "composite" | "deselectable" | "dir" | "id" | "getRootNode" | "onPointerDownOutside" | "onFocusOutside" | "onInteractOutside")[];
++export declare const splitProps: <Props extends Partial<UserDefinedContext>>(props: Props) => [Partial<UserDefinedContext>, Omit<Props, "open" | "collection" | "ids" | "name" | "form" | "disabled" | "invalid" | "readOnly" | "required" | "closeOnSelect" | "onHighlightChange" | "onValueChange" | "onOpenChange" | "positioning" | "value" | "defaultValue" | "highlightedValue" | "loopFocus" | "multiple" | "defaultOpen" | "scrollToIndexFn" | "composite" | "deselectable" | "dir" | "id" | "getRootNode" | "onPointerDownOutside" | "onFocusOutside" | "onInteractOutside">];
++export declare const itemProps: (keyof ItemProps<any>)[];
++export declare const splitItemProps: <Props extends ItemProps<any>>(props: Props) => [ItemProps<any>, Omit<Props, keyof ItemProps<any>>];
++export declare const itemGroupProps: "id"[];
++export declare const splitItemGroupProps: <Props extends ItemGroupProps>(props: Props) => [ItemGroupProps, Omit<Props, "id">];
++export declare const itemGroupLabelProps: "htmlFor"[];
++export declare const splitItemGroupLabelProps: <Props extends ItemGroupLabelProps>(props: Props) => [ItemGroupLabelProps, Omit<Props, "htmlFor">];
+ //#endregion
+ export type { MachineApi as Api, CollectionItem, CollectionOptions, UserDefinedContext as Context, ElementIds, FocusOutsideEvent, HighlightChangeDetails, InteractOutsideEvent, ItemGroupLabelProps, ItemGroupProps, ItemProps, ItemState, OpenChangeDetails, PointerDownOutsideEvent, PositioningOptions, ScrollToIndexDetails, Service, ValueChangeDetails };

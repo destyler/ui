@@ -1,0 +1,20 @@
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+--- a/dist/index.d.mts
++++ b/dist/index.d.mts
+@@ -4,7 +4,7 @@
+ import { FocusOutsideEvent, InteractOutsideEvent, InteractOutsideHandlers, PointerDownOutsideEvent } from "@destyler/dismissable";
+ import { CommonProperties, DirectionProperty, NormalizeProps, PropTypes, RequiredBy } from "@destyler/types";
+ //#region src/anatomy.d.ts
+-export declare const anatomy: any;
++export declare const anatomy: import("@destyler/anatomy").AnatomyInstance<"root" | "clearTrigger" | "content" | "control" | "input" | "item" | "itemGroup" | "itemGroupLabel" | "itemIndicator" | "itemText" | "label" | "list" | "positioner" | "trigger">;
+ //#endregion
+ //#region src/collection.d.ts
+ export declare function collection<T extends CollectionItem$1>(options: CollectionOptions$1<T>): ListCollection<T>;
+@@ -431,6 +431,6 @@
+ export declare function connect<T extends PropTypes, V extends CollectionItem>(state: State, send: Send, normalize: NormalizeProps<T>): MachineApi<T, V>;
+ //#endregion
+ //#region src/machine.d.ts
+-export declare function machine<T extends CollectionItem>(userContext: UserDefinedContext<T>): any;
++export declare function machine<T extends CollectionItem>(userContext: UserDefinedContext<T>): import("@destyler/xstate").Machine<MachineContext, MachineState, import("@destyler/xstate").AnyEventObject>;
+ //#endregion
+ export type { MachineApi as Api, CollectionItem, CollectionOptions, UserDefinedContext as Context, ElementIds, FocusOutsideEvent, HighlightChangeDetails, InputValueChangeDetails, InteractOutsideEvent, IntlTranslations, ItemGroupLabelProps, ItemGroupProps, ItemProps, ItemState, NavigateDetails, OpenChangeDetails, Placement, PointerDownOutsideEvent, PositioningOptions, ScrollToIndexDetails, Service, TriggerProps, ValueChangeDetails };

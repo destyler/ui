@@ -58,7 +58,7 @@ export interface RootEmits {
   /**
    * Callback to be called when the selected/active tab changes
    */
-  'valueChange': [details: Omit<tabs.ValueChangeDetails, 'value'> & { value: string | null }]
+  'valueChange': [details: tabs.ValueChangeDetails]
   /**
    * The callback fired when the model value changes.
    */

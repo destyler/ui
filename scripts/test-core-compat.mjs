@@ -13,7 +13,7 @@ const root = fileURLToPath(new URL('..', import.meta.url))
 const [source, output] = process.argv.slice(2)
 assert.ok(source && output, 'Usage: node scripts/test-core-compat.mjs <exact UI version | tarball directory> <evidence directory>')
 const registry = /^\d+\.\d+\.\d+(?:-[\w.]+)?$/.test(source)
-const core = '0.2.13'
+const core = '0.3.0'
 const runtimes = {
   react: { 'react': '19.3.0', 'react-dom': '19.3.0' },
   vue: { vue: '3.5.44' },

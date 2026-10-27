@@ -1,7 +1,7 @@
 import { Tabs } from '../index'
 
 interface BasicProps {
-  defaultValue?: string
+  defaultValue?: string | null
   onValueChange?: (details: { value: string | null }) => void
   loopFocus?: boolean
   orientation?: 'horizontal' | 'vertical'
