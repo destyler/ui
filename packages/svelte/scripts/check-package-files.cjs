@@ -1,3 +1,4 @@
+const assert = require('node:assert/strict')
 const { spawnSync } = require('node:child_process')
 const path = require('node:path')
 const process = require('node:process')
@@ -14,7 +15,10 @@ const result = spawnSync(
 if (result.status !== 0)
   throw new Error(result.stderr || result.stdout || 'npm pack --dry-run failed')
 
-const pack = JSON.parse(result.stdout)[0]
+// npm <=11 prints an array of pack results; npm >=12 prints an object keyed by package name.
+const packOutput = JSON.parse(result.stdout)
+const pack = Array.isArray(packOutput) ? packOutput[0] : packOutput[packageJson.name]
+assert.ok(pack && Array.isArray(pack.files), `npm pack --json returned no file list for ${packageJson.name}`)
 const packedFiles = new Set(pack.files.map(file => file.path))
 const excluded = [...packedFiles]
   .filter(file => (
