@@ -99,6 +99,7 @@ export default defineConfig({
             { label: 'Installation', slug: 'overview/installation' },
             { label: 'Getting Started', slug: 'overview/getting-started' },
             { label: 'Controllable State', slug: 'overview/controllable-state' },
+            { label: 'Tabs nullable selection', slug: 'overview/tabs-nullable-migration' },
           ],
         },
         {

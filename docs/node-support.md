@@ -10,9 +10,11 @@ Restoring Node 20 support is not planned for UI or core.
 
 - UI requires Node.js 22.22.3 or newer starting with the release containing
   its support migration.
-- [destyler/destyler#360](https://github.com/destyler/destyler/pull/360) sets
-  the same minimum for all public `@destyler/*` packages in the next core
-  release containing that change. See the
+- [Core 0.3.1](https://github.com/destyler/destyler/releases/tag/v0.3.1) keeps
+  the Node.js 22.22.3 minimum that
+  [core 0.3.0](https://github.com/destyler/destyler/releases/tag/v0.3.0) set for
+  all public `@destyler/*` packages
+  ([destyler/destyler#360](https://github.com/destyler/destyler/pull/360)). See the
   [core Node support guide](https://github.com/destyler/destyler/blob/main/document/src/content/guide/node-support.mdx)
   for consumer requirements and the separate repository-tooling range.
 - These migrations do not change previously published UI or core artifacts.

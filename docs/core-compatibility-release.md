@@ -3,6 +3,15 @@
 Tracking: [UI #151](https://github.com/destyler/ui/issues/151). Core versioning
 policy remains separately tracked in [core #353](https://github.com/destyler/destyler/issues/353).
 
+## Current installed-artifact gate
+
+`pnpm test:core-compat` builds the current checkout and pins every resolved
+`@destyler/*` package to exact core 0.3.1. The 2026-10-21 reproduction below
+records published beta.17 with core 0.2.13. A passing current gate shows the
+workspace Dialog, Popover, and Menu open-state cases, plus Tabs nullable
+selection, against core 0.3.1. It does not publish a package or change registry
+dist-tags.
+
 ## Reproduced on 2026-10-21
 
 The baseline is main `979457eb`, with Node 24.19.0, core 0.2.13, React 19.3.0,

@@ -1,9 +1,11 @@
-# Private lint compatibility patches
+# Compatibility patches
 
-These exact-version patches affect development tooling only, not public peers or
-runtime code. Upgrades require independent review and the diagnostic guards.
-The 2026-10-16 reconstruction uses verified official package sources and retained
-source evidence; it does not claim byte identity with the lost local checkpoint.
+These exact-version patches do not change public UI peers. Upgrades require
+independent review. Lint patches affect development tooling only.
+
+The 2026-10-16 lint reconstruction uses verified official package sources and
+retained source evidence; it does not claim byte identity with the lost local
+checkpoint.
 
 ## eslint-plugin-react-x 5.27.1
 
