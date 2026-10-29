@@ -12,6 +12,7 @@ export default mergeConfig(
       exclude: [
         ...configDefaults.exclude,
         '**/*.ssr.test.tsx',
+        '**/*.unit.test.tsx',
         'dist/**',
         'storybook-static/**',
       ],

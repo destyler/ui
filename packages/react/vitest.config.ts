@@ -8,7 +8,7 @@ export default mergeConfig(
     test: {
       name: 'react',
       environment: 'happy-dom',
-      exclude: [...configDefaults.exclude, '**/*.ssr.test.tsx'],
+      exclude: [...configDefaults.exclude, '**/*.ssr.test.tsx', '**/*.unit.test.tsx'],
       browser: {
         // Preserve the case-insensitive substring locators used before Vitest 5.
         locators: { exact: false },
