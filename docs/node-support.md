@@ -17,6 +17,8 @@ Restoring Node 20 support is not planned for UI or core.
   ([destyler/destyler#360](https://github.com/destyler/destyler/pull/360)). See the
   [core Node support guide](https://github.com/destyler/destyler/blob/main/document/src/content/guide/node-support.mdx)
   for consumer requirements and the separate repository-tooling range.
+- The current core 0.3.2 dependency update retains that same Node.js 22.22.3
+  minimum; it does not broaden or narrow the UI Node support policy.
 - These migrations do not change previously published UI or core artifacts.
 
 ## Upgrade an application

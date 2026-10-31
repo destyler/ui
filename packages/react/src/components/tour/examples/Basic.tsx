@@ -1,5 +1,6 @@
 import type { StepDetails } from '@destyler/tour'
 import { useEffect, useRef } from 'react'
+import { useEvent } from '~/hooks/use-event'
 import { Tour, useTour } from '../index'
 
 export function Basic() {
@@ -19,9 +20,12 @@ export function Basic() {
 
   const tour = useTour({ steps })
 
+  const start = useEvent(tour.start)
+  // Starting writes event metadata. Depend on the stable command, not the
+  // complete API that changes with every subscribed snapshot.
   useEffect(() => {
-    tour.start()
-  }, [tour])
+    start()
+  }, [start])
 
   return (
     <main>

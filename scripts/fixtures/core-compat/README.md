@@ -10,12 +10,13 @@ Use Node >=22.22.3 and pnpm 10.28.0, then install the workspace lockfile.
 - `pnpm test:core-compat /tmp/ui-core-evidence` builds and packs all four current
   packages and verifies each isolated consumer. Use a fresh evidence directory.
 - `node scripts/test-core-compat.mjs 0.0.1-beta.17 /tmp/ui-beta17-evidence`
-  reproduces the published release, with explicit UI and core versions. This is
-  expected to exit nonzero for beta.17, not a passing regression baseline.
+  tests the published beta.17 UI against the current exact core pin. This is
+  expected to exit nonzero for beta.17, not a passing regression baseline or a
+  reproduction of the historical beta.17/core 0.2.13 dependency combination.
 - `node scripts/test-core-compat.mjs /path/to/tarballs /tmp/ui-candidate-evidence`
   tests existing packs named by `pnpm pack` (the versions must match the checkout).
 
-The runner pins framework runtimes and core 0.3.1 using npm overrides, checks the
+The runner pins framework runtimes and core 0.3.2 using npm overrides, checks the
 resolved core packages, and retains each consumer's package-lock.json, version
 record (including the UI artifact URL/path and integrity hash), lock SHA-256, build/interaction logs, and a combined results.json. An empty
 evidence directory is required and checked before work begins; old
