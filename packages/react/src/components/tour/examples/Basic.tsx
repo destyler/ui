@@ -19,9 +19,16 @@ export function Basic() {
 
   const tour = useTour({ steps })
 
+  const startRef = useRef(tour.start)
   useEffect(() => {
-    tour.start()
-  }, [tour])
+    startRef.current = tour.start
+  }, [tour.start])
+  // Starting writes event metadata. Start only on mount, not whenever the
+  // complete API changes with a subscribed snapshot. Keep this effect after
+  // the ref update so it uses the latest command, including in StrictMode.
+  useEffect(() => {
+    startRef.current()
+  }, [])
 
   return (
     <main>

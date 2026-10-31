@@ -24,7 +24,7 @@ catalogs:
     '@astrojs/svelte': ^9.0.1
     '@astrojs/starlight': ^0.42.6
     '@astrojs/vue': ^7.0.3
-    '@destyler/docs': ^0.3.1
+    '@destyler/docs': ^0.3.2
     astro: ^7.3.8
     shiki: ^4.5.0
     tsx: ^4.23.15
@@ -58,64 +58,64 @@ catalogs:
     plop: ^4.0.5
     taze: ^21.3.0
   prod:
-    '@destyler/anatomy': ^0.3.1
-    '@destyler/aspect-ratio': ^0.3.1
-    '@destyler/auto-resize': ^0.3.1
-    '@destyler/breadcrumbs': ^0.3.1
-    '@destyler/calendar': ^0.3.1
-    '@destyler/carousel': ^0.3.1
-    '@destyler/checkbox': ^0.3.1
-    '@destyler/clipboard': ^0.3.1
-    '@destyler/collapse': ^0.3.1
-    '@destyler/collapsible': ^0.3.1
-    '@destyler/collection': ^0.3.1
-    '@destyler/color-picker': ^0.3.1
-    '@destyler/combobox': ^0.3.1
-    '@destyler/dialog': ^0.3.1
-    '@destyler/dom': ^0.3.1
-    '@destyler/dynamic': ^0.3.1
-    '@destyler/edit': ^0.3.1
-    '@destyler/file-upload': ^0.3.1
-    '@destyler/floating-panel': ^0.3.1
-    '@destyler/focus-trap': ^0.3.1
-    '@destyler/highlight-text': ^0.3.1
-    '@destyler/hover-card': ^0.3.1
-    '@destyler/i18n': ^0.3.1
-    '@destyler/image': ^0.3.1
-    '@destyler/label': ^0.3.1
-    '@destyler/menu': ^0.3.1
-    '@destyler/navigation-menu': ^0.3.1
-    '@destyler/number-input': ^0.3.1
-    '@destyler/otp-input': ^0.3.1
-    '@destyler/pagination': ^0.3.1
-    '@destyler/popover': ^0.3.1
-    '@destyler/presence': ^0.3.1
-    '@destyler/progress': ^0.3.1
-    '@destyler/qr-code': ^0.3.1
-    '@destyler/radio': ^0.3.1
-    '@destyler/react': ^0.3.1
-    '@destyler/scroll-area': ^0.3.1
-    '@destyler/select': ^0.3.1
-    '@destyler/separator': ^0.3.1
-    '@destyler/signature': ^0.3.1
-    '@destyler/slider': ^0.3.1
-    '@destyler/splitter': ^0.3.1
-    '@destyler/steps': ^0.3.1
-    '@destyler/store': ^0.3.1
-    '@destyler/solid': ^0.3.1
-    '@destyler/svelte': ^0.3.1
-    '@destyler/switch': ^0.3.1
-    '@destyler/tabs': ^0.3.1
-    '@destyler/timer': ^0.3.1
-    '@destyler/toast': ^0.3.1
-    '@destyler/toggle': ^0.3.1
-    '@destyler/tooltip': ^0.3.1
-    '@destyler/tour': ^0.3.1
-    '@destyler/tree': ^0.3.1
-    '@destyler/types': ^0.3.1
-    '@destyler/utils': ^0.3.1
-    '@destyler/vue': ^0.3.1
-    '@destyler/xstate': ^0.3.1
+    '@destyler/anatomy': ^0.3.2
+    '@destyler/aspect-ratio': ^0.3.2
+    '@destyler/auto-resize': ^0.3.2
+    '@destyler/breadcrumbs': ^0.3.2
+    '@destyler/calendar': ^0.3.2
+    '@destyler/carousel': ^0.3.2
+    '@destyler/checkbox': ^0.3.2
+    '@destyler/clipboard': ^0.3.2
+    '@destyler/collapse': ^0.3.2
+    '@destyler/collapsible': ^0.3.2
+    '@destyler/collection': ^0.3.2
+    '@destyler/color-picker': ^0.3.2
+    '@destyler/combobox': ^0.3.2
+    '@destyler/dialog': ^0.3.2
+    '@destyler/dom': ^0.3.2
+    '@destyler/dynamic': ^0.3.2
+    '@destyler/edit': ^0.3.2
+    '@destyler/file-upload': ^0.3.2
+    '@destyler/floating-panel': ^0.3.2
+    '@destyler/focus-trap': ^0.3.2
+    '@destyler/highlight-text': ^0.3.2
+    '@destyler/hover-card': ^0.3.2
+    '@destyler/i18n': ^0.3.2
+    '@destyler/image': ^0.3.2
+    '@destyler/label': ^0.3.2
+    '@destyler/menu': ^0.3.2
+    '@destyler/navigation-menu': ^0.3.2
+    '@destyler/number-input': ^0.3.2
+    '@destyler/otp-input': ^0.3.2
+    '@destyler/pagination': ^0.3.2
+    '@destyler/popover': ^0.3.2
+    '@destyler/presence': ^0.3.2
+    '@destyler/progress': ^0.3.2
+    '@destyler/qr-code': ^0.3.2
+    '@destyler/radio': ^0.3.2
+    '@destyler/react': ^0.3.2
+    '@destyler/scroll-area': ^0.3.2
+    '@destyler/select': ^0.3.2
+    '@destyler/separator': ^0.3.2
+    '@destyler/signature': ^0.3.2
+    '@destyler/slider': ^0.3.2
+    '@destyler/splitter': ^0.3.2
+    '@destyler/steps': ^0.3.2
+    '@destyler/store': ^0.3.2
+    '@destyler/solid': ^0.3.2
+    '@destyler/svelte': ^0.3.2
+    '@destyler/switch': ^0.3.2
+    '@destyler/tabs': ^0.3.2
+    '@destyler/timer': ^0.3.2
+    '@destyler/toast': ^0.3.2
+    '@destyler/toggle': ^0.3.2
+    '@destyler/tooltip': ^0.3.2
+    '@destyler/tour': ^0.3.2
+    '@destyler/tree': ^0.3.2
+    '@destyler/types': ^0.3.2
+    '@destyler/utils': ^0.3.2
+    '@destyler/vue': ^0.3.2
+    '@destyler/xstate': ^0.3.2
   runtime:
     '@vitejs/devtools': ^0.7.6
     '@vitejs/plugin-react': ^6.1.2

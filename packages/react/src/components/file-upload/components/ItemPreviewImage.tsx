@@ -13,11 +13,13 @@ export const FileUploadItemPreviewImage = forwardRef<HTMLImageElement, FileUploa
     const [url, setUrl] = useState<string>('')
     const fileUpload = useFileUploadContext()
     const itemProps = useFileUploadItemPropsContext()
+    const { createFileUrl } = fileUpload
+    const { file } = itemProps
     const mergedProps = mergeProps(fileUpload.getItemPreviewImageProps({ ...itemProps, url }), props)
 
     useEffect(() => {
-      return fileUpload.createFileUrl(itemProps.file, url => setUrl(url))
-    }, [itemProps, fileUpload])
+      return createFileUrl(file, url => setUrl(url))
+    }, [file, createFileUrl])
 
     if (!url)
       return null

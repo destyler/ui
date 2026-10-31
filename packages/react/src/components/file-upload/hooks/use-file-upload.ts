@@ -1,8 +1,9 @@
 import type { PropTypes } from '@destyler/react'
 import type { Optional } from '~/types'
+import { getDocument } from '@destyler/dom'
 import * as fileUpload from '@destyler/file-upload'
 import { normalizeProps, useMachine } from '@destyler/react'
-import { useId } from 'react'
+import { useCallback, useId, useInsertionEffect, useRef } from 'react'
 import { useFieldContext } from '~/components/field'
 import { useEvent } from '~/hooks/use-event'
 import { useEnvironmentContext, useLocaleContext } from '~/providers'
@@ -37,5 +38,26 @@ export function useFileUpload(props: UseFileUploadProps = {}): UseFileUploadRetu
   }
 
   const [state, send] = useMachine(fileUpload.machine(initialContext), { context })
-  return fileUpload.connect(state, send, normalizeProps)
+  // URL resources belong to their window, not to a changing machine snapshot.
+  // Resolve the current environment rather than retaining a connect closure over
+  // an older snapshot. Do not access the default document during server rendering.
+  const ownerWindow = typeof window === 'undefined'
+    ? undefined
+    : getDocument(context.getRootNode?.() ?? document).defaultView ?? window
+  // Publish only committed environments. A suspended render must not redirect
+  // an API retained by the visible tree. Insertion effects run before consumers'
+  // layout effects, while mutable root getters are still resolved at call time.
+  const committedRootNode = useRef(context.getRootNode)
+  useInsertionEffect(() => {
+    committedRootNode.current = context.getRootNode
+  }, [context.getRootNode])
+  const resolveOwnerWindow = useCallback(() => getDocument(committedRootNode.current?.() ?? document).defaultView ?? window, [])
+  const createFileUrl = useCallback<UseFileUploadReturn['createFileUrl']>((file, cb) => {
+    const win = resolveOwnerWindow() ?? ownerWindow ?? window
+    const url = win.URL.createObjectURL(file)
+    cb(url)
+    return () => win.URL.revokeObjectURL(url)
+  }, [ownerWindow, resolveOwnerWindow])
+
+  return { ...fileUpload.connect(state, send, normalizeProps), createFileUrl }
 }
