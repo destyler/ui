@@ -51,9 +51,10 @@ actual UI components retain compilation.
   the snapshot. The old workaround manufactured a different root object on
   prop-only renders, defeating the new stable-reference contract. Remove its
   obsolete read-tracking explanation and compiler opt-out as well.
-- **Tour Basic:** wrap `tour.start` in the existing stable `useEvent` helper and
-  make the startup effect depend on that command, not the entire connected API.
-  The command still calls the latest implementation.
+- **Tour Basic:** keep `tour.start` in a ref updated by an earlier effect and
+  run startup only on mount, not on every connected API change. This uses only
+  public React hooks so the displayed documentation source is copyable; it does
+  not require exporting the internal `useEvent` helper.
 - **FileUpload preview:** make URL creation stable for the owning window and
   key the resource effect to the actual File and creation function. A window
   change still invalidates the resource; cleanup revokes the URL using the

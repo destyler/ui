@@ -1,6 +1,5 @@
 import type { StepDetails } from '@destyler/tour'
 import { useEffect, useRef } from 'react'
-import { useEvent } from '~/hooks/use-event'
 import { Tour, useTour } from '../index'
 
 export function Basic() {
@@ -20,12 +19,16 @@ export function Basic() {
 
   const tour = useTour({ steps })
 
-  const start = useEvent(tour.start)
-  // Starting writes event metadata. Depend on the stable command, not the
-  // complete API that changes with every subscribed snapshot.
+  const startRef = useRef(tour.start)
   useEffect(() => {
-    start()
-  }, [start])
+    startRef.current = tour.start
+  }, [tour.start])
+  // Starting writes event metadata. Start only on mount, not whenever the
+  // complete API changes with a subscribed snapshot. Keep this effect after
+  // the ref update so it uses the latest command, including in StrictMode.
+  useEffect(() => {
+    startRef.current()
+  }, [])
 
   return (
     <main>
