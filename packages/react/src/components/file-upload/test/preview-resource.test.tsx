@@ -1,5 +1,5 @@
 import type { UseFileUploadReturn } from '../hooks/use-file-upload'
-import { act, StrictMode } from 'react'
+import { act, startTransition, StrictMode, Suspense, useLayoutEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 import { EnvironmentProvider } from '~/providers/environment/EnvironmentProvider'
@@ -134,6 +134,86 @@ describe('file-upload preview resource lifetime', () => {
     expect(inner.live.size).toBe(1)
     expect(outer.live.size).toBe(0)
     replacementCleanup()
+    expect(inner.live.size).toBe(0)
+  })
+
+  it.each(['abort', 'commit'] as const)('does not publish a suspended environment before %s', async (outcome) => {
+    const iframe = document.createElement('iframe')
+    document.body.append(iframe)
+    disposers.push(() => iframe.remove())
+    const frameWindow = iframe.contentWindow!
+    const outer = trackUrls(URL, 'outer')
+    const inner = trackUrls((frameWindow as Window & typeof globalThis).URL, 'inner')
+    const file = new File(['image'], 'image.png', { type: 'image/png' })
+    const { root, container } = mount()
+    let committed!: UseFileUploadReturn
+    let change!: (pending: boolean) => void
+    let speculativeRenders = 0
+    let ready = false
+    let release!: () => void
+    const suspended = new Promise<void>((resolve) => {
+      release = resolve
+    })
+    let layoutUrl = ''
+    function LayoutConsumer({ api }: { api: UseFileUploadReturn }) {
+      useLayoutEffect(() => {
+        const cleanup = api.createFileUrl(file, (url) => {
+          layoutUrl = url
+        })
+        cleanup()
+      }, [api])
+      return null
+    }
+    function Probe({ pending }: { pending: boolean }) {
+      const api = useFileUpload()
+      useLayoutEffect(() => {
+        committed = api
+      })
+      if (pending && !ready) {
+        speculativeRenders++
+        throw suspended
+      }
+      return <><span>{pending ? 'inner' : 'outer'}</span><LayoutConsumer api={api} /></>
+    }
+    function App() {
+      const [pending, setPending] = useState(false)
+      change = setPending
+      return (
+        <Suspense fallback={<span>loading</span>}>
+          <EnvironmentProvider value={pending ? frameWindow.document : document}>
+            <Probe pending={pending} />
+          </EnvironmentProvider>
+        </Suspense>
+      )
+    }
+    await act(async () => root.render(<App />))
+    const savedApi = committed
+    await act(async () => startTransition(() => change(true)))
+    expect(speculativeRenders).toBeGreaterThan(0)
+    expect(container.textContent).toBe('outer')
+    expect(committed).toBe(savedApi)
+    const pendingCleanup = savedApi.createFileUrl(file, vi.fn())
+    expect(outer.live.size).toBe(1)
+    expect(inner.create).not.toHaveBeenCalled()
+    pendingCleanup()
+
+    if (outcome === 'abort') {
+      await act(async () => change(false))
+    }
+    else {
+      await act(async () => {
+        ready = true
+        release()
+        await suspended
+      })
+    }
+    expect(container.textContent).toBe(outcome === 'abort' ? 'outer' : 'inner')
+    expect(layoutUrl).toMatch(outcome === 'abort' ? /^blob:outer-/ : /^blob:inner-/)
+    const finalCleanup = savedApi.createFileUrl(file, vi.fn())
+    expect(outer.live.size).toBe(outcome === 'abort' ? 1 : 0)
+    expect(inner.live.size).toBe(outcome === 'commit' ? 1 : 0)
+    finalCleanup()
+    expect(outer.live.size).toBe(0)
     expect(inner.live.size).toBe(0)
   })
 
