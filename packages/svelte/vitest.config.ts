@@ -10,6 +10,7 @@ export default mergeConfig(
       exclude: [
         ...configDefaults.exclude,
         '**/*.ssr.test.ts',
+        '**/*.unit.test.ts',
         '.svelte-kit/**',
         'dist/**',
         'storybook-static/**',
