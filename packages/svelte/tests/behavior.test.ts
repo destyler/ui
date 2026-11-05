@@ -38,7 +38,12 @@ it('breadcrumbs pass each item to the core getters', async () => {
   expect(items).toHaveLength(2)
   expect(items[1]?.getAttribute('aria-label')).toBe('breadcrumbs:listitem:Docs')
   await expect.element(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/')
-  await expect.element(screen.getByRole('link', { name: 'Docs' })).toHaveAttribute('aria-current', 'page')
+  const current = screen.getByText('Docs', { exact: true })
+  await expect.element(current).toHaveAttribute('aria-current', 'page')
+  await expect.element(current).toHaveAttribute('data-current', 'page')
+  await expect.element(current).not.toHaveAttribute('href')
+  await expect.element(current).not.toHaveAttribute('role')
+  await expect.element(current).not.toHaveAttribute('tabindex')
 })
 
 it('default state props initialize machines and scroll position', async () => {

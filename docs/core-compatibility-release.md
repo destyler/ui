@@ -6,10 +6,10 @@ policy remains separately tracked in [core #353](https://github.com/destyler/des
 ## Current installed-artifact gate
 
 `pnpm test:core-compat` builds the current checkout and pins every resolved
-`@destyler/*` package to exact core 0.3.2. The 2026-10-21 reproduction below
+`@destyler/*` package to exact core 0.3.3. The 2026-10-21 reproduction below
 records published beta.17 with core 0.2.13. A passing current gate shows the
 workspace Dialog, Popover, and Menu open-state cases, plus Tabs nullable
-selection, against core 0.3.2. It does not publish a package or change registry
+selection, against core 0.3.3. It does not publish a package or change registry
 dist-tags. See the [React 0.3.2 migration audit](core-032-react-contract.md)
 for the snapshot contract, focused evidence and remaining verification limits.
 
@@ -26,7 +26,7 @@ Explicitly installed `@destyler-ui/*@0.0.1-beta.17` results:
   This result does not prove a React controlled-state failure.
 
 Built and packed main artifacts pass all four Dialog state cases in all four
-frameworks (16 cases). The checkout still carries the beta.17 version, so these
+frameworks (16 cases). That reproduction checkout carried the beta.17 version, so those
 local tarballs are **not** evidence that registry beta.17 has been fixed. Source
 migration is already present; do not repeat it or overwrite a published version.
 See the [consumer instructions](../scripts/fixtures/core-compat/README.md) for
@@ -34,13 +34,17 @@ exact commands and coverage limits. The CI/release gate retains lockfiles and
 version records. Other controls are covered by existing suites, not by this new
 Dialog-specific gate; this is not an assertion that every beta.17 component fails.
 
-## Release closure, requiring release authorization
+## Original beta.17 release-closure checklist
+
+This checklist records the beta.17 replacement plan. The current candidate is
+UI 0.0.1 with core 0.3.3; its stable version does not change the verification
+requirements below or authorize publication by itself.
 
 1. Run the existing lint, framework type checks, test/SSR suites, packed consumer
    checks, and three-browser smoke suite on the candidate commit. Also pass
    `pnpm test:core-compat` on the supported Node floor. A focused local pass does
    not replace these existing release requirements.
-2. Select a new unused beta version for all four UI packages. Review the packed
+2. Select a new unused version for all four UI packages. Review the packed
    manifests, resolved core minimum, exports, Node engines, and tarball contents.
    Do not republish beta.17 or weaken Node >=22.22.3.
 3. Publish only the four intended public packages through the existing guarded

@@ -14,7 +14,7 @@ pnpm add @destyler-ui/vue vue
 
 Use the equivalent command for your package manager. The [package manifest](https://github.com/destyler/ui/blob/main/packages/vue/package.json) declares `vue` `>=3.5.0`.
 
-The package is beta. The peer range is a declaration, not evidence that every Vue version or consumer setup has been verified. Examples here describe the checked-in source API. Workspace demos and source type checks do not establish that an installed npm artifact has working runtime entry points and declarations; verify the version you install. Pending compatibility or packaging fixes are not released support.
+The peer range is a declaration, not evidence that every Vue version or consumer setup has been verified. Examples here describe the checked-in source API. Workspace demos and source type checks do not establish that an installed npm artifact has working runtime entry points and declarations; verify the version you install. Pending compatibility or packaging fixes are not released support.
 
 ## Quick start
 
