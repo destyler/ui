@@ -6,10 +6,10 @@ policy remains separately tracked in [core #353](https://github.com/destyler/des
 ## Current installed-artifact gate
 
 `pnpm test:core-compat` builds the current checkout and pins every resolved
-`@destyler/*` package to exact core 0.3.3. The 2026-10-21 reproduction below
+`@destyler/*` package to exact core 0.3.4. The 2026-10-21 reproduction below
 records published beta.17 with core 0.2.13. A passing current gate shows the
 workspace Dialog, Popover, and Menu open-state cases, plus Tabs nullable
-selection, against core 0.3.3. It does not publish a package or change registry
+selection, against core 0.3.4. It does not publish a package or change registry
 dist-tags. See the [React 0.3.2 migration audit](core-032-react-contract.md)
 for the snapshot contract, focused evidence and remaining verification limits.
 
@@ -37,7 +37,7 @@ Dialog-specific gate; this is not an assertion that every beta.17 component fail
 ## Original beta.17 release-closure checklist
 
 This checklist records the beta.17 replacement plan. The current candidate is
-UI 0.0.2 with core 0.3.3; its stable version does not change the verification
+UI 0.0.3 with core 0.3.4; its stable version does not change the verification
 requirements below or authorize publication by itself.
 
 1. Run the existing lint, framework type checks, test/SSR suites, packed consumer

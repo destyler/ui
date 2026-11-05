@@ -41,7 +41,7 @@ function mount(render: () => VNode, onError?: (error: unknown) => void) {
 }
 
 function connectedApi(send: Send) {
-  // These are the published core 0.3.3 handlers, not replacement behavior.
+  // These are the actual core handlers, not replacement behavior.
   // No second machine is started: this suite isolates wrapper composition.
   return core.connect(core.machine({
     id: 'select-listener-contract',
@@ -365,7 +365,7 @@ describe('select ordinary same-key listeners with connected core handlers', () =
 })
 
 describe('select Content self-target keyboard semantics', () => {
-  // In core 0.3.3 isSelfTarget means containment, not target === currentTarget.
+  // In core isSelfTarget means containment, not target === currentTarget.
   // Real bubbling descendants therefore navigate just like the content itself.
   it.each(childKinds)('%s: preserves core navigation for contained descendants and the content itself', (childKind) => {
     const control = controls.find(control => control.component === Select.Content)!
