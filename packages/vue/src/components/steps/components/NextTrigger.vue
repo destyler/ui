@@ -8,19 +8,23 @@ export interface StepsNextTriggerProps extends PolymorphicProps {}
 import { ui } from '~/factory'
 import { useStepsContext } from '../composables/use-steps-context'
 import { useForwardExpose } from '~/composables'
+import { useStepsTriggerProps } from '../composables/use-steps-trigger-props'
 
 defineOptions({
-  name: 'StepsNextTrigger'
+  name: 'StepsNextTrigger',
+  inheritAttrs: false
 })
 
 defineProps<StepsNextTriggerProps>()
 const steps = useStepsContext()
 
+const getMergedProps = useStepsTriggerProps(() => steps.value.getNextTriggerProps())
+
 useForwardExpose()
 </script>
 
 <template>
-  <ui.button v-bind="steps.getNextTriggerProps()" :as-child="asChild">
+  <ui.button v-bind="getMergedProps()" :as-child="asChild">
     <slot />
   </ui.button>
 </template>

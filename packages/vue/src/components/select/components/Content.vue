@@ -7,25 +7,28 @@ export interface SelectContentProps extends PolymorphicProps {}
 <script setup lang="ts">
 import { ui } from '~/factory'
 import { useSelectContext } from '../composables/use-select-context'
+import { useSelectPartProps } from '../composables/use-select-part-props'
 import { useForwardExpose } from '~/composables'
 import { usePresenceContext } from '~/components/presence'
 import { mergeProps } from '@destyler/vue'
 import { computed } from 'vue'
 
 defineOptions({
-  name: 'SelectContent'
+  name: 'SelectContent',
+  inheritAttrs: false,
 })
 
 defineProps<SelectContentProps>()
 const select = useSelectContext()
 const presence = usePresenceContext()
 const mergedProps = computed(() => mergeProps(select.value.getContentProps(), presence.value.presenceProps))
+const getMergedProps = useSelectPartProps(() => mergedProps.value)
 
 useForwardExpose()
 </script>
 
 <template>
-  <ui.div v-if="!presence.unmounted" v-bind="mergedProps" :as-child="asChild">
+  <ui.div v-if="!presence.unmounted" v-bind="getMergedProps()" :as-child="asChild">
     <slot />
   </ui.div>
 </template>
