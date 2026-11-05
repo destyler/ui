@@ -85,6 +85,13 @@ title alone: the changelog generation step currently allows failure without
 blocking npm publication. Neither a successful publish guard nor an npm publish
 confirms that these migration notes reached users.
 
+#### UI 0.0.2: Vue void-element hydration
+
+Include the [0.0.2 release notes and upgrade guidance](releases/0.0.2.md) in the
+GitHub release description. This patch fixes Vue SSR hydration mismatches from
+slot fragments under native void elements. The other three public packages
+receive the synchronized version only; core remains at 0.3.3.
+
 #### Published migration: Svelte Tree branch triggers
 
 The Svelte Tree branch-trigger migration was published in

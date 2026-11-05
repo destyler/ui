@@ -47,7 +47,26 @@ export type HTMLPolymorphicProps<T extends ElementType> = Omit<
 
 export type HTMLUIProps<T extends DOMElements> = HTMLPolymorphicProps<T>
 
+// Match Vue SSR: native HTML void elements cannot contain slot children.
+const voidElements = new Set([
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr',
+])
+
 function withAsChild(component: ElementType) {
+  const isVoidElement = typeof component === 'string' && voidElements.has(component)
   return defineComponent({
     name: 'Polymorphic',
     inheritAttrs: false,
@@ -60,7 +79,7 @@ function withAsChild(component: ElementType) {
     setup(props, { attrs, slots }) {
       return () => props.asChild
         ? h(Dynamic, attrs, { default: slots.default })
-        : h(component, { ...attrs }, slots.default?.())
+        : h(component, { ...attrs }, isVoidElement ? undefined : slots.default?.())
     },
   })
 }
