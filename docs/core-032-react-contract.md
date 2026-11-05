@@ -3,8 +3,8 @@
 This note records the UI source audit and focused validation on 2026-10-31,
 starting from UI main `2c7c0ba` and core `v0.3.2` (`53200b44`). It is not a
 release announcement or a claim that all supported environments have passed.
-The core catalog minimum and the installed-artifact compatibility gate now
-require 0.3.2. Previously published UI artifacts are unchanged.
+At that revision, the core catalog minimum and the installed-artifact
+compatibility gate required 0.3.2. Previously published UI artifacts are unchanged.
 
 ## Contract change
 

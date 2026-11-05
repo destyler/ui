@@ -49,7 +49,7 @@ React and Vue components are imported from the package root, for example `import
 
 ### Compatibility and release caveats
 
-The packages use beta versions. A peer range is a declaration, not a guarantee that every version, bundler, SSR setup, or application combination has been tested. See the [current CI configuration](.github/workflows/ci.yml) for the checks run in this repository.
+A peer range is a declaration, not a guarantee that every version, bundler, SSR setup, or application combination has been tested. See the [current CI configuration](.github/workflows/ci.yml) for the checks run in this repository.
 
 The React guide records [packaging caveats from the evaluated source revision](packages/react/README.md#evaluated-source-packaging-caveats), including an entry-point mismatch and the compiler target.
 

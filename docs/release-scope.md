@@ -85,29 +85,19 @@ title alone: the changelog generation step currently allows failure without
 blocking npm publication. Neither a successful publish guard nor an npm publish
 confirms that these migration notes reached users.
 
-#### Pending note: Svelte Tree branch triggers
+#### Published migration: Svelte Tree branch triggers
 
-Include this breaking-change summary in the next release containing
-[#60](https://github.com/destyler/ui/pull/60). No release version is assigned here;
-this entry does not claim that the change has been published.
+The Svelte Tree branch-trigger migration was published in
+[v0.0.1-beta.20](https://github.com/destyler/ui/releases/tag/v0.0.1-beta.20).
+Link those migration notes when preparing the first stable release; this is
+not a newly introduced change in 0.0.1.
 
-- **Breaking default-element and focus change:** Svelte `Tree.BranchTrigger`
-  now renders a non-tabbable `div` with `role="button"` instead of a native
-  `button`. Inside `Tree.BranchControl`, the trigger handles pointer expansion;
-  the branch control owns keyboard navigation and the tree's roving tab stop.
-- **Breaking public-type change:** props and event `currentTarget` types now
-  describe `HTMLDivElement` rather than `HTMLButtonElement`. Consumers relying
-  on button-only attributes or native button defaults must use explicit
-  `asChild` composition and adapt the snippet props to their chosen element's
-  types.
-- Follow the existing [Tree branch triggers migration guide](https://github.com/destyler/ui/blob/main/packages/svelte/README.md#tree-branch-triggers).
-  Caller-added focusable children or `tabindex` can reintroduce extra tab stops
-  or nested interactive controls; check keyboard and accessibility behavior in
-  the composed tree.
-
-Once a release containing this change is confirmed, replace this pending note
-with a link to that release's migration notes instead of copying it into every
-subsequent release.
+- `Tree.BranchTrigger` renders a non-tabbable `div` with `role="button"`.
+  `Tree.BranchControl` owns keyboard navigation and the roving tab stop.
+- Public props and event `currentTarget` types describe `HTMLDivElement`.
+  Consumers needing a different element must use explicit `asChild` composition.
+- Follow the [Tree branch triggers migration guide](https://github.com/destyler/ui/blob/main/packages/svelte/README.md#tree-branch-triggers).
+  Check composed keyboard behavior and avoid extra tab stops or nested controls.
 
 ### Publish guard
 

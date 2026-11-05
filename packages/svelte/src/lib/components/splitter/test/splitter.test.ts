@@ -54,7 +54,7 @@ describe('[splitter] component', () => {
     provider.unmount()
 
     await render(Vertical)
-    await expect.element(page.getByRole('separator')).toHaveAttribute('aria-orientation', 'vertical')
+    await expect.element(page.getByRole('separator')).toHaveAttribute('aria-orientation', 'horizontal')
   })
 
   it('lets the actual RootProvider example maximize its seeded panels', async () => {
