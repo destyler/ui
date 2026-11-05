@@ -36,7 +36,7 @@ type Send = Parameters<typeof core.connect>[1]
 type MachineEvent = Parameters<Send>[0]
 
 function connectedApi(send: Send) {
-  // The actual core 0.3.3 click handlers, without starting a second machine.
+  // The actual core click handlers, without starting a second machine.
   return core.connect(core.machine({ id: 'listener-contract', count: 3, defaultStep: 1 }).getState(), send, normalizeProps)
 }
 
@@ -297,10 +297,10 @@ describe('steps click listener composition with real connected core handlers', (
   }
 })
 
-describe('steps Trigger keyboard wiring only (not core 0.3.3 keyboard functionality)', () => {
+describe('steps Trigger keyboard wiring only (not core keyboard functionality)', () => {
   it.each(['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'])('allows a caller to veto a supplied %s handler before movement', async (key) => {
-    // Core 0.3.3 has no trigger keydown handler. This deliberately supplied
-    // provider handler tests wrapper composition, not a new keyboard feature.
+    // This deliberately supplied provider handler tests wrapper composition,
+    // not the actual core keyboard navigation implementation.
     const order: string[] = []
     const movement = vi.fn((_key: string) => order.push('movement'))
     const base = connectedApi(vi.fn())

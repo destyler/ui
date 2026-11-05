@@ -85,7 +85,16 @@ title alone: the changelog generation step currently allows failure without
 blocking npm publication. Neither a successful publish guard nor an npm publish
 confirms that these migration notes reached users.
 
-#### UI 0.0.2: Vue void-element hydration
+#### UI 0.0.3: Vue listeners and breaking core accessibility migrations
+
+Include the [0.0.3 release notes and upgrade guidance](releases/0.0.3.md) in the
+GitHub release description. All four public packages consume core `^0.3.4` and
+receive synchronized UI version 0.0.3. The patch numbers do not imply that no
+migration is needed: disclose the Steps keyboard/role and Select focus changes,
+and Vue's existing wrapper `.once.prevent` limitation. Require new exact-commit
+CI and installed-artifact validation against core 0.3.4 before release.
+
+#### Historical UI 0.0.2: Vue void-element hydration
 
 Include the [0.0.2 release notes and upgrade guidance](releases/0.0.2.md) in the
 GitHub release description. This patch fixes Vue SSR hydration mismatches from
