@@ -37,7 +37,7 @@ Dialog-specific gate; this is not an assertion that every beta.17 component fail
 ## Original beta.17 release-closure checklist
 
 This checklist records the beta.17 replacement plan. The current candidate is
-UI 0.0.1 with core 0.3.3; its stable version does not change the verification
+UI 0.0.2 with core 0.3.3; its stable version does not change the verification
 requirements below or authorize publication by itself.
 
 1. Run the existing lint, framework type checks, test/SSR suites, packed consumer

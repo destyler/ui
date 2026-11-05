@@ -76,6 +76,16 @@ const checked = ref<Checkbox.CheckedState>(false)
 
 Choose controlled or uncontrolled ownership on the first render and keep it stable. A defined `checked`, including `false`, takes precedence over `defaultChecked`; an omitted or `undefined` live prop starts uncontrolled. Do not use the removed `*.controlled` flags. Other components may use the default `v-model` or a different named model; check the component's API.
 
+## Server rendering and hydration
+
+Version 0.0.2 fixes hydration warnings caused by forwarded slot fragments inside
+native HTML void elements such as `input` and `hr`. These elements do not render
+default slot children. Non-void elements, custom components and `asChild`
+composition retain their slot behavior.
+
+Update explicitly to `0.0.2` or `^0.0.2`: `^0.0.1` does not include this patch.
+See the [0.0.2 release notes](../../docs/releases/0.0.2.md).
+
 ## Guides
 
 - [Installation and package imports](https://github.com/destyler/ui/blob/main/docs/src/content/docs/overview/installation.mdx)
