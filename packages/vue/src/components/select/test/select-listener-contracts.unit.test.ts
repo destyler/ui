@@ -389,12 +389,8 @@ describe('select Content self-target keyboard semantics', () => {
   })
 })
 
-describe('select native modifier-key limitation (not repaired by ordinary-listener composition)', () => {
-  // onClickOnce/onKeydownOnce are distinct Vue keys, not ordinary same-key
-  // listeners. Their registration order is unchanged; a wrapper .once veto
-  // still happens after core on the first event. Capture/passive are likewise
-  // outside this fix rather than silently rewritten into ordinary handlers.
-  it.each(controls)('$name retains separate .once registration, so it cannot veto the preceding core action', async (control) => {
+describe('select native Once listeners run before core', () => {
+  it.each(controls)('$name permits a native Once veto only on the first event', async (control) => {
     const order: string[] = []
     const subject = fixture(control, order)
     const once = vi.fn((event: Event) => {
@@ -410,11 +406,11 @@ describe('select native modifier-key limitation (not repaired by ordinary-listen
     const attachedAt = Date.now()
     await vi.waitFor(() => expect(Date.now()).toBeGreaterThan(attachedAt), { interval: 1 })
     dispatch(host, control)
-    expect(order).toEqual(['core', 'once'])
-    expectEffects(subject, control, 1)
+    expect(order).toEqual(['once'])
+    expectEffects(subject, control, 0)
     dispatch(host, control)
-    expect(order).toEqual(['core', 'once', 'core'])
-    expectEffects(subject, control, 2)
+    expect(order).toEqual(['once', 'core'])
+    expectEffects(subject, control, 1)
     expect(once).toHaveBeenCalledTimes(1)
   })
 })

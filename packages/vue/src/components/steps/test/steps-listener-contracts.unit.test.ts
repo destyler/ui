@@ -2,7 +2,8 @@ import type { Component, VNode } from 'vue'
 import * as core from '@destyler/steps'
 import { normalizeProps } from '@destyler/vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { createApp, defineComponent, h, nextTick, shallowRef } from 'vue'
+import { createApp, defineComponent, Fragment, h, nextTick, shallowRef } from 'vue'
+import { useNativeEventProps } from '~/composables/use-native-event-props'
 import { Steps } from '../index'
 
 const cleanups: Array<() => void> = []
@@ -61,6 +62,215 @@ const ForwardingChild = defineComponent({
 function childTree(kind: 'native' | 'component', props: Record<string, unknown>) {
   return kind === 'native' ? h('button', props, 'Child') : h(ForwardingChild, props, () => 'Child')
 }
+
+async function nextEventTurn() {
+  await nextTick()
+  // Separate Vue invokers must see a synthetic event after their attachment
+  // millisecond, otherwise the timestamp guard can hide listener ordering.
+  const attachedAt = Date.now()
+  await vi.waitFor(() => expect(Date.now()).toBeGreaterThan(attachedAt), { interval: 1 })
+}
+
+const AdaptedChild = defineComponent({
+  inheritAttrs: false,
+  setup(_, { attrs }) {
+    const nativeProps = useNativeEventProps()
+    return () => h('button', nativeProps(attrs), 'Child')
+  },
+})
+
+const AdaptedFragmentChild = defineComponent({
+  inheritAttrs: false,
+  setup(_, { attrs }) {
+    const nativeProps = useNativeEventProps()
+    return () => h(Fragment, [h('button', nativeProps(attrs), 'Child'), h('span', 'Sibling')])
+  },
+})
+
+const AdaptedNestedChild = defineComponent({
+  inheritAttrs: false,
+  setup(_, { attrs }) {
+    return () => h(AdaptedChild, attrs)
+  },
+})
+
+describe('steps wrapper Once on native and explicitly adapted receivers', () => {
+  for (const kind of ['normal', 'native', 'adapted'] as const) {
+    function renderControl(control: typeof controls[number], attrs: Record<string, unknown>, version = 0) {
+      return controlTree(control.component, {
+        asChild: kind !== 'normal',
+        key: kind === 'normal' ? version : undefined,
+        ...attrs,
+      }, () => kind === 'normal' ? 'Control' : kind === 'native' ? h('button', { key: version }, 'Child') : h(AdaptedChild, { key: version }))
+    }
+
+    it.each(controls)(`${kind}: $name wrapper Once vetoes only the first click`, async (control) => {
+      const order: string[] = []
+      const send = vi.fn((_event: MachineEvent) => order.push('core'))
+      const api = connectedApi(send)
+      const once = vi.fn((event: MouseEvent) => {
+        order.push('once')
+        event.preventDefault()
+      })
+      const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => renderControl(control, { onClickOnce: once })))
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(once).toHaveBeenCalledTimes(1)
+      expect(send).not.toHaveBeenCalled()
+      expect(order).toEqual(['once'])
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(once).toHaveBeenCalledTimes(1)
+      expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected])
+      expect(order).toEqual(['once', 'core', 'core'])
+    })
+
+    it.each(controls)(`${kind}: $name honors wrapper Once added after mount`, async (control) => {
+      const send = vi.fn()
+      const api = connectedApi(send)
+      const once = vi.fn((event: MouseEvent) => event.preventDefault())
+      const enabled = shallowRef(false)
+      const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => renderControl(control, enabled.value ? { onClickOnce: once } : {})))
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(send).toHaveBeenCalledExactlyOnceWith(control.expected)
+      enabled.value = true
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(once).toHaveBeenCalledTimes(1)
+      expect(send).toHaveBeenCalledTimes(1)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(once).toHaveBeenCalledTimes(1)
+      expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected])
+    })
+
+    it.each(controls)(`${kind}: $name replaces wrapper Once callbacks without rearming`, async (control) => {
+      const send = vi.fn()
+      const api = connectedApi(send)
+      const initial = vi.fn((event: MouseEvent) => event.preventDefault())
+      const replacement = vi.fn((event: MouseEvent) => event.preventDefault())
+      const consumedReplacement = vi.fn((event: MouseEvent) => event.preventDefault())
+      const listener = shallowRef(initial)
+      const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => renderControl(control, { onClickOnce: listener.value })))
+      listener.value = replacement
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(initial).not.toHaveBeenCalled()
+      expect(replacement).toHaveBeenCalledTimes(1)
+      expect(send).not.toHaveBeenCalled()
+      listener.value = consumedReplacement
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(replacement).toHaveBeenCalledTimes(1)
+      expect(consumedReplacement).not.toHaveBeenCalled()
+      expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected])
+    })
+
+    it.each(controls)(`${kind}: $name rearms wrapper Once after removal and readdition`, async (control) => {
+      const send = vi.fn()
+      const api = connectedApi(send)
+      const once = vi.fn((event: MouseEvent) => event.preventDefault())
+      const enabled = shallowRef(true)
+      const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => renderControl(control, enabled.value ? { onClickOnce: once } : {})))
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(send).toHaveBeenCalledExactlyOnceWith(control.expected)
+      enabled.value = false
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(send).toHaveBeenCalledTimes(2)
+      enabled.value = true
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(once).toHaveBeenCalledTimes(2)
+      expect(send).toHaveBeenCalledTimes(2)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(once).toHaveBeenCalledTimes(2)
+      expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected, control.expected])
+    })
+
+    it.each(controls)(`${kind}: $name rearms wrapper Once for a replacement receiver`, async (control) => {
+      const send = vi.fn()
+      const api = connectedApi(send)
+      const once = vi.fn((event: MouseEvent) => event.preventDefault())
+      const version = shallowRef(0)
+      const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => renderControl(control, { onClickOnce: once }, version.value)))
+      await nextEventTurn()
+      const original = host.querySelector('[data-testid="control"]')!
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(send).toHaveBeenCalledExactlyOnceWith(control.expected)
+      version.value += 1
+      await nextEventTurn()
+      expect(host.querySelector('[data-testid="control"]')).not.toBe(original)
+      expect(original.isConnected).toBe(false)
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(once).toHaveBeenCalledTimes(2)
+      expect(send).toHaveBeenCalledTimes(1)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(once).toHaveBeenCalledTimes(2)
+      expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected])
+    })
+  }
+
+  for (const child of [
+    { name: 'adapted Fragment-root', component: AdaptedFragmentChild },
+    { name: 'adapted nested', component: AdaptedNestedChild },
+  ]) {
+    it.each(controls)(`${child.name}: $name supports dynamically added Once`, async (control) => {
+      const send = vi.fn()
+      const api = connectedApi(send)
+      const once = vi.fn((event: MouseEvent) => event.preventDefault())
+      const enabled = shallowRef(false)
+      const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => controlTree(control.component, {
+        asChild: true,
+        ...(enabled.value ? { onClickOnce: once } : {}),
+      }, () => h(child.component))))
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(send).toHaveBeenCalledExactlyOnceWith(control.expected)
+      enabled.value = true
+      await nextEventTurn()
+      expect(dispatch(host).defaultPrevented).toBe(true)
+      expect(once).toHaveBeenCalledTimes(1)
+      expect(send).toHaveBeenCalledTimes(1)
+      expect(dispatch(host).defaultPrevented).toBe(false)
+      expect(once).toHaveBeenCalledTimes(1)
+      expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected])
+    })
+  }
+
+  it.each(controls)('unadapted: $name preserves core-before-Once ordering and native Once consumption', async (control) => {
+    const order: string[] = []
+    const send = vi.fn((_event: MachineEvent) => order.push('core'))
+    const api = connectedApi(send)
+    const once = vi.fn((event: MouseEvent) => {
+      order.push('once')
+      event.preventDefault()
+    })
+    const enabled = shallowRef(true)
+    const { host } = mount(() => h(Steps.RootProvider, { value: api }, () => controlTree(control.component, {
+      asChild: true,
+      ...(enabled.value ? { onClickOnce: once } : {}),
+    }, () => h(ForwardingChild))))
+    await nextEventTurn()
+    expect(dispatch(host).defaultPrevented).toBe(true)
+    expect(order).toEqual(['core', 'once'])
+    expect(dispatch(host).defaultPrevented).toBe(false)
+    expect(once).toHaveBeenCalledTimes(1)
+    expect(order).toEqual(['core', 'once', 'core'])
+    enabled.value = false
+    await nextEventTurn()
+    enabled.value = true
+    await nextEventTurn()
+    expect(dispatch(host).defaultPrevented).toBe(true)
+    expect(once).toHaveBeenCalledTimes(2)
+    expect(order).toEqual(['core', 'once', 'core', 'core', 'once'])
+    expect(send.mock.calls.map(call => call[0])).toEqual([control.expected, control.expected, control.expected])
+  })
+})
 
 describe('steps click listener composition with real connected core handlers', () => {
   for (const childKind of ['none', 'native', 'component'] as const) {

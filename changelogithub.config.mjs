@@ -20,4 +20,18 @@ export default version === '0.0.3'
         ].join('\n'),
       },
     }
-  : {}
+  : version === '0.0.4'
+    ? {
+        types: {
+          fix: { title: [
+            'Bug Fixes',
+            '',
+            'Read the [UI 0.0.4 release notes](https://github.com/destyler/ui/blob/v0.0.4/docs/releases/0.0.4.md).',
+            '',
+            '- Vue native Steps/Select Once listeners can now cancel the first core action where core checks `event.defaultPrevented`.',
+            '- Custom DOM-forwarding components require explicit `useNativeEventProps` cooperation. [Adapter example and Once lifetime](https://github.com/destyler/ui/blob/v0.0.4/docs/vue-once-listeners.md).',
+            '',
+          ].join('\n') },
+        },
+      }
+    : {}

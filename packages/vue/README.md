@@ -81,8 +81,8 @@ Choose controlled or uncontrolled ownership on the first render and keep it stab
 UI 0.0.3 fixes Steps and Select listener composition, including `asChild`,
 and Steps Root callback forwarding, and consumes core `^0.3.4`. Review the breaking Steps
 keyboard/role and Select focus migrations even though these are patch versions.
-Wrapper `.once.prevent` may still run after core; capture/passive behavior is
-unchanged. See the [0.0.3 release notes](../../docs/releases/0.0.3.md) for limits
+In the published 0.0.3 release, wrapper `.once.prevent` may still run after core;
+capture/passive behavior is unchanged. See the [0.0.3 release notes](../../docs/releases/0.0.3.md) for limits
 and upgrade guidance. Update explicitly to `0.0.3` or `^0.0.3`: `^0.0.2` excludes it.
 
 ## Server rendering and hydration
@@ -101,3 +101,10 @@ See the [0.0.2 release notes](../../docs/releases/0.0.2.md).
 - [Checkbox examples and API](https://github.com/destyler/ui/blob/main/docs/src/content/docs/components/checkbox.mdx)
 - [Controllable state and component-specific exceptions](https://github.com/destyler/ui/blob/main/docs/src/content/docs/overview/controllable-state.mdx)
 - [Core adapter/consumer migration notes](https://github.com/destyler/destyler/blob/main/CONTROLLED-API.md#adapter--consumer-migration-hard)
+
+## Once listeners in custom components (0.0.4)
+
+Native Steps/Select controls support consumer Once cancellation before internal
+handlers. When forwarding their attrs through a custom component, bind
+`useNativeEventProps()` at the actual native receiving element. See the
+[custom button example and Once lifecycle guide](../../docs/vue-once-listeners.md).
