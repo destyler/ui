@@ -85,7 +85,16 @@ title alone: the changelog generation step currently allows failure without
 blocking npm publication. Neither a successful publish guard nor an npm publish
 confirms that these migration notes reached users.
 
-#### UI 0.0.3: Vue listeners and breaking core accessibility migrations
+#### UI 0.0.4: Vue native Once listener cancellation
+
+Include the [0.0.4 release notes](releases/0.0.4.md) in the generated release.
+All four public packages and the root use version 0.0.4; core stays at `^0.3.4`.
+Only Vue behavior changes. Native Steps/Select Once cancellation is repaired;
+custom DOM-forwarding components require explicit `useNativeEventProps`
+cooperation. Keep the `fix(vue):` squash subject so changelogithub renders the
+version-scoped Bug Fixes section and links. Recheck exact-head CI before tagging.
+
+#### Historical UI 0.0.3: Vue listeners and breaking core accessibility migrations
 
 Include the [0.0.3 release notes and upgrade guidance](releases/0.0.3.md) in the
 GitHub release description. All four public packages consume core `^0.3.4` and

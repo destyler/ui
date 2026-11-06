@@ -102,7 +102,7 @@ See the [0.0.2 release notes](../../docs/releases/0.0.2.md).
 - [Controllable state and component-specific exceptions](https://github.com/destyler/ui/blob/main/docs/src/content/docs/overview/controllable-state.mdx)
 - [Core adapter/consumer migration notes](https://github.com/destyler/destyler/blob/main/CONTROLLED-API.md#adapter--consumer-migration-hard)
 
-## Once listeners in custom components (unreleased)
+## Once listeners in custom components (0.0.4)
 
 Native Steps/Select controls support consumer Once cancellation before internal
 handlers. When forwarding their attrs through a custom component, bind

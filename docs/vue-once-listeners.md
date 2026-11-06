@@ -1,7 +1,7 @@
-# Vue Once listeners and custom buttons (unreleased)
+# Vue Once listeners and custom buttons (0.0.4)
 
-This guide describes the source change in this branch. The new
-`useNativeEventProps` export is not included in the published 0.0.3 package.
+This guide applies to UI 0.0.4 and later. The `useNativeEventProps` export
+is not included in UI 0.0.3.
 
 Steps click controls and the Select Trigger, Content, Item, ClearTrigger and
 Label compose ordinary consumer listeners before their internal action. On their
@@ -137,9 +137,10 @@ of the installed package import. Tests cover its attrs, exposed button ref,
 Once cancellation and hydration diagnostics, plus callback replacement,
 removal/readdition, node replacement, arrays, errors and propagation.
 
-Real browser input tests are provided separately. They have not been executed
-in the current restricted environment after Chromium's socket EPERM failure;
-DOM-emulated tests are not a substitute for that browser verification.
+The four real Chromium input tests passed in CI on Node 22 and 24 for the
+implementation in PR #171. They cover trusted click and keydown events on both
+native and explicitly adapted receivers, including dynamic Once attachment.
+Release verification reruns the browser suites for the versioned commit.
 
 Vue's timestamp protection still applies to synthetic events dispatched in the
 same clock tick as listener attachment. The helper does not override that
