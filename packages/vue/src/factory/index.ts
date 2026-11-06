@@ -3,6 +3,7 @@ import {
   defineComponent,
   h,
 } from 'vue'
+import { useOnceListenerComposition } from '../utils/core-listeners'
 import { Dynamic } from '../utils/dynamic'
 
 type DOMElements = keyof IntrinsicElementAttributes
@@ -71,15 +72,17 @@ function withAsChild(component: ElementType) {
     name: 'Polymorphic',
     inheritAttrs: false,
     props: {
+      __uiComposeOnce: Object,
       asChild: {
         type: Boolean,
         default: false,
       },
     },
     setup(props, { attrs, slots }) {
+      const composeOnce = useOnceListenerComposition()
       return () => props.asChild
-        ? h(Dynamic, attrs, { default: slots.default })
-        : h(component, { ...attrs }, isVoidElement ? undefined : slots.default?.())
+        ? h(Dynamic, { ...attrs, __uiComposeOnce: props.__uiComposeOnce }, { default: slots.default })
+        : composeOnce(h(component, { ...attrs }, isVoidElement ? undefined : slots.default?.()), props.__uiComposeOnce)
     },
   })
 }

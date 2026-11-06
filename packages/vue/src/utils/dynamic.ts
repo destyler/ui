@@ -2,10 +2,14 @@ import type { VNode } from 'vue'
 import { mergeProps } from '@destyler/vue'
 import { cloneVNode, defineComponent, Fragment, mergeProps as mergeVNodeProps } from 'vue'
 
+import { rememberOnceCallbacks, useOnceListenerComposition } from './core-listeners'
+
 export const Dynamic = defineComponent({
   name: 'Dynamic',
   inheritAttrs: false,
-  setup(_, { attrs, slots }) {
+  props: { __uiComposeOnce: Object },
+  setup(props, { attrs, slots }) {
+    const composeOnce = useOnceListenerComposition()
     return () => {
       if (!slots.default)
         return null
@@ -19,7 +23,13 @@ export const Dynamic = defineComponent({
         // Vue can supply arrays even when each original listener is a function.
         // Keep them native so Vue preserves error handling and stopImmediatePropagation.
         for (const prop in mergedProps) {
-          if (/^on[^a-z]/.test(prop) && (Array.isArray(attrs[prop]) || Array.isArray(childProps[prop]))) {
+          const onceCore = props.__uiComposeOnce?.[prop.slice(0, -4)]
+          if (/^on[^a-z]/.test(prop) && prop.endsWith('Once') && !/(?:Capture|Passive)Once$/.test(prop)
+            && typeof attrs[prop] === 'function' && typeof childProps[prop] === 'function') {
+            rememberOnceCallbacks(mergedProps[prop], mergeVNodeProps({ [prop]: childProps[prop] }, { [prop]: attrs[prop] })[prop])
+          }
+          if (/^on[^a-z]/.test(prop) && (Array.isArray(attrs[prop]) || Array.isArray(childProps[prop])
+            || ((typeof onceCore === 'function' || Array.isArray(onceCore)) && typeof firstChildren.type === 'string' && prop.endsWith('Once') && !/(?:Capture|Passive)Once$/.test(prop)))) {
             mergedProps[prop] = mergeVNodeProps({ [prop]: childProps[prop] }, { [prop]: attrs[prop] })[prop]
           }
         }
@@ -31,10 +41,11 @@ export const Dynamic = defineComponent({
           }
         }
 
-        return children.length === 1 ? cloned : [cloned, ...otherChildren]
+        const result = composeOnce(cloned, props.__uiComposeOnce)
+        return children.length === 1 ? result : [result, ...otherChildren]
       }
 
-      return children
+      return children.map((child, index) => index === 0 ? composeOnce(child, props.__uiComposeOnce) : child)
     }
   },
 })
