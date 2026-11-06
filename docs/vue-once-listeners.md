@@ -92,8 +92,8 @@ Preserve the original callback references with Vue's `mergeProps`, then pass the
 complete set to the helper:
 
 ```ts
-import { mergeProps, useAttrs } from 'vue'
 import { useNativeEventProps } from '@destyler-ui/vue'
+import { mergeProps, useAttrs } from 'vue'
 
 const attrs = useAttrs()
 const nativeProps = useNativeEventProps()
