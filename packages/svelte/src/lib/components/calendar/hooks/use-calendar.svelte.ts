@@ -10,6 +10,12 @@ import { createMachineProps } from '../../../utils/create-machine-props.js'
 
 export interface UseCalendarProps
   extends Omit<calendar.Context, 'dir' | 'getRootNode' | 'id'> {
+  /**
+   * Allow selecting days shown outside their displayed month. Defaults to false.
+   * Requires a core Calendar version supporting this option.
+   */
+  allowOutsideDays?: boolean
+
   id: string
   defaultOpen?: calendar.Context['open']
   defaultValue?: calendar.Context['value']

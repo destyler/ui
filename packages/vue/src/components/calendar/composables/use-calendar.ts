@@ -11,6 +11,12 @@ import { cleanOpenProps } from '~/utils'
 export interface UseCalendarProps
   extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode' | 'parse' | 'value'>, 'id'> {
   /**
+   * Allow selecting days shown outside their displayed month. Defaults to false.
+   * Requires a core Calendar version supporting this option.
+   */
+  allowOutsideDays?: boolean
+
+  /**
    * The v-model value of the calendar
    */
   modelValue?: calendar.Context['value']

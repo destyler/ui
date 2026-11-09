@@ -11,6 +11,12 @@ import { normalizeMachineProps } from '~/utils/normalize-machine-props'
 export interface UseCalendarProps
   extends Optional<Omit<calendar.Context, 'dir' | 'getRootNode'>, 'id'> {
   /**
+   * Allow selecting days shown outside their displayed month. Defaults to false.
+   * Requires a core Calendar version supporting this option.
+   */
+  allowOutsideDays?: boolean
+
+  /**
    * The initial open state of the calendar when it is first rendered.
    */
   defaultOpen?: calendar.Context['open']
