@@ -2,7 +2,7 @@
 
 `allowOutsideDays?: boolean` is an opt-in Calendar Root / useCalendar option across React, Vue, Solid, and Svelte. Omitted, `undefined`, or `false` preserves the existing behavior: dates shown outside their displayed month are not selectable.
 
-This UI wiring requires a core Calendar release implementing the option. The currently declared `@destyler/calendar` dependency (`^0.3.4`) does not guarantee that capability: core 0.3.4 ignores it. Do not advertise the option as available or release this UI change until the core implementation and its dependency floor have been updated and verified. The UI manifests are prepared at 0.0.5, but this is not a published release. The release is blocked until core 0.3.5 is available, the Calendar catalog floor becomes ^0.3.5, and the regenerated lockfile and normal release gates pass. Do not publish the prepared manifests while the floor still permits 0.3.4.
+This UI release requires core Calendar 0.3.5 or later. The `@destyler/calendar` catalog floor is `^0.3.5`, and the exact-core packed-consumer gate targets 0.3.5 across all four frameworks. The production core catalog is aligned to 0.3.5 because mixing Calendar 0.3.5 with 0.3.4 Anatomy/XState types fails the framework type-check and declaration-build gates. Core 0.3.4 does not implement this option.
 
 With supporting core and `allowOutsideDays: true`, minimum/maximum dates, explicitly disabled cells, and unavailable dates must remain unselectable. This is not a CSS workaround and does not promise identical behavior to shadcn:
 

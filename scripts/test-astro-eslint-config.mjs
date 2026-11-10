@@ -101,5 +101,5 @@ test('aggregate CI keeps every existing project and the native Astro client gate
   assertAggregateProjects(projects)
   assert.throws(() => assertAggregateProjects(projects.filter(name => name !== 'docs/vitest.config.mts')), /Missing aggregate test project: docs/)
   const manifest = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'))
-  assert.equal(manifest.scripts['test:ci'], 'pnpm run svelte:sync && vitest run --browser.headless --no-file-parallelism')
+  assert.equal(manifest.scripts['test:ci'], 'pnpm run test:calendar-contract && pnpm run svelte:sync && vitest run --browser.headless --no-file-parallelism')
 })
