@@ -22,6 +22,7 @@ export interface CalendarRootProps extends HTMLProps<'div'>, CalendarRootBasePro
 export function CalendarRoot(props: CalendarRootProps) {
   const [presenceProps, calendarProps] = splitPresenceProps(props)
   const [useCalendarProps, localProps] = createSplitProps<UseCalendarProps>()(calendarProps, [
+    'allowOutsideDays',
     'closeOnSelect',
     'defaultOpen',
     'defaultValue',

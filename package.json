@@ -1,6 +1,6 @@
 {
   "name": "@destyler-ui/monorepo",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "packageManager": "pnpm@10.28.0",
   "description": "",
@@ -24,7 +24,7 @@
     "test:publish": "node --test scripts/test-publish.mjs",
     "svelte:sync": "pnpm --filter @destyler-ui/svelte exec svelte-kit sync",
     "test": "pnpm run svelte:sync && vitest run --browser.headless",
-    "test:ci": "pnpm run svelte:sync && vitest run --browser.headless --no-file-parallelism",
+    "test:ci": "pnpm run test:calendar-contract && pnpm run svelte:sync && vitest run --browser.headless --no-file-parallelism",
     "test:ui": "pnpm run svelte:sync && vitest --ui --open",
     "dep": "taze",
     "vue": "pnpm --filter @destyler-ui/vue",
@@ -37,7 +37,8 @@
     "generate:solid": "plop solid",
     "test:browser-smoke": "pnpm run svelte:sync && vitest run --config vitest.smoke.config.ts",
     "test:smoke-policy": "vitest run --config vitest.smoke.config.ts --project smoke-policy",
-    "test:core-compat": "node --test scripts/test-core-compat-runner.mjs && node scripts/test-core-compat-packed.mjs"
+    "test:core-compat": "node --test scripts/test-core-compat-runner.mjs && node scripts/test-core-compat-packed.mjs",
+    "test:calendar-contract": "node --test scripts/test-calendar-outside-days-contract.mjs"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",

@@ -2,6 +2,11 @@ import type * as calendar from '@destyler/calendar'
 
 export interface RootProps {
   /**
+   * Allow selecting days shown outside their displayed month. Defaults to false.
+   * Requires a core Calendar version supporting this option.
+   */
+  allowOutsideDays?: boolean
+  /**
    * Whether the calendar should close after the date selection is complete.
    * This is ignored when the selection mode is `multiple`.
    * @default true

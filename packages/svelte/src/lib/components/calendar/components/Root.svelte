@@ -36,6 +36,7 @@
   const [presenceProps, calendarProps] = $derived(splitPresenceProps(props))
   const [useCalendarProps, localProps] = $derived(
     createSplitProps<Optional<UseCalendarProps, 'id'>>()(calendarProps, [
+      'allowOutsideDays',
       'closeOnSelect',
       'defaultOpen',
       'defaultValue',
