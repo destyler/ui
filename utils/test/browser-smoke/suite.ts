@@ -111,7 +111,7 @@ export function browserSmoke(fixtures: Fixtures) {
       const [first, second] = roots
       const day = '[data-part="table-cell-trigger"][data-view="day"]:not([data-outside-range])'
       const focused = (root: HTMLElement, view = 'day') => root.querySelector<HTMLElement>(
-        \`[data-part="table-cell-trigger"][data-view="\${view}"][data-focus]:not([data-outside-range])\`,
+        `[data-part="table-cell-trigger"][data-view="${view}"][data-focus]:not([data-outside-range])`,
       )
       for (const root of roots) {
         expect(root.getAttribute('data-state')).toBe('open')
