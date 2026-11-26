@@ -37,6 +37,7 @@
   const [useCalendarProps, localProps] = $derived(
     createSplitProps<Optional<UseCalendarProps, 'id'>>()(calendarProps, [
       'allowOutsideDays',
+      'inline',
       'closeOnSelect',
       'defaultOpen',
       'defaultValue',

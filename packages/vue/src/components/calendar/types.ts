@@ -6,6 +6,8 @@ export interface RootProps {
    * Requires a core Calendar version supporting this option.
    */
   allowOutsideDays?: boolean
+  /** Mount-time always-visible inline calendar. Requires inline-capable Core. */
+  inline?: boolean
   /**
    * Whether the calendar should close after the date selection is complete.
    * This is ignored when the selection mode is `multiple`.
