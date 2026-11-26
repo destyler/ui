@@ -141,8 +141,12 @@ export function browserSmoke(fixtures: Fixtures) {
     it('Calendar: inline Escape closes its enclosing Dialog and restores focus', async () => {
       await fixtures.calendarDialog()
       const trigger = page.getByRole('button', { name: 'Open calendar dialog', exact: true })
+      // Keyboard activation establishes the return-focus target consistently.
+      // WebKit pointer activation does not necessarily focus a button.
+      await userEvent.tab()
+      await expect.element(trigger).toHaveFocus()
       for (let repeat = 0; repeat < 2; repeat++) {
-        await userEvent.click(trigger)
+        await userEvent.keyboard('[Enter]')
         const dialog = page.getByRole('dialog', { name: 'Calendar dialog', exact: true })
         await expect.element(dialog).toBeVisible()
         const dialogElement = dialog.element()
