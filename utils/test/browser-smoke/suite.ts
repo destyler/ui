@@ -153,6 +153,11 @@ export function browserSmoke(fixtures: Fixtures) {
         const root = dialogElement.querySelector<HTMLElement>('[data-scope="calendar"][data-part="root"]')!
         const focused = () => root.querySelector<HTMLElement>('[data-part="table-cell-trigger"][data-view="day"][data-focus]:not([data-outside-range])')
         expect(root.getAttribute('data-state')).toBe('open')
+        // Wait for the modal's deferred focus trap to activate before moving
+        // focus inside it; otherwise the trap may capture a grid cell as its
+        // return-focus target instead of the opener.
+        const prev = root.querySelector<HTMLElement>('[data-part="view"]:not([hidden]) [data-part="prev-trigger"]')!
+        await expect.element(prev).toHaveFocus()
         const cell = focused()!
         cell.focus()
         await expect.element(cell).toHaveFocus()
