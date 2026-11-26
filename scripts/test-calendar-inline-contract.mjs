@@ -42,4 +42,3 @@ test('Vue: public prop and undefined BooleanDefaults preserve omitted semantics'
   assert.match(defaults, /inline: undefined/)
   assert.match(source, /useCalendar\(props, emits\)/)
 })
-
