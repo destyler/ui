@@ -6,6 +6,7 @@ import { assertAxeResults } from './axe-policy'
 
 interface Fixtures {
   calendar: () => unknown
+  calendarDialog: () => unknown
   checkbox: () => unknown
   dialog: () => unknown
   tree: () => unknown
@@ -135,6 +136,31 @@ export function browserSmoke(fixtures: Fixtures) {
       await userEvent.keyboard('[Escape]')
       expect(first.getAttribute('data-state')).toBe('open')
       expect(second.getAttribute('data-state')).toBe('open')
+    })
+
+    it('Calendar: inline Escape closes its enclosing Dialog and restores focus', async () => {
+      await fixtures.calendarDialog()
+      const trigger = page.getByRole('button', { name: 'Open calendar dialog', exact: true })
+      for (let repeat = 0; repeat < 2; repeat++) {
+        await userEvent.click(trigger)
+        const dialog = page.getByRole('dialog', { name: 'Calendar dialog', exact: true })
+        await expect.element(dialog).toBeVisible()
+        const dialogElement = dialog.element()
+        const root = dialogElement.querySelector<HTMLElement>('[data-scope="calendar"][data-part="root"]')!
+        const focused = () => root.querySelector<HTMLElement>('[data-part="table-cell-trigger"][data-view="day"][data-focus]:not([data-outside-range])')
+        expect(root.getAttribute('data-state')).toBe('open')
+        const cell = focused()!
+        cell.focus()
+        await expect.element(cell).toHaveFocus()
+        const previous = cell.dataset.value
+        await userEvent.keyboard('[ArrowRight]')
+        await expect.poll(() => focused()?.dataset.value).not.toBe(previous)
+        await expect.poll(() => !!focused() && document.activeElement === focused()).toBe(true)
+        await userEvent.keyboard('[Escape]')
+        await expect.element(dialogElement).toHaveAttribute('data-state', 'closed')
+        await expect.element(dialogElement).not.toBeVisible()
+        await expect.element(trigger).toHaveFocus()
+      }
     })
 
     it('Tree: accessible name, roving focus, arrows, selection and repeated expansion', async () => {
