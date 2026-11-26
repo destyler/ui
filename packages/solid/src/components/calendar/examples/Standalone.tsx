@@ -3,7 +3,7 @@ import { Index } from 'solid-js'
 
 export function Standalone() {
   return (
-    <Calendar.Root open>
+    <Calendar.Root inline>
       <Calendar.View view="day">
         <Calendar.Context>
           {context => (

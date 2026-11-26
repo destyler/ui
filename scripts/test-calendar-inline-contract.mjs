@@ -42,3 +42,8 @@ test('Vue: public prop and undefined BooleanDefaults preserve omitted semantics'
   assert.match(defaults, /inline: undefined/)
   assert.match(source, /useCalendar\(props, emits\)/)
 })
+
+test('Calendar dependency floor requires the released inline implementation', () => {
+  const floor = read('pnpm-workspace.yaml').match(/'@destyler\/calendar': \^0\.3\.(\d+)(?:\r?\n|$)/)
+  assert.ok(floor && Number(floor[1]) >= 6)
+})

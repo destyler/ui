@@ -5,6 +5,7 @@ import { page, userEvent } from 'vitest/browser'
 import { assertAxeResults } from './axe-policy'
 
 interface Fixtures {
+  calendar: () => unknown
   checkbox: () => unknown
   dialog: () => unknown
   tree: () => unknown
@@ -100,6 +101,40 @@ export function browserSmoke(fixtures: Fixtures) {
         closedDialog = { trigger: trigger.element(), content: dialogElement }
       }
       await scanBody({ closedDialog })
+    })
+
+    it('Calendar: inline roots isolate keyboard focus and preserve it across views', async () => {
+      await fixtures.calendar()
+      await fixtures.calendar()
+      const roots = [...document.querySelectorAll<HTMLElement>('[data-scope="calendar"][data-part="root"]')]
+      expect(roots).toHaveLength(2)
+      const [first, second] = roots
+      const day = '[data-part="table-cell-trigger"][data-view="day"]:not([data-outside-range])'
+      const focused = (root: HTMLElement, view = 'day') => root.querySelector<HTMLElement>(
+        \`[data-part="table-cell-trigger"][data-view="\${view}"][data-focus]:not([data-outside-range])\`,
+      )
+      for (const root of roots) {
+        expect(root.getAttribute('data-state')).toBe('open')
+        expect(root.querySelector('[data-part="content"], [data-part="positioner"]')).toBeNull()
+      }
+      const last = [...first.querySelectorAll<HTMLElement>(day)].at(-1)!
+      const previous = last.dataset.value!
+      const secondValue = focused(second)?.dataset.value
+      expect(secondValue).toBeTruthy()
+      last.focus()
+      last.click()
+      await expect.poll(() => focused(first)?.dataset.value).toBe(previous)
+      await userEvent.keyboard('[ArrowRight]')
+      await expect.poll(() => focused(first)?.dataset.value?.slice(0, 7)).not.toBe(previous.slice(0, 7))
+      await expect.poll(() => !!focused(first) && document.activeElement === focused(first)).toBe(true)
+      expect(focused(second)?.dataset.value).toBe(secondValue)
+      const trigger = first.querySelector<HTMLElement>('[data-part="view"]:not([hidden]) [data-part="view-trigger"]')!
+      await userEvent.click(trigger)
+      await expect.poll(() => !!focused(first, 'month') && document.activeElement === focused(first, 'month')).toBe(true)
+      expect(focused(second)?.dataset.value).toBe(secondValue)
+      await userEvent.keyboard('[Escape]')
+      expect(first.getAttribute('data-state')).toBe('open')
+      expect(second.getAttribute('data-state')).toBe('open')
     })
 
     it('Tree: accessible name, roving focus, arrows, selection and repeated expansion', async () => {

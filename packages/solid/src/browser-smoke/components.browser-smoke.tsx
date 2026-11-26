@@ -3,6 +3,7 @@ import { onCleanup } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { afterEach, describe, expect, it } from 'vitest'
 import { browserSmoke } from '../../../../utils/test/browser-smoke/suite'
+import { Standalone as CalendarExample } from '../components/calendar/examples/Standalone'
 import { Basic as CheckboxExample } from '../components/checkbox/examples/Basic'
 import { ComponentUnderTest as DialogExample } from '../components/dialog/test/basic'
 import { Basic as TreeExample } from '../components/tree/examples/Basic'
@@ -41,6 +42,7 @@ describe('Solid smoke renderer lifecycle', { concurrent: false, shuffle: false }
 })
 
 browserSmoke({
+  calendar: () => render(() => <CalendarExample />),
   checkbox: () => render(() => <CheckboxExample />),
   dialog: () => render(() => <DialogExample />),
   tree: () => render(() => <TreeExample />),

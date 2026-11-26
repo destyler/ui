@@ -2,7 +2,7 @@
   import { Calendar } from '../index'
 </script>
 
-<Calendar.Root>
+<Calendar.Root inline>
   <Calendar.View view="day">
       <Calendar.Context>
         {#snippet render(calendar)}

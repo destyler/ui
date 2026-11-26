@@ -8,7 +8,5 @@ An inline Calendar needs Root, View and Table (with its cells and triggers),
 but no Control, Trigger, Content or Positioner. Open/close and closeOnSelect
 are popup-only options in inline mode. Remount the root to switch modes.
 
-The option requires a Core version containing the inline implementation.
-Before publishing UI, update the public calendar dependency floor and lockfile
-to the actual released Core version; this local candidate does not invent a
-release number.
+The option requires Core 0.3.6 or later. The UI package dependency floor
+is updated to the released Core version.

@@ -44,5 +44,6 @@ test('Vue: public prop and undefined BooleanDefaults preserve omitted semantics'
 })
 
 test('Calendar dependency floor requires the core outside-day implementation', () => {
-  assert.match(read('pnpm-workspace.yaml'), /'@destyler\/calendar': \^0\.3\.5(?:\r?\n|$)/)
+  const floor = read('pnpm-workspace.yaml').match(/'@destyler\/calendar': \^0\.3\.(\d+)(?:\r?\n|$)/)
+  assert.ok(floor && Number(floor[1]) >= 5)
 })
