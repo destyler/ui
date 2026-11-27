@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { CalendarFixtureMode } from '../../../../utils/test/browser-smoke/suite'
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { Calendar, parseDate } from '../components/calendar'
 
 const props = defineProps<{ mode: CalendarFixtureMode }>()
 const seed = [parseDate('2026-01-15')]
-const value = ref<Calendar.DateValue[]>(seed)
+const value = shallowRef<Calendar.DateValue[]>(seed)
 const events = ref<string[]>([])
 const inline = props.mode.startsWith('inline')
 const controlled = props.mode === 'inline-controlled'

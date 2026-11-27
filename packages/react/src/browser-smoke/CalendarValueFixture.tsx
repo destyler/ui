@@ -45,7 +45,7 @@ export function CalendarValueFixture({ mode }: { mode: CalendarFixtureMode }) {
       {...modeProps}
       defaultValue={seed}
       value={controlled ? value : undefined}
-      onValueChange={details => {
+      onValueChange={(details) => {
         setEvents(previous => [...previous, details.value.map(date => date.toString()).join(',')])
         if (controlled)
           setValue(details.value)
