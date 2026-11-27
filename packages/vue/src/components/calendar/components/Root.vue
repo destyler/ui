@@ -21,6 +21,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<CalendarRootProps>(), {
   allowOutsideDays: undefined,
+  inline: undefined,
   closeOnSelect: undefined,
   defaultOpen: undefined,
   disabled: undefined,

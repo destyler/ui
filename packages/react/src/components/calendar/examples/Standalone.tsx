@@ -2,7 +2,7 @@ import { Calendar } from '../index'
 
 export function Standalone() {
   return (
-    <Calendar.Root open>
+    <Calendar.Root inline>
       <Calendar.View view="day">
         <Calendar.Context>
           {api => (

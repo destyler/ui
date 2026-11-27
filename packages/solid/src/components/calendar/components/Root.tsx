@@ -23,6 +23,7 @@ export function CalendarRoot(props: CalendarRootProps) {
   const [presenceProps, calendarProps] = splitPresenceProps(props)
   const [useCalendarProps, localProps] = createSplitProps<UseCalendarProps>()(calendarProps, [
     'allowOutsideDays',
+    'inline',
     'closeOnSelect',
     'defaultOpen',
     'defaultValue',

@@ -17,6 +17,7 @@ export const CalendarRoot = forwardRef<HTMLDivElement, CalendarRootProps>((props
   const [presenceProps, calendarProps] = splitPresenceProps(props)
   const [useCalendarProps, localProps] = createSplitProps<UseCalendarProps>()(calendarProps, [
     'allowOutsideDays',
+    'inline',
     'closeOnSelect',
     'defaultOpen',
     'defaultValue',

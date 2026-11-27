@@ -15,6 +15,8 @@ export interface UseCalendarProps
    * Requires a core Calendar version supporting this option.
    */
   allowOutsideDays?: boolean
+  /** Mount-time always-visible inline calendar. Requires inline-capable Core. */
+  inline?: boolean
 
   /**
    * The initial open state of the calendar when it is first rendered.

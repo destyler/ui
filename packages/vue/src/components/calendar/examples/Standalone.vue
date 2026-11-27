@@ -3,7 +3,7 @@ import { Calendar } from '../index'
 </script>
 
 <template>
-  <Calendar.Root open>
+  <Calendar.Root inline>
     <Calendar.View view="day">
       <Calendar.Context v-slot="api">
         <Calendar.ViewControl>
