@@ -5,8 +5,10 @@ import CheckboxExample from '../components/checkbox/examples/Basic.vue'
 import DialogExample from '../components/dialog/examples/Basic.vue'
 import TreeExample from '../components/tree/examples/Basic.vue'
 import CalendarDialogFixture from './CalendarDialogFixture.vue'
+import CalendarValueFixture from './CalendarValueFixture.vue'
 
 browserSmoke({
+  calendarValue: mode => render(CalendarValueFixture, { props: { mode } }),
   calendarDialog: () => render(CalendarDialogFixture),
   calendar: () => render(CalendarExample),
   checkbox: () => render(CheckboxExample),

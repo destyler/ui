@@ -4,7 +4,10 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { page, userEvent } from 'vitest/browser'
 import { assertAxeResults } from './axe-policy'
 
+export type CalendarFixtureMode = 'inline-controlled' | 'inline-uncontrolled' | 'popup-default' | 'popup-false'
+
 interface Fixtures {
+  calendarValue: (mode: CalendarFixtureMode) => unknown
   calendar: () => unknown
   calendarDialog: () => unknown
   checkbox: () => unknown
@@ -171,6 +174,75 @@ export function browserSmoke(fixtures: Fixtures) {
         await expect.element(trigger).toHaveFocus()
       }
     })
+
+    for (const mode of ['inline-controlled', 'inline-uncontrolled'] as const) {
+      it(`Calendar: ${mode} selects and clears without closing`, async () => {
+        await fixtures.calendarValue(mode)
+        const root = document.querySelector<HTMLElement>('[data-scope="calendar"][data-part="root"]')!
+        const target = root.querySelector<HTMLElement>('[data-part="table-cell-trigger"][data-view="day"][data-value="2026-01-16"]:not([data-outside-range])')!
+        const shown = page.getByTestId('calendar-value')
+        const events = page.getByTestId('calendar-events')
+        const model = page.getByTestId('calendar-model')
+        await expect.element(shown).toHaveTextContent('2026-01-15')
+        await expect.element(events).toHaveTextContent('[]')
+        expect(root.getAttribute('data-state')).toBe('open')
+        expect(root.querySelector('[data-part="content"], [data-part="positioner"]')).toBeNull()
+        await userEvent.click(target)
+        await expect.element(target).toHaveAttribute('data-selected')
+        await expect.element(shown).toHaveTextContent('2026-01-16')
+        await expect.element(events).toHaveTextContent('["2026-01-16"]')
+        if (mode === 'inline-controlled')
+          await expect.element(model).toHaveTextContent('2026-01-16')
+        expect(root.getAttribute('data-state')).toBe('open')
+        const clear = root.querySelector<HTMLElement>('[data-part="clear-trigger"]')!
+        await userEvent.click(clear)
+        await expect.poll(() => shown.element().textContent?.trim()).toBe('')
+        await expect.element(events).toHaveTextContent('["2026-01-16",""]')
+        if (mode === 'inline-controlled')
+          await expect.poll(() => model.element().textContent?.trim()).toBe('')
+        expect(root.querySelector('[data-part="table-cell-trigger"][data-selected]')).toBeNull()
+        expect(root.getAttribute('data-state')).toBe('open')
+      })
+    }
+
+    for (const mode of ['popup-default', 'popup-false'] as const) {
+      it(`Calendar: ${mode} closes on selection and Escape, restoring focus`, async () => {
+        await fixtures.calendarValue(mode)
+        const root = document.querySelector<HTMLElement>('[data-scope="calendar"][data-part="root"]')!
+        const trigger = root.querySelector<HTMLElement>('[data-part="trigger"]')!
+        const input = root.querySelector<HTMLElement>('[data-part="input"]')!
+        const content = root.querySelector<HTMLElement>('[data-part="content"]')!
+        const shown = page.getByTestId('calendar-value')
+        const events = page.getByTestId('calendar-events')
+        const focused = () => content.querySelector<HTMLElement>('[data-part="table-cell-trigger"][data-view="day"][data-focus]:not([data-outside-range])')
+        expect(root.getAttribute('data-state')).toBe('closed')
+        await expect.element(content).not.toBeVisible()
+        trigger.focus()
+        await expect.element(trigger).toHaveFocus()
+        await userEvent.keyboard('[Enter]')
+        await expect.element(content).toBeVisible()
+        await expect.poll(() => !!focused() && document.activeElement === focused()).toBe(true)
+        await userEvent.keyboard('[ArrowRight]')
+        await expect.poll(() => focused()?.dataset.value).toBe('2026-01-16')
+        await expect.poll(() => !!focused() && document.activeElement === focused()).toBe(true)
+        await userEvent.keyboard('[Enter]')
+        await expect.element(content).not.toBeVisible()
+        await expect.element(root).toHaveAttribute('data-state', 'closed')
+        await expect.element(shown).toHaveTextContent('2026-01-16')
+        await expect.element(events).toHaveTextContent('["2026-01-16"]')
+        await expect.element(input).toHaveFocus()
+        trigger.focus()
+        await expect.element(trigger).toHaveFocus()
+        await userEvent.keyboard('[Enter]')
+        await expect.element(content).toBeVisible()
+        await expect.poll(() => !!focused() && document.activeElement === focused()).toBe(true)
+        await userEvent.keyboard('[Escape]')
+        await expect.element(content).not.toBeVisible()
+        await expect.element(root).toHaveAttribute('data-state', 'closed')
+        await expect.element(trigger).toHaveFocus()
+        await expect.element(events).toHaveTextContent('["2026-01-16"]')
+      })
+    }
 
     it('Tree: accessible name, roving focus, arrows, selection and repeated expansion', async () => {
       await fixtures.tree()

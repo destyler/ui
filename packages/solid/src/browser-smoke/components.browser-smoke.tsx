@@ -8,6 +8,7 @@ import { Basic as CheckboxExample } from '../components/checkbox/examples/Basic'
 import { Dialog } from '../components/dialog'
 import { ComponentUnderTest as DialogExample } from '../components/dialog/test/basic'
 import { Basic as TreeExample } from '../components/tree/examples/Basic'
+import { CalendarValueFixture } from './CalendarValueFixture'
 
 // Vitest browser projects do not enable globals, so register disposal explicitly.
 afterEach(cleanup)
@@ -60,6 +61,7 @@ function CalendarDialogFixture() {
 }
 
 browserSmoke({
+  calendarValue: mode => render(() => <CalendarValueFixture mode={mode} />),
   calendarDialog: () => render(() => <CalendarDialogFixture />),
   calendar: () => render(() => <CalendarExample />),
   checkbox: () => render(() => <CheckboxExample />),

@@ -6,6 +6,7 @@ import { Basic as CheckboxExample } from '../components/checkbox/examples/Basic'
 import { Dialog } from '../components/dialog'
 import { Basic as DialogExample } from '../components/dialog/examples/Basic'
 import { Basic as TreeExample } from '../components/tree/examples/Basic'
+import { CalendarValueFixture } from './CalendarValueFixture'
 
 function CalendarDialogFixture() {
   return (
@@ -26,6 +27,7 @@ function CalendarDialogFixture() {
 }
 
 browserSmoke({
+  calendarValue: mode => render(<CalendarValueFixture mode={mode} />),
   calendarDialog: () => render(<CalendarDialogFixture />),
   calendar: () => render(<CalendarExample />),
   checkbox: () => render(<CheckboxExample />),
